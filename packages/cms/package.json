@@ -1,0 +1,18 @@
+{
+  "name": "@heritageguiding/cms",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./payload.config.ts",
+  "types": "./payload.config.ts",
+  "exports": {
+    ".": "./payload.config.ts",
+    "./collections": "./collections/index.ts",
+    "./collections/*": "./collections/*.ts"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "^3.70.0",
+    "@payloadcms/richtext-lexical": "^3.70.0",
+    "@payloadcms/storage-vercel-blob": "^3.70.0",
+    "payload": "^3.70.0"
+  }
+}
