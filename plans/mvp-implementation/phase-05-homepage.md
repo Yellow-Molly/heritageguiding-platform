@@ -2,17 +2,18 @@
 
 ## Context Links
 
-- [MVP Project Plan](../../docs/MVP-PROJECT-PLAN.md)
+- [MVP Project Plan v1.2](../../docs/MVP-PROJECT-PLAN-v1.2-ENHANCED-SCHEMA.md)
 - [Design System](./phase-04-design-system.md)
 - [Data Models](./phase-03-data-models-cms-schema.md)
+- [Concierge Wizard](./phase-08.5-concierge-wizard.md)
 
 ## Overview
 
 | Priority | Status | Effort |
 |----------|--------|--------|
-| P1 - Critical | pending | 20-24h |
+| P1 - Critical | pending | 28-32h |
 
-Build responsive homepage with hero section, featured tours carousel, trust signals, and clear CTAs. Server-rendered for SEO with localized content.
+Build responsive homepage with hero section, **"Find Your Tour" CTA (links to /find-tour wizard)**, featured tours carousel, trust signals, and clear CTAs. Server-rendered for SEO with localized content. Footer with links to FAQ, About Us, Terms, Privacy. *(Validated: Wizard moved to separate /find-tour page)*
 
 ## Key Insights
 
@@ -21,15 +22,19 @@ Build responsive homepage with hero section, featured tours carousel, trust sign
 - Trust signals: expert credentials, reviews count, certifications
 - Hero image optimization with Next.js Image
 - AI-first: structured data for discoverability
+- **Concierge Wizard uses audience tags for personalized recommendations**
+- **Footer links to static pages (FAQ, About, Terms, Privacy)**
 
 ## Requirements
 
 ### Functional
 - Hero section with compelling headline and CTA
+- **Concierge Wizard component ("Who are you?" → "What interests you?" → Results)**
 - Featured tours grid (3-6 tours)
 - Trust signals section (reviews, certifications)
 - Quick navigation to tour categories
 - Language-aware content from CMS
+- **Footer with FAQ, About Us, Terms, Privacy links**
 
 ### Non-Functional
 - Largest Contentful Paint < 2.5s
@@ -43,12 +48,16 @@ Build responsive homepage with hero section, featured tours carousel, trust sign
 
 ```
 Homepage
-├── Header (nav, language switcher)
+├── Header (nav, language switcher, About Us link)
 ├── Hero Section
 │   ├── Background image
 │   ├── Headline (localized)
 │   ├── Subheadline
 │   └── CTA buttons
+├── Concierge Wizard (NEW)
+│   ├── Step 1: "Who are you?" (audience selection)
+│   ├── Step 2: "What interests you?" (category selection)
+│   └── Step 3: Results (personalized tour recommendations)
 ├── Featured Tours
 │   ├── Section heading
 │   └── Tour cards grid (3-6)
@@ -59,7 +68,7 @@ Homepage
 ├── Category Navigation
 │   ├── By theme
 │   └── By neighborhood
-└── Footer
+└── Footer (NEW: FAQ, About Us, Terms, Privacy links)
 ```
 
 ## Related Code Files
@@ -67,10 +76,12 @@ Homepage
 ### Create
 - `apps/web/app/[locale]/page.tsx` - Homepage
 - `apps/web/components/home/hero-section.tsx` - Hero
+- `apps/web/components/home/concierge-wizard-preview.tsx` - Wizard CTA (links to full wizard)
 - `apps/web/components/home/featured-tours.tsx` - Tours grid
 - `apps/web/components/home/trust-signals.tsx` - Social proof
 - `apps/web/components/home/category-nav.tsx` - Quick links
 - `apps/web/components/tour/tour-card.tsx` - Tour card
+- `apps/web/components/layout/footer.tsx` - Footer with static page links
 - `apps/web/lib/api/get-featured-tours.ts` - Data fetching
 - `apps/web/lib/api/get-trust-stats.ts` - Stats fetching
 
@@ -391,10 +402,12 @@ Homepage
 
 - [ ] Create homepage Server Component
 - [ ] Build HeroSection with responsive image
+- [ ] Build ConciergeWizardPreview component (CTA for full wizard)
 - [ ] Build FeaturedTours grid component
 - [ ] Create TourCard component
 - [ ] Build TrustSignals section
 - [ ] Build CategoryNav component
+- [ ] Build Footer with static page links
 - [ ] Create getFeaturedTours API function
 - [ ] Create getCategories API function
 - [ ] Add Swedish translation strings
@@ -405,14 +418,17 @@ Homepage
 - [ ] Generate SEO metadata
 - [ ] Test responsive layouts
 - [ ] Verify LCP < 2.5s
+- [ ] Verify footer links to FAQ, About, Terms, Privacy
 
 ## Success Criteria
 
 - [ ] Homepage loads in all 3 locales
 - [ ] Featured tours display from CMS
 - [ ] Hero image optimized and lazy-loaded
+- [ ] Concierge Wizard CTA visible and clickable
 - [ ] Trust signals section visible
 - [ ] Category navigation works
+- [ ] Footer with all static page links
 - [ ] Mobile layout responsive
 - [ ] Lighthouse performance score > 90
 - [ ] Schema.org markup validates
@@ -434,6 +450,7 @@ Homepage
 ## Next Steps
 
 After completion:
-1. Proceed to [Phase 06: Tour Catalog](./phase-06-tour-catalog.md)
-2. Build tour listing with filters
-3. Implement search and sorting
+1. Proceed to [Phase 05.5: Static Pages](./phase-05.5-static-pages.md)
+2. Then [Phase 06: Tour Catalog](./phase-06-tour-catalog.md)
+3. Build tour listing with filters
+4. Implement search and sorting
