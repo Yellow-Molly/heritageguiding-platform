@@ -2,26 +2,28 @@
 
 ## Context Links
 
-- [MVP Project Plan](../../docs/MVP-PROJECT-PLAN.md)
+- [MVP Project Plan v1.2](../../docs/MVP-PROJECT-PLAN-v1.2-ENHANCED-SCHEMA.md)
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [Schema.org Tourism Types](https://schema.org/TouristAttraction)
+- [Schema.org FAQPage](https://schema.org/FAQPage)
 - [Google SEO Documentation](https://developers.google.com/search/docs)
 
 ## Overview
 
 | Priority | Status | Effort |
 |----------|--------|--------|
-| P1 - Critical | pending | 42-52h |
+| P1 - Critical | pending | 44-54h |
 
-Implement WCAG 2.1 Level AA compliance, comprehensive SEO foundation including meta tags, Open Graph, sitemaps, and Schema.org structured data for AI discoverability.
+Implement WCAG 2.1 Level AA compliance, comprehensive SEO foundation including meta tags, Open Graph, sitemaps, and Schema.org structured data for AI discoverability. **Includes FAQPage and AboutPage schema markup.**
 
 ## Key Insights
 
 - WCAG 2.1 AA: keyboard nav, focus management, color contrast, screen readers
-- Schema.org: TouristAttraction, Person, Organization, AggregateRating
+- Schema.org: TouristAttraction, Person, Organization, AggregateRating, **FAQPage, AboutPage**
 - AI-first: structured data crucial for ChatGPT, Perplexity discoverability
 - hreflang tags for multi-language SEO
 - Core Web Vitals affect search ranking
+- **FAQPage schema improves visibility in search results with rich snippets**
 
 ## Requirements
 
@@ -50,6 +52,9 @@ Implement WCAG 2.1 Level AA compliance, comprehensive SEO foundation including m
 - Organization for HeritageGuiding
 - AggregateRating for reviews
 - Offer for pricing
+- **FAQPage for FAQ page (NEW)**
+- **AboutPage for About Us page (NEW)**
+- **BreadcrumbList for navigation**
 
 ### Non-Functional
 - Lighthouse Accessibility score > 95
@@ -103,6 +108,8 @@ app/
 - `apps/web/components/seo/json-ld.tsx` - Schema.org wrapper
 - `apps/web/components/seo/organization-schema.tsx` - Org markup
 - `apps/web/components/seo/tour-schema.tsx` - Tour markup
+- `apps/web/components/seo/faq-schema.tsx` - FAQPage markup (NEW)
+- `apps/web/components/seo/about-schema.tsx` - AboutPage markup (NEW)
 - `apps/web/lib/seo/generate-metadata.ts` - Metadata helper
 
 ### Modify
@@ -578,6 +585,139 @@ app/
     }
     ```
 
+16. **Add FAQPage Schema (NEW)**
+    ```typescript
+    // apps/web/components/seo/faq-schema.tsx
+    import { JsonLd } from './json-ld'
+
+    interface FAQ {
+      q: string  // question
+      a: string  // answer
+    }
+
+    interface Props {
+      faqs: FAQ[]
+    }
+
+    export function FAQSchema({ faqs }: Props) {
+      const data = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.a
+          }
+        }))
+      }
+
+      return <JsonLd data={data} />
+    }
+    ```
+
+17. **Add AboutPage Schema (NEW)**
+    ```typescript
+    // apps/web/components/seo/about-schema.tsx
+    import { JsonLd } from './json-ld'
+
+    interface TeamMember {
+      name: string
+      role: string
+      image?: string
+      credentials?: string[]
+    }
+
+    interface Props {
+      companyName: string
+      description: string
+      foundingDate?: string
+      founders?: TeamMember[]
+    }
+
+    export function AboutSchema({ companyName, description, foundingDate, founders }: Props) {
+      const data = {
+        '@context': 'https://schema.org',
+        '@type': 'AboutPage',
+        name: `About ${companyName}`,
+        description,
+        mainEntity: {
+          '@type': 'Organization',
+          name: companyName,
+          description,
+          foundingDate,
+          ...(founders?.length && {
+            founder: founders.map((founder) => ({
+              '@type': 'Person',
+              name: founder.name,
+              jobTitle: founder.role,
+              image: founder.image,
+              ...(founder.credentials?.length && {
+                hasCredential: founder.credentials.map((cred) => ({
+                  '@type': 'EducationalOccupationalCredential',
+                  credentialCategory: cred
+                }))
+              })
+            }))
+          })
+        }
+      }
+
+      return <JsonLd data={data} />
+    }
+    ```
+
+18. **Use FAQSchema on FAQ Page**
+    ```typescript
+    // apps/web/app/[locale]/faq/page.tsx (update)
+    import { FAQSchema } from '@/components/seo/faq-schema'
+
+    export default async function FAQPage({ params: { locale } }) {
+      const faqs = await getFAQs(locale) // Get from CMS
+
+      return (
+        <>
+          <FAQSchema faqs={faqs.flatMap(category => category.questions)} />
+          <main>
+            {/* FAQ content */}
+          </main>
+        </>
+      )
+    }
+    ```
+
+19. **Use AboutSchema on About Page**
+    ```typescript
+    // apps/web/app/[locale]/about-us/page.tsx (update)
+    import { AboutSchema } from '@/components/seo/about-schema'
+
+    const founders = [
+      {
+        name: 'Dr. [Name]',
+        role: 'Founder & Lead Historian',
+        image: '/images/team/founder.jpg',
+        credentials: ['PhD in Medieval Scandinavian History']
+      }
+    ]
+
+    export default async function AboutPage({ params: { locale } }) {
+      return (
+        <>
+          <AboutSchema
+            companyName="Heritage Guiding"
+            description="Expert-led cultural tours across Europe's most historic destinations"
+            foundingDate="2025"
+            founders={founders}
+          />
+          <main>
+            {/* About content */}
+          </main>
+        </>
+      )
+    }
+    ```
+
 ## Todo List
 
 ### Accessibility
@@ -610,6 +750,8 @@ app/
 - [ ] Add Person schema for guides
 - [ ] Add AggregateRating schema
 - [ ] Add Breadcrumb schema
+- [ ] Add FAQPage schema to FAQ page (NEW)
+- [ ] Add AboutPage schema to About Us page (NEW)
 - [ ] Validate all schemas on schema.org validator
 - [ ] Test rich results in Google Search Console
 
@@ -619,12 +761,15 @@ app/
 - [ ] Lighthouse SEO score > 95
 - [ ] 0 WCAG 2.1 AA violations (axe DevTools)
 - [ ] Schema.org validates without errors
+- [ ] FAQPage schema validates on FAQ page
+- [ ] AboutPage schema validates on About page
 - [ ] hreflang tags present for all languages
 - [ ] Sitemap accessible at /sitemap.xml
 - [ ] All images have alt text
 - [ ] All interactive elements keyboard accessible
 - [ ] Focus indicators visible on all elements
 - [ ] Rich results preview works in Google
+- [ ] FAQ rich snippets appear in search results
 
 ## Risk Assessment
 
