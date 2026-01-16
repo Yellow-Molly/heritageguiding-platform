@@ -2,7 +2,7 @@
 
 ## Context Links
 
-- [MVP Project Plan](../../docs/MVP-PROJECT-PLAN.md)
+- [MVP Project Plan v1.2](../../docs/MVP-PROJECT-PLAN-v1.2-ENHANCED-SCHEMA.md)
 - [Data Models](./phase-03-data-models-cms-schema.md)
 - [Tour Catalog](./phase-06-tour-catalog.md)
 - [Rezdy Research](./research/researcher-02-rezdy-api-integration.md)
@@ -11,9 +11,9 @@
 
 | Priority | Status | Effort |
 |----------|--------|--------|
-| P1 - Critical | pending | 28-32h |
+| P1 - Critical | pending | 32-36h |
 
-Build tour detail pages with emotional + factual content layers, image gallery, guide bio, reviews, accessibility info, and booking CTA integrated with Rezdy.
+Build tour detail pages with emotional + factual content layers, image gallery, guide bio, reviews, **logistics section with interactive map**, **inclusions/exclusions display**, accessibility info, and booking CTA integrated with Rezdy.
 
 ## Key Insights
 
@@ -22,24 +22,38 @@ Build tour detail pages with emotional + factual content layers, image gallery, 
 - Gallery with lightbox for immersive visuals
 - Rezdy booking widget embed or custom date picker
 - Reviews section with aggregate rating display
+- **Meeting point with Google Maps integration (coordinates)**
+- **Structured inclusions/exclusions for transparency**
+- **Audience tags for related tour recommendations**
 
 ## Requirements
 
 ### Functional
 - Hero image/gallery with lightbox
 - Emotional description (storytelling layer)
-- Factual details (duration, price, capacity, meeting point)
+- Factual details (duration, price, capacity)
+- **Logistics section with:** *(Validated: Link only, no embed)*
+  - Meeting point name and address
+  - "Open in Google Maps" link (no embed - zero API cost)
+  - Meeting instructions ("Look for guide with red umbrella")
+  - Parking and public transport info
+  - Ending point (if different)
+- **Inclusions/Exclusions section:**
+  - What's included (checklist with green checks)
+  - What's NOT included (checklist with X marks)
+  - What to bring (recommendations)
 - Guide bio with credentials
 - Customer reviews with ratings
 - Accessibility information
 - Booking CTA with availability check
-- Related tours suggestions
+- Related tours suggestions (using audience tags)
 
 ### Non-Functional
 - Schema.org TouristAttraction + Person markup
 - Open Graph meta tags for sharing
 - Mobile-optimized gallery
 - Print-friendly layout (optional)
+- **Google Maps loads lazily for performance**
 
 ## Architecture
 
@@ -50,11 +64,21 @@ Tour Detail
 ├── Header (breadcrumb navigation)
 ├── Hero Section
 │   ├── Image gallery
-│   └── Quick facts (price, duration)
+│   └── Quick facts (price, duration, difficulty)
 ├── Content Section
 │   ├── Emotional description
-│   ├── What's included
-│   └── Factual highlights
+│   ├── Factual highlights
+│   └── Tour highlights (bullet points)
+├── Logistics Section (NEW)
+│   ├── Meeting point name + address
+│   ├── Interactive Google Maps embed
+│   ├── Meeting instructions
+│   ├── Public transport info
+│   └── Parking info
+├── Inclusions Section (NEW)
+│   ├── What's included (green checkmarks)
+│   ├── What's NOT included (red X)
+│   └── What to bring (recommendations)
 ├── Guide Section
 │   ├── Photo
 │   ├── Name + credentials
@@ -68,7 +92,7 @@ Tour Detail
 │   ├── Aggregate rating
 │   └── Individual reviews
 ├── Accessibility Info
-├── Related Tours
+├── Related Tours (using audience tags)
 └── Footer
 ```
 
@@ -80,13 +104,17 @@ Tour Detail
 - `apps/web/components/tour/tour-gallery.tsx` - Image gallery
 - `apps/web/components/tour/tour-content.tsx` - Description sections
 - `apps/web/components/tour/tour-facts.tsx` - Quick facts
+- `apps/web/components/tour/logistics-section.tsx` - Meeting point + map (NEW)
+- `apps/web/components/tour/inclusions-section.tsx` - Included/excluded (NEW)
+- `apps/web/components/tour/google-map-embed.tsx` - Map component (NEW)
 - `apps/web/components/tour/guide-card.tsx` - Guide bio
 - `apps/web/components/tour/reviews-section.tsx` - Reviews
 - `apps/web/components/tour/booking-section.tsx` - Booking CTA
-- `apps/web/components/tour/related-tours.tsx` - Related suggestions
+- `apps/web/components/tour/related-tours.tsx` - Related suggestions (uses audience tags)
 - `apps/web/components/tour/tour-schema.tsx` - Schema.org
 - `apps/web/lib/api/get-tour-by-slug.ts` - Single tour API
 - `apps/web/lib/api/get-tour-reviews.ts` - Reviews API
+- `apps/web/lib/api/get-related-tours.ts` - Related tours by audience tags
 
 ### Modify
 - `messages/*.json` - Tour detail translations
@@ -287,7 +315,6 @@ Tour Detail
    ```typescript
    // apps/web/components/tour/tour-content.tsx
    import { useTranslations } from 'next-intl'
-   import { Check } from 'lucide-react'
 
    export function TourContent({ tour }) {
      const t = useTranslations('tourDetail')
@@ -299,31 +326,21 @@ Tour Detail
            <h2 className="text-2xl font-semibold">{t('experience')}</h2>
            <div
              className="prose mt-4"
-             dangerouslySetInnerHTML={{ __html: tour.emotionalDescription }}
-           />
-         </section>
-
-         {/* What's Included */}
-         <section>
-           <h2 className="text-2xl font-semibold">{t('included')}</h2>
-           <ul className="mt-4 space-y-2">
-             {tour.inclusions?.map((item, i) => (
-               <li key={i} className="flex items-center gap-2">
-                 <Check className="h-5 w-5 text-green-600" />
-                 {item}
-               </li>
-             ))}
-           </ul>
-         </section>
-
-         {/* Factual Highlights */}
-         <section>
-           <h2 className="text-2xl font-semibold">{t('highlights')}</h2>
-           <div
-             className="prose mt-4"
              dangerouslySetInnerHTML={{ __html: tour.description }}
            />
          </section>
+
+         {/* Tour Highlights */}
+         {tour.highlights?.length > 0 && (
+           <section>
+             <h2 className="text-2xl font-semibold">{t('highlights')}</h2>
+             <ul className="mt-4 space-y-2 list-disc list-inside">
+               {tour.highlights.map((item, i) => (
+                 <li key={i}>{item.highlight}</li>
+               ))}
+             </ul>
+           </section>
+         )}
 
          {/* Accessibility */}
          {tour.accessibility && (
@@ -340,6 +357,217 @@ Tour Detail
            </section>
          )}
        </div>
+     )
+   }
+   ```
+
+4.5. **Build Logistics Section (NEW)**
+   ```typescript
+   // apps/web/components/tour/logistics-section.tsx
+   import { useTranslations } from 'next-intl'
+   import { MapPin, Car, Train, Clock } from 'lucide-react'
+   import { GoogleMapEmbed } from './google-map-embed'
+   import { Card, CardContent } from '@/components/ui/card'
+
+   export function LogisticsSection({ tour }) {
+     const t = useTranslations('tourDetail.logistics')
+     const { logistics } = tour
+
+     if (!logistics) return null
+
+     return (
+       <section className="mt-12">
+         <h2 className="text-2xl font-semibold">{t('title')}</h2>
+         <Card className="mt-4">
+           <CardContent className="p-6 grid gap-6 lg:grid-cols-2">
+             {/* Meeting Point Info */}
+             <div className="space-y-4">
+               <div className="flex gap-3">
+                 <MapPin className="h-5 w-5 text-primary flex-shrink-0" />
+                 <div>
+                   <p className="font-semibold">{t('meetingPoint')}</p>
+                   <p>{logistics.meetingPointName}</p>
+                   {logistics.meetingPointAddress && (
+                     <p className="text-sm text-muted-foreground">
+                       {logistics.meetingPointAddress}
+                     </p>
+                   )}
+                 </div>
+               </div>
+
+               {logistics.meetingPointInstructions && (
+                 <div className="flex gap-3">
+                   <Clock className="h-5 w-5 text-primary flex-shrink-0" />
+                   <div>
+                     <p className="font-semibold">{t('instructions')}</p>
+                     <p className="text-sm">{logistics.meetingPointInstructions}</p>
+                   </div>
+                 </div>
+               )}
+
+               {logistics.publicTransportInfo && (
+                 <div className="flex gap-3">
+                   <Train className="h-5 w-5 text-primary flex-shrink-0" />
+                   <div>
+                     <p className="font-semibold">{t('publicTransport')}</p>
+                     <p className="text-sm">{logistics.publicTransportInfo}</p>
+                   </div>
+                 </div>
+               )}
+
+               {logistics.parkingInfo && (
+                 <div className="flex gap-3">
+                   <Car className="h-5 w-5 text-primary flex-shrink-0" />
+                   <div>
+                     <p className="font-semibold">{t('parking')}</p>
+                     <p className="text-sm">{logistics.parkingInfo}</p>
+                   </div>
+                 </div>
+               )}
+
+               {logistics.endingPoint && (
+                 <p className="text-sm">
+                   <span className="font-semibold">{t('endingPoint')}: </span>
+                   {logistics.endingPoint}
+                 </p>
+               )}
+             </div>
+
+             {/* Google Maps Embed */}
+             {logistics.coordinates && (
+               <GoogleMapEmbed
+                 lat={logistics.coordinates.latitude}
+                 lng={logistics.coordinates.longitude}
+                 title={logistics.meetingPointName}
+                 googleMapsLink={logistics.googleMapsLink}
+               />
+             )}
+           </CardContent>
+         </Card>
+       </section>
+     )
+   }
+   ```
+
+4.6. **Build Google Map Embed Component (NEW)**
+   ```typescript
+   // apps/web/components/tour/google-map-embed.tsx
+   'use client'
+
+   import { useState } from 'react'
+   import { Button } from '@/components/ui/button'
+   import { ExternalLink } from 'lucide-react'
+
+   interface Props {
+     lat: number
+     lng: number
+     title: string
+     googleMapsLink?: string
+   }
+
+   export function GoogleMapEmbed({ lat, lng, title, googleMapsLink }: Props) {
+     const [loaded, setLoaded] = useState(false)
+     const embedUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&q=${lat},${lng}&zoom=16`
+
+     return (
+       <div className="space-y-2">
+         <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted">
+           {!loaded ? (
+             <button
+               onClick={() => setLoaded(true)}
+               className="absolute inset-0 flex items-center justify-center hover:bg-muted/80 transition"
+             >
+               <span className="text-sm">Click to load map</span>
+             </button>
+           ) : (
+             <iframe
+               src={embedUrl}
+               width="100%"
+               height="100%"
+               style={{ border: 0 }}
+               allowFullScreen
+               loading="lazy"
+               referrerPolicy="no-referrer-when-downgrade"
+               title={`Map showing ${title}`}
+             />
+           )}
+         </div>
+         {googleMapsLink && (
+           <Button variant="outline" size="sm" asChild className="w-full">
+             <a href={googleMapsLink} target="_blank" rel="noopener noreferrer">
+               <ExternalLink className="h-4 w-4 mr-2" />
+               Open in Google Maps
+             </a>
+           </Button>
+         )}
+       </div>
+     )
+   }
+   ```
+
+4.7. **Build Inclusions Section (NEW)**
+   ```typescript
+   // apps/web/components/tour/inclusions-section.tsx
+   import { useTranslations } from 'next-intl'
+   import { Check, X, Lightbulb } from 'lucide-react'
+
+   export function InclusionsSection({ tour }) {
+     const t = useTranslations('tourDetail.inclusions')
+
+     const hasContent = tour.included?.length || tour.notIncluded?.length || tour.whatToBring?.length
+     if (!hasContent) return null
+
+     return (
+       <section className="mt-12">
+         <h2 className="text-2xl font-semibold">{t('title')}</h2>
+
+         <div className="mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+           {/* What's Included */}
+           {tour.included?.length > 0 && (
+             <div>
+               <h3 className="font-semibold text-green-700 mb-3">{t('included')}</h3>
+               <ul className="space-y-2">
+                 {tour.included.map((item, i) => (
+                   <li key={i} className="flex items-start gap-2">
+                     <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                     <span>{item.item}</span>
+                   </li>
+                 ))}
+               </ul>
+             </div>
+           )}
+
+           {/* What's NOT Included */}
+           {tour.notIncluded?.length > 0 && (
+             <div>
+               <h3 className="font-semibold text-red-700 mb-3">{t('notIncluded')}</h3>
+               <ul className="space-y-2">
+                 {tour.notIncluded.map((item, i) => (
+                   <li key={i} className="flex items-start gap-2">
+                     <X className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                     <span>{item.item}</span>
+                   </li>
+                 ))}
+               </ul>
+             </div>
+           )}
+
+           {/* What to Bring */}
+           {tour.whatToBring?.length > 0 && (
+             <div>
+               <h3 className="font-semibold text-amber-700 mb-3">{t('whatToBring')}</h3>
+               <ul className="space-y-2">
+                 {tour.whatToBring.map((item, i) => (
+                   <li key={i} className="flex items-start gap-2">
+                     <Lightbulb className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                     <span>{item.item}</span>
+                   </li>
+                 ))}
+               </ul>
+             </div>
+           )}
+         </div>
+       </section>
      )
    }
    ```
@@ -600,15 +828,22 @@ Tour Detail
 - [ ] Create TourGallery lightbox
 - [ ] Build TourContent sections
 - [ ] Create TourFacts component
+- [ ] Build LogisticsSection with map (NEW)
+- [ ] Create GoogleMapEmbed component (NEW)
+- [ ] Build InclusionsSection (NEW)
 - [ ] Build GuideCard component
 - [ ] Create BookingSection (placeholder for Rezdy)
 - [ ] Build ReviewsSection with ratings
 - [ ] Add TourSchema (Schema.org)
-- [ ] Create RelatedTours component
+- [ ] Create RelatedTours component (uses audience tags)
 - [ ] Implement getTourBySlug API
 - [ ] Implement getTourReviews API
+- [ ] Implement getRelatedTours API (by audience tags)
 - [ ] Generate Open Graph metadata
 - [ ] Add translations (SV/EN/DE)
+- [ ] Add logistics translations
+- [ ] Add inclusions translations
+- [ ] Configure Google Maps API key
 - [ ] Test static generation
 - [ ] Verify Schema.org validates
 
@@ -616,6 +851,9 @@ Tour Detail
 
 - [ ] Tour pages render with all content
 - [ ] Gallery lightbox works on mobile
+- [ ] Logistics section shows meeting point + map
+- [ ] Google Maps loads lazily (performance)
+- [ ] Inclusions/Exclusions display correctly
 - [ ] Guide information displays correctly
 - [ ] Reviews show with ratings
 - [ ] Schema.org validates without errors
