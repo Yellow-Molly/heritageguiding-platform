@@ -1,5 +1,13 @@
 @import 'tailwindcss';
 
+/* Fallback font families */
+:root {
+  --font-geist-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-geist-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Roboto Mono',
+    monospace;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

@@ -1,0 +1,65 @@
+{
+  "common": {
+    "home": "Hem",
+    "about": "Om oss",
+    "tours": "Turer",
+    "contact": "Kontakt",
+    "bookNow": "Boka nu",
+    "learnMore": "Läs mer",
+    "loading": "Laddar...",
+    "error": "Ett fel uppstod",
+    "search": "Sök",
+    "filter": "Filter",
+    "sortBy": "Sortera efter",
+    "language": "Språk",
+    "menu": "Meny"
+  },
+  "home": {
+    "title": "HeritageGuiding - Upptäck Stockholms Historia",
+    "description": "Upptäck Stockholm med expertvägledning. Privata och gruppturer på svenska, engelska och tyska.",
+    "hero": {
+      "title": "Upptäck Stockholms Rika Kulturarv",
+      "subtitle": "Expertguidningar som förmedlar stadens historia och kultur",
+      "cta": "Utforska våra turer"
+    },
+    "featured": {
+      "title": "Utvalda Turer",
+      "viewAll": "Se alla turer"
+    }
+  },
+  "tours": {
+    "title": "Våra Turer",
+    "description": "Bläddra bland vårt urval av expertguidningar",
+    "duration": "Varaktighet",
+    "price": "Pris",
+    "from": "från",
+    "perPerson": "per person",
+    "hours": "timmar",
+    "availability": "Tillgänglighet",
+    "accessibility": "Tillgänglighet",
+    "category": "Kategori",
+    "guide": "Guide"
+  },
+  "booking": {
+    "title": "Boka din tur",
+    "selectDate": "Välj datum",
+    "selectTime": "Välj tid",
+    "participants": "Antal deltagare",
+    "totalPrice": "Totalpris",
+    "proceedToPayment": "Fortsätt till betalning",
+    "bookingConfirmed": "Bokningen bekräftad",
+    "thankYou": "Tack för din bokning!"
+  },
+  "footer": {
+    "about": "Om HeritageGuiding",
+    "contact": "Kontakta oss",
+    "privacy": "Integritetspolicy",
+    "terms": "Villkor",
+    "copyright": "© 2026 HeritageGuiding. Alla rättigheter förbehållna."
+  },
+  "meta": {
+    "defaultTitle": "HeritageGuiding - Stockholm Turer",
+    "defaultDescription": "Upptäck Stockholm med expertvägledning. Privata och gruppturer på svenska, engelska och tyska.",
+    "keywords": "Stockholm turer, kulturarv, stadsvandring, privata turer"
+  }
+}

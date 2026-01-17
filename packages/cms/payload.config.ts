@@ -46,6 +46,25 @@ export default buildConfig({
     },
   }),
   editor: lexicalEditor(),
+  // Localization configuration for SV/EN/DE
+  localization: {
+    locales: [
+      {
+        code: 'sv',
+        label: 'Svenska',
+      },
+      {
+        code: 'en',
+        label: 'English',
+      },
+      {
+        code: 'de',
+        label: 'Deutsch',
+      },
+    ],
+    defaultLocale: 'sv',
+    fallback: true,
+  },
   plugins: [
     vercelBlobStorage({
       enabled: process.env.BLOB_READ_WRITE_TOKEN !== undefined,
