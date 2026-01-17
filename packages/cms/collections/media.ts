@@ -35,14 +35,19 @@ export const Media: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Alt Text',
+      localized: true,
       admin: {
-        description: 'Describe the image for accessibility',
+        description: 'Describe the image for accessibility (localized)',
       },
     },
     {
       name: 'caption',
       type: 'text',
       label: 'Caption',
+      localized: true,
+      admin: {
+        description: 'Optional caption for the image (localized)',
+      },
     },
   ],
   access: {

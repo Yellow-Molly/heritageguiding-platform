@@ -1,0 +1,65 @@
+{
+  "common": {
+    "home": "Home",
+    "about": "About",
+    "tours": "Tours",
+    "contact": "Contact",
+    "bookNow": "Book Now",
+    "learnMore": "Learn More",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "search": "Search",
+    "filter": "Filter",
+    "sortBy": "Sort by",
+    "language": "Language",
+    "menu": "Menu"
+  },
+  "home": {
+    "title": "HeritageGuiding - Discover Stockholm's History",
+    "description": "Discover Stockholm with expert guidance. Private and group tours in Swedish, English, and German.",
+    "hero": {
+      "title": "Discover Stockholm's Rich Heritage",
+      "subtitle": "Expert-led tours that bring the city's history and culture to life",
+      "cta": "Explore Our Tours"
+    },
+    "featured": {
+      "title": "Featured Tours",
+      "viewAll": "View All Tours"
+    }
+  },
+  "tours": {
+    "title": "Our Tours",
+    "description": "Browse our selection of expert-guided tours",
+    "duration": "Duration",
+    "price": "Price",
+    "from": "from",
+    "perPerson": "per person",
+    "hours": "hours",
+    "availability": "Availability",
+    "accessibility": "Accessibility",
+    "category": "Category",
+    "guide": "Guide"
+  },
+  "booking": {
+    "title": "Book Your Tour",
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "participants": "Number of Participants",
+    "totalPrice": "Total Price",
+    "proceedToPayment": "Proceed to Payment",
+    "bookingConfirmed": "Booking Confirmed",
+    "thankYou": "Thank you for your booking!"
+  },
+  "footer": {
+    "about": "About HeritageGuiding",
+    "contact": "Contact Us",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "copyright": "© 2026 HeritageGuiding. All rights reserved."
+  },
+  "meta": {
+    "defaultTitle": "HeritageGuiding - Stockholm Tours",
+    "defaultDescription": "Discover Stockholm with expert guidance. Private and group tours in Swedish, English, and German.",
+    "keywords": "Stockholm tours, heritage guiding, city tours, private tours"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "common": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "tours": "Touren",
+    "contact": "Kontakt",
+    "bookNow": "Jetzt buchen",
+    "learnMore": "Mehr erfahren",
+    "loading": "Lädt...",
+    "error": "Ein Fehler ist aufgetreten",
+    "search": "Suche",
+    "filter": "Filter",
+    "sortBy": "Sortieren nach",
+    "language": "Sprache",
+    "menu": "Menü"
+  },
+  "home": {
+    "title": "HeritageGuiding - Entdecken Sie Stockholms Geschichte",
+    "description": "Entdecken Sie Stockholm mit fachkundiger Führung. Private und Gruppentouren auf Schwedisch, Englisch und Deutsch.",
+    "hero": {
+      "title": "Entdecken Sie Stockholms Reiches Erbe",
+      "subtitle": "Expertengeführte Touren, die die Geschichte und Kultur der Stadt lebendig machen",
+      "cta": "Unsere Touren entdecken"
+    },
+    "featured": {
+      "title": "Empfohlene Touren",
+      "viewAll": "Alle Touren anzeigen"
+    }
+  },
+  "tours": {
+    "title": "Unsere Touren",
+    "description": "Durchsuchen Sie unsere Auswahl an fachkundig geführten Touren",
+    "duration": "Dauer",
+    "price": "Preis",
+    "from": "ab",
+    "perPerson": "pro Person",
+    "hours": "Stunden",
+    "availability": "Verfügbarkeit",
+    "accessibility": "Barrierefreiheit",
+    "category": "Kategorie",
+    "guide": "Reiseführer"
+  },
+  "booking": {
+    "title": "Buchen Sie Ihre Tour",
+    "selectDate": "Datum wählen",
+    "selectTime": "Uhrzeit wählen",
+    "participants": "Anzahl der Teilnehmer",
+    "totalPrice": "Gesamtpreis",
+    "proceedToPayment": "Zur Zahlung gehen",
+    "bookingConfirmed": "Buchung bestätigt",
+    "thankYou": "Vielen Dank für Ihre Buchung!"
+  },
+  "footer": {
+    "about": "Über HeritageGuiding",
+    "contact": "Kontaktieren Sie uns",
+    "privacy": "Datenschutzerklärung",
+    "terms": "Geschäftsbedingungen",
+    "copyright": "© 2026 HeritageGuiding. Alle Rechte vorbehalten."
+  },
+  "meta": {
+    "defaultTitle": "HeritageGuiding - Stockholm Touren",
+    "defaultDescription": "Entdecken Sie Stockholm mit fachkundiger Führung. Private und Gruppentouren auf Schwedisch, Englisch und Deutsch.",
+    "keywords": "Stockholm Touren, Kulturerbführung, Stadtführungen, Privattouren"
+  }
+}

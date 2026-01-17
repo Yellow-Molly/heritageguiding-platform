@@ -1,7 +1,7 @@
 # Codebase Summary - HeritageGuiding Platform
 
-**Last Updated:** January 13, 2026
-**Phase:** 01 - Foundation Setup
+**Last Updated:** January 17, 2026
+**Phase:** 02 - i18n & Localization **COMPLETE** ✅
 **Status:** In Development
 
 ## Overview
@@ -29,6 +29,7 @@ heritageguiding-platform/
 |-------|------------|
 | **Frontend** | Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS |
 | **CMS** | Payload CMS 3.0, Lexical Editor, PostgreSQL |
+| **i18n** | next-intl (SV/EN/DE routing & translations) |
 | **Database** | PostgreSQL 15+ |
 | **Styling** | Tailwind CSS v4, PostCSS |
 | **Storage** | Vercel Blob (images) |
@@ -46,6 +47,8 @@ heritageguiding-platform/
   "@payloadcms/richtext-lexical": "^3.70.0",
   "@payloadcms/storage-vercel-blob": "^3.70.0",
   "next": "^15.5.9",
+  "next-intl": "^3.x",
+  "date-fns": "^3.x",
   "payload": "^3.70.0",
   "react": "^19.2.3",
   "react-dom": "^19.2.3",
@@ -80,9 +83,19 @@ heritageguiding-platform/
 - `.prettierrc` - Code formatting config
 
 **App Structure:**
-- `(frontend)` - Public-facing routes
-- `(payload)` - Admin & API routes
+- `[locale]/(frontend)/` - Localized public-facing routes
+- `(payload)/` - Admin & API routes (non-localized)
 - `api/` - Route handlers
+- `middleware.ts` - next-intl routing middleware
+- `i18n.ts` - Locale configuration
+
+**i18n Structure (Phase 02):**
+- `messages/sv.json` - Swedish translations
+- `messages/en.json` - English translations
+- `messages/de.json` - German translations
+- `components/language-switcher/` - Language selection component
+- `lib/i18n-format.ts` - Date/time/currency formatting utilities
+- `lib/seo.ts` - SEO utilities with hreflang support
 
 ### packages/cms - Payload Configuration
 
@@ -94,16 +107,18 @@ heritageguiding-platform/
 2. **media** - Image/file management
    - Vercel Blob storage integration
    - Responsive image handling
+   - Localized fields: alt text, caption (SV/EN/DE)
 
 **Configuration:**
 - Secret: `PAYLOAD_SECRET` (from env)
 - Database: PostgreSQL with connection pooling
 - Editor: Lexical rich text editor
 - Storage: Vercel Blob for media files
+- Localization: SV (default), EN, DE with fallback support
 
 ### packages/ui - Shared Components
 
-(To be populated in Phase 2 - Design System)
+(To be populated in Phase 04 - Design System)
 
 ### packages/types - Shared Types
 
@@ -162,21 +177,31 @@ npm run payload                 # Payload CLI
 npm run payload:generate-types  # Generate TS types from schema
 ```
 
-## Current State (Phase 01)
+## Current State (Phase 02 COMPLETE)
 
-**Completed:**
-- Monorepo structure setup
-- Next.js 15 project with TypeScript
-- Payload CMS 3.0 integration
-- PostgreSQL database connection
-- Vercel Blob storage integration
-- GitHub Actions CI pipeline
-- ESLint, Prettier, TypeScript configuration
-- Basic Users and Media collections
-- Admin interface accessible at `/admin`
-- Placeholder homepage
+**Phase 01 - Foundation (Completed):**
+- ✅ Monorepo structure setup
+- ✅ Next.js 15 project with TypeScript
+- ✅ Payload CMS 3.0 integration
+- ✅ PostgreSQL database connection
+- ✅ Vercel Blob storage integration
+- ✅ GitHub Actions CI pipeline
+- ✅ ESLint, Prettier, TypeScript configuration
+- ✅ Basic Users and Media collections
+- ✅ Admin interface accessible at `/admin`
 
-**Status:** Foundation ready for Phase 02 (i18n & Localization)
+**Phase 02 - i18n & Localization (Completed):**
+- ✅ next-intl configured for SV/EN/DE routing
+- ✅ Language switcher component with session persistence
+- ✅ Translation files for all three languages
+- ✅ Locale-specific layouts with proper lang/dir attributes
+- ✅ Payload CMS localization plugin configured
+- ✅ Date/time/currency formatting utilities
+- ✅ SEO i18n support with hreflang tags
+- ✅ Multilingual content support in Media collection
+- ✅ Routes accessible via `/sv`, `/en`, `/de` prefixes
+
+**Status:** Ready for Phase 03 (Data Models & CMS Schema)
 
 ## Notes
 
