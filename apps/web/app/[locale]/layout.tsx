@@ -2,7 +2,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { locales, localeMetadata, type Locale } from '@/i18n'
-import { geistSans, geistMono } from '@/lib/fonts'
+import { inter, playfairDisplay } from '@/lib/fonts'
 import { generateHreflangAlternates, generateOgLocaleAlternates } from '@/lib/seo'
 import type { Metadata } from 'next'
 
@@ -53,7 +53,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={localeMetadata[locale as Locale]?.dir || 'ltr'} suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${inter.variable} ${playfairDisplay.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
       </body>
     </html>

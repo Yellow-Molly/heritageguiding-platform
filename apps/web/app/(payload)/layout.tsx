@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import '@payloadcms/next/css'
-import { geistSans, geistMono } from '@/lib/fonts'
+import { inter, playfairDisplay } from '@/lib/fonts'
 
 export const metadata: Metadata = {
   title: 'HeritageGuiding Admin',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function PayloadLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
+      <body className={`${inter.variable} ${playfairDisplay.variable}`}>{children}</body>
     </html>
   )
 }
