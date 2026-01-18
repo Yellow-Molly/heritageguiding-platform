@@ -1,8 +1,8 @@
 # System Architecture - HeritageGuiding Platform
 
-**Last Updated:** January 13, 2026
-**Phase:** 01 - Foundation Setup
-**Status:** Ready for Phase 02
+**Last Updated:** January 18, 2026
+**Phase:** 03 - Data Models & CMS Schema
+**Status:** Ready for Phase 04
 
 ## High-Level Architecture
 
@@ -42,12 +42,15 @@
 │                (Content & User Management)                   │
 │                                                               │
 │  ┌──────────────────────────────────────────────────────┐   │
-│  │  Collections (Database Models)                        │   │
+│  │  Collections (Database Models - Phase 03 Complete)   │   │
 │  │  - Users (admin users with role-based access)        │   │
-│  │  - Media (images + file storage)                     │   │
-│  │  - Tours (Phase 3+)                                  │   │
-│  │  - Guides/Experts (Phase 3+)                         │   │
-│  │  - Categories, Reviews (Phase 3+)                    │   │
+│  │  - Media (images + file storage, Vercel Blob)        │   │
+│  │  - Tours (logistics, inclusions, audience tags)      │   │
+│  │  - Guides/Experts (credentials, languages, photo)    │   │
+│  │  - Categories (themes & categorization)              │   │
+│  │  - Cities & Neighborhoods (geographic data)          │   │
+│  │  - Reviews (ratings, verified reviews)               │   │
+│  │  - Pages (FAQ, About, Terms, Privacy - localized)    │   │
 │  └──────────────────────────────────────────────────────┘   │
 │                                                               │
 │  ┌──────────────────────────────────────────────────────┐   │

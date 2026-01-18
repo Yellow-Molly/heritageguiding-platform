@@ -1,2 +1,10 @@
+// Payload CMS collections - barrel export
 export { Users } from './users'
 export { Media } from './media'
+export { Tours } from './tours'
+export { Guides } from './guides'
+export { Categories } from './categories'
+export { Cities } from './cities'
+export { Neighborhoods } from './neighborhoods'
+export { Reviews } from './reviews'
+export { Pages } from './pages'

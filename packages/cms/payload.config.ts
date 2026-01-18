@@ -4,8 +4,17 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { Users } from './collections/users'
-import { Media } from './collections/media'
+import {
+  Users,
+  Media,
+  Tours,
+  Guides,
+  Categories,
+  Cities,
+  Neighborhoods,
+  Reviews,
+  Pages,
+} from './collections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,7 +44,27 @@ export default buildConfig({
       titleSuffix: '- HeritageGuiding',
     },
   },
-  collections: [Users, Media],
+  // Localization for SV/EN/DE support
+  localization: {
+    locales: [
+      { label: 'Swedish', code: 'sv' },
+      { label: 'English', code: 'en' },
+      { label: 'German', code: 'de' },
+    ],
+    defaultLocale: 'sv',
+    fallback: true,
+  },
+  collections: [
+    Users,
+    Media,
+    Tours,
+    Guides,
+    Categories,
+    Cities,
+    Neighborhoods,
+    Reviews,
+    Pages,
+  ],
   secret: getPayloadSecret(),
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

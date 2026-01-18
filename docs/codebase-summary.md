@@ -1,7 +1,7 @@
 # Codebase Summary - HeritageGuiding Platform
 
-**Last Updated:** January 17, 2026
-**Phase:** 02 - i18n & Localization **COMPLETE** ✅
+**Last Updated:** January 18, 2026
+**Phase:** 03 - Data Models & CMS Schema (Complete)
 **Status:** In Development
 
 ## Overview
@@ -99,7 +99,7 @@ heritageguiding-platform/
 
 ### packages/cms - Payload Configuration
 
-**Collections:**
+**Collections (Phase 03):**
 1. **users** - Admin users with role-based access control
    - Fields: name, email (auth), role (admin/editor)
    - Access: Admins manage all, users read own data
@@ -108,6 +108,29 @@ heritageguiding-platform/
    - Vercel Blob storage integration
    - Responsive image handling
    - Localized fields: alt text, caption (SV/EN/DE)
+3. **tours** - Tours with logistics, inclusions, audience tags (177 lines)
+4. **guides** - Tour guides/experts with credentials & languages
+5. **categories** - Tour categories/themes
+6. **cities** - Geographic cities data
+7. **neighborhoods** - Stockholm neighborhoods
+8. **reviews** - Tour reviews with ratings
+9. **pages** - Static pages (FAQ, About, Terms, Privacy)
+
+**Field Modules:**
+- `slug-field.ts` - Unique slug generation
+- `seo-fields.ts` - Meta title, description, OG image
+- `accessibility-fields.ts` - WCAG compliance fields
+- `logistics-fields.ts` - Meeting point, coordinates, Google Maps
+- `tour-pricing-fields.ts` - Price, currency, discounts
+- `tour-inclusion-fields.ts` - Inclusions, exclusions, items
+- `tour-audience-fields.ts` - 10 audience tags for Concierge Wizard
+
+**Access Control:**
+- `is-admin.ts` - Admin-only operations
+- `is-authenticated.ts` - Authenticated user access
+
+**Hooks:**
+- `format-slug.ts` - URL-safe slug generation
 
 **Configuration:**
 - Secret: `PAYLOAD_SECRET` (from env)
@@ -115,6 +138,7 @@ heritageguiding-platform/
 - Editor: Lexical rich text editor
 - Storage: Vercel Blob for media files
 - Localization: SV (default), EN, DE with fallback support
+- i18n: SV/EN/DE localization per field
 
 ### packages/ui - Shared Components
 
@@ -177,7 +201,7 @@ npm run payload                 # Payload CLI
 npm run payload:generate-types  # Generate TS types from schema
 ```
 
-## Current State (Phase 02 COMPLETE)
+## Current State (Phase 03)
 
 **Phase 01 - Foundation (Completed):**
 - ✅ Monorepo structure setup
@@ -201,7 +225,17 @@ npm run payload:generate-types  # Generate TS types from schema
 - ✅ Multilingual content support in Media collection
 - ✅ Routes accessible via `/sv`, `/en`, `/de` prefixes
 
-**Status:** Ready for Phase 03 (Data Models & CMS Schema)
+**Phase 03 (Complete - Today):**
+- ✅ 9 Payload CMS collections (Tours, Guides, Categories, Cities, Neighborhoods, Reviews, Pages, Media, Users)
+- ✅ 7 reusable field modules with TypeScript exports
+- ✅ 2 access control helpers with role-based checks
+- ✅ 1 slug formatting hook with URL validation
+- ✅ Database migrations & indexes
+- ✅ Full i18n support per collection
+- ✅ Relationship mapping between collections
+- ✅ CRUD operations tested in admin UI
+
+**Status:** Foundation complete - Ready for Phase 04 (Design System)
 
 ## Notes
 
@@ -213,13 +247,14 @@ npm run payload:generate-types  # Generate TS types from schema
 
 ## Phase Roadmap
 
-| Phase | Focus | Est. Hours |
-|-------|-------|-----------|
-| **01** | Foundation Setup | 16-20 |
-| **02** | i18n & Localization | 24-28 |
-| **03** | Data Models | 20-24 |
-| **04-08** | Core Platform | 128-148 |
-| **09-13** | Advanced Features | 62-76 |
-| **14-17** | Polish & Launch | 50-62 |
+| Phase | Focus | Est. Hours | Status |
+|-------|-------|-----------|--------|
+| **01** | Foundation Setup | 16-20 | ✅ Complete |
+| **02** | i18n & Localization | 24-28 | ✅ Complete |
+| **03** | Data Models & CMS | 28-32 | ✅ Complete |
+| **04** | Design System | 32-36 | In Progress |
+| **05-08** | Core Platform (Homepage, Catalog, Details, Booking) | 104-132 | Planned |
+| **09-13** | Advanced Features (Groups, Concierge, SEO, Accessibility) | 72-86 | Planned |
+| **14-17** | Polish & Launch (Performance, Testing, Docs, Deploy) | 50-62 | Planned |
 
 See `./MVP-PROJECT-PLAN.md` for detailed timeline.

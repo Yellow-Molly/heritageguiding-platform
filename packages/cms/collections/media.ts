@@ -1,5 +1,9 @@
 import type { CollectionConfig } from 'payload'
 
+/**
+ * Media collection for images, videos, and documents
+ * Supports responsive image sizes and localized alt text
+ */
 export const Media: CollectionConfig = {
   slug: 'media',
   upload: {
@@ -28,12 +32,14 @@ export const Media: CollectionConfig = {
   admin: {
     useAsTitle: 'alt',
     description: 'Media files for tours, guides, and content',
+    group: 'Media',
   },
   fields: [
     {
       name: 'alt',
       type: 'text',
       required: true,
+      localized: true,
       label: 'Alt Text',
       localized: true,
       admin: {
@@ -43,6 +49,7 @@ export const Media: CollectionConfig = {
     {
       name: 'caption',
       type: 'text',
+      localized: true,
       label: 'Caption',
       localized: true,
       admin: {
