@@ -4,6 +4,11 @@
   "private": true,
   "main": "./payload.config.ts",
   "types": "./payload.config.ts",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
   "exports": {
     ".": "./payload.config.ts",
     "./collections": "./collections/index.ts",
@@ -14,5 +19,9 @@
     "@payloadcms/richtext-lexical": "^3.70.0",
     "@payloadcms/storage-vercel-blob": "^3.70.0",
     "payload": "^3.70.0"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.17",
+    "vitest": "^4.0.17"
   }
 }

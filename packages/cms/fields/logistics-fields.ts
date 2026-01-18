@@ -4,7 +4,7 @@ import type { Field } from 'payload'
  * URL validation for Google Maps links
  * Allows google.com/maps, goo.gl/maps, or maps.google.com URLs
  */
-const validateGoogleMapsUrl = (value: string | undefined | null): true | string => {
+export const validateGoogleMapsUrl = (value: string | undefined | null): true | string => {
   if (!value) return true
   const validPatterns = [
     /^https?:\/\/(www\.)?google\.(com|[a-z]{2,3})\/maps/i,
