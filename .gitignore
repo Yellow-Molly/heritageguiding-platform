@@ -80,3 +80,4 @@ tmpclaude-*
 # Payload CMS
 payload-types.ts
 **/payload-types.ts
+packages/cms/coverage/
