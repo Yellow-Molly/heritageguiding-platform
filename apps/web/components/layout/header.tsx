@@ -55,7 +55,7 @@ export function Header() {
           href="/"
           className={cn(
             'font-serif text-2xl font-bold transition-colors',
-            isScrolled ? 'text-[var(--color-primary)]' : 'text-white'
+            isScrolled ? 'text-[#1E3A5F]' : 'text-white text-shadow-sm'
           )}
         >
           HeritageGuiding
@@ -69,7 +69,7 @@ export function Header() {
               href={item.href}
               className={cn(
                 'text-base font-medium transition-colors hover:opacity-80',
-                isScrolled ? 'text-[var(--color-text)]' : 'text-white'
+                isScrolled ? 'text-[#2D3748]' : 'text-white text-shadow-sm'
               )}
             >
               {item.name}
@@ -83,7 +83,7 @@ export function Header() {
               onBlur={() => setTimeout(() => setIsLangMenuOpen(false), 150)}
               className={cn(
                 'flex items-center gap-1 text-sm font-medium transition-colors',
-                isScrolled ? 'text-[var(--color-text)]' : 'text-white'
+                isScrolled ? 'text-[#2D3748]' : 'text-white text-shadow-sm'
               )}
               aria-label="Select language"
               aria-expanded={isLangMenuOpen}
@@ -131,7 +131,7 @@ export function Header() {
         <button
           className={cn(
             'flex h-10 w-10 items-center justify-center rounded-lg md:hidden',
-            isScrolled ? 'text-[var(--color-primary)]' : 'text-white'
+            isScrolled ? 'text-[#1E3A5F]' : 'text-white text-shadow-sm'
           )}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}

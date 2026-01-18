@@ -27,7 +27,7 @@ const featuredTours: Tour[] = [
     title: 'Gamla Stan Walking Tour',
     description:
       'Explore the medieval streets of Old Town, discover hidden courtyards, and hear tales of Swedish royalty.',
-    image: 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=800&q=80',
     duration: 120,
     maxCapacity: 15,
     rating: 4.9,
@@ -40,7 +40,7 @@ const featuredTours: Tour[] = [
     title: 'Royal Palace Experience',
     description:
       'Step inside one of Europe\'s largest palaces and uncover 500 years of Swedish monarchy history.',
-    image: 'https://images.unsplash.com/photo-1570654639102-bdd95efeca90?q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80',
     duration: 150,
     maxCapacity: 12,
     rating: 4.8,
@@ -52,7 +52,7 @@ const featuredTours: Tour[] = [
     title: 'Vasa Museum Deep Dive',
     description:
       'Marvel at the world\'s only preserved 17th-century ship and learn about its dramatic story.',
-    image: 'https://images.unsplash.com/photo-1583269460323-1c9e5caa0ed4?q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80',
     duration: 90,
     maxCapacity: 20,
     rating: 4.9,

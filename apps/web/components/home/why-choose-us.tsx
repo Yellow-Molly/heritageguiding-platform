@@ -136,7 +136,7 @@ export function WhyChooseUs() {
             {/* Image */}
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
               <Image
-                src="https://images.unsplash.com/photo-1569091791842-7cfb64e04797?q=80&w=800"
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
                 alt="Tour guide explaining Stockholm history to a group"
                 fill
                 className="object-cover"

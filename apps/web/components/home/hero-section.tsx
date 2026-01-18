@@ -41,7 +41,7 @@ export function HeroSection() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1509356843151-3e7d96241e11?q=80&w=2070"
+          src="https://images.unsplash.com/photo-1508189860359-777d945909ef?auto=format&fit=crop&w=2070&q=80"
           alt="Gamla Stan, Stockholm Old Town at sunset with historic buildings reflecting on water"
           fill
           priority
@@ -85,7 +85,7 @@ export function HeroSection() {
 
         {/* Headline */}
         <h1
-          className="mb-6 animate-fade-in-up font-serif text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl xl:text-7xl"
+          className="mb-6 animate-fade-in-up font-serif text-4xl font-bold leading-tight text-white text-shadow-hero md:text-5xl lg:text-6xl xl:text-7xl"
           style={{ animationDelay: '150ms' }}
         >
           Discover Stockholm&apos;s
@@ -153,7 +153,7 @@ export function HeroSection() {
           data-parallax="-0.1"
         >
           <Image
-            src="https://images.unsplash.com/photo-1570654639102-bdd95efeca90?q=80&w=400"
+            src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=400&q=80"
             alt="Royal Palace Stockholm"
             width={200}
             height={150}
@@ -169,7 +169,7 @@ export function HeroSection() {
           data-parallax="-0.15"
         >
           <Image
-            src="https://images.unsplash.com/photo-1583269460323-1c9e5caa0ed4?q=80&w=400"
+            src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=400&q=80"
             alt="Stockholm City Hall"
             width={180}
             height={120}

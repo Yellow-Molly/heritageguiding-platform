@@ -29,6 +29,8 @@ const variantStyles = {
     hover:bg-white hover:text-[var(--color-primary)]
     focus-visible:ring-white
     bg-transparent
+    [text-shadow:0_1px_2px_rgba(0,0,0,0.3)]
+    hover:[text-shadow:none]
   `,
   'outline-dark': `
     border-2 border-[var(--color-primary)] text-[var(--color-primary)]

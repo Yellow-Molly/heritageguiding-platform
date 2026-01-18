@@ -11,7 +11,7 @@ export function FindTourCta() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1599411226268-c7e5b7a82c8d?q=80&w=2070"
+          src="https://images.unsplash.com/photo-1508189860359-777d945909ef?auto=format&fit=crop&w=2070&q=80"
           alt="Stockholm waterfront panorama"
           fill
           className="object-cover"
