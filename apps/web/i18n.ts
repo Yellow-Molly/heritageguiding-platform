@@ -27,7 +27,7 @@ export const localeMetadata: Record<
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // This will usually be inferred from the URL
-  let locale = await requestLocale
+  const locale = await requestLocale
 
   // Ensure locale is valid
   if (!locale || !locales.includes(locale as Locale)) {

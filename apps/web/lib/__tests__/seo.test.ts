@@ -125,32 +125,32 @@ describe('generateRobotsDirectives', () => {
   })
 
   it('respects index option', () => {
-    const result = generateRobotsDirectives('sv', { index: false })
+    const result = generateRobotsDirectives('sv', { index: false }) as Record<string, unknown>
     expect(result?.index).toBe(false)
   })
 
   it('respects follow option', () => {
-    const result = generateRobotsDirectives('sv', { follow: false })
+    const result = generateRobotsDirectives('sv', { follow: false }) as Record<string, unknown>
     expect(result?.follow).toBe(false)
   })
 
   it('respects noarchive option', () => {
-    const result = generateRobotsDirectives('sv', { noarchive: true })
+    const result = generateRobotsDirectives('sv', { noarchive: true }) as Record<string, unknown>
     expect(result?.noarchive).toBe(true)
   })
 
   it('respects nositelinkssearchbox option', () => {
-    const result = generateRobotsDirectives('sv', { nositelinkssearchbox: true })
+    const result = generateRobotsDirectives('sv', { nositelinkssearchbox: true }) as Record<string, unknown>
     expect(result?.nositelinkssearchbox).toBe(true)
   })
 
   it('respects notranslate option', () => {
-    const result = generateRobotsDirectives('sv', { notranslate: true })
+    const result = generateRobotsDirectives('sv', { notranslate: true }) as Record<string, unknown>
     expect(result?.notranslate).toBe(true)
   })
 
   it('handles multiple options', () => {
-    const result = generateRobotsDirectives('sv', { index: false, follow: false })
+    const result = generateRobotsDirectives('sv', { index: false, follow: false }) as Record<string, unknown>
     expect(result?.index).toBe(false)
     expect(result?.follow).toBe(false)
   })
@@ -198,7 +198,7 @@ describe('generatePageMetadata', () => {
     expect(result.openGraph?.url).toBe('https://example.com/sv/test')
     expect(result.openGraph?.siteName).toBe('HeritageGuiding')
     expect(result.openGraph?.locale).toBe('sv_SE')
-    expect(result.openGraph?.type).toBe('website')
+    expect((result.openGraph as Record<string, unknown>)?.type).toBe('website')
   })
 
   it('generates Twitter metadata', () => {
@@ -208,7 +208,7 @@ describe('generatePageMetadata', () => {
       locale: 'sv',
       pathname: '/test',
     })
-    expect(result.twitter?.card).toBe('summary_large_image')
+    expect((result.twitter as Record<string, unknown>)?.card).toBe('summary_large_image')
     expect(result.twitter?.title).toBe('Test')
     expect(result.twitter?.description).toBe('Test description')
   })
@@ -244,7 +244,7 @@ describe('generatePageMetadata', () => {
       pathname: '/test',
       noIndex: true,
     })
-    expect(result.robots?.index).toBe(false)
+    expect((result.robots as Record<string, unknown>)?.index).toBe(false)
   })
 
   it('handles English locale', () => {

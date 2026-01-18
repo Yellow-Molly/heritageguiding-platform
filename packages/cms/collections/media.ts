@@ -41,7 +41,6 @@ export const Media: CollectionConfig = {
       required: true,
       localized: true,
       label: 'Alt Text',
-      localized: true,
       admin: {
         description: 'Describe the image for accessibility (localized)',
       },
@@ -51,7 +50,6 @@ export const Media: CollectionConfig = {
       type: 'text',
       localized: true,
       label: 'Caption',
-      localized: true,
       admin: {
         description: 'Optional caption for the image (localized)',
       },
