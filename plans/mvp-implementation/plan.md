@@ -33,8 +33,8 @@ Stockholm tourism booking platform with AI-first architecture, multi-language su
 | 01 | Foundation & Setup | 16-20h | done (2026-01-13) | [phase-01](./phase-01-foundation-setup.md) |
 | 02 | i18n & Localization | 24-28h | done (2026-01-17) | [phase-02](./phase-02-i18n-localization.md) |
 | 03 | Data Models & CMS Schema | 28-32h | done (2026-01-18) | [phase-03](./phase-03-data-models-cms-schema.md) |
-| 04 | Design System | 32-36h | pending | [phase-04](./phase-04-design-system.md) |
-| 05 | Homepage | 28-32h | pending | [phase-05](./phase-05-homepage.md) |
+| 04 | Design System | 32-36h | done (2026-01-18) | [phase-04](./phase-04-design-system.md) |
+| 05 | Homepage | 28-32h | done (2026-01-18) | [phase-05](./phase-05-homepage.md) |
 | 05.5 | Static Pages (FAQ, About) | 6-10h | pending | [phase-05.5](./phase-05.5-static-pages.md) |
 | 06 | Tour Catalog | 24-28h | pending | [phase-06](./phase-06-tour-catalog.md) |
 | 07 | Tour Details | 32-36h | pending | [phase-07](./phase-07-tour-details.md) |

@@ -20,11 +20,41 @@
     "hero": {
       "title": "Entdecken Sie Stockholms Reiches Erbe",
       "subtitle": "Expertengeführte Touren, die die Geschichte und Kultur der Stadt lebendig machen",
-      "cta": "Unsere Touren entdecken"
+      "cta": "Unsere Touren entdecken",
+      "findTour": "Finden Sie Ihre Tour",
+      "imageAlt": "Panoramablick auf Stockholms Altstadt bei Sonnenuntergang"
     },
     "featured": {
       "title": "Empfohlene Touren",
+      "subtitle": "Unsere beliebtesten Kulturerbe-Erlebnisse",
       "viewAll": "Alle Touren anzeigen"
+    },
+    "trust": {
+      "happyTravelers": "Zufriedene Reisende",
+      "uniqueTours": "Einzigartige Touren",
+      "averageRating": "Durchschnittsbewertung",
+      "yearsExperience": "Jahre Erfahrung"
+    },
+    "categories": {
+      "title": "Finden Sie Ihr Perfektes Erlebnis",
+      "subtitle": "Durchsuchen Sie Touren nach Thema oder erkunden Sie Stockholms einzigartige Viertel",
+      "byTheme": "Nach Thema entdecken",
+      "byArea": "Nach Gebiet entdecken",
+      "tours": "Touren"
+    },
+    "whyChooseUs": {
+      "title": "Warum Uns Wählen",
+      "subtitle": "Erleben Sie das Kulturerbe wie nie zuvor",
+      "description": "Seit über 15 Jahren verbinden wir Reisende mit Stockholms reicher Geschichte."
+    },
+    "testimonials": {
+      "title": "Was Unsere Gäste Sagen",
+      "subtitle": "Verlassen Sie sich nicht nur auf unser Wort"
+    },
+    "findTour": {
+      "title": "Finden Sie Ihre Perfekte Tour",
+      "subtitle": "Beantworten Sie einige Fragen und lassen Sie uns das ideale Kulturerbe-Erlebnis empfehlen",
+      "cta": "Finden Sie Ihre Tour Jetzt"
     }
   },
   "tours": {

@@ -20,11 +20,41 @@
     "hero": {
       "title": "Discover Stockholm's Rich Heritage",
       "subtitle": "Expert-led tours that bring the city's history and culture to life",
-      "cta": "Explore Our Tours"
+      "cta": "Explore Our Tours",
+      "findTour": "Find Your Tour",
+      "imageAlt": "Panoramic view of Stockholm Old Town at sunset"
     },
     "featured": {
       "title": "Featured Tours",
+      "subtitle": "Our most beloved heritage experiences",
       "viewAll": "View All Tours"
+    },
+    "trust": {
+      "happyTravelers": "Happy Travelers",
+      "uniqueTours": "Unique Tours",
+      "averageRating": "Average Rating",
+      "yearsExperience": "Years Experience"
+    },
+    "categories": {
+      "title": "Find Your Perfect Experience",
+      "subtitle": "Browse tours by theme or explore Stockholm's unique neighborhoods",
+      "byTheme": "Explore by Theme",
+      "byArea": "Explore by Area",
+      "tours": "tours"
+    },
+    "whyChooseUs": {
+      "title": "Why Choose Us",
+      "subtitle": "Experience Heritage Like Never Before",
+      "description": "For over 15 years, we've been connecting travelers with Stockholm's rich history."
+    },
+    "testimonials": {
+      "title": "What Our Guests Say",
+      "subtitle": "Don't just take our word for it"
+    },
+    "findTour": {
+      "title": "Find Your Perfect Tour",
+      "subtitle": "Answer a few questions and let us recommend the ideal heritage experience",
+      "cta": "Find Your Tour Now"
     }
   },
   "tours": {

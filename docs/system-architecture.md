@@ -1,8 +1,8 @@
 # System Architecture - HeritageGuiding Platform
 
 **Last Updated:** January 18, 2026
-**Phase:** 03 - Data Models & CMS Schema
-**Status:** Ready for Phase 04
+**Phase:** 05 - Homepage
+**Status:** Ready for Phase 06
 
 ## High-Level Architecture
 

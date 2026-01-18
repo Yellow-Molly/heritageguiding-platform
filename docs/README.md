@@ -1,7 +1,7 @@
 # HeritageGuiding Platform - Documentation Index
 
 **Last Updated:** January 18, 2026
-**Project Status:** Phase 03 Complete - Ready for Phase 04
+**Project Status:** Phase 05 Complete - Ready for Phase 06
 
 Welcome to the HeritageGuiding Platform documentation. This folder contains comprehensive documentation for developers, project managers, and stakeholders.
 
@@ -229,7 +229,9 @@ Welcome to the HeritageGuiding Platform documentation. This folder contains comp
 - **Phase 01 (Foundation):** ✅ COMPLETE
 - **Phase 02 (i18n):** ✅ COMPLETE
 - **Phase 03 (Data Models):** ✅ COMPLETE
-- **Phases 04-08 (Core Platform):** Planned (Weeks 3-5)
+- **Phase 04 (Design System):** ✅ COMPLETE
+- **Phase 05 (Homepage):** ✅ COMPLETE
+- **Phases 06-08 (Core Platform):** Planned (Weeks 3-5)
 - **Phases 09-13 (Advanced):** Planned (Weeks 6-8)
 - **Phases 14-17 (Polish):** Planned (Weeks 9-12)
 

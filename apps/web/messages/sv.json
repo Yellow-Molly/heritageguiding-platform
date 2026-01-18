@@ -20,11 +20,41 @@
     "hero": {
       "title": "Upptäck Stockholms Rika Kulturarv",
       "subtitle": "Expertguidningar som förmedlar stadens historia och kultur",
-      "cta": "Utforska våra turer"
+      "cta": "Utforska våra turer",
+      "findTour": "Hitta Din Tur",
+      "imageAlt": "Panoramabild av Gamla Stan i Stockholm vid solnedgång"
     },
     "featured": {
       "title": "Utvalda Turer",
+      "subtitle": "Våra mest älskade kulturarvsupplevelser",
       "viewAll": "Se alla turer"
+    },
+    "trust": {
+      "happyTravelers": "Nöjda Resenärer",
+      "uniqueTours": "Unika Turer",
+      "averageRating": "Genomsnittsbetyg",
+      "yearsExperience": "Års Erfarenhet"
+    },
+    "categories": {
+      "title": "Hitta Din Perfekta Upplevelse",
+      "subtitle": "Bläddra bland turer efter tema eller utforska Stockholms unika stadsdelar",
+      "byTheme": "Utforska efter Tema",
+      "byArea": "Utforska efter Område",
+      "tours": "turer"
+    },
+    "whyChooseUs": {
+      "title": "Varför Välja Oss",
+      "subtitle": "Upplev Kulturarvet Som Aldrig Förr",
+      "description": "I över 15 år har vi kopplat resenärer med Stockholms rika historia."
+    },
+    "testimonials": {
+      "title": "Vad Våra Gäster Säger",
+      "subtitle": "Ta inte bara vårt ord för det"
+    },
+    "findTour": {
+      "title": "Hitta Din Perfekta Tur",
+      "subtitle": "Svara på några frågor och låt oss rekommendera den perfekta kulturarvsupplevelsen",
+      "cta": "Hitta Din Tur Nu"
     }
   },
   "tours": {

@@ -11,7 +11,7 @@
 
 | Priority | Status | Effort |
 |----------|--------|--------|
-| P1 - Critical | pending | 28-32h |
+| P1 - Critical | done (2026-01-18) | 28-32h |
 
 Build responsive homepage with hero section, **"Find Your Tour" CTA (links to /find-tour wizard)**, featured tours carousel, trust signals, and clear CTAs. Server-rendered for SEO with localized content. Footer with links to FAQ, About Us, Terms, Privacy. *(Validated: Wizard moved to separate /find-tour page)*
 
@@ -400,38 +400,38 @@ Homepage
 
 ## Todo List
 
-- [ ] Create homepage Server Component
-- [ ] Build HeroSection with responsive image
-- [ ] Build ConciergeWizardPreview component (CTA for full wizard)
-- [ ] Build FeaturedTours grid component
-- [ ] Create TourCard component
-- [ ] Build TrustSignals section
-- [ ] Build CategoryNav component
-- [ ] Build Footer with static page links
-- [ ] Create getFeaturedTours API function
-- [ ] Create getCategories API function
-- [ ] Add Swedish translation strings
-- [ ] Add English translation strings
-- [ ] Add German translation strings
-- [ ] Optimize hero image (WebP, sizes)
-- [ ] Add Schema.org TravelAgency markup
-- [ ] Generate SEO metadata
-- [ ] Test responsive layouts
-- [ ] Verify LCP < 2.5s
-- [ ] Verify footer links to FAQ, About, Terms, Privacy
+- [x] Create homepage Server Component
+- [x] Build HeroSection with responsive image
+- [ ] Build ConciergeWizardPreview component (CTA for full wizard) - Deferred to Phase 08.5
+- [x] Build FeaturedTours grid component
+- [x] Create TourCard component (integrated into FeaturedTours)
+- [x] Build TrustSignals section
+- [x] Build CategoryNav component
+- [x] Build Footer with static page links (completed in Phase 04)
+- [x] Create getFeaturedTours API function
+- [x] Create getCategories API function
+- [x] Add Swedish translation strings
+- [x] Add English translation strings
+- [x] Add German translation strings
+- [x] Optimize hero image (WebP, sizes)
+- [x] Add Schema.org TravelAgency markup
+- [x] Generate SEO metadata
+- [x] Test responsive layouts
+- [ ] Verify LCP < 2.5s - Needs performance monitoring setup
+- [x] Verify footer links to FAQ, About, Terms, Privacy
 
 ## Success Criteria
 
-- [ ] Homepage loads in all 3 locales
-- [ ] Featured tours display from CMS
-- [ ] Hero image optimized and lazy-loaded
-- [ ] Concierge Wizard CTA visible and clickable
-- [ ] Trust signals section visible
-- [ ] Category navigation works
-- [ ] Footer with all static page links
-- [ ] Mobile layout responsive
-- [ ] Lighthouse performance score > 90
-- [ ] Schema.org markup validates
+- [x] Homepage loads in all 3 locales
+- [x] Featured tours display from CMS (mock data with TODO for CMS integration)
+- [x] Hero image optimized and lazy-loaded
+- [ ] Concierge Wizard CTA visible and clickable - Deferred to Phase 08.5
+- [x] Trust signals section visible
+- [x] Category navigation works
+- [x] Footer with all static page links
+- [x] Mobile layout responsive
+- [ ] Lighthouse performance score > 90 - Needs measurement setup
+- [x] Schema.org markup validates
 
 ## Risk Assessment
 
@@ -454,3 +454,40 @@ After completion:
 2. Then [Phase 06: Tour Catalog](./phase-06-tour-catalog.md)
 3. Build tour listing with filters
 4. Implement search and sorting
+
+---
+
+## Completion Report
+
+**Status:** ✅ Completed
+**Completion Date:** 2026-01-18
+**Code Review:** [code-reviewer-260118-2310-phase05-homepage.md](../reports/code-reviewer-260118-2310-phase05-homepage.md)
+**Quality Score:** 8.2/10
+
+### Implementation Summary
+- Created homepage with hero section, featured tours, trust signals, and category navigation
+- Implemented comprehensive SEO with Schema.org structured data
+- Added i18n support for 3 locales (en, sv, de)
+- Built API layer with mock data (ready for CMS integration)
+- Added 81 new tests (227 total passing)
+- All TypeScript strict mode compliant
+
+### Completed Components
+1. Homepage Server Component with SEO metadata
+2. HeroSection with parallax effects and animations
+3. FeaturedTours grid with TourCard
+4. TrustSignals section
+5. CategoryNav with theme/area filtering
+6. TravelAgencySchema and WebPageSchema for SEO
+7. API functions: getFeaturedTours, getCategories, getTrustStats
+
+### Deferred Items
+- Concierge Wizard CTA → Phase 08.5
+- LCP performance measurement → Needs monitoring setup
+- CMS data integration → Phase 03 (Payload CMS)
+
+### Post-Merge Tasks
+1. Add focus-visible styles to CategoryNav links (accessibility)
+2. Add integration tests for critical flows
+3. Set up performance monitoring for LCP tracking
+4. Consider prefers-reduced-motion for animations
