@@ -267,6 +267,61 @@
       }
     }
   },
+  "tourDetail": {
+    "breadcrumb": {
+      "home": "Home",
+      "tours": "Tours"
+    },
+    "sections": {
+      "experience": "The Experience",
+      "highlights": "Tour Highlights",
+      "accessibility": "Accessibility"
+    },
+    "accessibility": {
+      "wheelchair": "Wheelchair accessible route",
+      "hearing": "Hearing assistance available",
+      "visual": "Visual assistance available"
+    },
+    "facts": {
+      "maxGroup": "Max {count} people",
+      "reviews": "reviews"
+    },
+    "logistics": {
+      "title": "Meeting Point & Logistics",
+      "meetingPoint": "Meeting Point",
+      "instructions": "How to Find Us",
+      "publicTransport": "Public Transport",
+      "parking": "Parking",
+      "endingPoint": "Tour Ends At",
+      "openInMaps": "Open in Google Maps"
+    },
+    "inclusions": {
+      "title": "What's Included",
+      "included": "Included",
+      "notIncluded": "Not Included",
+      "whatToBring": "What to Bring"
+    },
+    "guide": {
+      "title": "Your Guide",
+      "speaks": "Speaks"
+    },
+    "booking": {
+      "bookNow": "Book This Tour",
+      "perPerson": "per person",
+      "duration": "Duration",
+      "maxGroup": "Max {count} people",
+      "selectDate": "Select a date to check availability",
+      "checkAvailability": "Check Availability",
+      "freeCancellation": "Free cancellation up to 24 hours before",
+      "instantConfirmation": "Instant confirmation"
+    },
+    "reviews": {
+      "title": "Guest Reviews",
+      "basedOn": "Based on {count} reviews",
+      "noReviews": "No reviews yet. Be the first to share your experience!"
+    },
+    "relatedTours": "You May Also Like"
+  },
   "privacy": {
     "title": "Privacy Policy",
     "description": "How we collect, use, and protect your personal information",

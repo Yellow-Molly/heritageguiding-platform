@@ -267,6 +267,61 @@
       }
     }
   },
+  "tourDetail": {
+    "breadcrumb": {
+      "home": "Startseite",
+      "tours": "Touren"
+    },
+    "sections": {
+      "experience": "Das Erlebnis",
+      "highlights": "Höhepunkte",
+      "accessibility": "Barrierefreiheit"
+    },
+    "accessibility": {
+      "wheelchair": "Rollstuhlgerechte Route",
+      "hearing": "Hörhilfen verfügbar",
+      "visual": "Sehhilfen verfügbar"
+    },
+    "facts": {
+      "maxGroup": "Max. {count} Personen",
+      "reviews": "Bewertungen"
+    },
+    "logistics": {
+      "title": "Treffpunkt & Logistik",
+      "meetingPoint": "Treffpunkt",
+      "instructions": "So finden Sie uns",
+      "publicTransport": "Öffentliche Verkehrsmittel",
+      "parking": "Parken",
+      "endingPoint": "Tour endet bei",
+      "openInMaps": "In Google Maps öffnen"
+    },
+    "inclusions": {
+      "title": "Was ist enthalten",
+      "included": "Enthalten",
+      "notIncluded": "Nicht enthalten",
+      "whatToBring": "Was Sie mitbringen sollten"
+    },
+    "guide": {
+      "title": "Ihr Reiseführer",
+      "speaks": "Spricht"
+    },
+    "booking": {
+      "bookNow": "Diese Tour buchen",
+      "perPerson": "pro Person",
+      "duration": "Dauer",
+      "maxGroup": "Max. {count} Personen",
+      "selectDate": "Wählen Sie ein Datum zur Verfügbarkeitsprüfung",
+      "checkAvailability": "Verfügbarkeit prüfen",
+      "freeCancellation": "Kostenlose Stornierung bis 24 Stunden vorher",
+      "instantConfirmation": "Sofortige Bestätigung"
+    },
+    "reviews": {
+      "title": "Gästebewertungen",
+      "basedOn": "Basierend auf {count} Bewertungen",
+      "noReviews": "Noch keine Bewertungen. Teilen Sie als Erster Ihre Erfahrung!"
+    },
+    "relatedTours": "Das könnte Ihnen auch gefallen"
+  },
   "privacy": {
     "title": "Datenschutzerklärung",
     "description": "Wie wir Ihre persönlichen Daten erfassen, verwenden und schützen",

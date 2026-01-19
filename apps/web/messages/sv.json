@@ -267,6 +267,61 @@
       }
     }
   },
+  "tourDetail": {
+    "breadcrumb": {
+      "home": "Hem",
+      "tours": "Turer"
+    },
+    "sections": {
+      "experience": "Upplevelsen",
+      "highlights": "Höjdpunkter",
+      "accessibility": "Tillgänglighet"
+    },
+    "accessibility": {
+      "wheelchair": "Rullstolsanpassad rutt",
+      "hearing": "Hörselhjälp tillgänglig",
+      "visual": "Synhjälp tillgänglig"
+    },
+    "facts": {
+      "maxGroup": "Max {count} personer",
+      "reviews": "omdömen"
+    },
+    "logistics": {
+      "title": "Mötesplats & Logistik",
+      "meetingPoint": "Mötesplats",
+      "instructions": "Hur du hittar oss",
+      "publicTransport": "Kollektivtrafik",
+      "parking": "Parkering",
+      "endingPoint": "Turen slutar vid",
+      "openInMaps": "Öppna i Google Maps"
+    },
+    "inclusions": {
+      "title": "Vad ingår",
+      "included": "Ingår",
+      "notIncluded": "Ingår ej",
+      "whatToBring": "Vad du behöver ta med"
+    },
+    "guide": {
+      "title": "Din guide",
+      "speaks": "Talar"
+    },
+    "booking": {
+      "bookNow": "Boka denna tur",
+      "perPerson": "per person",
+      "duration": "Längd",
+      "maxGroup": "Max {count} personer",
+      "selectDate": "Välj datum för att se tillgänglighet",
+      "checkAvailability": "Kontrollera tillgänglighet",
+      "freeCancellation": "Gratis avbokning upp till 24 timmar innan",
+      "instantConfirmation": "Omedelbar bekräftelse"
+    },
+    "reviews": {
+      "title": "Gästomdömen",
+      "basedOn": "Baserat på {count} omdömen",
+      "noReviews": "Inga omdömen ännu. Bli först med att dela din upplevelse!"
+    },
+    "relatedTours": "Du kanske också gillar"
+  },
   "privacy": {
     "title": "Integritetspolicy",
     "description": "Hur vi samlar in, använder och skyddar din personliga information",
