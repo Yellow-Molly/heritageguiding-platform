@@ -91,5 +91,209 @@
     "defaultTitle": "HeritageGuiding - Stockholm Tours",
     "defaultDescription": "Discover Stockholm with expert guidance. Private and group tours in Swedish, English, and German.",
     "keywords": "Stockholm tours, heritage guiding, city tours, private tours"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "description": "Find answers to common questions about our tours and services",
+    "subtitle": "Find answers to common questions about our tours",
+    "categories": {
+      "booking": "Booking & Reservations",
+      "payment": "Payment & Pricing",
+      "cancellation": "Cancellation & Changes",
+      "experience": "Tour Experience",
+      "safety": "Safety & Health",
+      "guides": "About Our Guides"
+    },
+    "stillHaveQuestions": "Still have questions?",
+    "contactDescription": "Our team is here to help you plan your perfect Stockholm experience.",
+    "contactUs": "Contact Us"
+  },
+  "about": {
+    "title": "About Heritage Guiding",
+    "description": "Learn about our mission to share Stockholm's rich heritage",
+    "subtitle": "Where History Comes Alive",
+    "heroAlt": "Heritage Guiding team at Stockholm waterfront",
+    "story": {
+      "title": "Our Story",
+      "paragraph1": "Heritage Guiding was founded with a simple mission: to transform how visitors experience Stockholm's rich history. We believe that understanding the past enriches our present and inspires our future.",
+      "paragraph2": "Our team of expert guides brings together decades of experience in history, art, and archaeology. Each tour is crafted to provide not just information, but genuine connection with the stories that shaped this beautiful city.",
+      "paragraph3": "From the cobblestone streets of Gamla Stan to the magnificent halls of the Royal Palace, we invite you to discover Stockholm through the eyes of those who love it most."
+    },
+    "values": {
+      "title": "What Makes Us Different",
+      "subtitle": "We're committed to excellence in heritage tourism",
+      "expertise": {
+        "title": "PhD-Level Expertise",
+        "description": "Tours led by professional historians and scholars with advanced degrees"
+      },
+      "multilingual": {
+        "title": "Multilingual Tours",
+        "description": "Available in Swedish, English, and German with native speakers"
+      },
+      "accessibility": {
+        "title": "Fully Accessible",
+        "description": "Wheelchair-friendly routes and accommodations for all abilities"
+      },
+      "heritage": {
+        "title": "Heritage Focused",
+        "description": "Deep dive into authentic Swedish history and culture"
+      },
+      "smallGroups": {
+        "title": "Small Groups",
+        "description": "Intimate experiences with maximum 12 participants"
+      },
+      "sustainable": {
+        "title": "Sustainable Tourism",
+        "description": "Eco-conscious practices and support for local communities"
+      }
+    },
+    "team": {
+      "title": "Meet Our Team",
+      "subtitle": "Passionate historians dedicated to sharing Stockholm's stories",
+      "founder": {
+        "name": "Dr. Erik Lindström",
+        "role": "Founder & Lead Historian",
+        "bio": "With over 20 years of experience in Swedish medieval history, Erik founded Heritage Guiding to share his passion for Stockholm's rich past."
+      },
+      "leadGuide": {
+        "name": "Anna Bergström",
+        "role": "Senior Guide",
+        "bio": "Anna specializes in art history and architecture, bringing Stockholm's buildings and monuments to life through engaging storytelling."
+      },
+      "historian": {
+        "name": "Dr. Magnus Olsson",
+        "role": "Archaeological Advisor",
+        "bio": "Magnus brings archaeological expertise to our tours, revealing the hidden layers of history beneath Stockholm's streets."
+      }
+    },
+    "certifications": {
+      "title": "Our Certifications",
+      "subtitle": "Committed to the highest standards of quality and safety",
+      "licensed": "Licensed Guides",
+      "insured": "Fully Insured",
+      "local": "Local Experts"
+    },
+    "cta": {
+      "title": "Ready to Explore?",
+      "description": "Join us for an unforgettable journey through Stockholm's heritage",
+      "exploreTours": "Explore Tours",
+      "contactUs": "Contact Us"
+    }
+  },
+  "terms": {
+    "title": "Terms & Conditions",
+    "description": "Terms and conditions for using HeritageGuiding services",
+    "lastUpdated": "Last updated",
+    "sections": {
+      "intro": {
+        "title": "Introduction",
+        "content": "Welcome to HeritageGuiding. These terms and conditions govern your use of our website and services. By booking a tour or using our services, you agree to these terms."
+      },
+      "booking": {
+        "title": "Booking Terms",
+        "intro": "When you make a booking with us:",
+        "point1": "You must be at least 18 years old to make a booking",
+        "point2": "All information provided must be accurate and complete",
+        "point3": "Booking confirmation is subject to availability",
+        "point4": "You are responsible for arriving at the meeting point on time"
+      },
+      "payment": {
+        "title": "Payment",
+        "content": "Full payment is required at the time of booking. We accept major credit cards, Swish, and bank transfers. All prices are in Swedish Kronor (SEK) unless otherwise stated and include applicable taxes."
+      },
+      "cancellation": {
+        "title": "Cancellation Policy",
+        "intro": "Our cancellation policy is as follows:",
+        "point1": "Free cancellation up to 48 hours before the tour start time",
+        "point2": "Cancellations within 48 hours are non-refundable",
+        "point3": "No-shows are non-refundable"
+      },
+      "liability": {
+        "title": "Limitation of Liability",
+        "content": "While we take every precaution to ensure your safety, participation in tours is at your own risk. HeritageGuiding is not liable for personal injury, loss, or damage to property except where caused by our negligence."
+      },
+      "conduct": {
+        "title": "Tour Conduct",
+        "intro": "Participants agree to:",
+        "point1": "Follow the guide's instructions at all times",
+        "point2": "Behave respectfully towards other participants and public spaces",
+        "point3": "Not engage in illegal activities during the tour"
+      },
+      "ip": {
+        "title": "Intellectual Property",
+        "content": "All content on this website, including text, images, and tour materials, is the property of HeritageGuiding and protected by copyright law."
+      },
+      "law": {
+        "title": "Governing Law",
+        "content": "These terms are governed by Swedish law. Any disputes will be resolved in Swedish courts."
+      },
+      "contact": {
+        "title": "Contact Information",
+        "content": "For questions about these terms, please contact us at info@heritageguiding.com"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "description": "How we collect, use, and protect your personal information",
+    "lastUpdated": "Last updated",
+    "gdpr": {
+      "title": "GDPR Compliance",
+      "content": "HeritageGuiding is committed to protecting your privacy in accordance with the General Data Protection Regulation (GDPR). This policy explains how we handle your personal data."
+    },
+    "sections": {
+      "intro": {
+        "title": "Introduction",
+        "content": "This privacy policy explains how HeritageGuiding collects, uses, and protects your personal information when you use our website and services."
+      },
+      "dataCollected": {
+        "title": "Information We Collect",
+        "intro": "We may collect the following information:",
+        "point1": "Name and contact information (email, phone number)",
+        "point2": "Booking details and tour preferences",
+        "point3": "Payment information (processed securely through our payment provider)",
+        "point4": "Website usage data through cookies and analytics"
+      },
+      "dataUse": {
+        "title": "How We Use Your Information",
+        "intro": "We use your information to:",
+        "point1": "Process and confirm your bookings",
+        "point2": "Communicate about your tours and any changes",
+        "point3": "Improve our services and website experience",
+        "point4": "Send marketing communications (with your consent)"
+      },
+      "dataSharing": {
+        "title": "Information Sharing",
+        "content": "We do not sell your personal information. We may share data with trusted service providers who assist in operating our business, always under strict confidentiality agreements."
+      },
+      "cookies": {
+        "title": "Cookies",
+        "intro": "Our website uses cookies to:",
+        "point1": "Essential cookies for website functionality",
+        "point2": "Analytics cookies to understand usage patterns",
+        "point3": "Marketing cookies for personalized content (with consent)"
+      },
+      "rights": {
+        "title": "Your Rights",
+        "intro": "Under GDPR, you have the right to:",
+        "point1": "Access your personal data",
+        "point2": "Correct inaccurate data",
+        "point3": "Request deletion of your data",
+        "point4": "Object to data processing",
+        "point5": "Data portability"
+      },
+      "retention": {
+        "title": "Data Retention",
+        "content": "We retain your personal data only as long as necessary for the purposes outlined in this policy, or as required by law. Booking data is typically retained for 7 years for tax purposes."
+      },
+      "security": {
+        "title": "Security",
+        "content": "We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, or destruction."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "content": "For privacy-related inquiries or to exercise your rights, please contact our Data Protection Officer."
+      }
+    }
   }
 }

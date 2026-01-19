@@ -91,5 +91,209 @@
     "defaultTitle": "HeritageGuiding - Stockholm Touren",
     "defaultDescription": "Entdecken Sie Stockholm mit fachkundiger Führung. Private und Gruppentouren auf Schwedisch, Englisch und Deutsch.",
     "keywords": "Stockholm Touren, Kulturerbführung, Stadtführungen, Privattouren"
+  },
+  "faq": {
+    "title": "Häufig Gestellte Fragen",
+    "description": "Finden Sie Antworten auf häufige Fragen zu unseren Touren und Dienstleistungen",
+    "subtitle": "Finden Sie Antworten auf häufige Fragen zu unseren Touren",
+    "categories": {
+      "booking": "Buchung & Reservierungen",
+      "payment": "Zahlung & Preise",
+      "cancellation": "Stornierung & Änderungen",
+      "experience": "Tour-Erlebnis",
+      "safety": "Sicherheit & Gesundheit",
+      "guides": "Über Unsere Guides"
+    },
+    "stillHaveQuestions": "Noch Fragen?",
+    "contactDescription": "Unser Team hilft Ihnen gerne bei der Planung Ihres perfekten Stockholm-Erlebnisses.",
+    "contactUs": "Kontaktieren Sie Uns"
+  },
+  "about": {
+    "title": "Über Heritage Guiding",
+    "description": "Erfahren Sie mehr über unsere Mission, Stockholms reiches Erbe zu teilen",
+    "subtitle": "Wo Geschichte Lebendig Wird",
+    "heroAlt": "Heritage Guiding Team an Stockholms Ufer",
+    "story": {
+      "title": "Unsere Geschichte",
+      "paragraph1": "Heritage Guiding wurde mit einer einfachen Mission gegründet: die Art und Weise zu verändern, wie Besucher Stockholms reiche Geschichte erleben. Wir glauben, dass das Verständnis der Vergangenheit unsere Gegenwart bereichert und unsere Zukunft inspiriert.",
+      "paragraph2": "Unser Team von Experten-Guides vereint jahrzehntelange Erfahrung in Geschichte, Kunst und Archäologie. Jede Tour ist darauf ausgelegt, nicht nur Informationen zu vermitteln, sondern eine echte Verbindung zu den Geschichten herzustellen, die diese schöne Stadt geformt haben.",
+      "paragraph3": "Von den Kopfsteinpflasterstraßen der Altstadt bis zu den prächtigen Sälen des Königspalastes laden wir Sie ein, Stockholm durch die Augen derer zu entdecken, die es am meisten lieben."
+    },
+    "values": {
+      "title": "Was Uns Auszeichnet",
+      "subtitle": "Wir sind der Exzellenz im Kulturerbe-Tourismus verpflichtet",
+      "expertise": {
+        "title": "Doktor-Level Expertise",
+        "description": "Touren geleitet von professionellen Historikern und Wissenschaftlern mit höheren Abschlüssen"
+      },
+      "multilingual": {
+        "title": "Mehrsprachige Touren",
+        "description": "Verfügbar auf Schwedisch, Englisch und Deutsch mit Muttersprachlern"
+      },
+      "accessibility": {
+        "title": "Vollständig Barrierefrei",
+        "description": "Rollstuhlfreundliche Routen und Anpassungen für alle Fähigkeiten"
+      },
+      "heritage": {
+        "title": "Kulturerbe-Fokus",
+        "description": "Tiefes Eintauchen in authentische schwedische Geschichte und Kultur"
+      },
+      "smallGroups": {
+        "title": "Kleine Gruppen",
+        "description": "Intime Erlebnisse mit maximal 12 Teilnehmern"
+      },
+      "sustainable": {
+        "title": "Nachhaltiger Tourismus",
+        "description": "Umweltbewusste Praktiken und Unterstützung lokaler Gemeinschaften"
+      }
+    },
+    "team": {
+      "title": "Unser Team",
+      "subtitle": "Leidenschaftliche Historiker, die sich dem Teilen von Stockholms Geschichten widmen",
+      "founder": {
+        "name": "Dr. Erik Lindström",
+        "role": "Gründer & Leitender Historiker",
+        "bio": "Mit über 20 Jahren Erfahrung in schwedischer mittelalterlicher Geschichte gründete Erik Heritage Guiding, um seine Leidenschaft für Stockholms reiche Vergangenheit zu teilen."
+      },
+      "leadGuide": {
+        "name": "Anna Bergström",
+        "role": "Senior Guide",
+        "bio": "Anna spezialisiert sich auf Kunstgeschichte und Architektur und erweckt Stockholms Gebäude und Monumente durch fesselndes Erzählen zum Leben."
+      },
+      "historian": {
+        "name": "Dr. Magnus Olsson",
+        "role": "Archäologischer Berater",
+        "bio": "Magnus bringt archäologische Expertise in unsere Touren ein und enthüllt die verborgenen Schichten der Geschichte unter Stockholms Straßen."
+      }
+    },
+    "certifications": {
+      "title": "Unsere Zertifizierungen",
+      "subtitle": "Den höchsten Qualitäts- und Sicherheitsstandards verpflichtet",
+      "licensed": "Lizenzierte Guides",
+      "insured": "Vollversichert",
+      "local": "Lokale Experten"
+    },
+    "cta": {
+      "title": "Bereit zu Entdecken?",
+      "description": "Begleiten Sie uns auf einer unvergesslichen Reise durch Stockholms Kulturerbe",
+      "exploreTours": "Touren Entdecken",
+      "contactUs": "Kontaktieren Sie Uns"
+    }
+  },
+  "terms": {
+    "title": "Geschäftsbedingungen",
+    "description": "Geschäftsbedingungen für die Nutzung der HeritageGuiding-Dienste",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "sections": {
+      "intro": {
+        "title": "Einführung",
+        "content": "Willkommen bei HeritageGuiding. Diese Geschäftsbedingungen regeln Ihre Nutzung unserer Website und Dienste. Durch die Buchung einer Tour oder Nutzung unserer Dienste stimmen Sie diesen Bedingungen zu."
+      },
+      "booking": {
+        "title": "Buchungsbedingungen",
+        "intro": "Wenn Sie bei uns eine Buchung vornehmen:",
+        "point1": "Sie müssen mindestens 18 Jahre alt sein, um eine Buchung vorzunehmen",
+        "point2": "Alle angegebenen Informationen müssen korrekt und vollständig sein",
+        "point3": "Die Buchungsbestätigung erfolgt vorbehaltlich der Verfügbarkeit",
+        "point4": "Sie sind dafür verantwortlich, pünktlich am Treffpunkt zu erscheinen"
+      },
+      "payment": {
+        "title": "Zahlung",
+        "content": "Die vollständige Zahlung ist zum Zeitpunkt der Buchung erforderlich. Wir akzeptieren alle gängigen Kreditkarten, Swish und Banküberweisungen. Alle Preise sind in Schwedischen Kronen (SEK), sofern nicht anders angegeben, und beinhalten alle anfallenden Steuern."
+      },
+      "cancellation": {
+        "title": "Stornierungsrichtlinie",
+        "intro": "Unsere Stornierungsrichtlinie lautet wie folgt:",
+        "point1": "Kostenlose Stornierung bis 48 Stunden vor Tourbeginn",
+        "point2": "Stornierungen innerhalb von 48 Stunden werden nicht erstattet",
+        "point3": "Nichterscheinen wird nicht erstattet"
+      },
+      "liability": {
+        "title": "Haftungsbeschränkung",
+        "content": "Obwohl wir alle Vorkehrungen treffen, um Ihre Sicherheit zu gewährleisten, erfolgt die Teilnahme an Touren auf eigene Gefahr. HeritageGuiding haftet nicht für Personenschäden, Verluste oder Sachschäden, außer wenn sie durch unsere Fahrlässigkeit verursacht wurden."
+      },
+      "conduct": {
+        "title": "Verhalten während der Tour",
+        "intro": "Teilnehmer verpflichten sich zu:",
+        "point1": "Den Anweisungen des Guides jederzeit zu folgen",
+        "point2": "Respektvolles Verhalten gegenüber anderen Teilnehmern und öffentlichen Räumen",
+        "point3": "Keine illegalen Aktivitäten während der Tour"
+      },
+      "ip": {
+        "title": "Geistiges Eigentum",
+        "content": "Alle Inhalte dieser Website, einschließlich Texte, Bilder und Tourmaterialien, sind Eigentum von HeritageGuiding und urheberrechtlich geschützt."
+      },
+      "law": {
+        "title": "Anwendbares Recht",
+        "content": "Diese Bedingungen unterliegen schwedischem Recht. Etwaige Streitigkeiten werden vor schwedischen Gerichten gelöst."
+      },
+      "contact": {
+        "title": "Kontaktinformationen",
+        "content": "Bei Fragen zu diesen Bedingungen kontaktieren Sie uns bitte unter info@heritageguiding.com"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "description": "Wie wir Ihre persönlichen Daten erfassen, verwenden und schützen",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "gdpr": {
+      "title": "DSGVO-Konformität",
+      "content": "HeritageGuiding verpflichtet sich zum Schutz Ihrer Privatsphäre gemäß der Datenschutz-Grundverordnung (DSGVO). Diese Richtlinie erklärt, wie wir mit Ihren personenbezogenen Daten umgehen."
+    },
+    "sections": {
+      "intro": {
+        "title": "Einführung",
+        "content": "Diese Datenschutzerklärung erklärt, wie HeritageGuiding Ihre persönlichen Daten erfasst, verwendet und schützt, wenn Sie unsere Website und Dienste nutzen."
+      },
+      "dataCollected": {
+        "title": "Informationen, die Wir Erfassen",
+        "intro": "Wir können die folgenden Informationen erfassen:",
+        "point1": "Name und Kontaktdaten (E-Mail, Telefonnummer)",
+        "point2": "Buchungsdetails und Tour-Präferenzen",
+        "point3": "Zahlungsinformationen (sicher über unseren Zahlungsanbieter verarbeitet)",
+        "point4": "Website-Nutzungsdaten durch Cookies und Analysen"
+      },
+      "dataUse": {
+        "title": "Wie Wir Ihre Informationen Verwenden",
+        "intro": "Wir verwenden Ihre Informationen, um:",
+        "point1": "Ihre Buchungen zu verarbeiten und zu bestätigen",
+        "point2": "Über Ihre Touren und eventuelle Änderungen zu kommunizieren",
+        "point3": "Unsere Dienste und Website-Erfahrung zu verbessern",
+        "point4": "Marketing-Kommunikation zu senden (mit Ihrer Zustimmung)"
+      },
+      "dataSharing": {
+        "title": "Informationsweitergabe",
+        "content": "Wir verkaufen Ihre persönlichen Daten nicht. Wir können Daten mit vertrauenswürdigen Dienstleistern teilen, die uns beim Betrieb unseres Geschäfts unterstützen, immer unter strengen Vertraulichkeitsvereinbarungen."
+      },
+      "cookies": {
+        "title": "Cookies",
+        "intro": "Unsere Website verwendet Cookies für:",
+        "point1": "Notwendige Cookies für die Website-Funktionalität",
+        "point2": "Analyse-Cookies zum Verständnis von Nutzungsmustern",
+        "point3": "Marketing-Cookies für personalisierte Inhalte (mit Zustimmung)"
+      },
+      "rights": {
+        "title": "Ihre Rechte",
+        "intro": "Nach der DSGVO haben Sie das Recht auf:",
+        "point1": "Zugang zu Ihren personenbezogenen Daten",
+        "point2": "Berichtigung unrichtiger Daten",
+        "point3": "Löschung Ihrer Daten",
+        "point4": "Widerspruch gegen die Datenverarbeitung",
+        "point5": "Datenübertragbarkeit"
+      },
+      "retention": {
+        "title": "Datenspeicherung",
+        "content": "Wir speichern Ihre personenbezogenen Daten nur so lange, wie es für die in dieser Richtlinie beschriebenen Zwecke erforderlich ist oder gesetzlich vorgeschrieben. Buchungsdaten werden in der Regel 7 Jahre aus steuerlichen Gründen aufbewahrt."
+      },
+      "security": {
+        "title": "Sicherheit",
+        "content": "Wir implementieren angemessene technische und organisatorische Maßnahmen zum Schutz Ihrer personenbezogenen Daten vor unbefugtem Zugriff, Änderung oder Zerstörung."
+      },
+      "contact": {
+        "title": "Kontaktieren Sie Uns",
+        "content": "Für datenschutzbezogene Anfragen oder zur Ausübung Ihrer Rechte kontaktieren Sie bitte unseren Datenschutzbeauftragten."
+      }
+    }
   }
 }

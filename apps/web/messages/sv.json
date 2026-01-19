@@ -91,5 +91,209 @@
     "defaultTitle": "HeritageGuiding - Stockholm Turer",
     "defaultDescription": "Upptäck Stockholm med expertvägledning. Privata och gruppturer på svenska, engelska och tyska.",
     "keywords": "Stockholm turer, kulturarv, stadsvandring, privata turer"
+  },
+  "faq": {
+    "title": "Vanliga Frågor",
+    "description": "Hitta svar på vanliga frågor om våra turer och tjänster",
+    "subtitle": "Hitta svar på vanliga frågor om våra turer",
+    "categories": {
+      "booking": "Bokning & Reservationer",
+      "payment": "Betalning & Priser",
+      "cancellation": "Avbokning & Ändringar",
+      "experience": "Turupplevelse",
+      "safety": "Säkerhet & Hälsa",
+      "guides": "Om Våra Guider"
+    },
+    "stillHaveQuestions": "Har du fler frågor?",
+    "contactDescription": "Vårt team hjälper dig gärna att planera din perfekta Stockholm-upplevelse.",
+    "contactUs": "Kontakta Oss"
+  },
+  "about": {
+    "title": "Om Heritage Guiding",
+    "description": "Lär dig om vårt uppdrag att dela Stockholms rika kulturarv",
+    "subtitle": "Där Historien Lever",
+    "heroAlt": "Heritage Guiding-teamet vid Stockholms strand",
+    "story": {
+      "title": "Vår Historia",
+      "paragraph1": "Heritage Guiding grundades med ett enkelt uppdrag: att förändra hur besökare upplever Stockholms rika historia. Vi tror att förståelse för det förflutna berikar vår nutid och inspirerar vår framtid.",
+      "paragraph2": "Vårt team av expertguider samlar decennier av erfarenhet inom historia, konst och arkeologi. Varje tur är utformad för att ge inte bara information, utan en genuin koppling till berättelserna som formade denna vackra stad.",
+      "paragraph3": "Från kullerstenarna i Gamla Stan till de magnifika salarna i Kungliga Slottet inbjuder vi dig att upptäcka Stockholm genom ögonen på dem som älskar det mest."
+    },
+    "values": {
+      "title": "Vad Som Gör Oss Speciella",
+      "subtitle": "Vi är engagerade i excellens inom kulturarvsturism",
+      "expertise": {
+        "title": "Expertis på Doktorsnivå",
+        "description": "Turer ledda av professionella historiker och forskare med avancerade examina"
+      },
+      "multilingual": {
+        "title": "Flerspråkiga Turer",
+        "description": "Tillgängliga på svenska, engelska och tyska med modersmålstalare"
+      },
+      "accessibility": {
+        "title": "Fullt Tillgängliga",
+        "description": "Rullstolsvänliga rutter och anpassningar för alla förmågor"
+      },
+      "heritage": {
+        "title": "Kulturarvsfokus",
+        "description": "Djupdykning i autentisk svensk historia och kultur"
+      },
+      "smallGroups": {
+        "title": "Små Grupper",
+        "description": "Intima upplevelser med max 12 deltagare"
+      },
+      "sustainable": {
+        "title": "Hållbar Turism",
+        "description": "Miljömedvetna metoder och stöd till lokala samhällen"
+      }
+    },
+    "team": {
+      "title": "Möt Vårt Team",
+      "subtitle": "Passionerade historiker dedikerade till att dela Stockholms berättelser",
+      "founder": {
+        "name": "Dr. Erik Lindström",
+        "role": "Grundare & Ledande Historiker",
+        "bio": "Med över 20 års erfarenhet av svensk medeltidshistoria grundade Erik Heritage Guiding för att dela sin passion för Stockholms rika förflutna."
+      },
+      "leadGuide": {
+        "name": "Anna Bergström",
+        "role": "Senior Guide",
+        "bio": "Anna specialiserar sig på konsthistoria och arkitektur, och ger liv åt Stockholms byggnader och monument genom engagerande berättande."
+      },
+      "historian": {
+        "name": "Dr. Magnus Olsson",
+        "role": "Arkeologisk Rådgivare",
+        "bio": "Magnus tillför arkeologisk expertis till våra turer och avslöjar de dolda lagren av historia under Stockholms gator."
+      }
+    },
+    "certifications": {
+      "title": "Våra Certifieringar",
+      "subtitle": "Engagerade i högsta kvalitets- och säkerhetsstandarder",
+      "licensed": "Licensierade Guider",
+      "insured": "Fullt Försäkrade",
+      "local": "Lokala Experter"
+    },
+    "cta": {
+      "title": "Redo att Utforska?",
+      "description": "Följ med oss på en oförglömlig resa genom Stockholms kulturarv",
+      "exploreTours": "Utforska Turer",
+      "contactUs": "Kontakta Oss"
+    }
+  },
+  "terms": {
+    "title": "Villkor",
+    "description": "Villkor för användning av HeritageGuidings tjänster",
+    "lastUpdated": "Senast uppdaterad",
+    "sections": {
+      "intro": {
+        "title": "Introduktion",
+        "content": "Välkommen till HeritageGuiding. Dessa villkor reglerar din användning av vår webbplats och tjänster. Genom att boka en tur eller använda våra tjänster godkänner du dessa villkor."
+      },
+      "booking": {
+        "title": "Bokningsvillkor",
+        "intro": "När du gör en bokning hos oss:",
+        "point1": "Du måste vara minst 18 år för att göra en bokning",
+        "point2": "All information som lämnas måste vara korrekt och fullständig",
+        "point3": "Bokningsbekräftelse sker under förutsättning av tillgänglighet",
+        "point4": "Du ansvarar för att anlända till mötesplatsen i tid"
+      },
+      "payment": {
+        "title": "Betalning",
+        "content": "Full betalning krävs vid bokningstillfället. Vi accepterar de flesta kreditkort, Swish och banköverföringar. Alla priser är i svenska kronor (SEK) om inte annat anges och inkluderar tillämpliga skatter."
+      },
+      "cancellation": {
+        "title": "Avbokningspolicy",
+        "intro": "Vår avbokningspolicy är följande:",
+        "point1": "Gratis avbokning upp till 48 timmar före turens starttid",
+        "point2": "Avbokningar inom 48 timmar återbetalas inte",
+        "point3": "Uteblivna gäster återbetalas inte"
+      },
+      "liability": {
+        "title": "Ansvarsbegränsning",
+        "content": "Även om vi vidtar alla försiktighetsåtgärder för att säkerställa din säkerhet sker deltagande i turer på egen risk. HeritageGuiding ansvarar inte för personskada, förlust eller skada på egendom utom vid vår försumlighet."
+      },
+      "conduct": {
+        "title": "Uppförande under Tur",
+        "intro": "Deltagare förbinder sig att:",
+        "point1": "Följa guidens instruktioner hela tiden",
+        "point2": "Uppträda respektfullt mot andra deltagare och offentliga platser",
+        "point3": "Inte delta i olagliga aktiviteter under turen"
+      },
+      "ip": {
+        "title": "Immateriella Rättigheter",
+        "content": "Allt innehåll på denna webbplats, inklusive text, bilder och turmaterial, tillhör HeritageGuiding och skyddas av upphovsrättslagen."
+      },
+      "law": {
+        "title": "Tillämplig Lag",
+        "content": "Dessa villkor regleras av svensk lag. Eventuella tvister ska lösas i svenska domstolar."
+      },
+      "contact": {
+        "title": "Kontaktinformation",
+        "content": "För frågor om dessa villkor, vänligen kontakta oss på info@heritageguiding.com"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Integritetspolicy",
+    "description": "Hur vi samlar in, använder och skyddar din personliga information",
+    "lastUpdated": "Senast uppdaterad",
+    "gdpr": {
+      "title": "GDPR-efterlevnad",
+      "content": "HeritageGuiding är engagerat i att skydda din integritet i enlighet med den allmänna dataskyddsförordningen (GDPR). Denna policy förklarar hur vi hanterar dina personuppgifter."
+    },
+    "sections": {
+      "intro": {
+        "title": "Introduktion",
+        "content": "Denna integritetspolicy förklarar hur HeritageGuiding samlar in, använder och skyddar din personliga information när du använder vår webbplats och tjänster."
+      },
+      "dataCollected": {
+        "title": "Information Vi Samlar In",
+        "intro": "Vi kan samla in följande information:",
+        "point1": "Namn och kontaktinformation (e-post, telefonnummer)",
+        "point2": "Bokningsdetaljer och turpreferenser",
+        "point3": "Betalningsinformation (behandlas säkert via vår betalningsleverantör)",
+        "point4": "Webbplatsanvändningsdata genom cookies och analys"
+      },
+      "dataUse": {
+        "title": "Hur Vi Använder Din Information",
+        "intro": "Vi använder din information för att:",
+        "point1": "Behandla och bekräfta dina bokningar",
+        "point2": "Kommunicera om dina turer och eventuella ändringar",
+        "point3": "Förbättra våra tjänster och webbplatsupplevelse",
+        "point4": "Skicka marknadsföringskommunikation (med ditt samtycke)"
+      },
+      "dataSharing": {
+        "title": "Informationsdelning",
+        "content": "Vi säljer inte din personliga information. Vi kan dela data med betrodda tjänsteleverantörer som hjälper till att driva vår verksamhet, alltid under strikta sekretessavtal."
+      },
+      "cookies": {
+        "title": "Cookies",
+        "intro": "Vår webbplats använder cookies för att:",
+        "point1": "Nödvändiga cookies för webbplatsens funktionalitet",
+        "point2": "Analyskookies för att förstå användningsmönster",
+        "point3": "Marknadsföringscookies för personligt innehåll (med samtycke)"
+      },
+      "rights": {
+        "title": "Dina Rättigheter",
+        "intro": "Enligt GDPR har du rätt att:",
+        "point1": "Få tillgång till dina personuppgifter",
+        "point2": "Rätta felaktiga uppgifter",
+        "point3": "Begära radering av dina uppgifter",
+        "point4": "Invända mot databehandling",
+        "point5": "Dataportabilitet"
+      },
+      "retention": {
+        "title": "Datalagring",
+        "content": "Vi behåller dina personuppgifter endast så länge som nödvändigt för de ändamål som beskrivs i denna policy, eller som krävs enligt lag. Bokningsdata lagras vanligtvis i 7 år av skatteskäl."
+      },
+      "security": {
+        "title": "Säkerhet",
+        "content": "Vi implementerar lämpliga tekniska och organisatoriska åtgärder för att skydda dina personuppgifter mot obehörig åtkomst, ändring eller förstörelse."
+      },
+      "contact": {
+        "title": "Kontakta Oss",
+        "content": "För integritetsrelaterade frågor eller för att utöva dina rättigheter, vänligen kontakta vårt dataskyddsombud."
+      }
+    }
   }
 }
