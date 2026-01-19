@@ -58,8 +58,8 @@
     }
   },
   "tours": {
-    "title": "Our Tours",
-    "description": "Browse our selection of expert-guided tours",
+    "title": "Explore Our Tours",
+    "description": "Discover Stockholm with expert-led heritage tours. From medieval streets to royal palaces, find your perfect experience.",
     "duration": "Duration",
     "price": "Price",
     "from": "from",
@@ -68,7 +68,41 @@
     "availability": "Availability",
     "accessibility": "Accessibility",
     "category": "Category",
-    "guide": "Guide"
+    "guide": "Guide",
+    "filters": {
+      "allCategories": "All Categories",
+      "history": "History",
+      "architecture": "Architecture",
+      "food": "Food & Drink",
+      "nature": "Nature",
+      "museum": "Museums",
+      "anyDuration": "Any Duration",
+      "upTo90min": "Up to 90 min",
+      "upTo2hours": "Up to 2 hours",
+      "upTo3hours": "Up to 3 hours",
+      "wheelchairAccessible": "Wheelchair Accessible",
+      "category": "Category",
+      "duration": "Duration",
+      "sortBy": "Sort by",
+      "sortPopular": "Most Popular",
+      "sortPriceAsc": "Price: Low to High",
+      "sortPriceDesc": "Price: High to Low",
+      "sortDurationAsc": "Duration: Short to Long",
+      "sortRating": "Highest Rated",
+      "searchPlaceholder": "Search tours...",
+      "searchLabel": "Search tours",
+      "filters": "Filters",
+      "openFilters": "Open filters",
+      "closeFilters": "Close filters",
+      "filterPanel": "Filter panel",
+      "clearAll": "Clear All",
+      "applyFilters": "Apply Filters"
+    },
+    "empty": {
+      "title": "No tours found",
+      "description": "We couldn't find any tours matching your criteria. Try adjusting your filters.",
+      "clearFilters": "Clear all filters"
+    }
   },
   "booking": {
     "title": "Book Your Tour",

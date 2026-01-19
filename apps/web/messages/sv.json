@@ -58,8 +58,8 @@
     }
   },
   "tours": {
-    "title": "Våra Turer",
-    "description": "Bläddra bland vårt urval av expertguidningar",
+    "title": "Utforska Våra Turer",
+    "description": "Upptäck Stockholm med expertledda kulturarvsvandringar. Från medeltida gränder till kungliga palats, hitta din perfekta upplevelse.",
     "duration": "Varaktighet",
     "price": "Pris",
     "from": "från",
@@ -68,7 +68,41 @@
     "availability": "Tillgänglighet",
     "accessibility": "Tillgänglighet",
     "category": "Kategori",
-    "guide": "Guide"
+    "guide": "Guide",
+    "filters": {
+      "allCategories": "Alla Kategorier",
+      "history": "Historia",
+      "architecture": "Arkitektur",
+      "food": "Mat & Dryck",
+      "nature": "Natur",
+      "museum": "Museer",
+      "anyDuration": "Valfri Längd",
+      "upTo90min": "Upp till 90 min",
+      "upTo2hours": "Upp till 2 timmar",
+      "upTo3hours": "Upp till 3 timmar",
+      "wheelchairAccessible": "Rullstolsanpassad",
+      "category": "Kategori",
+      "duration": "Längd",
+      "sortBy": "Sortera",
+      "sortPopular": "Mest Populära",
+      "sortPriceAsc": "Pris: Lägst till Högst",
+      "sortPriceDesc": "Pris: Högst till Lägst",
+      "sortDurationAsc": "Längd: Kortast till Längst",
+      "sortRating": "Högst Betyg",
+      "searchPlaceholder": "Sök turer...",
+      "searchLabel": "Sök turer",
+      "filters": "Filter",
+      "openFilters": "Öppna filter",
+      "closeFilters": "Stäng filter",
+      "filterPanel": "Filterpanel",
+      "clearAll": "Rensa Alla",
+      "applyFilters": "Tillämpa Filter"
+    },
+    "empty": {
+      "title": "Inga turer hittades",
+      "description": "Vi kunde inte hitta några turer som matchar dina kriterier. Prova att justera dina filter.",
+      "clearFilters": "Rensa alla filter"
+    }
   },
   "booking": {
     "title": "Boka din tur",

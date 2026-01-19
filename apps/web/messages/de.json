@@ -58,8 +58,8 @@
     }
   },
   "tours": {
-    "title": "Unsere Touren",
-    "description": "Durchsuchen Sie unsere Auswahl an fachkundig geführten Touren",
+    "title": "Entdecken Sie Unsere Touren",
+    "description": "Entdecken Sie Stockholm mit fachkundig geführten Kulturerbe-Touren. Von mittelalterlichen Gassen bis zu königlichen Palästen, finden Sie Ihr perfektes Erlebnis.",
     "duration": "Dauer",
     "price": "Preis",
     "from": "ab",
@@ -68,7 +68,41 @@
     "availability": "Verfügbarkeit",
     "accessibility": "Barrierefreiheit",
     "category": "Kategorie",
-    "guide": "Reiseführer"
+    "guide": "Reiseführer",
+    "filters": {
+      "allCategories": "Alle Kategorien",
+      "history": "Geschichte",
+      "architecture": "Architektur",
+      "food": "Essen & Trinken",
+      "nature": "Natur",
+      "museum": "Museen",
+      "anyDuration": "Beliebige Dauer",
+      "upTo90min": "Bis zu 90 Min",
+      "upTo2hours": "Bis zu 2 Stunden",
+      "upTo3hours": "Bis zu 3 Stunden",
+      "wheelchairAccessible": "Rollstuhlgerecht",
+      "category": "Kategorie",
+      "duration": "Dauer",
+      "sortBy": "Sortieren",
+      "sortPopular": "Beliebteste",
+      "sortPriceAsc": "Preis: Niedrig bis Hoch",
+      "sortPriceDesc": "Preis: Hoch bis Niedrig",
+      "sortDurationAsc": "Dauer: Kurz bis Lang",
+      "sortRating": "Höchste Bewertung",
+      "searchPlaceholder": "Touren suchen...",
+      "searchLabel": "Touren suchen",
+      "filters": "Filter",
+      "openFilters": "Filter öffnen",
+      "closeFilters": "Filter schließen",
+      "filterPanel": "Filterbereich",
+      "clearAll": "Alle Löschen",
+      "applyFilters": "Filter Anwenden"
+    },
+    "empty": {
+      "title": "Keine Touren gefunden",
+      "description": "Wir konnten keine Touren finden, die Ihren Kriterien entsprechen. Versuchen Sie, Ihre Filter anzupassen.",
+      "clearFilters": "Alle Filter löschen"
+    }
   },
   "booking": {
     "title": "Buchen Sie Ihre Tour",
