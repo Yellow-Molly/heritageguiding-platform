@@ -9,7 +9,7 @@ export { TourEmptyState } from './tour-empty-state'
 export { TourPagination } from './tour-pagination'
 
 // New filter bar components (GetYourGuide-style)
-export { FilterBar, CategoryChips, DatesPicker, ResultsCount } from './filter-bar'
+export { FilterBar, CategoryChips, ResultsCount } from './filter-bar'
 
 // @deprecated - Use FilterBar instead
 export { TourFilters } from './tour-filters'

@@ -8,7 +8,6 @@ import { TourSearch } from '../tour-search'
 import { TourSort } from '../tour-sort'
 import { FilterDrawer } from '../filter-drawer'
 import { CategoryChips } from './category-chips'
-import { DatesPicker } from './dates-picker'
 import { ResultsCount } from './results-count'
 import type { Category } from '@/lib/api/get-categories'
 
@@ -77,11 +76,6 @@ export function FilterBar({
                 <CategoryChips categories={categories} />
               </div>
 
-              {/* Date picker */}
-              <div className="flex-shrink-0">
-                <DatesPicker />
-              </div>
-
               {/* Sort */}
               <div className="flex-shrink-0">
                 <TourSort />
@@ -114,13 +108,8 @@ export function FilterBar({
               <FilterDrawer />
             </div>
 
-            {/* Row 2: Category chips + Date picker */}
-            <div className="flex items-center gap-2">
-              <div className="flex-1 min-w-0 overflow-hidden">
-                <CategoryChips categories={categories} />
-              </div>
-              <DatesPicker />
-            </div>
+            {/* Row 2: Category chips */}
+            <CategoryChips categories={categories} />
 
             {/* Row 3: Results + Sort */}
             <div className="flex items-center justify-between">
