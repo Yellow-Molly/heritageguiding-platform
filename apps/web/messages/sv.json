@@ -70,7 +70,8 @@
     "category": "Kategori",
     "guide": "Guide",
     "filters": {
-      "allCategories": "Alla Kategorier",
+      "selectCategories": "Välj turkategorier",
+      "allCategories": "Alla",
       "history": "Historia",
       "architecture": "Arkitektur",
       "food": "Mat & Dryck",

@@ -70,7 +70,8 @@
     "category": "Kategorie",
     "guide": "Reiseführer",
     "filters": {
-      "allCategories": "Alle Kategorien",
+      "selectCategories": "Tourkategorien auswählen",
+      "allCategories": "Alle",
       "history": "Geschichte",
       "architecture": "Architektur",
       "food": "Essen & Trinken",

@@ -70,7 +70,8 @@
     "category": "Category",
     "guide": "Guide",
     "filters": {
-      "allCategories": "All Categories",
+      "selectCategories": "Select tour categories",
+      "allCategories": "All",
       "history": "History",
       "architecture": "Architecture",
       "food": "Food & Drink",
