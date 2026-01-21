@@ -46,11 +46,13 @@ heritageguiding-platform/
   "@payloadcms/next": "^3.70.0",
   "@payloadcms/richtext-lexical": "^3.70.0",
   "@payloadcms/storage-vercel-blob": "^3.70.0",
+  "@radix-ui/react-popover": "^1.x",
   "next": "^15.5.9",
   "next-intl": "^3.x",
   "date-fns": "^3.x",
   "payload": "^3.70.0",
   "react": "^19.2.3",
+  "react-day-picker": "^9.11.1",
   "react-dom": "^19.2.3",
   "sharp": "^0.34.5",
   "tailwindcss": "^4",
@@ -88,6 +90,14 @@ heritageguiding-platform/
 - `api/` - Route handlers
 - `middleware.ts` - next-intl routing middleware
 - `i18n.ts` - Locale configuration
+
+**Tour Catalog Components (Phase 07):**
+- `components/tour/filter-bar/` - GetYourGuide-style filter bar (sticky)
+  - `filter-bar.tsx` - Main container with scroll shadow
+  - `category-chips.tsx` - Multi-select chips with URL state
+  - `dates-picker.tsx` - Date range picker (react-day-picker v9)
+  - `results-count.tsx` - Pluralized results display
+- `components/ui/popover.tsx` - Radix UI Popover wrapper
 
 **i18n Structure (Phase 02):**
 - `messages/sv.json` - Swedish translations
@@ -236,7 +246,7 @@ npm run payload:generate-types  # Generate TS types from schema
 - ✅ Responsive design (mobile-first)
 - ✅ Full i18n support
 
-**Phase 07 - Tour Detail (Completed):**
+**Phase 07 - Tour Detail & Filter Bar (Completed):**
 - ✅ Full-screen image gallery with zoom
 - ✅ Tour facts table (duration, group size, etc.)
 - ✅ Logistics section (meeting point, map)
@@ -247,7 +257,12 @@ npm run payload:generate-types  # Generate TS types from schema
 - ✅ Related tours carousel
 - ✅ Breadcrumb navigation
 - ✅ JSON-LD schema markup
-- ✅ Full i18n support
+- ✅ GetYourGuide-style sticky FilterBar
+  - Category chips with multi-select + URL state
+  - Date range picker (react-day-picker v9)
+  - Results count with pluralization
+- ✅ Full i18n support (SV/EN/DE)
+- ✅ 18 FilterBar component tests
 
 **Status:** 61K LOC frontend, 30K LOC CMS, ready for Phase 08 (Rezdy Integration)
 

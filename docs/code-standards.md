@@ -194,6 +194,63 @@ describe('TourCard', () => {
   })
 })
 
+### Testing Filter Components
+```typescript
+describe('CategoryChips', () => {
+  it('should render all categories as clickable chips', () => {
+    const { getByText } = render(
+      <CategoryChips
+        categories={mockCategories}
+        selectedCategories={[]}
+        onCategoryChange={jest.fn()}
+      />
+    )
+    mockCategories.forEach(cat => {
+      expect(getByText(cat.name)).toBeInTheDocument()
+    })
+  })
+
+  it('should call onCategoryChange when chip clicked', () => {
+    const onChange = jest.fn()
+    const { getByText } = render(
+      <CategoryChips
+        categories={mockCategories}
+        selectedCategories={[]}
+        onCategoryChange={onChange}
+      />
+    )
+    fireEvent.click(getByText(mockCategories[0].name))
+    expect(onChange).toHaveBeenCalledWith([mockCategories[0].id])
+  })
+})
+
+describe('DatesPicker', () => {
+  it('should disable past dates', () => {
+    const { container } = render(
+      <DatesPicker
+        startDate={undefined}
+        endDate={undefined}
+        onDateRangeChange={jest.fn()}
+      />
+    )
+    // Verify disabled class on past day buttons
+  })
+
+  it('should call onDateRangeChange when dates selected', () => {
+    const onChange = jest.fn()
+    render(
+      <DatesPicker
+        startDate={undefined}
+        endDate={undefined}
+        onDateRangeChange={onChange}
+      />
+    )
+    // Select date range in picker
+    expect(onChange).toHaveBeenCalled()
+  })
+})
+```
+
 ## Code Quality Tools
 
 ### ESLint
@@ -338,6 +395,61 @@ Use field modules for reusability:
 - Use design tokens for colors/spacing
 - Organize class names: layout → spacing → colors → effects
 - Use responsive prefixes: `md:`, `lg:`, etc.
+
+## Filter Component Patterns (Phase 07)
+
+### FilterBar Architecture
+FilterBar is a GetYourGuide-style sticky filter container with:
+- Category chips (multi-select with URL state persistence)
+- Date range picker (react-day-picker v9)
+- Results count display
+
+**Location:** `apps/web/components/tour/filter-bar/`
+
+### Sub-Components
+
+**CategoryChips:**
+- Horizontal scrollable multi-select chips
+- URL state: `?categories=cat1,cat2`
+- Clear all functionality
+- Accessibility: ARIA labels, keyboard navigation
+
+**DatesPicker:**
+- Radix UI Popover trigger with Popover component
+- react-day-picker for date selection
+- Range validation & clear button
+- Disabled past dates
+
+**ResultsCount:**
+- Displays pluralized count: "1 tour" vs "5 tours"
+- i18n support with translation keys
+- Updates reactively from parent state
+
+### Integration Pattern
+```typescript
+// In tour-catalog-client.tsx (use client)
+const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+const [startDate, setStartDate] = useState<Date | undefined>()
+const [endDate, setEndDate] = useState<Date | undefined>()
+
+return (
+  <>
+    <FilterBar
+      categories={categories}
+      selectedCategories={selectedCategories}
+      onCategoryChange={setSelectedCategories}
+      startDate={startDate}
+      endDate={endDate}
+      onDateRangeChange={(start, end) => {
+        setStartDate(start)
+        setEndDate(end)
+      }}
+      resultsCount={filteredTours.length}
+    />
+    {/* Render filtered tours */}
+  </>
+)
+```
 
 ## Development Workflow
 

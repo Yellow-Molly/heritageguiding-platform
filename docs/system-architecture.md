@@ -80,30 +80,42 @@
 
 ## Component Interactions
 
-### Request Flow - Public Page View
+### Request Flow - Public Page View (Tour Catalog - Phase 07)
 
 ```
 1. User visits /tours (public route)
    ↓
 2. Next.js App Router matches (frontend) layout
    ↓
-3. React Server Component fetches tour data
-   - Query Payload GraphQL API
-   - Or fetch from PostgreSQL directly
+3. Server Component (tours/page.tsx):
+   - Fetches all categories via API
+   - Passes categories to TourCatalogClient
    ↓
-4. Component renders with data
+4. Client Component (TourCatalogClient):
+   - Manages filter state (categories, date range)
+   - Updates URL query params (?categories=...&start=...&end=...)
+   - Fetches filtered tours based on state
    ↓
-5. Browser receives HTML (SSR)
+5. FilterBar renders (sticky at top):
+   - CategoryChips: display & select categories
+   - DatesPicker: select date range
+   - ResultsCount: display filtered tour count
    ↓
-6. React hydrates interactive elements
+6. Tours Grid renders below FilterBar:
+   - Maps through filtered tours array
+   - Each tour card links to /tours/{slug}
    ↓
-7. Images load from Vercel Blob CDN
+7. Browser receives HTML + interactive components
+   ↓
+8. React hydrates filter interactions + lazy loads images
+   ↓
+9. Images load from Vercel Blob CDN with WebP format
 ```
 
-### Request Flow - Admin Action
+### Request Flow - Admin Page View
 
 ```
-1. Admin navigates to /admin
+1. User visits /admin
    ↓
 2. Payload CMS UI loads (Next.js route)
    ↓
@@ -120,6 +132,7 @@
 7. Confirmation + UI update
 ```
 
+
 ## Technology Layers
 
 ### Frontend (apps/web)
@@ -134,7 +147,8 @@
 apps/web/
 ├── app/
 │   ├── (frontend)/        # Public routes
-│   │   └── page.tsx       # Homepage
+│   │   ├── page.tsx       # Homepage
+│   │   └── tours/         # Tour catalog pages (Phase 6-7)
 │   ├── (payload)/         # Admin routes
 │   │   ├── admin/         # Admin UI
 │   │   ├── layout.tsx     # Payload layout wrapper
@@ -143,10 +157,32 @@ apps/web/
 │   ├── api/               # Route handlers
 │   │   └── [...slug]/     # Generic API routes
 │   ├── layout.tsx         # Root layout
-│   └── globals.css        # Global styles
-├── components/            # React components (Phase 2+)
-├── lib/                   # Utilities & helpers (Phase 2+)
-├── types/                 # TypeScript definitions (Phase 2+)
+│   ├── globals.css        # Global styles + utilities
+│   └── middleware.ts      # next-intl routing
+├── components/
+│   ├── tour/              # Tour-specific components
+│   │   ├── filter-bar/    # GetYourGuide-style filters (Phase 7)
+│   │   │   ├── filter-bar.tsx
+│   │   │   ├── category-chips.tsx
+│   │   │   ├── dates-picker.tsx
+│   │   │   ├── results-count.tsx
+│   │   │   └── index.ts
+│   │   ├── tour-card.tsx  # Individual tour card
+│   │   ├── tour-catalog-client.tsx  # Client-side filter logic
+│   │   └── index.ts
+│   ├── ui/                # Shared UI components
+│   │   ├── popover.tsx    # Radix UI Popover wrapper
+│   │   └── ...other components
+│   └── home/              # Homepage components
+├── lib/                   # Utilities & helpers
+│   ├── api/               # Data-fetching functions
+│   ├── i18n-format.ts     # i18n utilities
+│   └── ...other utilities
+├── types/                 # TypeScript definitions
+├── messages/              # i18n translations (SV/EN/DE)
+│   ├── sv.json
+│   ├── en.json
+│   └── de.json
 └── public/                # Static assets
 ```
 
@@ -218,6 +254,10 @@ query {
       title
       description
       price
+      duration
+      category {
+        name
+      }
       media {
         url
         alt
@@ -226,6 +266,10 @@ query {
   }
 }
 ```
+
+**Common Queries (Phase 07):**
+- `getAllCategories()` - Fetch all tour categories (for FilterBar)
+- `getToursByFilter()` - Filter tours by category, date, price
 
 ### REST API Routes (Data-Fetching Functions)
 
@@ -403,9 +447,14 @@ access: {
 
 ### Phase 05-07 (Pages & Components) ✅
 - 50+ React components (homepage, catalog, detail)
+- GetYourGuide-style FilterBar with sticky positioning
+  - CategoryChips: multi-select with URL state persistence
+  - DatesPicker: react-day-picker v9 with date validation
+  - ResultsCount: dynamic count display with pluralization
 - 7 data-fetching API functions
 - Server-side rendering with SSR
-- Full i18n on all pages
+- Full i18n on all pages (SV/EN/DE)
+- 18 FilterBar component tests (100% passing)
 
 ## Planned Architecture Changes
 
