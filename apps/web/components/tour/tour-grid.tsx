@@ -14,7 +14,7 @@ interface TourGridProps {
  * Handles empty states and pagination.
  */
 export async function TourGrid({ searchParams, viewMode = 'grid' }: TourGridProps) {
-  const { tours, total, page, totalPages } = await getTours(searchParams)
+  const { tours, page, totalPages } = await getTours(searchParams)
 
   if (tours.length === 0) {
     return <TourEmptyState />
@@ -22,11 +22,6 @@ export async function TourGrid({ searchParams, viewMode = 'grid' }: TourGridProp
 
   return (
     <div className="space-y-8">
-      {/* Results count */}
-      <p className="text-sm text-[var(--color-text-muted)]">
-        Showing {tours.length} of {total} tours
-      </p>
-
       {/* Tour Grid/List */}
       <div
         className={

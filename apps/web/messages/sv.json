@@ -97,7 +97,8 @@
       "closeFilters": "Stäng filter",
       "filterPanel": "Filterpanel",
       "clearAll": "Rensa Alla",
-      "applyFilters": "Tillämpa Filter"
+      "applyFilters": "Tillämpa Filter",
+      "resultsCount": "{count, plural, =0 {Inga resultat} one {# resultat} other {# resultat}}"
     },
     "empty": {
       "title": "Inga turer hittades",

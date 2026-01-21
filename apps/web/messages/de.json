@@ -97,7 +97,8 @@
       "closeFilters": "Filter schließen",
       "filterPanel": "Filterbereich",
       "clearAll": "Alle Löschen",
-      "applyFilters": "Filter Anwenden"
+      "applyFilters": "Filter Anwenden",
+      "resultsCount": "{count, plural, =0 {Keine Ergebnisse} one {# Ergebnis} other {# Ergebnisse}}"
     },
     "empty": {
       "title": "Keine Touren gefunden",

@@ -5,7 +5,8 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { TourGrid, TourGridSkeleton } from '@/components/tour'
 import { TourCatalogClient } from './tour-catalog-client'
-import type { TourFilters } from '@/lib/api/get-tours'
+import { getTours, type TourFilters } from '@/lib/api/get-tours'
+import { getCategories } from '@/lib/api/get-categories'
 
 interface ToursPageProps {
   params: Promise<{ locale: string }>
@@ -27,6 +28,12 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
   const filters = await searchParams
   const t = await getTranslations({ locale, namespace: 'tours' })
 
+  // Fetch categories and tour count for FilterBar
+  const [categories, { total }] = await Promise.all([
+    getCategories('theme', locale),
+    getTours(filters),
+  ])
+
   return (
     <>
       <Header />
@@ -45,7 +52,7 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
 
         {/* Catalog Section */}
         <section className="container mx-auto px-4 py-8 lg:py-12">
-          <TourCatalogClient>
+          <TourCatalogClient categories={categories} totalResults={total}>
             <Suspense fallback={<TourGridSkeleton />}>
               <TourGrid searchParams={filters} />
             </Suspense>
