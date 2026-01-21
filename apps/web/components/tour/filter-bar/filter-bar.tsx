@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react'
-import { Grid3X3, List } from 'lucide-react'
+import { Grid3X3, List, ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { TourSearch } from '../tour-search'
@@ -10,6 +10,9 @@ import { FilterDrawer } from '../filter-drawer'
 import { CategoryChips } from './category-chips'
 import { ResultsCount } from './results-count'
 import type { Category } from '@/lib/api/get-categories'
+
+// Scroll amount for arrow navigation
+const SCROLL_AMOUNT = 200
 
 interface FilterBarProps {
   totalResults: number
@@ -31,6 +34,29 @@ export function FilterBar({
 }: FilterBarProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const sentinelRef = useRef<HTMLDivElement>(null)
+  const chipsContainerRef = useRef<HTMLDivElement>(null)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(false)
+
+  // Check scroll state for arrow visibility
+  const updateScrollState = useCallback(() => {
+    const container = chipsContainerRef.current
+    if (!container) return
+    setCanScrollLeft(container.scrollLeft > 0)
+    setCanScrollRight(
+      container.scrollLeft < container.scrollWidth - container.clientWidth - 1
+    )
+  }, [])
+
+  // Scroll left handler
+  const scrollLeft = useCallback(() => {
+    chipsContainerRef.current?.scrollBy({ left: -SCROLL_AMOUNT, behavior: 'smooth' })
+  }, [])
+
+  // Scroll right handler
+  const scrollRight = useCallback(() => {
+    chipsContainerRef.current?.scrollBy({ left: SCROLL_AMOUNT, behavior: 'smooth' })
+  }, [])
 
   // Detect scroll to add shadow using IntersectionObserver
   useEffect(() => {
@@ -48,6 +74,20 @@ export function FilterBar({
     return () => observer.disconnect()
   }, [])
 
+  // Update scroll state on mount and when categories change
+  useEffect(() => {
+    updateScrollState()
+    const container = chipsContainerRef.current
+    if (!container) return
+
+    container.addEventListener('scroll', updateScrollState)
+    window.addEventListener('resize', updateScrollState)
+    return () => {
+      container.removeEventListener('scroll', updateScrollState)
+      window.removeEventListener('resize', updateScrollState)
+    }
+  }, [updateScrollState, categories])
+
   return (
     <>
       {/* Scroll sentinel - placed above filter bar */}
@@ -64,17 +104,15 @@ export function FilterBar({
         {/* Desktop layout */}
         <div className="hidden lg:block">
           <div className="container mx-auto px-4 py-3">
-            {/* Row 1: Search, Chips, Sort, View Toggle */}
+            {/* Row 1: Search, Sort, View Toggle */}
             <div className="flex items-center gap-4">
               {/* Search */}
               <div className="w-64 flex-shrink-0">
                 <TourSearch />
               </div>
 
-              {/* Category chips - takes remaining space */}
-              <div className="flex-1 min-w-0 overflow-hidden">
-                <CategoryChips categories={categories} />
-              </div>
+              {/* Spacer */}
+              <div className="flex-1" />
 
               {/* Sort */}
               <div className="flex-shrink-0">
@@ -90,9 +128,53 @@ export function FilterBar({
               )}
             </div>
 
-            {/* Row 2: Results count */}
-            <div className="mt-2 flex items-center justify-between">
-              <ResultsCount count={totalResults} />
+            {/* Row 2: Category chips with arrows + Results count */}
+            <div className="mt-3 flex items-center gap-4">
+              {/* Left arrow */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={scrollLeft}
+                disabled={!canScrollLeft}
+                aria-label="Scroll categories left"
+                className={cn(
+                  'flex-shrink-0 p-1.5',
+                  !canScrollLeft && 'opacity-30'
+                )}
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </Button>
+
+              {/* Category chips - takes remaining space */}
+              <div className="flex-1 min-w-0 overflow-hidden">
+                <CategoryChips
+                  categories={categories}
+                  containerRef={chipsContainerRef}
+                />
+              </div>
+
+              {/* Right arrow */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={scrollRight}
+                disabled={!canScrollRight}
+                aria-label="Scroll categories right"
+                className={cn(
+                  'flex-shrink-0 p-1.5',
+                  !canScrollRight && 'opacity-30'
+                )}
+              >
+                <ChevronRight className="h-5 w-5" />
+              </Button>
+
+              {/* Divider */}
+              <div className="h-6 w-px bg-[var(--color-border)] flex-shrink-0" />
+
+              {/* Results count */}
+              <div className="flex-shrink-0">
+                <ResultsCount count={totalResults} />
+              </div>
             </div>
           </div>
         </div>

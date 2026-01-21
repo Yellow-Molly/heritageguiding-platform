@@ -14,6 +14,8 @@ const VALID_SLUG_PATTERN = /^[a-z0-9-]+$/
 
 interface CategoryChipsProps {
   categories: Category[]
+  /** Optional ref for external scroll control (desktop arrow buttons) */
+  containerRef?: React.RefObject<HTMLDivElement | null>
 }
 
 /**
@@ -34,7 +36,7 @@ function isValidSlug(slug: string, validSlugs: string[]): boolean {
  * Horizontal scrollable multi-select category chips.
  * Uses URL state for shareable filter links.
  */
-export function CategoryChips({ categories }: CategoryChipsProps) {
+export function CategoryChips({ categories, containerRef }: CategoryChipsProps) {
   const t = useTranslations('tours.filters')
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -109,6 +111,7 @@ export function CategoryChips({ categories }: CategoryChipsProps) {
 
       {/* Scrollable chip container */}
       <div
+        ref={containerRef}
         className={cn(
           'flex gap-2 overflow-x-auto px-8 py-2',
           'scroll-smooth snap-x snap-mandatory',
