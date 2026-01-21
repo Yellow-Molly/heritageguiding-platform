@@ -106,13 +106,10 @@ export function FilterBar({
           <div className="container mx-auto px-4 py-3">
             {/* Row 1: Search, Sort, View Toggle */}
             <div className="flex items-center gap-4">
-              {/* Search */}
-              <div className="w-64 flex-shrink-0">
+              {/* Search - stretches to fill available space */}
+              <div className="flex-1 max-w-xl">
                 <TourSearch />
               </div>
-
-              {/* Spacer */}
-              <div className="flex-1" />
 
               {/* Sort */}
               <div className="flex-shrink-0">
