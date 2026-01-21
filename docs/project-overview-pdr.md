@@ -1,8 +1,8 @@
 # Project Overview & Product Development Requirements (PDR)
 
-**Document Version:** 1.1
-**Last Updated:** January 18, 2026
-**Status:** Phase 05 Complete - Ready for Phase 06
+**Document Version:** 1.2
+**Last Updated:** January 19, 2026
+**Status:** Phase 07 Complete - Ready for Phase 08
 **Project Lead:** Technical Team
 
 ## Executive Summary
@@ -26,6 +26,8 @@ HeritageGuiding is an AI-first tourism booking platform consolidating the Stockh
 - Tertiary: AI agents (ChatGPT, Perplexity, Google AI) discovering experiences
 
 ## Phase 01: Foundation Setup - COMPLETE ✅
+
+Successfully established monorepo infrastructure with Next.js 15, Payload CMS 3.0, PostgreSQL, and full CI/CD pipeline. All development tools configured.
 
 ### Phase 01 Objectives
 
@@ -86,49 +88,42 @@ heritageguiding-platform/
 - ✅ CI/CD pipeline runs successfully
 - ✅ Documentation complete (architecture, standards, codebase)
 
-## Phase 02: i18n & Localization (NEXT)
+## Phase 02: i18n & Localization - COMPLETE ✅
 
-### Phase 02 Objectives
+Fully implemented multilingual support with next-intl for Swedish/English/German routing, language persistence, locale-specific formatting, and SEO hreflang tags.
+
+## Phase 03: Data Models & CMS Schema - COMPLETE ✅
+
+All 9 Payload CMS collections implemented: Tours, Guides, Categories, Cities, Neighborhoods, Reviews, Pages, Media, Users. Full i18n support per collection with 7 reusable field modules.
+
+## Phase 04: Design System - COMPLETE ✅
+
+Comprehensive design system with premium heritage aesthetic: Navy/Gold/Coral palette, Playfair/Inter typography, spacing system, animations, component patterns, and accessibility guidelines (WCAG 2.1 AA).
+
+## Phase 05: Homepage - COMPLETE ✅
+
+Full homepage implementation with hero section, trust signals, featured tours grid, CTA sections, testimonials carousel, and footer. All components responsive and accessible.
+
+## Phase 06: Tour Catalog - COMPLETE ✅
+
+Complete tour catalog page with grid/list view toggle, filtering (categories, price, duration), search, sorting, and pagination. Full i18n support across all three languages.
+
+## Phase 07: Tour Detail - COMPLETE ✅
+
+Comprehensive tour detail page featuring: full-screen image gallery, tour facts table, logistics info, inclusions/exclusions, guide profile, booking CTA, customer reviews with ratings, related tours, breadcrumbs, and JSON-LD schema markup.
+
+## Phase 08: Rezdy Booking Integration (NEXT)
+
+### Phase 08 Objectives
 
 | Objective | Estimate | Notes |
 |-----------|----------|-------|
-| next-intl setup | 8-10h | SV/EN/DE routing |
-| Language switcher | 6-8h | Component + session persistence |
-| Content localization | 6-8h | Per-field translations in Payload |
-| Date/time formatting | 2-3h | Locale-specific formatting |
-| SEO i18n | 2-3h | hreflang tags, sitemap |
+| Rezdy API integration | 16-20h | OAuth, API client, error handling |
+| Booking widget embed | 8-10h | iFrame integration on detail page |
+| Availability sync | 6-8h | Real-time availability from Rezdy |
+| Confirmation flow | 4-6h | Email confirmations + webhook handling |
 
-**Time Estimate:** 24-28 hours
-
-### Phase 02 Deliverables
-
-1. **Language Routing** - Access via `/sv`, `/en`, `/de`
-2. **Admin Localization** - Create/edit tours in 3 languages in Payload CMS
-3. **Date/Time Formatting** - Locale-aware dates, times, currencies
-4. **Language Persistence** - User preferences saved across sessions
-5. **SEO Support** - hreflang tags for search engines
-
-### Phase 02 Acceptance Criteria
-
-- ✅ All routes accessible with language prefix
-- ✅ Language preferences persist across sessions
-- ✅ Content editable in all three languages via CMS
-- ✅ Date/time formatting correct per locale
-- ✅ hreflang tags generated automatically
-
-## Phase 03: Data Models & CMS Schema
-
-### Core Collections to Define
-
-| Collection | Fields | Est. Hours |
-|-----------|--------|-----------|
-| **Tours** | title, description, price, duration, guide, category, media, accessibility, published | 8-10 |
-| **Guides** | name, bio, credentials, photo, tours | 4-6 |
-| **Categories** | name, slug, description, tours | 2-3 |
-| **Reviews** | rating, text, date, tour, author | 3-4 |
-| **Media** | (already exists) refine for tour-specific needs | 3-5 |
-
-**Time Estimate:** 20-24 hours
+**Time Estimate:** 34-44 hours
 
 ## Core MVP Features
 
@@ -294,11 +289,13 @@ heritageguiding-platform/
 ### Critical Milestones
 
 1. **Week 1** - Foundation complete ✅
-2. **Week 2** - i18n & data models complete
-3. **Week 5** - Rezdy integration tested
-4. **Week 8** - All features implemented
-5. **Week 11** - Complete UAT cycle
-6. **Week 12** - Go-live 🚀
+2. **Week 2** - i18n & data models complete ✅
+3. **Week 3-4** - Design system, homepage, catalog complete ✅
+4. **Week 5** - Tour detail page complete ✅
+5. **Week 6** - Rezdy integration tested (in progress)
+6. **Week 8** - All features implemented
+7. **Week 11** - Complete UAT cycle
+8. **Week 12** - Go-live 🚀
 
 ## Definition of Done
 
@@ -418,13 +415,27 @@ The MVP is complete when **ALL** criteria are met:
 | Technical Lead | Approved | Jan 13, 2026 |
 | Stakeholder | Pending | - |
 
-## Next Steps
+## Current Progress
 
-1. **Review PDR** - Product owner review (48 hours)
-2. **Confirm Scope** - Finalize must-have vs nice-to-have
-3. **Setup Environment** - Vercel, database, email services
-4. **Begin Phase 2** - i18n implementation (Week 2)
-5. **Weekly Syncs** - Start recurring Monday meetings
+**Completed (61K LOC - apps/web):**
+- 50+ React components (responsive, accessible, i18n-ready)
+- 7 API data-fetching functions with full TypeScript typing
+- 50+ unit tests covering components, APIs, utilities
+- XSS prevention, security headers, input validation
+- ARIA labels, semantic HTML, accessibility badges
+
+**Completed (30K LOC - packages/cms):**
+- 9 fully configured Payload CMS collections
+- 3-locale localization (sv/en/de)
+- Vercel Blob cloud storage integration
+- Role-based access control
+
+## Next Steps (Phase 08+)
+
+1. **Phase 08** - Rezdy booking integration (2-3 weeks)
+2. **Phase 09** - Group inquiry form & WhatsApp integration
+3. **Phase 10-13** - Advanced features (SEO, accessibility audit, schema)
+4. **Phase 14-17** - Performance optimization, testing, launch prep
 
 ---
 

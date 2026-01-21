@@ -1,8 +1,8 @@
 # System Architecture - HeritageGuiding Platform
 
-**Last Updated:** January 18, 2026
-**Phase:** 05 - Homepage
-**Status:** Ready for Phase 06
+**Last Updated:** January 19, 2026
+**Phase:** 07 - Tour Detail
+**Status:** Ready for Phase 08 - Rezdy Integration
 
 ## High-Level Architecture
 
@@ -180,10 +180,13 @@ packages/cms/
 |-----------|--------|---------|
 | **Users** | Phase 01 ✅ | Admin authentication & authorization |
 | **Media** | Phase 01 ✅ | Image/file upload & management |
-| **Tours** | Phase 03 | Tour listings with details |
-| **Guides** | Phase 03 | Expert profiles |
-| **Categories** | Phase 03 | Tour themes/neighborhoods |
-| **Reviews** | Phase 03 | Customer feedback |
+| **Tours** | Phase 03 ✅ | Tour listings with full details |
+| **Guides** | Phase 03 ✅ | Expert profiles with credentials |
+| **Categories** | Phase 03 ✅ | Tour themes/activity classification |
+| **Reviews** | Phase 03 ✅ | Customer feedback with ratings |
+| **Cities** | Phase 03 ✅ | Geographic location data |
+| **Neighborhoods** | Phase 03 ✅ | City-based area classification |
+| **Pages** | Phase 03 ✅ | Static pages (FAQ, About, Terms, Privacy) |
 
 ### Data Layer (PostgreSQL + Vercel Blob)
 
@@ -224,15 +227,22 @@ query {
 }
 ```
 
-### REST API Routes
+### REST API Routes (Data-Fetching Functions)
 
-**Pattern:** `apps/web/app/api/[...slug]/route.ts`
+**Implemented (Phase 07):**
+- `fetchTours()` - Get all tours with filters
+- `fetchTourById()` - Get single tour with full details
+- `fetchToursByCategoryId()` - Get tours by category
+- `fetchGuideById()` - Get guide profile
+- `fetchReviewsByTourId()` - Get tour reviews
+- `fetchRelatedTours()` - Get related tour recommendations
+- `fetchTourSchema()` - Generate JSON-LD schema
 
-**Planned (Phase 2+):**
-- GET `/api/tours` - List tours
-- GET `/api/tours/:id` - Tour details
-- POST `/api/bookings` - Create booking
+**Planned (Phase 08+):**
+- POST `/api/bookings` - Create Rezdy booking
 - POST `/api/inquiries` - Group booking inquiry
+- GET `/api/availability/:tourId` - Real-time availability
+- POST `/api/webhooks/rezdy` - Rezdy confirmation webhooks
 
 ## Data Models (Planned)
 
@@ -379,23 +389,37 @@ access: {
 - Performance monitoring (Web Vitals)
 - Log aggregation
 
-## Future Architecture Changes
+## Completed Architecture Phases
 
-### Phase 2 (i18n)
-- Add next-intl middleware
-- Language-specific routing
-- Localized content in Payload
+### Phase 02 (i18n) ✅
+- next-intl middleware integrated
+- SV/EN/DE language routing
+- Localized content throughout Payload + frontend
 
-### Phase 3 (Data Models)
-- Tour, Guide, Category, Review collections
-- Relationships and nested fields
-- Content versioning
+### Phase 03-04 (Data & Design) ✅
+- 9 CMS collections with relationships
+- Field modules for reusability
+- Design system with tokens
 
-### Phase 5+ (Advanced)
+### Phase 05-07 (Pages & Components) ✅
+- 50+ React components (homepage, catalog, detail)
+- 7 data-fetching API functions
+- Server-side rendering with SSR
+- Full i18n on all pages
+
+## Planned Architecture Changes
+
+### Phase 08 (Rezdy Integration)
+- Rezdy OAuth2 authentication
+- Booking widget iframe integration
+- Webhook handlers for confirmations
+- Real-time availability sync
+
+### Phase 09+ (Advanced)
 - Vector database for semantic search
-- API rate limiting & caching
-- User accounts & preferences
-- Real-time booking updates
+- WhatsApp Business API integration
+- Group inquiry management system
+- Email notification pipeline
 
 ## Questions & References
 

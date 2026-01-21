@@ -1,7 +1,8 @@
 # Code Standards & Best Practices
 
-**Last Updated:** January 13, 2026
+**Last Updated:** January 19, 2026
 **Project:** HeritageGuiding Platform
+**Phase:** 07 Complete
 **Applies To:** All code in apps/, packages/, and scripts/
 
 ## Core Principles
@@ -138,28 +139,60 @@ try {
 ## Testing Strategy
 
 ### Unit Tests
-- One test file per module: `module.test.ts`
+- **Files:** One test file per module: `{module}.test.ts`
+- **Components:** `{component}.test.tsx` for React components
+- **APIs:** `{function-name}.test.ts` for data-fetching functions
 - Test behavior, not implementation
 - Use descriptive test names
 - Minimum coverage: 80%
+- Use Vitest for unit testing
 
 ### Integration Tests
 - Test across module boundaries
 - Use real database (test environment)
 - Clean up fixtures after tests
 
-### Naming Convention
+### Testing Data-Fetching Functions
 ```typescript
-describe('UserRepository', () => {
-  it('should create a new user with valid data', () => {
-    // Test
+describe('fetchTourById', () => {
+  it('should return tour with full details when given valid ID', async () => {
+    const tour = await fetchTourById('tour-123')
+    expect(tour).toHaveProperty('title')
+    expect(tour).toHaveProperty('logistics')
+    expect(tour).toHaveProperty('guide')
   })
 
-  it('should throw error when email is invalid', () => {
-    // Test
+  it('should throw error when tour not found', async () => {
+    await expect(fetchTourById('invalid-id')).rejects.toThrow()
+  })
+
+  it('should return localized content based on locale param', async () => {
+    const tourSv = await fetchTourById('tour-123', 'sv')
+    const tourEn = await fetchTourById('tour-123', 'en')
+    expect(tourSv.title).not.toEqual(tourEn.title)
   })
 })
 ```
+
+### Testing Components
+```typescript
+describe('TourCard', () => {
+  it('should render tour image, title, and price', () => {
+    const { getByText } = render(
+      <TourCard tour={mockTour} locale="en" />
+    )
+    expect(getByText(mockTour.title)).toBeInTheDocument()
+    expect(getByText(`$${mockTour.price}`)).toBeInTheDocument()
+  })
+
+  it('should link to tour detail page', () => {
+    const { getByRole } = render(
+      <TourCard tour={mockTour} locale="en" />
+    )
+    const link = getByRole('link')
+    expect(link).toHaveAttribute('href', `/en/tours/${mockTour.slug}`)
+  })
+})
 
 ## Code Quality Tools
 
@@ -267,10 +300,25 @@ export const Example: CollectionConfig = {
 - Be descriptive: `publishedAt` not `pub`
 - Collections plural in exports, singular in slug
 
+### Localization Patterns
+- Use `localized: true` for user-editable content
+- All tours, guides, pages must support SV/EN/DE
+- Default locale: Swedish (sv)
+- Fallback chain: sv → en → de
+
 ### Access Control
 - Define role-based access explicitly
 - Never default to `true` for sensitive operations
 - Document access rules in code comments
+
+### Collection Field Groups
+Use field modules for reusability:
+- `seo-fields.ts` - Meta, OG tags (all collections)
+- `logistics-fields.ts` - Meeting point, map, coords (tours)
+- `tour-pricing-fields.ts` - Price, currency, discounts (tours)
+- `tour-inclusion-fields.ts` - Inclusions/exclusions (tours)
+- `accessibility-fields.ts` - WCAG compliance (tours, guides)
+- `slug-field.ts` - Auto-formatted URL slugs (tours, guides)
 
 ## Styling with Tailwind
 
@@ -370,17 +418,67 @@ async function getUserById(id: string): Promise<User | null> {
 - Avoid N+1 queries
 - Cache frequently accessed data
 
+## API Data-Fetching Standards
+
+### Function Patterns
+```typescript
+// apps/web/lib/api/tours.ts
+import type { Tour, TourDetail } from '@/types'
+
+export async function fetchTours(
+  locale: string,
+  filters?: { category?: string; priceMax?: number }
+): Promise<Tour[]> {
+  try {
+    // Query Payload GraphQL
+    const response = await fetch(`${API_URL}/api/graphql`, {
+      method: 'POST',
+      body: JSON.stringify({ query, variables: { locale } }),
+    })
+    if (!response.ok) throw new Error('Failed to fetch tours')
+    return response.json().data.tours
+  } catch (error) {
+    console.error('Tour fetch error:', error)
+    throw new Error('Unable to load tours')
+  }
+}
+
+export async function fetchTourById(
+  slug: string,
+  locale: string
+): Promise<TourDetail> {
+  // Ensure full typing + null checking
+  const tour = await fetch(`/api/tours/${slug}?locale=${locale}`)
+  if (!tour) throw new Error('Tour not found')
+  return tour as TourDetail
+}
+```
+
+### Error Handling
+- Always throw descriptive errors
+- Log errors server-side only (not client)
+- Return user-friendly error messages
+- Never expose database/API internals
+
+### Type Safety
+- All functions must have return type annotations
+- Use `Promise<T>` for async functions
+- Export types from `/types` directory
+- Validate responses against TypeScript types
+
 ## Review Checklist
 
 **For Code Reviews:**
 - [ ] Code follows standards
-- [ ] Types are correct
-- [ ] Error handling present
-- [ ] Tests added/updated
-- [ ] No console logs
-- [ ] No security issues
-- [ ] Performance acceptable
+- [ ] Types are correct (no `any`)
+- [ ] Error handling with try-catch
+- [ ] Tests added/updated (80%+ coverage)
+- [ ] No console logs in production
+- [ ] No hardcoded secrets
+- [ ] Security: input validation, CSRF tokens
+- [ ] Performance: no N+1 queries, appropriate caching
 - [ ] Documentation updated
+- [ ] i18n support verified (all locales tested)
 
 ## Questions or Clarifications?
 
