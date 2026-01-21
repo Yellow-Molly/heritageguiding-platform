@@ -2,12 +2,17 @@
 export { TourCard } from './tour-card'
 export { TourGrid } from './tour-grid'
 export { TourGridSkeleton } from './tour-grid-skeleton'
-export { TourFilters } from './tour-filters'
 export { TourSearch } from './tour-search'
 export { TourSort } from './tour-sort'
 export { FilterDrawer } from './filter-drawer'
 export { TourEmptyState } from './tour-empty-state'
 export { TourPagination } from './tour-pagination'
+
+// New filter bar components (GetYourGuide-style)
+export { FilterBar, CategoryChips, DatesPicker, ResultsCount } from './filter-bar'
+
+// @deprecated - Use FilterBar instead
+export { TourFilters } from './tour-filters'
 
 // Tour detail components
 export { TourHero } from './tour-hero'

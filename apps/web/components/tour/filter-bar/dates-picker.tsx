@@ -130,14 +130,16 @@ export function DatesPicker() {
           <CalendarDays className="h-4 w-4 flex-shrink-0" />
           <span className="whitespace-nowrap">{displayText}</span>
           {hasSelection && (
-            <button
-              type="button"
+            <span
+              role="button"
+              tabIndex={0}
               onClick={handleClear}
-              className="ml-1 rounded-full p-0.5 hover:bg-[var(--color-primary)]/20"
+              onKeyDown={(e) => e.key === 'Enter' && handleClear(e as unknown as React.MouseEvent)}
+              className="ml-1 rounded-full p-0.5 hover:bg-[var(--color-primary)]/20 cursor-pointer"
               aria-label={t('clearDates')}
             >
               <X className="h-3 w-3" />
-            </button>
+            </span>
           )}
         </button>
       </PopoverTrigger>

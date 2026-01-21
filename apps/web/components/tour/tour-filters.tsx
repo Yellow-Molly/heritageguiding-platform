@@ -1,3 +1,9 @@
+/**
+ * @deprecated Use FilterBar from '@/components/tour/filter-bar' instead.
+ * This component will be removed in a future release.
+ * Migration: Replace <TourFilters /> with <FilterBar categories={...} totalResults={...} />
+ */
+
 'use client'
 
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
