@@ -18,26 +18,31 @@
     "payload:generate-types": "payload generate:types"
   },
   "dependencies": {
-    "@payloadcms/db-postgres": "^3.70.0",
-    "@payloadcms/next": "^3.70.0",
-    "@payloadcms/richtext-lexical": "^3.70.0",
-    "@payloadcms/storage-vercel-blob": "^3.70.0",
+    "@payloadcms/db-postgres": "^3.72.0",
+    "@payloadcms/next": "^3.72.0",
+    "@payloadcms/richtext-lexical": "^3.72.0",
+    "@payloadcms/storage-vercel-blob": "^3.72.0",
     "@radix-ui/react-accordion": "^1.2.12",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "lucide-react": "^0.562.0",
     "next": "^15.5.9",
     "next-intl": "^4.7.0",
-    "payload": "^3.70.0",
+    "payload": "^3.72.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "sharp": "^0.34.5",
     "tailwind-merge": "^3.4.0",
     "zod": "^4.3.5"
   },
+  "overrides": {
+    "undici": "^7.19.0",
+    "esbuild": "^0.25.0"
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
     "@testing-library/user-event": "^14.6.1",

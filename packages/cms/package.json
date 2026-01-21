@@ -15,10 +15,14 @@
     "./collections/*": "./collections/*.ts"
   },
   "dependencies": {
-    "@payloadcms/db-postgres": "^3.70.0",
-    "@payloadcms/richtext-lexical": "^3.70.0",
-    "@payloadcms/storage-vercel-blob": "^3.70.0",
-    "payload": "^3.70.0"
+    "@payloadcms/db-postgres": "^3.72.0",
+    "@payloadcms/richtext-lexical": "^3.72.0",
+    "@payloadcms/storage-vercel-blob": "^3.72.0",
+    "payload": "^3.72.0"
+  },
+  "overrides": {
+    "undici": "^7.19.0",
+    "esbuild": "^0.25.0"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.0.17",
