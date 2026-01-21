@@ -98,7 +98,9 @@
       "filterPanel": "Filterbereich",
       "clearAll": "Alle Löschen",
       "applyFilters": "Filter Anwenden",
-      "resultsCount": "{count, plural, =0 {Keine Ergebnisse} one {# Ergebnis} other {# Ergebnisse}}"
+      "resultsCount": "{count, plural, =0 {Keine Ergebnisse} one {# Ergebnis} other {# Ergebnisse}}",
+      "selectDates": "Datum wählen",
+      "clearDates": "Datum löschen"
     },
     "empty": {
       "title": "Keine Touren gefunden",

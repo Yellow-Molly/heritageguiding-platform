@@ -98,7 +98,9 @@
       "filterPanel": "Filterpanel",
       "clearAll": "Rensa Alla",
       "applyFilters": "Tillämpa Filter",
-      "resultsCount": "{count, plural, =0 {Inga resultat} one {# resultat} other {# resultat}}"
+      "resultsCount": "{count, plural, =0 {Inga resultat} one {# resultat} other {# resultat}}",
+      "selectDates": "Välj datum",
+      "clearDates": "Rensa datum"
     },
     "empty": {
       "title": "Inga turer hittades",

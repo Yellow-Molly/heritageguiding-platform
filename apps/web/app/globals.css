@@ -318,6 +318,17 @@ a {
   scrollbar-width: none;
 }
 
+/* react-day-picker range styling */
+.day-range-start:not(.day-range-end) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.day-range-end:not(.day-range-start) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
 /* Reduced Motion Preference */
 @media (prefers-reduced-motion: reduce) {
   *,
