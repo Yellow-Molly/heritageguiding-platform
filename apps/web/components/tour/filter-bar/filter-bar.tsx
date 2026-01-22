@@ -105,24 +105,22 @@ export function FilterBar({
         <div className="hidden lg:block">
           <div className="container mx-auto px-4 py-3">
             {/* Row 1: Search, Sort, View Toggle */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-between gap-4">
               {/* Search - stretches to fill available space */}
-              <div className="flex-1 max-w-xl">
+              <div className="flex-1">
                 <TourSearch />
               </div>
 
-              {/* Sort */}
-              <div className="flex-shrink-0">
+              {/* Sort + View toggle grouped on the right */}
+              <div className="flex items-center gap-4 flex-shrink-0">
                 <TourSort />
+                {onViewModeChange && (
+                  <ViewModeToggle
+                    viewMode={viewMode}
+                    onViewModeChange={onViewModeChange}
+                  />
+                )}
               </div>
-
-              {/* View mode toggle */}
-              {onViewModeChange && (
-                <ViewModeToggle
-                  viewMode={viewMode}
-                  onViewModeChange={onViewModeChange}
-                />
-              )}
             </div>
 
             {/* Row 2: Category chips with arrows + Results count */}
