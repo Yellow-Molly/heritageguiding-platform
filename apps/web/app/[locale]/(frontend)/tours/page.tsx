@@ -37,21 +37,9 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[var(--color-background)]">
-        {/* Hero Section */}
-        <section className="bg-[var(--color-primary)] py-12 text-white md:py-16">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="font-serif text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-              {t('title')}
-            </h1>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
-              {t('description')}
-            </p>
-          </div>
-        </section>
-
+      <main className="min-h-screen bg-[var(--color-background)] pt-[var(--header-height)]">
         {/* Catalog Section */}
-        <section className="container mx-auto px-4 py-8 lg:py-12">
+        <section className="container mx-auto px-4 py-6 lg:py-8">
           <TourCatalogClient categories={categories} totalResults={total}>
             <Suspense fallback={<TourGridSkeleton />}>
               <TourGrid searchParams={filters} />
