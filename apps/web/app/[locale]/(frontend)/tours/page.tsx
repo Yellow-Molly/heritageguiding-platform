@@ -36,7 +36,7 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
 
   return (
     <>
-      <Header />
+      <Header variant="solid" />
       <main className="min-h-screen bg-[var(--color-background)] pt-[var(--header-height)]">
         {/* Catalog Section */}
         <section className="container mx-auto px-4 py-6 lg:py-8">

@@ -18,8 +18,16 @@ const languages = [
   { code: 'de', name: 'Deutsch' },
 ]
 
-export function Header() {
+interface HeaderProps {
+  /** 'transparent' for pages with hero (home), 'solid' for pages without hero (tours) */
+  variant?: 'transparent' | 'solid'
+}
+
+export function Header({ variant = 'transparent' }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
+
+  // For solid variant, always show scrolled styling
+  const showSolidStyle = variant === 'solid' || isScrolled
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false)
   const [currentLang, setCurrentLang] = useState('en')
@@ -46,7 +54,7 @@ export function Header() {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-[var(--z-fixed)] transition-all duration-300',
-        isScrolled ? 'bg-white/95 shadow-md backdrop-blur-md' : 'bg-transparent'
+        showSolidStyle ? 'bg-white/95 shadow-md backdrop-blur-md' : 'bg-transparent'
       )}
     >
       <nav className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
@@ -55,7 +63,7 @@ export function Header() {
           href="/"
           className={cn(
             'font-serif text-2xl font-bold transition-colors',
-            isScrolled ? 'text-[#1E3A5F]' : 'text-white text-shadow-sm'
+            showSolidStyle ? 'text-[#1E3A5F]' : 'text-white text-shadow-sm'
           )}
         >
           HeritageGuiding
@@ -69,7 +77,7 @@ export function Header() {
               href={item.href}
               className={cn(
                 'text-base font-medium transition-colors hover:opacity-80',
-                isScrolled ? 'text-[#2D3748]' : 'text-white text-shadow-sm'
+                showSolidStyle ? 'text-[#2D3748]' : 'text-white text-shadow-sm'
               )}
             >
               {item.name}
@@ -83,7 +91,7 @@ export function Header() {
               onBlur={() => setTimeout(() => setIsLangMenuOpen(false), 150)}
               className={cn(
                 'flex items-center gap-1 text-sm font-medium transition-colors',
-                isScrolled ? 'text-[#2D3748]' : 'text-white text-shadow-sm'
+                showSolidStyle ? 'text-[#2D3748]' : 'text-white text-shadow-sm'
               )}
               aria-label="Select language"
               aria-expanded={isLangMenuOpen}
@@ -121,7 +129,7 @@ export function Header() {
           {/* CTA Button */}
           <Link
             href="/find-tour"
-            className={getButtonClassName(isScrolled ? 'primary' : 'outline', 'md')}
+            className={getButtonClassName(showSolidStyle ? 'primary' : 'outline', 'md')}
           >
             Find Your Tour
           </Link>
@@ -131,7 +139,7 @@ export function Header() {
         <button
           className={cn(
             'flex h-10 w-10 items-center justify-center rounded-lg md:hidden',
-            isScrolled ? 'text-[#1E3A5F]' : 'text-white text-shadow-sm'
+            showSolidStyle ? 'text-[#1E3A5F]' : 'text-white text-shadow-sm'
           )}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
