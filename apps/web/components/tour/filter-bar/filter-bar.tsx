@@ -96,7 +96,7 @@ export function FilterBar({
       {/* Sticky filter bar */}
       <div
         className={cn(
-          'sticky top-0 z-[200] bg-[var(--color-surface)] transition-shadow duration-150',
+          'sticky top-[var(--header-height)] z-[var(--z-sticky)] bg-[var(--color-surface)] transition-shadow duration-150',
           'border-b border-[var(--color-border)]',
           isScrolled && 'shadow-md'
         )}

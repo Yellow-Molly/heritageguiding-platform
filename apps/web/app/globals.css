@@ -80,6 +80,9 @@
   --transition-normal: 300ms ease;
   --transition-slow: 500ms ease;
 
+  /* Layout */
+  --header-height: 5rem; /* 80px - matches header h-20 */
+
   /* Z-Index Scale */
   --z-base: 0;
   --z-dropdown: 100;
