@@ -1,22 +1,18 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
+import { useState, useEffect, useTransition } from 'react'
 import Image from 'next/image'
 import { Menu, X, Globe, ChevronDown } from 'lucide-react'
+import { useLocale } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { getButtonClassName } from '@/components/ui/button'
+import { Link, usePathname, useRouter } from '@/i18n/navigation'
+import { locales, localeLabels, type Locale } from '@/i18n/routing'
 
 const navigation = [
-  { name: 'Tours', href: '/tours' },
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' },
-]
-
-const languages = [
-  { code: 'en', name: 'English' },
-  { code: 'sv', name: 'Svenska' },
-  { code: 'de', name: 'Deutsch' },
+  { name: 'Tours', href: '/tours' as const },
+  { name: 'About', href: '/about' as const },
+  { name: 'Contact', href: '/contact' as const },
 ]
 
 interface HeaderProps {
@@ -26,12 +22,16 @@ interface HeaderProps {
 
 export function Header({ variant = 'transparent' }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false)
+  const [isPending, startTransition] = useTransition()
+
+  const locale = useLocale() as Locale
+  const pathname = usePathname()
+  const router = useRouter()
 
   // For solid variant, always show scrolled styling
   const showSolidStyle = variant === 'solid' || isScrolled
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false)
-  const [currentLang, setCurrentLang] = useState('en')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +50,18 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  const handleLocaleChange = (newLocale: Locale) => {
+    if (newLocale === locale) {
+      setIsLangMenuOpen(false)
+      return
+    }
+
+    startTransition(() => {
+      router.replace(pathname, { locale: newLocale })
+      setIsLangMenuOpen(false)
+    })
+  }
 
   return (
     <header
@@ -94,15 +106,16 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
             <button
               onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
               onBlur={() => setTimeout(() => setIsLangMenuOpen(false), 150)}
+              disabled={isPending}
               className={cn(
-                'flex items-center gap-1 text-sm font-medium transition-colors',
+                'flex items-center gap-1 text-sm font-medium transition-colors disabled:opacity-50',
                 showSolidStyle ? 'text-[#2D3748]' : 'text-white text-shadow-sm'
               )}
               aria-label="Select language"
               aria-expanded={isLangMenuOpen}
             >
               <Globe className="h-4 w-4" />
-              <span>{languages.find((l) => l.code === currentLang)?.code.toUpperCase()}</span>
+              <span>{locale.toUpperCase()}</span>
               <ChevronDown
                 className={cn('h-4 w-4 transition-transform', isLangMenuOpen && 'rotate-180')}
               />
@@ -110,21 +123,19 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
 
             {isLangMenuOpen && (
               <div className="absolute right-0 top-full mt-2 w-32 rounded-lg bg-white py-2 shadow-lg">
-                {languages.map((lang) => (
+                {locales.map((loc) => (
                   <button
-                    key={lang.code}
-                    onClick={() => {
-                      setCurrentLang(lang.code)
-                      setIsLangMenuOpen(false)
-                    }}
+                    key={loc}
+                    onClick={() => handleLocaleChange(loc)}
+                    disabled={isPending}
                     className={cn(
-                      'block w-full px-4 py-2 text-left text-sm transition-colors hover:bg-[var(--color-background-alt)]',
-                      currentLang === lang.code
+                      'block w-full px-4 py-2 text-left text-sm transition-colors hover:bg-[var(--color-background-alt)] disabled:opacity-50',
+                      locale === loc
                         ? 'font-medium text-[var(--color-primary)]'
                         : 'text-[var(--color-text)]'
                     )}
                   >
-                    {lang.name}
+                    {localeLabels[loc]}
                   </button>
                 ))}
               </div>
@@ -179,18 +190,19 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
           <div className="mt-2 border-t border-[var(--color-border)] pt-4">
             <p className="px-4 pb-2 text-sm font-medium text-[var(--color-text-muted)]">Language</p>
             <div className="flex gap-2 px-4">
-              {languages.map((lang) => (
+              {locales.map((loc) => (
                 <button
-                  key={lang.code}
-                  onClick={() => setCurrentLang(lang.code)}
+                  key={loc}
+                  onClick={() => handleLocaleChange(loc)}
+                  disabled={isPending}
                   className={cn(
-                    'rounded-full px-3 py-1.5 text-sm transition-colors',
-                    currentLang === lang.code
+                    'rounded-full px-3 py-1.5 text-sm transition-colors disabled:opacity-50',
+                    locale === loc
                       ? 'bg-[var(--color-primary)] text-white'
                       : 'bg-[var(--color-background-alt)] text-[var(--color-text)]'
                   )}
                 >
-                  {lang.code.toUpperCase()}
+                  {loc.toUpperCase()}
                 </button>
               ))}
             </div>
