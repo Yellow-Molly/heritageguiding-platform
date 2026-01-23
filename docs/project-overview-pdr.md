@@ -1,9 +1,10 @@
 # Project Overview & Product Development Requirements (PDR)
 
-**Document Version:** 1.2
-**Last Updated:** January 19, 2026
+**Document Version:** 1.3
+**Last Updated:** January 23, 2026
 **Status:** Phase 07 Complete - Ready for Phase 08
 **Project Lead:** Technical Team
+**Latest Changes:** Multi-select filter categories (history, architecture, nature, maritime, royal), mobile filter drawer sync
 
 ## Executive Summary
 

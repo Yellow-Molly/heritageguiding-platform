@@ -1,8 +1,9 @@
 # Codebase Summary - HeritageGuiding Platform
 
-**Last Updated:** January 19, 2026
+**Last Updated:** January 23, 2026
 **Phase:** 07 - Tour Detail (Complete)
 **Status:** Ready for Phase 08 - Rezdy Integration
+**Latest Changes:** Multi-select filter categories (history, architecture, nature, maritime, royal), mobile filter drawer sync
 
 ## Overview
 
@@ -258,11 +259,14 @@ npm run payload:generate-types  # Generate TS types from schema
 - ✅ Breadcrumb navigation
 - ✅ JSON-LD schema markup
 - ✅ GetYourGuide-style sticky FilterBar
-  - Category chips with multi-select + URL state
+  - Multi-select category chips (URL param: `?categories=history,architecture`)
   - Date range picker (react-day-picker v9)
   - Results count with pluralization
+  - Mobile drawer sync with desktop chips
+  - Scroll shadow indicator
 - ✅ Full i18n support (SV/EN/DE)
 - ✅ 18 FilterBar component tests
+- ✅ Categories updated: history, architecture, nature, maritime, royal (multi-select ready)
 
 **Status:** 61K LOC frontend, 30K LOC CMS, ready for Phase 08 (Rezdy Integration)
 

@@ -1,9 +1,10 @@
 # Code Standards & Best Practices
 
-**Last Updated:** January 19, 2026
+**Last Updated:** January 23, 2026
 **Project:** HeritageGuiding Platform
 **Phase:** 07 Complete
 **Applies To:** All code in apps/, packages/, and scripts/
+**Recent Update:** Multi-select filter categories with mobile drawer sync
 
 ## Core Principles
 
@@ -401,18 +402,27 @@ Use field modules for reusability:
 ### FilterBar Architecture
 FilterBar is a GetYourGuide-style sticky filter container with:
 - Category chips (multi-select with URL state persistence)
+- Mobile drawer synced with desktop chips
 - Date range picker (react-day-picker v9)
-- Results count display
+- Results count display with pluralization
 
 **Location:** `apps/web/components/tour/filter-bar/`
+
+**Categories (Phase 07):** history, architecture, nature, maritime, royal
 
 ### Sub-Components
 
 **CategoryChips:**
 - Horizontal scrollable multi-select chips
-- URL state: `?categories=cat1,cat2`
+- URL state: `?categories=history,architecture` (comma-separated)
 - Clear all functionality
 - Accessibility: ARIA labels, keyboard navigation
+- Mobile: synchronized with filter drawer drawer
+
+**FilterDrawer (Mobile):**
+- Accessible drawer for category selection on small screens
+- Syncs with desktop CategoryChips via URL params
+- Touch-friendly button sizing
 
 **DatesPicker:**
 - Radix UI Popover trigger with Popover component

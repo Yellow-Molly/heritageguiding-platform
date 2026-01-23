@@ -1,8 +1,9 @@
 # System Architecture - HeritageGuiding Platform
 
-**Last Updated:** January 19, 2026
-**Phase:** 07 - Tour Detail
+**Last Updated:** January 23, 2026
+**Phase:** 07 - Tour Detail (Complete)
 **Status:** Ready for Phase 08 - Rezdy Integration
+**Recent Update:** Multi-select category filters with URL params (`?categories=history,architecture`)
 
 ## High-Level Architecture
 
@@ -92,14 +93,16 @@
    - Passes categories to TourCatalogClient
    ↓
 4. Client Component (TourCatalogClient):
-   - Manages filter state (categories, date range)
-   - Updates URL query params (?categories=...&start=...&end=...)
-   - Fetches filtered tours based on state
+   - Manages filter state (categories[], date range)
+   - Updates URL query params (?categories=history,architecture&start=...&end=...)
+   - Supports multi-select categories
+   - Mobile drawer sync with desktop chips
    ↓
 5. FilterBar renders (sticky at top):
-   - CategoryChips: display & select categories
+   - CategoryChips: multi-select chips with URL state sync
+   - Mobile Drawer: accessible drawer for small screens (syncs with desktop)
    - DatesPicker: select date range
-   - ResultsCount: display filtered tour count
+   - ResultsCount: pluralized display of filtered tour count
    ↓
 6. Tours Grid renders below FilterBar:
    - Maps through filtered tours array
