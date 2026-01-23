@@ -1,16 +1,26 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { SlidersHorizontal, X } from 'lucide-react'
+import { SlidersHorizontal, X, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { TourSort } from './tour-sort'
 
+// Consistent categories with CategoryChips and get-tours
+const CATEGORIES = [
+  { id: 'history', translationKey: 'history' },
+  { id: 'architecture', translationKey: 'architecture' },
+  { id: 'nature', translationKey: 'nature' },
+  { id: 'maritime', translationKey: 'maritime' },
+  { id: 'royal', translationKey: 'royal' },
+]
+
 /**
  * Mobile filter drawer component.
  * Provides a slide-out panel for filter controls on mobile devices.
+ * Uses 'categories' URL param (plural) for sync with CategoryChips.
  */
 export function FilterDrawer() {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,34 +29,56 @@ export function FilterDrawer() {
   const router = useRouter()
   const pathname = usePathname()
 
-  const updateFilter = (key: string, value: string | null) => {
-    const params = new URLSearchParams(searchParams.toString())
-    if (value) {
-      params.set(key, value)
-    } else {
-      params.delete(key)
-    }
-    params.delete('page')
-    router.push(`${pathname}?${params.toString()}`)
-  }
+  // Parse selected categories from URL (comma-separated)
+  const selectedCategories = useMemo(() => {
+    const raw = searchParams.get('categories')?.split(',').filter(Boolean) || []
+    return raw.filter((cat) => CATEGORIES.some((c) => c.id === cat))
+  }, [searchParams])
 
-  const clearAllFilters = () => {
+  // Toggle a single category (multi-select)
+  const toggleCategory = useCallback(
+    (categoryId: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      let newSelected: string[]
+
+      if (selectedCategories.includes(categoryId)) {
+        newSelected = selectedCategories.filter((c) => c !== categoryId)
+      } else {
+        newSelected = [...selectedCategories, categoryId]
+      }
+
+      if (newSelected.length > 0) {
+        params.set('categories', newSelected.join(','))
+      } else {
+        params.delete('categories')
+      }
+      params.delete('page')
+      router.push(`${pathname}?${params.toString()}`)
+    },
+    [searchParams, pathname, router, selectedCategories]
+  )
+
+  const updateFilter = useCallback(
+    (key: string, value: string | null) => {
+      const params = new URLSearchParams(searchParams.toString())
+      if (value) {
+        params.set(key, value)
+      } else {
+        params.delete(key)
+      }
+      params.delete('page')
+      router.push(`${pathname}?${params.toString()}`)
+    },
+    [searchParams, pathname, router]
+  )
+
+  const clearAllFilters = useCallback(() => {
     router.push(pathname)
     setIsOpen(false)
-  }
+  }, [router, pathname])
 
-  const currentCategory = searchParams.get('category') || ''
   const currentDuration = searchParams.get('duration') || ''
   const isAccessible = searchParams.get('accessible') === 'true'
-
-  const categories = [
-    { id: '', label: t('allCategories') },
-    { id: 'history', label: t('history') },
-    { id: 'architecture', label: t('architecture') },
-    { id: 'food', label: t('food') },
-    { id: 'nature', label: t('nature') },
-    { id: 'museum', label: t('museum') },
-  ]
 
   const durations = [
     { id: '', label: t('anyDuration') },
@@ -55,9 +87,9 @@ export function FilterDrawer() {
     { id: '180', label: t('upTo3hours') },
   ]
 
-  // Count active filters
+  // Count active filters (categories count as 1 if any selected)
   const activeFiltersCount = [
-    currentCategory,
+    selectedCategories.length > 0 ? 'categories' : '',
     currentDuration,
     isAccessible ? 'true' : '',
   ].filter(Boolean).length
@@ -117,26 +149,46 @@ export function FilterDrawer() {
 
         {/* Filter Content */}
         <div className="space-y-6 p-4">
-          {/* Category Filter */}
+          {/* Category Filter (Multi-select) */}
           <div>
-            <label
-              htmlFor="mobile-category"
-              className="mb-2 block text-sm font-medium text-[var(--color-text)]"
-            >
+            <span className="mb-3 block text-sm font-medium text-[var(--color-text)]">
               {t('category')}
-            </label>
-            <select
-              id="mobile-category"
-              value={currentCategory}
-              onChange={(e) => updateFilter('category', e.target.value || null)}
-              className="w-full h-10 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 text-sm text-[var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-            >
-              {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.label}
-                </option>
-              ))}
-            </select>
+            </span>
+            <div className="space-y-2">
+              {CATEGORIES.map((cat) => {
+                const isSelected = selectedCategories.includes(cat.id)
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => toggleCategory(cat.id)}
+                    className={cn(
+                      'flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm transition-colors',
+                      isSelected
+                        ? 'bg-[var(--color-primary)] text-white'
+                        : 'bg-[var(--color-background-alt)] text-[var(--color-text)] hover:bg-[var(--color-border)]'
+                    )}
+                  >
+                    <span>{t(cat.translationKey)}</span>
+                    {isSelected && <Check className="h-4 w-4" />}
+                  </button>
+                )
+              })}
+            </div>
+            {selectedCategories.length > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  const params = new URLSearchParams(searchParams.toString())
+                  params.delete('categories')
+                  params.delete('page')
+                  router.push(`${pathname}?${params.toString()}`)
+                }}
+                className="mt-2 text-xs text-[var(--color-primary)] hover:underline"
+              >
+                {t('clearCategories')}
+              </button>
+            )}
           </div>
 
           {/* Duration Filter */}

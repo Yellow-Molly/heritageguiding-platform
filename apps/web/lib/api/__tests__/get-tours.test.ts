@@ -35,25 +35,37 @@ describe('getTours', () => {
 
   describe('category filtering', () => {
     it('filters by history category', async () => {
-      const result = await getTours({ category: 'history' })
+      const result = await getTours({ categories: 'history' })
       expect(result.tours.length).toBeGreaterThan(0)
       // All returned tours should be in history category
       result.tours.forEach((tour) => {
-        expect(['gamla-stan-walking', 'royal-palace', 'viking-history', 'nobel-prize-tour']).toContain(
-          tour.id
-        )
+        expect(['gamla-stan-walking', 'viking-history', 'nobel-prize-tour']).toContain(tour.id)
       })
     })
 
-    it('filters by food category', async () => {
-      const result = await getTours({ category: 'food' })
+    it('filters by maritime category', async () => {
+      const result = await getTours({ categories: 'maritime' })
       expect(result.tours.length).toBe(1)
-      expect(result.tours[0].id).toBe('stockholm-food-tour')
+      expect(result.tours[0].id).toBe('vasa-museum')
+    })
+
+    it('filters by multiple categories', async () => {
+      const result = await getTours({ categories: 'history,royal' })
+      expect(result.tours.length).toBeGreaterThan(0)
+      // Tours should be in history OR royal category
+      result.tours.forEach((tour) => {
+        expect([
+          'gamla-stan-walking',
+          'viking-history',
+          'nobel-prize-tour',
+          'royal-palace',
+        ]).toContain(tour.id)
+      })
     })
 
     it('returns all tours for invalid category (validation rejects invalid values)', async () => {
       // Invalid categories are rejected by Zod validation, falling back to defaults
-      const result = await getTours({ category: 'nonexistent' })
+      const result = await getTours({ categories: 'nonexistent' })
       // Should return all tours since invalid filter is ignored
       expect(result.tours.length).toBeGreaterThan(0)
     })
@@ -200,11 +212,9 @@ describe('getTours', () => {
 
   describe('combined filters', () => {
     it('combines category and price filters', async () => {
-      const result = await getTours({ category: 'history', priceMax: '600' })
+      const result = await getTours({ categories: 'history', priceMax: '600' })
       result.tours.forEach((tour) => {
-        expect(['gamla-stan-walking', 'royal-palace', 'viking-history', 'nobel-prize-tour']).toContain(
-          tour.id
-        )
+        expect(['gamla-stan-walking', 'viking-history', 'nobel-prize-tour']).toContain(tour.id)
         expect(tour.price).toBeLessThanOrEqual(600)
       })
     })
@@ -241,6 +251,6 @@ describe('getTourCategories', () => {
 
     expect(ids).toContain('history')
     expect(ids).toContain('architecture')
-    expect(ids).toContain('food')
+    expect(ids).toContain('maritime')
   })
 })

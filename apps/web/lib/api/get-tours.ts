@@ -7,7 +7,7 @@ import type { FeaturedTour } from './get-featured-tours'
 import { validateTourFilters, type ValidatedTourFilters } from '@/lib/validation/tour-filters'
 
 export interface TourFilters {
-  category?: string
+  categories?: string
   priceMin?: string
   priceMax?: string
   duration?: string
@@ -227,16 +227,23 @@ function applyFilters(tours: FeaturedTour[], filters: ValidatedTourFilters): Fea
   let filtered = [...tours]
 
   // Category filter (simplified - in real app would check category relation)
-  if (filters.category) {
+  if (filters.categories) {
     const categoryMap: Record<string, string[]> = {
-      history: ['gamla-stan-walking', 'royal-palace', 'viking-history', 'nobel-prize-tour'],
+      history: ['gamla-stan-walking', 'viking-history', 'nobel-prize-tour'],
       architecture: ['architecture-tour', 'sodermalm-art'],
-      food: ['stockholm-food-tour'],
       nature: ['djurgarden-nature'],
-      museum: ['vasa-museum'],
+      maritime: ['vasa-museum'],
+      royal: ['royal-palace'],
     }
-    const tourIds = categoryMap[filters.category] || []
-    filtered = filtered.filter((t) => tourIds.includes(t.id))
+    // Support comma-separated categories (multi-select)
+    const selectedCategories = filters.categories.split(',').filter(Boolean)
+    const tourIds = selectedCategories.flatMap((cat) => categoryMap[cat] || [])
+    // If categories selected but no matching tours, return empty
+    if (tourIds.length > 0) {
+      filtered = filtered.filter((t) => tourIds.includes(t.id))
+    } else if (selectedCategories.length > 0) {
+      filtered = []
+    }
   }
 
   // Price range filter
@@ -346,10 +353,10 @@ export async function getTours(filters: TourFilters = {}): Promise<ToursResponse
  */
 export function getTourCategories(): Array<{ id: string; name: string }> {
   return [
-    { id: 'history', name: 'History' },
+    { id: 'history', name: 'History & Heritage' },
     { id: 'architecture', name: 'Architecture' },
-    { id: 'food', name: 'Food & Drink' },
-    { id: 'nature', name: 'Nature' },
-    { id: 'museum', name: 'Museums' },
+    { id: 'nature', name: 'Nature & Parks' },
+    { id: 'maritime', name: 'Maritime History' },
+    { id: 'royal', name: 'Royal Heritage' },
   ]
 }

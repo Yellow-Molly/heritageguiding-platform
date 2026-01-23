@@ -15,13 +15,21 @@ export function sanitizeSearchQuery(query: string): string {
 /**
  * Zod schema for tour filter validation
  */
+const VALID_CATEGORIES = ['history', 'architecture', 'nature', 'maritime', 'royal']
+
 export const tourFiltersSchema = z.object({
-  category: z
+  categories: z
     .string()
     .optional()
-    .refine((val) => !val || ['history', 'architecture', 'food', 'nature', 'museum'].includes(val), {
-      message: 'Invalid category',
-    }),
+    .refine(
+      (val) => {
+        if (!val) return true
+        // Validate comma-separated categories
+        const cats = val.split(',').filter(Boolean)
+        return cats.every((cat) => VALID_CATEGORIES.includes(cat))
+      },
+      { message: 'Invalid category' }
+    ),
   priceMin: z
     .string()
     .optional()
