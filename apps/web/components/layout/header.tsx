@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Menu, X, Globe, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getButtonClassName } from '@/components/ui/button'
@@ -59,14 +60,18 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
     >
       <nav className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
-        <Link
-          href="/"
-          className={cn(
-            'font-serif text-2xl font-bold transition-colors',
-            showSolidStyle ? 'text-[#1E3A5F]' : 'text-white text-shadow-sm'
-          )}
-        >
-          HeritageGuiding
+        <Link href="/" className="relative h-10 w-40 transition-opacity hover:opacity-80">
+          <Image
+            src="/logo.svg"
+            alt="HeritageGuiding"
+            fill
+            className={cn(
+              'object-contain object-left',
+              showSolidStyle ? 'brightness-0' : 'brightness-100'
+            )}
+            priority
+            unoptimized
+          />
         </Link>
 
         {/* Desktop Navigation */}
