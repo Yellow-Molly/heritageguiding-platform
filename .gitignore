@@ -81,3 +81,6 @@ tmpclaude-*
 payload-types.ts
 **/payload-types.ts
 packages/cms/coverage/
+nul
+plans/reports/
+apps/web/.claude/

@@ -40,7 +40,9 @@
   },
   "overrides": {
     "undici": "^7.19.0",
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.25.0",
+    "react": "$react",
+    "react-dom": "$react-dom"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
