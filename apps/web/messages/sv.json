@@ -327,6 +327,12 @@
     },
     "relatedTours": "Du kanske också gillar"
   },
+  "findTour": {
+    "title": "Hitta Din Tur - AI-Assistent",
+    "description": "Låt vår AI-assistent hjälpa dig hitta den perfekta Stockholmstur baserad på dina preferenser",
+    "heading": "Hitta Din Perfekta Tur",
+    "subheading": "Chatta med vår AI-assistent för att upptäcka den ideala kulturarvsupplevelsen för dig"
+  },
   "privacy": {
     "title": "Integritetspolicy",
     "description": "Hur vi samlar in, använder och skyddar din personliga information",

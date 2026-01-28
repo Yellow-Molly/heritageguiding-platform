@@ -327,6 +327,12 @@
     },
     "relatedTours": "Das könnte Ihnen auch gefallen"
   },
+  "findTour": {
+    "title": "Finden Sie Ihre Tour - KI-Assistent",
+    "description": "Lassen Sie unseren KI-Assistenten Ihnen helfen, die perfekte Stockholmer Kulturerbetour basierend auf Ihren Vorlieben zu finden",
+    "heading": "Finden Sie Ihre Perfekte Tour",
+    "subheading": "Chatten Sie mit unserem KI-Assistenten, um das ideale Kulturerbe-Erlebnis für Sie zu entdecken"
+  },
   "privacy": {
     "title": "Datenschutzerklärung",
     "description": "Wie wir Ihre persönlichen Daten erfassen, verwenden und schützen",

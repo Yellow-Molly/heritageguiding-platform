@@ -327,6 +327,12 @@
     },
     "relatedTours": "You May Also Like"
   },
+  "findTour": {
+    "title": "Find Your Tour - AI Assistant",
+    "description": "Let our AI assistant help you find the perfect Stockholm heritage tour based on your preferences",
+    "heading": "Find Your Perfect Tour",
+    "subheading": "Chat with our AI assistant to discover the ideal heritage experience for you"
+  },
   "privacy": {
     "title": "Privacy Policy",
     "description": "How we collect, use, and protect your personal information",

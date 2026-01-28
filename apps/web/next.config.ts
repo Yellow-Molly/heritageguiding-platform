@@ -57,11 +57,12 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.bubblav.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "img-src 'self' data: https://*.blob.vercel-storage.com https://images.unsplash.com",
               "font-src 'self' data: https://fonts.gstatic.com",
-              "connect-src 'self'",
+              "frame-src 'self' https://www.bubblav.com",
+              "connect-src 'self' https://www.bubblav.com https://*.bubblav.com",
             ].join('; '),
           },
           {
