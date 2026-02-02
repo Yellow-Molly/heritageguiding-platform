@@ -2,6 +2,7 @@
   "name": "@heritageguiding/cms",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "main": "./payload.config.ts",
   "types": "./payload.config.ts",
   "scripts": {
