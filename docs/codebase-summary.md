@@ -1,13 +1,13 @@
 # Codebase Summary - HeritageGuiding Platform
 
-**Last Updated:** January 23, 2026
-**Phase:** 07 - Tour Detail (Complete)
-**Status:** Ready for Phase 08 - Rezdy Integration
-**Latest Changes:** Multi-select filter categories (history, architecture, nature, maritime, royal), mobile filter drawer sync
+**Last Updated:** February 2, 2026
+**Phase:** 08.1 - Bokun Integration (In Progress)
+**Status:** Bokun API integration, caching, webhook handling implemented
+**Latest Changes:** Bokun API client (HMAC-SHA256), availability caching (60s TTL), webhook verification, Bookings collection
 
 ## Overview
 
-HeritageGuiding is an AI-first tourism booking platform consolidating Stockholm's heritage tourism market. Monorepo with Next.js 15 frontend (61K LOC, 50+ components, 7 APIs, 50+ tests) and Payload CMS 3.0 backend (30K LOC, 9 collections, 3-locale support).
+HeritageGuiding is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 15 frontend (65K LOC, 50+ components, 9 APIs, 50+ tests) and Payload CMS 3.0 backend (35K LOC, 10 collections, 3-locale support, Bokun integration).
 
 ## Repository Structure
 
@@ -110,22 +110,17 @@ heritageguiding-platform/
 
 ### packages/cms - Payload Configuration
 
-**Collections (Phase 03):**
+**Collections (Phase 03+):**
 1. **users** - Admin users with role-based access control
-   - Fields: name, email (auth), role (admin/editor)
-   - Access: Admins manage all, users read own data
-
-2. **media** - Image/file management
-   - Vercel Blob storage integration
-   - Responsive image handling
-   - Localized fields: alt text, caption (SV/EN/DE)
-3. **tours** - Tours with logistics, inclusions, audience tags (177 lines)
+2. **media** - Image/file management with Vercel Blob
+3. **tours** - Tours with logistics, inclusions, audience tags, bokunExperienceId
 4. **guides** - Tour guides/experts with credentials & languages
 5. **categories** - Tour categories/themes
 6. **cities** - Geographic cities data
-7. **neighborhoods** - Stockholm neighborhoods
+7. **neighborhoods** - Swedish neighborhoods
 8. **reviews** - Tour reviews with ratings
 9. **pages** - Static pages (FAQ, About, Terms, Privacy)
+10. **bookings** - Bokun webhook data (Phase 08.1) - confirmation codes, status, customer info, pricing
 
 **Field Modules:**
 - `slug-field.ts` - Unique slug generation
@@ -268,7 +263,7 @@ npm run payload:generate-types  # Generate TS types from schema
 - ✅ 18 FilterBar component tests
 - ✅ Categories updated: history, architecture, nature, maritime, royal (multi-select ready)
 
-**Status:** 61K LOC frontend, 30K LOC CMS, ready for Phase 08 (Rezdy Integration)
+**Status:** 65K LOC frontend (+ Bokun API client), 35K LOC CMS (+ Bookings collection), Phase 08.1 Bokun Integration in progress
 
 ## Notes
 
@@ -278,14 +273,16 @@ npm run payload:generate-types  # Generate TS types from schema
 - **Database Migrations:** Payload handles automatically
 - **Node Modules:** Two separate installations (root + apps/web)
 
-## Codebase Metrics (Phase 07)
+## Codebase Metrics (Phase 08.1)
 
 | Metric | Value |
 |--------|-------|
-| **Frontend LOC** | ~61,000 (apps/web) |
-| **CMS LOC** | ~30,000 (packages/cms) |
+| **Frontend LOC** | ~65,000 (apps/web + Bokun) |
+| **CMS LOC** | ~35,000 (packages/cms + Bookings) |
 | **React Components** | 50+ |
-| **API Functions** | 7 (with full typing) |
+| **API Functions** | 9 (with Bokun endpoints) |
+| **Bokun API Routes** | 2 (availability, webhook) |
+| **CMS Collections** | 10 (+ Bookings) |
 | **Unit Tests** | 50+ |
 | **TypeScript Coverage** | 100% |
 | **Accessibility** | WCAG 2.1 AA |
@@ -302,6 +299,7 @@ npm run payload:generate-types  # Generate TS types from schema
 | **05** | Homepage | 28-32 | ✅ Complete |
 | **06** | Catalog | 24-28 | ✅ Complete |
 | **07** | Detail Page | 28-32 | ✅ Complete |
-| **08** | Rezdy Booking | 34-44 | In Progress |
-| **09-13** | Advanced (Groups, Concierge, SEO) | 72-86 | Planned |
+| **08.1** | Bokun Booking | 20-24h | ⏳ In Progress |
+| **09** | Groups & Inquiry | 16-20h | Pending |
+| **10-13** | Advanced Features | 56-66 | Planned |
 | **14-17** | Polish & Launch | 50-62 | Planned |

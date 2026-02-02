@@ -1,9 +1,9 @@
 # HeritageGuiding Platform
 
-Premium heritage tour booking platform for Stockholm. AI-first architecture with advanced technology stack supporting Swedish/English/German markets.
+Premium heritage tour booking platform for Sweden. AI-first architecture with advanced technology stack supporting Swedish/English/German markets.
 
-**Status:** Phase 07 Complete - Ready for Phase 08 (Rezdy Integration)
-**Live Demo:** Coming January 2026
+**Status:** Phase 08.1 In Progress - Bokun Integration
+**Live Demo:** Coming February 2026
 
 ## Quick Start
 
@@ -66,13 +66,16 @@ heritageguiding-platform/
 │   ├── app/
 │   │   ├── [locale]/           # Localized routes
 │   │   ├── (payload)/          # Admin + API
-│   │   └── api/                # Route handlers
+│   │   ├── api/                # Route handlers
+│   │   │   └── bokun/          # Bokun integration endpoints
+│   │   └── ...
 │   ├── components/             # 50+ React components
-│   ├── lib/                    # Utilities (7 API functions)
+│   ├── lib/
+│   │   └── bokun/              # Bokun API client + services
 │   └── types/                  # TypeScript definitions
 ├── packages/
 │   ├── cms/                    # Payload CMS config
-│   │   ├── collections/        # 9 data models
+│   │   ├── collections/        # 10 data models
 │   │   └── fields/             # 7 reusable field modules
 │   ├── ui/                     # Shared UI components
 │   └── types/                  # Shared types
@@ -134,6 +137,11 @@ PAYLOAD_SECRET=<32+ character random string>
 
 # Frontend
 NEXT_PUBLIC_URL=https://heritageguiding.com
+
+# Bokun Integration (Phase 08.1)
+BOKUN_ACCESS_KEY=<your-bokun-access-key>
+BOKUN_SECRET_KEY=<your-bokun-secret-key>
+BOKUN_ENVIRONMENT=test|production
 
 # Optional: Image Storage
 BLOB_READ_WRITE_TOKEN=<vercel-blob-token>
@@ -274,13 +282,21 @@ Report via GitHub Issues with:
 - **QA/Tester**: Testing, bug reporting
 - **DevOps**: Infrastructure, CI/CD
 
-## Next Phase (Phase 08)
+## Current Phase (Phase 08.1)
 
-**Rezdy Booking Integration** (2-3 weeks)
-- OAuth2 authentication with Rezdy
-- Booking widget embedding
-- Real-time availability sync
+**Bokun Booking Integration** (In Progress)
+- HMAC-SHA256 authentication with Bokun API
+- Booking widget integration with fallback
+- 60-second availability caching
+- Webhook signature verification
 - Email confirmation workflow
+
+## Next Phase (Phase 09)
+
+**Group Inquiry & Advanced Features**
+- Group booking inquiry form
+- WhatsApp Business API integration
+- Email notification pipeline
 
 ## License
 
@@ -294,5 +310,5 @@ Proprietary - All rights reserved
 
 ---
 
-**Last Updated:** January 19, 2026
-**Repository Version:** Phase 07 Complete
+**Last Updated:** February 2, 2026
+**Repository Version:** Phase 08.1 In Progress

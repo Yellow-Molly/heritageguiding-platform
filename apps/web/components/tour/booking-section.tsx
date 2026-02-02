@@ -3,8 +3,9 @@
 import { useTranslations } from 'next-intl'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Clock, Users, MapPin, Shield, Calendar } from 'lucide-react'
+import { Clock, Users, MapPin, Shield, AlertCircle, Mail } from 'lucide-react'
 import { formatDuration, formatPrice } from '@/lib/utils'
+import { BokunBookingWidget } from '@/components/bokun-booking-widget-with-fallback'
 import type { TourDetail } from '@/lib/api/get-tour-by-slug'
 
 interface BookingSectionProps {
@@ -13,10 +14,14 @@ interface BookingSectionProps {
 
 /**
  * Sticky booking sidebar for tour detail page.
- * Will integrate with Rezdy booking widget in future phase.
+ * Integrates Bokun widget for booking calendar and checkout.
+ * Falls back to email inquiry form when no booking integration.
  */
 export function BookingSection({ tour }: BookingSectionProps) {
   const t = useTranslations('tourDetail.booking')
+
+  // Check if tour has Bokun integration configured
+  const hasBokunIntegration = Boolean(tour.bokunExperienceId)
 
   return (
     <Card className="sticky top-24">
@@ -53,20 +58,36 @@ export function BookingSection({ tour }: BookingSectionProps) {
           )}
         </div>
 
-        {/* Rezdy Widget Placeholder */}
-        <div
-          id="rezdy-booking-widget"
-          data-product-code={tour.rezdyProductCode}
-          className="rounded-lg border-2 border-dashed border-[var(--color-border)] p-4 text-center text-sm text-[var(--color-text-muted)]"
-        >
-          <Calendar className="mx-auto mb-2 h-8 w-8 opacity-50" />
-          <p>{t('selectDate')}</p>
-        </div>
+        {/* Bokun Widget - Primary booking method */}
+        {hasBokunIntegration && (
+          <BokunBookingWidget
+            experienceId={tour.bokunExperienceId!}
+            className="min-h-[300px]"
+          />
+        )}
 
-        {/* Book Now Button */}
-        <Button className="w-full" size="lg">
-          {t('checkAvailability')}
-        </Button>
+        {/* Email Inquiry Fallback - when no Bokun integration */}
+        {!hasBokunIntegration && (
+          <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="h-5 w-5 shrink-0 text-[var(--color-primary)]" />
+              <div>
+                <p className="font-medium">{t('inquireAboutTour')}</p>
+                <p className="mt-1 text-sm text-[var(--color-text-muted)]">
+                  {t('contactUsForAvailability')}
+                </p>
+              </div>
+            </div>
+            <Button className="mt-4 w-full" variant="outline" asChild>
+              <a
+                href={`mailto:info@heritageguiding.com?subject=${encodeURIComponent(`Inquiry: ${tour.title}`)}&body=${encodeURIComponent(`Hello,\n\nI am interested in booking the "${tour.title}" tour.\n\nPlease let me know about available dates and pricing.\n\nThank you!`)}`}
+              >
+                <Mail className="mr-2 h-4 w-4" />
+                {t('sendInquiry')}
+              </a>
+            </Button>
+          </div>
+        )}
 
         {/* Trust Signals */}
         <div className="space-y-2 pt-2 text-center text-xs text-[var(--color-text-muted)]">

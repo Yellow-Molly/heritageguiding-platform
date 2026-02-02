@@ -1,9 +1,9 @@
 # System Architecture - HeritageGuiding Platform
 
-**Last Updated:** January 23, 2026
-**Phase:** 07 - Tour Detail (Complete)
-**Status:** Ready for Phase 08 - Rezdy Integration
-**Recent Update:** Multi-select category filters with URL params (`?categories=history,architecture`)
+**Last Updated:** February 2, 2026
+**Phase:** 08.1 - Bokun Integration (In Progress)
+**Status:** Bokun API routes, caching, webhook handlers implemented
+**Recent Update:** Bokun API client with HMAC-SHA256 auth, 60s availability caching, webhook signature verification
 
 ## High-Level Architecture
 
@@ -219,13 +219,14 @@ packages/cms/
 |-----------|--------|---------|
 | **Users** | Phase 01 ✅ | Admin authentication & authorization |
 | **Media** | Phase 01 ✅ | Image/file upload & management |
-| **Tours** | Phase 03 ✅ | Tour listings with full details |
+| **Tours** | Phase 03 ✅ | Tour listings with bokunExperienceId for widget integration |
 | **Guides** | Phase 03 ✅ | Expert profiles with credentials |
 | **Categories** | Phase 03 ✅ | Tour themes/activity classification |
 | **Reviews** | Phase 03 ✅ | Customer feedback with ratings |
 | **Cities** | Phase 03 ✅ | Geographic location data |
 | **Neighborhoods** | Phase 03 ✅ | City-based area classification |
 | **Pages** | Phase 03 ✅ | Static pages (FAQ, About, Terms, Privacy) |
+| **Bookings** | Phase 08.1 ✅ | Bokun webhook events, status, customer info |
 
 ### Data Layer (PostgreSQL + Vercel Blob)
 
@@ -285,11 +286,21 @@ query {
 - `fetchRelatedTours()` - Get related tour recommendations
 - `fetchTourSchema()` - Generate JSON-LD schema
 
-**Planned (Phase 08+):**
-- POST `/api/bookings` - Create Rezdy booking
+**Bokun Integration (Phase 08.1 - In Progress):**
+- `GET /api/bokun/availability` - Real-time availability with 60s caching (lib/bokun/bokun-availability-service-with-caching.ts)
+- `POST /api/bokun/webhook` - Webhook handler with HMAC-SHA256 signature verification (app/api/bokun/webhook/route.ts)
+
+**Features:**
+- HMAC-SHA256 authentication for API requests
+- Availability cache with 60-second TTL
+- Webhook signature verification using HMAC
+- Rate limit handling with exponential backoff (400 req/min)
+- Webhook event types: BOOKING_CREATED, BOOKING_CONFIRMED, PAYMENT_RECEIVED, etc.
+
+**Planned (Phase 09+):**
+- POST `/api/bookings` - Create Bokun booking
 - POST `/api/inquiries` - Group booking inquiry
-- GET `/api/availability/:tourId` - Real-time availability
-- POST `/api/webhooks/rezdy` - Rezdy confirmation webhooks
+- POST `/api/webhooks/reminder` - Booking reminders
 
 ## Data Models (Planned)
 
@@ -461,11 +472,14 @@ access: {
 
 ## Planned Architecture Changes
 
-### Phase 08 (Rezdy Integration)
-- Rezdy OAuth2 authentication
-- Booking widget iframe integration
-- Webhook handlers for confirmations
-- Real-time availability sync
+### Phase 08.1 (Bokun Integration) - In Progress
+- ✅ Bokun API with HMAC-SHA256 authentication
+- ✅ Booking widget integration with fallback (bokun-booking-widget-with-fallback.tsx)
+- ✅ Webhook handlers for booking events with signature verification
+- ✅ Availability caching with 60-second TTL
+- ✅ Rate limit handling (400 req/min) with exponential backoff
+- ✅ Bookings collection for webhook data persistence
+- ✅ Environment variables: BOKUN_ACCESS_KEY, BOKUN_SECRET_KEY, BOKUN_ENVIRONMENT
 
 ### Phase 09+ (Advanced)
 - Vector database for semantic search

@@ -58,8 +58,8 @@ export interface TourDetail extends FeaturedTour {
   }>
   /** Audience tags for related tours */
   audienceTags?: string[]
-  /** Rezdy product code for booking */
-  rezdyProductCode?: string
+  /** Bokun experience ID for booking widget */
+  bokunExperienceId?: string
 }
 
 // Extended mock data with full tour details
@@ -169,7 +169,7 @@ const mockTourDetails: Record<string, TourDetail> = {
       { id: 'walking', name: 'Walking Tours', slug: 'walking' },
     ],
     audienceTags: ['history-lovers', 'first-time-visitors', 'culture-seekers'],
-    rezdyProductCode: 'GAMLASTAN001',
+    bokunExperienceId: 'GAMLASTAN001',
   },
   'royal-palace': {
     id: 'royal-palace',
@@ -266,7 +266,7 @@ const mockTourDetails: Record<string, TourDetail> = {
       { id: 'museum', name: 'Museums', slug: 'museum' },
     ],
     audienceTags: ['royalty-fans', 'history-lovers', 'art-enthusiasts'],
-    rezdyProductCode: 'ROYALPALACE001',
+    bokunExperienceId: 'ROYALPALACE001',
   },
   'vasa-museum': {
     id: 'vasa-museum',
@@ -358,7 +358,7 @@ const mockTourDetails: Record<string, TourDetail> = {
       { id: 'history', name: 'History', slug: 'history' },
     ],
     audienceTags: ['history-lovers', 'families', 'maritime-enthusiasts'],
-    rezdyProductCode: 'VASA001',
+    bokunExperienceId: 'VASA001',
   },
 }
 

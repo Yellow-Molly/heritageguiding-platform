@@ -14,6 +14,7 @@ import {
   Neighborhoods,
   Reviews,
   Pages,
+  Bookings,
 } from './collections/index'
 
 const filename = fileURLToPath(import.meta.url)
@@ -64,6 +65,7 @@ export default buildConfig({
     Neighborhoods,
     Reviews,
     Pages,
+    Bookings,
   ],
   secret: getPayloadSecret(),
   typescript: {

@@ -132,10 +132,14 @@ export const Tours: CollectionConfig = {
 
     // ===== BOOKING & AVAILABILITY =====
     {
-      name: 'rezdyProductId',
+      name: 'bokunExperienceId',
       type: 'text',
       maxLength: 100,
-      admin: { description: 'Rezdy booking system product ID', position: 'sidebar' },
+      index: true,
+      admin: {
+        description: 'Bokun experience/activity ID for booking integration',
+        position: 'sidebar',
+      },
     },
     {
       name: 'availability',

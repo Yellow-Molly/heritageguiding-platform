@@ -2,7 +2,7 @@
 
 ## Overview
 
-Premium heritage tour guiding platform for Stockholm. Design inspired by TripFreak with Aurora UI + Motion-Driven patterns adapted for a sophisticated, trust-building experience.
+Premium heritage tour guiding platform for Sweden. Design inspired by TripFreak with Aurora UI + Motion-Driven patterns adapted for a sophisticated, trust-building experience.
 
 ## Design Philosophy
 
@@ -322,6 +322,7 @@ useEffect(() => {
 
 | Date | Change |
 |------|--------|
+| 2026-02-02 | Phase 08.1: Bokun booking widget integration (bokun-booking-widget-with-fallback.tsx) |
 | 2026-01-19 | Phase 07 complete: Design system applied across all pages (catalog, detail, footer) |
 | 2026-01-18 | Updated component patterns and accessibility checklist |
 | 2026-01-16 | Initial design system and homepage implementation (Phase 04-05) |

@@ -318,7 +318,10 @@
       "selectDate": "Select a date to check availability",
       "checkAvailability": "Check Availability",
       "freeCancellation": "Free cancellation up to 24 hours before",
-      "instantConfirmation": "Instant confirmation"
+      "instantConfirmation": "Instant confirmation",
+      "inquireAboutTour": "Inquire About This Tour",
+      "contactUsForAvailability": "Contact us directly to check availability and book your spot.",
+      "sendInquiry": "Send Inquiry"
     },
     "reviews": {
       "title": "Guest Reviews",

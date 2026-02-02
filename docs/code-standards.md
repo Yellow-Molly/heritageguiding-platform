@@ -1,10 +1,10 @@
 # Code Standards & Best Practices
 
-**Last Updated:** January 23, 2026
+**Last Updated:** February 2, 2026
 **Project:** HeritageGuiding Platform
-**Phase:** 07 Complete
+**Phase:** 08.1 In Progress
 **Applies To:** All code in apps/, packages/, and scripts/
-**Recent Update:** Multi-select filter categories with mobile drawer sync
+**Recent Update:** Bokun API integration with HMAC authentication, availability caching
 
 ## Core Principles
 
@@ -88,6 +88,24 @@ export function SampleComponent({
 - Use `'use client'` directive only when needed
 - Prefer `next/link` over `<a>` tags
 - Use dynamic imports with `React.lazy()` for code splitting
+
+## File Organization - Phase 08.1 Addition
+
+### Bokun Integration Structure
+```
+apps/web/
+├── lib/bokun/
+│   ├── bokun-types.ts                          # Type definitions
+│   ├── bokun-api-client-with-hmac-authentication.ts  # API client
+│   ├── bokun-availability-service-with-caching.ts    # Caching layer
+│   ├── bokun-booking-service-and-widget-url-generator.ts  # Booking service
+│   └── index.ts                                # Exports
+├── app/api/bokun/
+│   ├── availability/route.ts                   # GET endpoint
+│   └── webhook/route.ts                        # POST endpoint
+└── components/
+    └── bokun-booking-widget-with-fallback.tsx  # Widget wrapper
+```
 
 ## File Size Management
 
@@ -521,6 +539,11 @@ async function getUserById(id: string): Promise<User | null> {
 - [ ] Input validation on all endpoints
 - [ ] Rate limiting on API endpoints
 - [ ] Auth checks on protected routes
+- [ ] **Bokun-Specific (Phase 08.1):**
+  - [ ] HMAC-SHA256 signature generation for requests
+  - [ ] HMAC signature verification for webhooks
+  - [ ] API secret protection (env vars only)
+  - [ ] Webhook payload validation before processing
 
 ## Performance Best Practices
 
@@ -576,6 +599,68 @@ export async function fetchTourById(
 }
 ```
 
+### Bokun API Integration Pattern (Phase 08.1)
+```typescript
+// apps/web/lib/bokun/bokun-api-client-with-hmac-authentication.ts
+import crypto from 'crypto'
+
+interface BokunConfig {
+  accessKey: string
+  secretKey: string
+  environment: 'test' | 'production'
+}
+
+export class BokunAPIClient {
+  private config: BokunConfig
+
+  constructor(config: BokunConfig) {
+    this.config = config
+  }
+
+  // Generate HMAC-SHA256 signature for requests
+  private generateSignature(body: string): string {
+    return crypto
+      .createHmac('sha256', this.config.secretKey)
+      .update(body)
+      .digest('hex')
+  }
+
+  // Verify webhook signature
+  static verifyWebhookSignature(
+    body: string,
+    signature: string,
+    secretKey: string
+  ): boolean {
+    const expectedSignature = crypto
+      .createHmac('sha256', secretKey)
+      .update(body)
+      .digest('hex')
+    return signature === expectedSignature
+  }
+
+  async getAvailability(experienceId: string, date: string) {
+    const body = JSON.stringify({ experienceId, date })
+    const signature = this.generateSignature(body)
+    const response = await fetch(`${this.getBaseUrl()}/availability`, {
+      method: 'POST',
+      headers: {
+        'X-Bokun-Access-Key': this.config.accessKey,
+        'X-Bokun-Signature': signature,
+        'Content-Type': 'application/json',
+      },
+      body,
+    })
+    return response.json()
+  }
+
+  private getBaseUrl(): string {
+    return this.config.environment === 'test'
+      ? 'https://api-test.bokun.io/v2'
+      : 'https://api.bokun.io/v2'
+  }
+}
+```
+
 ### Error Handling
 - Always throw descriptive errors
 - Log errors server-side only (not client)
@@ -601,6 +686,13 @@ export async function fetchTourById(
 - [ ] Performance: no N+1 queries, appropriate caching
 - [ ] Documentation updated
 - [ ] i18n support verified (all locales tested)
+- [ ] **Bokun-Specific Checks (Phase 08.1):**
+  - [ ] HMAC signatures correctly generated and verified
+  - [ ] Webhook payload structure validated
+  - [ ] Availability cache respects 60s TTL
+  - [ ] Rate limiting with exponential backoff implemented
+  - [ ] Environment variables for API keys used
+  - [ ] Bookings collection updated on webhook events
 
 ## Questions or Clarifications?
 

@@ -39,6 +39,7 @@ Stockholm tourism booking platform with AI-first architecture, multi-language su
 | 06 | Tour Catalog | 24-28h | pending | [phase-06](./phase-06-tour-catalog.md) |
 | 07 | Tour Details | 32-36h | pending | [phase-07](./phase-07-tour-details.md) |
 | 08 | Rezdy Integration | 24-28h | pending | [phase-08](./phase-08-rezdy-integration.md) |
+| 08.1 | Bokun Integration | 20-24h | pending | [phase-08.1](./phase-08.1-bokun-integration.md) |
 | 08.5 | Concierge Wizard | 8-12h | pending | [phase-08.5](./phase-08.5-concierge-wizard.md) |
 | 09 | Group Bookings + WhatsApp | 20-24h | pending | [phase-09](./phase-09-group-bookings-whatsapp.md) |
 | 10 | Accessibility + SEO | 44-54h | pending | [phase-10](./phase-10-accessibility-seo.md) |
@@ -47,7 +48,7 @@ Stockholm tourism booking platform with AI-first architecture, multi-language su
 
 ## Key Dependencies
 
-- Rezdy API access (required by Phase 8)
+- Rezdy API access (required by Phase 8) OR Bokun API access (required by Phase 8.1)
 - Supabase PostgreSQL database
 - Vercel hosting account
 - Domain DNS configuration
@@ -60,6 +61,8 @@ Stockholm tourism booking platform with AI-first architecture, multi-language su
 
 - [Next.js + Payload Integration](../reports/researcher-260112-nextjs-payload-integration.md)
 - [Rezdy API Integration](./research/researcher-02-rezdy-api-integration.md)
+- [Bokun API Research](./research/researcher-bokun-api.md)
+- [Bokun Widget Research](./research/researcher-bokun-widget.md)
 
 ## Key Schema Enhancements (v1.2)
 

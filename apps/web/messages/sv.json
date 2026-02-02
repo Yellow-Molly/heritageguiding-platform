@@ -318,7 +318,10 @@
       "selectDate": "Välj datum för att se tillgänglighet",
       "checkAvailability": "Kontrollera tillgänglighet",
       "freeCancellation": "Gratis avbokning upp till 24 timmar innan",
-      "instantConfirmation": "Omedelbar bekräftelse"
+      "instantConfirmation": "Omedelbar bekräftelse",
+      "inquireAboutTour": "Förfrågan om denna tur",
+      "contactUsForAvailability": "Kontakta oss direkt för att kontrollera tillgänglighet och boka din plats.",
+      "sendInquiry": "Skicka förfrågan"
     },
     "reviews": {
       "title": "Gästomdömen",

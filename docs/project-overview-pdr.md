@@ -1,18 +1,18 @@
 # Project Overview & Product Development Requirements (PDR)
 
-**Document Version:** 1.3
-**Last Updated:** January 23, 2026
-**Status:** Phase 07 Complete - Ready for Phase 08
+**Document Version:** 1.4
+**Last Updated:** February 2, 2026
+**Status:** Phase 08.1 In Progress - Bokun Integration
 **Project Lead:** Technical Team
-**Latest Changes:** Multi-select filter categories (history, architecture, nature, maritime, royal), mobile filter drawer sync
+**Latest Changes:** Bokun API integration, HMAC authentication, availability caching (60s TTL), Bookings collection
 
 ## Executive Summary
 
-HeritageGuiding is an AI-first tourism booking platform consolidating the Stockholm heritage tourism market. The MVP combines advanced technology (Next.js 15, Payload CMS 3.0) with superior UX to capture market share from 50-100 fragmented competitors. Launch target: 12 weeks.
+HeritageGuiding is an AI-first tourism booking platform consolidating the Sweden heritage tourism market. The MVP combines advanced technology (Next.js 15, Payload CMS 3.0) with superior UX to capture market share from 50-100 fragmented competitors. Launch target: 12 weeks.
 
 ## Product Vision
 
-**Mission:** Enable world-class heritage experiences in Stockholm through intelligent technology that serves both human visitors and AI agents.
+**Mission:** Enable world-class heritage experiences in Sweden through intelligent technology that serves both human visitors and AI agents.
 
 **Unique Position:**
 - AI-first architecture (structured data for AI discovery)
@@ -113,18 +113,19 @@ Complete tour catalog page with grid/list view toggle, filtering (categories, pr
 
 Comprehensive tour detail page featuring: full-screen image gallery, tour facts table, logistics info, inclusions/exclusions, guide profile, booking CTA, customer reviews with ratings, related tours, breadcrumbs, and JSON-LD schema markup.
 
-## Phase 08: Rezdy Booking Integration (NEXT)
+## Phase 08.1: Bokun Booking Integration (IN PROGRESS)
 
-### Phase 08 Objectives
+### Phase 08.1 Objectives - Status
 
-| Objective | Estimate | Notes |
-|-----------|----------|-------|
-| Rezdy API integration | 16-20h | OAuth, API client, error handling |
-| Booking widget embed | 8-10h | iFrame integration on detail page |
-| Availability sync | 6-8h | Real-time availability from Rezdy |
-| Confirmation flow | 4-6h | Email confirmations + webhook handling |
+| Objective | Estimate | Status |
+|-----------|----------|--------|
+| Bokun API integration | 12h | ✅ Complete - HMAC auth, types |
+| Availability caching | 4h | ✅ Complete - 60s TTL, service layer |
+| Booking widget embed | 2h | ✅ Complete - Fallback component |
+| Webhook handlers | 4h | ✅ Complete - Signature verification |
+| Bookings collection | 2h | ✅ Complete - CMS storage |
 
-**Time Estimate:** 34-44 hours
+**Time Estimate:** 20-24 hours (on track)
 
 ## Core MVP Features
 
@@ -135,7 +136,7 @@ Comprehensive tour detail page featuring: full-screen image gallery, tour facts 
 | Multiple language support (SV/EN/DE) | 2 | 24-28 |
 | Tour catalog with filters | 6 | 24-28 |
 | Tour detail pages | 7 | 28-32 |
-| Rezdy booking integration | 8 | 24-28 |
+| Bokun booking integration | 8.1 | 20-24 |
 | Group inquiry form | 9 | 12-14 |
 | WhatsApp integration | 10 | 8-10 |
 | WCAG 2.1 AA accessibility | 11 | 16-20 |
@@ -282,9 +283,10 @@ Comprehensive tour detail page featuring: full-screen image gallery, tour facts 
 | **Week 1** | 01 | Foundation | Dev environment ready |
 | **Week 1-2** | 02 | i18n | Multilingual routing |
 | **Week 2** | 03 | Data models | CMS schema defined |
-| **Week 3-5** | 04-08 | Core platform | Homepage, catalog, details, booking |
-| **Week 6-8** | 09-13 | Advanced features | Groups, WhatsApp, SEO, accessibility |
-| **Week 9-11** | 14-16 | Polish & test | Performance, QA, documentation |
+| **Week 3-5** | 04-07 | Core platform | Homepage, catalog, details |
+| **Week 5-6** | 08.1 | Bokun integration | Booking widget, webhooks |
+| **Week 7-9** | 09-13 | Advanced features | Groups, WhatsApp, SEO, accessibility |
+| **Week 10-11** | 14-16 | Polish & test | Performance, QA, documentation |
 | **Week 12** | 17 | Launch | Production deployment |
 
 ### Critical Milestones
@@ -293,8 +295,8 @@ Comprehensive tour detail page featuring: full-screen image gallery, tour facts 
 2. **Week 2** - i18n & data models complete ✅
 3. **Week 3-4** - Design system, homepage, catalog complete ✅
 4. **Week 5** - Tour detail page complete ✅
-5. **Week 6** - Rezdy integration tested (in progress)
-6. **Week 8** - All features implemented
+5. **Week 5-6** - Bokun integration tested (in progress)
+6. **Week 9** - All features implemented
 7. **Week 11** - Complete UAT cycle
 8. **Week 12** - Go-live 🚀
 
@@ -431,9 +433,9 @@ The MVP is complete when **ALL** criteria are met:
 - Vercel Blob cloud storage integration
 - Role-based access control
 
-## Next Steps (Phase 08+)
+## Next Steps (Phase 08.1+)
 
-1. **Phase 08** - Rezdy booking integration (2-3 weeks)
+1. **Phase 08.1** - Bokun booking integration (2 weeks) - IN PROGRESS
 2. **Phase 09** - Group inquiry form & WhatsApp integration
 3. **Phase 10-13** - Advanced features (SEO, accessibility audit, schema)
 4. **Phase 14-17** - Performance optimization, testing, launch prep
