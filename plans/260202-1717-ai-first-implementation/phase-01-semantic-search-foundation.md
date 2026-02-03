@@ -12,7 +12,7 @@
 
 | Priority | Status | Effort |
 |----------|--------|--------|
-| P1 - Critical | pending | 16-20h |
+| P1 - Critical | in-progress (80%) | 16-20h |
 
 Enable semantic/natural language search for tours using pgvector and OpenAI embeddings. Users can search with queries like "romantic sunset tour" or "kid-friendly history walk" instead of exact keyword matches.
 
@@ -536,14 +536,14 @@ EMBEDDING_DIMENSIONS=1536
 
 ## Todo List
 
-- [ ] Enable pgvector extension on PostgreSQL
-- [ ] Create tour_embeddings table with HNSW index
-- [ ] Implement embeddings-service.ts
-- [ ] Implement semantic-search-service.ts
-- [ ] Create /api/search/semantic endpoint
-- [ ] Create Payload afterChange hook
-- [ ] Register hook in Tours collection
-- [ ] Add OPENAI_API_KEY to environment
+- [x] Enable pgvector extension on PostgreSQL (migration created)
+- [x] Create tour_embeddings table with HNSW index (migration created)
+- [x] Implement embeddings-service.ts (openai-embeddings-service.ts)
+- [x] Implement semantic-search-service.ts (pgvector-semantic-search-service.ts)
+- [x] Create /api/search/semantic endpoint
+- [x] Create Payload afterChange hook (generate-tour-embedding-on-save-hook.ts)
+- [x] Register hook in Tours collection
+- [x] Add OPENAI_API_KEY to environment (.env.example updated)
 - [ ] Generate embeddings for existing tours (batch script)
 - [ ] Update FilterBar with semantic search input
 - [ ] Add search analytics tracking

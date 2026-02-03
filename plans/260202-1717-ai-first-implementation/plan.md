@@ -84,5 +84,4 @@ Phase 01 + 03 + 07 ─> Phase 09 (Itinerary Generation)
 
 ---
 
-**Prerequisite:** Fix 5 Bokun security issues before AI implementation.
 **Blockers:** None (can proceed in parallel with existing MVP phases).
