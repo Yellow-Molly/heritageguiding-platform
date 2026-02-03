@@ -77,13 +77,13 @@ export default buildConfig({
     },
   }),
   editor: lexicalEditor(),
-  plugins: process.env.BLOB_READ_WRITE_TOKEN
-    ? [
-        vercelBlobStorage({
-          enabled: true,
-          collections: { media: true },
-          token: process.env.BLOB_READ_WRITE_TOKEN,
-        }),
-      ]
-    : [],
+  // Always register vercel-blob plugin so importMap includes client component
+  // Plugin is only enabled when BLOB_READ_WRITE_TOKEN is set
+  plugins: [
+    vercelBlobStorage({
+      enabled: !!process.env.BLOB_READ_WRITE_TOKEN,
+      collections: { media: true },
+      token: process.env.BLOB_READ_WRITE_TOKEN || 'placeholder-for-importmap-generation',
+    }),
+  ],
 })
