@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin } from '../access'
-import { formatSlugHook } from '../hooks'
+import { formatSlugHook, generateTourEmbeddingOnSaveHook } from '../hooks'
 import {
   accessibilityFields,
   seoFields,
@@ -34,6 +34,9 @@ export const Tours: CollectionConfig = {
     create: isAdmin,
     update: isAdmin,
     delete: isAdmin,
+  },
+  hooks: {
+    afterChange: [generateTourEmbeddingOnSaveHook],
   },
   fields: [
     // ===== BASIC INFORMATION =====
