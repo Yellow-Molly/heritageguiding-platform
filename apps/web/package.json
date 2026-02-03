@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npx payload generate:importmap",
+    "prebuild": "rm -f app/\\(payload\\)/admin/importMap.js && npx payload generate:importmap",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx",
