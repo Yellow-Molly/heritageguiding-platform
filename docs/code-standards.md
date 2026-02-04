@@ -1,10 +1,10 @@
 # Code Standards & Best Practices
 
-**Last Updated:** February 2, 2026
+**Last Updated:** February 4, 2026
 **Project:** HeritageGuiding Platform
-**Phase:** 08.1 In Progress
+**Phase:** 08.1 Complete
 **Applies To:** All code in apps/, packages/, and scripts/
-**Recent Update:** Bokun API integration with HMAC authentication, availability caching
+**Recent Update:** Bokun API integration with HMAC-SHA256 authentication, availability caching, semantic search patterns
 
 ## Core Principles
 
@@ -89,22 +89,32 @@ export function SampleComponent({
 - Prefer `next/link` over `<a>` tags
 - Use dynamic imports with `React.lazy()` for code splitting
 
-## File Organization - Phase 08.1 Addition
+## File Organization - Phase 08.1 Complete
 
-### Bokun Integration Structure
+### Bokun Integration Structure (Verified)
 ```
 apps/web/
 ├── lib/bokun/
 │   ├── bokun-types.ts                          # Type definitions
-│   ├── bokun-api-client-with-hmac-authentication.ts  # API client
-│   ├── bokun-availability-service-with-caching.ts    # Caching layer
-│   ├── bokun-booking-service-and-widget-url-generator.ts  # Booking service
+│   ├── bokun-api-client-with-hmac-authentication.ts  # HMAC-SHA256 auth
+│   ├── bokun-availability-service-with-caching.ts    # 60s TTL caching
+│   ├── bokun-booking-service-and-widget-url-generator.ts  # URL generation
 │   └── index.ts                                # Exports
 ├── app/api/bokun/
-│   ├── availability/route.ts                   # GET endpoint
-│   └── webhook/route.ts                        # POST endpoint
+│   ├── availability/route.ts                   # GET availability
+│   └── webhook/route.ts                        # POST webhook verification
 └── components/
-    └── bokun-booking-widget-with-fallback.tsx  # Widget wrapper
+    └── bokun-booking-widget-with-fallback.tsx  # Widget with fallback
+```
+
+### Semantic Search Structure (Phase 08.1+)
+```
+apps/web/
+├── lib/ai/
+│   ├── openai-embeddings-service.ts            # text-embedding-3-small
+│   └── pgvector-semantic-search-service.ts     # Vector similarity
+└── app/api/search/
+    └── semantic/route.ts                       # POST semantic search
 ```
 
 ## File Size Management
@@ -164,7 +174,8 @@ try {
 - Test behavior, not implementation
 - Use descriptive test names
 - Minimum coverage: 80%
-- Use Vitest for unit testing
+- Use Vitest 4.0.17+ for unit testing
+- Current tests: 25+ covering components, APIs, utilities
 
 ### Integration Tests
 - Test across module boundaries

@@ -1,10 +1,10 @@
 # Project Overview & Product Development Requirements (PDR)
 
-**Document Version:** 1.4
-**Last Updated:** February 2, 2026
-**Status:** Phase 08.1 In Progress - Bokun Integration
+**Document Version:** 1.5
+**Last Updated:** February 4, 2026
+**Status:** Phase 08.1 Complete - Bokun Integration
 **Project Lead:** Technical Team
-**Latest Changes:** Bokun API integration, HMAC authentication, availability caching (60s TTL), Bookings collection
+**Latest Changes:** Bokun API integration complete, semantic search with pgvector, availability caching (60s TTL), Bookings collection, webhook verification
 
 ## Executive Summary
 
@@ -113,19 +113,23 @@ Complete tour catalog page with grid/list view toggle, filtering (categories, pr
 
 Comprehensive tour detail page featuring: full-screen image gallery, tour facts table, logistics info, inclusions/exclusions, guide profile, booking CTA, customer reviews with ratings, related tours, breadcrumbs, and JSON-LD schema markup.
 
-## Phase 08.1: Bokun Booking Integration (IN PROGRESS)
+## Phase 08.1: Bokun Booking Integration - COMPLETE ✅
+
+Fully implemented booking system with HMAC authentication, 60-second availability caching, webhook signature verification, and semantic search capabilities.
 
 ### Phase 08.1 Objectives - Status
 
 | Objective | Estimate | Status |
 |-----------|----------|--------|
-| Bokun API integration | 12h | ✅ Complete - HMAC auth, types |
+| Bokun API integration | 12h | ✅ Complete - HMAC-SHA256 auth, types |
 | Availability caching | 4h | ✅ Complete - 60s TTL, service layer |
 | Booking widget embed | 2h | ✅ Complete - Fallback component |
-| Webhook handlers | 4h | ✅ Complete - Signature verification |
-| Bookings collection | 2h | ✅ Complete - CMS storage |
+| Webhook handlers | 4h | ✅ Complete - HMAC-SHA256 signature verification |
+| Bookings collection | 2h | ✅ Complete - CMS storage with status tracking |
+| Semantic search | 6h | ✅ Complete - pgvector + OpenAI embeddings |
+| Rate limiting | 2h | ✅ Complete - 400 req/min with exponential backoff |
 
-**Time Estimate:** 20-24 hours (on track)
+**Time Estimate:** 20-24 hours (Complete - Feb 4, 2026)
 
 ## Core MVP Features
 
@@ -420,28 +424,30 @@ The MVP is complete when **ALL** criteria are met:
 
 ## Current Progress
 
-**Completed (61K LOC - apps/web):**
+**Completed (65K LOC - apps/web):**
 - 50+ React components (responsive, accessible, i18n-ready)
-- 7 API data-fetching functions with full TypeScript typing
-- 50+ unit tests covering components, APIs, utilities
+- 9 API data-fetching functions with full TypeScript typing
+- 25+ unit tests covering components, APIs, utilities
+- Bokun API client with HMAC-SHA256 authentication
+- Semantic search with pgvector + OpenAI embeddings
 - XSS prevention, security headers, input validation
 - ARIA labels, semantic HTML, accessibility badges
 
-**Completed (30K LOC - packages/cms):**
-- 9 fully configured Payload CMS collections
+**Completed (35K LOC - packages/cms):**
+- 10 fully configured Payload CMS collections (including Bookings)
 - 3-locale localization (sv/en/de)
 - Vercel Blob cloud storage integration
 - Role-based access control
+- pgvector extension for semantic search
 
-## Next Steps (Phase 08.1+)
+## Next Steps (Phase 09+)
 
-1. **Phase 08.1** - Bokun booking integration (2 weeks) - IN PROGRESS
-2. **Phase 09** - Group inquiry form & WhatsApp integration
-3. **Phase 10-13** - Advanced features (SEO, accessibility audit, schema)
-4. **Phase 14-17** - Performance optimization, testing, launch prep
+1. **Phase 09** - Group inquiry form & WhatsApp integration (pending)
+2. **Phase 10-13** - Advanced features (SEO, accessibility audit, schema)
+3. **Phase 14-17** - Performance optimization, testing, launch prep
 
 ---
 
 **Document Status:** Ready for stakeholder review
 **Questions?** Contact technical lead
-**Last Review:** January 13, 2026
+**Last Review:** February 4, 2026

@@ -2,7 +2,7 @@
 
 Premium heritage tour booking platform for Sweden. AI-first architecture with advanced technology stack supporting Swedish/English/German markets.
 
-**Status:** Phase 08.1 In Progress - Bokun Integration
+**Status:** Phase 08.1 Complete - Bokun Integration + Semantic Search
 **Live Demo:** Coming February 2026
 
 ## Quick Start
@@ -183,7 +183,8 @@ BLOB_READ_WRITE_TOKEN=<vercel-blob-token>
 | [code-standards.md](./docs/code-standards.md) | Coding guidelines, testing, commit standards |
 | [codebase-summary.md](./docs/codebase-summary.md) | Repository structure, tech stack, CI/CD |
 | [design-guidelines.md](./docs/design-guidelines.md) | Colors, typography, component patterns |
-| [INFRASTRUCTURE-SETUP-COMPLETE.md](./docs/INFRASTRUCTURE-SETUP-COMPLETE.md) | DevOps, hosting, database, deployment |
+| [infrastructure-setup.md](./docs/infrastructure-setup.md) | Hosting, database, third-party services |
+| [deployment-guide.md](./docs/deployment-guide.md) | CI/CD, environment variables, DNS |
 | [MVP-PROJECT-PLAN.md](./docs/MVP-PROJECT-PLAN.md) | 17 phases, timeline, acceptance criteria |
 
 ## Development Workflow
@@ -282,18 +283,20 @@ Report via GitHub Issues with:
 - **QA/Tester**: Testing, bug reporting
 - **DevOps**: Infrastructure, CI/CD
 
-## Current Phase (Phase 08.1)
+## Completed Phase (Phase 08.1)
 
-**Bokun Booking Integration** (In Progress)
+**Bokun Booking Integration** (Complete - Feb 4, 2026)
 - HMAC-SHA256 authentication with Bokun API
 - Booking widget integration with fallback
 - 60-second availability caching
-- Webhook signature verification
-- Email confirmation workflow
+- Webhook signature verification with HMAC
+- Bookings collection for data persistence
+- Semantic search with pgvector + OpenAI embeddings
+- Rate limiting (400 req/min) with exponential backoff
 
 ## Next Phase (Phase 09)
 
-**Group Inquiry & Advanced Features**
+**Group Inquiry & Advanced Features** (Pending)
 - Group booking inquiry form
 - WhatsApp Business API integration
 - Email notification pipeline
@@ -310,5 +313,5 @@ Proprietary - All rights reserved
 
 ---
 
-**Last Updated:** February 2, 2026
-**Repository Version:** Phase 08.1 In Progress
+**Last Updated:** February 4, 2026
+**Repository Version:** Phase 08.1 Complete

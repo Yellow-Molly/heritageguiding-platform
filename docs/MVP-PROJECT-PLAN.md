@@ -1,9 +1,9 @@
 # MVP PROJECT PLAN
 ## HeritageGuiding Platform - AI-First Tourism Booking Platform
 
-**Document Version:** 1.3
-**Date:** February 2, 2026
-**Status:** Phase 08.1 In Progress - Bokun Integration
+**Document Version:** 1.4
+**Date:** February 4, 2026
+**Status:** Phase 08.1 Complete - Bokun Integration + Semantic Search
 
 ---
 
@@ -88,7 +88,8 @@ The MVP development is organized into **17 distinct phases**.
 | **5.5. Static Pages** | 6-10 | FAQ (accordion), About Us, Terms, Privacy |
 | **6. Tour Catalog** | 24-28 | Grid/list views, filters, search, sorting, pagination |
 | **7. Tour Details** | 32-36 | Gallery, expert bio, reviews, logistics map, inclusions, booking CTA |
-| **8. Booking Integration** | 24-28 | Bokun API, availability sync, widget embedding |
+| **8. Booking Integration** | 24-28 | Bokun API, availability sync, widget embedding ✅ |
+| **8.1. Semantic Search** | 6-8 | pgvector + OpenAI embeddings, vector similarity ✅ |
 | **8.5. Concierge Wizard** | 8-12 | AI-powered tour recommendations using audience tags |
 
 ### Phase 9-13: Advanced Features (Weeks 6-8)
@@ -121,7 +122,8 @@ The MVP development is organized into **17 distinct phases**.
 | **Frontend** | Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS |
 | **CMS** | Payload CMS 3.0 with rich text, media management, RBAC |
 | **Database** | PostgreSQL 15+ with full-text search |
-| **Booking** | Bokun API (HMAC auth, webhooks, availability caching) |
+| **Booking** | Bokun API (HMAC-SHA256 auth, webhooks, 60s availability caching) |
+| **Search** | pgvector semantic search with OpenAI embeddings (text-embedding-3-small) |
 | **Localization** | next-intl for routing, date-fns for formatting |
 | **Hosting** | Vercel (frontend), PostgreSQL (database) |
 | **Media** | Vercel Blob for image optimization |

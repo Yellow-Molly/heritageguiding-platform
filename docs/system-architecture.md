@@ -1,9 +1,9 @@
 # System Architecture - HeritageGuiding Platform
 
-**Last Updated:** February 2, 2026
-**Phase:** 08.1 - Bokun Integration (In Progress)
-**Status:** Bokun API routes, caching, webhook handlers implemented
-**Recent Update:** Bokun API client with HMAC-SHA256 auth, 60s availability caching, webhook signature verification
+**Last Updated:** February 4, 2026
+**Phase:** 08.1 - Bokun Integration (Complete)
+**Status:** Bokun API routes, caching, webhook handlers, semantic search fully implemented
+**Recent Update:** Bokun API client with HMAC-SHA256 auth, 60s availability caching, semantic search with pgvector, webhook signature verification
 
 ## High-Level Architecture
 
@@ -226,7 +226,7 @@ packages/cms/
 | **Cities** | Phase 03 ✅ | Geographic location data |
 | **Neighborhoods** | Phase 03 ✅ | City-based area classification |
 | **Pages** | Phase 03 ✅ | Static pages (FAQ, About, Terms, Privacy) |
-| **Bookings** | Phase 08.1 ✅ | Bokun webhook events, status, customer info |
+| **Bookings** | Phase 08.1 ✅ | Bokun webhook events, status, customer info, payment tracking |
 
 ### Data Layer (PostgreSQL + Vercel Blob)
 
@@ -470,9 +470,9 @@ access: {
 - Full i18n on all pages (SV/EN/DE)
 - 18 FilterBar component tests (100% passing)
 
-## Planned Architecture Changes
+## Completed Architecture Changes
 
-### Phase 08.1 (Bokun Integration) - In Progress
+### Phase 08.1 (Bokun Integration) - COMPLETE ✅
 - ✅ Bokun API with HMAC-SHA256 authentication
 - ✅ Booking widget integration with fallback (bokun-booking-widget-with-fallback.tsx)
 - ✅ Webhook handlers for booking events with signature verification
@@ -480,12 +480,14 @@ access: {
 - ✅ Rate limit handling (400 req/min) with exponential backoff
 - ✅ Bookings collection for webhook data persistence
 - ✅ Environment variables: BOKUN_ACCESS_KEY, BOKUN_SECRET_KEY, BOKUN_ENVIRONMENT
+- ✅ Semantic search with pgvector + OpenAI embeddings (text-embedding-3-small, 1536 dims)
+- ✅ API endpoints for availability, webhooks, semantic search
 
-### Phase 09+ (Advanced)
-- Vector database for semantic search
+### Phase 09+ (Advanced) - Planned
 - WhatsApp Business API integration
 - Group inquiry management system
 - Email notification pipeline
+- Advanced analytics dashboard
 
 ## Questions & References
 
