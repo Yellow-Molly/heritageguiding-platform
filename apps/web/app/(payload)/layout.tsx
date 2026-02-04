@@ -5,7 +5,7 @@ import '@payloadcms/next/css'
 import { RootLayout } from '@payloadcms/next/layouts'
 import type { Metadata } from 'next'
 import React from 'react'
-import { importMap } from './admin/[[...segments]]/importMap'
+import { importMap } from './admin/importMap.js'
 
 export const metadata: Metadata = {
   title: 'HeritageGuiding Admin',
