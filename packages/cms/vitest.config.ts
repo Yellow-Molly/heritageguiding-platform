@@ -8,7 +8,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      include: ['hooks/**/*.ts', 'access/**/*.ts', 'fields/logistics-fields.ts'],
+      include: ['hooks/**/*.ts', 'access/**/*.ts', 'fields/logistics-fields.ts', 'lib/csv/**/*.ts'],
       exclude: ['**/*.test.ts', '**/index.ts'],
       thresholds: {
         statements: 80,

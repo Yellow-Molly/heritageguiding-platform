@@ -28,6 +28,13 @@ export const Tours: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'status', 'featured', 'guide'],
     group: 'Content',
+    components: {
+      beforeListTable: [
+        {
+          path: '@cms/components/admin/tour-csv-actions-toolbar#TourCSVActionsToolbar',
+        },
+      ],
+    },
   },
   access: {
     read: () => true,
