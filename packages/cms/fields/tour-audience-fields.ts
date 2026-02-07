@@ -23,6 +23,7 @@ export const audienceTagsField: Field = {
     { label: 'Food & Wine', value: 'food_wine' },
     { label: 'Adventure Seekers', value: 'adventure' },
     { label: 'Architecture Enthusiasts', value: 'architecture' },
+    { label: 'Solo Travelers', value: 'solo_travelers' },
   ],
 }
 
