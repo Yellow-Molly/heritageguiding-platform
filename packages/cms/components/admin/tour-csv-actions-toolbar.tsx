@@ -7,7 +7,9 @@
  */
 
 import { TourCSVExportButton } from './tour-csv-export-button'
+import { TourExcelExportButton } from './tour-excel-export-button'
 import { TourCSVImportButton } from './tour-csv-import-button'
+import { TourExcelImportButton } from './tour-excel-import-button'
 
 export function TourCSVActionsToolbar() {
   return (
@@ -20,7 +22,9 @@ export function TourCSVActionsToolbar() {
       }}
     >
       <TourCSVExportButton />
+      <TourExcelExportButton />
       <TourCSVImportButton />
+      <TourExcelImportButton />
     </div>
   )
 }
