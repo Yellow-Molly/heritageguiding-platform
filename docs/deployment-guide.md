@@ -353,8 +353,8 @@ git push origin hotfix/booking-bug
 ### Week 1 Setup
 
 - [ ] Repository structure created
-- [ ] Next.js 15 initialized
-- [ ] Payload CMS installed
+- [ ] Next.js 16 initialized (Turbopack bundler)
+- [ ] Payload CMS 3.75 installed
 - [ ] Database migrations run
 - [ ] Development server working
 - [ ] Type checking working
@@ -388,7 +388,7 @@ git push origin hotfix/booking-bug
 - Day 7: Configure email (Resend)
 
 **Week 1 (Phase 1 - Foundation):**
-- Initialize Next.js + Payload CMS
+- Initialize Next.js 16 + Payload CMS 3.75
 - Configure database connection
 - Set up development environment
 - Test integrations

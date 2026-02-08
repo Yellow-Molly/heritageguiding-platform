@@ -7,13 +7,13 @@
 
 ## Overview
 
-HeritageGuiding is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 15 frontend (65K LOC, 50+ React components, 9 API functions, 25+ unit tests) and Payload CMS 3.0 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication).
+HeritageGuiding is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16 frontend (65K LOC, 50+ React components, 9 API functions, 25+ unit tests) and Payload CMS 3.75 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication).
 
 ## Repository Structure
 
 ```
 heritageguiding-platform/
-├── apps/web/              # Next.js 15 frontend (SSR + static)
+├── apps/web/              # Next.js 16 frontend (SSR + static, Turbopack)
 │   ├── app/               # App Router pages
 │   │   ├── (frontend)/    # Public routes (localized)
 │   │   ├── (payload)/     # Admin + API routes
@@ -35,13 +35,13 @@ heritageguiding-platform/
 
 | Layer | Technology |
 |-------|------------|
-| **Frontend** | Next.js 15 (App Router), React 19, TypeScript 5, Tailwind CSS 4 |
-| **CMS** | Payload CMS 3.0, Lexical Editor, PostgreSQL 15+ |
+| **Frontend** | Next.js 16 (App Router, Turbopack), React 19, TypeScript 5, Tailwind CSS 4 |
+| **CMS** | Payload CMS 3.75, Lexical Editor, PostgreSQL 15+ |
 | **i18n** | next-intl (SV/EN/DE routing & translations) |
 | **Database** | PostgreSQL 15+ with pgvector extension |
 | **Styling** | Tailwind CSS v4, PostCSS, Radix UI 1.2.12 |
 | **Storage** | Vercel Blob (images, WebP optimization) |
-| **Code Quality** | ESLint 9, Prettier 3, TypeScript 5, Vitest 4.0.17 |
+| **Code Quality** | ESLint 9 (flat config), Prettier 3, TypeScript 5, Vitest 4.0.17 |
 | **Validation** | Zod 4.3.5 |
 | **Hosting** | Vercel (frontend), PostgreSQL host (database) |
 | **CI/CD** | GitHub Actions (lint, type-check, build) |
@@ -49,15 +49,15 @@ heritageguiding-platform/
 ## Key Dependencies
 
 ### Critical
-- `next@^15.5.9` - React framework
+- `next@^16.1.6` - React framework (Turbopack default bundler)
 - `react@^19.2.3` - UI library
-- `payload@^3.70.0` - Headless CMS
+- `payload@^3.75.0` - Headless CMS
 - `next-intl@^3.x` - Internationalization
 - `tailwindcss@^4` - Styling
 - `typescript@^5` - Type safety
 
 ### Data & Search
-- `@payloadcms/db-postgres@^3.70.0` - PostgreSQL database
+- `@payloadcms/db-postgres@^3.75.0` - PostgreSQL database
 - `pgvector@^0.1.x` - Vector database support
 - OpenAI `text-embedding-3-small` (1536 dimensions)
 

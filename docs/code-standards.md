@@ -285,11 +285,17 @@ describe('DatesPicker', () => {
 
 ### ESLint
 **File:** `apps/web/eslint.config.mjs`
+**Version:** ESLint 9 with native flat config (no FlatCompat)
+**Config:** eslint-config-next 16.1.6 (native flat config support)
 
 ```bash
-npm run lint         # Check code
+npm run lint         # Check code (no --ext flag needed)
 npm run lint:fix     # Auto-fix issues
 ```
+
+**Lint Command Changes (ESLint 9):**
+- ❌ Old: `eslint . --ext .ts,.tsx` (ESLint 8)
+- ✅ New: `eslint .` (ESLint 9 flat config auto-detects extensions)
 
 **Rules:**
 - No unused imports

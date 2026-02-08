@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-HeritageGuiding is an AI-first tourism booking platform consolidating the Sweden heritage tourism market. The MVP combines advanced technology (Next.js 15, Payload CMS 3.0) with superior UX to capture market share from 50-100 fragmented competitors. Launch target: 12 weeks.
+HeritageGuiding is an AI-first tourism booking platform consolidating the Sweden heritage tourism market. The MVP combines advanced technology (Next.js 16, Payload CMS 3.75) with superior UX to capture market share from 50-100 fragmented competitors. Launch target: 12 weeks.
 
 ## Product Vision
 
@@ -28,15 +28,15 @@ HeritageGuiding is an AI-first tourism booking platform consolidating the Sweden
 
 ## Phase 01: Foundation Setup - COMPLETE ✅
 
-Successfully established monorepo infrastructure with Next.js 15, Payload CMS 3.0, PostgreSQL, and full CI/CD pipeline. All development tools configured.
+Successfully established monorepo infrastructure with Next.js 16, Payload CMS 3.75, PostgreSQL, and full CI/CD pipeline. All development tools configured.
 
 ### Phase 01 Objectives
 
 | Objective | Status | Notes |
 |-----------|--------|-------|
 | Monorepo structure | ✅ | apps/web + packages/cms/ui/types |
-| Next.js 15 setup | ✅ | App Router + TypeScript + ESLint + Prettier |
-| Payload CMS 3.0 | ✅ | PostgreSQL + Lexical editor + Vercel Blob |
+| Next.js 16 setup | ✅ | App Router + TypeScript + ESLint 9 flat config + Prettier |
+| Payload CMS 3.75 | ✅ | PostgreSQL + Lexical editor + Vercel Blob |
 | Users collection | ✅ | Admin auth with role-based access |
 | Media collection | ✅ | Image upload to Vercel Blob |
 | CI/CD pipeline | ✅ | GitHub Actions (lint, type-check, build) |
@@ -48,7 +48,7 @@ Successfully established monorepo infrastructure with Next.js 15, Payload CMS 3.
 **Repository Structure:**
 ```
 heritageguiding-platform/
-├── apps/web/              # Next.js 15 + Payload integration
+├── apps/web/              # Next.js 16 + Payload integration (Turbopack)
 ├── packages/
 │   ├── cms/              # Payload config + collections
 │   ├── ui/               # Shared UI components (placeholder)
@@ -59,11 +59,11 @@ heritageguiding-platform/
 ```
 
 **Technology Stack Confirmed:**
-- Frontend: Next.js 15, React 19, TypeScript, Tailwind CSS v4
-- CMS: Payload 3.0, Lexical Editor, PostgreSQL 15+
+- Frontend: Next.js 16 (Turbopack bundler), React 19, TypeScript, Tailwind CSS v4
+- CMS: Payload 3.75, Lexical Editor, PostgreSQL 15+
 - Storage: Vercel Blob for images
 - DevOps: GitHub Actions, Vercel deployment
-- Quality: ESLint 9, Prettier 3, TypeScript strict mode
+- Quality: ESLint 9 (flat config), Prettier 3, TypeScript strict mode
 
 **Development Environment:**
 - Dev server runs without errors

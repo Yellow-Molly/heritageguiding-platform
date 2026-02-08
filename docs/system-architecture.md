@@ -21,7 +21,7 @@
                             ↑↓
 ┌─────────────────────────────────────────────────────────────┐
 │                      Application Layer                       │
-│                    (Next.js 15 Server)                       │
+│                  (Next.js 16 Server, Turbopack)             │
 │                                                               │
 │  ┌──────────────────────────────────────────────────────┐   │
 │  │  Frontend Routes (Public)                             │   │
@@ -141,7 +141,7 @@
 ### Frontend (apps/web)
 
 **Purpose:** User-facing application and admin interface
-**Framework:** Next.js 15 with App Router
+**Framework:** Next.js 16 with App Router (Turbopack default bundler)
 **Language:** TypeScript
 **Styling:** Tailwind CSS v4
 
@@ -197,7 +197,7 @@ apps/web/
 ### CMS Layer (packages/cms)
 
 **Purpose:** Content management, data models, access control
-**Framework:** Payload CMS 3.0
+**Framework:** Payload CMS 3.75
 **Language:** TypeScript
 **Database:** PostgreSQL
 
