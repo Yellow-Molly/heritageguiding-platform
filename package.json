@@ -8,6 +8,9 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@payloadcms/db-postgres": "^3.75.0",
+    "@payloadcms/richtext-lexical": "^3.75.0",
+    "@payloadcms/storage-vercel-blob": "^3.75.0",
     "payload": "^3.75.0"
   }
 }
