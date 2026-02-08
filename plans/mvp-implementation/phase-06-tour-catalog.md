@@ -542,7 +542,7 @@ Client: Update UI without page reload
 - Excellent RSC/client component separation
 - Clean URL-based state management
 - Strong accessibility (ARIA, keyboard nav)
-- Proper Next.js 15 async params handling
+- Proper Next.js 16 async params handling
 - Complete i18n coverage (3 locales)
 
 **Minor Issues (Non-blocking):**

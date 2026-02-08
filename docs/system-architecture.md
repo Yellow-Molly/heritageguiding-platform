@@ -1,9 +1,9 @@
 # System Architecture - HeritageGuiding Platform
 
-**Last Updated:** February 4, 2026
-**Phase:** 08.1 - Bokun Integration (Complete)
-**Status:** Bokun API routes, caching, webhook handlers, semantic search fully implemented
-**Recent Update:** Bokun API client with HMAC-SHA256 auth, 60s availability caching, semantic search with pgvector, webhook signature verification
+**Last Updated:** February 8, 2026
+**Phase:** 08.1 - Bokun Integration + Excel Import/Export (Complete)
+**Status:** Bokun API routes, caching, webhook handlers, semantic search, Excel/CSV import-export fully implemented
+**Recent Update:** Bokun API client with HMAC-SHA256 auth, 60s availability caching, semantic search with pgvector, webhook signature verification, Excel/CSV pipelines
 
 ## High-Level Architecture
 
@@ -26,8 +26,9 @@
 │  ┌──────────────────────────────────────────────────────┐   │
 │  │  Frontend Routes (Public)                             │   │
 │  │  - Homepage: / (app/(frontend)/page.tsx)             │   │
-│  │  - Tour Catalog: /tours (Phase 2+)                   │   │
-│  │  - Tour Details: /tours/:id (Phase 2+)               │   │
+│  │  - Tour Catalog: /tours (Phase 6+)                   │   │
+│  │  - Tour Details: /tours/:id (Phase 7+)               │   │
+│  │  - Import/Export: /admin/import (Phase 8.1+)         │   │
 │  └──────────────────────────────────────────────────────┘   │
 │                                                               │
 │  ┌──────────────────────────────────────────────────────┐   │
@@ -35,6 +36,8 @@
 │  │  - Admin Panel: /admin (Payload UI)                  │   │
 │  │  - GraphQL: /api/graphql (Payload)                   │   │
 │  │  - REST API: /api/[...slug] (Route handlers)         │   │
+│  │  - Bokun: /api/bokun/* (availability, webhooks)      │   │
+│  │  - Search: /api/search/semantic (vector search)      │   │
 │  └──────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────┘
                             ↑↓
@@ -297,6 +300,12 @@ query {
 - Rate limit handling with exponential backoff (400 req/min)
 - Webhook event types: BOOKING_CREATED, BOOKING_CONFIRMED, PAYMENT_RECEIVED, etc.
 
+**Excel/CSV Import-Export (Phase 08.1):**
+- `POST /api/admin/import` - Upload Excel/CSV file
+- `GET /api/admin/export` - Download tours as Excel/CSV
+- Format-agnostic pipeline: Parse → Map → Validate (Zod) → Transform → Create
+- ExcelJS 4.4.0 for Excel handling
+
 **Planned (Phase 09+):**
 - POST `/api/bookings` - Create Bokun booking
 - POST `/api/inquiries` - Group booking inquiry
@@ -472,7 +481,7 @@ access: {
 
 ## Completed Architecture Changes
 
-### Phase 08.1 (Bokun Integration) - COMPLETE ✅
+### Phase 08.1 (Bokun Integration + Excel Import/Export) - COMPLETE ✅
 - ✅ Bokun API with HMAC-SHA256 authentication
 - ✅ Booking widget integration with fallback (bokun-booking-widget-with-fallback.tsx)
 - ✅ Webhook handlers for booking events with signature verification
@@ -481,7 +490,9 @@ access: {
 - ✅ Bookings collection for webhook data persistence
 - ✅ Environment variables: BOKUN_ACCESS_KEY, BOKUN_SECRET_KEY, BOKUN_ENVIRONMENT
 - ✅ Semantic search with pgvector + OpenAI embeddings (text-embedding-3-small, 1536 dims)
-- ✅ API endpoints for availability, webhooks, semantic search
+- ✅ Excel/CSV import-export (format-agnostic pipeline, Zod validation, ExcelJS 4.4.0)
+- ✅ API endpoints for availability, webhooks, semantic search, import/export
+- ✅ Turbopack/webpack coexistence: webpack config present but ignored by Turbopack
 
 ### Phase 09+ (Advanced) - Planned
 - WhatsApp Business API integration
@@ -489,8 +500,24 @@ access: {
 - Email notification pipeline
 - Advanced analytics dashboard
 
+## Deprecations & Compatibility Notes
+
+### Next.js 16 Changes (from 15)
+- **middleware.ts → proxy.ts:** Rename is deprecation warning only, not breaking. `middleware.ts` still works.
+- **unstable_cache:** NOT renamed. `cacheLife` and `cacheTag` lost `unstable_` prefix, but `unstable_cache` remains.
+
+### Turbopack & Webpack Coexistence
+- Turbopack is the default bundler in Next.js 16
+- Custom webpack config (if present) gets ignored by Turbopack
+- No errors even with webpack config present—Turbopack simply skips it
+
+### Node.js 24 Environment Variables
+Set in CI/CD (GitHub Actions) and Vercel:
+- `NODE_VERSION=24` or similar
+- Required for ESM resolution in Vercel builds
+
 ## Questions & References
 
 - **Code Standards:** See `./code-standards.md`
 - **Project Plan:** See `./MVP-PROJECT-PLAN.md`
-- **Setup Details:** See `./INFRASTRUCTURE-SETUP-COMPLETE.md`
+- **Setup Details:** See `./infrastructure-setup.md`

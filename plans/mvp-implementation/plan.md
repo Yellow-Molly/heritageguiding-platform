@@ -1,30 +1,32 @@
 ---
 title: "HeritageGuiding MVP Implementation"
-description: "AI-first tourism booking platform with Next.js 15 + Payload CMS 3.0"
+description: "AI-first tourism booking platform with Next.js 16 + Payload CMS 3.75"
 status: in-progress
 priority: P1
 effort: "310-372h (12 weeks)"
-branch: main
-tags: [mvp, next.js, payload-cms, rezdy, i18n, accessibility, concierge-wizard]
+branch: master
+tags: [mvp, next.js, payload-cms, bokun, i18n, accessibility, concierge-wizard, semantic-search]
 created: 2026-01-12
-updated: 2026-01-18
+updated: 2026-02-08
 ---
 
 # HeritageGuiding MVP Implementation Plan
 
 ## Overview
 
-Stockholm tourism booking platform with AI-first architecture, multi-language support (SV/EN/DE), WCAG 2.1 AA accessibility, Rezdy booking integration, and AI-powered Concierge Wizard for personalized tour recommendations.
+Stockholm tourism booking platform with AI-first architecture, multi-language support (SV/EN/DE), WCAG 2.1 AA accessibility, Bokun booking integration, semantic search (pgvector + OpenAI), and AI-powered Concierge Wizard for personalized tour recommendations.
 
 ## Technology Stack
 
-- **Frontend:** Next.js 15, React 19, TypeScript, Tailwind CSS, shadcn/ui
-- **CMS:** Payload CMS 3.0 (embedded mode)
-- **Database:** PostgreSQL 15+ (Supabase)
-- **i18n:** next-intl (SV/EN/DE)
-- **Booking:** Rezdy API
-- **Hosting:** Vercel
-- **Maps:** Google Maps (meeting point coordinates)
+- **Frontend:** Next.js 16.1.6, React 19.2.3, TypeScript 5.9.3, Tailwind CSS 4, shadcn/ui
+- **CMS:** Payload CMS 3.75.0 (embedded mode)
+- **Database:** PostgreSQL 15+ (Supabase) + pgvector for semantic search
+- **i18n:** next-intl 4.7.0 (SV/EN/DE)
+- **Booking:** Bokun API (HMAC-SHA1 auth, embedded widget)
+- **Search:** OpenAI text-embedding-3-small + pgvector HNSW
+- **Import/Export:** ExcelJS 4.4.0 + csv-parse/csv-stringify
+- **Hosting:** Vercel (Node 24)
+- **Maps:** Google Maps link (no embed, zero API cost)
 
 ## Phase Overview
 
@@ -35,11 +37,11 @@ Stockholm tourism booking platform with AI-first architecture, multi-language su
 | 03 | Data Models & CMS Schema | 28-32h | done (2026-01-18) | [phase-03](./phase-03-data-models-cms-schema.md) |
 | 04 | Design System | 32-36h | done (2026-01-18) | [phase-04](./phase-04-design-system.md) |
 | 05 | Homepage | 28-32h | done (2026-01-18) | [phase-05](./phase-05-homepage.md) |
-| 05.5 | Static Pages (FAQ, About) | 6-10h | pending | [phase-05.5](./phase-05.5-static-pages.md) |
-| 06 | Tour Catalog | 24-28h | pending | [phase-06](./phase-06-tour-catalog.md) |
+| 05.5 | Static Pages (FAQ, About) | 6-10h | done (2026-01-19) | [phase-05.5](./phase-05.5-static-pages.md) |
+| 06 | Tour Catalog | 24-28h | done (2026-01-19) | [phase-06](./phase-06-tour-catalog.md) |
 | 07 | Tour Details | 32-36h | pending | [phase-07](./phase-07-tour-details.md) |
-| 08 | Rezdy Integration | 24-28h | pending | [phase-08](./phase-08-rezdy-integration.md) |
-| 08.1 | Bokun Integration | 20-24h | pending | [phase-08.1](./phase-08.1-bokun-integration.md) |
+| 08 | Rezdy Integration | 24-28h | superseded by 08.1 | [phase-08](./phase-08-rezdy-integration.md) |
+| 08.1 | Bokun Integration | 20-24h | done (2026-02-04) | [phase-08.1](./phase-08.1-bokun-integration.md) |
 | 08.5 | Concierge Wizard | 8-12h | pending | [phase-08.5](./phase-08.5-concierge-wizard.md) |
 | 09 | Group Bookings + WhatsApp | 20-24h | pending | [phase-09](./phase-09-group-bookings-whatsapp.md) |
 | 10 | Accessibility + SEO | 44-54h | pending | [phase-10](./phase-10-accessibility-seo.md) |
@@ -48,13 +50,12 @@ Stockholm tourism booking platform with AI-first architecture, multi-language su
 
 ## Key Dependencies
 
-- Rezdy API access (required by Phase 8) OR Bokun API access (required by Phase 8.1)
-- Supabase PostgreSQL database
-- Vercel hosting account
+- Bokun API access (Phase 08.1 complete, Rezdy superseded)
+- Supabase PostgreSQL database + pgvector extension
+- OpenAI API key (semantic search embeddings)
+- Vercel hosting account (Node 24)
 - Domain DNS configuration
 - Tour content/images from client
-- FAQ content (min 20 questions) by Week 3
-- About Us content + team photos by Week 3
 - Tour data with logistics, inclusions, audience tags
 
 ## Research Reports
@@ -93,7 +94,7 @@ Stockholm tourism booking platform with AI-first architecture, multi-language su
 
 | Decision | User Choice |
 |----------|-------------|
-| **Rezdy Integration** | Hosted Checkout - redirect to Rezdy's payment page |
+| **Booking Integration** | Bokun embedded widget (supersedes Rezdy - decided Feb 2026) |
 | **Media Storage** | Vercel Blob (~$10/month, integrated) |
 | **Group Inquiries** | Both - email notification + store in Payload CMS |
 | **Default Locale** | Auto-detect browser/location, fallback to English |

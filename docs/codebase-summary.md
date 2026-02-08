@@ -1,13 +1,13 @@
 # Codebase Summary - HeritageGuiding Platform
 
-**Last Updated:** February 4, 2026
-**Phase:** 08.1 - Bokun Integration (Complete)
-**Status:** Bokun API integration, availability caching, semantic search, webhook handling fully implemented
-**Codebase Metrics:** 144 TypeScript files, 350K+ tokens, 65K LOC frontend + 35K LOC CMS
+**Last Updated:** February 8, 2026
+**Phase:** 08.1 - Bokun Integration + Excel Import/Export (Complete)
+**Status:** Bokun API integration, availability caching, semantic search, webhook handling, Excel/CSV import-export fully implemented
+**Codebase Metrics:** 150+ TypeScript files, 360K+ tokens, 65K LOC frontend + 35K LOC CMS
 
 ## Overview
 
-HeritageGuiding is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16 frontend (65K LOC, 50+ React components, 9 API functions, 25+ unit tests) and Payload CMS 3.75 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication).
+HeritageGuiding is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16.1.6 frontend (65K LOC, 60+ React components, 9 API functions, 227+ unit tests) and Payload CMS 3.75 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication, Excel/CSV import-export).
 
 ## Repository Structure
 
@@ -35,14 +35,15 @@ heritageguiding-platform/
 
 | Layer | Technology |
 |-------|------------|
-| **Frontend** | Next.js 16 (App Router, Turbopack), React 19, TypeScript 5, Tailwind CSS 4 |
-| **CMS** | Payload CMS 3.75, Lexical Editor, PostgreSQL 15+ |
+| **Frontend** | Next.js 16.1.6 (App Router, Turbopack), React 19.2.3, TypeScript 5.9.3, Tailwind CSS 4 |
+| **CMS** | Payload CMS 3.75.0, Lexical Editor, PostgreSQL 15+ |
 | **i18n** | next-intl (SV/EN/DE routing & translations) |
 | **Database** | PostgreSQL 15+ with pgvector extension |
 | **Styling** | Tailwind CSS v4, PostCSS, Radix UI 1.2.12 |
 | **Storage** | Vercel Blob (images, WebP optimization) |
-| **Code Quality** | ESLint 9 (flat config), Prettier 3, TypeScript 5, Vitest 4.0.17 |
+| **Code Quality** | ESLint 9 (flat config), Prettier 3, TypeScript 5.9.3, Vitest 4.0.17 |
 | **Validation** | Zod 4.3.5 |
+| **Import/Export** | ExcelJS 4.4.0 (CSV/Excel pipelines) |
 | **Hosting** | Vercel (frontend), PostgreSQL host (database) |
 | **CI/CD** | GitHub Actions (lint, type-check, build) |
 
@@ -52,9 +53,10 @@ heritageguiding-platform/
 - `next@^16.1.6` - React framework (Turbopack default bundler)
 - `react@^19.2.3` - UI library
 - `payload@^3.75.0` - Headless CMS
-- `next-intl@^3.x` - Internationalization
-- `tailwindcss@^4` - Styling
-- `typescript@^5` - Type safety
+- `next-intl@^4.7.0` - Internationalization
+- `tailwindcss@^4.0.0` - Styling
+- `typescript@^5.9.3` - Type safety
+- `zod@^4.3.5` - Schema validation
 
 ### Data & Search
 - `@payloadcms/db-postgres@^3.75.0` - PostgreSQL database
@@ -74,8 +76,9 @@ heritageguiding-platform/
 - `sharp@^0.34.5` - Image optimization
 
 ### Testing
-- `vitest@^4.0.17` - Unit testing
+- `vitest@^4.0.17` - Unit testing (227+ tests)
 - React Testing Library - Component testing
+- ESLint 9 flat config (no --ext flag needed)
 
 ## Project Structure Details
 
@@ -109,7 +112,7 @@ app/
 └── middleware.ts         # next-intl routing middleware
 ```
 
-#### Components (50+ total, organized by feature)
+#### Components (60+ total, organized by feature)
 
 **Home Components (8 components):**
 - `hero-section.tsx` - Landing hero with parallax
@@ -184,7 +187,7 @@ app/
 - `bokun-booking-widget-with-fallback.tsx` - Booking widget wrapper
 - `language-switcher/` - Language selection
 
-**Tests:** 25+ unit tests using Vitest + React Testing Library
+**Tests:** 227+ unit tests using Vitest + React Testing Library
 
 #### Libraries & Utilities
 
@@ -207,9 +210,15 @@ app/
 - `app/api/bokun/webhook/route.ts` - POST webhook with signature verification
 
 **AI/Semantic Search (Phase 08.1+):**
-- `lib/ai/openai-embeddings-service.ts` - OpenAI text-embedding-3-small
-- `lib/ai/pgvector-semantic-search-service.ts` - Vector similarity search
+- `lib/ai/openai-embeddings-service.ts` - OpenAI text-embedding-3-small (1536 dims)
+- `lib/ai/pgvector-semantic-search-service.ts` - Vector similarity search (cosine)
 - `app/api/search/semantic/route.ts` - Semantic search endpoint
+
+**Excel/CSV Import-Export (Phase 08.1+):**
+- 9 service files for format handling (Excel, CSV)
+- 6 admin components for bulk operations
+- Format-agnostic pipeline: Parse → Map → Validate (Zod) → Transform → Create
+- ExcelJS 4.4.0 for Excel operations
 
 **i18n & Formatting:**
 - `lib/i18n-format.ts` - Locale-specific formatting
@@ -321,6 +330,12 @@ app/
     - Booking date, confirmation timestamp
     - Payment status
 
+11. **excel_imports** - Bulk import history (Phase 08.1+, optional)
+    - File name, source format (Excel/CSV)
+    - Import timestamp, row count
+    - Status (pending/processing/complete/failed)
+    - Error log for validation failures
+
 #### Field Modules (7 reusable)
 
 - `slug-field.ts` - Auto-generates URL slugs
@@ -350,7 +365,7 @@ app/
 - **Localization:** SV (default), EN, DE with fallback
 - **Extensions:** pgvector for semantic search
 
-#### Tests (10+ test files)
+#### Tests (15+ test files)
 
 - Access control validation
 - Slug format verification
@@ -477,7 +492,7 @@ npm run payload          # Payload CLI
 npm run payload:generate-types  # Generate TS types from schema
 ```
 
-## Current State (Phase 08.1 - Complete)
+## Current State (Phase 08.1 - Complete, Excel Import/Export included)
 
 ### Completed Phases
 - Phase 01: Foundation ✅
@@ -497,22 +512,26 @@ npm run payload:generate-types  # Generate TS types from schema
 - Bookings collection for data persistence
 - Rate limit handling with exponential backoff
 - Semantic search with pgvector + OpenAI embeddings
+- Excel/CSV import-export with format-agnostic pipeline
+- Zod validation for all import formats
 
 ## Codebase Metrics
 
 | Metric | Value |
 |--------|-------|
-| **Total TypeScript Files** | 144 |
+| **Total TypeScript Files** | 150+ |
 | **Frontend LOC** | ~65,000 |
 | **CMS LOC** | ~35,000 |
 | **Total Tokens** | 350,000+ |
-| **React Components** | 50+ |
+| **React Components** | 60+ |
 | **API Functions** | 9 (data-fetching) |
 | **Bokun API Routes** | 2 (availability, webhook) |
 | **Semantic Search Routes** | 1 |
-| **CMS Collections** | 10 |
+| **Excel/CSV Services** | 9 |
+| **Admin Components** | 6 (import/export UI) |
+| **CMS Collections** | 10+ |
 | **Field Modules** | 7 |
-| **Unit Tests** | 25+ |
+| **Unit Tests** | 227+ |
 | **TypeScript Coverage** | 100% |
 | **Accessibility** | WCAG 2.1 AA |
 | **Lighthouse Score** | 90+ (all categories) |
@@ -552,5 +571,5 @@ npm run payload:generate-types  # Generate TS types from schema
 
 ---
 
-**Last Updated:** February 4, 2026
-**Document Status:** Phase 08.1 Complete - Ready for Phase 09
+**Last Updated:** February 8, 2026
+**Document Status:** Phase 08.1 Complete (Excel Import/Export included) - Ready for Phase 09

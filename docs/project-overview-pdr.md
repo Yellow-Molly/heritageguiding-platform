@@ -1,14 +1,14 @@
 # Project Overview & Product Development Requirements (PDR)
 
 **Document Version:** 1.5
-**Last Updated:** February 4, 2026
-**Status:** Phase 08.1 Complete - Bokun Integration
+**Last Updated:** February 8, 2026
+**Status:** Phase 08.1 Complete - Bokun Integration + Excel Import/Export
 **Project Lead:** Technical Team
 **Latest Changes:** Bokun API integration complete, semantic search with pgvector, availability caching (60s TTL), Bookings collection, webhook verification
 
 ## Executive Summary
 
-HeritageGuiding is an AI-first tourism booking platform consolidating the Sweden heritage tourism market. The MVP combines advanced technology (Next.js 16, Payload CMS 3.75) with superior UX to capture market share from 50-100 fragmented competitors. Launch target: 12 weeks.
+HeritageGuiding is an AI-first tourism booking platform consolidating the Sweden heritage tourism market. The MVP combines advanced technology (Next.js 16.1.6, Payload CMS 3.75) with superior UX to capture market share from 50-100 fragmented competitors. Launch target: 12 weeks.
 
 ## Product Vision
 
@@ -18,8 +18,9 @@ HeritageGuiding is an AI-first tourism booking platform consolidating the Sweden
 - AI-first architecture (structured data for AI discovery)
 - Multilingual support (SV/EN/DE)
 - WCAG 2.1 AA accessible from day one
-- Professional booking infrastructure (Rezdy integration)
+- Professional booking infrastructure (Bokun integration)
 - Superior content quality over quantity
+- Excel/CSV import-export for content management
 
 **Target Market:**
 - Primary: International tourists seeking authentic heritage experiences
@@ -59,8 +60,9 @@ heritageguiding-platform/
 ```
 
 **Technology Stack Confirmed:**
-- Frontend: Next.js 16 (Turbopack bundler), React 19, TypeScript, Tailwind CSS v4
-- CMS: Payload 3.75, Lexical Editor, PostgreSQL 15+
+- Frontend: Next.js 16.1.6 (Turbopack bundler), React 19.2.3, TypeScript 5.9.3, Tailwind CSS v4
+- CMS: Payload 3.75.0, Lexical Editor, PostgreSQL 15+
+- Import/Export: ExcelJS 4.4.0 (CSV/Excel pipelines)
 - Storage: Vercel Blob for images
 - DevOps: GitHub Actions, Vercel deployment
 - Quality: ESLint 9 (flat config), Prettier 3, TypeScript strict mode
@@ -70,7 +72,7 @@ heritageguiding-platform/
 - Payload admin accessible at `/admin`
 - Database migrations working
 - Package manager: npm with version 10+
-- Node version: 20 (CI) with local >= 20
+- Node version: 24 (CI) with local >= 24
 
 **CI/CD Pipeline:**
 - Automated lint checking (ESLint 9)
@@ -113,9 +115,9 @@ Complete tour catalog page with grid/list view toggle, filtering (categories, pr
 
 Comprehensive tour detail page featuring: full-screen image gallery, tour facts table, logistics info, inclusions/exclusions, guide profile, booking CTA, customer reviews with ratings, related tours, breadcrumbs, and JSON-LD schema markup.
 
-## Phase 08.1: Bokun Booking Integration - COMPLETE ✅
+## Phase 08.1: Bokun Booking Integration + Excel Import/Export - COMPLETE ✅
 
-Fully implemented booking system with HMAC authentication, 60-second availability caching, webhook signature verification, and semantic search capabilities.
+Fully implemented booking system with HMAC authentication, 60-second availability caching, webhook signature verification, semantic search capabilities, and Excel/CSV import-export pipelines.
 
 ### Phase 08.1 Objectives - Status
 
@@ -128,8 +130,9 @@ Fully implemented booking system with HMAC authentication, 60-second availabilit
 | Bookings collection | 2h | ✅ Complete - CMS storage with status tracking |
 | Semantic search | 6h | ✅ Complete - pgvector + OpenAI embeddings |
 | Rate limiting | 2h | ✅ Complete - 400 req/min with exponential backoff |
+| Excel/CSV import-export | 4h | ✅ Complete - Format-agnostic pipeline with Zod validation |
 
-**Time Estimate:** 20-24 hours (Complete - Feb 4, 2026)
+**Time Estimate:** 24-28 hours (Complete - Feb 8, 2026)
 
 ## Core MVP Features
 
@@ -240,8 +243,8 @@ Fully implemented booking system with HMAC authentication, 60-second availabilit
 
 ### Must Use
 
-- Next.js 15 (no alternatives)
-- Payload CMS 3.0 (no alternatives)
+- Next.js 16.1.6 (no alternatives)
+- Payload CMS 3.75 (no alternatives)
 - PostgreSQL (no SQLite)
 - TypeScript strict mode
 - Tailwind CSS for styling
@@ -266,13 +269,13 @@ Fully implemented booking system with HMAC authentication, 60-second availabilit
 | Vercel deployment | Yes | Switch to AWS (2 days) |
 | Vercel Blob storage | No | Use Cloudinary (1 day) |
 | Email service | Yes | Resend or SendGrid (1 day) |
-| Rezdy API | Yes | Manual booking form (2 days) |
+| Bokun API | Yes | Manual booking form (2 days) |
 
 ### Key Risks & Mitigations
 
 | Risk | Impact | Probability | Mitigation |
 |------|--------|-------------|-----------|
-| Rezdy API delays | Booking feature blocked | Medium | Early integration testing |
+| Bokun API delays | Booking feature blocked | Low | Early integration testing (Complete) |
 | UX design unavailable | Use shadcn/ui defaults | Low | Acceptable for MVP |
 | Content not ready | Use placeholder text | Medium | CMS allows easy updates |
 | Database connection issues | App offline | Low | Connection pooling + retries |
@@ -288,7 +291,7 @@ Fully implemented booking system with HMAC authentication, 60-second availabilit
 | **Week 1-2** | 02 | i18n | Multilingual routing |
 | **Week 2** | 03 | Data models | CMS schema defined |
 | **Week 3-5** | 04-07 | Core platform | Homepage, catalog, details |
-| **Week 5-6** | 08.1 | Bokun integration | Booking widget, webhooks |
+| **Week 5-6** | 08.1 | Bokun + Excel import/export | Booking, widgets, bulk content management |
 | **Week 7-9** | 09-13 | Advanced features | Groups, WhatsApp, SEO, accessibility |
 | **Week 10-11** | 14-16 | Polish & test | Performance, QA, documentation |
 | **Week 12** | 17 | Launch | Production deployment |
@@ -299,7 +302,7 @@ Fully implemented booking system with HMAC authentication, 60-second availabilit
 2. **Week 2** - i18n & data models complete ✅
 3. **Week 3-4** - Design system, homepage, catalog complete ✅
 4. **Week 5** - Tour detail page complete ✅
-5. **Week 5-6** - Bokun integration tested (in progress)
+5. **Week 5-6** - Bokun integration + Excel import/export complete ✅
 6. **Week 9** - All features implemented
 7. **Week 11** - Complete UAT cycle
 8. **Week 12** - Go-live 🚀
@@ -425,11 +428,12 @@ The MVP is complete when **ALL** criteria are met:
 ## Current Progress
 
 **Completed (65K LOC - apps/web):**
-- 50+ React components (responsive, accessible, i18n-ready)
+- 60+ React components (responsive, accessible, i18n-ready)
 - 9 API data-fetching functions with full TypeScript typing
-- 25+ unit tests covering components, APIs, utilities
+- 227+ unit tests covering components, APIs, utilities
 - Bokun API client with HMAC-SHA256 authentication
 - Semantic search with pgvector + OpenAI embeddings
+- Excel/CSV import-export with 9 service files + 6 admin components
 - XSS prevention, security headers, input validation
 - ARIA labels, semantic HTML, accessibility badges
 
@@ -439,6 +443,7 @@ The MVP is complete when **ALL** criteria are met:
 - Vercel Blob cloud storage integration
 - Role-based access control
 - pgvector extension for semantic search
+- Excel/CSV import-export services
 
 ## Next Steps (Phase 09+)
 
@@ -450,4 +455,4 @@ The MVP is complete when **ALL** criteria are met:
 
 **Document Status:** Ready for stakeholder review
 **Questions?** Contact technical lead
-**Last Review:** February 4, 2026
+**Last Review:** February 8, 2026

@@ -12,7 +12,7 @@
 |----------|--------|--------|
 | P1 - Critical | ✅ completed (code review done) | 16-20h |
 
-Initialize Next.js 15 monorepo with Payload CMS 3.0 embedded mode, PostgreSQL connection, and development tooling.
+Initialize Next.js 16 monorepo with Payload CMS 3.75 embedded mode, PostgreSQL connection, and development tooling.
 
 ## Key Insights
 
@@ -24,7 +24,7 @@ Initialize Next.js 15 monorepo with Payload CMS 3.0 embedded mode, PostgreSQL co
 ## Requirements
 
 ### Functional
-- Next.js 15 development server runs at localhost:3000
+- Next.js 16 development server runs at localhost:3000
 - Payload CMS admin accessible at `/admin`
 - Database connection established and migrations run
 - TypeScript types generated from Payload collections
@@ -40,7 +40,7 @@ Initialize Next.js 15 monorepo with Payload CMS 3.0 embedded mode, PostgreSQL co
 ```
 heritageguiding-platform/
 ├── apps/
-│   └── web/                    # Next.js 15 application
+│   └── web/                    # Next.js 16 application
 │       ├── app/
 │       │   ├── (frontend)/     # Public pages
 │       │   ├── (payload)/      # Payload admin
@@ -81,12 +81,12 @@ heritageguiding-platform/
 
 ## Implementation Steps
 
-1. **Initialize Next.js 15 Project**
+1. **Initialize Next.js 16 Project**
    ```bash
    npx create-next-app@latest apps/web --typescript --tailwind --eslint --app --src-dir=false
    ```
 
-2. **Install Payload CMS 3.0**
+2. **Install Payload CMS 3.75**
    ```bash
    npm install payload @payloadcms/next @payloadcms/db-postgres @payloadcms/richtext-lexical
    ```
@@ -128,8 +128,8 @@ heritageguiding-platform/
 
 ## Todo List
 
-- [x] Initialize Next.js 15 project structure
-- [x] Install and configure Payload CMS 3.0
+- [x] Initialize Next.js 16 project structure
+- [x] Install and configure Payload CMS 3.75
 - [x] Set up PostgreSQL adapter with Supabase
 - [x] Create Payload admin and API routes
 - [x] Configure base collections (users, media)
@@ -156,7 +156,7 @@ heritageguiding-platform/
 | Risk | Probability | Impact | Mitigation |
 |------|-------------|--------|------------|
 | PostgreSQL connection issues | Medium | High | Test locally first; use PgBouncer |
-| Payload 3.0 breaking changes | Low | Medium | Pin exact versions; check changelog |
+| Payload 3.75 breaking changes | Low | Medium | Pin exact versions; check changelog |
 | Vercel build timeout | Low | Medium | Optimize build; increase timeout |
 
 ## Security Considerations
@@ -174,7 +174,7 @@ heritageguiding-platform/
 
 **Summary:**
 - ✅ All 4 tests passing (type-check, lint, format:check, build)
-- ✅ Clean architecture with proper Next.js 15 patterns
+- ✅ Clean architecture with proper Next.js 16 patterns
 - ✅ Strong security headers (HSTS, X-Frame-Options, CSP, Permissions-Policy)
 - ✅ Runtime validation for PAYLOAD_SECRET and DATABASE_URL
 - ✅ Users collection restricted to authenticated access
@@ -187,8 +187,8 @@ heritageguiding-platform/
 **Total Effort:** 18.5h (within 16-20h estimate)
 
 ### Deliverables
-1. Next.js 15 + React 19 monorepo with Turborepo
-2. Payload CMS 3.0 embedded in /admin
+1. Next.js 16 + React 19 monorepo with Turborepo
+2. Payload CMS 3.75 embedded in /admin
 3. PostgreSQL connection with Supabase + PgBouncer
 4. ESLint 9.x + Prettier + Husky configured
 5. GitHub Actions CI/CD pipeline

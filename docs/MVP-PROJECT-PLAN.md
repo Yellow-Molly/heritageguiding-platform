@@ -2,8 +2,8 @@
 ## HeritageGuiding Platform - AI-First Tourism Booking Platform
 
 **Document Version:** 1.4
-**Date:** February 4, 2026
-**Status:** Phase 08.1 Complete - Bokun Integration + Semantic Search
+**Date:** February 8, 2026
+**Status:** Phase 08.1 Complete - Bokun Integration + Semantic Search + Excel Import/Export
 
 ---
 
@@ -17,7 +17,7 @@ This document outlines the MVP scope, timeline, and deliverables for the Heritag
 |--------|---------|
 | **Total Development Time** | 310-372 hours (10-12 weeks) |
 | **Target Launch** | 12 weeks from start date |
-| **Technology Stack** | Next.js 15, Payload CMS 3.0, PostgreSQL, Bokun Integration |
+| **Technology Stack** | Next.js 16.1.6, Payload CMS 3.75, PostgreSQL, Bokun Integration, ExcelJS |
 | **Languages Supported** | Swedish, English, German (French post-launch) |
 | **Compliance** | WCAG 2.1 Level AA from day one |
 
@@ -35,7 +35,8 @@ The platform is designed with AI-first architecture, making it discoverable by A
 | **AI-First Architecture** | Schema.org structured data, hybrid content, scalable search |
 | **Accessibility** | WCAG 2.1 Level AA compliant - keyboard nav, screen reader support |
 | **Booking System** | Bokun integration for payments, calendar management |
-| **Content Management** | Payload CMS 3.0 for tour management and multilingual workflows |
+| **Content Management** | Payload CMS 3.75 for tour management and multilingual workflows |
+| **Bulk Operations** | Excel/CSV import-export for content management |
 | **Group Bookings** | Inquiry form for groups 10+, WhatsApp integration |
 | **Reviews & Trust** | Ratings display, expert credentials, certifications |
 | **SEO & Discovery** | Meta optimization, OpenGraph, sitemap generation |
@@ -51,9 +52,9 @@ The MVP development is organized into **17 distinct phases**.
 
 | Phase | Hours | Key Deliverables |
 |-------|-------|------------------|
-| **1. Foundation** | 16-20 | Next.js 15, Payload CMS 3.0, PostgreSQL, Git structure |
+| **1. Foundation** | 16-20 | Next.js 16.1.6, Payload CMS 3.75, PostgreSQL, Git structure |
 | **2. i18n** | 24-28 | next-intl (SV/EN/DE), language switcher, hreflang tags |
-| **3. Data Models** | 28-32 | Tours, Guides, Categories, Reviews, Media, Neighborhoods, Pages collections |
+| **3. Data Models** | 28-32 | Tours, Guides, Categories, Reviews, Media, Neighborhoods, Pages, Bookings collections |
 
 ### Phase 3: Data Models (Enhanced Schema)
 
@@ -90,6 +91,7 @@ The MVP development is organized into **17 distinct phases**.
 | **7. Tour Details** | 32-36 | Gallery, expert bio, reviews, logistics map, inclusions, booking CTA |
 | **8. Booking Integration** | 24-28 | Bokun API, availability sync, widget embedding ✅ |
 | **8.1. Semantic Search** | 6-8 | pgvector + OpenAI embeddings, vector similarity ✅ |
+| **8.1+. Excel Import/Export** | 4-6 | ExcelJS, format-agnostic pipeline, Zod validation ✅ |
 | **8.5. Concierge Wizard** | 8-12 | AI-powered tour recommendations using audience tags |
 
 ### Phase 9-13: Advanced Features (Weeks 6-8)
@@ -119,12 +121,13 @@ The MVP development is organized into **17 distinct phases**.
 
 | Layer | Technology |
 |-------|------------|
-| **Frontend** | Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS |
-| **CMS** | Payload CMS 3.0 with rich text, media management, RBAC |
-| **Database** | PostgreSQL 15+ with full-text search |
+| **Frontend** | Next.js 16.1.6 (App Router), React 19.2.3, TypeScript 5.9.3, Tailwind CSS 4 |
+| **CMS** | Payload CMS 3.75 with rich text, media management, RBAC |
+| **Database** | PostgreSQL 15+ with full-text search, pgvector extension |
 | **Booking** | Bokun API (HMAC-SHA256 auth, webhooks, 60s availability caching) |
-| **Search** | pgvector semantic search with OpenAI embeddings (text-embedding-3-small) |
-| **Localization** | next-intl for routing, date-fns for formatting |
+| **Search** | pgvector semantic search with OpenAI embeddings (text-embedding-3-small, 1536 dims) |
+| **Import/Export** | ExcelJS 4.4.0 (Excel/CSV pipelines, format-agnostic) |
+| **Localization** | next-intl 4.7.0 for routing, date-fns for formatting |
 | **Hosting** | Vercel (frontend), PostgreSQL (database) |
 | **Media** | Vercel Blob for image optimization |
 | **Email** | Resend for transactional emails |

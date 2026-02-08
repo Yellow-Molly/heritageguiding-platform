@@ -1,10 +1,10 @@
 # Code Standards & Best Practices
 
-**Last Updated:** February 4, 2026
+**Last Updated:** February 8, 2026
 **Project:** HeritageGuiding Platform
-**Phase:** 08.1 Complete
+**Phase:** 08.1 Complete - Bokun + Excel Import/Export
 **Applies To:** All code in apps/, packages/, and scripts/
-**Recent Update:** Bokun API integration with HMAC-SHA256 authentication, availability caching, semantic search patterns
+**Recent Update:** Bokun API integration, availability caching, semantic search, Excel/CSV import-export, ESLint 9 flat config, Node.js 24
 
 ## Core Principles
 
@@ -171,11 +171,12 @@ try {
 - **Files:** One test file per module: `{module}.test.ts`
 - **Components:** `{component}.test.tsx` for React components
 - **APIs:** `{function-name}.test.ts` for data-fetching functions
+- **Vitest Jest Compatibility:** vi.fn() = jest.fn() (jest-compatible API)
 - Test behavior, not implementation
 - Use descriptive test names
 - Minimum coverage: 80%
 - Use Vitest 4.0.17+ for unit testing
-- Current tests: 25+ covering components, APIs, utilities
+- Current tests: 227+ covering components, APIs, utilities, import/export
 
 ### Integration Tests
 - Test across module boundaries
@@ -285,17 +286,19 @@ describe('DatesPicker', () => {
 
 ### ESLint
 **File:** `apps/web/eslint.config.mjs`
-**Version:** ESLint 9 with native flat config (no FlatCompat)
-**Config:** eslint-config-next 16.1.6 (native flat config support)
+**Version:** ESLint 9 with native flat config array (no FlatCompat needed)
+**Config:** eslint-config-next 16.1.6 exports native flat config arrays
 
 ```bash
 npm run lint         # Check code (no --ext flag needed)
 npm run lint:fix     # Auto-fix issues
 ```
 
-**Lint Command Changes (ESLint 9):**
-- ❌ Old: `eslint . --ext .ts,.tsx` (ESLint 8)
-- ✅ New: `eslint .` (ESLint 9 flat config auto-detects extensions)
+**ESLint 9 Flat Config Notes:**
+- ❌ Old: `eslint . --ext .ts,.tsx` (ESLint 8 flag removed)
+- ✅ New: `eslint .` (ESLint 9 auto-detects by file type)
+- ✅ Config: Array format directly from eslint-config-next 16 (no FlatCompat needed)
+- ✅ Extensions: Auto-detected, no manual specification needed
 
 **Rules:**
 - No unused imports
@@ -388,10 +391,21 @@ export const Example: CollectionConfig = {
 }
 ```
 
+### Important TypeScript Notes
+- **Payload 3.75 Breaking Change:** `ServerFunctionClient` type changed
+  - Old: `args: unknown[]`
+  - New: `args: Record<string, unknown>`
+  - Update all server function clients when upgrading
+
 ### Field Naming
 - Use camelCase for field names
 - Be descriptive: `publishedAt` not `pub`
 - Collections plural in exports, singular in slug
+
+### Type Checking
+- **Separate Type Checking for CMS:** `typescript.ignoreBuildErrors: true` is set in next.config.ts
+- Reason: packages/cms has separate TypeScript compilation
+- Run `npm run type-check` to verify overall types
 
 ### Localization Patterns
 - Use `localized: true` for user-editable content

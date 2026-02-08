@@ -2,7 +2,7 @@
 
 Complete technical infrastructure plan for the platform.
 
-**Last Updated:** February 4, 2026
+**Last Updated:** February 8, 2026
 
 ---
 
@@ -75,7 +75,7 @@ main (production)
 ### Prerequisites
 
 ```bash
-Node.js: v20+ (LTS)
+Node.js: v24+ (LTS)
 npm: v10+
 PostgreSQL: v15+ (with pgvector extension)
 Git: v2.40+
@@ -122,16 +122,17 @@ npm run dev
 ```json
 {
   "dependencies": {
-    "next": "^15.1.0",
-    "react": "^19.0.0",
-    "@payloadcms/next": "^3.72.0",
-    "@payloadcms/db-postgres": "^3.72.0",
-    "next-intl": "^3.20.0",
+    "next": "^16.1.6",
+    "react": "^19.2.3",
+    "@payloadcms/next": "^3.75.0",
+    "@payloadcms/db-postgres": "^3.75.0",
+    "next-intl": "^4.7.0",
     "tailwindcss": "^4.0.0",
-    "zod": "^3.23.0"
+    "zod": "^4.3.5",
+    "exceljs": "^4.4.0"
   },
   "devDependencies": {
-    "typescript": "^5.7.0",
+    "typescript": "^5.9.3",
     "vitest": "^4.0.17",
     "eslint": "^9.0.0"
   }

@@ -10,7 +10,7 @@
 
 | Priority | Status | Effort |
 |----------|--------|--------|
-| P1 - Critical | pending | 6-10h |
+| P1 - Critical | done (2026-01-19) | 6-10h |
 
 Create essential trust-building and informational static pages: FAQ with accordion UI, About Us with team section, Terms & Conditions, and Privacy Policy. All pages CMS-managed and localized (SV/EN/DE).
 

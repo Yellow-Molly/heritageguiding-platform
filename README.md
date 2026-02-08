@@ -2,13 +2,13 @@
 
 Premium heritage tour booking platform for Sweden. AI-first architecture with advanced technology stack supporting Swedish/English/German markets.
 
-**Status:** Phase 08.1 Complete - Bokun Integration + Semantic Search
+**Status:** Phase 08.1 Complete - Bokun Integration + Semantic Search + Excel Import/Export
 **Live Demo:** Coming February 2026
 
 ## Quick Start
 
 ### Prerequisites
-- Node.js 20+
+- Node.js 24+
 - PostgreSQL 15+
 - npm 10+
 
@@ -48,12 +48,13 @@ npm run dev
 
 | Layer | Technology |
 |-------|-----------|
-| **Frontend** | Next.js 16, React 19, TypeScript 5, Tailwind CSS 4 |
-| **CMS** | Payload CMS 3.0 with PostgreSQL |
+| **Frontend** | Next.js 16.1.6, React 19.2.3, TypeScript 5.9.3, Tailwind CSS 4 |
+| **CMS** | Payload CMS 3.75 with PostgreSQL |
 | **i18n** | next-intl (SV/EN/DE routing + persistence) |
 | **Styling** | Tailwind CSS + Radix UI 1.2.12 |
 | **Testing** | Vitest 4.0.17 + React Testing Library |
 | **Validation** | Zod 4.3.5 |
+| **Import/Export** | ExcelJS 4.4.0 (CSV/Excel) |
 | **Storage** | Vercel Blob (images), PostgreSQL (data) |
 | **Hosting** | Vercel (frontend), PostgreSQL host (database) |
 | **CI/CD** | GitHub Actions (lint, type-check, build) |
@@ -107,6 +108,7 @@ heritageguiding-platform/
 - Sort by rating, price, duration
 - Pagination (12 tours/page)
 - Mobile-responsive design
+- Excel/CSV import-export for bulk operations
 
 ### Phase 07: Tour Detail
 - Full-screen image gallery
@@ -285,7 +287,7 @@ Report via GitHub Issues with:
 
 ## Completed Phase (Phase 08.1)
 
-**Bokun Booking Integration** (Complete - Feb 4, 2026)
+**Bokun Booking Integration + Excel Import/Export** (Complete - Feb 8, 2026)
 - HMAC-SHA256 authentication with Bokun API
 - Booking widget integration with fallback
 - 60-second availability caching
@@ -293,6 +295,7 @@ Report via GitHub Issues with:
 - Bookings collection for data persistence
 - Semantic search with pgvector + OpenAI embeddings
 - Rate limiting (400 req/min) with exponential backoff
+- Excel/CSV import-export pipeline (Zod validation)
 
 ## Next Phase (Phase 09)
 
@@ -313,5 +316,5 @@ Proprietary - All rights reserved
 
 ---
 
-**Last Updated:** February 4, 2026
+**Last Updated:** February 8, 2026
 **Repository Version:** Phase 08.1 Complete

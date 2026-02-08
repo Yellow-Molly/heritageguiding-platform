@@ -1,5 +1,7 @@
 # Phase 08: Rezdy Integration
 
+> **SUPERSEDED:** This phase was replaced by Phase 08.1 (Bokun Integration) in February 2026. Bokun was selected as the sole booking provider. This document is retained for historical reference.
+
 ## Context Links
 
 - [MVP Project Plan](../../docs/MVP-PROJECT-PLAN.md)
@@ -11,7 +13,7 @@
 
 | Priority | Status | Effort |
 |----------|--------|--------|
-| P1 - Critical | pending | 24-28h |
+| P2 - Superseded | superseded by Phase 08.1 (Bokun) | 24-28h |
 
 Integrate Rezdy booking API for availability checking, session selection, and booking creation. Implement webhook handler for booking confirmations.
 

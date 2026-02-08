@@ -2,7 +2,7 @@
 
 CI/CD pipeline, environment variables, domain configuration, and deployment workflows.
 
-**Last Updated:** February 4, 2026
+**Last Updated:** February 8, 2026
 
 ---
 

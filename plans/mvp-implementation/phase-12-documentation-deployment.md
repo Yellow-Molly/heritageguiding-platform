@@ -188,8 +188,8 @@ Auto-deploy to heritageguiding.com
 
    | Layer | Technology |
    |-------|------------|
-   | Frontend | Next.js 15, React 19, TypeScript |
-   | CMS | Payload CMS 3.0 (embedded) |
+   | Frontend | Next.js 16, React 19, TypeScript |
+   | CMS | Payload CMS 3.75 (embedded) |
    | Database | PostgreSQL 15 (Supabase) |
    | Styling | Tailwind CSS, shadcn/ui |
    | Hosting | Vercel |
@@ -511,8 +511,8 @@ Auto-deploy to heritageguiding.com
 
     ## Tech Stack
 
-    - Next.js 15 + React 19
-    - Payload CMS 3.0
+    - Next.js 16 + React 19
+    - Payload CMS 3.75
     - PostgreSQL (Supabase)
     - Tailwind CSS + shadcn/ui
     - Rezdy API
