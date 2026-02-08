@@ -48,7 +48,7 @@ npm run dev
 
 | Layer | Technology |
 |-------|-----------|
-| **Frontend** | Next.js 15, React 19, TypeScript 5, Tailwind CSS 4 |
+| **Frontend** | Next.js 16, React 19, TypeScript 5, Tailwind CSS 4 |
 | **CMS** | Payload CMS 3.0 with PostgreSQL |
 | **i18n** | next-intl (SV/EN/DE routing + persistence) |
 | **Styling** | Tailwind CSS + Radix UI 1.2.12 |
@@ -62,7 +62,7 @@ npm run dev
 
 ```
 heritageguiding-platform/
-├── apps/web/                    # Next.js 15 frontend
+├── apps/web/                    # Next.js 16 frontend
 │   ├── app/
 │   │   ├── [locale]/           # Localized routes
 │   │   ├── (payload)/          # Admin + API

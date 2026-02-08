@@ -20,6 +20,7 @@ export async function generateMetadata({
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
 
   return {
+    metadataBase: new URL(baseUrl),
     title: t('defaultTitle'),
     description: t('defaultDescription'),
     keywords: t('keywords'),

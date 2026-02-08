@@ -11,9 +11,9 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  webpack: (config, { isServer }) => {
+  // Webpack config kept for --webpack fallback mode
+  webpack: (config) => {
     // Fix module resolution for packages/cms imports
-    // Add the web app's node_modules to the resolution paths
     config.resolve.modules = [
       path.resolve(__dirname, 'node_modules'),
       ...(config.resolve.modules || []),

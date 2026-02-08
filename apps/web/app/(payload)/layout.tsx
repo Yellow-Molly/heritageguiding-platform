@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: 'Content management for HeritageGuiding',
 }
 
-async function serverFunction(args: { name: string; args: unknown[] }) {
+async function serverFunction(args: { name: string; args: Record<string, unknown> }) {
   'use server'
   // Minimal server function - will be enhanced when needed
   return null
