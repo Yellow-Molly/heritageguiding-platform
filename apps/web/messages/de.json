@@ -331,10 +331,43 @@
     "relatedTours": "Das könnte Ihnen auch gefallen"
   },
   "findTour": {
-    "title": "Finden Sie Ihre Tour - KI-Assistent",
-    "description": "Lassen Sie unseren KI-Assistenten Ihnen helfen, die perfekte Stockholmer Kulturerbetour basierend auf Ihren Vorlieben zu finden",
+    "title": "Finden Sie Ihre Perfekte Tour",
+    "description": "Beantworten Sie ein paar Fragen und wir empfehlen Ihnen die perfekte Stockholmer Kulturtour",
     "heading": "Finden Sie Ihre Perfekte Tour",
-    "subheading": "Chatten Sie mit unserem KI-Assistenten, um das ideale Kulturerbe-Erlebnis für Sie zu entdecken"
+    "subheading": "Beantworten Sie ein paar Fragen und wir empfehlen das ideale Kulturerbe-Erlebnis für Sie"
+  },
+  "wizard": {
+    "step1": {
+      "title": "Mit wem reisen Sie?",
+      "subtitle": "Helfen Sie uns, die perfekte Tour für Sie zu finden"
+    },
+    "step2": {
+      "title": "Was interessiert Sie?",
+      "subtitle": "Wählen Sie ein oder mehrere Interessen"
+    },
+    "audience": {
+      "family": "Familie mit Kindern",
+      "couples": "Romantischer Ausflug",
+      "corporate": "Unternehmen / Team",
+      "seniors": "Seniorenreisende",
+      "solo": "Alleinreisender"
+    },
+    "interests": {
+      "history": "Geschichte & Kulturerbe",
+      "art": "Kunst & Kultur",
+      "foodWine": "Essen & Wein",
+      "photography": "Fotografie",
+      "adventure": "Abenteuer",
+      "architecture": "Architektur"
+    },
+    "back": "Zurück",
+    "findTours": "Perfekte Touren finden",
+    "startOver": "Neu starten",
+    "results": {
+      "title": "Perfekte Touren für Sie",
+      "subtitle": "Wir haben {count, plural, one {# Tour} other {# Touren}} gefunden, die Ihren Vorlieben entsprechen",
+      "noResults": "Noch keine Touren für Ihre Kriterien. Versuchen Sie andere Auswahl oder erkunden Sie alle unsere Touren."
+    }
   },
   "privacy": {
     "title": "Datenschutzerklärung",

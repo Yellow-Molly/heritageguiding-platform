@@ -331,10 +331,43 @@
     "relatedTours": "You May Also Like"
   },
   "findTour": {
-    "title": "Find Your Tour - AI Assistant",
-    "description": "Let our AI assistant help you find the perfect Stockholm heritage tour based on your preferences",
+    "title": "Find Your Perfect Tour",
+    "description": "Answer a few questions and let us recommend the ideal Stockholm heritage tour for you",
     "heading": "Find Your Perfect Tour",
-    "subheading": "Chat with our AI assistant to discover the ideal heritage experience for you"
+    "subheading": "Answer a few questions and we'll recommend the ideal heritage experience for you"
+  },
+  "wizard": {
+    "step1": {
+      "title": "Who are you traveling with?",
+      "subtitle": "Help us find the perfect tour for you"
+    },
+    "step2": {
+      "title": "What interests you?",
+      "subtitle": "Select one or more interests"
+    },
+    "audience": {
+      "family": "Family with Children",
+      "couples": "Couple's Getaway",
+      "corporate": "Corporate / Team",
+      "seniors": "Senior Travelers",
+      "solo": "Solo Explorer"
+    },
+    "interests": {
+      "history": "History & Heritage",
+      "art": "Art & Culture",
+      "foodWine": "Food & Wine",
+      "photography": "Photography",
+      "adventure": "Adventure",
+      "architecture": "Architecture"
+    },
+    "back": "Back",
+    "findTours": "Find Perfect Tours",
+    "startOver": "Start Over",
+    "results": {
+      "title": "Perfect tours for you",
+      "subtitle": "We found {count, plural, one {# tour} other {# tours}} matching your preferences",
+      "noResults": "No tours match your criteria yet. Try different selections or explore all our tours."
+    }
   },
   "privacy": {
     "title": "Privacy Policy",

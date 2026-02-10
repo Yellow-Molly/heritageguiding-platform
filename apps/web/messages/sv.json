@@ -331,10 +331,43 @@
     "relatedTours": "Du kanske också gillar"
   },
   "findTour": {
-    "title": "Hitta Din Tur - AI-Assistent",
-    "description": "Låt vår AI-assistent hjälpa dig hitta den perfekta Stockholmstur baserad på dina preferenser",
+    "title": "Hitta Din Perfekta Tur",
+    "description": "Svara på några frågor så rekommenderar vi den perfekta Stockholmsturen för dig",
     "heading": "Hitta Din Perfekta Tur",
-    "subheading": "Chatta med vår AI-assistent för att upptäcka den ideala kulturarvsupplevelsen för dig"
+    "subheading": "Svara på några frågor så rekommenderar vi den ideala kulturarvsupplevelsen för dig"
+  },
+  "wizard": {
+    "step1": {
+      "title": "Vilka reser du med?",
+      "subtitle": "Hjälp oss hitta den perfekta turen för dig"
+    },
+    "step2": {
+      "title": "Vad intresserar dig?",
+      "subtitle": "Välj ett eller flera intressen"
+    },
+    "audience": {
+      "family": "Familj med barn",
+      "couples": "Romantisk resa",
+      "corporate": "Företag / Team",
+      "seniors": "Seniorresenärer",
+      "solo": "Ensam utforskare"
+    },
+    "interests": {
+      "history": "Historia & Kulturarv",
+      "art": "Konst & Kultur",
+      "foodWine": "Mat & Vin",
+      "photography": "Fotografi",
+      "adventure": "Äventyr",
+      "architecture": "Arkitektur"
+    },
+    "back": "Tillbaka",
+    "findTours": "Hitta Perfekta Turer",
+    "startOver": "Börja Om",
+    "results": {
+      "title": "Perfekta turer för dig",
+      "subtitle": "Vi hittade {count, plural, one {# tur} other {# turer}} som matchar dina preferenser",
+      "noResults": "Inga turer matchar dina kriterier ännu. Prova andra val eller utforska alla våra turer."
+    }
   },
   "privacy": {
     "title": "Integritetspolicy",

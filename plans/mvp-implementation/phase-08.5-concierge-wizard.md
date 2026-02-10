@@ -10,7 +10,7 @@
 
 | Priority | Status | Effort |
 |----------|--------|--------|
-| P1 - Critical | pending | 8-12h |
+| P1 - Critical | complete | 8-12h |
 
 AI-powered tour recommendation wizard on **dedicated /find-tour page** using audience tags. Multi-step wizard: "Who are you?" → "What interests you?" → Personalized tour recommendations. *(Validated: Separate page, not homepage - allows A/B testing and cleaner homepage)*
 
