@@ -1,13 +1,13 @@
 # Codebase Summary - HeritageGuiding Platform
 
-**Last Updated:** February 8, 2026
-**Phase:** 08.1 - Bokun Integration + Excel Import/Export (Complete)
-**Status:** Bokun API integration, availability caching, semantic search, webhook handling, Excel/CSV import-export fully implemented
-**Codebase Metrics:** 150+ TypeScript files, 360K+ tokens, 65K LOC frontend + 35K LOC CMS
+**Last Updated:** February 10, 2026
+**Phase:** 08.5 - Concierge Wizard (Complete)
+**Status:** 3-step wizard for personalized tour recommendations on /find-tour, replacing BubblaV AI chat
+**Codebase Metrics:** 155+ TypeScript files, 370K+ tokens, 67K LOC frontend + 35K LOC CMS
 
 ## Overview
 
-HeritageGuiding is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16.1.6 frontend (65K LOC, 60+ React components, 9 API functions, 227+ unit tests) and Payload CMS 3.75 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication, Excel/CSV import-export).
+HeritageGuiding is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16.1.6 frontend (67K LOC, 65+ React components, 10 API routes, 287+ unit tests) and Payload CMS 3.75 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication, Excel/CSV import-export, Concierge Wizard with audience-interest matching).
 
 ## Repository Structure
 
@@ -91,7 +91,7 @@ app/
 │   ├── page.tsx          # Homepage
 │   ├── about-us/         # About page
 │   ├── faq/              # FAQ with accordion
-│   ├── find-tour/        # AI tour finder
+│   ├── find-tour/        # Concierge Wizard (3-step, audience-interest matching)
 │   ├── privacy/          # Privacy policy
 │   ├── terms/            # Terms & conditions
 │   └── tours/            # Tour catalog & detail pages
@@ -106,6 +106,7 @@ app/
 │   │   ├── availability/ # GET availability endpoint
 │   │   └── webhook/      # POST webhook handler
 │   ├── search/semantic/  # Semantic search endpoint
+│   ├── tours/recommend/  # POST wizard recommendations (Zod-validated)
 │   └── [...slug]/        # Generic API routes
 ├── layout.tsx            # Root layout
 ├── globals.css           # Global styles
@@ -183,11 +184,19 @@ app/
 - `popover.tsx` - Radix UI popover wrapper
 - `skeleton.tsx` - Loading skeleton
 
+**Wizard Components (Phase 08.5, 5 components):**
+- `concierge-wizard-container.tsx` - Main wizard controller, 3 steps, localStorage persistence
+- `wizard-step-selector.tsx` - Audience/interest selection (step 1-2)
+- `wizard-option-card.tsx` - Reusable option cards with aria-pressed
+- `wizard-progress-indicator.tsx` - Step progress display (aria-progressbar)
+- `wizard-tour-results.tsx` - Personalized recommendations (step 3)
+- Tests: 60 unit tests (audience selection, interest selection, API integration, a11y, localStorage, i18n)
+
 **Other Components:**
 - `bokun-booking-widget-with-fallback.tsx` - Booking widget wrapper
 - `language-switcher/` - Language selection
 
-**Tests:** 227+ unit tests using Vitest + React Testing Library
+**Tests:** 287+ unit tests using Vitest + React Testing Library
 
 #### Libraries & Utilities
 
@@ -232,7 +241,9 @@ app/
 - `lib/utils.ts` - General utilities
 - `lib/fonts.ts` - Font definitions
 - `lib/validation/tour-filters.ts` - Zod validation schemas
+- `lib/validation/wizard-schemas.ts` - Wizard request/response validation
 - `lib/hooks/use-debounce.ts` - Debounce hook
+- `lib/hooks/use-wizard-persistence.ts` - localStorage persistence for wizard state
 - `lib/utils/sanitize-html.ts` - HTML sanitization
 
 **Messages (Translations):**
@@ -439,6 +450,13 @@ query {
   - Storage: pgvector database
   - Output: Ranked tour recommendations
 
+**Concierge Wizard (Phase 08.5):**
+- `POST /api/tours/recommend` - Personalized tour recommendations
+  - Input: audience[], interests[] (Zod-validated)
+  - Processing: Payload CMS query with audience tag matching
+  - Storage: localStorage for returning visitors
+  - Output: Top 6 matching tours with scores
+
 ## CI/CD Pipeline
 
 **File:** `.github/workflows/ci.yml`
@@ -503,6 +521,7 @@ npm run payload:generate-types  # Generate TS types from schema
 - Phase 06: Tour Catalog ✅
 - Phase 07: Tour Detail ✅
 - Phase 08.1: Bokun Booking Integration ✅
+- Phase 08.5: Concierge Wizard ✅
 
 ### Phase 08.1 Deliverables
 - Bokun API client with HMAC-SHA256 authentication
@@ -515,6 +534,17 @@ npm run payload:generate-types  # Generate TS types from schema
 - Excel/CSV import-export with format-agnostic pipeline
 - Zod validation for all import formats
 
+### Phase 08.5 Deliverables
+- 3-step Concierge Wizard on /find-tour
+- Step 1: Audience selection (family, couples, corporate, seniors, solo)
+- Step 2: Interest selection (history, art, food/wine, photography, adventure, architecture)
+- Step 3: Personalized tour recommendations (top 6 matches from Payload CMS)
+- localStorage persistence for returning visitors
+- Full i18n support (SV/EN/DE)
+- Zod-validated POST /api/tours/recommend endpoint
+- 60 unit tests with 100% coverage on new components
+- Accessible (aria-pressed, aria-label, keyboard nav, progressbar)
+
 ## Codebase Metrics
 
 | Metric | Value |
@@ -523,15 +553,15 @@ npm run payload:generate-types  # Generate TS types from schema
 | **Frontend LOC** | ~65,000 |
 | **CMS LOC** | ~35,000 |
 | **Total Tokens** | 350,000+ |
-| **React Components** | 60+ |
+| **React Components** | 65+ |
 | **API Functions** | 9 (data-fetching) |
-| **Bokun API Routes** | 2 (availability, webhook) |
-| **Semantic Search Routes** | 1 |
+| **API Routes** | 4 (Bokun availability/webhook, semantic search, wizard recommendations) |
 | **Excel/CSV Services** | 9 |
 | **Admin Components** | 6 (import/export UI) |
+| **Wizard Components** | 5 (Phase 08.5) |
 | **CMS Collections** | 10+ |
 | **Field Modules** | 7 |
-| **Unit Tests** | 227+ |
+| **Unit Tests** | 287+ |
 | **TypeScript Coverage** | 100% |
 | **Accessibility** | WCAG 2.1 AA |
 | **Lighthouse Score** | 90+ (all categories) |
@@ -565,11 +595,12 @@ npm run payload:generate-types  # Generate TS types from schema
 | **06** | Catalog | ✅ Complete |
 | **07** | Detail Page | ✅ Complete |
 | **08.1** | Bokun Booking | ✅ Complete |
+| **08.5** | Concierge Wizard | ✅ Complete |
 | **09** | Groups & Inquiry | Pending |
 | **10-13** | Advanced Features | Planned |
 | **14-17** | Polish & Launch | Planned |
 
 ---
 
-**Last Updated:** February 8, 2026
-**Document Status:** Phase 08.1 Complete (Excel Import/Export included) - Ready for Phase 09
+**Last Updated:** February 10, 2026
+**Document Status:** Phase 08.5 Complete (Concierge Wizard) - Ready for Phase 09

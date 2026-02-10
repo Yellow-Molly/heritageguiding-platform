@@ -1,9 +1,9 @@
 # System Architecture - HeritageGuiding Platform
 
-**Last Updated:** February 8, 2026
-**Phase:** 08.1 - Bokun Integration + Excel Import/Export (Complete)
-**Status:** Bokun API routes, caching, webhook handlers, semantic search, Excel/CSV import-export fully implemented
-**Recent Update:** Bokun API client with HMAC-SHA256 auth, 60s availability caching, semantic search with pgvector, webhook signature verification, Excel/CSV pipelines
+**Last Updated:** February 10, 2026
+**Phase:** 08.5 - Concierge Wizard (Complete)
+**Status:** 3-step wizard with audience-interest matching, localStorage persistence, Zod-validated API, 60 tests
+**Recent Update:** Concierge Wizard replacing BubblaV AI chat on /find-tour, POST /api/tours/recommend endpoint, full i18n and a11y support
 
 ## High-Level Architecture
 
@@ -28,6 +28,7 @@
 │  │  - Homepage: / (app/(frontend)/page.tsx)             │   │
 │  │  - Tour Catalog: /tours (Phase 6+)                   │   │
 │  │  - Tour Details: /tours/:id (Phase 7+)               │   │
+│  │  - Concierge Wizard: /find-tour (Phase 8.5+)        │   │
 │  │  - Import/Export: /admin/import (Phase 8.1+)         │   │
 │  └──────────────────────────────────────────────────────┘   │
 │                                                               │
@@ -38,6 +39,7 @@
 │  │  - REST API: /api/[...slug] (Route handlers)         │   │
 │  │  - Bokun: /api/bokun/* (availability, webhooks)      │   │
 │  │  - Search: /api/search/semantic (vector search)      │   │
+│  │  - Wizard: /api/tours/recommend (Concierge recs)     │   │
 │  └──────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────┘
                             ↑↓
@@ -83,6 +85,39 @@
 ```
 
 ## Component Interactions
+
+### Request Flow - Concierge Wizard (Phase 08.5)
+
+```
+1. User visits /find-tour
+   ↓
+2. Next.js App Router renders wizard page (server component)
+   ↓
+3. Client Component (ConciergeWizardContainer) hydrates:
+   - Checks localStorage for previous selections
+   - Restores state if returning visitor
+   ↓
+4. Step 1: User selects audience (family, couples, corporate, seniors, solo)
+   - WizardStepSelector renders option cards
+   - Multi-select with keyboard navigation
+   - aria-pressed states for accessibility
+   ↓
+5. Step 2: User selects interests (history, art, food/wine, etc.)
+   - Same component reused with different options
+   - Progress indicator updates to 67%
+   ↓
+6. Step 3: System fetches recommendations
+   - POST /api/tours/recommend with Zod validation
+   - Payload CMS query matches audience tags
+   - Returns top 6 tours with scores
+   ↓
+7. WizardTourResults renders:
+   - Display tour cards with images
+   - "View Tour" links to /tours/{slug}
+   - "Start Over" button resets wizard
+   ↓
+8. localStorage persists selections for next visit
+```
 
 ### Request Flow - Public Page View (Tour Catalog - Phase 07)
 
@@ -176,6 +211,12 @@ apps/web/
 │   │   ├── tour-card.tsx  # Individual tour card
 │   │   ├── tour-catalog-client.tsx  # Client-side filter logic
 │   │   └── index.ts
+│   ├── wizard/            # Concierge Wizard (Phase 8.5)
+│   │   ├── concierge-wizard-container.tsx
+│   │   ├── wizard-step-selector.tsx
+│   │   ├── wizard-option-card.tsx
+│   │   ├── wizard-progress-indicator.tsx
+│   │   └── wizard-tour-results.tsx
 │   ├── ui/                # Shared UI components
 │   │   ├── popover.tsx    # Radix UI Popover wrapper
 │   │   └── ...other components
@@ -274,9 +315,10 @@ query {
 }
 ```
 
-**Common Queries (Phase 07):**
+**Common Queries (Phase 07-08.5):**
 - `getAllCategories()` - Fetch all tour categories (for FilterBar)
 - `getToursByFilter()` - Filter tours by category, date, price
+- `getToursByAudienceAndInterests()` - Match tours by audience tags (Concierge Wizard)
 
 ### REST API Routes (Data-Fetching Functions)
 
@@ -305,6 +347,13 @@ query {
 - `GET /api/admin/export` - Download tours as Excel/CSV
 - Format-agnostic pipeline: Parse → Map → Validate (Zod) → Transform → Create
 - ExcelJS 4.4.0 for Excel handling
+
+**Concierge Wizard (Phase 08.5 - Complete):**
+- `POST /api/tours/recommend` - Personalized recommendations
+  - Input: audience[], interests[] (Zod-validated)
+  - Processing: Query Payload CMS with audience tag matching
+  - Output: Top 6 matching tours with scores
+  - Features: localStorage persistence, i18n, accessibility
 
 **Planned (Phase 09+):**
 - POST `/api/bookings` - Create Bokun booking
@@ -493,6 +542,17 @@ access: {
 - ✅ Excel/CSV import-export (format-agnostic pipeline, Zod validation, ExcelJS 4.4.0)
 - ✅ API endpoints for availability, webhooks, semantic search, import/export
 - ✅ Turbopack/webpack coexistence: webpack config present but ignored by Turbopack
+
+### Phase 08.5 (Concierge Wizard) - COMPLETE ✅
+- ✅ 3-step wizard on /find-tour (replaces BubblaV AI chat)
+- ✅ Step 1: Audience selection (family, couples, corporate, seniors, solo)
+- ✅ Step 2: Interest selection (history, art, food/wine, photography, adventure, architecture)
+- ✅ Step 3: Personalized tour recommendations from Payload CMS API
+- ✅ localStorage persistence for returning visitors
+- ✅ Full i18n support (EN/SV/DE)
+- ✅ Zod-validated POST /api/tours/recommend endpoint
+- ✅ 60 unit tests, 100% coverage on new code
+- ✅ Accessible (aria-pressed, aria-label, keyboard navigation, progressbar)
 
 ### Phase 09+ (Advanced) - Planned
 - WhatsApp Business API integration

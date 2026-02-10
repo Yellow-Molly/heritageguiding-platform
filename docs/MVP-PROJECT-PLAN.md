@@ -1,9 +1,9 @@
 # MVP PROJECT PLAN
 ## HeritageGuiding Platform - AI-First Tourism Booking Platform
 
-**Document Version:** 1.4
-**Date:** February 8, 2026
-**Status:** Phase 08.1 Complete - Bokun Integration + Semantic Search + Excel Import/Export
+**Document Version:** 1.5
+**Date:** February 10, 2026
+**Status:** Phase 08.5 Complete - Concierge Wizard with audience-interest matching
 
 ---
 
@@ -92,7 +92,7 @@ The MVP development is organized into **17 distinct phases**.
 | **8. Booking Integration** | 24-28 | Bokun API, availability sync, widget embedding ✅ |
 | **8.1. Semantic Search** | 6-8 | pgvector + OpenAI embeddings, vector similarity ✅ |
 | **8.1+. Excel Import/Export** | 4-6 | ExcelJS, format-agnostic pipeline, Zod validation ✅ |
-| **8.5. Concierge Wizard** | 8-12 | AI-powered tour recommendations using audience tags |
+| **8.5. Concierge Wizard** | 8-12 | 3-step wizard with audience-interest matching ✅ |
 
 ### Phase 9-13: Advanced Features (Weeks 6-8)
 
@@ -236,6 +236,7 @@ heritageguiding.com/
 | v1.0 | Original MVP | 292-350 |
 | v1.1 | +FAQ & About Us (+16h) | 302-364 |
 | v1.2 | +Enhanced schema, Concierge Wizard (+20h) | 310-372 |
+| v1.5 | Phase 08.5 Complete (Concierge Wizard) | 318-384 |
 
 **Timeline:** Achievable in 12 weeks with proper planning.
 
@@ -359,6 +360,8 @@ Excluded from MVP, planned for post-launch:
 | v1.1 | Jan 15, 2026 | Added FAQ & About Us pages |
 | v1.2 | Jan 15, 2026 | Enhanced schema, Concierge Wizard |
 | v1.3 | Feb 2, 2026 | Condensed document, updated to Bokun integration |
+| v1.4 | Feb 8, 2026 | Phase 08.1 complete status |
+| v1.5 | Feb 10, 2026 | Phase 08.5 Concierge Wizard complete |
 
 ---
 

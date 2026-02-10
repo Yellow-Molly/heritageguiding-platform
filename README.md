@@ -2,7 +2,7 @@
 
 Premium heritage tour booking platform for Sweden. AI-first architecture with advanced technology stack supporting Swedish/English/German markets.
 
-**Status:** Phase 08.1 Complete - Bokun Integration + Semantic Search + Excel Import/Export
+**Status:** Phase 08.5 Complete - Concierge Wizard with personalized tour recommendations
 **Live Demo:** Coming February 2026
 
 ## Quick Start
@@ -119,6 +119,15 @@ heritageguiding-platform/
 - Related tours recommendation
 - Breadcrumb navigation
 - JSON-LD schema markup
+
+### Phase 08.5: Concierge Wizard
+- 3-step personalized tour finder on /find-tour
+- Step 1: Audience selection (family, couples, corporate, seniors, solo)
+- Step 2: Interest selection (history, art, food/wine, photography, adventure, architecture)
+- Step 3: Top 6 tour recommendations from Payload CMS
+- localStorage persistence for returning visitors
+- Full i18n (SV/EN/DE) and accessibility (WCAG 2.1 AA)
+- 60 unit tests with 100% coverage
 
 ### Accessibility & i18n
 - WCAG 2.1 AA compliance
@@ -285,9 +294,9 @@ Report via GitHub Issues with:
 - **QA/Tester**: Testing, bug reporting
 - **DevOps**: Infrastructure, CI/CD
 
-## Completed Phase (Phase 08.1)
+## Completed Phases
 
-**Bokun Booking Integration + Excel Import/Export** (Complete - Feb 8, 2026)
+**Phase 08.1: Bokun Booking Integration + Excel Import/Export** (Feb 8, 2026)
 - HMAC-SHA256 authentication with Bokun API
 - Booking widget integration with fallback
 - 60-second availability caching
@@ -296,6 +305,16 @@ Report via GitHub Issues with:
 - Semantic search with pgvector + OpenAI embeddings
 - Rate limiting (400 req/min) with exponential backoff
 - Excel/CSV import-export pipeline (Zod validation)
+
+**Phase 08.5: Concierge Wizard** (Feb 10, 2026)
+- 3-step wizard on /find-tour (replaces BubblaV AI chat)
+- Audience selection: family, couples, corporate, seniors, solo
+- Interest selection: history, art, food/wine, photography, adventure, architecture
+- Personalized recommendations from Payload CMS API (top 6 matches)
+- localStorage persistence for returning visitors
+- Zod-validated POST /api/tours/recommend endpoint
+- Full i18n (SV/EN/DE) and accessibility support
+- 60 unit tests, 100% coverage
 
 ## Next Phase (Phase 09)
 
@@ -316,5 +335,5 @@ Proprietary - All rights reserved
 
 ---
 
-**Last Updated:** February 8, 2026
-**Repository Version:** Phase 08.1 Complete
+**Last Updated:** February 10, 2026
+**Repository Version:** Phase 08.5 Complete
