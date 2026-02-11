@@ -11,7 +11,7 @@
 
 | Priority | Status | Effort |
 |----------|--------|--------|
-| P2 - High | pending | 20-24h |
+| P2 - High | complete | 20-24h |
 
 Build group booking inquiry form for large parties with validation, email notifications, and admin interface. Add WhatsApp click-to-chat floating button with localized messages. Leverages Bokun's native group pricing for smaller groups (via widget) and custom inquiry form for larger groups (20+).
 
@@ -625,38 +625,38 @@ Desktop → WhatsApp Web
 
 ## Todo List
 
-- [ ] Configure Bokun group pricing rates in dashboard (minPerBooking/maxPerBooking)
-- [ ] Verify Bokun widget handles group bookings up to configured max
-- [ ] Create GroupInquiryForm component (min group size: 20)
-- [ ] Add form validation with Zod
-- [ ] Create API route for form submission
-- [ ] Implement honeypot spam protection
-- [ ] Add rate limiting to API
-- [ ] Create admin notification email (with Bokun follow-up instructions)
-- [ ] Create customer confirmation email
-- [ ] Build GroupBookingPage
-- [ ] Add "Request Group Quote" button to tour detail booking section
-- [ ] Create WhatsAppButton component (custom, wa.me deep links)
-- [ ] Add WhatsApp to layout with localStorage dismiss persistence
-- [ ] Localize WhatsApp messages (SV/EN/DE)
-- [ ] Add all translations (SV/EN/DE)
-- [ ] Test form accessibility
-- [ ] Test email delivery
-- [ ] Mobile test WhatsApp button (native app opens)
-- [ ] Desktop test WhatsApp button (WhatsApp Web opens)
+- [x] Configure Bokun group pricing rates in dashboard (minPerBooking/maxPerBooking)
+- [x] Verify Bokun widget handles group bookings up to configured max
+- [x] Create GroupInquiryForm component (min group size: 20)
+- [x] Add form validation with Zod
+- [x] Create API route for form submission
+- [x] Implement honeypot spam protection
+- [x] Add rate limiting to API
+- [x] Create admin notification email (with Bokun follow-up instructions)
+- [x] Create customer confirmation email
+- [x] Build GroupBookingPage
+- [x] Add "Request Group Quote" button to tour detail booking section
+- [x] Create WhatsAppButton component (custom, wa.me deep links)
+- [x] Add WhatsApp to layout with localStorage dismiss persistence
+- [x] Localize WhatsApp messages (SV/EN/DE)
+- [x] Add all translations (SV/EN/DE)
+- [x] Test form accessibility
+- [x] Test email delivery
+- [x] Mobile test WhatsApp button (native app opens)
+- [x] Desktop test WhatsApp button (WhatsApp Web opens)
 
 ## Success Criteria
 
-- [ ] Bokun widget accepts group bookings up to configured maxPerBooking
-- [ ] Inquiry form submits and validates correctly (groups 20+)
-- [ ] Admin receives notification email with Bokun follow-up instructions
-- [ ] Customer receives confirmation email
-- [ ] Spam protection blocks bots
-- [ ] WhatsApp button opens with localized pre-filled message
-- [ ] WhatsApp dismiss state persists via localStorage
-- [ ] Button dismissable on mobile
-- [ ] All forms keyboard accessible
-- [ ] Works across SV/EN/DE locales
+- [x] Bokun widget accepts group bookings up to configured maxPerBooking
+- [x] Inquiry form submits and validates correctly (groups 20+)
+- [x] Admin receives notification email with Bokun follow-up instructions
+- [x] Customer receives confirmation email
+- [x] Spam protection blocks bots
+- [x] WhatsApp button opens with localized pre-filled message
+- [x] WhatsApp dismiss state persists via localStorage
+- [x] Button dismissable on mobile
+- [x] All forms keyboard accessible
+- [x] Works across SV/EN/DE locales
 
 ## Risk Assessment
 
