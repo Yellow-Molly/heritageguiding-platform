@@ -369,6 +369,42 @@
       "noResults": "Noch keine Touren für Ihre Kriterien. Versuchen Sie andere Auswahl oder erkunden Sie alle unsere Touren."
     }
   },
+  "groupBooking": {
+    "title": "Gruppenanfrage",
+    "description": "Für Gruppen ab 20 Personen füllen Sie bitte dieses Formular aus und wir erstellen ein individuelles Angebot für Ihre Gruppe.",
+    "modalTrigger": "Gruppenangebot anfragen",
+    "modalDescription": "Für Gruppen ab 20 Personen füllen Sie dieses Formular aus und wir melden uns innerhalb von 24 Stunden.",
+    "meta": {
+      "title": "Gruppentouren - HeritageGuiding",
+      "description": "Buchen Sie eine private Gruppentour in Stockholm für 20+ Personen"
+    },
+    "form": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "groupSize": "Gruppengröße",
+      "preferredDates": "Gewünschte Termine",
+      "datesPlaceholder": "z.B. 15.-20. Juni 2026",
+      "tourInterest": "Interessante Touren",
+      "tourPlaceholder": "z.B. Historisches Stockholm, Königspalast",
+      "specialRequirements": "Besondere Anforderungen",
+      "requirementsPlaceholder": "Barrierefreiheit, Ernährungseinschränkungen usw.",
+      "submit": "Anfrage senden",
+      "submitting": "Wird gesendet...",
+      "required": "Dieses Feld ist erforderlich",
+      "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+      "minGroupSize": "Mindestgruppengröße ist 20",
+      "successTitle": "Anfrage gesendet!",
+      "successMessage": "Wir kontaktieren Sie innerhalb von 24 Stunden mit einem individuellen Angebot.",
+      "errorMessage": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut."
+    }
+  },
+  "whatsapp": {
+    "prompt": "Fragen? Chatten Sie mit uns!",
+    "chatOnWhatsApp": "Auf WhatsApp chatten",
+    "dismiss": "Schließen"
+  },
   "privacy": {
     "title": "Datenschutzerklärung",
     "description": "Wie wir Ihre persönlichen Daten erfassen, verwenden und schützen",

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Clock, Users, MapPin, Shield, AlertCircle, Mail } from 'lucide-react'
 import { formatDuration, formatPrice } from '@/lib/utils'
 import { BokunBookingWidget } from '@/components/bokun-booking-widget-with-fallback'
+import { GroupInquiryModal } from '@/components/booking/group-inquiry-modal'
 import type { TourDetail } from '@/lib/api/get-tour-by-slug'
 
 interface BookingSectionProps {
@@ -88,6 +89,9 @@ export function BookingSection({ tour }: BookingSectionProps) {
             </Button>
           </div>
         )}
+
+        {/* Group Booking Inquiry - for groups of 20+ */}
+        <GroupInquiryModal tourName={tour.title} />
 
         {/* Trust Signals */}
         <div className="space-y-2 pt-2 text-center text-xs text-[var(--color-text-muted)]">

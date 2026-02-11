@@ -369,6 +369,42 @@
       "noResults": "Inga turer matchar dina kriterier ännu. Prova andra val eller utforska alla våra turer."
     }
   },
+  "groupBooking": {
+    "title": "Gruppbokningsförfrågan",
+    "description": "För grupper om 20 eller fler, fyll i formuläret så skapar vi en skräddarsydd offert för er grupp.",
+    "modalTrigger": "Begär gruppoffert",
+    "modalDescription": "För grupper om 20+, fyll i formuläret så återkommer vi inom 24 timmar.",
+    "meta": {
+      "title": "Gruppturer - HeritageGuiding",
+      "description": "Boka en privat grupptur i Stockholm för 20+ personer"
+    },
+    "form": {
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "email": "E-post",
+      "phone": "Telefon",
+      "groupSize": "Gruppstorlek",
+      "preferredDates": "Önskade datum",
+      "datesPlaceholder": "t.ex. 15-20 juni 2026",
+      "tourInterest": "Intressanta turer",
+      "tourPlaceholder": "t.ex. Historiska Stockholm, Kungliga Slottet",
+      "specialRequirements": "Särskilda önskemål",
+      "requirementsPlaceholder": "Tillgänglighetsbehov, kostbegränsningar etc.",
+      "submit": "Skicka förfrågan",
+      "submitting": "Skickar...",
+      "required": "Detta fält är obligatoriskt",
+      "invalidEmail": "Ange en giltig e-postadress",
+      "minGroupSize": "Minsta gruppstorlek är 20",
+      "successTitle": "Förfrågan skickad!",
+      "successMessage": "Vi kontaktar dig inom 24 timmar med en skräddarsydd offert.",
+      "errorMessage": "Något gick fel. Försök igen."
+    }
+  },
+  "whatsapp": {
+    "prompt": "Frågor? Chatta med oss!",
+    "chatOnWhatsApp": "Chatta på WhatsApp",
+    "dismiss": "Stäng"
+  },
   "privacy": {
     "title": "Integritetspolicy",
     "description": "Hur vi samlar in, använder och skyddar din personliga information",

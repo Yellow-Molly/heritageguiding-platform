@@ -369,6 +369,42 @@
       "noResults": "No tours match your criteria yet. Try different selections or explore all our tours."
     }
   },
+  "groupBooking": {
+    "title": "Group Booking Inquiry",
+    "description": "For groups of 20 or more, please fill out this form and we'll create a custom quote for your group.",
+    "modalTrigger": "Request Group Quote",
+    "modalDescription": "For groups of 20+, fill out this form and we'll get back to you within 24 hours.",
+    "meta": {
+      "title": "Group Tours - HeritageGuiding",
+      "description": "Book a private group tour in Stockholm for 20+ people"
+    },
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "groupSize": "Group Size",
+      "preferredDates": "Preferred Dates",
+      "datesPlaceholder": "e.g., June 15-20, 2026",
+      "tourInterest": "Tours of Interest",
+      "tourPlaceholder": "e.g., Historical Stockholm, Royal Palace",
+      "specialRequirements": "Special Requirements",
+      "requirementsPlaceholder": "Accessibility needs, dietary restrictions, etc.",
+      "submit": "Submit Inquiry",
+      "submitting": "Sending...",
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email",
+      "minGroupSize": "Minimum group size is 20",
+      "successTitle": "Inquiry Sent!",
+      "successMessage": "We'll contact you within 24 hours with a custom quote.",
+      "errorMessage": "Something went wrong. Please try again."
+    }
+  },
+  "whatsapp": {
+    "prompt": "Questions? Chat with us!",
+    "chatOnWhatsApp": "Chat on WhatsApp",
+    "dismiss": "Dismiss"
+  },
   "privacy": {
     "title": "Privacy Policy",
     "description": "How we collect, use, and protect your personal information",

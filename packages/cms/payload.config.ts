@@ -15,7 +15,9 @@ import {
   Reviews,
   Pages,
   Bookings,
+  GroupInquiries,
 } from './collections/index'
+import { SiteSettings } from './globals/site-settings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -66,7 +68,9 @@ export default buildConfig({
     Reviews,
     Pages,
     Bookings,
+    GroupInquiries,
   ],
+  globals: [SiteSettings],
   secret: getPayloadSecret(),
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
