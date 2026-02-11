@@ -268,7 +268,7 @@ Fully implemented booking system with HMAC authentication, 60-second availabilit
 | PostgreSQL hosting | Yes | Switch provider (1 day) |
 | Vercel deployment | Yes | Switch to AWS (2 days) |
 | Vercel Blob storage | No | Use Cloudinary (1 day) |
-| Email service | Yes | Resend or SendGrid (1 day) |
+| Email service | Yes | Gmail SMTP (Google Workspace) (1 day) |
 | Bokun API | Yes | Manual booking form (2 days) |
 
 ### Key Risks & Mitigations

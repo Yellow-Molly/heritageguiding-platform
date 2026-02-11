@@ -193,8 +193,8 @@ Auto-deploy to heritageguiding.com
    | Database | PostgreSQL 15 (Supabase) |
    | Styling | Tailwind CSS, shadcn/ui |
    | Hosting | Vercel |
-   | Booking | Rezdy API |
-   | Email | Resend |
+   | Booking | Bokun API |
+   | Email | Nodemailer + Gmail SMTP (Google Workspace) |
 
    ## Architecture Diagram
 
@@ -203,7 +203,7 @@ Auto-deploy to heritageguiding.com
                                     │
                     ┌───────────────┼───────────────┐
                     ↓               ↓               ↓
-               [Payload CMS]  [Rezdy API]    [Resend]
+               [Payload CMS]  [Bokun API]    [Gmail SMTP]
                     │
                     ↓
               [PostgreSQL]
@@ -251,8 +251,10 @@ Auto-deploy to heritageguiding.com
    ```
    DATABASE_URL=postgresql://...
    PAYLOAD_SECRET=your-32-char-secret
-   REZDY_API_KEY=your-rezdy-key
-   RESEND_API_KEY=re_...
+   BOKUN_ACCESS_KEY=your-bokun-access-key
+   BOKUN_SECRET_KEY=your-bokun-secret-key
+   GMAIL_USER=noreply@heritageguiding.com
+   GMAIL_APP_PASSWORD=your-google-workspace-app-password
    NEXT_PUBLIC_URL=https://heritageguiding.com
    ```
 
@@ -339,18 +341,19 @@ Auto-deploy to heritageguiding.com
    **Cause**: Rezdy API issue
 
    **Solution**:
-   1. Check REZDY_API_KEY is valid
-   2. Verify tour has rezdyProductCode
-   3. Check Rezdy dashboard for issues
+   1. Check BOKUN_ACCESS_KEY and BOKUN_SECRET_KEY are valid
+   2. Verify tour has bokunExperienceId
+   3. Check Bokun dashboard for issues
 
    ### "Emails not sending"
 
-   **Cause**: Resend configuration
+   **Cause**: Gmail SMTP configuration
 
    **Solution**:
-   1. Check RESEND_API_KEY
-   2. Verify sender domain in Resend
-   3. Check spam folder
+   1. Check GMAIL_USER and GMAIL_APP_PASSWORD env vars
+   2. Verify Google Workspace app password is valid (not regular password)
+   3. Ensure app passwords enabled in Google Workspace admin
+   4. Check spam folder
 
    ## Getting Help
 
@@ -371,7 +374,7 @@ Auto-deploy to heritageguiding.com
    - [ ] Content populated (min 5 tours)
    - [ ] Translations complete (SV/EN/DE)
    - [ ] Images optimized and uploaded
-   - [ ] Rezdy products linked
+   - [ ] Bokun experiences linked (bokunExperienceId)
    - [ ] Email templates tested
 
    ## Infrastructure
@@ -433,8 +436,10 @@ Auto-deploy to heritageguiding.com
    # Set production env vars
    vercel env add DATABASE_URL production
    vercel env add PAYLOAD_SECRET production
-   vercel env add REZDY_API_KEY production
-   vercel env add RESEND_API_KEY production
+   vercel env add BOKUN_ACCESS_KEY production
+   vercel env add BOKUN_SECRET_KEY production
+   vercel env add GMAIL_USER production
+   vercel env add GMAIL_APP_PASSWORD production
    vercel env add NEXT_PUBLIC_URL production
 
    # Deploy to production

@@ -130,7 +130,7 @@ The MVP development is organized into **17 distinct phases**.
 | **Localization** | next-intl 4.7.0 for routing, date-fns for formatting |
 | **Hosting** | Vercel (frontend), PostgreSQL (database) |
 | **Media** | Vercel Blob for image optimization |
-| **Email** | Resend for transactional emails |
+| **Email** | Nodemailer + Gmail SMTP (Google Workspace Business) |
 
 ### Site Structure
 
@@ -312,7 +312,7 @@ heritageguiding.com/
 - Vercel platform stability
 - PostgreSQL hosting
 - Vercel Blob (images)
-- Email service (Resend)
+- Email service (Gmail SMTP)
 
 ---
 

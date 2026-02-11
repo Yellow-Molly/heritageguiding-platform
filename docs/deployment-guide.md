@@ -147,8 +147,9 @@ OPENAI_API_KEY=sk-your-openai-key
 # Media Storage (Vercel Blob)
 BLOB_READ_WRITE_TOKEN=vercel_blob_token
 
-# Email (Resend)
-RESEND_API_KEY=re_your-api-key
+# Email (Gmail SMTP via Nodemailer)
+GMAIL_USER=bookings@heritageguiding.com
+GMAIL_APP_PASSWORD=your-google-app-password
 EMAIL_FROM=bookings@heritageguiding.com
 
 # Analytics (optional)
@@ -180,7 +181,7 @@ vercel env add PAYLOAD_SECRET production
 - PAYLOAD_SECRET
 - BOKUN_SECRET_KEY
 - OPENAI_API_KEY
-- RESEND_API_KEY
+- GMAIL_APP_PASSWORD
 
 **Public Variables (NEXT_PUBLIC_*):**
 - NEXT_PUBLIC_URL
@@ -228,12 +229,13 @@ heritageguiding.se      → heritageguiding.com
 www.heritageguiding.com → heritageguiding.com
 ```
 
-### Email DNS (Resend)
+### Email DNS (Google Workspace)
 
 ```
-Type    Name              Value
-CNAME   resend._domainkey resend-value
-TXT     @                 v=DMARC1; p=none
+Type    Name    Value
+MX      @       Google Workspace MX records (configured in Google Admin)
+TXT     @       v=SPF1 include:_spf.google.com ~all
+TXT     @       v=DMARC1; p=none
 ```
 
 ---
@@ -347,7 +349,7 @@ git push origin hotfix/booking-bug
 - [ ] pgvector extension enabled
 - [ ] Bokun API access granted
 - [ ] OpenAI API key obtained
-- [ ] Resend account created
+- [ ] Google Workspace Business account created
 - [ ] Email DNS configured
 
 ### Week 1 Setup
@@ -385,7 +387,7 @@ git push origin hotfix/booking-bug
 - Day 4: Create Supabase database
 - Day 5: Configure environment variables
 - Day 6: Set up Bokun + OpenAI accounts
-- Day 7: Configure email (Resend)
+- Day 7: Configure email (Google Workspace + app password)
 
 **Week 1 (Phase 1 - Foundation):**
 - Initialize Next.js 16 + Payload CMS 3.75

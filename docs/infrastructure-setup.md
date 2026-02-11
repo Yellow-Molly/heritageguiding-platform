@@ -284,14 +284,20 @@ BLOB_READ_WRITE_TOKEN=<vercel-blob-token>
 
 Features: Automatic WebP, responsive images, lazy loading
 
-### Email: Resend
+### Email: Gmail SMTP (Google Workspace Business)
 
-**Plan:** Pro ($20/month for 50k emails)
+**Plan:** Google Workspace Business Starter ($6/user/month)
 
 ```bash
-RESEND_API_KEY=re_your-api-key
+GMAIL_USER=bookings@heritageguiding.com
+GMAIL_APP_PASSWORD=your-google-app-password
 EMAIL_FROM=bookings@heritageguiding.com
 ```
+
+**Setup:**
+- Create app password in Google Account settings
+- Enable 2-factor authentication (required for app passwords)
+- Use Nodemailer for SMTP transport
 
 ### Analytics
 
@@ -385,9 +391,9 @@ pg_dump $DATABASE_URL > backups/$(date +%Y%m%d).sql
 | Vercel Pro | $20 |
 | Supabase Pro | $25 |
 | Vercel Blob | $10 |
-| Resend Pro | $20 |
+| Google Workspace Business | $6 |
 | Domains (.com + .se) | $3 |
-| **TOTAL** | **$78/month** |
+| **TOTAL** | **$64/month** |
 
 **Optional:**
 - Sentry Developer: $26/month

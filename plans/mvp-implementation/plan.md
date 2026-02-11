@@ -25,6 +25,7 @@ Stockholm tourism booking platform with AI-first architecture, multi-language su
 - **Booking:** Bokun API (HMAC-SHA1 auth, embedded widget)
 - **Search:** OpenAI text-embedding-3-small + pgvector HNSW
 - **Import/Export:** ExcelJS 4.4.0 + csv-parse/csv-stringify
+- **Email:** Nodemailer + Gmail SMTP (Google Workspace Business)
 - **Hosting:** Vercel (Node 24)
 - **Maps:** Google Maps link (no embed, zero API cost)
 
@@ -43,7 +44,7 @@ Stockholm tourism booking platform with AI-first architecture, multi-language su
 | 08 | Rezdy Integration | 24-28h | superseded by 08.1 | [phase-08](./phase-08-rezdy-integration.md) |
 | 08.1 | Bokun Integration | 20-24h | done (2026-02-04) | [phase-08.1](./phase-08.1-bokun-integration.md) |
 | 08.5 | Concierge Wizard | 8-12h | pending | [phase-08.5](./phase-08.5-concierge-wizard.md) |
-| 09 | Group Bookings + WhatsApp | 20-24h | pending | [phase-09](./phase-09-group-bookings-whatsapp.md) |
+| 09 | Group Bookings + WhatsApp (Bokun) | 20-24h | pending | [phase-09](./phase-09-group-bookings-whatsapp.md) |
 | 10 | Accessibility + SEO | 44-54h | pending | [phase-10](./phase-10-accessibility-seo.md) |
 | 11 | Performance + Testing | 32-40h | pending | [phase-11](./phase-11-performance-testing.md) |
 | 12 | Documentation + Deployment | 16-22h | pending | [phase-12](./phase-12-documentation-deployment.md) |
