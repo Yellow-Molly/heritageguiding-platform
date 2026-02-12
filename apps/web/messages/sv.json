@@ -12,7 +12,9 @@
     "filter": "Filter",
     "sortBy": "Sortera efter",
     "language": "Språk",
-    "menu": "Meny"
+    "menu": "Meny",
+    "guides": "Guider",
+    "findYourTour": "Hitta din tur"
   },
   "home": {
     "title": "HeritageGuiding - Upptäck Stockholms Historia",
@@ -404,6 +406,24 @@
     "prompt": "Frågor? Chatta med oss!",
     "chatOnWhatsApp": "Chatta på WhatsApp",
     "dismiss": "Stäng"
+  },
+  "guides": {
+    "title": "Våra expertguider",
+    "description": "Möt de passionerade experterna som ger liv åt Stockholms kulturarv. Varje guide bidrar med unik expertis och lokal kunskap.",
+    "subtitle": "Möt personerna bakom upplevelserna",
+    "specializations": "Specialiseringar",
+    "languages": "Språk",
+    "operatingAreas": "Verksamhetsområden",
+    "credentials": "Meriter och certifieringar",
+    "about": "Om {name}",
+    "toursBy": "Turer med {name}",
+    "noTours": "Inga turer tillgängliga för närvarande",
+    "onLeave": "Ledig",
+    "emptyState": "Inga guider hittades som matchar dina kriterier",
+    "breadcrumb": {
+      "home": "Hem",
+      "guides": "Guider"
+    }
   },
   "privacy": {
     "title": "Integritetspolicy",

@@ -10,7 +10,7 @@ export const Guides: CollectionConfig = {
   slug: 'guides',
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'languages', 'email'],
+    defaultColumns: ['name', 'status', 'languages', 'email'],
     group: 'Content',
   },
   access: {
@@ -40,6 +40,21 @@ export const Guides: CollectionConfig = {
       },
       admin: {
         position: 'sidebar',
+      },
+    },
+    {
+      name: 'status',
+      type: 'select',
+      required: true,
+      defaultValue: 'active',
+      options: [
+        { label: 'Active', value: 'active' },
+        { label: 'Inactive', value: 'inactive' },
+        { label: 'On Leave', value: 'on-leave' },
+      ],
+      admin: {
+        position: 'sidebar',
+        description: 'Guide availability status',
       },
     },
     {
@@ -82,6 +97,15 @@ export const Guides: CollectionConfig = {
       },
     },
     {
+      name: 'phone',
+      type: 'text',
+      maxLength: 20,
+      admin: {
+        description: 'Contact phone (not exposed publicly)',
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'languages',
       type: 'select',
       hasMany: true,
@@ -96,6 +120,49 @@ export const Guides: CollectionConfig = {
       ],
       admin: {
         description: 'Languages the guide can conduct tours in',
+      },
+    },
+    {
+      name: 'specializations',
+      type: 'relationship',
+      relationTo: 'categories',
+      hasMany: true,
+      index: true,
+      admin: {
+        description: 'Tour categories this guide specializes in',
+      },
+    },
+    {
+      name: 'operatingAreas',
+      type: 'relationship',
+      relationTo: 'cities',
+      hasMany: true,
+      index: true,
+      admin: {
+        description: 'Cities where this guide operates',
+      },
+    },
+    {
+      name: 'additionalLanguages',
+      type: 'select',
+      hasMany: true,
+      options: [
+        { label: 'Japanese', value: 'ja' },
+        { label: 'Chinese', value: 'zh' },
+        { label: 'Norwegian', value: 'no' },
+        { label: 'Danish', value: 'da' },
+        { label: 'Finnish', value: 'fi' },
+        { label: 'Dutch', value: 'nl' },
+        { label: 'Portuguese', value: 'pt' },
+        { label: 'Russian', value: 'ru' },
+        { label: 'Arabic', value: 'ar' },
+        { label: 'Korean', value: 'ko' },
+        { label: 'Polish', value: 'pl' },
+        { label: 'Thai', value: 'th' },
+        { label: 'Hindi', value: 'hi' },
+      ],
+      admin: {
+        description: 'Additional languages beyond main tour languages',
       },
     },
   ],

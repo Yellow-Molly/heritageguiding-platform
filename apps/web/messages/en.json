@@ -12,7 +12,9 @@
     "filter": "Filter",
     "sortBy": "Sort by",
     "language": "Language",
-    "menu": "Menu"
+    "menu": "Menu",
+    "guides": "Guides",
+    "findYourTour": "Find Your Tour"
   },
   "home": {
     "title": "HeritageGuiding - Discover Stockholm's History",
@@ -404,6 +406,24 @@
     "prompt": "Questions? Chat with us!",
     "chatOnWhatsApp": "Chat on WhatsApp",
     "dismiss": "Dismiss"
+  },
+  "guides": {
+    "title": "Our Expert Guides",
+    "description": "Meet the passionate experts who bring Stockholm's heritage to life. Each guide brings unique expertise and local knowledge.",
+    "subtitle": "Meet the people behind the experiences",
+    "specializations": "Specializations",
+    "languages": "Languages",
+    "operatingAreas": "Operating Areas",
+    "credentials": "Credentials & Certifications",
+    "about": "About {name}",
+    "toursBy": "Tours by {name}",
+    "noTours": "No tours currently available",
+    "onLeave": "On Leave",
+    "emptyState": "No guides found matching your criteria",
+    "breadcrumb": {
+      "home": "Home",
+      "guides": "Guides"
+    }
   },
   "privacy": {
     "title": "Privacy Policy",

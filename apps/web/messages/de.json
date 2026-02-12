@@ -12,7 +12,9 @@
     "filter": "Filter",
     "sortBy": "Sortieren nach",
     "language": "Sprache",
-    "menu": "Menü"
+    "menu": "Menü",
+    "guides": "Reiseführer",
+    "findYourTour": "Finden Sie Ihre Tour"
   },
   "home": {
     "title": "HeritageGuiding - Entdecken Sie Stockholms Geschichte",
@@ -404,6 +406,24 @@
     "prompt": "Fragen? Chatten Sie mit uns!",
     "chatOnWhatsApp": "Auf WhatsApp chatten",
     "dismiss": "Schließen"
+  },
+  "guides": {
+    "title": "Unsere Experten-Reiseführer",
+    "description": "Lernen Sie die leidenschaftlichen Experten kennen, die Stockholms Kulturerbe zum Leben erwecken.",
+    "subtitle": "Die Menschen hinter den Erlebnissen",
+    "specializations": "Spezialisierungen",
+    "languages": "Sprachen",
+    "operatingAreas": "Einsatzgebiete",
+    "credentials": "Qualifikationen und Zertifizierungen",
+    "about": "Über {name}",
+    "toursBy": "Touren mit {name}",
+    "noTours": "Derzeit keine Touren verfügbar",
+    "onLeave": "Abwesend",
+    "emptyState": "Keine Reiseführer gefunden, die Ihren Kriterien entsprechen",
+    "breadcrumb": {
+      "home": "Startseite",
+      "guides": "Reiseführer"
+    }
   },
   "privacy": {
     "title": "Datenschutzerklärung",

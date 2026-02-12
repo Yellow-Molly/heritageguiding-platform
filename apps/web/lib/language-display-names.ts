@@ -1,0 +1,22 @@
+/** Mapping of language codes to their English display names */
+export const languageDisplayNames: Record<string, string> = {
+  sv: 'Swedish',
+  en: 'English',
+  de: 'German',
+  fr: 'French',
+  es: 'Spanish',
+  it: 'Italian',
+  ja: 'Japanese',
+  zh: 'Chinese',
+  no: 'Norwegian',
+  da: 'Danish',
+  fi: 'Finnish',
+  nl: 'Dutch',
+  pt: 'Portuguese',
+  ru: 'Russian',
+  ar: 'Arabic',
+  ko: 'Korean',
+  pl: 'Polish',
+  th: 'Thai',
+  hi: 'Hindi',
+}

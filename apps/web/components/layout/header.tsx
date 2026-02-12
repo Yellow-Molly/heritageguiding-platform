@@ -3,16 +3,17 @@
 import { useState, useEffect, useTransition } from 'react'
 import Image from 'next/image'
 import { Menu, X, Globe, ChevronDown } from 'lucide-react'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { getButtonClassName } from '@/components/ui/button'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { locales, localeLabels, type Locale } from '@/i18n/routing'
 
-const navigation = [
-  { name: 'Tours', href: '/tours' as const },
-  { name: 'About', href: '/about' as const },
-  { name: 'Contact', href: '/contact' as const },
+const navigationItems = [
+  { key: 'tours' as const, href: '/tours' as const },
+  { key: 'guides' as const, href: '/guides' as const },
+  { key: 'about' as const, href: '/about' as const },
+  { key: 'contact' as const, href: '/contact' as const },
 ]
 
 interface HeaderProps {
@@ -29,6 +30,7 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
   const locale = useLocale() as Locale
   const pathname = usePathname()
   const router = useRouter()
+  const t = useTranslations('common')
 
   // For solid variant, always show scrolled styling
   const showSolidStyle = variant === 'solid' || isScrolled
@@ -85,16 +87,16 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-8 md:flex">
-          {navigation.map((item) => (
+          {navigationItems.map((item) => (
             <Link
-              key={item.name}
+              key={item.key}
               href={item.href}
               className={cn(
                 'text-base font-medium transition-colors hover:opacity-80',
                 showSolidStyle ? 'text-[#2D3748]' : 'text-white text-shadow-sm'
               )}
             >
-              {item.name}
+              {t(item.key)}
             </Link>
           ))}
 
@@ -144,7 +146,7 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
             href="/find-tour"
             className={getButtonClassName(showSolidStyle ? 'primary' : 'outline', 'md')}
           >
-            Find Your Tour
+            {t('findYourTour')}
           </Link>
         </div>
 
@@ -172,14 +174,14 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
         )}
       >
         <div className="container mx-auto flex flex-col gap-2 px-4 py-6">
-          {navigation.map((item) => (
+          {navigationItems.map((item) => (
             <Link
-              key={item.name}
+              key={item.key}
               href={item.href}
               onClick={() => setIsMobileMenuOpen(false)}
               className="rounded-lg px-4 py-3 text-base font-medium text-[var(--color-text)] transition-colors hover:bg-[var(--color-background-alt)]"
             >
-              {item.name}
+              {t(item.key)}
             </Link>
           ))}
 
@@ -212,7 +214,7 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
               onClick={() => setIsMobileMenuOpen(false)}
               className={getButtonClassName('primary', 'lg', 'w-full')}
             >
-              Find Your Tour
+              {t('findYourTour')}
             </Link>
           </div>
         </div>
