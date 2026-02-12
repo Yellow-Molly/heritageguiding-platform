@@ -33,7 +33,7 @@ const INITIAL_FORM: FormData = {
 }
 
 /**
- * Group booking inquiry form for groups of 20+ people.
+ * Group booking inquiry form for groups of 9+ people.
  * Validates client-side, submits to /api/group-inquiry.
  * Includes honeypot field for spam protection.
  */
@@ -53,7 +53,7 @@ export function GroupInquiryForm({ tourName }: { tourName?: string }) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) newErrors.email = t('form.invalidEmail')
     if (form.phone.length < 8) newErrors.phone = t('form.required')
     const size = Number(form.groupSize)
-    if (!size || size < 20 || size > 200) newErrors.groupSize = t('form.minGroupSize')
+    if (!size || size < 9 || size > 200) newErrors.groupSize = t('form.minGroupSize')
     if (form.preferredDates.length < 5) newErrors.preferredDates = t('form.required')
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -179,7 +179,7 @@ export function GroupInquiryForm({ tourName }: { tourName?: string }) {
           <Input
             id="giq-groupSize"
             type="number"
-            min={20}
+            min={9}
             max={200}
             value={form.groupSize}
             onChange={(e) => updateField('groupSize', e.target.value)}

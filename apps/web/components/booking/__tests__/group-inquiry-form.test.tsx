@@ -22,7 +22,7 @@ vi.mock('next-intl', () => ({
       'form.submitting': 'Sending...',
       'form.required': 'This field is required',
       'form.invalidEmail': 'Please enter a valid email',
-      'form.minGroupSize': 'Minimum group size is 20',
+      'form.minGroupSize': 'Minimum group size is 9',
       'form.successTitle': 'Inquiry Sent!',
       'form.successMessage': "We'll contact you within 24 hours with a custom quote.",
       'form.errorMessage': 'Something went wrong. Please try again.',

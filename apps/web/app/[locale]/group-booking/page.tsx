@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 /**
- * Standalone group booking inquiry page for groups of 20+ people.
+ * Standalone group booking inquiry page for groups of 9+ people.
  * Accessible from tour detail page or direct URL (/[locale]/group-booking).
  */
 export default async function GroupBookingPage() {

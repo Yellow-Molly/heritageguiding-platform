@@ -60,7 +60,7 @@ export function FindTourCta() {
             <div className="rounded-xl bg-white/10 p-6 text-center backdrop-blur-sm">
               <Users className="mx-auto mb-3 h-8 w-8 text-[var(--color-secondary)]" />
               <h3 className="mb-1 font-medium text-white">Any Group Size</h3>
-              <p className="text-sm text-white/70">Private to 20+ guests</p>
+              <p className="text-sm text-white/70">Private for 9+ guests</p>
             </div>
             <div className="rounded-xl bg-white/10 p-6 text-center backdrop-blur-sm">
               <MapPin className="mx-auto mb-3 h-8 w-8 text-[var(--color-secondary)]" />

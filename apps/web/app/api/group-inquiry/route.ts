@@ -9,7 +9,7 @@ const groupInquirySchema = z.object({
   lastName: z.string().min(2),
   email: z.string().email(),
   phone: z.string().min(8),
-  groupSize: z.number().min(20).max(200),
+  groupSize: z.number().min(9).max(200),
   preferredDates: z.string().min(5),
   tourInterest: z.string().optional(),
   specialRequirements: z.string().optional(),

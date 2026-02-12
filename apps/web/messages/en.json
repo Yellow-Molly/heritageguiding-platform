@@ -371,12 +371,12 @@
   },
   "groupBooking": {
     "title": "Group Booking Inquiry",
-    "description": "For groups of 20 or more, please fill out this form and we'll create a custom quote for your group.",
+    "description": "For groups of 9 or more, please fill out this form and we'll create a custom quote for your group.",
     "modalTrigger": "Request Group Quote",
-    "modalDescription": "For groups of 20+, fill out this form and we'll get back to you within 24 hours.",
+    "modalDescription": "For groups of 9+, fill out this form and we'll get back to you within 24 hours.",
     "meta": {
       "title": "Group Tours - HeritageGuiding",
-      "description": "Book a private group tour in Stockholm for 20+ people"
+      "description": "Book a private group tour in Stockholm for 9+ people"
     },
     "form": {
       "firstName": "First Name",
@@ -394,7 +394,7 @@
       "submitting": "Sending...",
       "required": "This field is required",
       "invalidEmail": "Please enter a valid email",
-      "minGroupSize": "Minimum group size is 20",
+      "minGroupSize": "Minimum group size is 9",
       "successTitle": "Inquiry Sent!",
       "successMessage": "We'll contact you within 24 hours with a custom quote.",
       "errorMessage": "Something went wrong. Please try again."

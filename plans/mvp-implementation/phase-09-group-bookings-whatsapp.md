@@ -13,13 +13,13 @@
 |----------|--------|--------|
 | P2 - High | complete | 20-24h |
 
-Build group booking inquiry form for large parties with validation, email notifications, and admin interface. Add WhatsApp click-to-chat floating button with localized messages. Leverages Bokun's native group pricing for smaller groups (via widget) and custom inquiry form for larger groups (20+).
+Build group booking inquiry form for parties of 9+ with validation, email notifications, and admin interface. Add WhatsApp click-to-chat floating button with localized messages. Leverages Bokun's native group pricing for smaller groups (via widget) and custom inquiry form for groups of 9+.
 
 ## Key Insights
 
 - **Bokun group pricing**: Supports native group rates via pricing categories (`minPerBooking`/`maxPerBooking` rate settings at product level)
-- **Groups <20**: Can book directly via Bokun embedded widget if group rates configured in Bokun dashboard
-- **Groups 20+**: Exceed typical widget capacity; need custom inquiry form -> manual quote -> admin creates Bokun booking
+- **Groups <9**: Can book directly via Bokun embedded widget if group rates configured in Bokun dashboard
+- **Groups 9+**: Need custom inquiry form -> manual quote -> admin creates Bokun booking
 - **Tiered pricing**: Bokun supports different rate tiers for different group sizes (configured in dashboard)
 - **No "request a quote" API**: Bokun has no dedicated group-quote endpoint; large group inquiries handled offline
 - **WhatsApp**: `wa.me` deep links are free, no Business API needed at MVP scale
@@ -28,12 +28,12 @@ Build group booking inquiry form for large parties with validation, email notifi
 ## Requirements
 
 ### Functional - Group Bookings
-- Group inquiry form with validation (name, email, phone, group size, dates)
+- Group inquiry form with validation (name, email, phone, group size 9+, dates)
 - Special requirements textarea (accessibility, dietary, etc.)
 - Email to admin with inquiry details (admin creates Bokun booking manually)
 - Confirmation email to customer
 - Admin interface to view/respond to inquiries
-- Tour detail page shows "Request Group Quote" button for groups exceeding Bokun widget capacity
+- Tour detail page shows "Request Group Quote" button for groups of 9+
 
 ### Functional - WhatsApp
 - Floating button (bottom-right, above fold on mobile)
@@ -55,10 +55,10 @@ Build group booking inquiry form for large parties with validation, email notifi
 ```
 Tour Detail Page
        |
-       ├─── Groups <20 ───> Bokun Widget (standard booking)
+       ├─── Groups <9 ────> Bokun Widget (standard booking)
        |                     (group rates configured in Bokun dashboard)
        |
-       └─── Groups 20+ ────> "Request Group Quote" button
+       └─── Groups 9+ ────> "Request Group Quote" button
                                     ↓
                              Inquiry form (modal or page)
                                     ↓
@@ -141,11 +141,11 @@ Desktop → WhatsApp Web
      lastName: z.string().min(2),
      email: z.string().email(),
      phone: z.string().min(8),
-     groupSize: z.number().min(20).max(200),
+     groupSize: z.number().min(9).max(200),
      preferredDates: z.string().min(5),
      tourInterest: z.string().optional(),
      specialRequirements: z.string().optional(),
-     honeypot: z.string().max(0) // Spam protection
+     honeypot: z.string().max(0) // Spam protection (group 9+)
    })
 
    type InquiryFormData = z.infer<typeof inquirySchema>
@@ -244,7 +244,7 @@ Desktop → WhatsApp Web
              <Input
                id="groupSize"
                type="number"
-               min={20}
+               min={9}
                max={200}
                {...register('groupSize', { valueAsNumber: true })}
              />
@@ -316,7 +316,7 @@ Desktop → WhatsApp Web
      lastName: z.string().min(2),
      email: z.string().email(),
      phone: z.string().min(8),
-     groupSize: z.number().min(20).max(200),
+     groupSize: z.number().min(9).max(200),
      preferredDates: z.string().min(5),
      tourInterest: z.string().optional(),
      specialRequirements: z.string().optional(),
@@ -560,7 +560,7 @@ Desktop → WhatsApp Web
    {
      "groupBooking": {
        "title": "Group Booking Inquiry",
-       "description": "For groups of 20 or more, please fill out this form and we'll create a custom quote for your group.",
+       "description": "For groups of 9 or more, please fill out this form and we'll create a custom quote for your group.",
        "meta": {
          "title": "Group Tours - HeritageGuiding",
          "description": "Book a private group tour in Stockholm"
@@ -581,7 +581,7 @@ Desktop → WhatsApp Web
          "submitting": "Sending...",
          "required": "This field is required",
          "invalidEmail": "Please enter a valid email",
-         "minGroupSize": "Minimum group size is 20",
+         "minGroupSize": "Minimum group size is 9",
          "successTitle": "Inquiry Sent!",
          "successMessage": "We'll contact you within 24 hours with a custom quote.",
          "errorMessage": "Something went wrong. Please try again."
@@ -627,7 +627,7 @@ Desktop → WhatsApp Web
 
 - [x] Configure Bokun group pricing rates in dashboard (minPerBooking/maxPerBooking)
 - [x] Verify Bokun widget handles group bookings up to configured max
-- [x] Create GroupInquiryForm component (min group size: 20)
+- [x] Create GroupInquiryForm component (min group size: 9)
 - [x] Add form validation with Zod
 - [x] Create API route for form submission
 - [x] Implement honeypot spam protection
@@ -648,7 +648,7 @@ Desktop → WhatsApp Web
 ## Success Criteria
 
 - [x] Bokun widget accepts group bookings up to configured maxPerBooking
-- [x] Inquiry form submits and validates correctly (groups 20+)
+- [x] Inquiry form submits and validates correctly (groups 9+)
 - [x] Admin receives notification email with Bokun follow-up instructions
 - [x] Customer receives confirmation email
 - [x] Spam protection blocks bots
@@ -697,7 +697,7 @@ After completion:
 
 | Decision | User Choice |
 |----------|-------------|
-| **Group Size Threshold** | 20+ uses inquiry form; groups <20 book via Bokun widget |
+| **Group Size Threshold** | 9+ uses inquiry form; groups <9 book via Bokun widget |
 | **Inquiry Storage** | Both: Payload CMS collection (GroupInquiries) + email notification |
 | **Form Placement** | Both: modal on tour detail page + standalone /group-booking page |
 | **WhatsApp Implementation** | Use `@digicroz/react-floating-whatsapp` npm package (not custom) |

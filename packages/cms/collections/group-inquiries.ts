@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { isAdmin } from '../access'
 
 /**
- * Group inquiry collection for tracking large group booking requests (20+ people).
+ * Group inquiry collection for tracking group booking requests (9+ people).
  * Admin reviews inquiries and creates Bokun bookings manually.
  */
 export const GroupInquiries: CollectionConfig = {
@@ -11,7 +11,7 @@ export const GroupInquiries: CollectionConfig = {
     useAsTitle: 'customerName',
     defaultColumns: ['customerName', 'groupSize', 'status', 'preferredDates', 'createdAt'],
     group: 'Bookings',
-    description: 'Group booking inquiries for 20+ people',
+    description: 'Group booking inquiries for 9+ people',
   },
   access: {
     read: isAdmin,
@@ -46,7 +46,7 @@ export const GroupInquiries: CollectionConfig = {
       name: 'groupSize',
       type: 'number',
       required: true,
-      min: 20,
+      min: 9,
       max: 200,
       admin: { description: 'Number of people in group' },
     },

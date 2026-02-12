@@ -371,12 +371,12 @@
   },
   "groupBooking": {
     "title": "Gruppenanfrage",
-    "description": "Für Gruppen ab 20 Personen füllen Sie bitte dieses Formular aus und wir erstellen ein individuelles Angebot für Ihre Gruppe.",
+    "description": "Für Gruppen ab 9 Personen füllen Sie bitte dieses Formular aus und wir erstellen ein individuelles Angebot für Ihre Gruppe.",
     "modalTrigger": "Gruppenangebot anfragen",
-    "modalDescription": "Für Gruppen ab 20 Personen füllen Sie dieses Formular aus und wir melden uns innerhalb von 24 Stunden.",
+    "modalDescription": "Für Gruppen ab 9 Personen füllen Sie dieses Formular aus und wir melden uns innerhalb von 24 Stunden.",
     "meta": {
       "title": "Gruppentouren - HeritageGuiding",
-      "description": "Buchen Sie eine private Gruppentour in Stockholm für 20+ Personen"
+      "description": "Buchen Sie eine private Gruppentour in Stockholm für 9+ Personen"
     },
     "form": {
       "firstName": "Vorname",
@@ -394,7 +394,7 @@
       "submitting": "Wird gesendet...",
       "required": "Dieses Feld ist erforderlich",
       "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
-      "minGroupSize": "Mindestgruppengröße ist 20",
+      "minGroupSize": "Mindestgruppengröße ist 9",
       "successTitle": "Anfrage gesendet!",
       "successMessage": "Wir kontaktieren Sie innerhalb von 24 Stunden mit einem individuellen Angebot.",
       "errorMessage": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut."

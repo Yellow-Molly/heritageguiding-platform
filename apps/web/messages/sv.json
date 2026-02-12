@@ -371,12 +371,12 @@
   },
   "groupBooking": {
     "title": "Gruppbokningsförfrågan",
-    "description": "För grupper om 20 eller fler, fyll i formuläret så skapar vi en skräddarsydd offert för er grupp.",
+    "description": "För grupper om 9 eller fler, fyll i formuläret så skapar vi en skräddarsydd offert för er grupp.",
     "modalTrigger": "Begär gruppoffert",
-    "modalDescription": "För grupper om 20+, fyll i formuläret så återkommer vi inom 24 timmar.",
+    "modalDescription": "För grupper om 9+, fyll i formuläret så återkommer vi inom 24 timmar.",
     "meta": {
       "title": "Gruppturer - HeritageGuiding",
-      "description": "Boka en privat grupptur i Stockholm för 20+ personer"
+      "description": "Boka en privat grupptur i Stockholm för 9+ personer"
     },
     "form": {
       "firstName": "Förnamn",
@@ -394,7 +394,7 @@
       "submitting": "Skickar...",
       "required": "Detta fält är obligatoriskt",
       "invalidEmail": "Ange en giltig e-postadress",
-      "minGroupSize": "Minsta gruppstorlek är 20",
+      "minGroupSize": "Minsta gruppstorlek är 9",
       "successTitle": "Förfrågan skickad!",
       "successMessage": "Vi kontaktar dig inom 24 timmar med en skräddarsydd offert.",
       "errorMessage": "Något gick fel. Försök igen."

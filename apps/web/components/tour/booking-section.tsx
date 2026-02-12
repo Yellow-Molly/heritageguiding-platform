@@ -90,7 +90,7 @@ export function BookingSection({ tour }: BookingSectionProps) {
           </div>
         )}
 
-        {/* Group Booking Inquiry - for groups of 20+ */}
+        {/* Group Booking Inquiry - for groups of 9+ */}
         <GroupInquiryModal tourName={tour.title} />
 
         {/* Trust Signals */}
