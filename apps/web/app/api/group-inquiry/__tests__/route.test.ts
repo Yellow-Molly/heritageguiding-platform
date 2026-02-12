@@ -76,8 +76,8 @@ describe('POST /api/group-inquiry', () => {
       expect(response.status).toBe(400)
     })
 
-    it('rejects group size below 20', async () => {
-      const response = await POST(createRequest({ ...validPayload, groupSize: 10 }))
+    it('rejects group size below 9', async () => {
+      const response = await POST(createRequest({ ...validPayload, groupSize: 5 }))
       expect(response.status).toBe(400)
     })
 

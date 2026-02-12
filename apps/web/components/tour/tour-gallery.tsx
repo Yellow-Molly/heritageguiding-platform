@@ -25,6 +25,15 @@ interface TourGalleryProps {
  */
 export function TourGallery({ images, open, onClose }: TourGalleryProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [prevOpen, setPrevOpen] = useState(open)
+
+  // Reset index when gallery opens (React recommended pattern for deriving state from props)
+  if (open !== prevOpen) {
+    setPrevOpen(open)
+    if (open) {
+      setCurrentIndex(0)
+    }
+  }
 
   const next = useCallback(() => {
     setCurrentIndex((i) => (i + 1) % images.length)
@@ -47,11 +56,6 @@ export function TourGallery({ images, open, onClose }: TourGalleryProps) {
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [open, next, prev, onClose])
-
-  // Reset index when gallery opens
-  useEffect(() => {
-    if (open) setCurrentIndex(0)
-  }, [open])
 
   if (!images || images.length === 0) return null
 

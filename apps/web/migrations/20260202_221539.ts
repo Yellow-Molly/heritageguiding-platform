@@ -1,5 +1,6 @@
 import { sql } from '@payloadcms/db-postgres'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function up({ db }: { db: any }): Promise<void> {
   await db.execute(sql`
    CREATE TYPE "public"."_locales" AS ENUM('sv', 'en', 'de');
@@ -556,6 +557,7 @@ export async function up({ db }: { db: any }): Promise<void> {
   CREATE INDEX "payload_migrations_created_at_idx" ON "payload_migrations" USING btree ("created_at");`)
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function down({ db }: { db: any }): Promise<void> {
   await db.execute(sql`
    DROP TABLE "users_sessions" CASCADE;

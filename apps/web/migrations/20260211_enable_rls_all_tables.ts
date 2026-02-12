@@ -13,6 +13,7 @@ import { sql } from '@payloadcms/db-postgres'
  *
  * Note: spatial_ref_sys excluded - owned by supabase_admin, must be fixed via Supabase dashboard.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function up({ db }: { db: any }): Promise<void> {
   await db.execute(sql`
     -- Enable RLS on all application tables
@@ -58,6 +59,7 @@ export async function up({ db }: { db: any }): Promise<void> {
   `)
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function down({ db }: { db: any }): Promise<void> {
   await db.execute(sql`
     -- Disable RLS on all tables
