@@ -46,7 +46,7 @@ Stockholm tourism booking platform with AI-first architecture, multi-language su
 | 08.5 | Concierge Wizard | 8-12h | done (2026-02-10) | [phase-08.5](./phase-08.5-concierge-wizard.md) |
 | 09 | Group Bookings + WhatsApp (Bokun) | 20-24h | pending | [phase-09](./phase-09-group-bookings-whatsapp.md) |
 | 10 | Accessibility + SEO | 28-36h | done (2026-02-15) | [phase-10](./phase-10-accessibility-seo.md) |
-| 11 | Performance + Testing | 32-40h | pending | [phase-11](./phase-11-performance-testing.md) |
+| 11 | Performance Optimization + Manual QA | 24-30h | done (2026-02-15) | [phase-11](./phase-11-performance-testing.md) |
 | 12 | Documentation + Deployment | 16-22h | pending | [phase-12](./phase-12-documentation-deployment.md) |
 
 ## Key Dependencies

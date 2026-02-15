@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getTourBySlug, getAllTourSlugs } from '@/lib/api/get-tour-by-slug'
 import { getTourReviews } from '@/lib/api/get-tour-reviews'
@@ -8,13 +9,18 @@ import { TourFacts } from '@/components/tour/tour-facts'
 import { LogisticsSection } from '@/components/tour/logistics-section'
 import { InclusionsSection } from '@/components/tour/inclusions-section'
 import { GuideCard } from '@/components/tour/guide-card'
-import { BookingSection } from '@/components/tour/booking-section'
 import { ReviewsSection } from '@/components/tour/reviews-section'
 import { RelatedTours } from '@/components/tour/related-tours'
 import { TourSchema } from '@/components/tour/tour-schema'
 import { Breadcrumb } from '@/components/shared/breadcrumb'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
+
+// Lazy-load booking sidebar (includes Bokun widget + group inquiry modal)
+const BookingSection = dynamic(
+  () => import('@/components/tour/booking-section').then((mod) => ({ default: mod.BookingSection })),
+  { loading: () => <div className="h-[400px] animate-pulse rounded-lg bg-[var(--color-surface)]" role="status" aria-label="Loading booking" /> }
+)
 
 interface TourPageProps {
   params: Promise<{

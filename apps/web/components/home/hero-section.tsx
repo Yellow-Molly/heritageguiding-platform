@@ -158,6 +158,7 @@ export function HeroSection() {
             width={200}
             height={150}
             className="h-[150px] w-[200px] object-cover"
+            sizes="200px"
           />
         </div>
       </div>
@@ -174,6 +175,7 @@ export function HeroSection() {
             width={180}
             height={120}
             className="h-[120px] w-[180px] object-cover"
+            sizes="180px"
           />
         </div>
       </div>

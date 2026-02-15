@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { locales, localeMetadata, type Locale } from '@/i18n'
 import { WhatsAppFloatingButton } from '@/components/shared/whatsapp-floating-button'
 import { SkipToContentLink } from '@/components/accessibility'
+import { WebVitalsReporter } from '@/components/analytics/web-vitals-reporter'
 import { inter, playfairDisplay } from '@/lib/fonts'
 import { getWhatsAppNumber } from '@/lib/get-whatsapp-number-from-cms'
 import { generateHreflangAlternates, generateOgLocaleAlternates } from '@/lib/seo'
@@ -60,8 +61,16 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={localeMetadata[locale as Locale]?.dir || 'ltr'} suppressHydrationWarning>
+      <head>
+        {/* Preconnect to critical third-party origins */}
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className={`${inter.variable} ${playfairDisplay.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
+          <WebVitalsReporter />
           <SkipToContentLink />
           <div id="main">{children}</div>
           {whatsappNumber && <WhatsAppFloatingButton phoneNumber={whatsappNumber} />}

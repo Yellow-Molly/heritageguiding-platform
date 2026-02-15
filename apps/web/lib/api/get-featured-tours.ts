@@ -1,7 +1,10 @@
 /**
  * Fetches featured tours from CMS or returns mock data for development.
  * In production, this will query Payload CMS for published, featured tours.
+ * Cached with on-demand revalidation via revalidateTag('tours').
  */
+
+import { unstable_cache } from 'next/cache'
 
 export interface FeaturedTour {
   id: string
@@ -94,29 +97,25 @@ const mockFeaturedTours: FeaturedTour[] = [
 ]
 
 /**
+ * Internal fetch function for featured tours.
+ */
+async function fetchFeaturedTours(
+  _locale: string = 'en',
+  limit: number = 6
+): Promise<FeaturedTour[]> {
+  // TODO: Replace with Payload CMS query when CMS is configured
+  return mockFeaturedTours.slice(0, limit)
+}
+
+/**
  * Get featured tours for homepage display.
+ * Cached with on-demand revalidation via revalidateTag('tours').
  * @param locale - The locale for content (sv, en, de)
  * @param limit - Maximum number of tours to return
  * @returns Array of featured tours
  */
-export async function getFeaturedTours(
-  _locale: string = 'en', // Intentionally unused - will be used for CMS query
-  limit: number = 6
-): Promise<FeaturedTour[]> {
-  // TODO: Replace with Payload CMS query when CMS is configured
-  // const payload = await getPayload({ config })
-  // const { docs } = await payload.find({
-  //   collection: 'tours',
-  //   where: {
-  //     status: { equals: 'published' },
-  //     featured: { equals: true }
-  //   },
-  //   limit,
-  //   locale,
-  //   depth: 2
-  // })
-  // return docs as FeaturedTour[]
-
-  // For now, return mock data
-  return mockFeaturedTours.slice(0, limit)
-}
+export const getFeaturedTours = unstable_cache(
+  fetchFeaturedTours,
+  ['featured-tours'],
+  { tags: ['tours'] }
+)

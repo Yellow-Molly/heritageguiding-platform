@@ -1,7 +1,10 @@
 /**
  * Fetches tour categories from CMS or returns mock data for development.
  * Categories are used for filtering and navigation.
+ * Cached with on-demand revalidation via revalidateTag('categories').
  */
+
+import { unstable_cache } from 'next/cache'
 
 export type CategoryType = 'theme' | 'neighborhood'
 
@@ -102,28 +105,28 @@ const mockNeighborhoodCategories: Category[] = [
 ]
 
 /**
+ * Internal fetch function for categories.
+ */
+async function fetchCategories(
+  type: CategoryType,
+  _locale: string = 'en'
+): Promise<Category[]> {
+  // TODO: Replace with Payload CMS query when CMS is configured
+  return type === 'theme' ? mockThemeCategories : mockNeighborhoodCategories
+}
+
+/**
  * Get categories by type for navigation and filtering.
+ * Cached with on-demand revalidation via revalidateTag('categories').
  * @param type - The category type ('theme' or 'neighborhood')
  * @param locale - The locale for content
  * @returns Array of categories
  */
-export async function getCategories(
-  type: CategoryType,
-  _locale: string = 'en' // Intentionally unused - will be used for CMS query
-): Promise<Category[]> {
-  // TODO: Replace with Payload CMS query when CMS is configured
-  // const payload = await getPayload({ config })
-  // const { docs } = await payload.find({
-  //   collection: 'categories',
-  //   where: { type: { equals: type } },
-  //   locale,
-  //   depth: 1
-  // })
-  // return docs as Category[]
-
-  // For now, return mock data
-  return type === 'theme' ? mockThemeCategories : mockNeighborhoodCategories
-}
+export const getCategories = unstable_cache(
+  fetchCategories,
+  ['categories'],
+  { tags: ['categories'] }
+)
 
 /**
  * Get all categories grouped by type.

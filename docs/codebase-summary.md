@@ -1,13 +1,13 @@
 # Codebase Summary - HeritageGuiding Platform
 
 **Last Updated:** February 15, 2026
-**Phase:** 10 - Accessibility + SEO (Complete)
-**Status:** WCAG 2.1 AA foundations, sitemap, robots.txt, Schema.org, 579 unit tests
+**Phase:** 11 - Performance Optimization (Complete)
+**Status:** Image optimization, dynamic caching, Web Vitals monitoring, Lighthouse CI, 600 unit tests
 **Codebase Metrics:** 165+ TypeScript files, 380K+ tokens, 69K LOC frontend + 35K LOC CMS
 
 ## Overview
 
-HeritageGuiding is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16.1.6 frontend (69K LOC, 70+ React components, 10 API routes, 579 unit tests) and Payload CMS 3.75 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication, Excel/CSV import-export, Concierge Wizard with audience-interest matching, comprehensive SEO with sitemap/robots.txt, Schema.org structured data across all public pages).
+HeritageGuiding is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16.1.6 frontend (69K LOC, 70+ React components, 10 API routes, 600 unit tests, performance-optimized with image caching, dynamic imports, Web Vitals monitoring, Lighthouse CI) and Payload CMS 3.75 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication, Excel/CSV import-export, Concierge Wizard with audience-interest matching, comprehensive SEO with sitemap/robots.txt, Schema.org structured data across all public pages).
 
 ## Repository Structure
 
@@ -575,6 +575,16 @@ npm run payload:generate-types  # Generate TS types from schema
 - **Testing:** 102 new unit tests (579 total, 100% pass rate)
 - **Commit:** f961c3f on master branch
 
+### Phase 11 Deliverables (2026-02-15)
+- **Image Optimization:** Next.js Image config (deviceSizes, imageSizes, minimumCacheTTL: 3600, optimizePackageImports)
+- **Static Caching:** Cache-Control: max-age=31536000, immutable for versioned assets
+- **Dynamic Imports:** Lazy-loaded ConciergeWizardContainer, BookingSection for reduced initial bundle
+- **Data Caching:** unstable_cache for tours/categories with on-demand revalidateTag invalidation
+- **Preconnect Hints:** Blob CDN preconnect for faster image loading
+- **Web Vitals:** useReportWebVitals hook + POST /api/analytics/vitals with rate limiting (60 req/min)
+- **Lighthouse CI:** lighthouserc.js config + GitHub Actions workflow for monitoring
+- **Testing:** 21 new unit tests (600 total, 100% pass rate)
+
 ## Codebase Metrics
 
 | Metric | Value |
@@ -593,10 +603,11 @@ npm run payload:generate-types  # Generate TS types from schema
 | **Wizard Components** | 5 (Phase 08.5) |
 | **CMS Collections** | 10+ |
 | **Field Modules** | 7 |
-| **Unit Tests** | 579 (102 new Phase 10) |
+| **Unit Tests** | 600 (21 new Phase 11) |
 | **TypeScript Coverage** | 100% |
 | **Accessibility** | WCAG 2.1 AA foundations |
-| **Lighthouse Score** | 90+ (pending deployment validation) |
+| **Lighthouse Score** | 90+ (Lighthouse CI monitored) |
+| **Performance Monitoring** | Web Vitals API + Lighthouse CI |
 
 ## File Size Management
 
@@ -630,11 +641,11 @@ npm run payload:generate-types  # Generate TS types from schema
 | **08.5** | Concierge Wizard | ✅ Complete |
 | **09.5** | Guide Profiles | ✅ Complete |
 | **10** | Accessibility + SEO | ✅ Complete |
+| **11** | Performance Optimization | ✅ Complete |
 | **09** | Groups & WhatsApp | Pending |
-| **11** | Performance + Testing | Planned |
 | **12** | Documentation + Deployment | Planned |
 
 ---
 
 **Last Updated:** February 15, 2026
-**Document Status:** Phase 10 Complete (Accessibility + SEO) - Ready for Phase 09 or 11
+**Document Status:** Phase 11 Complete (Performance Optimization) - Ready for Phase 12

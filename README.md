@@ -2,7 +2,7 @@
 
 Premium heritage tour booking platform for Sweden. AI-first architecture with advanced technology stack supporting Swedish/English/German markets.
 
-**Status:** Phase 10 Complete - Accessibility + SEO
+**Status:** Phase 11 Complete - Performance Optimization
 **Live Demo:** Coming March 2026
 
 ## Quick Start
@@ -142,6 +142,17 @@ heritageguiding-platform/
 - **Accessibility:** Skip-to-content link, ARIA live announcer, focus indicators, reduced motion support
 - **Testing:** 579 unit tests (102 new Phase 10, 100% pass rate)
 - **Commit:** f961c3f (2026-02-15)
+
+### Phase 11: Performance Optimization ✅
+- **Image Optimization:** Next.js Image config (deviceSizes, imageSizes, minimumCacheTTL, optimizePackageImports)
+- **Static Asset Caching:** 1-year immutable cache headers for images
+- **Dynamic Imports:** Lazy loading for ConciergeWizardContainer, BookingSection
+- **Data Caching:** unstable_cache + on-demand revalidateTag for tours/categories
+- **Preconnect Hints:** CDN domain optimization for faster resource loading
+- **Web Vitals Monitoring:** useReportWebVitals hook + /api/analytics/vitals endpoint with rate limiting
+- **CI/CD Integration:** Lighthouse CI config (lighthouserc.js + GitHub Actions workflow)
+- **Testing:** 600 total unit tests (21 new Phase 11, 100% pass rate)
+- **Commit:** Latest (2026-02-15)
 
 ### Accessibility & i18n
 - WCAG 2.1 AA foundations (skip nav, focus styles, ARIA, reduced motion)
@@ -285,11 +296,13 @@ Report via GitHub Issues with:
 
 ## Performance
 
-**Metrics (Phase 07):**
-- Lighthouse: 90+ (all categories)
-- Page load: <2s on 3G
-- Core Web Vitals: All green
+**Metrics (Phase 11):**
+- Lighthouse: 90+ (all categories, CI monitored)
+- Page load: <2s on 3G (optimized with image config, dynamic imports, caching)
+- Core Web Vitals: All green (tracked via /api/analytics/vitals)
 - Mobile responsive: 100%
+- Image optimization: WebP, responsive sizes, lazy loading
+- Cache strategy: Static assets (1 year immutable), data (on-demand revalidation)
 
 ## Security
 
@@ -341,13 +354,13 @@ Report via GitHub Issues with:
 - Honeypot spam protection
 - 39 unit tests (477 total tests passing)
 
-## Next Phase (Phase 10)
+## Next Phase (Phase 12)
 
-**Accessibility & SEO** (Pending)
-- WCAG 2.1 AA comprehensive audit
-- Schema.org implementation for all content types
-- Performance optimization
-- Core Web Vitals validation
+**Documentation & Deployment** (Pending)
+- Comprehensive deployment guide
+- Architecture documentation updates
+- Developer onboarding guide
+- Production monitoring setup
 
 ## License
 
@@ -361,5 +374,5 @@ Proprietary - All rights reserved
 
 ---
 
-**Last Updated:** February 11, 2026
-**Repository Version:** Phase 09 Complete
+**Last Updated:** February 15, 2026
+**Repository Version:** Phase 11 Complete

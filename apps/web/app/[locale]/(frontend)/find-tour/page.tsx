@@ -1,11 +1,17 @@
 import type { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
-import { ConciergeWizardContainer } from '@/components/wizard'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
 import { WebPageSchema } from '@/components/seo'
+
+// Lazy-load heavy wizard component to reduce initial bundle size
+const ConciergeWizardContainer = dynamic(
+  () => import('@/components/wizard').then((mod) => ({ default: mod.ConciergeWizardContainer })),
+  { loading: () => <div className="flex min-h-[400px] items-center justify-center" role="status" aria-label="Loading wizard"><div className="h-8 w-8 animate-spin rounded-full border-4 border-[var(--color-primary)] border-t-transparent" /></div> }
+)
 
 interface FindTourPageProps {
   params: Promise<{ locale: string }>

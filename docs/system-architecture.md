@@ -1,9 +1,9 @@
 # System Architecture - HeritageGuiding Platform
 
-**Last Updated:** February 10, 2026
-**Phase:** 08.5 - Concierge Wizard (Complete)
-**Status:** 3-step wizard with audience-interest matching, localStorage persistence, Zod-validated API, 60 tests
-**Recent Update:** Concierge Wizard replacing BubblaV AI chat on /find-tour, POST /api/tours/recommend endpoint, full i18n and a11y support
+**Last Updated:** February 15, 2026
+**Phase:** 11 - Performance Optimization (Complete)
+**Status:** Image optimization, data caching, dynamic imports, Web Vitals monitoring, Lighthouse CI
+**Recent Update:** Next.js image config, unstable_cache for tours/categories, preconnect hints, /api/analytics/vitals endpoint
 
 ## High-Level Architecture
 
@@ -476,26 +476,43 @@ access: {
 - GitHub Secrets for CI/CD
 - Production secrets stored securely
 
-## Performance Considerations
+## Performance Architecture (Phase 11)
 
 ### Frontend Optimization
 
 - **SSR:** Server-side rendering for fast initial load
-- **Code Splitting:** Dynamic imports for large features
-- **Images:** Vercel Blob CDN with WebP format
-- **Caching:** Next.js automatic caching + CDN
+- **Image Config:** Next.js Image component with optimized deviceSizes, imageSizes, minimumCacheTTL (3600s)
+- **Dynamic Imports:** Lazy loading for ConciergeWizardContainer, BookingSection reduces initial bundle
+- **Code Splitting:** Route-based code splitting via Next.js App Router
+- **Static Assets:** Cache-Control headers (max-age=31536000, immutable) for versioned files
+- **Preconnect:** CDN domain preconnect hints for faster resource loading
+
+### Data Caching Strategy
+
+- **unstable_cache:** Server-side caching for fetchTours(), fetchCategories() with revalidateTag
+- **On-Demand Revalidation:** revalidateTag('tours', 'categories') triggered on CMS updates
+- **60-second Availability Cache:** Bokun API responses cached with TTL
+- **localStorage:** Concierge Wizard persistence for returning visitors
 
 ### Database Optimization
 
-- Indexes on frequently queried fields
+- Indexes on frequently queried fields (tour slug, category id)
 - Connection pooling via PostgreSQL
-- Avoid N+1 queries in API endpoints
+- Avoid N+1 queries via GraphQL field selection
+- pgvector indexes for semantic search
 
 ### Content Delivery
 
-- Vercel Blob CDN for images
-- Global edge caching (Vercel)
-- Automatic image optimization
+- **Vercel Blob CDN:** Images with WebP, responsive variants, lazy loading
+- **Global Edge Caching:** Vercel edge network for instant static asset delivery
+- **Automatic Optimization:** Sharp for image processing, responsive sizing
+
+### Web Vitals Monitoring
+
+- **useReportWebVitals Hook:** Captures LCP, FID, CLS, INP, TTFB metrics
+- **Analytics Endpoint:** POST /api/analytics/vitals (rate limited: 60 req/min)
+- **Lighthouse CI:** Automated performance monitoring via GitHub Actions (lighthouserc.js)
+- **Metrics Dashboards:** Track 90+ Lighthouse scores across builds
 
 ## Monitoring & Observability
 
@@ -553,6 +570,16 @@ access: {
 - ✅ Zod-validated POST /api/tours/recommend endpoint
 - ✅ 60 unit tests, 100% coverage on new code
 - ✅ Accessible (aria-pressed, aria-label, keyboard navigation, progressbar)
+
+### Phase 11 (Performance) - COMPLETE ✅
+- ✅ Next.js Image optimization with config tuning
+- ✅ Static asset caching with immutable headers
+- ✅ Dynamic imports for lazy loading (ConciergeWizardContainer, BookingSection)
+- ✅ Server-side caching with unstable_cache + on-demand revalidateTag
+- ✅ Preconnect hints for Blob CDN
+- ✅ Web Vitals monitoring hook + analytics API
+- ✅ Lighthouse CI integration with GitHub Actions
+- ✅ 21 new performance tests (600 total)
 
 ### Phase 09+ (Advanced) - Planned
 - WhatsApp Business API integration

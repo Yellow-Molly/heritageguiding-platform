@@ -1,8 +1,10 @@
 /**
  * Fetches a single tour by slug from CMS.
  * In production, this will query Payload CMS. Currently uses mock data.
+ * Cached with on-demand revalidation via revalidateTag('tours').
  */
 
+import { unstable_cache } from 'next/cache'
 import type { FeaturedTour } from './get-featured-tours'
 
 /** Extended tour details for detail page */
@@ -363,31 +365,28 @@ const mockTourDetails: Record<string, TourDetail> = {
 }
 
 /**
- * Get a single tour by its slug.
- * @param slug - The tour URL slug
- * @param locale - The locale for content (sv, en, de)
- * @returns Tour detail or null if not found
+ * Internal fetch function for tour by slug.
  */
-export async function getTourBySlug(
+async function fetchTourBySlug(
   slug: string,
   _locale: string = 'en'
 ): Promise<TourDetail | null> {
   // TODO: Replace with Payload CMS query when CMS is configured
-  // const payload = await getPayload({ config })
-  // const { docs } = await payload.find({
-  //   collection: 'tours',
-  //   where: {
-  //     slug: { equals: slug },
-  //     status: { equals: 'published' }
-  //   },
-  //   locale,
-  //   depth: 3
-  // })
-  // return docs[0] || null
-
-  // For now, return mock data
   return mockTourDetails[slug] || null
 }
+
+/**
+ * Get a single tour by its slug.
+ * Cached with on-demand revalidation via revalidateTag('tours').
+ * @param slug - The tour URL slug
+ * @param locale - The locale for content (sv, en, de)
+ * @returns Tour detail or null if not found
+ */
+export const getTourBySlug = unstable_cache(
+  fetchTourBySlug,
+  ['tour-by-slug'],
+  { tags: ['tours'] }
+)
 
 /**
  * Get all tour slugs for static generation.

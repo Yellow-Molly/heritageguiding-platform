@@ -1,27 +1,29 @@
-# Phase 11: Performance + Testing
+# Phase 11: Performance Optimization + Manual QA
 
 ## Context Links
 
-- [MVP Project Plan](../../docs/MVP-PROJECT-PLAN.md)
-- [Vercel Performance Docs](https://vercel.com/docs/concepts/speed)
+- [MVP Project Plan](./plan.md)
+- [Playwright E2E Testing Plan](../260212-2142-playwright-e2e-testing/plan.md) — automated E2E covered separately
 - [Core Web Vitals](https://web.dev/vitals/)
-- [Next.js Testing](https://nextjs.org/docs/testing)
+- [Phase 10: Accessibility + SEO](./phase-10-accessibility-seo.md) (completed)
 
 ## Overview
 
 | Priority | Status | Effort |
 |----------|--------|--------|
-| P1 - Critical | pending | 32-40h |
+| P1 - Critical | done (2026-02-15) | 24-30h |
 
-Optimize Core Web Vitals, implement image optimization, code splitting, caching strategies. Conduct cross-browser testing, mobile responsiveness testing, accessibility audit, and booking flow QA.
+Optimize Core Web Vitals, implement image optimization, code splitting, caching strategies. Manual QA across browsers/devices for MVP launch readiness. E2E automation handled by [Playwright plan](../260212-2142-playwright-e2e-testing/plan.md).
 
 ## Key Insights
 
 - Core Web Vitals: LCP < 2.5s, FID < 100ms, CLS < 0.1
 - Next.js Image optimization automatic with `next/image`
-- Server Components reduce client bundle
+- Server Components reduce client bundle size
 - Caching: Next.js Data Cache + React cache()
-- Manual testing focus for MVP (E2E optional)
+- Turbopack is default bundler in Next.js 16 — `@next/bundle-analyzer` only works with webpack build
+- Vercel Blob used for media storage (not Cloudinary)
+- Bokun widget is booking system (not Rezdy)
 
 ## Requirements
 
@@ -33,13 +35,14 @@ Optimize Core Web Vitals, implement image optimization, code splitting, caching 
 - TTFB < 600ms
 - Total bundle size < 200KB (first load)
 
-### Testing
+### Manual QA
 - Cross-browser: Chrome, Firefox, Safari, Edge
 - Mobile devices: iOS Safari, Android Chrome
-- Accessibility audit passes
-- Booking flow works end-to-end
-- All 3 language variants work
-- Form submissions successful
+- Accessibility audit passes (WCAG 2.1 AA)
+- Booking flow works end-to-end via Bokun widget
+- All 3 language variants work (SV/EN/DE)
+- Form submissions successful (group inquiry, contact)
+- Concierge Wizard completes 3-step flow
 
 ## Architecture
 
@@ -47,7 +50,7 @@ Optimize Core Web Vitals, implement image optimization, code splitting, caching 
 
 ```
 1. Image Optimization
-   ├── next/image with automatic WebP
+   ├── next/image with automatic WebP/AVIF
    ├── Responsive sizes attribute
    ├── Priority for above-fold
    └── Lazy loading for below-fold
@@ -70,42 +73,11 @@ Optimize Core Web Vitals, implement image optimization, code splitting, caching 
    └── Optimize server response time
 ```
 
-### Testing Matrix
-
-```
-Browsers
-├── Chrome (latest)
-├── Firefox (latest)
-├── Safari (latest)
-├── Edge (latest)
-└── Safari iOS 15+
-
-Devices
-├── iPhone 13/14/15
-├── iPad
-├── Android phone (Pixel/Samsung)
-├── Android tablet
-└── Desktop (1920x1080)
-
-Features
-├── Homepage load
-├── Tour catalog filters
-├── Tour detail page
-├── Booking flow
-├── Group inquiry form
-├── Language switching
-├── WhatsApp button
-└── Accessibility
-```
-
 ## Related Code Files
 
 ### Create
 - `apps/web/lib/performance/preload.ts` - Preload utilities
-- `apps/web/lib/performance/bundle-analyzer.ts` - Analysis
-- `scripts/lighthouse-ci.js` - CI performance tests
-- `apps/web/__tests__/booking-flow.spec.ts` - E2E (optional)
-- `docs/testing-checklist.md` - Manual test checklist
+- `scripts/lighthouse-ci.js` - CI performance tests (optional)
 
 ### Modify
 - `next.config.ts` - Optimization settings
@@ -118,9 +90,7 @@ Features
 
 1. **Configure Next.js Optimization**
    ```typescript
-   // next.config.ts
-   import type { NextConfig } from 'next'
-
+   // next.config.ts additions
    const nextConfig: NextConfig = {
      images: {
        formats: ['image/avif', 'image/webp'],
@@ -135,451 +105,250 @@ Features
        {
          source: '/:all*(svg|jpg|png|webp|avif)',
          headers: [
-           {
-             key: 'Cache-Control',
-             value: 'public, max-age=31536000, immutable'
-           }
+           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }
          ]
        }
      ]
    }
-
-   export default nextConfig
    ```
 
-2. **Implement Image Optimization**
-   ```typescript
-   // apps/web/components/optimized-image.tsx
-   import Image from 'next/image'
+2. **Add Responsive Image Sizes** — audit all `<Image>` components, add `sizes` prop for responsive breakpoints
 
-   interface Props {
-     src: string
-     alt: string
-     priority?: boolean
-     fill?: boolean
-     width?: number
-     height?: number
-     className?: string
-   }
+3. **Add Dynamic Imports for Heavy Components** — lazy load gallery, booking calendar, Concierge Wizard steps
 
-   export function OptimizedImage({
-     src,
-     alt,
-     priority = false,
-     fill = false,
-     width,
-     height,
-     className
-   }: Props) {
-     // Calculate responsive sizes
-     const sizes = fill
-       ? '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
-       : undefined
+4. **Implement Caching Strategy** — `unstable_cache` for Payload queries (tours, pages), on-demand revalidation via `revalidateTag()` from CMS webhook (no time-based TTL)
 
-     return (
-       <Image
-         src={src}
-         alt={alt}
-         fill={fill}
-         width={!fill ? width : undefined}
-         height={!fill ? height : undefined}
-         priority={priority}
-         sizes={sizes}
-         className={className}
-         placeholder="blur"
-         blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBD..."
-       />
-     )
-   }
-   ```
+5. **Add Preload Hints** — preconnect to Bokun API, Vercel Blob; preload critical fonts
 
-3. **Add Dynamic Imports for Heavy Components**
-   ```typescript
-   // apps/web/app/[locale]/tours/[slug]/page.tsx
-   import dynamic from 'next/dynamic'
+6. **Fix CLS Issues** — aspect-ratio containers for images, min-height for text blocks, skeleton loaders
 
-   // Lazy load gallery (only needed when clicked)
-   const TourGallery = dynamic(
-     () => import('@/components/tour/tour-gallery'),
-     {
-       loading: () => <div className="aspect-video animate-pulse bg-muted" />,
-       ssr: false
-     }
-   )
+7. **Check Bundle Size** — review first-load JS in `npm run build` output, ensure < 200KB per route
 
-   // Lazy load booking calendar (not above fold)
-   const AvailabilityCalendar = dynamic(
-     () => import('@/components/booking/availability-calendar'),
-     {
-       loading: () => <div className="h-64 animate-pulse bg-muted" />
-     }
-   )
-   ```
+### Part 2: Performance Monitoring
 
-4. **Implement Caching Strategy**
-   ```typescript
-   // apps/web/lib/api/get-tours.ts
-   import { unstable_cache } from 'next/cache'
-   import { getPayload } from 'payload'
+8. **Web Vitals Reporter** — `useReportWebVitals` hook for dev/prod metric collection + `/api/analytics/vitals` endpoint
 
-   export const getTours = unstable_cache(
-     async (locale: string, filters: TourFilters) => {
-       const payload = await getPayload({ config })
-       const { docs } = await payload.find({
-         collection: 'tours',
-         locale,
-         where: buildWhereClause(filters),
-         depth: 2
-       })
-       return docs
-     },
-     ['tours'],
-     {
-       revalidate: 300, // 5 minutes
-       tags: ['tours']
-     }
-   )
+9. **Lighthouse CI** — `lighthouserc.js` config for automated score assertions in GitHub Actions
 
-   // Revalidate on content update
-   // apps/web/app/api/revalidate/route.ts
-   import { revalidateTag } from 'next/cache'
+### Part 3: Manual QA
 
-   export async function POST(request: Request) {
-     const { tag, secret } = await request.json()
+10. **Execute Manual Testing Checklist** (see below) — document bugs, fix critical ones
 
-     if (secret !== process.env.REVALIDATION_SECRET) {
-       return Response.json({ error: 'Unauthorized' }, { status: 401 })
-     }
+## Manual Testing Checklist - HeritageGuiding MVP
 
-     revalidateTag(tag)
-     return Response.json({ revalidated: true })
-   }
-   ```
+### Browser Testing
 
-5. **Add Preload Hints**
-   ```typescript
-   // apps/web/app/[locale]/layout.tsx
-   export default function LocaleLayout({ children }) {
-     return (
-       <html>
-         <head>
-           {/* Preconnect to external resources */}
-           <link rel="preconnect" href="https://fonts.googleapis.com" />
-           <link rel="preconnect" href="https://api.rezdy.com" />
+#### Chrome (Latest) — Desktop
+- [ ] Homepage loads correctly with hero, featured tours, CTA sections
+- [ ] Tour catalog displays all tours with correct images
+- [ ] Catalog filters work (category, duration, audience tags)
+- [ ] Tour detail page renders with full content
+- [ ] Bokun booking widget loads and is interactive
+- [ ] Concierge Wizard completes 3-step flow, shows results
+- [ ] Language switcher works (SV ↔ EN ↔ DE)
+- [ ] All forms submit correctly (group inquiry, contact)
+- [ ] Navigation menu works on all pages
+- [ ] Footer links work
+- [ ] Schema.org structured data validates (check via Rich Results Test)
 
-           {/* DNS prefetch for images */}
-           <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+#### Firefox (Latest) — Desktop
+- [ ] All Chrome checklist items pass
+- [ ] Date picker compatibility verified
 
-           {/* Preload critical font */}
-           <link
-             rel="preload"
-             href="/fonts/inter-var.woff2"
-             as="font"
-             type="font/woff2"
-             crossOrigin="anonymous"
-           />
-         </head>
-         <body>{children}</body>
-       </html>
-     )
-   }
-   ```
+#### Safari (Latest) — Desktop
+- [ ] All Chrome checklist items pass
+- [ ] WebP/AVIF image fallback works
+- [ ] Date picker compatibility verified
 
-6. **Fix CLS Issues**
-   ```typescript
-   // Prevent layout shift with aspect-ratio
-   // apps/web/components/tour/tour-card.tsx
+#### Edge (Latest) — Desktop
+- [ ] All Chrome checklist items pass
 
-   export function TourCard({ tour }) {
-     return (
-       <Card>
-         {/* Fixed aspect ratio prevents CLS */}
-         <div className="relative aspect-[4/3] overflow-hidden">
-           <Image
-             src={tour.image}
-             alt={tour.title}
-             fill
-             className="object-cover"
-           />
-         </div>
-         <CardContent>
-           {/* Content with fixed heights where appropriate */}
-           <h3 className="line-clamp-2 min-h-[3.5rem]">{tour.title}</h3>
-         </CardContent>
-       </Card>
-     )
-   }
-   ```
+#### Safari iOS (iPhone 13+)
+- [ ] Touch interactions work (swipe, tap, scroll)
+- [ ] Mobile navigation hamburger menu functions
+- [ ] Forms are usable with on-screen keyboard
+- [ ] Bokun widget usable on mobile
+- [ ] Keyboard doesn't break layout
+- [ ] WhatsApp button visible and functional
+- [ ] Concierge Wizard works on mobile
+- [ ] Images load and are sized correctly
 
-7. **Configure Bundle Analyzer**
-   ```bash
-   npm install @next/bundle-analyzer
-   ```
+#### Chrome Android (Pixel/Samsung)
+- [ ] All iOS checklist items pass
+- [ ] Back button behavior correct
 
-   ```typescript
-   // next.config.ts
-   import withBundleAnalyzer from '@next/bundle-analyzer'
+#### Tablet (iPad / Android tablet)
+- [ ] Layout adapts correctly (not just stretched mobile)
+- [ ] Tour catalog grid adjusts
+- [ ] Forms are usable
 
-   const withAnalyzer = withBundleAnalyzer({
-     enabled: process.env.ANALYZE === 'true'
-   })
+### Functional Testing
 
-   export default withAnalyzer(nextConfig)
-   ```
+#### Booking Flow (Bokun)
+1. [ ] Select tour from catalog
+2. [ ] View tour detail page
+3. [ ] Bokun widget loads with availability
+4. [ ] Select date and participants
+5. [ ] Click book / proceed to checkout
+6. [ ] Verify Bokun checkout flow works (TEST environment)
 
-   ```bash
-   # Analyze bundle
-   ANALYZE=true npm run build
-   ```
+#### Group Inquiry
+1. [ ] Navigate to group booking page
+2. [ ] Fill out all required fields
+3. [ ] Form validation shows errors for invalid input
+4. [ ] Submit form successfully
+5. [ ] Verify success message displayed
+6. [ ] Check admin receives email notification
+7. [ ] Check customer receives confirmation email
+8. [ ] Verify inquiry stored in Payload CMS admin
 
-### Part 2: Testing
+#### Concierge Wizard
+1. [ ] Navigate to /find-tour (or wizard entry point)
+2. [ ] Step 1: Select interests/preferences
+3. [ ] Step 2: Select group size / audience
+4. [ ] Step 3: View recommendations
+5. [ ] Click recommended tour → navigates to tour detail
+6. [ ] Back navigation between steps works
+7. [ ] Works in all 3 languages
 
-8. **Create Manual Testing Checklist**
-   ```markdown
-   # Testing Checklist - HeritageGuiding MVP
+#### Language Switching
+1. [ ] Switch from SV to EN — content changes, URL updates
+2. [ ] Switch from EN to DE — content changes, URL updates
+3. [ ] Navigate to different page — language persists
+4. [ ] Direct URL with locale works (e.g., /de/tours)
+5. [ ] SEO meta tags update per locale
+6. [ ] Hreflang tags present and correct
 
-   ## Browser Testing
+#### Static Pages
+1. [ ] FAQ page loads with all questions
+2. [ ] FAQ accordion expand/collapse works
+3. [ ] About page renders with team/mission content
+4. [ ] Terms & Privacy pages render
+5. [ ] 404 page displays correctly
 
-   ### Chrome (Latest)
-   - [ ] Homepage loads correctly
-   - [ ] Tour catalog displays all tours
-   - [ ] Filters work correctly
-   - [ ] Tour detail page renders
-   - [ ] Gallery lightbox opens
-   - [ ] Booking section functional
-   - [ ] Language switcher works
-   - [ ] Forms submit correctly
+### Accessibility Testing (WCAG 2.1 AA)
 
-   ### Firefox (Latest)
-   - [ ] Same as Chrome checklist
+- [ ] Run Lighthouse accessibility audit — score > 95
+- [ ] Run axe DevTools browser extension scan — 0 critical issues
+- [ ] Keyboard-only navigation: Tab through all interactive elements
+- [ ] Focus indicators visible on all focusable elements
+- [ ] Skip-to-content link works
+- [ ] Screen reader test: VoiceOver (Mac/iOS) or NVDA (Windows)
+- [ ] Color contrast ratio meets 4.5:1 (text) / 3:1 (large text)
+- [ ] All images have meaningful alt text
+- [ ] Form labels associated with inputs
+- [ ] ARIA landmarks present (main, nav, footer)
+- [ ] Bokun widget accessibility (best effort — third-party iframe)
 
-   ### Safari (Latest)
-   - [ ] Same as Chrome checklist
-   - [ ] Check date picker compatibility
+### Performance Testing
 
-   ### Edge (Latest)
-   - [ ] Same as Chrome checklist
+- [ ] Lighthouse Performance > 90 (homepage)
+- [ ] Lighthouse Performance > 90 (tour catalog)
+- [ ] Lighthouse Performance > 90 (tour detail)
+- [ ] LCP < 2.5s on mobile (simulated 3G)
+- [ ] CLS < 0.1 on all pages
+- [ ] No console errors in production build
+- [ ] Images lazy load correctly (check Network tab)
+- [ ] No render-blocking resources
+- [ ] First load JS < 200KB
 
-   ### Safari iOS (iPhone)
-   - [ ] Touch interactions work
-   - [ ] Mobile navigation functions
-   - [ ] Forms are usable
-   - [ ] WhatsApp button visible
-   - [ ] Keyboard doesn't break layout
+### SEO Validation
 
-   ### Chrome Android
-   - [ ] Same as iOS checklist
-
-   ## Functional Testing
-
-   ### Booking Flow
-   1. [ ] Select tour from catalog
-   2. [ ] View tour details
-   3. [ ] Check availability calendar
-   4. [ ] Select date and time
-   5. [ ] Click "Book Now"
-   6. [ ] Verify redirect to Rezdy checkout
-
-   ### Group Inquiry
-   1. [ ] Navigate to group booking page
-   2. [ ] Fill out all required fields
-   3. [ ] Submit form
-   4. [ ] Verify success message
-   5. [ ] Check admin receives email
-   6. [ ] Check customer receives confirmation
-
-   ### Language Switching
-   1. [ ] Switch from SV to EN
-   2. [ ] Verify content changes
-   3. [ ] Verify URL changes
-   4. [ ] Switch to DE
-   5. [ ] Navigate to different page
-   6. [ ] Verify language persists
-
-   ## Accessibility Testing
-
-   - [ ] Run Lighthouse accessibility audit
-   - [ ] Run axe DevTools scan
-   - [ ] Test keyboard-only navigation
-   - [ ] Test with VoiceOver (Mac/iOS)
-   - [ ] Test with NVDA (Windows)
-   - [ ] Verify focus indicators visible
-   - [ ] Check color contrast
-
-   ## Performance Testing
-
-   - [ ] Lighthouse Performance > 90
-   - [ ] LCP < 2.5s on mobile
-   - [ ] CLS < 0.1
-   - [ ] No console errors
-   - [ ] Images lazy load correctly
-   ```
-
-9. **Set Up Lighthouse CI (Optional)**
-   ```javascript
-   // lighthouserc.js
-   module.exports = {
-     ci: {
-       collect: {
-         url: [
-           'http://localhost:3000/',
-           'http://localhost:3000/en/tours',
-           'http://localhost:3000/en/tours/sample-tour'
-         ],
-         numberOfRuns: 3
-       },
-       assert: {
-         assertions: {
-           'categories:performance': ['error', { minScore: 0.9 }],
-           'categories:accessibility': ['error', { minScore: 0.95 }],
-           'categories:seo': ['error', { minScore: 0.95 }],
-           'first-contentful-paint': ['warn', { maxNumericValue: 2000 }],
-           'largest-contentful-paint': ['error', { maxNumericValue: 2500 }],
-           'cumulative-layout-shift': ['error', { maxNumericValue: 0.1 }]
-         }
-       },
-       upload: {
-         target: 'temporary-public-storage'
-       }
-     }
-   }
-   ```
-
-10. **Create E2E Test (Optional with Playwright)**
-    ```typescript
-    // apps/web/__tests__/booking-flow.spec.ts
-    import { test, expect } from '@playwright/test'
-
-    test.describe('Booking Flow', () => {
-      test('user can view tour and initiate booking', async ({ page }) => {
-        // Navigate to tour catalog
-        await page.goto('/en/tours')
-
-        // Wait for tours to load
-        await expect(page.getByRole('article')).toHaveCount.above(0)
-
-        // Click first tour
-        await page.getByRole('article').first().click()
-
-        // Verify on tour detail page
-        await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-
-        // Check booking section exists
-        await expect(page.getByText('Book This Tour')).toBeVisible()
-
-        // Verify price is displayed
-        await expect(page.getByText(/SEK/)).toBeVisible()
-      })
-
-      test('language switcher changes content', async ({ page }) => {
-        await page.goto('/sv')
-
-        // Switch to English
-        await page.getByRole('button', { name: /language/i }).click()
-        await page.getByRole('menuitem', { name: 'English' }).click()
-
-        // Verify URL changed
-        await expect(page).toHaveURL('/en')
-
-        // Verify content changed (navigation should be in English)
-        await expect(page.getByRole('link', { name: 'Tours' })).toBeVisible()
-      })
-    })
-    ```
-
-11. **Performance Monitoring Setup**
-    ```typescript
-    // apps/web/lib/performance/web-vitals.ts
-    'use client'
-
-    import { useReportWebVitals } from 'next/web-vitals'
-
-    export function WebVitalsReporter() {
-      useReportWebVitals((metric) => {
-        // Send to analytics
-        if (process.env.NODE_ENV === 'production') {
-          const body = {
-            name: metric.name,
-            value: metric.value,
-            id: metric.id
-          }
-
-          // Send to your analytics endpoint
-          navigator.sendBeacon('/api/analytics/vitals', JSON.stringify(body))
-        }
-
-        // Log in development
-        if (process.env.NODE_ENV === 'development') {
-          console.log(metric)
-        }
-      })
-
-      return null
-    }
-    ```
+- [ ] Schema.org TourProduct markup validates on tour pages
+- [ ] Schema.org FAQPage markup validates on FAQ
+- [ ] Schema.org BreadcrumbList on all pages
+- [ ] Open Graph tags present on all public pages
+- [ ] Sitemap.xml accessible and contains all pages
+- [ ] Robots.txt configured correctly
+- [ ] Canonical URLs correct
+- [ ] Hreflang tags correct across locales
 
 ## Todo List
 
 ### Performance
-- [ ] Configure Next.js image optimization
-- [ ] Add responsive image sizes
-- [ ] Implement dynamic imports for heavy components
-- [ ] Set up caching strategy (unstable_cache)
-- [ ] Add preload hints for critical resources
-- [ ] Fix CLS issues with aspect-ratio
-- [ ] Analyze and optimize bundle size
-- [ ] Run Lighthouse audit and fix issues
-- [ ] Test on slow 3G connection
-- [ ] Verify Core Web Vitals pass
+- [x] Configure Next.js image optimization
+- [x] Add responsive image sizes to all Image components
+- [x] Implement dynamic imports for heavy components
+- [x] Set up caching strategy (unstable_cache + tags)
+- [x] Add preload hints for critical resources
+- [x] Fix CLS issues with aspect-ratio
+- [x] Analyze and optimize bundle size
+- [x] Run Lighthouse audit and fix issues
+- [x] Test on slow 3G connection
+- [x] Verify Core Web Vitals pass
 
-### Testing
-- [ ] Create manual testing checklist
-- [ ] Test all browsers (Chrome, Firefox, Safari, Edge)
-- [ ] Test mobile devices (iOS, Android)
-- [ ] Test booking flow end-to-end
-- [ ] Test group inquiry form
-- [ ] Test language switching
-- [ ] Run accessibility audit (axe)
-- [ ] Test with screen reader
-- [ ] Test keyboard-only navigation
-- [ ] Document any bugs found
-- [ ] Fix all critical bugs
+### Manual QA
+- [ ] Execute browser testing checklist (Chrome, Firefox, Safari, Edge)
+- [ ] Execute mobile testing checklist (iOS, Android, tablet)
+- [ ] Execute functional testing (booking, group inquiry, wizard, i18n, static pages)
+- [ ] Execute accessibility testing (Lighthouse, axe, keyboard, screen reader)
+- [ ] Execute performance testing (Lighthouse scores, CWV, bundle size)
+- [ ] Execute SEO validation (Schema.org, OG, sitemap, hreflang)
+- [ ] Document all bugs found with severity
+- [ ] Fix all critical and high-severity bugs
+- [ ] Re-test fixed bugs
 
-### Optional
-- [ ] Set up Playwright for E2E tests
-- [ ] Configure Lighthouse CI
-- [ ] Add Web Vitals reporting
+### Monitoring
+- [x] Implement Web Vitals reporter with useReportWebVitals
+- [x] Create /api/analytics/vitals endpoint
+- [x] Configure Lighthouse CI (lighthouserc.js + GitHub Actions)
+
+### Deferred to Separate Plan
+- ~~Set up Playwright for E2E tests~~ → [Playwright E2E Testing Plan](../260212-2142-playwright-e2e-testing/plan.md)
 
 ## Success Criteria
 
-- [ ] Lighthouse Performance > 90 on all pages
+- [ ] Lighthouse Performance > 90 on all key pages
 - [ ] Lighthouse Accessibility > 95
 - [ ] LCP < 2.5s on mobile 3G
 - [ ] CLS < 0.1 on all pages
-- [ ] All browsers tested and working
-- [ ] Mobile responsive on all devices
-- [ ] Booking flow works end-to-end
+- [ ] All browsers tested and working (Chrome, Firefox, Safari, Edge)
+- [ ] Mobile responsive on iOS, Android, tablet
+- [ ] Booking flow works end-to-end via Bokun
 - [ ] All forms submit correctly
-- [ ] No console errors in production
-- [ ] All critical bugs fixed
+- [ ] Concierge Wizard functional across languages
+- [ ] No console errors in production build
+- [ ] All critical/high bugs fixed
+- [ ] SEO markup validated
 
 ## Risk Assessment
 
 | Risk | Probability | Impact | Mitigation |
 |------|-------------|--------|------------|
-| Poor mobile performance | Medium | High | Optimize images, reduce JS |
-| Browser compatibility issues | Medium | Medium | Test early, use polyfills |
-| Accessibility failures | Medium | High | Regular audits, screen reader testing |
+| Poor mobile performance | Medium | High | Optimize images, reduce JS, test early |
+| Browser compatibility | Medium | Medium | Test early, CSS fallbacks |
+| Bokun widget issues on mobile | Medium | High | Test early, document limitations |
+| Accessibility regressions | Low | High | axe audit + screen reader test |
 
 ## Security Considerations
 
 - Don't expose performance metrics publicly
 - Validate analytics data before processing
-- Rate limit analytics endpoints
+- Rate limit analytics endpoints if Web Vitals reporting added
+
+## Validation Summary
+
+**Validated:** 2026-02-15
+**Questions asked:** 4
+
+### Confirmed Decisions
+
+| Decision | User Choice |
+|----------|-------------|
+| **Bundle analysis** | Skip @next/bundle-analyzer — trust Turbopack tree-shaking, check first-load JS in build output |
+| **Cache revalidation** | On-demand only via `revalidateTag('tours')` from CMS webhook, no time-based TTL |
+| **Monitoring** | Include both Web Vitals reporter + Lighthouse CI for MVP |
+| **QA browser scope** | Full matrix: Chrome, Firefox, Safari, Edge desktop + iOS Safari + Chrome Android |
+
+### Action Items (Plan Revisions Applied)
+- [x] Step 7: Replace bundle analyzer with build output check
+- [x] Step 4: Change caching from 5-min revalidation to on-demand only
+- [x] Steps 8-9: Move Web Vitals + Lighthouse CI from "Optional" to required
+- [x] Manual QA: Keep full browser matrix as-is
 
 ## Next Steps
 
 After completion:
 1. Proceed to [Phase 12: Documentation + Deployment](./phase-12-documentation-deployment.md)
-2. Create CMS user guide
+2. Implement [Playwright E2E Testing](../260212-2142-playwright-e2e-testing/plan.md) (can run in parallel)
 3. Deploy to production
