@@ -8,6 +8,9 @@ import { ValuesSection } from '@/components/pages/values-section'
 import { TeamSection } from '@/components/pages/team-section'
 import { Button } from '@/components/ui/button'
 import { Award, Shield, MapPin } from 'lucide-react'
+import { generatePageMetadata } from '@/lib/seo'
+import type { Locale } from '@/i18n'
+import { AboutSchema } from '@/components/seo'
 
 export async function generateMetadata({
   params,
@@ -17,10 +20,12 @@ export async function generateMetadata({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'about' })
 
-  return {
+  return generatePageMetadata({
     title: t('title'),
     description: t('description'),
-  }
+    locale: locale as Locale,
+    pathname: '/about-us',
+  })
 }
 
 export default async function AboutPage({
@@ -33,6 +38,7 @@ export default async function AboutPage({
 
   return (
     <>
+      <AboutSchema />
       <Header />
       <main className="min-h-screen">
         {/* Hero Section */}

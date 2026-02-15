@@ -7,6 +7,9 @@ import { TourGrid, TourGridSkeleton } from '@/components/tour'
 import { TourCatalogClient } from './tour-catalog-client'
 import { getTours, type TourFilters } from '@/lib/api/get-tours'
 import { getCategories } from '@/lib/api/get-categories'
+import { generatePageMetadata } from '@/lib/seo'
+import type { Locale } from '@/i18n'
+import { TourListSchema } from '@/components/seo'
 
 interface ToursPageProps {
   params: Promise<{ locale: string }>
@@ -17,10 +20,12 @@ export async function generateMetadata({ params }: ToursPageProps): Promise<Meta
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'tours' })
 
-  return {
+  return generatePageMetadata({
     title: t('title'),
     description: t('description'),
-  }
+    locale: locale as Locale,
+    pathname: '/tours',
+  })
 }
 
 export default async function ToursPage({ params, searchParams }: ToursPageProps) {
@@ -28,14 +33,15 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
   const filters = await searchParams
   const t = await getTranslations({ locale, namespace: 'tours' })
 
-  // Fetch categories and tour count for FilterBar
-  const [categories, { total }] = await Promise.all([
+  // Fetch categories and tours for FilterBar + schema
+  const [categories, { tours, total }] = await Promise.all([
     getCategories('theme', locale),
     getTours(filters),
   ])
 
   return (
     <>
+      <TourListSchema tours={tours} />
       <Header variant="solid" />
       <main className="min-h-screen bg-[var(--color-background)] pt-[var(--header-height)]">
         {/* Catalog Section */}

@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
+import { generatePageMetadata } from '@/lib/seo'
+import type { Locale } from '@/i18n'
+import { WebPageSchema } from '@/components/seo'
 
 export async function generateMetadata({
   params,
@@ -11,10 +14,12 @@ export async function generateMetadata({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'privacy' })
 
-  return {
+  return generatePageMetadata({
     title: t('title'),
     description: t('description'),
-  }
+    locale: locale as Locale,
+    pathname: '/privacy',
+  })
 }
 
 export default async function PrivacyPage({
@@ -25,8 +30,15 @@ export default async function PrivacyPage({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'privacy' })
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
+
   return (
     <>
+      <WebPageSchema
+        name={t('title')}
+        description={t('description')}
+        url={`${baseUrl}/${locale}/privacy`}
+      />
       <Header />
       <main className="min-h-screen bg-[var(--color-background)]">
         {/* Hero Section */}

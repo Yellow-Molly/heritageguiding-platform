@@ -4,6 +4,9 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { GuideGrid } from '@/components/guide'
 import { getGuides, type GuideFilters } from '@/lib/api/get-guides'
+import { generatePageMetadata } from '@/lib/seo'
+import type { Locale } from '@/i18n'
+import { GuideListSchema } from '@/components/seo'
 
 interface GuidesPageProps {
   params: Promise<{ locale: string }>
@@ -13,10 +16,12 @@ interface GuidesPageProps {
 export async function generateMetadata({ params }: GuidesPageProps): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'guides' })
-  return {
+  return generatePageMetadata({
     title: t('title'),
     description: t('description'),
-  }
+    locale: locale as Locale,
+    pathname: '/guides',
+  })
 }
 
 export default async function GuidesPage({ params, searchParams }: GuidesPageProps) {
@@ -27,6 +32,7 @@ export default async function GuidesPage({ params, searchParams }: GuidesPagePro
 
   return (
     <>
+      <GuideListSchema guides={guides} />
       <Header variant="solid" />
       <main className="min-h-screen bg-[var(--color-background)] pt-[var(--header-height)]">
         <section className="container mx-auto px-4 py-6 lg:py-8">

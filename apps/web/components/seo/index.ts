@@ -1,3 +1,7 @@
 export { TravelAgencySchema, WebPageSchema } from './travel-agency-schema'
 export { FAQSchema } from './faq-schema'
 export type { FAQSchemaItem } from './faq-schema'
+export { AboutSchema } from './about-schema'
+export { GuideDetailSchema } from './guide-detail-schema'
+export { GuideListSchema } from './guide-list-schema'
+export { TourListSchema } from './tour-list-schema'

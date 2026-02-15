@@ -5,6 +5,9 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { GuideDetailHeader, GuideDetailContent, GuideToursSection } from '@/components/guide'
 import { Breadcrumb } from '@/components/shared/breadcrumb'
+import { generatePageMetadata } from '@/lib/seo'
+import type { Locale } from '@/i18n'
+import { GuideDetailSchema } from '@/components/seo'
 
 interface GuideDetailPageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -34,6 +37,14 @@ export default async function GuideDetailPage({ params }: GuideDetailPageProps) 
 
   return (
     <>
+      <GuideDetailSchema
+        name={guide.name}
+        slug={guide.slug}
+        photo={guide.photo?.url}
+        languages={guide.languages}
+        specializations={guide.specializations}
+        credentials={guide.credentials}
+      />
       <Header variant="solid" />
       <main className="min-h-screen bg-[var(--color-background)] pt-[var(--header-height)]">
         <div className="container py-4">
@@ -66,10 +77,13 @@ export async function generateMetadata({ params }: GuideDetailPageProps) {
     return { title: 'Guide Not Found' }
   }
 
-  return {
+  return generatePageMetadata({
     title: guide.name,
     description: `Meet ${guide.name}, expert heritage guide in Stockholm.`,
-  }
+    locale: locale as Locale,
+    pathname: `/guides/${guide.slug}`,
+    ogImage: guide.photo?.url,
+  })
 }
 
 export async function generateStaticParams() {

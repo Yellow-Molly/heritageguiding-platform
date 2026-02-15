@@ -13,6 +13,8 @@ import { ReviewsSection } from '@/components/tour/reviews-section'
 import { RelatedTours } from '@/components/tour/related-tours'
 import { TourSchema } from '@/components/tour/tour-schema'
 import { Breadcrumb } from '@/components/shared/breadcrumb'
+import { generatePageMetadata } from '@/lib/seo'
+import type { Locale } from '@/i18n'
 
 interface TourPageProps {
   params: Promise<{
@@ -107,23 +109,16 @@ export async function generateMetadata({ params }: TourPageProps) {
   const tour = await getTourBySlug(slug, locale)
 
   if (!tour) {
-    return {
-      title: 'Tour Not Found',
-    }
+    return { title: 'Tour Not Found' }
   }
 
-  return {
+  return generatePageMetadata({
     title: tour.title,
     description: tour.description.substring(0, 160),
-    openGraph: {
-      title: tour.title,
-      description: tour.description,
-      images: tour.gallery?.[0]?.image?.url
-        ? [{ url: tour.gallery[0].image.url, alt: tour.gallery[0].image.alt }]
-        : undefined,
-      type: 'website',
-    },
-  }
+    locale: locale as Locale,
+    pathname: `/tours/${tour.slug}`,
+    ogImage: tour.gallery?.[0]?.image?.url,
+  })
 }
 
 export async function generateStaticParams() {

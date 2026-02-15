@@ -6,6 +6,8 @@ import { Footer } from '@/components/layout/footer'
 import { FAQAccordion } from '@/components/pages/faq-accordion'
 import { FAQSchema } from '@/components/seo'
 import { Button } from '@/components/ui/button'
+import { generatePageMetadata } from '@/lib/seo'
+import type { Locale } from '@/i18n'
 
 /**
  * FAQ data organized by category.
@@ -155,10 +157,12 @@ export async function generateMetadata({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'faq' })
 
-  return {
+  return generatePageMetadata({
     title: t('title'),
     description: t('description'),
-  }
+    locale: locale as Locale,
+    pathname: '/faq',
+  })
 }
 
 export default async function FAQPage({
