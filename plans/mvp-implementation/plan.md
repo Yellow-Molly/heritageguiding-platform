@@ -5,9 +5,9 @@ status: in-progress
 priority: P1
 effort: "310-372h (12 weeks)"
 branch: master
-tags: [mvp, next.js, payload-cms, bokun, i18n, accessibility, concierge-wizard, semantic-search]
+tags: [mvp, next.js, payload-cms, bokun, i18n, accessibility, seo, schema-org, concierge-wizard, semantic-search]
 created: 2026-01-12
-updated: 2026-02-08
+updated: 2026-02-15
 ---
 
 # HeritageGuiding MVP Implementation Plan
@@ -43,9 +43,9 @@ Stockholm tourism booking platform with AI-first architecture, multi-language su
 | 07 | Tour Details | 32-36h | pending | [phase-07](./phase-07-tour-details.md) |
 | 08 | Rezdy Integration | 24-28h | superseded by 08.1 | [phase-08](./phase-08-rezdy-integration.md) |
 | 08.1 | Bokun Integration | 20-24h | done (2026-02-04) | [phase-08.1](./phase-08.1-bokun-integration.md) |
-| 08.5 | Concierge Wizard | 8-12h | pending | [phase-08.5](./phase-08.5-concierge-wizard.md) |
+| 08.5 | Concierge Wizard | 8-12h | done (2026-02-10) | [phase-08.5](./phase-08.5-concierge-wizard.md) |
 | 09 | Group Bookings + WhatsApp (Bokun) | 20-24h | pending | [phase-09](./phase-09-group-bookings-whatsapp.md) |
-| 10 | Accessibility + SEO | 44-54h | pending | [phase-10](./phase-10-accessibility-seo.md) |
+| 10 | Accessibility + SEO | 28-36h | done (2026-02-15) | [phase-10](./phase-10-accessibility-seo.md) |
 | 11 | Performance + Testing | 32-40h | pending | [phase-11](./phase-11-performance-testing.md) |
 | 12 | Documentation + Deployment | 16-22h | pending | [phase-12](./phase-12-documentation-deployment.md) |
 

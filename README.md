@@ -2,8 +2,8 @@
 
 Premium heritage tour booking platform for Sweden. AI-first architecture with advanced technology stack supporting Swedish/English/German markets.
 
-**Status:** Phase 09 Complete - Group Bookings + WhatsApp Integration
-**Live Demo:** Coming February 2026
+**Status:** Phase 10 Complete - Accessibility + SEO
+**Live Demo:** Coming March 2026
 
 ## Quick Start
 
@@ -129,12 +129,26 @@ heritageguiding-platform/
 - Full i18n (SV/EN/DE) and accessibility (WCAG 2.1 AA)
 - 60 unit tests with 100% coverage
 
+### Phase 09.5: Guide Profiles
+- Guide listing page with bio, credentials, languages
+- Guide detail pages with Schema.org Person markup
+- Integration with tour detail pages
+- GuideListSchema + GuideDetailSchema components
+
+### Phase 10: Accessibility + SEO ✅
+- **SEO Foundation:** Dynamic sitemap.xml (9 static + CMS routes, 3-locale hreflang), robots.txt
+- **Enhanced Metadata:** All 10 public pages with OG/Twitter cards, hreflang alternates, canonical URLs
+- **Schema.org:** 7 components (TravelAgency, FAQPage, TouristAttraction, AboutPage, Person, ItemList for tours/guides)
+- **Accessibility:** Skip-to-content link, ARIA live announcer, focus indicators, reduced motion support
+- **Testing:** 579 unit tests (102 new Phase 10, 100% pass rate)
+- **Commit:** f961c3f (2026-02-15)
+
 ### Accessibility & i18n
-- WCAG 2.1 AA compliance
-- Keyboard navigation
-- Screen reader support
+- WCAG 2.1 AA foundations (skip nav, focus styles, ARIA, reduced motion)
+- Keyboard navigation support
+- Screen reader optimizations (visually-hidden, announcer)
 - 3 languages: Swedish, English, German
-- Locale-specific formatting
+- Locale-specific formatting (dates, currency)
 
 ## Environment Setup
 

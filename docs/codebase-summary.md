@@ -1,13 +1,13 @@
 # Codebase Summary - HeritageGuiding Platform
 
-**Last Updated:** February 10, 2026
-**Phase:** 08.5 - Concierge Wizard (Complete)
-**Status:** 3-step wizard for personalized tour recommendations on /find-tour, replacing BubblaV AI chat
-**Codebase Metrics:** 155+ TypeScript files, 370K+ tokens, 67K LOC frontend + 35K LOC CMS
+**Last Updated:** February 15, 2026
+**Phase:** 10 - Accessibility + SEO (Complete)
+**Status:** WCAG 2.1 AA foundations, sitemap, robots.txt, Schema.org, 579 unit tests
+**Codebase Metrics:** 165+ TypeScript files, 380K+ tokens, 69K LOC frontend + 35K LOC CMS
 
 ## Overview
 
-HeritageGuiding is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16.1.6 frontend (67K LOC, 65+ React components, 10 API routes, 287+ unit tests) and Payload CMS 3.75 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication, Excel/CSV import-export, Concierge Wizard with audience-interest matching).
+HeritageGuiding is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16.1.6 frontend (69K LOC, 70+ React components, 10 API routes, 579 unit tests) and Payload CMS 3.75 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication, Excel/CSV import-export, Concierge Wizard with audience-interest matching, comprehensive SEO with sitemap/robots.txt, Schema.org structured data across all public pages).
 
 ## Repository Structure
 
@@ -92,11 +92,14 @@ app/
 │   ├── about-us/         # About page
 │   ├── faq/              # FAQ with accordion
 │   ├── find-tour/        # Concierge Wizard (3-step, audience-interest matching)
+│   ├── guides/           # Guide listing & detail pages
+│   │   ├── page.tsx      # Listing with GuideListSchema
+│   │   └── [slug]/       # Detail with GuideDetailSchema
 │   ├── privacy/          # Privacy policy
 │   ├── terms/            # Terms & conditions
 │   └── tours/            # Tour catalog & detail pages
-│       ├── page.tsx      # Catalog with filters
-│       ├── [slug]/       # Tour detail page
+│       ├── page.tsx      # Catalog with TourListSchema
+│       ├── [slug]/       # Detail with TourSchema
 │       └── tour-catalog-client.tsx  # Client-side filter logic
 ├── (payload)/            # Admin interface
 │   ├── admin/            # Payload CMS UI
@@ -108,8 +111,10 @@ app/
 │   ├── search/semantic/  # Semantic search endpoint
 │   ├── tours/recommend/  # POST wizard recommendations (Zod-validated)
 │   └── [...slug]/        # Generic API routes
-├── layout.tsx            # Root layout
-├── globals.css           # Global styles
+├── sitemap.ts            # Dynamic sitemap (9 static + CMS routes, hreflang)
+├── robots.ts             # robots.txt generator
+├── layout.tsx            # Root layout (skip link, ARIA announcer)
+├── globals.css           # Global styles (focus, reduced motion)
 └── middleware.ts         # next-intl routing middleware
 ```
 
@@ -156,11 +161,15 @@ app/
 - `values-section.tsx` - Company values
 - Tests: `faq-accordion.test.tsx`, `team-section.test.tsx`, `values-section.test.tsx`
 
-**SEO Components (3 components):**
+**SEO Components (7 components, Phase 10):**
 - `faq-schema.tsx` - FAQPage schema
-- `travel-agency-schema.tsx` - Organization schema
-- `tour-schema.tsx` - TouristAttraction schema
-- Tests: `faq-schema.test.tsx`, `travel-agency-schema.test.tsx`
+- `travel-agency-schema.tsx` - TravelAgency + Organization schema
+- `tour-schema.tsx` - TouristAttraction + Product schema
+- `about-schema.tsx` - AboutPage + Organization (Phase 10)
+- `guide-detail-schema.tsx` - Person schema (Phase 10)
+- `guide-list-schema.tsx` - ItemList of guides (Phase 10)
+- `tour-list-schema.tsx` - ItemList of tours (Phase 10)
+- Tests: 36 new tests (Phase 10)
 
 **Shared Components (5 components):**
 - `accessibility-badge.tsx` - WCAG indicators
@@ -168,6 +177,11 @@ app/
 - `loading-spinner.tsx` - Loading indicator
 - `rating-stars.tsx` - Star rating display
 - Tests: `accessibility-badge.test.tsx`, `loading-spinner.test.tsx`, `rating-stars.test.tsx`
+
+**Accessibility Components (2 components, Phase 10):**
+- `skip-to-content-link.tsx` - Skip navigation link
+- `visually-hidden.tsx` - Screen reader only content
+- Tests: 12 new tests (Phase 10)
 
 **Layout Components (3 components):**
 - `header.tsx` - Navigation header
@@ -196,7 +210,7 @@ app/
 - `bokun-booking-widget-with-fallback.tsx` - Booking widget wrapper
 - `language-switcher/` - Language selection
 
-**Tests:** 287+ unit tests using Vitest + React Testing Library
+**Tests:** 579 unit tests using Vitest + React Testing Library (102 new Phase 10 tests, +27% coverage)
 
 #### Libraries & Utilities
 
@@ -522,6 +536,8 @@ npm run payload:generate-types  # Generate TS types from schema
 - Phase 07: Tour Detail ✅
 - Phase 08.1: Bokun Booking Integration ✅
 - Phase 08.5: Concierge Wizard ✅
+- Phase 09.5: Guide Profiles ✅
+- Phase 10: Accessibility + SEO ✅
 
 ### Phase 08.1 Deliverables
 - Bokun API client with HMAC-SHA256 authentication
@@ -545,26 +561,42 @@ npm run payload:generate-types  # Generate TS types from schema
 - 60 unit tests with 100% coverage on new components
 - Accessible (aria-pressed, aria-label, keyboard nav, progressbar)
 
+### Phase 09.5 Deliverables
+- Guide profiles collection with listing/detail pages
+- Guide fields: name, bio, credentials, languages, photo
+- GuideListSchema + GuideDetailSchema (Schema.org Person)
+- Integration with tour detail pages
+
+### Phase 10 Deliverables (2026-02-15)
+- **SEO Foundation:** robots.txt, sitemap.xml (9 static + CMS dynamic routes, 3-locale hreflang)
+- **Metadata:** All 10 public pages upgraded to generatePageMetadata() (OG, Twitter, hreflang, canonical)
+- **Schema.org:** 4 new components (AboutSchema, GuideDetailSchema, GuideListSchema, TourListSchema)
+- **Accessibility:** Skip link, visually-hidden, ARIA announcer div, focus styles, reduced motion CSS
+- **Testing:** 102 new unit tests (579 total, 100% pass rate)
+- **Commit:** f961c3f on master branch
+
 ## Codebase Metrics
 
 | Metric | Value |
 |--------|-------|
-| **Total TypeScript Files** | 150+ |
-| **Frontend LOC** | ~65,000 |
+| **Total TypeScript Files** | 165+ |
+| **Frontend LOC** | ~69,000 |
 | **CMS LOC** | ~35,000 |
-| **Total Tokens** | 350,000+ |
-| **React Components** | 65+ |
+| **Total Tokens** | 380,000+ |
+| **React Components** | 70+ |
 | **API Functions** | 9 (data-fetching) |
 | **API Routes** | 4 (Bokun availability/webhook, semantic search, wizard recommendations) |
+| **SEO Components** | 7 (Schema.org) |
+| **Accessibility Components** | 2 (skip link, visually-hidden) |
 | **Excel/CSV Services** | 9 |
 | **Admin Components** | 6 (import/export UI) |
 | **Wizard Components** | 5 (Phase 08.5) |
 | **CMS Collections** | 10+ |
 | **Field Modules** | 7 |
-| **Unit Tests** | 287+ |
+| **Unit Tests** | 579 (102 new Phase 10) |
 | **TypeScript Coverage** | 100% |
-| **Accessibility** | WCAG 2.1 AA |
-| **Lighthouse Score** | 90+ (all categories) |
+| **Accessibility** | WCAG 2.1 AA foundations |
+| **Lighthouse Score** | 90+ (pending deployment validation) |
 
 ## File Size Management
 
@@ -596,11 +628,13 @@ npm run payload:generate-types  # Generate TS types from schema
 | **07** | Detail Page | ✅ Complete |
 | **08.1** | Bokun Booking | ✅ Complete |
 | **08.5** | Concierge Wizard | ✅ Complete |
-| **09** | Groups & Inquiry | Pending |
-| **10-13** | Advanced Features | Planned |
-| **14-17** | Polish & Launch | Planned |
+| **09.5** | Guide Profiles | ✅ Complete |
+| **10** | Accessibility + SEO | ✅ Complete |
+| **09** | Groups & WhatsApp | Pending |
+| **11** | Performance + Testing | Planned |
+| **12** | Documentation + Deployment | Planned |
 
 ---
 
-**Last Updated:** February 10, 2026
-**Document Status:** Phase 08.5 Complete (Concierge Wizard) - Ready for Phase 09
+**Last Updated:** February 15, 2026
+**Document Status:** Phase 10 Complete (Accessibility + SEO) - Ready for Phase 09 or 11

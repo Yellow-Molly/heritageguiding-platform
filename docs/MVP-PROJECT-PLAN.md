@@ -1,9 +1,9 @@
 # MVP PROJECT PLAN
 ## HeritageGuiding Platform - AI-First Tourism Booking Platform
 
-**Document Version:** 1.5
-**Date:** February 10, 2026
-**Status:** Phase 08.5 Complete - Concierge Wizard with audience-interest matching
+**Document Version:** 1.6
+**Date:** February 15, 2026
+**Status:** Phase 10 Complete - Accessibility + SEO with Schema.org
 
 ---
 
@@ -100,9 +100,7 @@ The MVP development is organized into **17 distinct phases**.
 |-------|-------|------------------|
 | **9. Group Bookings** | 12-14 | Inquiry form, email notifications, admin interface |
 | **10. WhatsApp** | 8-10 | Floating button, click-to-chat, localized messages |
-| **11. Accessibility** | 16-20 | WCAG 2.1 AA: keyboard nav, ARIA, focus management |
-| **12. SEO Foundation** | 12-16 | Meta tags, OpenGraph, sitemap, robots.txt |
-| **13. Schema.org** | 14-16 | TouristAttraction, Person, Organization, FAQPage |
+| **10. Accessibility + SEO** | 28-36 | WCAG 2.1 AA compliance, sitemap, robots.txt, Schema.org ✅ |
 
 ### Phase 14-17: Polish & Launch (Weeks 9-12)
 
@@ -237,6 +235,7 @@ heritageguiding.com/
 | v1.1 | +FAQ & About Us (+16h) | 302-364 |
 | v1.2 | +Enhanced schema, Concierge Wizard (+20h) | 310-372 |
 | v1.5 | Phase 08.5 Complete (Concierge Wizard) | 318-384 |
+| v1.6 | Phase 10 Complete (Accessibility + SEO) | 346-420 |
 
 **Timeline:** Achievable in 12 weeks with proper planning.
 
@@ -362,6 +361,7 @@ Excluded from MVP, planned for post-launch:
 | v1.3 | Feb 2, 2026 | Condensed document, updated to Bokun integration |
 | v1.4 | Feb 8, 2026 | Phase 08.1 complete status |
 | v1.5 | Feb 10, 2026 | Phase 08.5 Concierge Wizard complete |
+| v1.6 | Feb 15, 2026 | Phase 10 Accessibility + SEO complete (sitemap, robots.txt, Schema.org, 579 tests) |
 
 ---
 
