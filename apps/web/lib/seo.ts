@@ -18,7 +18,7 @@ export function generateHreflangAlternates(
   pathname: string,
   currentLocale: Locale,
 ): Metadata['alternates'] {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
   // Ensure pathname starts with /
   const normalizedPath = pathname.startsWith('/') ? pathname : `/${pathname}`
@@ -110,7 +110,7 @@ export function generatePageMetadata(options: {
   noIndex?: boolean
 }): Metadata {
   const { title, description, locale, pathname, keywords, ogImage, noIndex } = options
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
   return {
     title,
@@ -122,7 +122,7 @@ export function generatePageMetadata(options: {
       title,
       description,
       url: `${baseUrl}/${locale}${pathname}`,
-      siteName: 'HeritageGuiding',
+      siteName: 'Private Tours',
       locale: localeMetadata[locale].hreflang.replace('-', '_'),
       alternateLocale: generateOgLocaleAlternates(locale),
       type: 'website',

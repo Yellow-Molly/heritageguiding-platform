@@ -85,7 +85,7 @@ export function TourSchema({ tour, reviews }: TourSchemaProps) {
       availability: 'https://schema.org/InStock',
       seller: {
         '@type': 'Organization',
-        name: 'HeritageGuiding',
+        name: 'Private Tours',
       },
     },
     ...(reviews.length > 0 && {

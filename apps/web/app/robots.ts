@@ -5,7 +5,7 @@ import type { MetadataRoute } from 'next'
  * Allows all crawlers (including AI: GPTBot, CCBot) except for admin/API paths.
  */
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
   return {
     rules: {

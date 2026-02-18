@@ -8,8 +8,8 @@ import React from 'react'
 import { importMap } from './admin/importMap.js'
 
 export const metadata: Metadata = {
-  title: 'HeritageGuiding Admin',
-  description: 'Content management for HeritageGuiding',
+  title: 'Private Tours Admin',
+  description: 'Content management for Private Tours',
 }
 
 async function serverFunction(args: { name: string; args: Record<string, unknown> }) {

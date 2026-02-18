@@ -77,7 +77,7 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
         <Link href="/" className="relative h-8 w-48 transition-opacity hover:opacity-80">
           <Image
             src="/logo1.svg"
-            alt="HeritageGuiding"
+            alt="Private Tours"
             fill
             className="object-contain object-left"
             priority

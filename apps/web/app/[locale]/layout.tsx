@@ -21,7 +21,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
   return {
     metadataBase: new URL(baseUrl),
@@ -34,7 +34,7 @@ export async function generateMetadata({
       locale: localeMetadata[locale as Locale]?.hreflang.replace('-', '_') || 'en_US',
       alternateLocale: generateOgLocaleAlternates(locale as Locale),
       url: `${baseUrl}/${locale}`,
-      siteName: 'HeritageGuiding',
+      siteName: 'Private Tours',
     },
   }
 }

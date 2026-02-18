@@ -30,7 +30,7 @@ export default async function PrivacyPage({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'privacy' })
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
   return (
     <>
@@ -122,7 +122,7 @@ export default async function PrivacyPage({
             <h2>{t('sections.contact.title')}</h2>
             <p>{t('sections.contact.content')}</p>
             <p>
-              <strong>Email:</strong> privacy@heritageguiding.com
+              <strong>Email:</strong> privacy@privatetours.se
             </p>
           </div>
         </section>

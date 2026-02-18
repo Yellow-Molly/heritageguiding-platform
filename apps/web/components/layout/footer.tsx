@@ -88,7 +88,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="/" className="mb-6 inline-block font-serif text-2xl font-bold">
-              HeritageGuiding
+              Private Tours
             </Link>
             <p className="mb-6 max-w-sm text-white/70">
               Discover Stockholm&apos;s rich history with expert-led heritage tours. Licensed
@@ -109,8 +109,8 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-[var(--color-secondary)]" />
-                <a href="mailto:info@heritageguiding.com" className="hover:text-white">
-                  info@heritageguiding.com
+                <a href="mailto:info@privatetours.se" className="hover:text-white">
+                  info@privatetours.se
                 </a>
               </div>
               <div className="flex items-center gap-3">
@@ -162,7 +162,7 @@ export function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 py-6 text-sm text-white/60 md:flex-row lg:px-8">
-          <p>&copy; {currentYear} HeritageGuiding. All rights reserved.</p>
+          <p>&copy; {currentYear} Private Tours. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <span>Language:</span>
             <select

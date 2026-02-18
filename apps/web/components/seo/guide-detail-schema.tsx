@@ -23,7 +23,7 @@ export function GuideDetailSchema({
   specializations,
   credentials,
 }: GuideSchemaProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
   const schema = {
     '@context': 'https://schema.org',
@@ -51,7 +51,7 @@ export function GuideDetailSchema({
       }),
     worksFor: {
       '@type': 'Organization',
-      name: 'HeritageGuiding',
+      name: 'Private Tours',
       url: baseUrl,
     },
   }

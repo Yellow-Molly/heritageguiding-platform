@@ -12,20 +12,20 @@ interface AboutSchemaProps {
 }
 
 const defaultDescription =
-  'HeritageGuiding offers expert-led Stockholm heritage tours. Discover Swedish history and culture with licensed local guides.'
+  'Private Tours offers expert-led Stockholm heritage tours. Discover Swedish history and culture with licensed local guides.'
 
 export function AboutSchema({ founders, description }: AboutSchemaProps) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
-    name: 'About HeritageGuiding',
+    name: 'About Private Tours',
     description: description || defaultDescription,
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'}/about-us`,
+    url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'}/about-us`,
     mainEntity: {
       '@type': 'Organization',
-      name: 'HeritageGuiding',
+      name: 'Private Tours',
       description: description || defaultDescription,
-      url: process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com',
+      url: process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se',
       foundingDate: '2024',
       areaServed: {
         '@type': 'City',

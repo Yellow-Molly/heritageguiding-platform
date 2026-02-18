@@ -18,7 +18,7 @@ interface GuideListSchemaProps {
 }
 
 export function GuideListSchema({ guides }: GuideListSchemaProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
   const schema = {
     '@context': 'https://schema.org',

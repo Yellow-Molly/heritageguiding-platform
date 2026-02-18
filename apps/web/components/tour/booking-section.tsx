@@ -81,7 +81,7 @@ export function BookingSection({ tour }: BookingSectionProps) {
             </div>
             <Button className="mt-4 w-full" variant="outline" asChild>
               <a
-                href={`mailto:info@heritageguiding.com?subject=${encodeURIComponent(`Inquiry: ${tour.title}`)}&body=${encodeURIComponent(`Hello,\n\nI am interested in booking the "${tour.title}" tour.\n\nPlease let me know about available dates and pricing.\n\nThank you!`)}`}
+                href={`mailto:info@privatetours.se?subject=${encodeURIComponent(`Inquiry: ${tour.title}`)}&body=${encodeURIComponent(`Hello,\n\nI am interested in booking the "${tour.title}" tour.\n\nPlease let me know about available dates and pricing.\n\nThank you!`)}`}
               >
                 <Mail className="mr-2 h-4 w-4" />
                 {t('sendInquiry')}

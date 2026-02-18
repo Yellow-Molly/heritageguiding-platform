@@ -26,12 +26,12 @@ interface TravelAgencySchemaProps {
 }
 
 const defaultData: TravelAgencySchemaProps = {
-  name: 'HeritageGuiding',
+  name: 'Private Tours',
   description:
     'Expert-led Stockholm heritage tours. Discover Swedish history and culture with licensed local guides offering private and group tours in Swedish, English, and German.',
-  url: 'https://heritageguiding.com',
+  url: 'https://privatetours.se',
   telephone: '+46812345678',
-  email: 'info@heritageguiding.com',
+  email: 'info@privatetours.se',
   address: {
     streetAddress: 'Gamla Stan',
     addressLocality: 'Stockholm',
@@ -44,9 +44,9 @@ const defaultData: TravelAgencySchemaProps = {
     reviewCount: 735,
   },
   sameAs: [
-    'https://facebook.com/heritageguiding',
-    'https://instagram.com/heritageguiding',
-    'https://linkedin.com/company/heritageguiding',
+    'https://facebook.com/privatetours',
+    'https://instagram.com/privatetours',
+    'https://linkedin.com/company/privatetours',
   ],
 }
 
@@ -141,8 +141,8 @@ export function WebPageSchema({ name, description, url, breadcrumb }: WebPageSch
     url,
     isPartOf: {
       '@type': 'WebSite',
-      name: 'HeritageGuiding',
-      url: 'https://heritageguiding.com',
+      name: 'Private Tours',
+      url: 'https://privatetours.se',
     },
     breadcrumb: breadcrumb
       ? {

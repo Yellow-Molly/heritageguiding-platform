@@ -34,11 +34,11 @@ describe('TravelAgencySchema', () => {
       expect(json['@type']).toBe('TravelAgency')
     })
 
-    it('has default name HeritageGuiding', () => {
+    it('has default name Private Tours', () => {
       const { container } = render(<TravelAgencySchema />)
       const script = container.querySelector('script[type="application/ld+json"]')
       const json = JSON.parse(script!.innerHTML)
-      expect(json.name).toBe('HeritageGuiding')
+      expect(json.name).toBe('Private Tours')
     })
   })
 
@@ -205,7 +205,7 @@ describe('WebPageSchema', () => {
       const script = container.querySelector('script[type="application/ld+json"]')
       const json = JSON.parse(script!.innerHTML)
       expect(json.isPartOf['@type']).toBe('WebSite')
-      expect(json.isPartOf.name).toBe('HeritageGuiding')
+      expect(json.isPartOf.name).toBe('Private Tours')
     })
   })
 

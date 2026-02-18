@@ -46,7 +46,7 @@ describe('generateHreflangAlternates', () => {
   it('uses default URL when env not set', () => {
     vi.unstubAllEnvs()
     const result = generateHreflangAlternates('/tours', 'sv')
-    expect(result?.canonical).toBe('https://heritageguiding.com/sv/tours')
+    expect(result?.canonical).toBe('https://privatetours.se/sv/tours')
   })
 })
 
@@ -196,7 +196,7 @@ describe('generatePageMetadata', () => {
     expect(result.openGraph?.title).toBe('Test')
     expect(result.openGraph?.description).toBe('Test description')
     expect(result.openGraph?.url).toBe('https://example.com/sv/test')
-    expect(result.openGraph?.siteName).toBe('HeritageGuiding')
+    expect(result.openGraph?.siteName).toBe('Private Tours')
     expect(result.openGraph?.locale).toBe('sv_SE')
     expect((result.openGraph as Record<string, unknown>)?.type).toBe('website')
   })

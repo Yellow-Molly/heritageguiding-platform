@@ -34,7 +34,7 @@ export async function generateMetadata({
           url: '/images/og-homepage.jpg',
           width: 1200,
           height: 630,
-          alt: 'HeritageGuiding - Expert Stockholm Tours',
+          alt: 'Private Tours - Expert Stockholm Tours',
         },
       ],
     },

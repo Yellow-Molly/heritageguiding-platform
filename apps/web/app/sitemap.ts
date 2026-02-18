@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 const LOCALES = ['sv', 'en', 'de'] as const
 
 /** Static public routes (without locale prefix) */

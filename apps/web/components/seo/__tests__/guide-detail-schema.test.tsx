@@ -77,9 +77,9 @@ describe('GuideDetailSchema', () => {
     expect(json.hasCredential[0].name).toBe('Licensed Guide')
   })
 
-  it('includes worksFor HeritageGuiding', () => {
+  it('includes worksFor Private Tours', () => {
     const { container } = render(<GuideDetailSchema {...defaultProps} />)
     const json = getJson(container)
-    expect(json.worksFor.name).toBe('HeritageGuiding')
+    expect(json.worksFor.name).toBe('Private Tours')
   })
 })

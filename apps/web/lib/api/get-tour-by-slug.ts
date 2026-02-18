@@ -222,7 +222,7 @@ const mockTourDetails: Record<string, TourDetail> = {
       meetingPointName: 'Royal Palace Main Entrance',
       meetingPointAddress: 'Kungliga slottet, 107 70 Stockholm',
       meetingPointInstructions:
-        'Meet at the main entrance facing Slottsbacken. Guide will have a HeritageGuiding sign.',
+        'Meet at the main entrance facing Slottsbacken. Guide will have a Private Tours sign.',
       coordinates: {
         latitude: 59.3268,
         longitude: 18.0717,
@@ -314,7 +314,7 @@ const mockTourDetails: Record<string, TourDetail> = {
       meetingPointName: 'Vasa Museum Entrance',
       meetingPointAddress: 'Galärvarvsvägen 14, 115 21 Stockholm',
       meetingPointInstructions:
-        'Meet outside the main entrance, under the museum sign. Guide wears a HeritageGuiding badge.',
+        'Meet outside the main entrance, under the museum sign. Guide wears a Private Tours badge.',
       coordinates: {
         latitude: 59.328,
         longitude: 18.0914,

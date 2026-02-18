@@ -18,7 +18,7 @@ export async function sendInquiryNotificationToAdmin(data: InquiryNotificationDa
   const transporter = createEmailTransporter()
 
   await transporter.sendMail({
-    from: `HeritageGuiding <${process.env.GMAIL_USER}>`,
+    from: `Private Tours <${process.env.GMAIL_USER}>`,
     to: process.env.ADMIN_EMAIL!,
     subject: `New Group Inquiry: ${data.groupSize} people - ${data.name}`,
     html: `

@@ -1,5 +1,5 @@
 /**
- * API data fetching functions for HeritageGuiding.
+ * API data fetching functions for Private Tours.
  * These functions provide data from CMS or mock sources for development.
  */
 

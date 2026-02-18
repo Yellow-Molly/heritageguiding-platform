@@ -17,7 +17,7 @@ interface TourListSchemaProps {
 }
 
 export function TourListSchema({ tours }: TourListSchemaProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
   const schema = {
     '@context': 'https://schema.org',

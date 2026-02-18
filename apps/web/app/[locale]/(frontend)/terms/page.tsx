@@ -30,7 +30,7 @@ export default async function TermsPage({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'terms' })
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
   return (
     <>

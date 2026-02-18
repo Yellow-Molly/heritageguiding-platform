@@ -26,7 +26,7 @@ const values: ValueItem[] = [
 ]
 
 /**
- * Values section showcasing what makes HeritageGuiding different.
+ * Values section showcasing what makes Private Tours different.
  * Displays 6 core values with icons and descriptions.
  */
 export function ValuesSection() {

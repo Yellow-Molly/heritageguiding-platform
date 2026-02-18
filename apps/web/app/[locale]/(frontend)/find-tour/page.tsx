@@ -33,7 +33,7 @@ export default async function FindTourPage({ params }: FindTourPageProps) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'findTour' })
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://heritageguiding.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
   return (
     <>
