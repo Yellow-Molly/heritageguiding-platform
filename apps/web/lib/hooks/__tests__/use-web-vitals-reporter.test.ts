@@ -93,4 +93,34 @@ describe('useWebVitalsReporter', () => {
 
     vi.stubEnv('NODE_ENV', originalEnv!)
   })
+
+  it('uses fetch fallback when sendBeacon is unavailable', async () => {
+    const originalEnv = process.env.NODE_ENV
+    vi.stubEnv('NODE_ENV', 'production')
+
+    // Navigator without sendBeacon
+    vi.stubGlobal('navigator', {})
+
+    const fetchSpy = vi.fn().mockResolvedValue(new Response())
+    vi.stubGlobal('fetch', fetchSpy)
+
+    useWebVitalsReporter()
+    reportCallback!({
+      name: 'LCP',
+      value: 1500,
+      rating: 'needs-improvement',
+      id: 'v4-fallback',
+      navigationType: 'navigate',
+    })
+
+    expect(fetchSpy).toHaveBeenCalledWith(
+      '/api/analytics/vitals',
+      expect.objectContaining({
+        method: 'POST',
+        keepalive: true,
+      })
+    )
+
+    vi.stubEnv('NODE_ENV', originalEnv!)
+  })
 })

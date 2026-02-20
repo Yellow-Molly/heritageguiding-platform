@@ -13,7 +13,12 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       include: ['lib/**/*.ts'],
-      exclude: ['**/*.test.ts', '**/index.ts'],
+      exclude: [
+        '**/*.test.ts',
+        '**/index.ts',
+        'lib/bokun/bokun-types.ts', // Type-only, no runtime code
+        'lib/fonts.ts', // next/font/google module-level config
+      ],
       thresholds: {
         statements: 80,
         branches: 80,

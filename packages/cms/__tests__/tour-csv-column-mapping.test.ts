@@ -653,3 +653,75 @@ describe('csvRowToTourData', () => {
     expect(result.accessibility.wheelchairAccessible).toBe(false)
   })
 })
+
+// ============================================================================
+// Gap-fill edge cases for flattenTourToCSVRow uncovered branches
+// ============================================================================
+
+describe('flattenTourToCSVRow edge cases', () => {
+  const createBaseTour = (overrides: Partial<TourWithLocales> = {}): TourWithLocales => ({
+    id: 1,
+    slug: 'edge-tour',
+    title: { sv: 'Edge SV', en: 'Edge EN', de: 'Edge DE' },
+    shortDescription: { sv: 'Short SV', en: 'Short EN', de: 'Short DE' },
+    description: {
+      sv: { root: { children: [{ type: 'paragraph', children: [{ type: 'text', text: 'Desc' }] }] } },
+      en: { root: { children: [{ type: 'paragraph', children: [{ type: 'text', text: 'Desc' }] }] } },
+      de: { root: { children: [{ type: 'paragraph', children: [{ type: 'text', text: 'Desc' }] }] } },
+    },
+    highlights: { sv: [], en: [], de: null },
+    pricing: { basePrice: 100, currency: 'SEK', priceType: 'per_person', groupDiscount: false, childPrice: null },
+    duration: { hours: 1, durationText: { sv: '1 timme', en: '1 hour', de: '1 Stunde' } },
+    logistics: {
+      meetingPointName: { sv: 'Plats', en: 'Place', de: 'Ort' },
+      coordinates: [18.0686, 59.3293],
+    },
+    included: { sv: [], en: [], de: [] },
+    notIncluded: { sv: [], en: [], de: [] },
+    whatToBring: { sv: [], en: [], de: [] },
+    targetAudience: [],
+    difficultyLevel: 'easy',
+    ageRecommendation: { minimumAge: null, childFriendly: false, teenFriendly: false },
+    accessibility: { wheelchairAccessible: false, mobilityNotes: { sv: 'SV', en: 'EN', de: 'DE' }, hearingAssistance: false, visualAssistance: false, serviceAnimalsAllowed: false },
+    guide: { id: 1, slug: 'guide-1', name: 'Guide' } as any,
+    categories: [] as any,
+    neighborhoods: [] as any,
+    images: [],
+    featured: false,
+    status: 'published',
+    availability: 'available',
+    updatedAt: '2026-01-01T00:00:00Z',
+    createdAt: '2026-01-01T00:00:00Z',
+    ...overrides,
+  })
+
+  it('handles tour with null logistics coordinates (covers null branch in formatPoint)', () => {
+    const tour = createBaseTour()
+    if (tour.logistics) {
+      tour.logistics.coordinates = null as any
+    }
+    const row = flattenTourToCSVRow(tour)
+    expect(row.logistics_coordinates).toBe('')
+  })
+
+  it('handles description as plain string instead of Lexical format (non-localized object branch)', () => {
+    const tour = createBaseTour()
+    // Set description as a plain string — triggers the "not a localized object" branch
+    // in getLocalizedValue which returns current as-is, then lexicalToPlainText receives string
+    tour.description = 'Plain text description' as any
+    const row = flattenTourToCSVRow(tour)
+    // lexicalToPlainText returns '' for non-object input, so expect defined string
+    expect(typeof row.description_sv).toBe('string')
+  })
+
+  it('handles object value in safeStringify (covers typeof value === object branch)', () => {
+    const tour = createBaseTour()
+    // Set mobilityNotes to an unexpected plain object (not a localized Record)
+    if (tour.accessibility) {
+      tour.accessibility.mobilityNotes = { unexpected: 'object' } as any
+    }
+    const row = flattenTourToCSVRow(tour)
+    // safeStringify returns '' for objects — result must still be a string
+    expect(typeof row.accessibility_mobilityNotes_sv).toBe('string')
+  })
+})
