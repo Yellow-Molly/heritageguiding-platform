@@ -1,7 +1,7 @@
 # Code Standards & Best Practices
 
 **Last Updated:** February 21, 2026
-**Project:** HeritageGuiding Platform (Private Tours rebrand)
+**Project:** Private Tours Platform
 **Phase:** 12 Complete - Unit Test Coverage Improvement
 **Applies To:** All code in apps/, packages/, and scripts/
 **Recent Update:** Test coverage improved from ~52% to 90%+ across workspaces, 1009 unit tests, email services, Bokun integration tests, AI/semantic search tests, CSV/Excel tests

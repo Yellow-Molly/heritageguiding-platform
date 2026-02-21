@@ -17,7 +17,7 @@
     "findYourTour": "Hitta din tur"
   },
   "home": {
-    "title": "HeritageGuiding - Upptäck Stockholms Historia",
+    "title": "Private Tours - Upptäck Stockholms Historia",
     "description": "Upptäck Stockholm med expertvägledning. Privata och gruppturer på svenska, engelska och tyska.",
     "hero": {
       "title": "Upptäck Stockholms Rika Kulturarv",
@@ -122,14 +122,14 @@
     "thankYou": "Tack för din bokning!"
   },
   "footer": {
-    "about": "Om HeritageGuiding",
+    "about": "Om Private Tours",
     "contact": "Kontakta oss",
     "privacy": "Integritetspolicy",
     "terms": "Villkor",
-    "copyright": "© 2026 HeritageGuiding. Alla rättigheter förbehållna."
+    "copyright": "© 2026 Private Tours. Alla rättigheter förbehållna."
   },
   "meta": {
-    "defaultTitle": "HeritageGuiding - Stockholm Turer",
+    "defaultTitle": "Private Tours - Stockholm Turer",
     "defaultDescription": "Upptäck Stockholm med expertvägledning. Privata och gruppturer på svenska, engelska och tyska.",
     "keywords": "Stockholm turer, kulturarv, stadsvandring, privata turer"
   },
@@ -150,13 +150,13 @@
     "contactUs": "Kontakta Oss"
   },
   "about": {
-    "title": "Om Heritage Guiding",
+    "title": "Om Private Tours",
     "description": "Lär dig om vårt uppdrag att dela Stockholms rika kulturarv",
     "subtitle": "Där Historien Lever",
-    "heroAlt": "Heritage Guiding-teamet vid Stockholms strand",
+    "heroAlt": "Private Tours-teamet vid Stockholms strand",
     "story": {
       "title": "Vår Historia",
-      "paragraph1": "Heritage Guiding grundades med ett enkelt uppdrag: att förändra hur besökare upplever Stockholms rika historia. Vi tror att förståelse för det förflutna berikar vår nutid och inspirerar vår framtid.",
+      "paragraph1": "Private Tours grundades med ett enkelt uppdrag: att förändra hur besökare upplever Stockholms rika historia. Vi tror att förståelse för det förflutna berikar vår nutid och inspirerar vår framtid.",
       "paragraph2": "Vårt team av expertguider samlar decennier av erfarenhet inom historia, konst och arkeologi. Varje tur är utformad för att ge inte bara information, utan en genuin koppling till berättelserna som formade denna vackra stad.",
       "paragraph3": "Från kullerstenarna i Gamla Stan till de magnifika salarna i Kungliga Slottet inbjuder vi dig att upptäcka Stockholm genom ögonen på dem som älskar det mest."
     },
@@ -194,7 +194,7 @@
       "founder": {
         "name": "Dr. Erik Lindström",
         "role": "Grundare & Ledande Historiker",
-        "bio": "Med över 20 års erfarenhet av svensk medeltidshistoria grundade Erik Heritage Guiding för att dela sin passion för Stockholms rika förflutna."
+        "bio": "Med över 20 års erfarenhet av svensk medeltidshistoria grundade Erik Private Tours för att dela sin passion för Stockholms rika förflutna."
       },
       "leadGuide": {
         "name": "Anna Bergström",
@@ -223,12 +223,12 @@
   },
   "terms": {
     "title": "Villkor",
-    "description": "Villkor för användning av HeritageGuidings tjänster",
+    "description": "Villkor för användning av Private Tours tjänster",
     "lastUpdated": "Senast uppdaterad",
     "sections": {
       "intro": {
         "title": "Introduktion",
-        "content": "Välkommen till HeritageGuiding. Dessa villkor reglerar din användning av vår webbplats och tjänster. Genom att boka en tur eller använda våra tjänster godkänner du dessa villkor."
+        "content": "Välkommen till Private Tours. Dessa villkor reglerar din användning av vår webbplats och tjänster. Genom att boka en tur eller använda våra tjänster godkänner du dessa villkor."
       },
       "booking": {
         "title": "Bokningsvillkor",
@@ -251,7 +251,7 @@
       },
       "liability": {
         "title": "Ansvarsbegränsning",
-        "content": "Även om vi vidtar alla försiktighetsåtgärder för att säkerställa din säkerhet sker deltagande i turer på egen risk. HeritageGuiding ansvarar inte för personskada, förlust eller skada på egendom utom vid vår försumlighet."
+        "content": "Även om vi vidtar alla försiktighetsåtgärder för att säkerställa din säkerhet sker deltagande i turer på egen risk. Private Tours ansvarar inte för personskada, förlust eller skada på egendom utom vid vår försumlighet."
       },
       "conduct": {
         "title": "Uppförande under Tur",
@@ -262,7 +262,7 @@
       },
       "ip": {
         "title": "Immateriella Rättigheter",
-        "content": "Allt innehåll på denna webbplats, inklusive text, bilder och turmaterial, tillhör HeritageGuiding och skyddas av upphovsrättslagen."
+        "content": "Allt innehåll på denna webbplats, inklusive text, bilder och turmaterial, tillhör Private Tours och skyddas av upphovsrättslagen."
       },
       "law": {
         "title": "Tillämplig Lag",
@@ -270,7 +270,7 @@
       },
       "contact": {
         "title": "Kontaktinformation",
-        "content": "För frågor om dessa villkor, vänligen kontakta oss på info@heritageguiding.com"
+        "content": "För frågor om dessa villkor, vänligen kontakta oss på info@privatetours.se"
       }
     }
   },
@@ -377,7 +377,7 @@
     "modalTrigger": "Begär gruppoffert",
     "modalDescription": "För grupper om 9+, fyll i formuläret så återkommer vi inom 24 timmar.",
     "meta": {
-      "title": "Gruppturer - HeritageGuiding",
+      "title": "Gruppturer - Private Tours",
       "description": "Boka en privat grupptur i Stockholm för 9+ personer"
     },
     "form": {
@@ -431,12 +431,12 @@
     "lastUpdated": "Senast uppdaterad",
     "gdpr": {
       "title": "GDPR-efterlevnad",
-      "content": "HeritageGuiding är engagerat i att skydda din integritet i enlighet med den allmänna dataskyddsförordningen (GDPR). Denna policy förklarar hur vi hanterar dina personuppgifter."
+      "content": "Private Tours är engagerat i att skydda din integritet i enlighet med den allmänna dataskyddsförordningen (GDPR). Denna policy förklarar hur vi hanterar dina personuppgifter."
     },
     "sections": {
       "intro": {
         "title": "Introduktion",
-        "content": "Denna integritetspolicy förklarar hur HeritageGuiding samlar in, använder och skyddar din personliga information när du använder vår webbplats och tjänster."
+        "content": "Denna integritetspolicy förklarar hur Private Tours samlar in, använder och skyddar din personliga information när du använder vår webbplats och tjänster."
       },
       "dataCollected": {
         "title": "Information Vi Samlar In",

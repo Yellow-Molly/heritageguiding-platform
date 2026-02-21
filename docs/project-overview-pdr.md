@@ -4,11 +4,11 @@
 **Last Updated:** February 21, 2026
 **Status:** Phase 12 Complete - Unit Test Coverage Improvement (52%→90%+)
 **Project Lead:** Technical Team
-**Latest Changes:** Test coverage dramatically improved from ~52% to 90%+ across both workspaces, 1009 unit tests (444 new), comprehensive service/integration test coverage, rebrand from HeritageGuiding to Private Tours
+**Latest Changes:** Test coverage dramatically improved from ~52% to 90%+ across both workspaces, 1009 unit tests (444 new), comprehensive service/integration test coverage, rebranded to Private Tours
 
 ## Executive Summary
 
-HeritageGuiding is an AI-first tourism booking platform consolidating the Sweden heritage tourism market. The MVP combines advanced technology (Next.js 16.1.6, Payload CMS 3.75) with superior UX to capture market share from 50-100 fragmented competitors. Launch target: 12 weeks.
+Private Tours is an AI-first tourism booking platform consolidating the Sweden heritage tourism market. The MVP combines advanced technology (Next.js 16.1.6, Payload CMS 3.75) with superior UX to capture market share from 50-100 fragmented competitors. Launch target: 12 weeks.
 
 ## Product Vision
 
@@ -48,7 +48,7 @@ Successfully established monorepo infrastructure with Next.js 16, Payload CMS 3.
 
 **Repository Structure:**
 ```
-heritageguiding-platform/
+privatetours-platform/
 ├── apps/web/              # Next.js 16 + Payload integration (Turbopack)
 ├── packages/
 │   ├── cms/              # Payload config + collections

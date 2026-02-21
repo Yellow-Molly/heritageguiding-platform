@@ -1,5 +1,5 @@
 # MVP PROJECT PLAN
-## HeritageGuiding Platform - AI-First Tourism Booking Platform
+## Private Tours Platform - AI-First Tourism Booking Platform
 
 **Document Version:** 1.6
 **Date:** February 15, 2026
@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-This document outlines the MVP scope, timeline, and deliverables for the HeritageGuiding platform (formerly Sweden Tours). The MVP is a production-ready, AI-first booking platform designed to consolidate the fragmented tourism market.
+This document outlines the MVP scope, timeline, and deliverables for the Private Tours platform (formerly Sweden Tours). The MVP is a production-ready, AI-first booking platform designed to consolidate the fragmented tourism market.
 
 ### Project Overview
 
@@ -133,7 +133,7 @@ The MVP development is organized into **17 distinct phases**.
 ### Site Structure
 
 ```
-heritageguiding.com/
+privatetours.se/
 ├── /                      # Homepage
 ├── /tours                 # Tour catalog
 ├── /tours/[slug]          # Tour details

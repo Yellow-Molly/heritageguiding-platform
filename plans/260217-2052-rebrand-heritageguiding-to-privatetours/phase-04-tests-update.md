@@ -8,8 +8,8 @@
 - **Date:** 2026-02-17
 - **Description:** Update test assertions and fixtures to match new brand name and domain
 - **Priority:** P1
-- **Status:** Pending
-- **Review Status:** Not started
+- **Status:** Complete
+- **Review Status:** Verified 2026-02-21
 
 ## Key Insights
 - 4 test files reference old brand: seo.test.ts, travel-agency-schema.test.tsx, guide-detail-schema.test.tsx, about-schema.test.tsx
@@ -76,12 +76,12 @@ grep -r "heritageguiding" apps/web/__tests__/ --include="*.ts" --include="*.tsx"
 If any matches found, update them.
 
 ## Todo List
-- [ ] Update seo.test.ts assertions
-- [ ] Update travel-agency-schema.test.tsx assertions
-- [ ] Update guide-detail-schema.test.tsx assertions
-- [ ] Update about-schema.test.tsx assertions
-- [ ] Run full test suite (600+ tests)
-- [ ] Verify zero remaining references in test files
+- [x] Update seo.test.ts assertions (already done in Phase 01)
+- [x] Update travel-agency-schema.test.tsx assertions (already done in Phase 01)
+- [x] Update guide-detail-schema.test.tsx assertions (already done in Phase 01)
+- [x] Update about-schema.test.tsx assertions (already done in Phase 01)
+- [x] Run full test suite — 1,009 tests passed (785 web + 224 cms)
+- [x] Verify zero remaining references in test files — grep confirmed clean
 
 ## Success Criteria
 - `npm test` passes with 0 failures

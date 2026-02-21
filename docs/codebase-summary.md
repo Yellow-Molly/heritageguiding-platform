@@ -1,4 +1,4 @@
-# Codebase Summary - HeritageGuiding Platform
+# Codebase Summary - Private Tours Platform
 
 **Last Updated:** February 21, 2026
 **Phase:** 11 - Performance Optimization (Complete)
@@ -7,12 +7,12 @@
 
 ## Overview
 
-HeritageGuiding is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16.1.6 frontend (69K LOC, 70+ React components, 10 API routes, 1009 unit tests with 90%+ coverage, performance-optimized with image caching, dynamic imports, Web Vitals monitoring, Lighthouse CI) and Payload CMS 3.75 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication, Excel/CSV import-export, Concierge Wizard with audience-interest matching, comprehensive SEO with sitemap/robots.txt, Schema.org structured data across all public pages).
+Private Tours is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16.1.6 frontend (69K LOC, 70+ React components, 10 API routes, 1009 unit tests with 90%+ coverage, performance-optimized with image caching, dynamic imports, Web Vitals monitoring, Lighthouse CI) and Payload CMS 3.75 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication, Excel/CSV import-export, Concierge Wizard with audience-interest matching, comprehensive SEO with sitemap/robots.txt, Schema.org structured data across all public pages).
 
 ## Repository Structure
 
 ```
-heritageguiding-platform/
+privatetours-platform/
 ├── apps/web/              # Next.js 16 frontend (SSR + static, Turbopack)
 │   ├── app/               # App Router pages
 │   │   ├── (frontend)/    # Public routes (localized)
@@ -629,7 +629,7 @@ npm run payload:generate-types  # Generate TS types from schema
   - CSV/Excel import-export (validators, mappers, converters)
   - Web Vitals monitoring and analytics
 - **Coverage Config:** vitest.config.ts updated to exclude type-only (bokun-types.ts) and config-only (fonts.ts) files
-- **Rebrand:** Source code references updated from HeritageGuiding to Private Tours
+- **Rebrand:** Source code references updated to Private Tours branding
 
 ## Codebase Metrics
 

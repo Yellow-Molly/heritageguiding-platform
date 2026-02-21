@@ -1,4 +1,4 @@
-# HeritageGuiding MVP - Infrastructure Setup
+# Private Tours MVP - Infrastructure Setup
 
 Complete technical infrastructure plan for the platform.
 
@@ -26,7 +26,7 @@ Complete technical infrastructure plan for the platform.
 **Total Repositories: 1**
 
 ```
-heritageguiding-platform/
+privatetours-platform/
 ├── apps/
 │   └── web/                    # Next.js 15 frontend
 │       ├── app/                # App router pages
@@ -85,8 +85,8 @@ Git: v2.40+
 
 ```bash
 # Clone repository
-git clone https://github.com/your-org/heritageguiding-platform.git
-cd heritageguiding-platform
+git clone https://github.com/your-org/privatetours-platform.git
+cd privatetours-platform
 
 # Install dependencies
 npm install
@@ -168,9 +168,9 @@ npm run dev
 
 **Deployment Environments:**
 ```
-Production:  main branch     → heritageguiding.com
-Staging:     staging branch  → staging.heritageguiding.com
-Preview:     PR branches     → pr-123.heritageguiding.vercel.app
+Production:  main branch     → privatetours.se
+Staging:     staging branch  → staging.privatetours.se
+Preview:     PR branches     → pr-123.privatetours.vercel.app
 ```
 
 **Features:**
@@ -289,9 +289,9 @@ Features: Automatic WebP, responsive images, lazy loading
 **Plan:** Google Workspace Business Starter ($6/user/month)
 
 ```bash
-GMAIL_USER=bookings@heritageguiding.com
+GMAIL_USER=bookings@privatetours.se
 GMAIL_APP_PASSWORD=your-google-app-password
-EMAIL_FROM=bookings@heritageguiding.com
+EMAIL_FROM=bookings@privatetours.se
 ```
 
 **Setup:**

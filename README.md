@@ -1,4 +1,4 @@
-# HeritageGuiding Platform
+# Private Tours Platform
 
 Premium heritage tour booking platform for Sweden. AI-first architecture with advanced technology stack supporting Swedish/English/German markets.
 
@@ -16,8 +16,8 @@ Premium heritage tour booking platform for Sweden. AI-first architecture with ad
 
 ```bash
 # Clone repository
-git clone https://github.com/your-org/heritageguiding-platform.git
-cd heritageguiding-platform
+git clone https://github.com/your-org/privatetours-platform.git
+cd privatetours-platform
 
 # Install dependencies
 npm install
@@ -62,7 +62,7 @@ npm run dev
 ## Project Structure
 
 ```
-heritageguiding-platform/
+privatetours-platform/
 ├── apps/web/                    # Next.js 16 frontend
 │   ├── app/
 │   │   ├── [locale]/           # Localized routes
@@ -149,7 +149,7 @@ heritageguiding-platform/
 - **packages/cms Coverage:** 89.7% statement coverage with 11 test files
 - **New Test Suites:** Email services, Bokun API integration, AI/embeddings, CSV/Excel pipelines, Web Vitals
 - **Coverage Metrics:** All 4 metrics (statements/branch/functions/lines) exceed 80% in both workspaces
-- **Rebrand:** Source references updated from HeritageGuiding to Private Tours
+- **Rebrand:** Source references updated to Private Tours branding
 - **Commit:** f084681 (2026-02-21)
 
 ### Phase 11: Performance Optimization ✅
@@ -175,13 +175,13 @@ heritageguiding-platform/
 ### Required Variables
 ```env
 # Database
-DATABASE_URL=postgresql://user:password@host:5432/heritageguiding
+DATABASE_URL=postgresql://user:password@host:5432/privatetours
 
 # Payload CMS
 PAYLOAD_SECRET=<32+ character random string>
 
 # Frontend
-NEXT_PUBLIC_URL=https://heritageguiding.com
+NEXT_PUBLIC_URL=https://privatetours.se
 
 # Bokun Integration (Phase 08.1)
 BOKUN_ACCESS_KEY=<your-bokun-access-key>
@@ -381,7 +381,7 @@ Proprietary - All rights reserved
 ## Contact
 
 - **Technical Lead**: [contact info]
-- **Project Slack**: #heritageguiding
+- **Project Slack**: #privatetours
 - **Docs Issues**: GitHub Issues
 
 ---

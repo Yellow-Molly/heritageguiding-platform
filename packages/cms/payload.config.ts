@@ -44,7 +44,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     meta: {
-      titleSuffix: '- HeritageGuiding',
+      titleSuffix: '- Private Tours',
     },
   },
   // Localization for SV/EN/DE support

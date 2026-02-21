@@ -17,7 +17,7 @@
     "findYourTour": "Finden Sie Ihre Tour"
   },
   "home": {
-    "title": "HeritageGuiding - Entdecken Sie Stockholms Geschichte",
+    "title": "Private Tours - Entdecken Sie Stockholms Geschichte",
     "description": "Entdecken Sie Stockholm mit fachkundiger Führung. Private und Gruppentouren auf Schwedisch, Englisch und Deutsch.",
     "hero": {
       "title": "Entdecken Sie Stockholms Reiches Erbe",
@@ -122,14 +122,14 @@
     "thankYou": "Vielen Dank für Ihre Buchung!"
   },
   "footer": {
-    "about": "Über HeritageGuiding",
+    "about": "Über Private Tours",
     "contact": "Kontaktieren Sie uns",
     "privacy": "Datenschutzerklärung",
     "terms": "Geschäftsbedingungen",
-    "copyright": "© 2026 HeritageGuiding. Alle Rechte vorbehalten."
+    "copyright": "© 2026 Private Tours. Alle Rechte vorbehalten."
   },
   "meta": {
-    "defaultTitle": "HeritageGuiding - Stockholm Touren",
+    "defaultTitle": "Private Tours - Stockholm Touren",
     "defaultDescription": "Entdecken Sie Stockholm mit fachkundiger Führung. Private und Gruppentouren auf Schwedisch, Englisch und Deutsch.",
     "keywords": "Stockholm Touren, Kulturerbführung, Stadtführungen, Privattouren"
   },
@@ -150,13 +150,13 @@
     "contactUs": "Kontaktieren Sie Uns"
   },
   "about": {
-    "title": "Über Heritage Guiding",
+    "title": "Über Private Tours",
     "description": "Erfahren Sie mehr über unsere Mission, Stockholms reiches Erbe zu teilen",
     "subtitle": "Wo Geschichte Lebendig Wird",
-    "heroAlt": "Heritage Guiding Team an Stockholms Ufer",
+    "heroAlt": "Private Tours Team an Stockholms Ufer",
     "story": {
       "title": "Unsere Geschichte",
-      "paragraph1": "Heritage Guiding wurde mit einer einfachen Mission gegründet: die Art und Weise zu verändern, wie Besucher Stockholms reiche Geschichte erleben. Wir glauben, dass das Verständnis der Vergangenheit unsere Gegenwart bereichert und unsere Zukunft inspiriert.",
+      "paragraph1": "Private Tours wurde mit einer einfachen Mission gegründet: die Art und Weise zu verändern, wie Besucher Stockholms reiche Geschichte erleben. Wir glauben, dass das Verständnis der Vergangenheit unsere Gegenwart bereichert und unsere Zukunft inspiriert.",
       "paragraph2": "Unser Team von Experten-Guides vereint jahrzehntelange Erfahrung in Geschichte, Kunst und Archäologie. Jede Tour ist darauf ausgelegt, nicht nur Informationen zu vermitteln, sondern eine echte Verbindung zu den Geschichten herzustellen, die diese schöne Stadt geformt haben.",
       "paragraph3": "Von den Kopfsteinpflasterstraßen der Altstadt bis zu den prächtigen Sälen des Königspalastes laden wir Sie ein, Stockholm durch die Augen derer zu entdecken, die es am meisten lieben."
     },
@@ -194,7 +194,7 @@
       "founder": {
         "name": "Dr. Erik Lindström",
         "role": "Gründer & Leitender Historiker",
-        "bio": "Mit über 20 Jahren Erfahrung in schwedischer mittelalterlicher Geschichte gründete Erik Heritage Guiding, um seine Leidenschaft für Stockholms reiche Vergangenheit zu teilen."
+        "bio": "Mit über 20 Jahren Erfahrung in schwedischer mittelalterlicher Geschichte gründete Erik Private Tours, um seine Leidenschaft für Stockholms reiche Vergangenheit zu teilen."
       },
       "leadGuide": {
         "name": "Anna Bergström",
@@ -223,12 +223,12 @@
   },
   "terms": {
     "title": "Geschäftsbedingungen",
-    "description": "Geschäftsbedingungen für die Nutzung der HeritageGuiding-Dienste",
+    "description": "Geschäftsbedingungen für die Nutzung der Private Tours-Dienste",
     "lastUpdated": "Zuletzt aktualisiert",
     "sections": {
       "intro": {
         "title": "Einführung",
-        "content": "Willkommen bei HeritageGuiding. Diese Geschäftsbedingungen regeln Ihre Nutzung unserer Website und Dienste. Durch die Buchung einer Tour oder Nutzung unserer Dienste stimmen Sie diesen Bedingungen zu."
+        "content": "Willkommen bei Private Tours. Diese Geschäftsbedingungen regeln Ihre Nutzung unserer Website und Dienste. Durch die Buchung einer Tour oder Nutzung unserer Dienste stimmen Sie diesen Bedingungen zu."
       },
       "booking": {
         "title": "Buchungsbedingungen",
@@ -251,7 +251,7 @@
       },
       "liability": {
         "title": "Haftungsbeschränkung",
-        "content": "Obwohl wir alle Vorkehrungen treffen, um Ihre Sicherheit zu gewährleisten, erfolgt die Teilnahme an Touren auf eigene Gefahr. HeritageGuiding haftet nicht für Personenschäden, Verluste oder Sachschäden, außer wenn sie durch unsere Fahrlässigkeit verursacht wurden."
+        "content": "Obwohl wir alle Vorkehrungen treffen, um Ihre Sicherheit zu gewährleisten, erfolgt die Teilnahme an Touren auf eigene Gefahr. Private Tours haftet nicht für Personenschäden, Verluste oder Sachschäden, außer wenn sie durch unsere Fahrlässigkeit verursacht wurden."
       },
       "conduct": {
         "title": "Verhalten während der Tour",
@@ -262,7 +262,7 @@
       },
       "ip": {
         "title": "Geistiges Eigentum",
-        "content": "Alle Inhalte dieser Website, einschließlich Texte, Bilder und Tourmaterialien, sind Eigentum von HeritageGuiding und urheberrechtlich geschützt."
+        "content": "Alle Inhalte dieser Website, einschließlich Texte, Bilder und Tourmaterialien, sind Eigentum von Private Tours und urheberrechtlich geschützt."
       },
       "law": {
         "title": "Anwendbares Recht",
@@ -270,7 +270,7 @@
       },
       "contact": {
         "title": "Kontaktinformationen",
-        "content": "Bei Fragen zu diesen Bedingungen kontaktieren Sie uns bitte unter info@heritageguiding.com"
+        "content": "Bei Fragen zu diesen Bedingungen kontaktieren Sie uns bitte unter info@privatetours.se"
       }
     }
   },
@@ -377,7 +377,7 @@
     "modalTrigger": "Gruppenangebot anfragen",
     "modalDescription": "Für Gruppen ab 9 Personen füllen Sie dieses Formular aus und wir melden uns innerhalb von 24 Stunden.",
     "meta": {
-      "title": "Gruppentouren - HeritageGuiding",
+      "title": "Gruppentouren - Private Tours",
       "description": "Buchen Sie eine private Gruppentour in Stockholm für 9+ Personen"
     },
     "form": {
@@ -431,12 +431,12 @@
     "lastUpdated": "Zuletzt aktualisiert",
     "gdpr": {
       "title": "DSGVO-Konformität",
-      "content": "HeritageGuiding verpflichtet sich zum Schutz Ihrer Privatsphäre gemäß der Datenschutz-Grundverordnung (DSGVO). Diese Richtlinie erklärt, wie wir mit Ihren personenbezogenen Daten umgehen."
+      "content": "Private Tours verpflichtet sich zum Schutz Ihrer Privatsphäre gemäß der Datenschutz-Grundverordnung (DSGVO). Diese Richtlinie erklärt, wie wir mit Ihren personenbezogenen Daten umgehen."
     },
     "sections": {
       "intro": {
         "title": "Einführung",
-        "content": "Diese Datenschutzerklärung erklärt, wie HeritageGuiding Ihre persönlichen Daten erfasst, verwendet und schützt, wenn Sie unsere Website und Dienste nutzen."
+        "content": "Diese Datenschutzerklärung erklärt, wie Private Tours Ihre persönlichen Daten erfasst, verwendet und schützt, wenn Sie unsere Website und Dienste nutzen."
       },
       "dataCollected": {
         "title": "Informationen, die Wir Erfassen",

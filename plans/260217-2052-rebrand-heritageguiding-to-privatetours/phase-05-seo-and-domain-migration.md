@@ -8,8 +8,8 @@
 - **Date:** 2026-02-17
 - **Description:** Configure 301 redirects from old domain, update sitemap/robots, setup new domain on Vercel
 - **Priority:** P1
-- **Status:** Pending
-- **Review Status:** Not started
+- **Status:** Code Complete (deployment steps pending)
+- **Review Status:** Code verified, tests passing
 
 ## Key Insights
 - 301 redirects preserve ~95-99% of PageRank (Google confirmed)
@@ -161,12 +161,12 @@ Update in Vercel dashboard:
 4. Update any link-in-bio services
 
 ## Todo List
-- [ ] Add redirect rules to next.config.ts
-- [ ] Update .env.example
-- [ ] Verify sitemap generates new domain URLs
-- [ ] Verify robots.txt points to new sitemap
-- [ ] Verify canonical URLs use new domain
-- [ ] Build and test locally
+- [x] Add redirect rules to next.config.ts
+- [x] Update .env.example
+- [x] Verify sitemap generates new domain URLs (done in Phase 01)
+- [x] Verify robots.txt points to new sitemap (done in Phase 01)
+- [x] Verify canonical URLs use new domain (done in Phase 01)
+- [x] Build and test locally (1009 tests pass)
 - [ ] DNS: Register privatetours.se and configure records
 - [ ] Vercel: Add new domain, keep old for redirects
 - [ ] Update env vars in Vercel dashboard

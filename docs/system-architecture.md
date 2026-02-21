@@ -3,7 +3,7 @@
 **Last Updated:** February 21, 2026
 **Phase:** 12 - Unit Test Coverage Improvement (Complete)
 **Status:** 1009 unit tests (90%+ coverage), comprehensive service/integration testing, email services, Bokun API tests, AI embeddings tests, CSV/Excel tests
-**Recent Update:** Test coverage expanded from ~52% to 90%+, 444 new unit tests across 12 test files, rebrand from HeritageGuiding to Private Tours
+**Recent Update:** Test coverage expanded from ~52% to 90%+, 444 new unit tests across 12 test files, rebranded to Private Tours
 
 ## High-Level Architecture
 
@@ -410,7 +410,7 @@ Build Next.js
   ↓
 Deploy to Vercel Preview/Production
   ↓
-Domain: https://heritageguiding.com
+Domain: https://privatetours.se
 ```
 
 ### Database & CMS (PostgreSQL Host)

@@ -8,8 +8,8 @@
 - **Date:** 2026-02-17
 - **Description:** Update all 3 translation files (en.json, sv.json, de.json) with new brand name and domain
 - **Priority:** P1
-- **Status:** Pending
-- **Review Status:** Not started
+- **Status:** Complete
+- **Review Status:** Validated
 
 ## Key Insights
 - 3 locale files: `apps/web/messages/en.json`, `sv.json`, `de.json`
@@ -83,11 +83,11 @@ npm run type-check
 ```
 
 ## Todo List
-- [ ] Update en.json (all HeritageGuiding -> PrivateTours, all domain/email refs)
-- [ ] Update sv.json (same replacements)
-- [ ] Update de.json (same replacements)
-- [ ] Validate all 3 JSON files parse correctly
-- [ ] Run lint + type-check
+- [x] Update en.json (all HeritageGuiding -> Private Tours, all domain/email refs)
+- [x] Update sv.json (same replacements, handled Swedish possessive)
+- [x] Update de.json (same replacements)
+- [x] Validate all 3 JSON files parse correctly
+- [x] Run lint + type-check (no new issues from translation changes)
 
 ## Success Criteria
 - `grep -r "heritageguiding" apps/web/messages/` returns nothing

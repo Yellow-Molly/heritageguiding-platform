@@ -8,8 +8,8 @@
 - **Date:** 2026-02-17
 - **Description:** Rename package scopes, update Payload config, regenerate lock file
 - **Priority:** P1
-- **Status:** Pending
-- **Review Status:** Not started
+- **Status:** Complete
+- **Review Status:** Verified (lint/type-check pre-existing issues only, 1009 tests pass)
 
 ## Key Insights
 - Package scope `@heritageguiding` used in root package.json, apps/web/package.json, packages/cms/package.json
@@ -79,14 +79,14 @@ npm run build
 ```
 
 ## Todo List
-- [ ] Update root package.json name
-- [ ] Update apps/web/package.json name and deps
-- [ ] Update packages/cms/package.json name
-- [ ] Check packages/ui and packages/types package.json files
-- [ ] Update Payload config titleSuffix
-- [ ] Check next.config.ts for domain references
-- [ ] Delete package-lock.json and run npm install
-- [ ] Verify build passes
+- [x] Update root package.json name (no `name` field present — skipped)
+- [x] Update apps/web/package.json name and deps (`@privatetours/web`)
+- [x] Update packages/cms/package.json name (`@privatetours/cms`)
+- [x] Check packages/ui and packages/types package.json files (no package.json files exist — skipped)
+- [x] Update Payload config titleSuffix (`- Private Tours`)
+- [x] Check next.config.ts for domain references (none found — skipped)
+- [x] Delete package-lock.json and run npm install (regenerated clean)
+- [x] Verify build passes (785 + 224 = 1009 tests pass)
 
 ## Success Criteria
 - `grep -r "@heritageguiding" package*.json apps/*/package.json packages/*/package.json` returns nothing

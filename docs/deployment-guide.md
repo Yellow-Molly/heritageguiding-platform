@@ -1,4 +1,4 @@
-# HeritageGuiding - Deployment Guide
+# Private Tours - Deployment Guide
 
 CI/CD pipeline, environment variables, domain configuration, and deployment workflows.
 
@@ -98,13 +98,13 @@ jobs:
    ↓
 6. Merge develop → staging
    ↓
-7. Vercel auto-deploys to staging.heritageguiding.com
+7. Vercel auto-deploys to staging.privatetours.se
    ↓
 8. QA testing on staging
    ↓
 9. Merge staging → main
    ↓
-10. Vercel auto-deploys to heritageguiding.com
+10. Vercel auto-deploys to privatetours.se
 ```
 
 ---
@@ -130,7 +130,7 @@ NODE_ENV=development
 NEXT_PUBLIC_URL=http://localhost:3000
 
 # Database
-DATABASE_URL=postgresql://user:password@localhost:5432/heritageguiding
+DATABASE_URL=postgresql://user:password@localhost:5432/privatetours
 
 # Payload CMS
 PAYLOAD_SECRET=your-secret-key-minimum-32-characters
@@ -148,9 +148,9 @@ OPENAI_API_KEY=sk-your-openai-key
 BLOB_READ_WRITE_TOKEN=vercel_blob_token
 
 # Email (Gmail SMTP via Nodemailer)
-GMAIL_USER=bookings@heritageguiding.com
+GMAIL_USER=bookings@privatetours.se
 GMAIL_APP_PASSWORD=your-google-app-password
-EMAIL_FROM=bookings@heritageguiding.com
+EMAIL_FROM=bookings@privatetours.se
 
 # Analytics (optional)
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
@@ -193,8 +193,7 @@ vercel env add PAYLOAD_SECRET production
 
 ### Domain Setup
 
-**Primary:** HeritageGuiding.com
-**Secondary:** HeritageGuiding.se
+**Primary:** privatetours.se
 
 ### DNS Records
 
@@ -215,8 +214,8 @@ CNAME   www     cname.vercel-dns.com     300
 ### Vercel Domain Setup
 
 1. Go to Vercel Project → Settings → Domains
-2. Add `heritageguiding.com`
-3. Add `www.heritageguiding.com`
+2. Add `privatetours.se`
+3. Add `www.privatetours.se`
 4. Vercel provides DNS configuration
 5. Update DNS at registrar
 6. Wait for propagation (1-48 hours)
@@ -225,8 +224,8 @@ CNAME   www     cname.vercel-dns.com     300
 ### Redirect Strategy
 
 ```
-heritageguiding.se      → heritageguiding.com
-www.heritageguiding.com → heritageguiding.com
+heritageguiding.com  → privatetours.se
+www.privatetours.se  → privatetours.se
 ```
 
 ### Email DNS (Google Workspace)
@@ -270,7 +269,7 @@ npm install @sentry/nextjs
 
 **Configuration:**
 ```
-Monitor: heritageguiding.com
+Monitor: privatetours.se
 Check interval: 5 minutes
 Alert: Email, SMS
 ```
@@ -279,7 +278,7 @@ Alert: Email, SMS
 
 ```bash
 # View logs
-vercel logs heritageguiding-platform
+vercel logs privatetours-platform
 
 # Real-time logs
 vercel logs --follow
@@ -341,8 +340,7 @@ git push origin hotfix/booking-bug
 ### Pre-Development
 
 - [ ] GitHub repository created (private)
-- [ ] HeritageGuiding.com registered
-- [ ] HeritageGuiding.se registered
+- [ ] privatetours.se registered
 - [ ] Vercel account created
 - [ ] Vercel connected to GitHub
 - [ ] Supabase database created

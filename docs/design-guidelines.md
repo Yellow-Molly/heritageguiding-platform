@@ -1,4 +1,4 @@
-# HeritageGuiding Design Guidelines
+# Private Tours Design Guidelines
 
 ## Overview
 

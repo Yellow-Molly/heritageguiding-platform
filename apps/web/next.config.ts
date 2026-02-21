@@ -43,6 +43,29 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'date-fns'],
   },
+  async redirects() {
+    return [
+      // Old domain -> new domain (keep for 1+ year for SEO)
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'heritageguiding.com' }],
+        destination: 'https://privatetours.se/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.heritageguiding.com' }],
+        destination: 'https://privatetours.se/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'staging.heritageguiding.com' }],
+        destination: 'https://staging.privatetours.se/:path*',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {

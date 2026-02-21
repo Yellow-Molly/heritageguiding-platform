@@ -44,7 +44,7 @@ export default async function AboutPage({
         {/* Hero Section */}
         <section className="relative h-[50vh] min-h-[400px]">
           <Image
-            src="https://placehold.co/1920x800/1a365d/ffffff?text=Heritage+Guiding"
+            src="https://placehold.co/1920x800/1a365d/ffffff?text=Private+Tours"
             alt={t('heroAlt')}
             fill
             className="object-cover"
