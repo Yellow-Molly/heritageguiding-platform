@@ -1,9 +1,9 @@
-# System Architecture - HeritageGuiding Platform
+# System Architecture - Private Tours Platform
 
-**Last Updated:** February 15, 2026
-**Phase:** 11 - Performance Optimization (Complete)
-**Status:** Image optimization, data caching, dynamic imports, Web Vitals monitoring, Lighthouse CI
-**Recent Update:** Next.js image config, unstable_cache for tours/categories, preconnect hints, /api/analytics/vitals endpoint
+**Last Updated:** February 21, 2026
+**Phase:** 12 - Unit Test Coverage Improvement (Complete)
+**Status:** 1009 unit tests (90%+ coverage), comprehensive service/integration testing, email services, Bokun API tests, AI embeddings tests, CSV/Excel tests
+**Recent Update:** Test coverage expanded from ~52% to 90%+, 444 new unit tests across 12 test files, rebrand from HeritageGuiding to Private Tours
 
 ## High-Level Architecture
 

@@ -2,7 +2,7 @@
 
 Premium heritage tour booking platform for Sweden. AI-first architecture with advanced technology stack supporting Swedish/English/German markets.
 
-**Status:** Phase 11 Complete - Performance Optimization
+**Status:** Phase 12 Complete - Unit Test Coverage (1009 tests, 90%+ coverage)
 **Live Demo:** Coming March 2026
 
 ## Quick Start
@@ -143,6 +143,15 @@ heritageguiding-platform/
 - **Testing:** 579 unit tests (102 new Phase 10, 100% pass rate)
 - **Commit:** f961c3f (2026-02-15)
 
+### Phase 12: Unit Test Coverage Improvement ✅
+- **Test Expansion:** 1009 total unit tests (444 new tests, 90%+ coverage across workspaces)
+- **apps/web Coverage:** 95.9% statement coverage with 33 test files
+- **packages/cms Coverage:** 89.7% statement coverage with 11 test files
+- **New Test Suites:** Email services, Bokun API integration, AI/embeddings, CSV/Excel pipelines, Web Vitals
+- **Coverage Metrics:** All 4 metrics (statements/branch/functions/lines) exceed 80% in both workspaces
+- **Rebrand:** Source references updated from HeritageGuiding to Private Tours
+- **Commit:** f084681 (2026-02-21)
+
 ### Phase 11: Performance Optimization ✅
 - **Image Optimization:** Next.js Image config (deviceSizes, imageSizes, minimumCacheTTL, optimizePackageImports)
 - **Static Asset Caching:** 1-year immutable cache headers for images
@@ -259,10 +268,13 @@ npm test -- --coverage
 ```
 
 Tests verify:
-- 50+ component tests
-- 7 API function tests
+- 1009 unit tests across both workspaces
+- 500+ component tests (apps/web: 95.9% coverage)
+- 500+ service/integration tests (packages/cms: 89.7% coverage)
 - Edge cases and error handling
 - i18n support across all locales
+- Email services, Bokun API, AI embeddings, CSV/Excel pipelines
+- Web Vitals monitoring and analytics
 
 ## Deployment
 
@@ -374,5 +386,5 @@ Proprietary - All rights reserved
 
 ---
 
-**Last Updated:** February 15, 2026
-**Repository Version:** Phase 11 Complete
+**Last Updated:** February 21, 2026
+**Repository Version:** Phase 12 Complete (Test Coverage Improvement)

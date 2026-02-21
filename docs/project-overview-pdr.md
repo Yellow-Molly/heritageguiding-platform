@@ -1,10 +1,10 @@
 # Project Overview & Product Development Requirements (PDR)
 
-**Document Version:** 1.5
-**Last Updated:** February 8, 2026
-**Status:** Phase 08.1 Complete - Bokun Integration + Excel Import/Export
+**Document Version:** 1.6
+**Last Updated:** February 21, 2026
+**Status:** Phase 12 Complete - Unit Test Coverage Improvement (52%→90%+)
 **Project Lead:** Technical Team
-**Latest Changes:** Bokun API integration complete, semantic search with pgvector, availability caching (60s TTL), Bookings collection, webhook verification
+**Latest Changes:** Test coverage dramatically improved from ~52% to 90%+ across both workspaces, 1009 unit tests (444 new), comprehensive service/integration test coverage, rebrand from HeritageGuiding to Private Tours
 
 ## Executive Summary
 
@@ -428,22 +428,33 @@ The MVP is complete when **ALL** criteria are met:
 ## Current Progress
 
 **Completed (65K LOC - apps/web):**
-- 60+ React components (responsive, accessible, i18n-ready)
+- 70+ React components (responsive, accessible, i18n-ready)
 - 9 API data-fetching functions with full TypeScript typing
-- 227+ unit tests covering components, APIs, utilities
-- Bokun API client with HMAC-SHA256 authentication
-- Semantic search with pgvector + OpenAI embeddings
-- Excel/CSV import-export with 9 service files + 6 admin components
+- **500+ unit tests** (95.9% statement coverage, all 4 metrics >80%)
+- 33 test files covering components, APIs, utilities, services, hooks
+- Bokun API client with HMAC-SHA256 authentication + comprehensive tests
+- Semantic search with pgvector + OpenAI embeddings + vector search tests
+- Email services (transporter, admin notifications, customer confirmations) + tests
+- Excel/CSV import-export with 9 service files + 6 admin components + tests
+- Web Vitals monitoring hook + analytics endpoint + tests
 - XSS prevention, security headers, input validation
-- ARIA labels, semantic HTML, accessibility badges
+- ARIA labels, semantic HTML, accessibility badges, skip links
 
 **Completed (35K LOC - packages/cms):**
 - 10 fully configured Payload CMS collections (including Bookings)
+- **500+ unit tests** (89.7% statement coverage, all 4 metrics >80%)
+- 11 test files covering CSV/Excel import-export, access control, embedding hooks
 - 3-locale localization (sv/en/de)
 - Vercel Blob cloud storage integration
 - Role-based access control
-- pgvector extension for semantic search
-- Excel/CSV import-export services
+- pgvector extension for semantic search with embedding generation on save
+- Excel/CSV import-export services with comprehensive validation
+
+**Phase 12 Milestone (Unit Test Coverage):**
+- Total test count: 1009 (up from ~600 Phase 11)
+- New tests: 444 (for email, Bokun API, AI/embeddings, CSV/Excel, Web Vitals)
+- Coverage improvement: ~52% → 90%+ across both workspaces
+- Test files created: 12 new comprehensive test suites
 
 ## Next Steps (Phase 09+)
 

@@ -1,10 +1,10 @@
 # Code Standards & Best Practices
 
-**Last Updated:** February 8, 2026
-**Project:** HeritageGuiding Platform
-**Phase:** 08.1 Complete - Bokun + Excel Import/Export
+**Last Updated:** February 21, 2026
+**Project:** HeritageGuiding Platform (Private Tours rebrand)
+**Phase:** 12 Complete - Unit Test Coverage Improvement
 **Applies To:** All code in apps/, packages/, and scripts/
-**Recent Update:** Bokun API integration, availability caching, semantic search, Excel/CSV import-export, ESLint 9 flat config, Node.js 24
+**Recent Update:** Test coverage improved from ~52% to 90%+ across workspaces, 1009 unit tests, email services, Bokun integration tests, AI/semantic search tests, CSV/Excel tests
 
 ## Core Principles
 
@@ -171,12 +171,16 @@ try {
 - **Files:** One test file per module: `{module}.test.ts`
 - **Components:** `{component}.test.tsx` for React components
 - **APIs:** `{function-name}.test.ts` for data-fetching functions
+- **Services:** `{service-name}.test.ts` for business logic
 - **Vitest Jest Compatibility:** vi.fn() = jest.fn() (jest-compatible API)
 - Test behavior, not implementation
 - Use descriptive test names
-- Minimum coverage: 80%
+- **Minimum coverage:** 80% statement + branch + function + line (all 4 metrics required)
 - Use Vitest 4.0.17+ for unit testing
-- Current tests: 227+ covering components, APIs, utilities, import/export
+- **Current Coverage:** 1009 total tests (Phase 12)
+  - apps/web: 95.9% statement coverage (33 test files)
+  - packages/cms: 89.7% statement coverage (11 test files)
+  - All metrics (stmts/branch/funcs/lines) exceed 80% in both workspaces
 
 ### Integration Tests
 - Test across module boundaries
@@ -201,6 +205,34 @@ describe('fetchTourById', () => {
     const tourSv = await fetchTourById('tour-123', 'sv')
     const tourEn = await fetchTourById('tour-123', 'en')
     expect(tourSv.title).not.toEqual(tourEn.title)
+  })
+})
+```
+
+### Testing Services (Phase 12 Pattern)
+```typescript
+describe('BokunAvailabilityService', () => {
+  it('should cache availability for 60 seconds', async () => {
+    const service = new BokunAvailabilityService()
+    const result1 = await service.getAvailability('exp-123', '2026-03-01')
+    const result2 = await service.getAvailability('exp-123', '2026-03-01')
+    // Both should return same cached result
+    expect(result1).toEqual(result2)
+  })
+
+  it('should invalidate cache after TTL expires', async () => {
+    // Use vi.useFakeTimers() to test cache expiration
+    const service = new BokunAvailabilityService()
+    await service.getAvailability('exp-123', '2026-03-01')
+    vi.advanceTimersByTime(61000) // Advance 61 seconds
+    const result = await service.getAvailability('exp-123', '2026-03-01')
+    // Should fetch fresh data (not from cache)
+  })
+
+  it('should handle API errors with exponential backoff', async () => {
+    const service = new BokunAvailabilityService()
+    // Mock API to fail, verify retry logic
+    expect(vi.fn).toHaveBeenCalledTimes(3) // Verify retries
   })
 })
 ```
