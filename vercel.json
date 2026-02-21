@@ -1,4 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "npm install && npm install @parcel/watcher-linux-x64-glibc@2.5.6 --no-save"
+  "installCommand": "npm install --no-package-lock"
 }
