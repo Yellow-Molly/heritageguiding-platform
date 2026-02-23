@@ -5,7 +5,6 @@ import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { ValuesSection } from '@/components/pages/values-section'
-import { TeamSection } from '@/components/pages/team-section'
 import { Button } from '@/components/ui/button'
 import { Award, Shield, MapPin } from 'lucide-react'
 import { generatePageMetadata } from '@/lib/seo'
@@ -74,7 +73,36 @@ export default async function AboutPage({
               <div className="mt-6 space-y-4 text-[var(--color-text)]">
                 <p>{t('story.paragraph1')}</p>
                 <p>{t('story.paragraph2')}</p>
-                <p>{t('story.paragraph3')}</p>
+                <blockquote className="border-l-4 border-[var(--color-primary)] pl-4 text-lg italic font-medium text-[var(--color-text)]">
+                  {t('story.paragraph3')}
+                </blockquote>
+                <p>{t('story.paragraph4')}</p>
+                <p>{t('story.paragraph5')}</p>
+                <p>{t('story.paragraph6')}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Mission & Vision Section */}
+        <section className="bg-[var(--color-background-alt)] py-16">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto grid max-w-4xl gap-12 md:grid-cols-2">
+              <div>
+                <h2 className="font-serif text-2xl font-bold text-[var(--color-primary)]">
+                  {t('mission.title')}
+                </h2>
+                <p className="mt-4 text-[var(--color-text)]">
+                  {t('mission.description')}
+                </p>
+              </div>
+              <div>
+                <h2 className="font-serif text-2xl font-bold text-[var(--color-primary)]">
+                  {t('vision.title')}
+                </h2>
+                <p className="mt-4 text-[var(--color-text)]">
+                  {t('vision.description')}
+                </p>
               </div>
             </div>
           </div>
@@ -83,8 +111,38 @@ export default async function AboutPage({
         {/* Values Section */}
         <ValuesSection />
 
+        {/* Responsible Tourism Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-3xl">
+              <h2 className="font-serif text-3xl font-bold text-[var(--color-primary)]">
+                {t('responsibleTourism.title')}
+              </h2>
+              <div className="mt-6 space-y-4 text-[var(--color-text)]">
+                <p>{t('responsibleTourism.paragraph1')}</p>
+                <p>{t('responsibleTourism.paragraph2')}</p>
+                <p>{t('responsibleTourism.paragraph3')}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Team Section */}
-        <TeamSection />
+        <section className="bg-[var(--color-background-alt)] py-16">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 className="font-serif text-3xl font-bold text-[var(--color-primary)]">
+                {t('team.title')}
+              </h2>
+              <p className="mx-auto mt-2 max-w-2xl text-[var(--color-text-muted)]">
+                {t('team.subtitle')}
+              </p>
+              <p className="mt-6 text-[var(--color-text)]">
+                {t('team.description')}
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* Certifications Section */}
         <section className="bg-[var(--color-primary)] py-16 text-white">

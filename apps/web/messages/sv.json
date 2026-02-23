@@ -151,61 +151,60 @@
   },
   "about": {
     "title": "Om Private Tours",
-    "description": "Lär dig om vårt uppdrag att dela Stockholms rika kulturarv",
-    "subtitle": "Där Historien Lever",
-    "heroAlt": "Private Tours-teamet vid Stockholms strand",
+    "description": "Privata, expertledda upplevelser i Stockholm med auktoriserade guider",
+    "subtitle": "Djup, Tillit och Personlig Kontakt",
+    "heroAlt": "Private Tours - expertledda upplevelser i Stockholm",
     "story": {
-      "title": "Vår Historia",
-      "paragraph1": "Private Tours grundades med ett enkelt uppdrag: att förändra hur besökare upplever Stockholms rika historia. Vi tror att förståelse för det förflutna berikar vår nutid och inspirerar vår framtid.",
-      "paragraph2": "Vårt team av expertguider samlar decennier av erfarenhet inom historia, konst och arkeologi. Varje tur är utformad för att ge inte bara information, utan en genuin koppling till berättelserna som formade denna vackra stad.",
-      "paragraph3": "Från kullerstenarna i Gamla Stan till de magnifika salarna i Kungliga Slottet inbjuder vi dig att upptäcka Stockholm genom ögonen på dem som älskar det mest."
+      "title": "Vilka Vi Är",
+      "paragraph1": "Private Tours skapades för resenärer som värderar djup, tillit och personlig kontakt framför volym och hastighet.",
+      "paragraph2": "Vi erbjuder privata, expertledda upplevelser i Stockholm som uteslutande leds av auktoriserade yrkesverksamma. Varje guide är noggrant utvald, varje rutt är kuraterad och varje upplevelse är utformad för att kännas smidig från början till slut. Detta är ingen öppen marknadsplats — det är en genomtänkt samling av människor och platser valda för sin kunskap, integritet och förmåga att vägleda med självförtroende.",
+      "paragraph3": "Våra gäster söker inte fler alternativ. De söker det rätta.",
+      "paragraph4": "Därför arbetar vi enbart med licensierade guider och ämnesexperter som talar ditt språk flytande och har djup kännedom om staden de representerar. Genom att ta fullt ansvar för logistik, tempo och innehåll tar vi bort friktion och låter dig fokusera helt på upplevelsen i sig.",
+      "paragraph5": "Många av våra turer kombinerar historisk expertis med praktiska aktiviteter — som svensk matkultur — eftersom förståelse för en plats ofta bäst sker genom både berättelse och handling. Under hela resan förblir din värd vid din sida och erbjuder sammanhang, kontinuitet och personlig uppmärksamhet.",
+      "paragraph6": "Private Tours finns för att göra tiden i Stockholm meningsfull, enkel och personlig — ledd av människor som genuint bryr sig om både sitt hantverk och sina gäster."
+    },
+    "mission": {
+      "title": "Vårt Uppdrag",
+      "description": "Att erbjuda privat tillgång till Stockholms mest betrodda experter genom ett noggrant kuraterat system, där varje upplevelse är personlig, pålitlig och djupt engagerande."
+    },
+    "vision": {
+      "title": "Vår Vision",
+      "description": "Att sätta en ny standard för kulturturism där expertis, tillit och mänsklig kontakt definierar upplevelsen — och där kvalitet aldrig lämnas åt slumpen."
     },
     "values": {
-      "title": "Vad Som Gör Oss Speciella",
-      "subtitle": "Vi är engagerade i excellens inom kulturarvsturism",
-      "expertise": {
-        "title": "Expertis på Doktorsnivå",
-        "description": "Turer ledda av professionella historiker och forskare med avancerade examina"
+      "title": "Vad Som Gör Oss Annorlunda",
+      "subtitle": "Ett genomtänkt tillvägagångssätt för kulturturism i Stockholm",
+      "authorizedExperts": {
+        "title": "Enbart Auktoriserade Experter",
+        "description": "Varje upplevelse leds av en fullt licensierad guide eller verifierad expert. Vi granskar personligen meriter för att säkerställa akademiskt djup, professionalism och tydlighet i berättandet."
+      },
+      "curated": {
+        "title": "Kuraterat, Aldrig Överfyllt",
+        "description": "Vi är ingen öppen plattform. Varje rutt, aktivitet och värd är utvald och granskad för att säkerställa konsekvens, kvalitet och autenticitet."
+      },
+      "privateByDesign": {
+        "title": "Privat Från Grunden",
+        "description": "Alla upplevelser är uteslutande privata. Detta gör det möjligt för oss att anpassa tempo, fokus och djup helt efter dina intressen."
+      },
+      "seamlessHosting": {
+        "title": "Smidigt Värdskap",
+        "description": "Din guide hanterar logistik, transport och övergångar, vilket skapar en smidig, oavbruten upplevelse från början till slut."
       },
       "multilingual": {
-        "title": "Flerspråkiga Turer",
-        "description": "Tillgängliga på svenska, engelska och tyska med modersmålstalare"
-      },
-      "accessibility": {
-        "title": "Fullt Tillgängliga",
-        "description": "Rullstolsvänliga rutter och anpassningar för alla förmågor"
-      },
-      "heritage": {
-        "title": "Kulturarvsfokus",
-        "description": "Djupdykning i autentisk svensk historia och kultur"
-      },
-      "smallGroups": {
-        "title": "Små Grupper",
-        "description": "Intima upplevelser med max 12 deltagare"
-      },
-      "sustainable": {
-        "title": "Hållbar Turism",
-        "description": "Miljömedvetna metoder och stöd till lokala samhällen"
+        "title": "Flerspråkig Expertis",
+        "description": "Turer erbjuds på svenska, engelska, tyska, franska, portugisiska och spanska — alltid av certifierade yrkesverksamma."
       }
     },
+    "responsibleTourism": {
+      "title": "Ett Engagemang för Ansvarsfull Turism",
+      "paragraph1": "Private Tours är engagerade i att verka med omsorg för både människor och platser. Vi samarbetar med lokala yrkesverksamma och företag, upprätthåller en lågpåverkande modell med enbart privata turer och utformar upplevelser som respekterar de miljöer och samhällen vi besöker.",
+      "paragraph2": "Tillgänglighet är viktigt för oss. Våra digitala plattformar följer erkända tillgänglighetsstandarder och våra rutter är utformade för att vara inkluderande när det är möjligt — utan att kompromissa med djup eller kvalitet.",
+      "paragraph3": "Kulturarv är inte en kuliss; det är ett ansvar. Vårt arbete grundas i utbildning, bevarande och långsiktig respekt för de berättelser vi delar."
+    },
     "team": {
-      "title": "Möt Vårt Team",
-      "subtitle": "Passionerade historiker dedikerade till att dela Stockholms berättelser",
-      "founder": {
-        "name": "Dr. Erik Lindström",
-        "role": "Grundare & Ledande Historiker",
-        "bio": "Med över 20 års erfarenhet av svensk medeltidshistoria grundade Erik Private Tours för att dela sin passion för Stockholms rika förflutna."
-      },
-      "leadGuide": {
-        "name": "Anna Bergström",
-        "role": "Senior Guide",
-        "bio": "Anna specialiserar sig på konsthistoria och arkitektur, och ger liv åt Stockholms byggnader och monument genom engagerande berättande."
-      },
-      "historian": {
-        "name": "Dr. Magnus Olsson",
-        "role": "Arkeologisk Rådgivare",
-        "bio": "Magnus tillför arkeologisk expertis till våra turer och avslöjar de dolda lagren av historia under Stockholms gator."
-      }
+      "title": "Vårt Team",
+      "subtitle": "Passionerade yrkesverksamma dedikerade till att dela Stockholms berättelser",
+      "description": "Vårt team består av licensierade guider, historiker och kulturexperter — var och en noggrant granskad för sin kunskap, professionalism och förmåga att vägleda med genuin omsorg. Tillsammans bidrar vi med decennier av samlad erfarenhet inom kulturarvsturism, arkeologi, konsthistoria och svensk kultur."
     },
     "certifications": {
       "title": "Våra Certifieringar",

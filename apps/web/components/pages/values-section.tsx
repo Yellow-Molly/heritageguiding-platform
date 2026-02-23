@@ -2,12 +2,11 @@
 
 import { useTranslations } from 'next-intl'
 import {
-  GraduationCap,
-  Globe,
-  Accessibility,
-  Building,
-  Users,
-  Leaf,
+  ShieldCheck,
+  Gem,
+  Lock,
+  Route,
+  Languages,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -17,17 +16,16 @@ interface ValueItem {
 }
 
 const values: ValueItem[] = [
-  { icon: GraduationCap, key: 'expertise' },
-  { icon: Globe, key: 'multilingual' },
-  { icon: Accessibility, key: 'accessibility' },
-  { icon: Building, key: 'heritage' },
-  { icon: Users, key: 'smallGroups' },
-  { icon: Leaf, key: 'sustainable' },
+  { icon: ShieldCheck, key: 'authorizedExperts' },
+  { icon: Gem, key: 'curated' },
+  { icon: Lock, key: 'privateByDesign' },
+  { icon: Route, key: 'seamlessHosting' },
+  { icon: Languages, key: 'multilingual' },
 ]
 
 /**
  * Values section showcasing what makes Private Tours different.
- * Displays 6 core values with icons and descriptions.
+ * Displays 5 core differentiators with icons and descriptions.
  */
 export function ValuesSection() {
   const t = useTranslations('about.values')

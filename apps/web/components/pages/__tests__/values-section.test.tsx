@@ -6,19 +6,17 @@ vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => {
     const translations: Record<string, string> = {
       title: 'What Makes Us Different',
-      subtitle: "We're committed to excellence",
-      'expertise.title': 'PhD-Level Expertise',
-      'expertise.description': 'Tours led by professional historians',
-      'multilingual.title': 'Multilingual Tours',
-      'multilingual.description': 'Available in Swedish, English, and German',
-      'accessibility.title': 'Fully Accessible',
-      'accessibility.description': 'Wheelchair-friendly routes',
-      'heritage.title': 'Heritage Focused',
-      'heritage.description': 'Deep dive into authentic Swedish history',
-      'smallGroups.title': 'Small Groups',
-      'smallGroups.description': 'Intimate experiences with maximum 12 participants',
-      'sustainable.title': 'Sustainable Tourism',
-      'sustainable.description': 'Eco-conscious practices',
+      subtitle: 'A considered approach to cultural tourism in Stockholm',
+      'authorizedExperts.title': 'Authorized Experts Only',
+      'authorizedExperts.description': 'Every experience is led by a fully licensed guide or verified expert.',
+      'curated.title': 'Curated, Never Crowded',
+      'curated.description': 'We are not an open platform.',
+      'privateByDesign.title': 'Private by Design',
+      'privateByDesign.description': 'All experiences are exclusively private.',
+      'seamlessHosting.title': 'Seamless Hosting',
+      'seamlessHosting.description': 'Your guide manages logistics, transportation, and transitions.',
+      'multilingual.title': 'Multilingual Expertise',
+      'multilingual.description': 'Tours are offered in Swedish, English, German, French, Portuguese, and Spanish.',
     }
     return translations[key] || key
   },
@@ -36,25 +34,24 @@ describe('ValuesSection', () => {
 
     it('renders section subtitle', () => {
       render(<ValuesSection />)
-      expect(screen.getByText("We're committed to excellence")).toBeInTheDocument()
+      expect(screen.getByText('A considered approach to cultural tourism in Stockholm')).toBeInTheDocument()
     })
 
-    it('renders all six value cards', () => {
+    it('renders all five value cards', () => {
       render(<ValuesSection />)
 
-      expect(screen.getByText('PhD-Level Expertise')).toBeInTheDocument()
-      expect(screen.getByText('Multilingual Tours')).toBeInTheDocument()
-      expect(screen.getByText('Fully Accessible')).toBeInTheDocument()
-      expect(screen.getByText('Heritage Focused')).toBeInTheDocument()
-      expect(screen.getByText('Small Groups')).toBeInTheDocument()
-      expect(screen.getByText('Sustainable Tourism')).toBeInTheDocument()
+      expect(screen.getByText('Authorized Experts Only')).toBeInTheDocument()
+      expect(screen.getByText('Curated, Never Crowded')).toBeInTheDocument()
+      expect(screen.getByText('Private by Design')).toBeInTheDocument()
+      expect(screen.getByText('Seamless Hosting')).toBeInTheDocument()
+      expect(screen.getByText('Multilingual Expertise')).toBeInTheDocument()
     })
 
     it('renders value descriptions', () => {
       render(<ValuesSection />)
 
-      expect(screen.getByText('Tours led by professional historians')).toBeInTheDocument()
-      expect(screen.getByText('Wheelchair-friendly routes')).toBeInTheDocument()
+      expect(screen.getByText('Every experience is led by a fully licensed guide or verified expert.')).toBeInTheDocument()
+      expect(screen.getByText('All experiences are exclusively private.')).toBeInTheDocument()
     })
   })
 
