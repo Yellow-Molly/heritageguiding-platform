@@ -85,3 +85,5 @@ nul
 plans/reports/
 apps/web/.claude/
 docs/booking-management-comparison.md
+.claude/
+docx/
