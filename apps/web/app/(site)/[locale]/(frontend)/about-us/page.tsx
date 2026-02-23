@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
@@ -42,15 +41,7 @@ export default async function AboutPage({
       <main className="min-h-screen">
         {/* Hero Section */}
         <section className="relative h-[50vh] min-h-[400px]">
-          <Image
-            src="https://placehold.co/1920x800/1a365d/ffffff?text=Private+Tours"
-            alt={t('heroAlt')}
-            fill
-            className="object-cover"
-            priority
-            unoptimized
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)] via-[#1a365d] to-[#0f2440]" />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="container mx-auto px-4 text-center text-white">
               <h1 className="text-shadow-hero font-serif text-4xl font-bold md:text-5xl lg:text-6xl">

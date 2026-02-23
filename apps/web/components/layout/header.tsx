@@ -12,7 +12,7 @@ import { locales, localeLabels, type Locale } from '@/i18n/routing'
 const navigationItems = [
   { key: 'tours' as const, href: '/tours' as const },
   { key: 'guides' as const, href: '/guides' as const },
-  { key: 'about' as const, href: '/about' as const },
+  { key: 'about' as const, href: '/about-us' as const },
   { key: 'contact' as const, href: '/contact' as const },
 ]
 
