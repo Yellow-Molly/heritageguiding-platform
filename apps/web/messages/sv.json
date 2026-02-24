@@ -135,19 +135,121 @@
   },
   "faq": {
     "title": "Vanliga Frågor",
-    "description": "Hitta svar på vanliga frågor om våra turer och tjänster",
-    "subtitle": "Hitta svar på vanliga frågor om våra turer",
+    "description": "Hitta svar på vanliga frågor om Private Tours, bokning, guider och våra premiumupplevelser",
+    "subtitle": "Allt du behöver veta om våra privata turupplevelser",
     "categories": {
       "booking": "Bokning & Reservationer",
       "payment": "Betalning & Priser",
       "cancellation": "Avbokning & Ändringar",
       "experience": "Turupplevelse",
-      "safety": "Säkerhet & Hälsa",
-      "guides": "Om Våra Guider"
+      "guides": "Om Våra Guider",
+      "accessibility": "Tillgänglighet & Praktisk Information"
     },
     "stillHaveQuestions": "Har du fler frågor?",
-    "contactDescription": "Vårt team hjälper dig gärna att planera din perfekta Stockholm-upplevelse.",
-    "contactUs": "Kontakta Oss"
+    "contactDescription": "Vårt team hjälper dig gärna att planera din perfekta Private Tours-upplevelse.",
+    "contactUs": "Kontakta Oss",
+    "questions": {
+      "booking": {
+        "q1": {
+          "question": "Hur bokar jag en tur?",
+          "answer": "Att boka en tur är enkelt och sker helt online. Du väljer din önskade upplevelse, datum, språk och grupstorlek via vår bokningsplattform. När din bokning är bekräftad får du ett detaljerat bekräftelsemail med mötesinformation, kontaktuppgifter och praktisk vägledning. Om du har specifika intressen eller önskemål kan dessa anges under bokningsprocessen så att din guide kan anpassa upplevelsen därefter."
+        },
+        "q2": {
+          "question": "Hur långt i förväg bör jag boka?",
+          "answer": "Vi rekommenderar att boka så tidigt som möjligt, särskilt under högsäsong som vår, sommar och större helgdagar. Många av våra guider är mycket efterfrågade på grund av sin expertis och begränsade tillgänglighet. Även om senbokningar ibland är möjliga, säkerställer tidig bokning tillgång till din önskade guide, språk och tidsplats."
+        },
+        "q3": {
+          "question": "Kan jag boka för en grupp?",
+          "answer": "Ja. Alla våra turer är privata och utformade för individer, par, familjer eller större grupper. Gruppstorleken väljs vid bokningstillfället och upplevelsen anpassas efter din grupps intressen och tempo. För större grupper eller företagsbokningar rekommenderar vi att du kontaktar oss direkt så att vi kan säkerställa bästa möjliga upplägg."
+        },
+        "q4": {
+          "question": "Behöver jag skriva ut min biljett?",
+          "answer": "Nej. Utskrivna biljetter krävs inte. Din bokningsbekräftelse skickas digitalt och kan visas på din telefon eller surfplatta. Din guide har redan dina bokningsuppgifter och möter dig på den överenskomna platsen."
+        },
+        "q5": {
+          "question": "Vad gäller om jag reser ensam?",
+          "answer": "Ensamresande är mycket välkomna. Många gäster väljer Private Tours just för den personliga uppmärksamheten och flexibiliteten som en privat upplevelse erbjuder. Tuerns innehåll, tempo och fokus anpassas helt efter dina intressen."
+        }
+      },
+      "payment": {
+        "q1": {
+          "question": "Vilka betalningsmetoder accepterar ni?",
+          "answer": "Vi accepterar de vanligaste kredit- och betalkorten, inklusive Visa och Mastercard. Alla betalningar behandlas säkert via vår bokningsplattform med krypterade betalningslösningar. Full betalning krävs vid bokningstillfället för att bekräfta din reservation."
+        },
+        "q2": {
+          "question": "Vad ingår i priset?",
+          "answer": "Priset inkluderar en privat, guidad upplevelse ledd av en auktoriserad professionell, all planering och förberedelse samt värdskap under hela turen. Där det är tillämpligt ingår även logistik- och transportkoordinering. Eventuella tillkommande kostnader såsom måltider, entreavgifter eller tjänster från tredje part anges alltid tydligt i förväg."
+        },
+        "q3": {
+          "question": "Finns det några dolda avgifter?",
+          "answer": "Nej. Alla priser är transparenta och anges tydligt vid bokningstillfället. Om valfria tillägg finns tillgängliga presenteras dessa alltid separat så att du kan fatta välgrundade beslut."
+        }
+      },
+      "cancellation": {
+        "q1": {
+          "question": "Vad är er avbokningspolicy?",
+          "answer": "Avbokningar som görs mer än 48 timmar före planerad starttid erhåller full återbetalning. Avbokningar som görs 24-48 timmar före turen erhåller delvis återbetalning. Avbokningar inom 24 timmar före turstarten återbetalas inte, eftersom guider och logistik redan är fullt inbokade."
+        },
+        "q2": {
+          "question": "Kan jag boka om min tur?",
+          "answer": "Ja, beroende på guidens tillgänglighet. Vi rekommenderar att du kontaktar oss så tidigt som möjligt om du behöver boka om. Även om vi inte kan garantera tillgänglighet för nya datum gör vi alltid vårt bästa för att tillmötesgå ändringar."
+        },
+        "q3": {
+          "question": "Vad händer om ni ställer in turen?",
+          "answer": "I det osannolika fallet att vi behöver ställa in en tur erbjuds du full återbetalning eller möjligheten att boka om utan extra kostnad."
+        }
+      },
+      "experience": {
+        "q1": {
+          "question": "Hur länge varar turerna?",
+          "answer": "De flesta turer varar mellan 2 och 4 timmar, beroende på vilken upplevelse du väljer. Varaktigheten anges tydligt vid bokningstillfället, och privata turer ger flexibilitet om du vill utforska vissa ämnen mer på djupet."
+        },
+        "q2": {
+          "question": "På vilka språk erbjuds turerna?",
+          "answer": "Turer erbjuds på svenska, engelska och tyska. Varje guide är professionellt certifierad på det språk de erbjuder för att säkerställa klarhet, nyansrikedom och en högkvalitativ upplevelse."
+        },
+        "q3": {
+          "question": "Passar turerna för barn?",
+          "answer": "Ja. Turer kan anpassas för familjer med barn. Ange gärna åldersintervallet vid bokningstillfället så att din guide kan justera innehåll och tempo därefter."
+        },
+        "q4": {
+          "question": "Genomförs turerna i alla väderförhållanden?",
+          "answer": "Ja. Turer genomförs året runt och i de flesta väderförhållanden. Vi rekommenderar att klä sig lämpligt efter säsongen. Vid extrema väderförhållanden kontaktar vi dig i förväg för att diskutera alternativ."
+        },
+        "q5": {
+          "question": "Ingår transport?",
+          "answer": "Transportdetaljer varierar beroende på turen. När transport ingår anges detta tydligt i turtbeskrivningen. Din guide hjälper alltid till med logistiken för att säkerställa en smidig upplevelse."
+        }
+      },
+      "guides": {
+        "q1": {
+          "question": "Vilka är era guider?",
+          "answer": "Våra guider är auktoriserade yrkespersoner och ämnesexperter, många med akademisk bakgrund inom historia, arkeologi eller kulturvetenskap. Alla guider är noggrant utvalda för att säkerställa djup kunskap, starka kommunikationsfärdigheter och professionellt värdskap."
+        },
+        "q2": {
+          "question": "Är era guider licensierade?",
+          "answer": "Ja. Vi samarbetar uteslutande med licensierade guider eller verifierade experter. Meriter och språkcertifieringar granskas som en del av vår urvalsprocess."
+        },
+        "q3": {
+          "question": "Följer samma guide med oss under hela turen?",
+          "answer": "Ja. Din guide finns där för att vara värd under hela upplevelsen, vilket skapar kontinuitet och en avslappnad, personlig atmosfär. I de sällsynta fall där en upplevelse involverar flera guider eller tydliga etapper anges detta alltid tydligt i förväg, vilket säkerställer full transparens och trygghet."
+        }
+      },
+      "accessibility": {
+        "q1": {
+          "question": "Är turerna tillgängliga för gäster med rörelsebehov?",
+          "answer": "Vi vill att alla ska känna sig bekväma och välkomna på våra turer. Tillgänglighetsdetaljer beskrivs tydligt i varje turbeskrivning, så att du enkelt kan se gångavstånd, terräng och fysiska krav i förväg. Många av våra upplevelser kan anpassas för rörelsebehov och vi hjälper alltid gärna till. Om du har specifika önskemål eller frågor är du välkommen att kontakta oss, så vägleder vi dig mot det mest lämpliga alternativet."
+        },
+        "q2": {
+          "question": "Vad bör jag ta med mig?",
+          "answer": "Bekväma promenadskor och väderlämpliga kläder rekommenderas. Eventuella ytterligare krav kommuniceras i din bokningsbekräftelse."
+        },
+        "q3": {
+          "question": "Hur kontaktar jag er före eller under turen?",
+          "answer": "Du kan nå oss via e-post eller telefon med hjälp av kontaktuppgifterna i din bekräftelse. Din guides kontaktinformation inkluderas också för koordinering på turdagen."
+        }
+      }
+    }
   },
   "about": {
     "title": "Om Private Tours",

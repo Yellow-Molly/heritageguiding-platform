@@ -135,19 +135,121 @@
   },
   "faq": {
     "title": "Frequently Asked Questions",
-    "description": "Find answers to common questions about our tours and services",
-    "subtitle": "Find answers to common questions about our tours",
+    "description": "Find answers to common questions about Private Tours, booking, guides, and our premium experiences",
+    "subtitle": "Everything you need to know about our private tour experiences",
     "categories": {
       "booking": "Booking & Reservations",
       "payment": "Payment & Pricing",
       "cancellation": "Cancellation & Changes",
       "experience": "Tour Experience",
-      "safety": "Safety & Health",
-      "guides": "About Our Guides"
+      "guides": "About Our Guides",
+      "accessibility": "Accessibility & Practical Information"
     },
     "stillHaveQuestions": "Still have questions?",
-    "contactDescription": "Our team is here to help you plan your perfect Stockholm experience.",
-    "contactUs": "Contact Us"
+    "contactDescription": "Our team is ready to help you plan your perfect Private Tours experience.",
+    "contactUs": "Contact Us",
+    "questions": {
+      "booking": {
+        "q1": {
+          "question": "How do I book a tour?",
+          "answer": "Booking a tour is simple and fully online. You select your preferred experience, date, language, and group size through our booking platform. Once your booking is confirmed, you will receive a detailed confirmation email with meeting details, contact information, and practical guidance. If you have specific interests or requests, these can be shared during the booking process so your guide can tailor the experience accordingly."
+        },
+        "q2": {
+          "question": "How far in advance should I book?",
+          "answer": "We recommend booking as early as possible, especially during peak travel seasons such as spring, summer, and major holidays. Many of our guides are in high demand due to their expertise and limited availability. While last-minute bookings are sometimes possible, advance booking ensures access to your preferred guide, language, and time slot."
+        },
+        "q3": {
+          "question": "Can I book for a group?",
+          "answer": "Yes. All our tours are private and designed for individuals, couples, families, or larger groups. Group size can be selected during booking, and the experience will be adjusted to suit your group's interests and pace. For larger groups or corporate bookings, we recommend contacting us directly so we can ensure the best possible setup."
+        },
+        "q4": {
+          "question": "Do I need to print my ticket?",
+          "answer": "No. Printed tickets are not required. Your booking confirmation is sent digitally and can be shown on your phone or tablet. Your guide will already have your booking details and will meet you at the agreed location."
+        },
+        "q5": {
+          "question": "What if I'm traveling alone?",
+          "answer": "Solo travelers are very welcome. Many guests choose Private Tours specifically for the personal attention and flexibility that a private experience provides. The content, pacing, and focus of the tour will be fully adapted to your interests."
+        }
+      },
+      "payment": {
+        "q1": {
+          "question": "What payment methods do you accept?",
+          "answer": "We accept major credit and debit cards, including Visa and Mastercard. All payments are processed securely through our booking platform using encrypted payment solutions. Full payment is required at the time of booking to confirm your reservation."
+        },
+        "q2": {
+          "question": "What does the price include?",
+          "answer": "The price includes a private, guided experience led by an authorized professional, all planning and preparation, and hosting throughout the tour. Where applicable, logistics and transportation coordination are included. Any additional costs such as meals, entrance fees, or third-party services will be clearly stated in advance."
+        },
+        "q3": {
+          "question": "Are there any hidden fees?",
+          "answer": "No. All prices are transparent and clearly stated during booking. If optional extras are available, these are always presented separately so you can make informed choices."
+        }
+      },
+      "cancellation": {
+        "q1": {
+          "question": "What is your cancellation policy?",
+          "answer": "Cancellations made more than 48 hours before the scheduled start time receive a full refund. Cancellations made 24-48 hours before the tour receive a partial refund. Cancellations within 24 hours of the tour start time are non-refundable, as guides and logistics are already fully committed."
+        },
+        "q2": {
+          "question": "Can I reschedule my tour?",
+          "answer": "Yes, subject to guide availability. We recommend contacting us as early as possible if you need to reschedule. While we cannot guarantee availability for new dates, we always do our best to accommodate changes."
+        },
+        "q3": {
+          "question": "What happens if the tour is canceled by you?",
+          "answer": "In the unlikely event that we need to cancel a tour, you will be offered a full refund or the option to reschedule at no additional cost."
+        }
+      },
+      "experience": {
+        "q1": {
+          "question": "How long do tours last?",
+          "answer": "Most tours last between 2 and 4 hours, depending on the experience you choose. Duration is clearly stated during booking, and private tours allow for flexibility if you wish to explore certain topics in more depth."
+        },
+        "q2": {
+          "question": "What languages are tours offered in?",
+          "answer": "Tours are offered in Swedish, English, and German. Each guide is professionally certified in the language they offer to ensure clarity, nuance, and a high-quality experience."
+        },
+        "q3": {
+          "question": "Are tours suitable for children?",
+          "answer": "Yes. Tours can be adapted for families with children. Please let us know the age range when booking so your guide can adjust content and pacing accordingly."
+        },
+        "q4": {
+          "question": "Do tours run in all weather conditions?",
+          "answer": "Yes. Tours operate year-round and in most weather conditions. We recommend dressing appropriately for the season. In case of extreme weather, we will contact you in advance to discuss alternatives."
+        },
+        "q5": {
+          "question": "Is transportation included?",
+          "answer": "Transportation details vary depending on the tour. When included, this will be clearly stated in the tour description. Your guide will always assist with logistics to ensure a smooth experience."
+        }
+      },
+      "guides": {
+        "q1": {
+          "question": "Who are your guides?",
+          "answer": "Our guides are authorized professionals and subject-matter experts, many with academic backgrounds in history, archaeology, or cultural studies. All guides are carefully vetted to ensure deep knowledge, strong communication skills, and professional hosting."
+        },
+        "q2": {
+          "question": "Are your guides licensed?",
+          "answer": "Yes. We work exclusively with licensed guides or verified experts. Credentials and language certifications are reviewed as part of our selection process."
+        },
+        "q3": {
+          "question": "Will the same guide stay with us throughout the tour?",
+          "answer": "Yes. Your guide is there to host you throughout the experience, creating continuity and a relaxed, personal atmosphere. In the rare cases where an experience involves multiple guides or distinct stages, this will always be clearly stated beforehand, ensuring full transparency and peace of mind."
+        }
+      },
+      "accessibility": {
+        "q1": {
+          "question": "Are tours accessible for guests with mobility needs?",
+          "answer": "We want everyone to feel comfortable and welcome on our tours. Accessibility details are clearly outlined in each tour description, so you can easily see walking distances, terrain, and physical requirements in advance. Many of our experiences can accommodate mobility needs, and we are always happy to help. If you have any specific wishes or questions, please do not hesitate to contact us and we will gladly guide you toward the most suitable option."
+        },
+        "q2": {
+          "question": "What should I bring?",
+          "answer": "Comfortable walking shoes and weather-appropriate clothing are recommended. Any additional requirements will be communicated in your booking confirmation."
+        },
+        "q3": {
+          "question": "How do I contact you before or during the tour?",
+          "answer": "You can reach us via email or phone using the contact details provided in your confirmation email. Your guide's contact information will also be included for day-of coordination."
+        }
+      }
+    }
   },
   "about": {
     "title": "About Private Tours",

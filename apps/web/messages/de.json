@@ -135,19 +135,121 @@
   },
   "faq": {
     "title": "Häufig Gestellte Fragen",
-    "description": "Finden Sie Antworten auf häufige Fragen zu unseren Touren und Dienstleistungen",
-    "subtitle": "Finden Sie Antworten auf häufige Fragen zu unseren Touren",
+    "description": "Finden Sie Antworten auf häufige Fragen zu Private Tours, Buchung, Guides und unseren Premium-Erlebnissen",
+    "subtitle": "Alles, was Sie über unsere privaten Tour-Erlebnisse wissen müssen",
     "categories": {
       "booking": "Buchung & Reservierungen",
       "payment": "Zahlung & Preise",
       "cancellation": "Stornierung & Änderungen",
       "experience": "Tour-Erlebnis",
-      "safety": "Sicherheit & Gesundheit",
-      "guides": "Über Unsere Guides"
+      "guides": "Über Unsere Guides",
+      "accessibility": "Barrierefreiheit & Praktische Informationen"
     },
     "stillHaveQuestions": "Noch Fragen?",
-    "contactDescription": "Unser Team hilft Ihnen gerne bei der Planung Ihres perfekten Stockholm-Erlebnisses.",
-    "contactUs": "Kontaktieren Sie Uns"
+    "contactDescription": "Unser Team hilft Ihnen gerne bei der Planung Ihres perfekten Private Tours-Erlebnisses.",
+    "contactUs": "Kontaktieren Sie Uns",
+    "questions": {
+      "booking": {
+        "q1": {
+          "question": "Wie buche ich eine Tour?",
+          "answer": "Eine Tour zu buchen ist einfach und vollständig online möglich. Sie wählen Ihr bevorzugtes Erlebnis, Datum, Sprache und Gruppengröße über unsere Buchungsplattform. Sobald Ihre Buchung bestätigt ist, erhalten Sie eine detaillierte Bestätigungs-E-Mail mit Treffpunktdetails, Kontaktdaten und praktischen Hinweisen. Wenn Sie spezifische Interessen oder Wünsche haben, können diese während des Buchungsprozesses angegeben werden, damit Ihr Guide das Erlebnis entsprechend gestalten kann."
+        },
+        "q2": {
+          "question": "Wie weit im Voraus sollte ich buchen?",
+          "answer": "Wir empfehlen, so früh wie möglich zu buchen, insbesondere während der Hauptreisezeiten wie Frühling, Sommer und großen Feiertagen. Viele unserer Guides sind aufgrund ihrer Expertise und begrenzten Verfügbarkeit sehr gefragt. Obwohl Last-Minute-Buchungen manchmal möglich sind, sichert eine frühzeitige Buchung den Zugang zu Ihrem bevorzugten Guide, Ihrer Sprache und Ihrem Zeitfenster."
+        },
+        "q3": {
+          "question": "Kann ich für eine Gruppe buchen?",
+          "answer": "Ja. Alle unsere Touren sind privat und für Einzelpersonen, Paare, Familien oder größere Gruppen konzipiert. Die Gruppengröße kann bei der Buchung ausgewählt werden, und das Erlebnis wird auf die Interessen und das Tempo Ihrer Gruppe abgestimmt. Für größere Gruppen oder Firmenbuchungen empfehlen wir, uns direkt zu kontaktieren, damit wir die bestmögliche Vorbereitung sicherstellen können."
+        },
+        "q4": {
+          "question": "Muss ich mein Ticket ausdrucken?",
+          "answer": "Nein. Ausgedruckte Tickets sind nicht erforderlich. Ihre Buchungsbestätigung wird digital versendet und kann auf Ihrem Telefon oder Tablet vorgezeigt werden. Ihr Guide hat Ihre Buchungsdetails bereits vorliegen und wird Sie am vereinbarten Ort treffen."
+        },
+        "q5": {
+          "question": "Was gilt, wenn ich alleine reise?",
+          "answer": "Alleinreisende sind herzlich willkommen. Viele Gäste entscheiden sich für Private Tours speziell wegen der persönlichen Aufmerksamkeit und Flexibilität, die ein privates Erlebnis bietet. Inhalt, Tempo und Schwerpunkt der Tour werden vollständig Ihren Interessen angepasst."
+        }
+      },
+      "payment": {
+        "q1": {
+          "question": "Welche Zahlungsmethoden akzeptieren Sie?",
+          "answer": "Wir akzeptieren gängige Kredit- und Debitkarten, einschließlich Visa und Mastercard. Alle Zahlungen werden sicher über unsere Buchungsplattform mit verschlüsselten Zahlungslösungen verarbeitet. Zur Bestätigung Ihrer Reservierung ist eine vollständige Zahlung zum Zeitpunkt der Buchung erforderlich."
+        },
+        "q2": {
+          "question": "Was ist im Preis inbegriffen?",
+          "answer": "Der Preis beinhaltet ein privates, geführtes Erlebnis unter der Leitung eines autorisierten Fachmanns, alle Planung und Vorbereitung sowie die Betreuung während der gesamten Tour. Wo zutreffend, sind Logistik und Transportkoordination eingeschlossen. Etwaige zusätzliche Kosten wie Mahlzeiten, Eintrittsgebühren oder Drittanbieter-Dienstleistungen werden stets im Voraus klar angegeben."
+        },
+        "q3": {
+          "question": "Gibt es versteckte Gebühren?",
+          "answer": "Nein. Alle Preise sind transparent und werden bei der Buchung klar angegeben. Falls optionale Zusatzleistungen verfügbar sind, werden diese stets separat aufgeführt, damit Sie fundierte Entscheidungen treffen können."
+        }
+      },
+      "cancellation": {
+        "q1": {
+          "question": "Was ist Ihre Stornierungsrichtlinie?",
+          "answer": "Stornierungen, die mehr als 48 Stunden vor dem geplanten Starttermin vorgenommen werden, erhalten eine vollständige Rückerstattung. Stornierungen 24-48 Stunden vor der Tour erhalten eine teilweise Rückerstattung. Stornierungen innerhalb von 24 Stunden vor Tourbeginn sind nicht erstattungsfähig, da Guides und Logistik bereits vollständig eingeplant sind."
+        },
+        "q2": {
+          "question": "Kann ich meine Tour umbuchen?",
+          "answer": "Ja, vorbehaltlich der Verfügbarkeit des Guides. Wir empfehlen, uns so früh wie möglich zu kontaktieren, wenn Sie umbuchen möchten. Obwohl wir die Verfügbarkeit für neue Termine nicht garantieren können, bemühen wir uns stets, Änderungen zu ermöglichen."
+        },
+        "q3": {
+          "question": "Was passiert, wenn Sie die Tour absagen?",
+          "answer": "Im unwahrscheinlichen Fall, dass wir eine Tour absagen müssen, erhalten Sie eine vollständige Rückerstattung oder die Möglichkeit, ohne zusätzliche Kosten umzubuchen."
+        }
+      },
+      "experience": {
+        "q1": {
+          "question": "Wie lange dauern die Touren?",
+          "answer": "Die meisten Touren dauern zwischen 2 und 4 Stunden, je nach gewähltem Erlebnis. Die Dauer wird bei der Buchung klar angegeben, und private Touren bieten Flexibilität, wenn Sie bestimmte Themen ausführlicher erkunden möchten."
+        },
+        "q2": {
+          "question": "In welchen Sprachen werden Touren angeboten?",
+          "answer": "Touren werden auf Schwedisch, Englisch und Deutsch angeboten. Jeder Guide ist in der von ihm angebotenen Sprache professionell zertifiziert, um Klarheit, Nuancen und ein hochwertiges Erlebnis zu gewährleisten."
+        },
+        "q3": {
+          "question": "Sind Touren für Kinder geeignet?",
+          "answer": "Ja. Touren können für Familien mit Kindern angepasst werden. Bitte teilen Sie uns bei der Buchung die Altersgruppe mit, damit Ihr Guide Inhalt und Tempo entsprechend anpassen kann."
+        },
+        "q4": {
+          "question": "Finden Touren bei jedem Wetter statt?",
+          "answer": "Ja. Touren finden das ganze Jahr über und bei den meisten Witterungsbedingungen statt. Wir empfehlen, sich der Jahreszeit entsprechend zu kleiden. Bei extremen Wetterverhältnissen werden wir Sie im Voraus kontaktieren, um Alternativen zu besprechen."
+        },
+        "q5": {
+          "question": "Ist Transport inbegriffen?",
+          "answer": "Transportdetails variieren je nach Tour. Wenn Transport enthalten ist, wird dies in der Tourbeschreibung klar angegeben. Ihr Guide wird stets bei der Logistik behilflich sein, um ein reibungsloses Erlebnis zu gewährleisten."
+        }
+      },
+      "guides": {
+        "q1": {
+          "question": "Wer sind Ihre Guides?",
+          "answer": "Unsere Guides sind autorisierte Fachleute und Sachverständige, viele mit akademischem Hintergrund in Geschichte, Archäologie oder Kulturwissenschaften. Alle Guides werden sorgfältig geprüft, um fundiertes Wissen, starke Kommunikationsfähigkeiten und professionelle Betreuung sicherzustellen."
+        },
+        "q2": {
+          "question": "Sind Ihre Guides lizenziert?",
+          "answer": "Ja. Wir arbeiten ausschließlich mit lizenzierten Guides oder verifizierten Experten zusammen. Qualifikationen und Sprachzertifizierungen werden im Rahmen unseres Auswahlprozesses überprüft."
+        },
+        "q3": {
+          "question": "Bleibt derselbe Guide während der gesamten Tour bei uns?",
+          "answer": "Ja. Ihr Guide ist während des gesamten Erlebnisses Ihr Gastgeber und sorgt für Kontinuität sowie eine entspannte, persönliche Atmosphäre. In den seltenen Fällen, in denen ein Erlebnis mehrere Guides oder unterschiedliche Abschnitte umfasst, wird dies stets im Voraus klar angegeben, um vollständige Transparenz und Sicherheit zu gewährleisten."
+        }
+      },
+      "accessibility": {
+        "q1": {
+          "question": "Sind Touren für Gäste mit eingeschränkter Mobilität zugänglich?",
+          "answer": "Wir möchten, dass sich alle Gäste auf unseren Touren wohlfühlen und willkommen sind. Zugänglichkeitsdetails sind in jeder Tourbeschreibung klar aufgeführt, sodass Sie Gehstrecken, Gelände und körperliche Anforderungen im Voraus einsehen können. Viele unserer Erlebnisse können Mobilitätsbedürfnisse berücksichtigen, und wir helfen stets gerne weiter. Wenn Sie spezifische Wünsche oder Fragen haben, zögern Sie bitte nicht, uns zu kontaktieren - wir werden Sie gerne zu der am besten geeigneten Option führen."
+        },
+        "q2": {
+          "question": "Was sollte ich mitbringen?",
+          "answer": "Bequeme Wanderschuhe und witterungsgerechte Kleidung werden empfohlen. Etwaige zusätzliche Anforderungen werden in Ihrer Buchungsbestätigung mitgeteilt."
+        },
+        "q3": {
+          "question": "Wie kann ich Sie vor oder während der Tour erreichen?",
+          "answer": "Sie können uns per E-Mail oder Telefon unter den in Ihrer Bestätigungs-E-Mail angegebenen Kontaktdaten erreichen. Die Kontaktdaten Ihres Guides werden ebenfalls für die Koordination am Tourtag angegeben."
+        }
+      }
+    }
   },
   "about": {
     "title": "Über Private Tours",
