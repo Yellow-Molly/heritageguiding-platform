@@ -1,12 +1,16 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronDown, Star, Shield, Award } from 'lucide-react'
+import { ChevronDown, Star, Shield, Award, Sparkles } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { getButtonClassName } from '@/components/ui/button'
+import { useAiChat } from '@/components/ai-chat'
+import { Link } from '@/i18n/navigation'
 
 export function HeroSection() {
+  const { openChat } = useAiChat()
+  const t = useTranslations()
   const heroRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -108,11 +112,12 @@ export function HeroSection() {
           className="flex animate-fade-in-up flex-col items-center justify-center gap-4 sm:flex-row"
           style={{ animationDelay: '450ms' }}
         >
-          <Link href="/find-tour" className={getButtonClassName('primary', 'xl')}>
-            Find Your Tour
-          </Link>
+          <button onClick={openChat} className={getButtonClassName('primary', 'xl')} aria-label={t('common.askAi')}>
+            <Sparkles className="h-5 w-5" />
+            {t('common.askAi')}
+          </button>
           <Link href="/tours" className={getButtonClassName('outline', 'xl')}>
-            Explore All Tours
+            {t('home.hero.cta')}
           </Link>
         </div>
 

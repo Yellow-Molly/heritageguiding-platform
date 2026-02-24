@@ -15,6 +15,15 @@ vi.mock('next-intl', () => ({
   }),
 }))
 
+// Mock AI chat hook
+vi.mock('@/components/ai-chat', () => ({
+  useAiChat: vi.fn().mockReturnValue({
+    isOpen: false,
+    openChat: vi.fn(),
+    closeChat: vi.fn(),
+  }),
+}))
+
 import { WhatsAppFloatingButton } from '../whatsapp-floating-button'
 
 // Mock localStorage

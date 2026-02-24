@@ -4,6 +4,7 @@ import { getMessages, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { locales, localeMetadata, type Locale } from '@/i18n'
 import { WhatsAppFloatingButton } from '@/components/shared/whatsapp-floating-button'
+import { AiChatProvider } from '@/components/ai-chat'
 import { SkipToContentLink } from '@/components/accessibility'
 import { WebVitalsReporter } from '@/components/analytics/web-vitals-reporter'
 import { inter, playfairDisplay } from '@/lib/fonts'
@@ -71,12 +72,14 @@ export default async function LocaleLayout({
       </head>
       <body className={`${inter.variable} ${playfairDisplay.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <WebVitalsReporter />
-          <SkipToContentLink />
-          <div id="main">{children}</div>
-          {whatsappNumber && <WhatsAppFloatingButton phoneNumber={whatsappNumber} />}
-          {/* ARIA live region for dynamic announcements */}
-          <div id="aria-announcer" role="status" aria-live="polite" className="sr-only" />
+          <AiChatProvider>
+            <WebVitalsReporter />
+            <SkipToContentLink />
+            <div id="main">{children}</div>
+            {whatsappNumber && <WhatsAppFloatingButton phoneNumber={whatsappNumber} />}
+            {/* ARIA live region for dynamic announcements */}
+            <div id="aria-announcer" role="status" aria-live="polite" className="sr-only" />
+          </AiChatProvider>
         </NextIntlClientProvider>
       </body>
     </html>

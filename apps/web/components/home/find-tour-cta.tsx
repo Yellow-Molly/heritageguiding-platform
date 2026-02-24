@@ -1,11 +1,14 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
-import { Search, CalendarDays, Users, MapPin } from 'lucide-react'
+import { Sparkles, CalendarDays, Users, MapPin, Search } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { getButtonClassName } from '@/components/ui/button'
+import { useAiChat } from '@/components/ai-chat'
 
 export function FindTourCta() {
+  const { openChat } = useAiChat()
+  const t = useTranslations()
   return (
     <section className="relative overflow-hidden py-20 md:py-28" aria-label="Find your tour">
       {/* Background Image */}
@@ -74,18 +77,19 @@ export function FindTourCta() {
             </div>
           </div>
 
-          {/* CTA Button */}
-          <Link
-            href="/find-tour"
+          {/* Ask AI Button */}
+          <button
+            onClick={openChat}
             className={getButtonClassName(
               'secondary',
               'xl',
               'shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all'
             )}
+            aria-label={t('common.askAi')}
           >
-            <Search className="mr-2 h-5 w-5" />
-            Find Your Tour Now
-          </Link>
+            <Sparkles className="mr-2 h-5 w-5" />
+            {t('common.askAi')}
+          </button>
         </div>
       </div>
     </section>

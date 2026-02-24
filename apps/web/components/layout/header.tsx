@@ -2,12 +2,13 @@
 
 import { useState, useEffect, useTransition } from 'react'
 import Image from 'next/image'
-import { Menu, X, Globe, ChevronDown } from 'lucide-react'
+import { Menu, X, Globe, ChevronDown, Sparkles } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { getButtonClassName } from '@/components/ui/button'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { locales, localeLabels, type Locale } from '@/i18n/routing'
+import { useAiChat } from '@/components/ai-chat'
 
 const navigationItems = [
   { key: 'tours' as const, href: '/tours' as const },
@@ -31,6 +32,7 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
   const pathname = usePathname()
   const router = useRouter()
   const t = useTranslations('common')
+  const { openChat } = useAiChat()
 
   // For solid variant, always show scrolled styling
   const showSolidStyle = variant === 'solid' || isScrolled
@@ -141,13 +143,15 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
             )}
           </div>
 
-          {/* CTA Button */}
-          <Link
-            href="/find-tour"
+          {/* Ask AI Button */}
+          <button
+            onClick={openChat}
             className={getButtonClassName(showSolidStyle ? 'primary' : 'outline', 'md')}
+            aria-label={t('askAi')}
           >
-            {t('findYourTour')}
-          </Link>
+            <Sparkles className="h-4 w-4" />
+            {t('askAi')}
+          </button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -207,15 +211,16 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
             </div>
           </div>
 
-          {/* Mobile CTA */}
+          {/* Mobile Ask AI */}
           <div className="px-4 pt-4">
-            <Link
-              href="/find-tour"
-              onClick={() => setIsMobileMenuOpen(false)}
+            <button
+              onClick={() => { openChat(); setIsMobileMenuOpen(false) }}
               className={getButtonClassName('primary', 'lg', 'w-full')}
+              aria-label={t('askAi')}
             >
-              {t('findYourTour')}
-            </Link>
+              <Sparkles className="h-4 w-4" />
+              {t('askAi')}
+            </button>
           </div>
         </div>
       </div>

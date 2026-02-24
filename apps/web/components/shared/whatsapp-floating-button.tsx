@@ -3,6 +3,7 @@
 import { useState, useSyncExternalStore } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { X, MessageCircle } from 'lucide-react'
+import { useAiChat } from '@/components/ai-chat'
 
 interface WhatsAppFloatingButtonProps {
   phoneNumber: string
@@ -38,11 +39,12 @@ function getDismissedServerSnapshot() {
 export function WhatsAppFloatingButton({ phoneNumber }: WhatsAppFloatingButtonProps) {
   const locale = useLocale()
   const t = useTranslations('whatsapp')
+  const { isOpen: isAiChatOpen } = useAiChat()
   const storedDismissed = useSyncExternalStore(subscribeToDismiss, getDismissedSnapshot, getDismissedServerSnapshot)
   const [localDismissed, setLocalDismissed] = useState(false)
   const dismissed = storedDismissed || localDismissed
 
-  if (!phoneNumber || dismissed) return null
+  if (!phoneNumber || dismissed || isAiChatOpen) return null
 
   const message = encodeURIComponent(LOCALIZED_MESSAGES[locale] || LOCALIZED_MESSAGES.en)
   const waLink = `https://wa.me/${phoneNumber}?text=${message}`
