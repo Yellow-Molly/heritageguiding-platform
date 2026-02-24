@@ -76,9 +76,9 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
     >
       <nav className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="relative h-8 w-48 transition-opacity hover:opacity-80">
+        <Link href="/" className="relative h-10 w-56 transition-opacity hover:opacity-80">
           <Image
-            src="/logo1.svg"
+            src={showSolidStyle ? '/logo-black.svg' : '/logo.svg'}
             alt="Private Tours"
             fill
             className="object-contain object-left"
