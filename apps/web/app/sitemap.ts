@@ -31,11 +31,12 @@ function buildAlternates(path: string): Record<string, string> {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = []
 
-  // Static routes - one entry per route with hreflang alternates
+  // Static routes - fixed date so crawlers get accurate change signals
+  const staticLastModified = new Date('2026-02-24')
   for (const route of STATIC_ROUTES) {
     entries.push({
       url: `${BASE_URL}/sv${route.path}`,
-      lastModified: new Date(),
+      lastModified: staticLastModified,
       changeFrequency: route.changeFrequency,
       priority: route.priority,
       alternates: { languages: buildAlternates(route.path) },
@@ -49,21 +50,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const tours = await payload.find({
       collection: 'tours',
       where: { status: { equals: 'published' } },
-      depth: 0,
+      depth: 1, // Resolve media relations for image URLs
       limit: 500,
-      select: { slug: true, updatedAt: true },
+      select: { slug: true, updatedAt: true, images: true },
     })
 
     for (const tour of tours.docs) {
-      const slug = String((tour as Record<string, unknown>).slug)
-      const updatedAt = (tour as Record<string, unknown>).updatedAt as string | undefined
+      const t = tour as Record<string, unknown>
+      const slug = String(t.slug)
+      const updatedAt = t.updatedAt as string | undefined
       const path = `/tours/${slug}`
+
+      // Extract image URLs from tour gallery for Google Image Search
+      const tourImages = (t.images as Array<{ image?: { url?: string } }> | undefined) ?? []
+      const imageUrls = tourImages
+        .map((img) => img.image?.url)
+        .filter((url): url is string => !!url)
+        .map((url) => (url.startsWith('http') ? url : `${BASE_URL}${url}`))
+
       entries.push({
         url: `${BASE_URL}/sv${path}`,
-        lastModified: updatedAt ? new Date(updatedAt) : new Date(),
+        lastModified: updatedAt ? new Date(updatedAt) : staticLastModified,
         changeFrequency: 'weekly',
         priority: 0.9,
         alternates: { languages: buildAlternates(path) },
+        ...(imageUrls.length > 0 && { images: imageUrls }),
       })
     }
 
@@ -82,7 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const path = `/guides/${slug}`
       entries.push({
         url: `${BASE_URL}/sv${path}`,
-        lastModified: updatedAt ? new Date(updatedAt) : new Date(),
+        lastModified: updatedAt ? new Date(updatedAt) : staticLastModified,
         changeFrequency: 'monthly',
         priority: 0.8,
         alternates: { languages: buildAlternates(path) },
