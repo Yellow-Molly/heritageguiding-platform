@@ -21,43 +21,92 @@
     "title": "Private Tours - Entdecken Sie Stockholms Geschichte",
     "description": "Entdecken Sie Stockholm mit fachkundiger Führung. Private und Gruppentouren auf Schwedisch, Englisch und Deutsch.",
     "hero": {
-      "title": "Entdecken Sie Stockholms Reiches Erbe",
-      "subtitle": "Expertengeführte Touren, die die Geschichte und Kultur der Stadt lebendig machen",
+      "scriptLabel": "Entdecken Sie die Magie von",
+      "title": "Stockholms Verborgenes Erbe",
+      "subtitle": "Expertengeführte Touren, die Jahrhunderte schwedischer Geschichte enthüllen",
       "cta": "Unsere Touren entdecken",
-      "findTour": "Finden Sie Ihre Tour",
       "imageAlt": "Panoramablick auf Stockholms Altstadt bei Sonnenuntergang"
     },
     "featured": {
-      "title": "Empfohlene Touren",
-      "subtitle": "Unsere beliebtesten Kulturerbe-Erlebnisse",
-      "viewAll": "Alle Touren anzeigen"
+      "label": "Beliebte Erlebnisse",
+      "title": "Unsere Beliebten Touren",
+      "subtitle": "Entdecken Sie unsere beliebtesten Kulturerbe-Erlebnisse in Stockholm",
+      "viewAll": "Alle Touren anzeigen",
+      "bookNow": "Jetzt Buchen",
+      "from": "Ab",
+      "perPerson": "/ Person",
+      "reviews": "Bewertungen"
     },
     "trust": {
+      "licensedGuides": "Lizenzierte Guides",
+      "trusted": "Vertrauenswürdig",
       "happyTravelers": "Zufriedene Reisende",
-      "uniqueTours": "Einzigartige Touren",
-      "averageRating": "Durchschnittsbewertung",
       "yearsExperience": "Jahre Erfahrung"
     },
-    "categories": {
-      "title": "Finden Sie Ihr Perfektes Erlebnis",
-      "subtitle": "Durchsuchen Sie Touren nach Thema oder erkunden Sie Stockholms einzigartige Viertel",
-      "byTheme": "Nach Thema entdecken",
-      "byArea": "Nach Gebiet entdecken",
-      "tours": "Touren"
+    "video": {
+      "label": "Unsere Geschichte",
+      "title": "Sehen Sie Unser Video, Buchen Sie eine Tour",
+      "description": "Erfahren Sie, was unsere Kulturerbe-Touren besonders macht. Begleiten Sie unsere Experten-Guides, wenn sie Stockholms verborgene Geschichten enthüllen, von mittelalterlichen Gassen bis zu königlichen Gemächern.",
+      "cta": "Mehr Über Uns Erfahren"
     },
-    "whyChooseUs": {
-      "title": "Warum Uns Wählen",
-      "subtitle": "Erleben Sie das Kulturerbe wie nie zuvor",
-      "description": "Seit über 15 Jahren verbinden wir Reisende mit Stockholms reicher Geschichte."
+    "seasons": {
+      "label": "Ganzjährige Erlebnisse",
+      "title": "Erkunden Sie Stockholm das Ganze Jahr",
+      "winter": {
+        "tab": "Winter",
+        "title": "Magisches Winter-Stockholm",
+        "description": "Erleben Sie die bezaubernde Winteratmosphäre mit schneebedeckter Altstadt, gemütlichen Fika-Pausen und dem Nobelmuseum. Wintertouren beinhalten Aufwärmpausen in Innenräumen und kürzere Gehstrecken.",
+        "imageAlt": "Schneebedeckte Gamla Stan im Winter"
+      },
+      "spring": {
+        "tab": "Frühling",
+        "title": "Stockholm in Blüte",
+        "description": "Beobachten Sie, wie die Stadt mit Kirschblüten im Kungsträdgården, wiedereröffnenden Straßencafés und längeren Tageslichtstunden zum Leben erwacht.",
+        "imageAlt": "Kirschblüten im Kungsträdgården-Park"
+      },
+      "summer": {
+        "tab": "Sommer",
+        "title": "Endlose Sommertage",
+        "description": "Genießen Sie fast 24 Stunden Tageslicht, Schärenblicke und Kulturerbe-Stätten im Freien. Der Sommer ist die Hauptsaison mit der größten Tourauswahl.",
+        "imageAlt": "Stockholmer Uferpromenade im Sommersonnenschein"
+      },
+      "autumn": {
+        "tab": "Herbst",
+        "title": "Goldene Herbstfarben",
+        "description": "Entdecken Sie Stockholms Parks in leuchtenden Herbstfarben. Weniger Menschenmassen bedeuten intimere Touren durch Djurgårdens Wälder und Södermalms Aussichtspunkte.",
+        "imageAlt": "Herbstlaub in Djurgården"
+      }
+    },
+    "guidesSection": {
+      "label": "Unser Team",
+      "title": "Lernen Sie Unsere Experten-Guides Kennen",
+      "subtitle": "Leidenschaftliche Geschichtenerzähler, die Stockholms Geschichte lebendig machen",
+      "viewAll": "Alle Unsere Guides Kennenlernen",
+      "role": "Lizenzierter Guide"
+    },
+    "blog": {
+      "label": "Unser Blog",
+      "title": "Neuestes aus Unserem Blog",
+      "subtitle": "Reisetipps, Stockholmer Geschichten und Kulturerbe-Einblicke",
+      "readMore": "Weiterlesen",
+      "category": {
+        "tips": "Reisetipps",
+        "history": "Geschichte",
+        "culture": "Kultur"
+      }
+    },
+    "newsletter": {
+      "title": "Abonnieren Sie Reisetipps",
+      "subtitle": "Erhalten Sie Stockholmer Reise-Einblicke und exklusive Tour-Angebote direkt in Ihren Posteingang.",
+      "placeholder": "Geben Sie Ihre E-Mail-Adresse ein",
+      "submit": "Abonnieren",
+      "privacy": "Wir respektieren Ihre Privatsphäre. Jederzeit abmelden.",
+      "success": "Vielen Dank für Ihr Abonnement!",
+      "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
     },
     "testimonials": {
       "title": "Was Unsere Gäste Sagen",
       "subtitle": "Verlassen Sie sich nicht nur auf unser Wort"
-    },
-    "findTour": {
-      "title": "Finden Sie Ihre Perfekte Tour",
-      "subtitle": "Beantworten Sie einige Fragen und lassen Sie uns das ideale Kulturerbe-Erlebnis empfehlen",
-      "cta": "Finden Sie Ihre Tour Jetzt"
     }
   },
   "tours": {

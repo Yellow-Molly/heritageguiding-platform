@@ -15,20 +15,20 @@ Premium heritage tour guiding platform for Sweden. Design inspired by TripFreak 
 
 ## Color Palette
 
-### Primary - Deep Navy Blue
+### Primary - Dark Charcoal (Updated Phase 11)
 Trust, sophistication, authority.
 ```css
---color-primary: #1E3A5F
---color-primary-light: #2A4A75
---color-primary-dark: #152B47
+--color-primary: #252525        /* was #1E3A5F */
+--color-primary-light: #3e3e3e  /* was #2A4A75 */
+--color-primary-dark: #0b0b0b   /* was #152B47 */
 ```
 
-### Secondary - Rich Gold
+### Secondary - Warm Gold (Updated Phase 11)
 Heritage, premium quality, excellence.
 ```css
---color-secondary: #C4A052
---color-secondary-light: #D4B462
---color-secondary-dark: #B49042
+--color-secondary: #DBC078      /* was #C4A052 */
+--color-secondary-light: #e6d3a0 /* was #D4B462 */
+--color-secondary-dark: #d0ad50  /* was #B49042 */
 ```
 
 ### Accent - Coral Orange
@@ -208,15 +208,18 @@ All animations respect `prefers-reduced-motion` media query.
 
 ## Page Structure
 
-### Homepage Sections
-1. Header (fixed, transparent->solid on scroll)
-2. Hero (100vh, full-bleed image, gradient overlay)
-3. Trust Signals Strip (navy background, stats)
-4. Featured Tours Grid (3 columns desktop)
-5. Find Your Tour CTA (full-width, image background)
-6. Why Choose Us (2-column layout)
-7. Testimonials Carousel
-8. Footer (multi-column, newsletter)
+### Homepage Sections (Updated - Phase 11, Stepi Style)
+1. Header (fixed, transparent→solid on scroll)
+2. Hero (100vh, single background image, script label, single CTA)
+3. Trust Signals Bar (light background, dark text, 4 stats with coral icons)
+4. Video Section (2-col: video left, text right; stacked mobile)
+5. Tours Carousel (CSS scroll-snap mobile, 3-col grid desktop)
+6. Testimonials Carousel (unchanged)
+7. Seasonal Tabs (4 tabs: Winter/Spring/Summer/Autumn with image + text)
+8. Meet Our Guides (3-col grid of circular photos + name/role)
+9. Blog Preview (3 article cards: image, title, excerpt, read more link)
+10. Newsletter Signup (centered form: email input + submit)
+11. Footer (multi-column, minimal updates)
 
 ### Container
 ```css
@@ -322,6 +325,7 @@ useEffect(() => {
 
 | Date | Change |
 |------|--------|
+| 2026-03-01 | Phase 11 (Homepage Redesign): Stepi-style redesign complete. Color palette updated (navy→charcoal, gold→warm gold). Hero simplified. Trust signals restyled. 5 new sections added (video, seasonal tabs, guides, blog, newsletter). 4 components removed (CategoryNav, WhyChooseUs, FindTourCta, FeaturedTours). Tours carousel replaced. Build: 769/769 tests pass. Code review: 7/10 (critical issues fixed). |
 | 2026-02-02 | Phase 08.1: Bokun booking widget integration (bokun-booking-widget-with-fallback.tsx) |
 | 2026-01-19 | Phase 07 complete: Design system applied across all pages (catalog, detail, footer) |
 | 2026-01-18 | Updated component patterns and accessibility checklist |

@@ -1,4 +1,4 @@
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Inter, Playfair_Display, Allura } from 'next/font/google'
 
 // Primary body font - Inter
 export const inter = Inter({
@@ -11,6 +11,14 @@ export const inter = Inter({
 export const playfairDisplay = Playfair_Display({
   variable: '--font-playfair',
   subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+})
+
+// Decorative script font - Allura (hero labels)
+export const allura = Allura({
+  variable: '--font-allura',
+  subsets: ['latin'],
+  weight: '400',
   display: 'swap',
 })
 

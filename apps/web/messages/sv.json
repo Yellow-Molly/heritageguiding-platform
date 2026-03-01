@@ -21,43 +21,92 @@
     "title": "Private Tours - Upptäck Stockholms Historia",
     "description": "Upptäck Stockholm med expertvägledning. Privata och gruppturer på svenska, engelska och tyska.",
     "hero": {
-      "title": "Upptäck Stockholms Rika Kulturarv",
-      "subtitle": "Expertguidningar som förmedlar stadens historia och kultur",
+      "scriptLabel": "Upptäck magin i",
+      "title": "Stockholms Dolda Kulturarv",
+      "subtitle": "Expertledda turer som avslöjar århundraden av svensk historia",
       "cta": "Utforska våra turer",
-      "findTour": "Hitta Din Tur",
       "imageAlt": "Panoramabild av Gamla Stan i Stockholm vid solnedgång"
     },
     "featured": {
-      "title": "Utvalda Turer",
-      "subtitle": "Våra mest älskade kulturarvsupplevelser",
-      "viewAll": "Se alla turer"
+      "label": "Populära Upplevelser",
+      "title": "Våra Populära Turer",
+      "subtitle": "Upptäck våra mest älskade kulturarvsupplevelser i Stockholm",
+      "viewAll": "Se alla turer",
+      "bookNow": "Boka Nu",
+      "from": "Från",
+      "perPerson": "/ person",
+      "reviews": "omdömen"
     },
     "trust": {
+      "licensedGuides": "Licensierade Guider",
+      "trusted": "Pålitlig",
       "happyTravelers": "Nöjda Resenärer",
-      "uniqueTours": "Unika Turer",
-      "averageRating": "Genomsnittsbetyg",
       "yearsExperience": "Års Erfarenhet"
     },
-    "categories": {
-      "title": "Hitta Din Perfekta Upplevelse",
-      "subtitle": "Bläddra bland turer efter tema eller utforska Stockholms unika stadsdelar",
-      "byTheme": "Utforska efter Tema",
-      "byArea": "Utforska efter Område",
-      "tours": "turer"
+    "video": {
+      "label": "Vår Historia",
+      "title": "Se Vår Video, Boka en Tur",
+      "description": "Se vad som gör våra kulturarvsturer speciella. Följ med våra expertguider när de avslöjar Stockholms dolda berättelser, från medeltida gränder till kungliga salar.",
+      "cta": "Läs Mer Om Oss"
     },
-    "whyChooseUs": {
-      "title": "Varför Välja Oss",
-      "subtitle": "Upplev Kulturarvet Som Aldrig Förr",
-      "description": "I över 15 år har vi kopplat resenärer med Stockholms rika historia."
+    "seasons": {
+      "label": "Året-Runt Upplevelser",
+      "title": "Utforska Stockholm Året Runt",
+      "winter": {
+        "tab": "Vinter",
+        "title": "Magiska Vinterstockholm",
+        "description": "Upplev den förtrollande vinteratmosfären med snötäckta Gamla Stan, mysiga fikaställen och Nobelmuseet. Vinterturer inkluderar inomhusvärmande pauser och kortare promenadavstånd.",
+        "imageAlt": "Snötäckta Gamla Stan på vintern"
+      },
+      "spring": {
+        "tab": "Vår",
+        "title": "Stockholm i Blom",
+        "description": "Se staden vakna till liv med körsbärsblommor i Kungsträdgården, uteserveringar som öppnar igen och längre dagsljus perfekt för utökade stadsvandringar.",
+        "imageAlt": "Körsbärsblommor i Kungsträdgården"
+      },
+      "summer": {
+        "tab": "Sommar",
+        "title": "Oändliga Sommardagar",
+        "description": "Njut av nästan 24 timmars dagsljus, skärgårdsvyer och kulturarvsplatser utomhus när de är som bäst. Sommaren är högsäsong med det bredaste utbudet av turer.",
+        "imageAlt": "Stockholms strandlinje i sommarsolsken"
+      },
+      "autumn": {
+        "tab": "Höst",
+        "title": "Gyllene Höstfärger",
+        "description": "Upptäck Stockholms parker i höstens färgprakt. Färre folkmassor innebär mer intima turer genom Djurgårdens skogar och Södermalms utsiktsplatser.",
+        "imageAlt": "Höstlövverk på Djurgården"
+      }
+    },
+    "guidesSection": {
+      "label": "Vårt Team",
+      "title": "Möt Våra Expertguider",
+      "subtitle": "Passionerade berättare som ger liv åt Stockholms historia",
+      "viewAll": "Möt Alla Våra Guider",
+      "role": "Licensierad Guide"
+    },
+    "blog": {
+      "label": "Vår Blogg",
+      "title": "Senaste från Vår Blogg",
+      "subtitle": "Resetips, Stockholmsberättelser och kulturarvsinsikter",
+      "readMore": "Läs Mer",
+      "category": {
+        "tips": "Resetips",
+        "history": "Historia",
+        "culture": "Kultur"
+      }
+    },
+    "newsletter": {
+      "title": "Prenumerera på Resetips",
+      "subtitle": "Få Stockholms reseinsikter och exklusiva turerbjudanden direkt till din inkorg.",
+      "placeholder": "Ange din e-postadress",
+      "submit": "Prenumerera",
+      "privacy": "Vi respekterar din integritet. Avprenumerera när som helst.",
+      "success": "Tack för din prenumeration!",
+      "error": "Något gick fel. Försök igen."
     },
     "testimonials": {
       "title": "Vad Våra Gäster Säger",
       "subtitle": "Ta inte bara vårt ord för det"
-    },
-    "findTour": {
-      "title": "Hitta Din Perfekta Tur",
-      "subtitle": "Svara på några frågor och låt oss rekommendera den perfekta kulturarvsupplevelsen",
-      "cta": "Hitta Din Tur Nu"
     }
   },
   "tours": {

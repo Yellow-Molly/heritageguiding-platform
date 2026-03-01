@@ -7,7 +7,7 @@ import { WhatsAppFloatingButton } from '@/components/shared/whatsapp-floating-bu
 import { AiChatProvider } from '@/components/ai-chat'
 import { SkipToContentLink } from '@/components/accessibility'
 import { WebVitalsReporter } from '@/components/analytics/web-vitals-reporter'
-import { inter, playfairDisplay } from '@/lib/fonts'
+import { inter, playfairDisplay, allura } from '@/lib/fonts'
 import { getWhatsAppNumber } from '@/lib/get-whatsapp-number-from-cms'
 import { generateHreflangAlternates, generateOgLocaleAlternates } from '@/lib/seo'
 import type { Metadata } from 'next'
@@ -70,7 +70,7 @@ export default async function LocaleLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.variable} ${playfairDisplay.variable} antialiased`}>
+      <body className={`${inter.variable} ${playfairDisplay.variable} ${allura.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <AiChatProvider>
             <WebVitalsReporter />

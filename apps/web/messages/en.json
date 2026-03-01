@@ -21,43 +21,92 @@
     "title": "Private Tours - Discover Stockholm's History",
     "description": "Discover Stockholm with expert guidance. Private and group tours in Swedish, English, and German.",
     "hero": {
-      "title": "Discover Stockholm's Rich Heritage",
-      "subtitle": "Expert-led tours that bring the city's history and culture to life",
+      "scriptLabel": "Discover the magic of",
+      "title": "Stockholm's Hidden Heritage",
+      "subtitle": "Expert-led tours revealing centuries of Swedish history",
       "cta": "Explore Our Tours",
-      "findTour": "Find Your Tour",
       "imageAlt": "Panoramic view of Stockholm Old Town at sunset"
     },
     "featured": {
-      "title": "Featured Tours",
-      "subtitle": "Our most beloved heritage experiences",
-      "viewAll": "View All Tours"
+      "label": "Popular Experiences",
+      "title": "Our Popular Tours",
+      "subtitle": "Discover our most beloved heritage experiences in Stockholm",
+      "viewAll": "View All Tours",
+      "bookNow": "Book Now",
+      "from": "From",
+      "perPerson": "/ person",
+      "reviews": "reviews"
     },
     "trust": {
+      "licensedGuides": "Licensed Guides",
+      "trusted": "Trusted",
       "happyTravelers": "Happy Travelers",
-      "uniqueTours": "Unique Tours",
-      "averageRating": "Average Rating",
       "yearsExperience": "Years Experience"
     },
-    "categories": {
-      "title": "Find Your Perfect Experience",
-      "subtitle": "Browse tours by theme or explore Stockholm's unique neighborhoods",
-      "byTheme": "Explore by Theme",
-      "byArea": "Explore by Area",
-      "tours": "tours"
+    "video": {
+      "label": "Our Story",
+      "title": "Watch Our Video, Take a Tour",
+      "description": "See what makes our heritage tours special. Join our expert guides as they reveal Stockholm's hidden stories, from medieval alleyways to royal chambers.",
+      "cta": "Learn More About Us"
     },
-    "whyChooseUs": {
-      "title": "Why Choose Us",
-      "subtitle": "Experience Heritage Like Never Before",
-      "description": "For over 15 years, we've been connecting travelers with Stockholm's rich history."
+    "seasons": {
+      "label": "Year-Round Experiences",
+      "title": "Explore Stockholm All Year Round",
+      "winter": {
+        "tab": "Winter",
+        "title": "Magical Winter Stockholm",
+        "description": "Experience the enchanting winter atmosphere with snow-covered Old Town, cozy fika stops, and the Nobel Museum. Winter tours include indoor warming breaks and shorter walking distances.",
+        "imageAlt": "Snow-covered Gamla Stan in winter"
+      },
+      "spring": {
+        "tab": "Spring",
+        "title": "Stockholm in Bloom",
+        "description": "Watch the city come alive with cherry blossoms in Kungstradgarden, outdoor cafes reopening, and longer daylight hours perfect for extended walking tours.",
+        "imageAlt": "Cherry blossoms in Kungstradgarden park"
+      },
+      "summer": {
+        "tab": "Summer",
+        "title": "Endless Summer Days",
+        "description": "Enjoy nearly 24 hours of daylight, archipelago views, and outdoor heritage sites at their best. Summer is peak season with the widest tour selection available.",
+        "imageAlt": "Stockholm waterfront in summer sunshine"
+      },
+      "autumn": {
+        "tab": "Autumn",
+        "title": "Golden Autumn Colors",
+        "description": "Discover Stockholm's parks ablaze with autumn colors. Fewer crowds mean more intimate tours through Djurgarden's forests and Sodermalm's viewpoints.",
+        "imageAlt": "Autumn foliage in Djurgarden"
+      }
+    },
+    "guidesSection": {
+      "label": "Our Team",
+      "title": "Meet Our Expert Guides",
+      "subtitle": "Passionate storytellers who bring Stockholm's history to life",
+      "viewAll": "Meet All Our Guides",
+      "role": "Licensed Guide"
+    },
+    "blog": {
+      "label": "Our Blog",
+      "title": "Latest from Our Blog",
+      "subtitle": "Travel tips, Stockholm stories, and heritage insights",
+      "readMore": "Read More",
+      "category": {
+        "tips": "Travel Tips",
+        "history": "History",
+        "culture": "Culture"
+      }
+    },
+    "newsletter": {
+      "title": "Subscribe for Travel Tips",
+      "subtitle": "Get Stockholm travel insights and exclusive tour offers delivered to your inbox.",
+      "placeholder": "Enter your email address",
+      "submit": "Subscribe",
+      "privacy": "We respect your privacy. Unsubscribe at any time.",
+      "success": "Thank you for subscribing!",
+      "error": "Something went wrong. Please try again."
     },
     "testimonials": {
       "title": "What Our Guests Say",
       "subtitle": "Don't just take our word for it"
-    },
-    "findTour": {
-      "title": "Find Your Perfect Tour",
-      "subtitle": "Answer a few questions and let us recommend the ideal heritage experience",
-      "cta": "Find Your Tour Now"
     }
   },
   "tours": {

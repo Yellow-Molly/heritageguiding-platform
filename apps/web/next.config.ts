@@ -97,7 +97,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "img-src 'self' data: https://*.blob.vercel-storage.com https://images.unsplash.com",
               "font-src 'self' data: https://fonts.gstatic.com",
-              "frame-src 'self' https://www.bubblav.com",
+              "frame-src 'self' https://www.bubblav.com https://www.youtube-nocookie.com",
               "connect-src 'self' https://www.bubblav.com https://*.bubblav.com",
             ].join('; '),
           },

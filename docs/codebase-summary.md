@@ -1,8 +1,8 @@
 # Codebase Summary - Private Tours Platform
 
-**Last Updated:** February 21, 2026
-**Phase:** 11 - Performance Optimization (Complete)
-**Status:** Image optimization, dynamic caching, Web Vitals monitoring, Lighthouse CI, 1009 unit tests (90%+ coverage)
+**Last Updated:** March 1, 2026
+**Phase:** 11 - Performance Optimization + Homepage Redesign (Complete)
+**Status:** Stepi-style homepage redesign, charcoal/warm-gold rebranding, 5 new sections, 4 components removed, 769/769 tests pass, code review 7/10
 **Codebase Metrics:** 165+ TypeScript files, 380K+ tokens, 69K LOC frontend + 35K LOC CMS
 
 ## Overview
@@ -120,15 +120,21 @@ app/
 
 #### Components (60+ total, organized by feature)
 
-**Home Components (8 components):**
-- `hero-section.tsx` - Landing hero with parallax
-- `trust-signals.tsx` - Statistics section
-- `featured-tours.tsx` - Grid of featured tours
-- `testimonials.tsx` - Carousel of reviews
-- `why-choose-us.tsx` - Value proposition
-- `find-tour-cta.tsx` - Tour finder CTA
-- `category-nav.tsx` - Category navigation
-- Tests: `category-nav.test.tsx`
+**Home Components (12 components, Phase 11 Redesign):**
+- `hero-section.tsx` - Simplified hero with Allura script label, single CTA
+- `trust-signals.tsx` - Light background stats (licensed guides, trusted %, years, happy %)
+- `video-section.tsx` - 2-col video (left) + text (right), lazy YouTube embed
+- `tours-carousel.tsx` - CSS scroll-snap carousel (mobile), 3-col grid (desktop)
+- `tour-card.tsx` - Individual tour card with price, rating, metadata
+- `seasonal-tabs.tsx` - 4 seasonal tabs (Winter/Spring/Summer/Autumn) with image + text
+- `guides-section.tsx` - 3-col grid of expert guides
+- `guide-card.tsx` - Circular photo + name/role
+- `blog-section.tsx` - 3 blog preview cards
+- `blog-card.tsx` - Individual blog card with category, excerpt, read more
+- `newsletter-signup.tsx` - Email subscription form
+- `testimonials.tsx` - Carousel of reviews (unchanged)
+- Tests: `hero-section.test.tsx`, `tours-carousel.test.tsx`, `seasonal-tabs.test.tsx`, `newsletter-signup.test.tsx` (4 new files, Phase 11)
+- **Removed:** `category-nav.tsx`, `why-choose-us.tsx`, `find-tour-cta.tsx`, `featured-tours.tsx` (4 files, Phase 11)
 
 **Tour Components (15+ components):**
 - `tour-card.tsx` - Individual tour card
@@ -557,7 +563,7 @@ npm run payload          # Payload CLI
 npm run payload:generate-types  # Generate TS types from schema
 ```
 
-## Current State (Phase 08.1 - Complete, Excel Import/Export included)
+## Current State (Phase 11 - Complete, Homepage Redesign + Test Coverage)
 
 ### Completed Phases
 - Phase 01: Foundation ✅
@@ -571,6 +577,8 @@ npm run payload:generate-types  # Generate TS types from schema
 - Phase 08.5: Concierge Wizard ✅
 - Phase 09.5: Guide Profiles ✅
 - Phase 10: Accessibility + SEO ✅
+- Phase 11: Performance Optimization ✅
+- Phase 11.1: Homepage Redesign (Stepi Style) ✅
 
 ### Phase 08.1 Deliverables
 - Bokun API client with HMAC-SHA256 authentication
@@ -617,6 +625,23 @@ npm run payload:generate-types  # Generate TS types from schema
 - **Web Vitals:** useReportWebVitals hook + POST /api/analytics/vitals with rate limiting (60 req/min)
 - **Lighthouse CI:** lighthouserc.js config + GitHub Actions workflow for monitoring
 - **Testing:** 21 new unit tests (600 total, 100% pass rate)
+
+### Phase 11.1 Deliverables (2026-03-01, Homepage Redesign - Stepi Style)
+- **Brand Colors:** Primary navy (#1E3A5F) → dark charcoal (#252525); secondary gold (#C4A052) → warm gold (#DBC078)
+- **Hero Section:** Simplified—removed parallax, floating images, dual CTA; added Allura script font
+- **5 New Sections:**
+  - Video section (lazy YouTube embed, 2-col desktop/stacked mobile)
+  - Tours carousel (CSS scroll-snap mobile, 3-col grid desktop)
+  - Seasonal tabs (4 tabs with image/text per season)
+  - Guides section (3-col circular photos + name/role)
+  - Blog preview (3 hardcoded cards with read more links)
+  - Newsletter signup (email form with success state)
+- **4 Components Removed:** CategoryNav, WhyChooseUs, FindTourCta, FeaturedTours
+- **Trust Signals Restyled:** Light background, dark text, 4 stats with coral icons
+- **Test Results:** 769/769 tests pass
+- **Code Review:** 7/10 score; critical issues fixed (CSP, blog Link, ARIA tabs)
+- **Build:** Next.js production build passes without errors
+- **Responsive:** Verified mobile (375px), tablet (768px), desktop (1024px+)
 
 ### Phase 12 Deliverables (2026-02-21)
 - **Test Coverage:** 1009 total unit tests (444 new tests), 90%+ coverage across both workspaces
@@ -691,10 +716,11 @@ npm run payload:generate-types  # Generate TS types from schema
 | **09.5** | Guide Profiles | ✅ Complete |
 | **10** | Accessibility + SEO | ✅ Complete |
 | **11** | Performance Optimization | ✅ Complete |
+| **11.1** | Homepage Redesign (Stepi Style) | ✅ Complete |
 | **09** | Groups & WhatsApp | Pending |
 | **12** | Documentation + Deployment | Planned |
 
 ---
 
-**Last Updated:** February 21, 2026
-**Document Status:** Phase 12 Complete (Unit Test Coverage Improvement: 600→1009 tests, 52%→90%+ coverage)
+**Last Updated:** March 1, 2026
+**Document Status:** Phase 11.1 Complete (Homepage Redesign: Stepi Style, Brand Recolor, 5 New Sections, 4 Components Removed, 769/769 Tests Pass)
