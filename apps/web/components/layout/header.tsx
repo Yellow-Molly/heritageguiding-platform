@@ -95,7 +95,7 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
               href={item.href}
               className={cn(
                 'text-base font-medium transition-colors hover:opacity-80',
-                showSolidStyle ? 'text-[#2D3748]' : 'text-white text-shadow-sm'
+                showSolidStyle ? 'text-[var(--color-text)]' : 'text-white text-shadow-sm'
               )}
             >
               {t(item.key)}
@@ -110,7 +110,7 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
               disabled={isPending}
               className={cn(
                 'flex items-center gap-1 text-sm font-medium transition-colors disabled:opacity-50',
-                showSolidStyle ? 'text-[#2D3748]' : 'text-white text-shadow-sm'
+                showSolidStyle ? 'text-[var(--color-text)]' : 'text-white text-shadow-sm'
               )}
               aria-label="Select language"
               aria-expanded={isLangMenuOpen}
@@ -158,7 +158,7 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
         <button
           className={cn(
             'flex h-10 w-10 items-center justify-center rounded-lg md:hidden',
-            showSolidStyle ? 'text-[#1E3A5F]' : 'text-white text-shadow-sm'
+            showSolidStyle ? 'text-primary' : 'text-white text-shadow-sm'
           )}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}

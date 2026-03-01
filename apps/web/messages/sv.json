@@ -21,15 +21,16 @@
     "title": "Private Tours - Upptäck Stockholms Historia",
     "description": "Upptäck Stockholm med expertvägledning. Privata och gruppturer på svenska, engelska och tyska.",
     "hero": {
-      "title": "Upptäck Stockholms Rika Kulturarv",
-      "subtitle": "Expertguidningar som förmedlar stadens historia och kultur",
+      "tagline": "Premiuma Kulturarvsvandringar",
+      "title": "Upptäck Stockholms Dolda Kulturarv",
+      "subtitle": "Expertledda turer som avslöjar århundraden av svensk historia och kultur",
       "cta": "Utforska våra turer",
-      "findTour": "Hitta Din Tur",
       "imageAlt": "Panoramabild av Gamla Stan i Stockholm vid solnedgång"
     },
     "featured": {
+      "tagline": "Populära Upplevelser",
       "title": "Utvalda Turer",
-      "subtitle": "Våra mest älskade kulturarvsupplevelser",
+      "subtitle": "Upptäck våra mest älskade kulturarvsupplevelser, noggrant utformade för att avslöja Stockholms rika historia och kultur.",
       "viewAll": "Se alla turer"
     },
     "trust": {
@@ -51,8 +52,49 @@
       "description": "I över 15 år har vi kopplat resenärer med Stockholms rika historia."
     },
     "testimonials": {
+      "tagline": "Omdömen",
       "title": "Vad Våra Gäster Säger",
-      "subtitle": "Ta inte bara vårt ord för det"
+      "subtitle": "Ta inte bara vårt ord för det. Hör från resenärer som upplevt magin i våra kulturarvsvandringar."
+    },
+    "video": {
+      "tagline": "Se Det I Verkligheten",
+      "title": "Se Vår Video",
+      "description": "Upplev Stockholms magi genom våra expertguidars ögon. Från medeltida gator till kungliga palats, varje tur berättar en unik historia.",
+      "cta": "Bläddra Bland Turer",
+      "playButton": "Spela video",
+      "iframeTitle": "Private Tours Stockholm introduktionsvideo",
+      "thumbnailAlt": "Förhandsgranskning av Stockholms kulturarvsturer"
+    },
+    "seasonal": {
+      "tagline": "Fyra Årstider, Oändliga Berättelser",
+      "title": "Res Året Runt",
+      "cta": "Boka Denna Säsong",
+      "winter": {
+        "title": "Vinterunderlandsturer",
+        "description": "Upplev Stockholms förtrollande vinterlandskap. Mysiga vandringsturer genom snötäckta gator, levande ljus vid historiska platser och varma fikapauser.",
+        "imageAlt": "Snöiga Gamla Stan i Stockholm på vintern"
+      },
+      "spring": {
+        "title": "Våruppvakningsturer",
+        "description": "Se Stockholm vakna till liv med körsbärsblom och längre dagar. Perfekt väder för att utforska parker, strandpromenader och utomhusattraktioner.",
+        "imageAlt": "Stockholms körsbärsblom på våren"
+      },
+      "summer": {
+        "title": "Sommarens Kulturarvsturer",
+        "description": "Njut av midnattssolen och det livliga stadslivet. Ö-hopping, utsikter från tak och Stockholms skärgård och historiska platser i full prakt.",
+        "imageAlt": "Stockholms strandlinje i sommarens solsken"
+      },
+      "autumn": {
+        "title": "Höstfärgsturer",
+        "description": "Gyllene löv ramar in Stockholms vackraste landmärken. Färre folkmassor, frisk luft och stadens mest fotogeniska säsong.",
+        "imageAlt": "Stockholms höstfärger längs vattnet"
+      }
+    },
+    "guides": {
+      "tagline": "Dina Lokala Experter",
+      "title": "Möt Våra Expertguider",
+      "ariaLabel": "Möt våra guider",
+      "viewAll": "Möt Alla Guider"
     },
     "findTour": {
       "title": "Hitta Din Perfekta Tur",
@@ -123,11 +165,62 @@
     "thankYou": "Tack för din bokning!"
   },
   "footer": {
-    "about": "Om Private Tours",
-    "contact": "Kontakta oss",
-    "privacy": "Integritetspolicy",
-    "terms": "Villkor",
-    "copyright": "© 2026 Private Tours. Alla rättigheter förbehållna."
+    "newsletter": {
+      "title": "Håll dig uppdaterad",
+      "subtitle": "Prenumerera för att få exklusiva erbjudanden och kulturarvsinsikter.",
+      "placeholder": "Ange din e-post",
+      "button": "Prenumerera"
+    },
+    "brand": {
+      "name": "Private Tours",
+      "description": "Upptäck Stockholms rika historia med expertledda kulturarvsvandringar. Licensierade guider, autentiska upplevelser, oförglömliga minnen."
+    },
+    "columns": {
+      "tours": {
+        "title": "Turer",
+        "links": {
+          "gamlastan": "Gamla Stan-vandring",
+          "royal": "Kungliga Slottet-upplevelse",
+          "vasa": "Vasamuseet på djupet",
+          "private": "Privata turer",
+          "group": "Gruppturer"
+        }
+      },
+      "support": {
+        "title": "Support",
+        "links": {
+          "faq": "Vanliga frågor",
+          "contact": "Kontakta oss",
+          "booking": "Bokningshjälp",
+          "cancellation": "Avbokningspolicy",
+          "accessibility": "Tillgänglighet"
+        }
+      },
+      "company": {
+        "title": "Företag",
+        "links": {
+          "about": "Om oss",
+          "guides": "Våra guider",
+          "blog": "Blogg",
+          "careers": "Karriär",
+          "press": "Press"
+        }
+      },
+      "legal": {
+        "title": "Juridiskt",
+        "links": {
+          "terms": "Villkor",
+          "privacy": "Integritetspolicy",
+          "cookies": "Cookiepolicy"
+        }
+      }
+    },
+    "contact": {
+      "address": "Gamla Stan, Stockholm, Sverige",
+      "hours": "Dagligen 9:00 - 18:00 CET"
+    },
+    "copyright": "© {year} Private Tours. Alla rättigheter förbehållna.",
+    "language": "Språk"
   },
   "meta": {
     "defaultTitle": "Private Tours - Stockholm Turer",

@@ -3,20 +3,20 @@
 /* ==========================================
    Private Tours Design System
    Premium Stockholm Heritage Tour Platform
-   Inspired by TripFreak with Aurora UI + Motion-Driven patterns
+   Inspired by Stepi Travel with Dark+Gold palette
    ========================================== */
 
 /* Design Tokens */
 :root {
-  /* Primary Colors - Deep Navy Blue */
-  --color-primary: #1E3A5F;
-  --color-primary-light: #2A4A75;
-  --color-primary-dark: #152B47;
+  /* Primary Colors - Dark Charcoal */
+  --color-primary: #252525;
+  --color-primary-light: #3e3e3e;
+  --color-primary-dark: #0b0b0b;
 
-  /* Secondary Colors - Rich Gold */
-  --color-secondary: #C4A052;
-  --color-secondary-light: #D4B462;
-  --color-secondary-dark: #B49042;
+  /* Secondary Colors - Warm Gold */
+  --color-secondary: #DBC078;
+  --color-secondary-light: #e6d3a0;
+  --color-secondary-dark: #d0ad50;
 
   /* Accent Colors - Coral Orange */
   --color-accent: #E67E5A;

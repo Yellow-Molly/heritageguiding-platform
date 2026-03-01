@@ -21,15 +21,16 @@
     "title": "Private Tours - Entdecken Sie Stockholms Geschichte",
     "description": "Entdecken Sie Stockholm mit fachkundiger Führung. Private und Gruppentouren auf Schwedisch, Englisch und Deutsch.",
     "hero": {
-      "title": "Entdecken Sie Stockholms Reiches Erbe",
-      "subtitle": "Expertengeführte Touren, die die Geschichte und Kultur der Stadt lebendig machen",
+      "tagline": "Premium Kulturerbe-Touren",
+      "title": "Entdecken Sie Stockholms Verborgenes Erbe",
+      "subtitle": "Expertengeführte Touren, die Jahrhunderte schwedischer Geschichte und Kultur enthüllen",
       "cta": "Unsere Touren entdecken",
-      "findTour": "Finden Sie Ihre Tour",
       "imageAlt": "Panoramablick auf Stockholms Altstadt bei Sonnenuntergang"
     },
     "featured": {
+      "tagline": "Beliebte Erlebnisse",
       "title": "Empfohlene Touren",
-      "subtitle": "Unsere beliebtesten Kulturerbe-Erlebnisse",
+      "subtitle": "Entdecken Sie unsere beliebtesten Kulturerbe-Erlebnisse, sorgfältig gestaltet, um Stockholms reiche Geschichte und Kultur zu enthüllen.",
       "viewAll": "Alle Touren anzeigen"
     },
     "trust": {
@@ -51,8 +52,49 @@
       "description": "Seit über 15 Jahren verbinden wir Reisende mit Stockholms reicher Geschichte."
     },
     "testimonials": {
+      "tagline": "Erfahrungsberichte",
       "title": "Was Unsere Gäste Sagen",
-      "subtitle": "Verlassen Sie sich nicht nur auf unser Wort"
+      "subtitle": "Verlassen Sie sich nicht nur auf unser Wort. Hören Sie von Reisenden, die die Magie unserer Kulturerbe-Touren erlebt haben."
+    },
+    "video": {
+      "tagline": "Erleben Sie Es Selbst",
+      "title": "Unser Video Ansehen",
+      "description": "Erleben Sie die Magie Stockholms durch die Augen unserer Expertenguides. Von mittelalterlichen Straßen bis zu königlichen Palästen erzählt jede Tour eine einzigartige Geschichte.",
+      "cta": "Touren Durchsuchen",
+      "playButton": "Video abspielen",
+      "iframeTitle": "Private Tours Stockholm Einführungsvideo",
+      "thumbnailAlt": "Vorschau der Stockholmer Kulturerbe-Tour"
+    },
+    "seasonal": {
+      "tagline": "Vier Jahreszeiten, Endlose Geschichten",
+      "title": "Das Ganze Jahr Reisen",
+      "cta": "Diese Saison Buchen",
+      "winter": {
+        "title": "Winterwunderland-Touren",
+        "description": "Erleben Sie Stockholms bezaubernde Winterlandschaft. Gemütliche Wandertouren durch schneebedeckte Straßen, kerzenbeleuchtete historische Stätten und warme Fika-Pausen.",
+        "imageAlt": "Verschneite Stockholmer Altstadt im Winter"
+      },
+      "spring": {
+        "title": "Frühlingserwachenstouren",
+        "description": "Sehen Sie, wie Stockholm mit Kirschblüten und längeren Tagen zum Leben erwacht. Perfektes Wetter zum Erkunden von Parks, Uferpromenaden und Außenattraktionen.",
+        "imageAlt": "Stockholmer Kirschblüten im Frühling"
+      },
+      "summer": {
+        "title": "Sommer-Kulturerbe-Touren",
+        "description": "Genießen Sie die Mitternachtssonne und das pulsierende Stadtleben. Inselhüpfen, Dachterrassen und die volle Pracht von Stockholms Schärengarten und historischen Stätten.",
+        "imageAlt": "Stockholmer Uferfront im Sommersonnenschein"
+      },
+      "autumn": {
+        "title": "Herbstfarben-Touren",
+        "description": "Goldene Blätter rahmen Stockholms schönste Sehenswürdigkeiten ein. Weniger Menschenmassen, frische Luft und die fotogenste Jahreszeit der Stadt.",
+        "imageAlt": "Stockholmer Herbstfarben am Wasser"
+      }
+    },
+    "guides": {
+      "tagline": "Ihre Lokalen Experten",
+      "title": "Lernen Sie Unsere Expertenguides Kennen",
+      "ariaLabel": "Unsere Guides kennenlernen",
+      "viewAll": "Alle Guides Kennenlernen"
     },
     "findTour": {
       "title": "Finden Sie Ihre Perfekte Tour",
@@ -123,11 +165,62 @@
     "thankYou": "Vielen Dank für Ihre Buchung!"
   },
   "footer": {
-    "about": "Über Private Tours",
-    "contact": "Kontaktieren Sie uns",
-    "privacy": "Datenschutzerklärung",
-    "terms": "Geschäftsbedingungen",
-    "copyright": "© 2026 Private Tours. Alle Rechte vorbehalten."
+    "newsletter": {
+      "title": "Bleiben Sie informiert",
+      "subtitle": "Abonnieren Sie für exklusive Angebote und Einblicke ins Kulturerbe.",
+      "placeholder": "E-Mail-Adresse eingeben",
+      "button": "Abonnieren"
+    },
+    "brand": {
+      "name": "Private Tours",
+      "description": "Entdecken Sie Stockholms reiche Geschichte mit fachkundig geführten Kulturerbe-Touren. Lizenzierte Guides, authentische Erlebnisse, unvergessliche Erinnerungen."
+    },
+    "columns": {
+      "tours": {
+        "title": "Touren",
+        "links": {
+          "gamlastan": "Gamla Stan Rundgang",
+          "royal": "Königliches Schloss Erlebnis",
+          "vasa": "Vasa-Museum Vertiefung",
+          "private": "Private Touren",
+          "group": "Gruppentouren"
+        }
+      },
+      "support": {
+        "title": "Hilfe",
+        "links": {
+          "faq": "Häufige Fragen",
+          "contact": "Kontakt",
+          "booking": "Buchungshilfe",
+          "cancellation": "Stornierungsrichtlinien",
+          "accessibility": "Barrierefreiheit"
+        }
+      },
+      "company": {
+        "title": "Unternehmen",
+        "links": {
+          "about": "Über uns",
+          "guides": "Unsere Guides",
+          "blog": "Blog",
+          "careers": "Karriere",
+          "press": "Presse"
+        }
+      },
+      "legal": {
+        "title": "Rechtliches",
+        "links": {
+          "terms": "Nutzungsbedingungen",
+          "privacy": "Datenschutz",
+          "cookies": "Cookie-Richtlinie"
+        }
+      }
+    },
+    "contact": {
+      "address": "Gamla Stan, Stockholm, Schweden",
+      "hours": "Täglich 9:00 - 18:00 CET"
+    },
+    "copyright": "© {year} Private Tours. Alle Rechte vorbehalten.",
+    "language": "Sprache"
   },
   "meta": {
     "defaultTitle": "Private Tours - Stockholm Touren",

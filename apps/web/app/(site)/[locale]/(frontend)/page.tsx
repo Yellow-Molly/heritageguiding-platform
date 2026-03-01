@@ -4,11 +4,11 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { HeroSection } from '@/components/home/hero-section'
 import { TrustSignals } from '@/components/home/trust-signals'
+import { VideoSection } from '@/components/home/video-section'
 import { FeaturedTours } from '@/components/home/featured-tours'
-import { FindTourCta } from '@/components/home/find-tour-cta'
-import { WhyChooseUs } from '@/components/home/why-choose-us'
 import { Testimonials } from '@/components/home/testimonials'
-import { CategoryNav } from '@/components/home/category-nav'
+import { SeasonalTabs } from '@/components/home/seasonal-tabs'
+import { MeetOurGuides } from '@/components/home/meet-our-guides'
 import { TravelAgencySchema } from '@/components/seo'
 
 /**
@@ -60,11 +60,11 @@ export default async function HomePage() {
       <main>
         <HeroSection />
         <TrustSignals />
+        <VideoSection />
         <FeaturedTours />
-        <FindTourCta />
-        <CategoryNav />
-        <WhyChooseUs />
         <Testimonials />
+        <SeasonalTabs />
+        <MeetOurGuides />
       </main>
       <Footer />
     </>

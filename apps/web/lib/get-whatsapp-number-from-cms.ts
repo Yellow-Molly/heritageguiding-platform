@@ -7,9 +7,9 @@ export async function getWhatsAppNumber(): Promise<string | null> {
     const { getPayload } = await import('payload')
     const config = (await import('@payload-config')).default
     const payload = await getPayload({ config })
-    // @ts-expect-error - site-settings global is defined in CMS config at runtime
-    const settingsData = await payload.findGlobal({ slug: 'site-settings' })
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const settingsData = await payload.findGlobal({ slug: 'site-settings' })
+    // site-settings global is defined in CMS config at runtime
     const whatsappNumberValue = (settingsData as any)?.whatsappNumber
     if (typeof whatsappNumberValue === 'string') {
       return whatsappNumberValue

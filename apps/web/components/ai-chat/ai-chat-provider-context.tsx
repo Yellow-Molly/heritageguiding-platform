@@ -57,7 +57,7 @@ export function AiChatProvider({ children }: { children: ReactNode }) {
       <BubblaVWidget
         ref={widgetRef}
         websiteId={BUBBLAV_SITE_ID}
-        bubbleColor="#1E3A5F"
+        bubbleColor="#252525"
         bubbleIconColor="#ffffff"
         botName="Heritage AI"
         textboxPlaceholder="Ask me anything about Stockholm tours..."

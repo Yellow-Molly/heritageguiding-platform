@@ -21,15 +21,16 @@
     "title": "Private Tours - Discover Stockholm's History",
     "description": "Discover Stockholm with expert guidance. Private and group tours in Swedish, English, and German.",
     "hero": {
-      "title": "Discover Stockholm's Rich Heritage",
-      "subtitle": "Expert-led tours that bring the city's history and culture to life",
+      "tagline": "Premium Heritage Tours",
+      "title": "Discover Stockholm's Hidden Heritage",
+      "subtitle": "Expert-led tours revealing centuries of Swedish history and culture",
       "cta": "Explore Our Tours",
-      "findTour": "Find Your Tour",
       "imageAlt": "Panoramic view of Stockholm Old Town at sunset"
     },
     "featured": {
+      "tagline": "Popular Experiences",
       "title": "Featured Tours",
-      "subtitle": "Our most beloved heritage experiences",
+      "subtitle": "Discover our most beloved heritage experiences, carefully crafted to reveal Stockholm's rich history and culture.",
       "viewAll": "View All Tours"
     },
     "trust": {
@@ -51,8 +52,49 @@
       "description": "For over 15 years, we've been connecting travelers with Stockholm's rich history."
     },
     "testimonials": {
+      "tagline": "Testimonials",
       "title": "What Our Guests Say",
-      "subtitle": "Don't just take our word for it"
+      "subtitle": "Don't just take our word for it. Hear from travelers who've experienced the magic of our heritage tours."
+    },
+    "video": {
+      "tagline": "See It In Action",
+      "title": "Watch Our Video",
+      "description": "Experience the magic of Stockholm through the eyes of our expert guides. From medieval streets to royal palaces, every tour tells a unique story.",
+      "cta": "Browse Tours",
+      "playButton": "Play video",
+      "iframeTitle": "Private Tours Stockholm introduction video",
+      "thumbnailAlt": "Stockholm heritage tour preview"
+    },
+    "seasonal": {
+      "tagline": "Four Seasons, Endless Stories",
+      "title": "Travel All Year Round",
+      "cta": "Book This Season",
+      "winter": {
+        "title": "Winter Wonderland Tours",
+        "description": "Experience Stockholm's enchanting winter landscape. Cozy walking tours through snow-covered streets, candlelit historic sites, and warm fika breaks.",
+        "imageAlt": "Snowy Stockholm Old Town in winter"
+      },
+      "spring": {
+        "title": "Spring Awakening Tours",
+        "description": "Watch Stockholm come alive with cherry blossoms and longer days. Perfect weather for exploring parks, waterfront promenades, and outdoor attractions.",
+        "imageAlt": "Stockholm cherry blossoms in spring"
+      },
+      "summer": {
+        "title": "Summer Heritage Tours",
+        "description": "Enjoy the midnight sun and vibrant city life. Island hopping, rooftop views, and the full splendor of Stockholm's archipelago and historic sites.",
+        "imageAlt": "Stockholm waterfront in summer sunshine"
+      },
+      "autumn": {
+        "title": "Autumn Colors Tours",
+        "description": "Golden leaves frame Stockholm's most beautiful landmarks. Quieter crowds, crisp air, and the city's most photogenic season.",
+        "imageAlt": "Stockholm autumn colors along the waterfront"
+      }
+    },
+    "guides": {
+      "tagline": "Your Local Experts",
+      "title": "Meet Our Expert Guides",
+      "ariaLabel": "Meet our guides",
+      "viewAll": "Meet All Guides"
     },
     "findTour": {
       "title": "Find Your Perfect Tour",
@@ -123,11 +165,62 @@
     "thankYou": "Thank you for your booking!"
   },
   "footer": {
-    "about": "About Private Tours",
-    "contact": "Contact Us",
-    "privacy": "Privacy Policy",
-    "terms": "Terms & Conditions",
-    "copyright": "© 2026 Private Tours. All rights reserved."
+    "newsletter": {
+      "title": "Stay Updated",
+      "subtitle": "Subscribe to receive exclusive offers and heritage insights.",
+      "placeholder": "Enter your email",
+      "button": "Subscribe"
+    },
+    "brand": {
+      "name": "Private Tours",
+      "description": "Discover Stockholm's rich history with expert-led heritage tours. Licensed guides, authentic experiences, unforgettable memories."
+    },
+    "columns": {
+      "tours": {
+        "title": "Tours",
+        "links": {
+          "gamlastan": "Gamla Stan Walking Tour",
+          "royal": "Royal Palace Experience",
+          "vasa": "Vasa Museum Deep Dive",
+          "private": "Private Tours",
+          "group": "Group Tours"
+        }
+      },
+      "support": {
+        "title": "Support",
+        "links": {
+          "faq": "FAQ",
+          "contact": "Contact Us",
+          "booking": "Booking Help",
+          "cancellation": "Cancellation Policy",
+          "accessibility": "Accessibility"
+        }
+      },
+      "company": {
+        "title": "Company",
+        "links": {
+          "about": "About Us",
+          "guides": "Our Guides",
+          "blog": "Blog",
+          "careers": "Careers",
+          "press": "Press"
+        }
+      },
+      "legal": {
+        "title": "Legal",
+        "links": {
+          "terms": "Terms of Service",
+          "privacy": "Privacy Policy",
+          "cookies": "Cookie Policy"
+        }
+      }
+    },
+    "contact": {
+      "address": "Gamla Stan, Stockholm, Sweden",
+      "hours": "Daily 9:00 - 18:00 CET"
+    },
+    "copyright": "© {year} Private Tours. All rights reserved.",
+    "language": "Language"
   },
   "meta": {
     "defaultTitle": "Private Tours - Stockholm Tours",
