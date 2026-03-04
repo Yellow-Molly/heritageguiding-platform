@@ -2,47 +2,33 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { Clock, Users, Star, ArrowRight } from 'lucide-react'
+import { Star, ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { formatDuration, formatPrice } from '@/lib/utils'
-import { getButtonClassName } from '@/components/ui/button'
+import { formatPrice } from '@/lib/utils'
+import { Link } from '@/i18n/navigation'
 
 interface Tour {
   id: string
   title: string
-  description: string
   image: string
-  duration: number
-  maxCapacity: number
   rating: number
   reviewCount: number
   price: number
-  featured?: boolean
 }
 
 const featuredTours: Tour[] = [
   {
     id: 'gamla-stan-walking',
     title: 'Gamla Stan Walking Tour',
-    description:
-      'Explore the medieval streets of Old Town, discover hidden courtyards, and hear tales of Swedish royalty.',
     image: 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=800&q=80',
-    duration: 120,
-    maxCapacity: 15,
     rating: 4.9,
     reviewCount: 234,
     price: 495,
-    featured: true,
   },
   {
     id: 'royal-palace',
     title: 'Royal Palace Experience',
-    description:
-      'Step inside one of Europe\'s largest palaces and uncover 500 years of Swedish monarchy history.',
     image: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80',
-    duration: 150,
-    maxCapacity: 12,
     rating: 4.8,
     reviewCount: 189,
     price: 695,
@@ -50,11 +36,7 @@ const featuredTours: Tour[] = [
   {
     id: 'vasa-museum',
     title: 'Vasa Museum Deep Dive',
-    description:
-      'Marvel at the world\'s only preserved 17th-century ship and learn about its dramatic story.',
     image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80',
-    duration: 90,
-    maxCapacity: 20,
     rating: 4.9,
     reviewCount: 312,
     price: 545,
@@ -87,77 +69,48 @@ function TourCard({ tour, index }: { tour: Tour; index: number }) {
     <div
       ref={cardRef}
       className={cn(
-        'group relative overflow-hidden rounded-2xl bg-white shadow-[var(--shadow-card)] transition-all duration-300',
-        'hover:shadow-[var(--shadow-card-hover)] hover:scale-[1.02]',
+        'group min-w-[260px] snap-start overflow-hidden rounded-xl border border-gray-100 bg-white transition-shadow duration-300',
+        'shadow-sm hover:shadow-md',
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       )}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      {/* Image Container */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+      {/* Portrait image */}
+      <div className="relative aspect-[3/4] overflow-hidden">
         <Image
           src={tour.image}
           alt={tour.title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes="(max-width: 768px) 80vw, (max-width: 1024px) 50vw, 33vw"
         />
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+      </div>
 
-        {/* Featured Badge */}
-        {tour.featured && (
-          <div className="absolute left-4 top-4 rounded-full bg-[var(--color-secondary)] px-3 py-1 text-xs font-semibold text-[var(--color-primary-dark)]">
-            Featured
+      {/* Card info — clean, below image */}
+      <div className="p-5">
+        <h3 className="mb-2 font-serif text-lg font-semibold text-[#252525]">
+          {tour.title}
+        </h3>
+
+        {/* Rating + Price row */}
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-1">
+            <Star className="h-4 w-4 fill-[#DBC078] text-[#DBC078]" />
+            <span className="text-sm font-medium text-[#252525]">{tour.rating}</span>
+            <span className="text-xs text-[#3e3e3e]">({tour.reviewCount})</span>
           </div>
-        )}
-
-        {/* Price Badge */}
-        <div className="absolute bottom-4 right-4 rounded-lg bg-white/95 px-3 py-1.5 shadow-md backdrop-blur-sm">
-          <span className="text-sm font-bold text-[var(--color-primary)]">
+          <span className="text-sm font-bold text-[#d0ad50]">
             From {formatPrice(tour.price)}
           </span>
         </div>
 
-        {/* Quick Info Overlay */}
-        <div className="absolute bottom-4 left-4 flex items-center gap-3 text-white">
-          <div className="flex items-center gap-1">
-            <Clock className="h-4 w-4" />
-            <span className="text-sm">{formatDuration(tour.duration)}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Users className="h-4 w-4" />
-            <span className="text-sm">Max {tour.maxCapacity}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-6">
-        {/* Rating */}
-        <div className="mb-2 flex items-center gap-2">
-          <div className="flex items-center gap-1">
-            <Star className="h-4 w-4 fill-[var(--color-secondary)] text-[var(--color-secondary)]" />
-            <span className="font-medium text-[var(--color-text)]">{tour.rating}</span>
-          </div>
-          <span className="text-sm text-[var(--color-text-muted)]">({tour.reviewCount} reviews)</span>
-        </div>
-
-        {/* Title */}
-        <h3 className="mb-2 font-serif text-xl font-semibold text-[var(--color-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-          {tour.title}
-        </h3>
-
-        {/* Description */}
-        <p className="mb-4 line-clamp-2 text-sm text-[var(--color-text-muted)]">{tour.description}</p>
-
-        {/* CTA */}
+        {/* Read More link */}
         <Link
           href={`/tours/${tour.id}`}
-          className="inline-flex items-center gap-2 font-medium text-[var(--color-accent)] transition-colors hover:text-[var(--color-accent-dark)]"
+          className="inline-flex items-center gap-1 text-sm font-medium text-[#d0ad50] transition-colors hover:underline"
         >
-          View Details
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          Read More
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
     </div>
@@ -166,34 +119,33 @@ function TourCard({ tour, index }: { tour: Tour; index: number }) {
 
 export function FeaturedTours() {
   return (
-    <section className="bg-[var(--color-background)] py-20 md:py-28" aria-label="Featured tours">
+    <section className="bg-white py-16 md:py-24" aria-label="Featured tours">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
-        <div className="mb-12 text-center md:mb-16">
-          <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
-            Popular Experiences
-          </span>
-          <h2 className="mb-4 font-serif text-3xl font-bold text-[var(--color-primary)] md:text-4xl lg:text-5xl">
-            Featured Tours
+        <div className="mb-12 text-center">
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-widest text-[#d0ad50]">
+            Most Popular Tours
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-[var(--color-text-muted)]">
-            Discover our most beloved heritage experiences, carefully crafted to reveal
-            Stockholm&apos;s rich history and culture.
+          <p className="font-serif text-3xl font-bold text-[#252525] md:text-4xl">
+            Discover our most loved Swedish experiences
           </p>
         </div>
 
-        {/* Tours Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {/* Desktop: 3-col grid | Mobile: horizontal scroll */}
+        <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
           {featuredTours.map((tour, index) => (
             <TourCard key={tour.id} tour={tour} index={index} />
           ))}
         </div>
 
-        {/* View All CTA */}
-        <div className="mt-12 text-center md:mt-16">
-          <Link href="/tours" className={getButtonClassName('outline-dark', 'lg')}>
+        {/* View All Tours CTA */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/tours"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-[#d0ad50] px-8 py-3 font-medium text-[#d0ad50] transition-all hover:bg-[#d0ad50] hover:text-white"
+          >
             View All Tours
-            <ArrowRight className="ml-2 h-5 w-5" />
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react'
 import Image from 'next/image'
-import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react'
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface Testimonial {
@@ -40,7 +40,7 @@ const testimonials: Testimonial[] = [
     location: 'Oslo, Norway',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200',
     rating: 5,
-    text: 'Perfect for families! My kids were engaged the entire time. The Vasa Museum came alive through our guide\'s storytelling. We learned so much!',
+    text: "Perfect for families! My kids were engaged the entire time. The Vasa Museum came alive through our guide's storytelling. We learned so much!",
     tourName: 'Vasa Museum Deep Dive',
   },
   {
@@ -49,7 +49,7 @@ const testimonials: Testimonial[] = [
     location: 'San Francisco, USA',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200',
     rating: 5,
-    text: 'Worth every penny. The private tour allowed us to explore at our own pace with expert guidance. Stockholm\'s history is fascinating!',
+    text: "Worth every penny. The private tour allowed us to explore at our own pace with expert guidance. Stockholm's history is fascinating!",
     tourName: 'Private City Tour',
   },
 ]
@@ -77,47 +77,38 @@ export function Testimonials() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
+        if (entry.isIntersecting) setIsVisible(true)
       },
       { threshold: 0.2 }
     )
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
   }, [])
 
   return (
     <section
       ref={sectionRef}
-      className="bg-[var(--color-background)] py-20 md:py-28"
+      className="bg-[#F7F7F5] py-16 md:py-24"
       aria-label="Customer testimonials"
     >
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div
           className={cn(
-            'mb-12 text-center md:mb-16 transition-all duration-700',
+            'mb-12 text-center transition-all duration-700',
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           )}
         >
-          <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-widest text-[#d0ad50]">
             Testimonials
-          </span>
-          <h2 className="mb-4 font-serif text-3xl font-bold text-[var(--color-primary)] md:text-4xl lg:text-5xl">
-            What Our Guests Say
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-[var(--color-text-muted)]">
-            Don&apos;t just take our word for it. Hear from travelers who&apos;ve experienced the
-            magic of our heritage tours.
+          <p className="font-serif text-3xl font-bold text-[#252525] md:text-4xl">
+            What Travelers Say
           </p>
         </div>
 
-        {/* Testimonials Carousel */}
+        {/* Testimonial Card */}
         <div
           className={cn(
             'relative mx-auto max-w-4xl transition-all duration-700 delay-200',
@@ -126,12 +117,8 @@ export function Testimonials() {
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
-          {/* Quote Icon */}
-          <Quote className="absolute -left-4 -top-4 h-16 w-16 text-[var(--color-primary)]/10 md:-left-8 md:-top-8 md:h-24 md:w-24" />
-
-          {/* Testimonial Card */}
-          <div className="relative overflow-hidden rounded-2xl bg-white p-8 shadow-[var(--shadow-card)] md:p-12">
-            <div className="min-h-[280px]">
+          <div className="relative overflow-hidden rounded-xl bg-white p-8 shadow-sm md:p-12">
+            <div className="min-h-[260px]">
               {testimonials.map((testimonial, index) => (
                 <div
                   key={testimonial.id}
@@ -145,7 +132,7 @@ export function Testimonials() {
                   )}
                   aria-hidden={index !== currentIndex}
                 >
-                  {/* Rating */}
+                  {/* Rating — gold stars */}
                   <div className="mb-6 flex gap-1">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
@@ -153,7 +140,7 @@ export function Testimonials() {
                         className={cn(
                           'h-5 w-5',
                           i < testimonial.rating
-                            ? 'fill-[var(--color-secondary)] text-[var(--color-secondary)]'
+                            ? 'fill-[#DBC078] text-[#DBC078]'
                             : 'text-gray-300'
                         )}
                       />
@@ -161,29 +148,24 @@ export function Testimonials() {
                   </div>
 
                   {/* Quote */}
-                  <blockquote className="mb-8 font-serif text-xl italic text-[var(--color-text)] md:text-2xl">
+                  <blockquote className="mb-8 font-serif text-xl italic text-[#252525] md:text-2xl">
                     &ldquo;{testimonial.text}&rdquo;
                   </blockquote>
 
                   {/* Author */}
                   <div className="flex items-center gap-4">
-                    <div className="relative h-14 w-14 overflow-hidden rounded-full">
+                    <div className="relative h-12 w-12 overflow-hidden rounded-full">
                       <Image
                         src={testimonial.avatar}
                         alt={testimonial.name}
                         fill
                         className="object-cover"
-                        sizes="56px"
+                        sizes="48px"
                       />
                     </div>
                     <div>
-                      <p className="font-semibold text-[var(--color-primary)]">{testimonial.name}</p>
-                      <p className="text-sm text-[var(--color-text-muted)]">
-                        {testimonial.location}
-                      </p>
-                      <p className="text-sm font-medium text-[var(--color-accent)]">
-                        {testimonial.tourName}
-                      </p>
+                      <p className="font-semibold text-[#252525]">{testimonial.name}</p>
+                      <p className="text-sm text-[#3e3e3e]">{testimonial.location}</p>
                     </div>
                   </div>
                 </div>
@@ -191,17 +173,16 @@ export function Testimonials() {
             </div>
           </div>
 
-          {/* Navigation Buttons */}
+          {/* Navigation */}
           <div className="mt-8 flex items-center justify-center gap-4">
             <button
               onClick={prevSlide}
-              className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[var(--color-border)] bg-white text-[var(--color-primary)] transition-all hover:border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#252525] transition-all hover:border-[#d0ad50] hover:text-[#d0ad50]"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
 
-            {/* Dots */}
             <div className="flex gap-2">
               {testimonials.map((_, index) => (
                 <button
@@ -210,8 +191,8 @@ export function Testimonials() {
                   className={cn(
                     'h-2.5 rounded-full transition-all',
                     index === currentIndex
-                      ? 'w-8 bg-[var(--color-accent)]'
-                      : 'w-2.5 bg-[var(--color-border)] hover:bg-[var(--color-text-muted)]'
+                      ? 'w-8 bg-[#d0ad50]'
+                      : 'w-2.5 bg-gray-300 hover:bg-[#DBC078]'
                   )}
                   aria-label={`Go to testimonial ${index + 1}`}
                   aria-current={index === currentIndex}
@@ -221,7 +202,7 @@ export function Testimonials() {
 
             <button
               onClick={nextSlide}
-              className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[var(--color-border)] bg-white text-[var(--color-primary)] transition-all hover:border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#252525] transition-all hover:border-[#d0ad50] hover:text-[#d0ad50]"
               aria-label="Next testimonial"
             >
               <ChevronRight className="h-5 w-5" />

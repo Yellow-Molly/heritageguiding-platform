@@ -4,11 +4,12 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { HeroSection } from '@/components/home/hero-section'
 import { TrustSignals } from '@/components/home/trust-signals'
+import { VideoHighlight } from '@/components/home/video-highlight'
 import { FeaturedTours } from '@/components/home/featured-tours'
-import { FindTourCta } from '@/components/home/find-tour-cta'
-import { WhyChooseUs } from '@/components/home/why-choose-us'
+import { SeasonalCta } from '@/components/home/seasonal-cta'
+import { GuidesPreview } from '@/components/home/guides-preview'
 import { Testimonials } from '@/components/home/testimonials'
-import { CategoryNav } from '@/components/home/category-nav'
+import { LatestPosts } from '@/components/home/latest-posts'
 import { TravelAgencySchema } from '@/components/seo'
 
 /**
@@ -48,7 +49,7 @@ export async function generateMetadata({
 
 /**
  * Homepage - Server Component for optimal SEO and performance.
- * Renders all homepage sections with structured data.
+ * Section order: Hero → TrustSignals → Video → Tours → SeasonalCta → Guides → Testimonials → Blog → Footer
  */
 export default async function HomePage() {
   return (
@@ -60,11 +61,12 @@ export default async function HomePage() {
       <main>
         <HeroSection />
         <TrustSignals />
+        <VideoHighlight />
         <FeaturedTours />
-        <FindTourCta />
-        <CategoryNav />
-        <WhyChooseUs />
+        <SeasonalCta />
+        <GuidesPreview />
         <Testimonials />
+        <LatestPosts />
       </main>
       <Footer />
     </>
