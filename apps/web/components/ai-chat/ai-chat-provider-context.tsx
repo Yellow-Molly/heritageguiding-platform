@@ -5,10 +5,11 @@ import {
   useContext,
   useState,
   useCallback,
+  useEffect,
   useRef,
   type ReactNode,
 } from 'react'
-import { BubblaVWidget, useBubblaVEvent, type BubblaVWidgetRef } from '@bubblav/ai-chatbot-react'
+import { BubblaVWidget, type BubblaVWidgetRef } from '@bubblav/ai-chatbot-react'
 
 /** Bubblav site ID from dashboard */
 const BUBBLAV_SITE_ID = 'c09d8606-f999-4dd4-8220-0e924e741636'
@@ -37,9 +38,29 @@ export function AiChatProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
   const widgetRef = useRef<BubblaVWidgetRef>(null)
 
-  // Sync state when widget is opened/closed via its own UI
-  useBubblaVEvent('widget_opened', () => setIsOpen(true))
-  useBubblaVEvent('widget_closed', () => setIsOpen(false))
+  // Sync state when widget is opened/closed via its own bubble UI
+  // Note: useBubblaVEvent not available in ESM bundle, use window.BubblaV directly
+  useEffect(() => {
+    const onOpen = () => setIsOpen(true)
+    const onClose = () => setIsOpen(false)
+    const trySubscribe = () => {
+      const bv = typeof window !== 'undefined' ? (window as Record<string, unknown>).BubblaV as { on?: (e: string, cb: () => void) => void; off?: (e: string, cb: () => void) => void } | undefined : undefined
+      if (bv?.on) {
+        bv.on('widget_opened', onOpen)
+        bv.on('widget_closed', onClose)
+        return () => { bv.off?.('widget_opened', onOpen); bv.off?.('widget_closed', onClose) }
+      }
+    }
+    const cleanup = trySubscribe()
+    if (cleanup) return cleanup
+    // Widget script may not be loaded yet; poll briefly
+    const timer = setInterval(() => {
+      const c = trySubscribe()
+      if (c) { clearInterval(timer); }
+    }, 200)
+    const timeout = setTimeout(() => clearInterval(timer), 5000)
+    return () => { clearInterval(timer); clearTimeout(timeout) }
+  }, [])
 
   const openChat = useCallback(() => {
     widgetRef.current?.open()
