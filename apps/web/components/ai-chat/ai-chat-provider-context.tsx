@@ -8,7 +8,7 @@ import {
   useRef,
   type ReactNode,
 } from 'react'
-import { BubblaVWidget, type BubblaVWidgetRef } from '@bubblav/ai-chatbot-react'
+import { BubblaVWidget, useBubblaVEvent, type BubblaVWidgetRef } from '@bubblav/ai-chatbot-react'
 
 /** Bubblav site ID from dashboard */
 const BUBBLAV_SITE_ID = 'c09d8606-f999-4dd4-8220-0e924e741636'
@@ -36,6 +36,10 @@ export function useAiChat(): AiChatContextValue {
 export function AiChatProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
   const widgetRef = useRef<BubblaVWidgetRef>(null)
+
+  // Sync state when widget is opened/closed via its own UI
+  useBubblaVEvent('widget_opened', () => setIsOpen(true))
+  useBubblaVEvent('widget_closed', () => setIsOpen(false))
 
   const openChat = useCallback(() => {
     widgetRef.current?.open()

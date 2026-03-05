@@ -95,10 +95,10 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.bubblav.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              "img-src 'self' data: https://*.blob.vercel-storage.com https://images.unsplash.com",
+              "img-src 'self' data: https://*.blob.vercel-storage.com https://images.unsplash.com https://*.privatetours.se",
               "font-src 'self' data: https://fonts.gstatic.com",
               "frame-src 'self' https://www.bubblav.com https://www.youtube.com https://www.youtube-nocookie.com",
-              "connect-src 'self' https://www.bubblav.com https://*.bubblav.com",
+              "connect-src 'self' https://www.bubblav.com https://*.bubblav.com https://*.ably.net https://*.ably-realtime.com wss://*.ably.net wss://*.ably-realtime.com",
             ].join('; '),
           },
           {
