@@ -6,13 +6,27 @@ import {
   useState,
   useCallback,
   useEffect,
-  useRef,
   type ReactNode,
 } from 'react'
-import { BubblaVWidget, type BubblaVWidgetRef } from '@bubblav/ai-chatbot-react'
+import { BubblaVWidget } from '@bubblav/ai-chatbot-react'
 
 /** Bubblav site ID from dashboard */
 const BUBBLAV_SITE_ID = 'c09d8606-f999-4dd4-8220-0e924e741636'
+
+/** Type for the global BubblaV API exposed by widget.js */
+interface BubblaVGlobal {
+  open: () => void
+  close: () => void
+  on: (event: string, cb: () => void) => void
+  off: (event: string, cb: () => void) => void
+}
+
+/** Get the global BubblaV API (loaded by widget.js script) */
+function getBubblaV(): BubblaVGlobal | undefined {
+  return typeof window !== 'undefined'
+    ? (window as unknown as { BubblaV?: BubblaVGlobal }).BubblaV
+    : undefined
+}
 
 interface AiChatContextValue {
   isOpen: boolean
@@ -31,24 +45,22 @@ export function useAiChat(): AiChatContextValue {
 
 /**
  * Provider that manages AI chat widget state and renders BubblaV widget.
- * The widget bubble is always visible (bottom-left to avoid WhatsApp conflict).
- * "Ask AI" buttons throughout the site also open the widget via openChat().
+ * Uses window.BubblaV global API directly (the ref-based approach has ESM
+ * compatibility issues with Turbopack on Vercel).
  */
 export function AiChatProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
-  const widgetRef = useRef<BubblaVWidgetRef>(null)
 
   // Sync state when widget is opened/closed via its own bubble UI
-  // Note: useBubblaVEvent not available in ESM bundle, use window.BubblaV directly
   useEffect(() => {
     const onOpen = () => setIsOpen(true)
     const onClose = () => setIsOpen(false)
     const trySubscribe = () => {
-      const bv = typeof window !== 'undefined' ? (window as Record<string, unknown>).BubblaV as { on?: (e: string, cb: () => void) => void; off?: (e: string, cb: () => void) => void } | undefined : undefined
+      const bv = getBubblaV()
       if (bv?.on) {
         bv.on('widget_opened', onOpen)
         bv.on('widget_closed', onClose)
-        return () => { bv.off?.('widget_opened', onOpen); bv.off?.('widget_closed', onClose) }
+        return () => { bv.off('widget_opened', onOpen); bv.off('widget_closed', onClose) }
       }
     }
     const cleanup = trySubscribe()
@@ -56,19 +68,19 @@ export function AiChatProvider({ children }: { children: ReactNode }) {
     // Widget script may not be loaded yet; poll briefly
     const timer = setInterval(() => {
       const c = trySubscribe()
-      if (c) { clearInterval(timer); }
+      if (c) clearInterval(timer)
     }, 200)
     const timeout = setTimeout(() => clearInterval(timer), 5000)
     return () => { clearInterval(timer); clearTimeout(timeout) }
   }, [])
 
   const openChat = useCallback(() => {
-    widgetRef.current?.open()
+    getBubblaV()?.open()
     setIsOpen(true)
   }, [])
 
   const closeChat = useCallback(() => {
-    widgetRef.current?.close()
+    getBubblaV()?.close()
     setIsOpen(false)
   }, [])
 
@@ -76,7 +88,6 @@ export function AiChatProvider({ children }: { children: ReactNode }) {
     <AiChatContext.Provider value={{ isOpen, openChat, closeChat }}>
       {children}
       <BubblaVWidget
-        ref={widgetRef}
         websiteId={BUBBLAV_SITE_ID}
         bubbleColor="#1E3A5F"
         bubbleIconColor="#ffffff"
