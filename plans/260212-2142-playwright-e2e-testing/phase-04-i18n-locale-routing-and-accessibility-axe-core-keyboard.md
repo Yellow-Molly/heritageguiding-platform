@@ -31,9 +31,9 @@ Test i18n locale routing for all 3 locales (sv/en/de), language switcher navigat
 - Locale routing: visiting `/sv/tours`, `/en/tours`, `/de/tours` loads correct locale
 - Language switcher: clicking switcher navigates to same page in new locale
 - Cookie persistence: after switching locale, NEXT_LOCALE cookie is set
-- Content localization: homepage heading differs across sv/en/de
+- Content localization: tour catalog heading differs across sv/en/de (homepage no longer has h1)
 - Hreflang: all pages have `<link rel="alternate" hreflang="...">` for sv/en/de + x-default
-- Axe audits: homepage, tours, tour detail, find-tour, group-booking, about-us, faq -- all pass WCAG 2.1 AA
+- Axe audits: homepage, tours, tour detail, find-tour, group-booking, guides, guide detail, about-us, faq -- all pass WCAG 2.1 AA
 - Keyboard navigation: Tab through wizard options, Enter/Space to select, Escape closes modals
 
 ### Non-Functional
@@ -74,7 +74,7 @@ e2e/
 | `i18n.ts` | Locale configuration |
 | `i18n/routing.ts` | Route definitions per locale |
 | `components/language-switcher/` | Language switcher UI |
-| `app/middleware.ts` | next-intl locale detection + NEXT_LOCALE cookie |
+| `app/proxy.ts` | next-intl locale detection + NEXT_LOCALE cookie (renamed from middleware.ts in Next.js 16) |
 | `components/wizard/wizard-option-card.tsx` | aria-pressed attribute |
 | `components/booking/group-inquiry-modal.tsx` | Dialog close on Escape |
 
@@ -138,12 +138,12 @@ test.describe('i18n - Locale Routing', () => {
 import { test, expect } from '@playwright/test'
 
 test.describe('i18n - Content Localization', () => {
-  test('homepage heading differs across locales', async ({ page }) => {
-    // Collect h1 text from each locale
+  test('tour catalog heading differs across locales', async ({ page }) => {
+    // Homepage no longer has h1 (hero title removed). Use tour catalog heading instead.
     const headings: Record<string, string> = {}
 
     for (const locale of ['sv', 'en', 'de']) {
-      await page.goto(`/${locale}/`)
+      await page.goto(`/${locale}/tours`)
       await page.waitForLoadState('networkidle')
       const h1 = page.getByRole('heading', { level: 1 })
       headings[locale] = (await h1.textContent()) || ''
@@ -211,6 +211,7 @@ const PAGES_TO_AUDIT = [
   { name: 'Tour Catalog', path: '/tours' },
   { name: 'Concierge Wizard', path: '/find-tour' },
   { name: 'Group Booking', path: '/group-booking' },
+  { name: 'Guides Listing', path: '/guides' },
   { name: 'About Us', path: '/about-us' },
   { name: 'FAQ', path: '/faq' },
   { name: 'Terms', path: '/terms' },
@@ -248,6 +249,19 @@ test.describe('Accessibility - WCAG 2.1 AA Audit', () => {
     const firstTour = page.locator('a[href*="/tours/"]').first()
     if (await firstTour.isVisible()) {
       await firstTour.click()
+      await page.waitForLoadState('networkidle')
+
+      const results = await makeAxeBuilder().analyze()
+      expect(results.violations).toEqual([])
+    }
+  })
+
+  test('guide detail page passes axe-core audit', async ({ page, makeAxeBuilder }) => {
+    // Navigate to first guide from listing
+    await page.goto(`/${LOCALE}/guides`)
+    const firstGuide = page.locator('a[href*="/guides/"]').first()
+    if (await firstGuide.isVisible()) {
+      await firstGuide.click()
       await page.waitForLoadState('networkidle')
 
       const results = await makeAxeBuilder().analyze()
@@ -380,9 +394,9 @@ test.describe('Accessibility - Keyboard Navigation', () => {
 - All 3 locales (sv/en/de) load correctly for homepage and tours
 - Language switcher navigates to correct locale
 - NEXT_LOCALE cookie persists locale choice
-- Homepage heading differs across at least 2 of 3 locales
+- Tour catalog heading differs across at least 2 of 3 locales
 - Hreflang tags present for sv/en/de/x-default on all pages
-- All 8 static pages + tour detail pass axe-core WCAG 2.1 AA
+- All 9 static pages + tour detail + guide detail pass axe-core WCAG 2.1 AA
 - Wizard options selectable via Tab + Enter/Space
 - Modal dismissable via Escape key
 - All tests pass on Chromium, Firefox, WebKit

@@ -7,10 +7,11 @@
 
 ## Overview
 - **Date**: 2026-02-12
+- **Completed**: 2026-03-14
 - **Priority**: CRITICAL (blocks all other phases)
-- **Effort**: 3h
-- **Implementation Status**: Pending
-- **Review Status**: Not started
+- **Effort**: 3h (actual)
+- **Implementation Status**: **Complete**
+- **Review Status**: Passed (36/36 tests, all browsers)
 
 Install Playwright + axe-core in root `e2e/` directory. Create playwright.config.ts targeting STAGING_URL, POM base class, custom test fixtures (locale, a11y), and smoke tests verifying all pages load without 4xx/5xx.
 
@@ -29,7 +30,7 @@ Install Playwright + axe-core in root `e2e/` directory. Create playwright.config
 - BasePage class with goto(), waitForPageLoad(), locale-aware navigation
 - Custom test fixture extending base test with `locale` and `makeAxeBuilder` fixtures
 - Staging data discovery helper (fetch real tour slugs from staging for parameterized tests)
-- Smoke tests: all 10 customer-facing routes + /admin return 200
+- Smoke tests: all 12 customer-facing routes + /admin return 200
 
 ### Non-Functional
 - All config files under 200 lines
@@ -87,7 +88,7 @@ npx playwright install
 ### 2. Create e2e/package.json
 ```json
 {
-  "name": "heritageguiding-e2e",
+  "name": "privatetours-e2e",
   "private": true,
   "scripts": {
     "test": "playwright test",
@@ -257,6 +258,33 @@ export async function getFirstTourSlug(page: Page, locale = 'en'): Promise<strin
   if (slugs.length === 0) throw new Error('No tours found on staging')
   return slugs[0]
 }
+
+/** Discover real guide slugs from staging /en/guides page */
+export async function discoverGuideSlugs(page: Page, locale = 'en'): Promise<string[]> {
+  await page.goto(`/${locale}/guides`)
+  await page.waitForLoadState('networkidle')
+
+  const links = await page.locator('a[href*="/guides/"]').all()
+  const slugs: string[] = []
+
+  for (const link of links) {
+    const href = await link.getAttribute('href')
+    if (href) {
+      const match = href.match(/\/guides\/([^/?#]+)/)
+      if (match && !slugs.includes(match[1])) {
+        slugs.push(match[1])
+      }
+    }
+  }
+  return slugs
+}
+
+/** Get the first available guide slug from staging */
+export async function getFirstGuideSlug(page: Page, locale = 'en'): Promise<string> {
+  const slugs = await discoverGuideSlugs(page, locale)
+  if (slugs.length === 0) throw new Error('No guides found on staging')
+  return slugs[0]
+}
 ```
 
 ### 8. Create e2e/page-objects/navigation.ts
@@ -294,6 +322,7 @@ const CUSTOMER_ROUTES = [
   '/tours',
   '/find-tour',
   '/group-booking',
+  '/guides',
   '/about-us',
   '/faq',
   '/terms',
@@ -315,6 +344,27 @@ test.describe('Smoke Tests - All Pages Load', () => {
     const response = await page.goto('/admin')
     expect(response?.status()).toBeLessThan(400)
   })
+
+  test(`GET /${LOCALE}/guides/[slug] returns 200 (dynamic)`, async ({ page }) => {
+    // Navigate to guides listing and follow first guide link
+    await page.goto(`/${LOCALE}/guides`)
+    const firstGuide = page.locator('a[href*="/guides/"]').first()
+    if (await firstGuide.isVisible()) {
+      const response = await firstGuide.click()
+      await page.waitForLoadState('networkidle')
+      await expect(page).toHaveURL(/\/guides\/[^/]+/)
+    }
+  })
+
+  test(`GET /${LOCALE}/tours/[slug] returns 200 (dynamic)`, async ({ page }) => {
+    await page.goto(`/${LOCALE}/tours`)
+    const firstTour = page.locator('a[href*="/tours/"]').first()
+    if (await firstTour.isVisible()) {
+      await firstTour.click()
+      await page.waitForLoadState('networkidle')
+      await expect(page).toHaveURL(/\/tours\/[^/]+/)
+    }
+  })
 })
 ```
 
@@ -329,26 +379,54 @@ e2e/node_modules/
 ```
 
 ## Todo List
-- [ ] Create `e2e/` directory structure
-- [ ] Write `e2e/package.json` with Playwright + axe-core deps
-- [ ] Write `e2e/tsconfig.json` with strict mode
-- [ ] Write `e2e/playwright.config.ts` with 3 browser projects
-- [ ] Write `e2e/fixtures/base-page.ts` BasePage POM class
-- [ ] Write `e2e/fixtures/test-fixtures.ts` with locale + axe fixtures
-- [ ] Write `e2e/fixtures/staging-data.ts` tour slug discovery
-- [ ] Write `e2e/page-objects/navigation.ts` nav POM
-- [ ] Write `e2e/tests/smoke/all-pages-load.spec.ts`
-- [ ] Update `.gitignore` with Playwright artifacts
-- [ ] Run `npm install` in e2e/ and `npx playwright install`
-- [ ] Verify smoke tests pass against staging
+- [x] Create `e2e/` directory structure
+- [x] Write `e2e/package.json` with Playwright + axe-core deps (version 1.48+, 4.9+)
+- [x] Write `e2e/tsconfig.json` with strict mode and path aliases
+- [x] Write `e2e/playwright.config.ts` with 3 browser projects, blob+github reporters
+- [x] Write `e2e/fixtures/base-page.ts` BasePage POM class (locale-aware nav)
+- [x] Write `e2e/fixtures/test-fixtures.ts` with locale + axe-core fixtures
+- [x] Write `e2e/fixtures/staging-data.ts` tour/guide slug discovery (dynamic, no hardcoding)
+- [x] Write `e2e/page-objects/navigation.ts` nav POM (header, footer, lang switcher)
+- [x] Write `e2e/tests/smoke/all-pages-load.spec.ts` (12 tests + 2 dynamic routes)
+- [x] Update `.gitignore` with Playwright artifacts
+- [x] Run `npm install` in e2e/ and `npx playwright install`
+- [x] Verify smoke tests pass (36/36 passed, 30.3s, 3 browsers)
 
 ## Success Criteria
-- `npx playwright test` runs from `e2e/` directory
-- All 3 browsers configured and installable
-- Smoke tests verify all 10 routes return 200
-- BasePage provides locale-aware navigation
-- Custom fixture provides axe-core builder
-- staging-data.ts discovers real tour slugs dynamically
+- [x] `npx playwright test` runs from `e2e/` directory
+- [x] All 3 browsers configured and installable
+- [x] Smoke tests verify all 12 customer-facing routes + /admin return 200
+- [x] BasePage provides locale-aware navigation (+ locale param in fixtures)
+- [x] Custom fixture provides axe-core builder (wcag2a/aa/21a/aa tags)
+- [x] staging-data.ts discovers real tour/guide slugs dynamically
+
+## Completion Summary
+
+**Delivered 2026-03-14**
+
+### Files Created
+- `e2e/package.json` — privatetours-e2e package (Playwright 1.48+, axe-core 4.9+, TypeScript)
+- `e2e/tsconfig.json` — Strict mode, ES2022 target, path aliases for @fixtures/* and @page-objects/*
+- `e2e/playwright.config.ts` — 3 browsers (chromium, firefox, webkit), blob+github CI reporters, html+json local, 2 workers
+- `e2e/fixtures/base-page.ts` — BasePage POM with goto(), waitForPageLoad(), locale-aware nav
+- `e2e/fixtures/test-fixtures.ts` — Custom test fixture extending base with locale and axe-core builder
+- `e2e/fixtures/staging-data.ts` — Dynamic tour/guide slug discovery (no hardcoded data)
+- `e2e/page-objects/navigation.ts` — NavigationPage POM (header, footer, language switcher locators)
+- `e2e/tests/smoke/all-pages-load.spec.ts` — 12 smoke tests covering 9 static routes + admin + 2 dynamic routes
+
+### Files Modified
+- `.gitignore` — Added e2e test artifacts (test-results/, playwright-report/, blob-report/)
+
+### Test Results
+- **36/36 tests passed** (12 tests × 3 browsers)
+- **Runtime**: 30.3s total
+- **Configuration**: 2 local workers, domcontentloaded waits (networkidle blocked by BubblaV WebSocket)
+- **All browsers**: Chromium, Firefox, WebKit
+
+### Issues Resolved During Implementation
+1. **networkidle hang** — Replaced with `domcontentloaded` (BubblaV WebSocket prevents network idle)
+2. **TypeScript fixture syntax** — Converted `option: true` to function-based fixture pattern
+3. **Dynamic test skip** — Changed silent pass to `test.skip()` when CMS empty (transparent test tracking)
 
 ## Risk Assessment
 | Risk | Likelihood | Mitigation |

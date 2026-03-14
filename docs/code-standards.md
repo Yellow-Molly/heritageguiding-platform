@@ -187,6 +187,21 @@ try {
 - Use real database (test environment)
 - Clean up fixtures after tests
 
+### E2E Tests (Phase 01)
+- **Framework:** Playwright 1.48.0 (`e2e/` directory)
+- **Setup:** `e2e/playwright.config.ts` configures 3 browsers (chromium, firefox, webkit)
+- **Fixtures:** Reusable fixtures in `e2e/fixtures/` for shared test setup
+- **Page Objects:** Navigation models in `e2e/page-objects/` for maintainability
+- **Test Location:** `e2e/tests/smoke/` for smoke/critical path tests
+- **Accessibility:** @axe-core/playwright integration for WCAG compliance
+- **Commands:**
+  - `npm run test` - Run all E2E tests
+  - `npm run test:headed` - Run with browser visible
+  - `npm run test:ui` - Interactive UI mode
+  - `npm run test:[chromium|firefox|webkit]` - Test specific browser
+- **Reporters:** HTML, JSON (local), blob + GitHub (CI)
+- **Focus:** Validate critical user journeys across browsers (page loads, navigation, dynamic routes)
+
 ### Testing Data-Fetching Functions
 ```typescript
 describe('fetchTourById', () => {

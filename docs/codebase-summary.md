@@ -26,6 +26,11 @@ privatetours-platform/
 │   ├── cms/               # Payload CMS 3.0 config + collections
 │   ├── ui/                # Shared UI components
 │   └── types/             # Shared TypeScript definitions
+├── e2e/                   # Playwright E2E tests (Phase 01 - smoke tests)
+│   ├── tests/             # Test specs
+│   ├── fixtures/          # Reusable test fixtures
+│   ├── page-objects/      # Page object models
+│   └── playwright.config.ts # Configuration for 3 browsers (chromium, firefox, webkit)
 ├── docs/                  # Project documentation
 ├── plans/                 # Development plans & reports
 └── .github/workflows/     # CI/CD automation
@@ -78,6 +83,8 @@ privatetours-platform/
 ### Testing
 - `vitest@^4.0.17` - Unit testing (1009 tests, 90%+ coverage across both workspaces)
 - React Testing Library - Component testing
+- `@playwright/test@^1.48.0` - E2E testing (smoke tests across chromium, firefox, webkit)
+- `@axe-core/playwright@^4.9.0` - Accessibility testing
 - ESLint 9 flat config (no --ext flag needed)
 
 ## Project Structure Details
@@ -548,9 +555,17 @@ npm run type-check       # TypeScript validation
 npm run format           # Auto-format code
 
 # Testing
-npm test                 # Run tests
+npm test                 # Run unit tests (Vitest)
 npm test -- --watch     # Watch mode
 npm test -- --coverage  # Coverage report
+
+# E2E Testing (from e2e/ directory)
+cd e2e
+npm run test             # Run Playwright smoke tests (all browsers)
+npm run test:headed      # Run with browser visible
+npm run test:ui          # Interactive UI mode
+npm run test:[browser]   # Test specific browser (chromium|firefox|webkit)
+npm run report           # View HTML test report
 
 # Payload CMS
 npm run payload          # Payload CLI

@@ -429,13 +429,16 @@ Backups: Daily automated backups
 **Stages:**
 1. **Lint & Type Check** (all PRs)
 2. **Build** (after lint passes)
-3. **Deploy** (main branch only - not yet implemented)
+3. **Unit Tests** - Vitest (1009 tests, 90%+ coverage)
+4. **E2E Tests** - Playwright smoke tests across 3 browsers (chromium, firefox, webkit) from `e2e/` directory (Phase 01)
+5. **Deploy** (main branch only - not yet implemented)
 
 **Environment Variables:**
 - `DATABASE_URL` - PostgreSQL connection
 - `PAYLOAD_SECRET` - Payload encryption key
 - `NEXT_PUBLIC_URL` - Public site URL
 - `BLOB_READ_WRITE_TOKEN` - Vercel Blob token
+- `STAGING_URL` - Staging environment for E2E tests (optional, defaults to localhost:3000)
 
 ## Security Architecture
 

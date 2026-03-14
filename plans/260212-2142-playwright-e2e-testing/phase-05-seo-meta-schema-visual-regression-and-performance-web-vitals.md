@@ -4,7 +4,7 @@
 - **Parent Plan**: [plan.md](./plan.md)
 - **Depends On**: [Phase 01](./phase-01-foundation-setup-config-pom-base-smoke-tests.md), [Phase 02](./phase-02-customer-journey-browse-search-filter-booking.md)
 - **Research**: [i18n, Bokun, SEO, Performance](./research/researcher-02-i18n-bokun-seo-testing.md)
-- **Codebase**: apps/web/components/seo/ (faq-schema, travel-agency-schema, tour-schema)
+- **Codebase**: apps/web/components/seo/ (faq-schema, travel-agency-schema, tour-schema, guide-detail-schema, guide-list-schema, about-schema)
 
 ## Overview
 - **Date**: 2026-02-12
@@ -16,9 +16,10 @@
 Test SEO meta tags (title, description, OpenGraph, Twitter Card) and JSON-LD structured data (TravelAgency, TourProduct/TouristAttraction, FAQPage) across key pages. Visual regression via `toHaveScreenshot()` at 3 viewports (375px mobile, 768px tablet, 1920px desktop). Performance via Core Web Vitals assertions (LCP < 2.5s, CLS < 0.1, FCP < 1.8s). WhatsApp floating button visibility and localStorage dismiss.
 
 ## Key Insights
-- SEO components: `faq-schema.tsx`, `travel-agency-schema.tsx`, `tour-schema.tsx`
+- SEO components: `faq-schema.tsx`, `travel-agency-schema.tsx`, `tour-schema.tsx`, `guide-detail-schema.tsx`, `guide-list-schema.tsx`, `about-schema.tsx`
 - JSON-LD rendered as `<script type="application/ld+json">` in page head
-- Homepage uses TravelAgency schema, tour detail uses TouristAttraction, FAQ uses FAQPage
+- Homepage uses TravelAgency schema, tour detail uses TouristAttraction, FAQ uses FAQPage, guide detail uses Person, about uses AboutPage
+- New `llms.txt` and `llms-full.txt` endpoints added (since Feb 12)
 - OpenGraph tags: og:title, og:description, og:image, og:url
 - Visual regression uses `toHaveScreenshot()` with `maxDiffPixels: 100`, `threshold: 0.2`
 - Animations must be disabled for consistent screenshots
@@ -74,6 +75,9 @@ e2e/
 | `components/seo/faq-schema.tsx` | FAQPage JSON-LD structure |
 | `components/seo/travel-agency-schema.tsx` | TravelAgency JSON-LD structure |
 | `components/seo/tour-schema.tsx` | TouristAttraction JSON-LD structure |
+| `components/seo/guide-detail-schema.tsx` | Person JSON-LD for guide detail (new since Feb 12) |
+| `components/seo/guide-list-schema.tsx` | ItemList JSON-LD for guides listing (new since Feb 12) |
+| `components/seo/about-schema.tsx` | AboutPage JSON-LD (new since Feb 12) |
 | `lib/seo.ts` | SEO utilities, hreflang generation |
 | `components/shared/whatsapp-floating-button.tsx` | WhatsApp button, DISMISS_KEY = 'hg-whatsapp-dismissed' |
 
@@ -143,6 +147,26 @@ test.describe('SEO - Meta Tags', () => {
     await page.goto(`/${LOCALE}/faq`)
     const title = await page.title()
     expect(title.length).toBeGreaterThan(0)
+  })
+
+  test('guides listing has meta tags', async ({ page }) => {
+    await page.goto(`/${LOCALE}/guides`)
+    const title = await page.title()
+    expect(title.length).toBeGreaterThan(0)
+    const description = await page.locator('meta[name="description"]').getAttribute('content')
+    expect(description).toBeTruthy()
+  })
+
+  test('llms.txt endpoint returns content', async ({ page }) => {
+    const response = await page.goto('/llms.txt')
+    expect(response?.status()).toBe(200)
+    const text = await page.locator('body').textContent()
+    expect(text?.length).toBeGreaterThan(0)
+  })
+
+  test('llms-full.txt endpoint returns content', async ({ page }) => {
+    const response = await page.goto('/llms-full.txt')
+    expect(response?.status()).toBe(200)
   })
 })
 ```
@@ -215,6 +239,24 @@ test.describe('SEO - JSON-LD Schema Markup', () => {
     expect(firstItem.name).toBeTruthy()
     expect(firstItem.acceptedAnswer).toBeTruthy()
   })
+
+  test('guide detail page has Person schema', async ({ page }) => {
+    // Navigate to first guide from listing
+    await page.goto(`/${LOCALE}/guides`)
+    const firstGuide = page.locator('a[href*="/guides/"]').first()
+    if (await firstGuide.isVisible()) {
+      await firstGuide.click()
+      await page.waitForLoadState('networkidle')
+
+      const schemas = await getJsonLdSchemas(page)
+      const guideSchema = schemas.find(
+        (s: Record<string, unknown>) => s['@type'] === 'Person'
+      )
+      expect(guideSchema).toBeTruthy()
+      expect(guideSchema['@context']).toContain('schema.org')
+      expect(guideSchema.name).toBeTruthy()
+    }
+  })
 })
 ```
 
@@ -233,6 +275,7 @@ const VIEWPORTS = [
 const PAGES = [
   { name: 'homepage', path: '/' },
   { name: 'tour-catalog', path: '/tours' },
+  { name: 'guides-listing', path: '/guides' },
   { name: 'about-us', path: '/about-us' },
   { name: 'faq', path: '/faq' },
 ]
@@ -497,7 +540,7 @@ test.describe('Admin - Smoke Test', () => {
 - TravelAgency JSON-LD on homepage with name + @context
 - TouristAttraction/Product JSON-LD on tour detail with name + description
 - FAQPage JSON-LD on /faq with mainEntity array of Question items
-- Visual screenshots captured at 375px, 768px, 1920px for 4 pages
+- Visual screenshots captured at 375px, 768px, 1920px for 5 pages (homepage, tours, guides, about, faq)
 - LCP < 2.5s, CLS < 0.1, FCP < 1.8s on homepage (Chromium)
 - WhatsApp button visible, dismissable, localStorage persists dismiss
 - Admin login page loads with email/password form

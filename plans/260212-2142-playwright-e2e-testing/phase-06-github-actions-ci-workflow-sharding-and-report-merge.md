@@ -206,9 +206,9 @@ Add these secrets in GitHub repo Settings > Secrets and Variables > Actions:
 
 | Secret | Description | Example |
 |--------|-------------|---------|
-| `STAGING_URL` | Staging site base URL | `https://staging.heritageguiding.com` |
-| `PRODUCTION_URL` | Production site base URL | `https://heritageguiding.com` |
-| `ADMIN_EMAIL` | Payload CMS admin email | `admin@heritageguiding.com` |
+| `STAGING_URL` | Staging site base URL | `https://staging.privatetours.com` |
+| `PRODUCTION_URL` | Production site base URL | `https://privatetours.com` |
+| `ADMIN_EMAIL` | Payload CMS admin email | `admin@privatetours.com` |
 | `ADMIN_PASSWORD` | Payload CMS admin password | `(secure password)` |
 
 ### 3. Verify playwright.config.ts reporter for CI

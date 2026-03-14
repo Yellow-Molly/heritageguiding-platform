@@ -13,7 +13,7 @@
 - **Implementation Status**: Pending
 - **Review Status**: Not started
 
-Test the primary customer journey: Homepage hero/featured tours -> tour catalog (search, category filter, sort, pagination) -> tour detail page (gallery, facts, guide card, reviews, Bokun widget presence). Bokun iframe validated for presence/src only (cross-origin prevents deep interaction).
+Test the primary customer journey: Homepage hero/CTA -> tour catalog (search, category filter, sort, pagination) -> tour detail page (gallery, facts, guide card, reviews, Bokun widget presence). Homepage hero no longer has a heading (removed 2026-03-14). "Find Your Tour" CTAs replaced with "Ask AI" BubblaV chat. Bokun iframe validated for presence/src only (cross-origin prevents deep interaction).
 
 ## Key Insights
 - Tour catalog uses client-side filtering with URL query params (`?categories=history,architecture`)
@@ -27,7 +27,7 @@ Test the primary customer journey: Homepage hero/featured tours -> tour catalog 
 ## Requirements
 
 ### Functional
-- Homepage POM: hero section, featured tours grid, trust signals, testimonials, newsletter CTA
+- Homepage POM: hero section (no heading, CTA links to /tours), featured tours grid, guides preview, trust signals, testimonials, seasonal CTA, video highlight
 - Tour catalog POM: search input, category chips, sort dropdown, pagination, tour grid, empty state
 - Tour detail POM: gallery, facts panel, guide card, reviews, booking section, Bokun iframe
 - Tests: homepage -> catalog navigation, search by text, filter by category, sort, pagination
@@ -70,8 +70,11 @@ e2e/
 ### Existing Reference (apps/web)
 | File | Relevance |
 |------|-----------|
-| `components/home/hero-section.tsx` | Locator hints for hero |
+| `components/home/hero-section.tsx` | Locator hints for hero (no h1 heading, CTA links to /tours) |
 | `components/home/featured-tours.tsx` | Featured tours grid structure |
+| `components/home/guides-preview.tsx` | Guides preview section (new since Feb 12) |
+| `components/home/seasonal-cta.tsx` | Seasonal CTA section (new since Feb 12) |
+| `components/home/video-highlight.tsx` | Video highlight section (new since Feb 12) |
 | `components/tour/tour-catalog-client.tsx` | Client-side filter logic |
 | `components/tour/filter-bar/category-chips.tsx` | Category chip selectors |
 | `components/tour/tour-search.tsx` | Search input structure |
@@ -89,24 +92,27 @@ import { BasePage } from '../fixtures/base-page'
 
 export class HomePage extends BasePage {
   readonly heroSection: Locator
-  readonly heroHeading: Locator
   readonly heroCta: Locator
   readonly featuredToursSection: Locator
   readonly featuredTourCards: Locator
+  readonly guidesPreviewSection: Locator
   readonly trustSignals: Locator
   readonly testimonialsSection: Locator
-  readonly newsletterSection: Locator
+  readonly seasonalCtaSection: Locator
+  readonly videoHighlightSection: Locator
 
   constructor(page: Page, locale = 'en') {
     super(page, locale)
     this.heroSection = page.locator('[data-testid="hero-section"], section').first()
-    this.heroHeading = page.getByRole('heading', { level: 1 })
-    this.heroCta = page.getByRole('link', { name: /tour|explore|discover/i }).first()
+    // Hero no longer has h1 heading (removed 2026-03-14). CTA links to /tours
+    this.heroCta = page.getByRole('link', { name: /tour|explore/i }).first()
     this.featuredToursSection = page.locator('[data-testid="featured-tours"]')
     this.featuredTourCards = page.locator('[data-testid="tour-card"], article').filter({ has: page.getByRole('link') })
+    this.guidesPreviewSection = page.locator('[data-testid="guides-preview"]')
     this.trustSignals = page.locator('[data-testid="trust-signals"]')
     this.testimonialsSection = page.locator('[data-testid="testimonials"]')
-    this.newsletterSection = page.locator('[data-testid="newsletter"]')
+    this.seasonalCtaSection = page.locator('[data-testid="seasonal-cta"]')
+    this.videoHighlightSection = page.locator('[data-testid="video-highlight"]')
   }
 
   async gotoHomepage() {
@@ -219,11 +225,12 @@ import { HomePage } from '../../page-objects/homepage'
 import { TourCatalogPage } from '../../page-objects/tour-catalog'
 
 test.describe('Browse and Discover Tours', () => {
-  test('homepage displays hero, featured tours, and trust signals', async ({ page }) => {
+  test('homepage displays hero CTA, featured tours, and trust signals', async ({ page }) => {
     const home = new HomePage(page)
     await home.gotoHomepage()
 
-    await expect(home.heroHeading).toBeVisible()
+    // Hero no longer has heading text — verify CTA and featured tours instead
+    await expect(home.heroCta).toBeVisible()
     await expect(home.featuredTourCards.first()).toBeVisible()
   })
 
@@ -371,7 +378,7 @@ test.describe('Tour Detail Page and Booking', () => {
 - [ ] Confirm Bokun iframe detection works on tours with bokunExperienceId
 
 ## Success Criteria
-- Homepage tests verify hero, featured tours, navigation to catalog
+- Homepage tests verify hero CTA, featured tours, navigation to catalog (no hero heading)
 - Catalog tests verify search, category filter, URL state persistence, pagination
 - Detail tests verify title, facts, Bokun iframe presence
 - All tests use dynamic slug discovery (no hardcoded tour names)
