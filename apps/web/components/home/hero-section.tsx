@@ -56,13 +56,6 @@ export function HeroSection() {
 
       {/* Hero Content — centered, minimal */}
       <div className="container relative z-20 mx-auto px-4 text-center lg:px-8">
-        <h1
-          className="mb-6 animate-fade-in-up font-serif text-5xl font-bold leading-tight text-white text-shadow-hero md:text-6xl lg:text-7xl xl:text-8xl"
-          style={{ animationDelay: '150ms' }}
-        >
-          {t('home.hero.title')}
-        </h1>
-
         {/* Single CTA — outline white */}
         <div
           className="animate-fade-in-up"
