@@ -28,12 +28,13 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
 
+      # Fresh install resolves correct platform-specific native bindings.
+      # npm ci with a Windows-generated lockfile fails to install Linux
+      # optional deps (@next/swc, @parcel/watcher) due to npm workspace bug.
       - name: Install dependencies
-        run: npm ci
-        working-directory: .
-
-      - name: Install Linux-specific native modules
-        run: npm install --no-save @parcel/watcher-linux-x64-glibc @next/swc-linux-x64-gnu
+        run: |
+          rm -f package-lock.json
+          npm install
         working-directory: .
 
       - name: Build
