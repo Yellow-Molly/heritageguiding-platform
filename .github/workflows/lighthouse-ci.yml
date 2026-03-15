@@ -29,7 +29,11 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+        working-directory: .
+
+      - name: Install Linux-specific native modules
+        run: npm install --no-save @parcel/watcher-linux-x64-glibc @next/swc-linux-x64-gnu
         working-directory: .
 
       - name: Build
