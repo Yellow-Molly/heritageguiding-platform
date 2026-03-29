@@ -5,6 +5,8 @@ import { TourPagination } from './tour-pagination'
 
 interface TourGridProps {
   searchParams: TourFilters
+  /** Locale for content localization */
+  locale?: string
   /** Display mode: grid (default) or list */
   viewMode?: 'grid' | 'list'
 }
@@ -13,8 +15,8 @@ interface TourGridProps {
  * Server component that fetches and displays tours.
  * Handles empty states and pagination.
  */
-export async function TourGrid({ searchParams, viewMode = 'grid' }: TourGridProps) {
-  const { tours, page, totalPages } = await getTours(searchParams)
+export async function TourGrid({ searchParams, locale = 'sv', viewMode = 'grid' }: TourGridProps) {
+  const { tours, page, totalPages } = await getTours(searchParams, locale)
 
   if (tours.length === 0) {
     return <TourEmptyState />

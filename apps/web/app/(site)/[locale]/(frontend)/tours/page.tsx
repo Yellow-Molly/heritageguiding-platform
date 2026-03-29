@@ -36,7 +36,7 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
   // Fetch categories and tours for FilterBar + schema
   const [categories, { tours, total }] = await Promise.all([
     getCategories('theme', locale),
-    getTours(filters),
+    getTours(filters, locale),
   ])
 
   return (
@@ -48,7 +48,7 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
         <section className="container mx-auto px-4 py-6 lg:py-8">
           <TourCatalogClient categories={categories} totalResults={total}>
             <Suspense fallback={<TourGridSkeleton />}>
-              <TourGrid searchParams={filters} />
+              <TourGrid searchParams={filters} locale={locale} />
             </Suspense>
           </TourCatalogClient>
         </section>
