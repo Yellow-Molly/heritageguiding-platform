@@ -45,6 +45,19 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Coming soon redirect — production only (remove after April 2 launch)
+      {
+        source: '/:locale(en|sv)',
+        has: [{ type: 'host', value: 'privatetours.se' }],
+        destination: '/:locale/coming-soon',
+        permanent: false,
+      },
+      {
+        source: '/:locale(en|sv)/:path((?!coming-soon).*)',
+        has: [{ type: 'host', value: 'privatetours.se' }],
+        destination: '/:locale/coming-soon',
+        permanent: false,
+      },
       // Old domain -> new domain (keep for 1+ year for SEO)
       {
         source: '/:path*',
