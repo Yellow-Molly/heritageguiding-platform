@@ -46,6 +46,10 @@ export default buildConfig({
     meta: {
       titleSuffix: '- Private Tours',
     },
+    livePreview: {
+      url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+      collections: ['tours', 'pages'],
+    },
   },
   // Localization for SV/EN/DE support
   localization: {
@@ -81,12 +85,16 @@ export default buildConfig({
     },
   }),
   editor: lexicalEditor(),
-  // Vercel-blob plugin - always enabled, will use local storage fallback if no token
+  // Vercel Blob storage — only enabled when token is available (production/staging)
   plugins: [
-    vercelBlobStorage({
-      enabled: true,
-      collections: { media: true },
-      token: process.env.BLOB_READ_WRITE_TOKEN || '',
-    }),
+    ...(process.env.BLOB_READ_WRITE_TOKEN
+      ? [
+          vercelBlobStorage({
+            enabled: true,
+            collections: { media: true },
+            token: process.env.BLOB_READ_WRITE_TOKEN,
+          }),
+        ]
+      : []),
   ],
 })

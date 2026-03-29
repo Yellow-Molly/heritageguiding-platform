@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.80.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {

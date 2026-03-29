@@ -51,6 +51,13 @@ pnpm-lock.yaml
 .env*
 !.env.example
 
+# import script intermediate data
+data/
+
+# Payload local media uploads (dev only)
+apps/web/media/
+media/
+
 # vercel
 .vercel
 
@@ -93,3 +100,4 @@ apps/web/.claude/
 docs/booking-management-comparison.md
 .claude/
 docx/
+apps/web/plans/reports/
