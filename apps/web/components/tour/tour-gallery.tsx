@@ -1,9 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, useCallback, useEffect } from 'react'
-import { Dialog, DialogContent } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
+import { useState, useCallback, useEffect, useRef } from 'react'
+import { FocusScope } from '@radix-ui/react-focus-scope'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -18,20 +17,21 @@ interface TourGalleryProps {
   images: GalleryImage[]
   open: boolean
   onClose: () => void
+  startIndex?: number
 }
 
 /**
- * Lightbox gallery component for tour images.
+ * Fullscreen lightbox gallery with thumbnail strip navigation.
  */
-export function TourGallery({ images, open, onClose }: TourGalleryProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
+export function TourGallery({ images, open, onClose, startIndex = 0 }: TourGalleryProps) {
+  const [currentIndex, setCurrentIndex] = useState(startIndex)
   const [prevOpen, setPrevOpen] = useState(open)
 
-  // Reset index when gallery opens (React recommended pattern for deriving state from props)
+  // Reset index when gallery opens
   if (open !== prevOpen) {
     setPrevOpen(open)
     if (open) {
-      setCurrentIndex(0)
+      setCurrentIndex(Math.min(startIndex, images.length - 1))
     }
   }
 
@@ -57,84 +57,103 @@ export function TourGallery({ images, open, onClose }: TourGalleryProps) {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [open, next, prev, onClose])
 
-  if (!images || images.length === 0) return null
+  // Lock body scroll when open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+
+  // Restore focus to trigger element when gallery closes
+  const triggerRef = useRef<Element | null>(null)
+  useEffect(() => {
+    if (open) {
+      triggerRef.current = document.activeElement
+    } else if (triggerRef.current instanceof HTMLElement) {
+      triggerRef.current.focus()
+      triggerRef.current = null
+    }
+  }, [open])
+
+  if (!open || !images || images.length === 0) return null
 
   const currentImage = images[currentIndex]?.image
 
   return (
-    <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-5xl border-none bg-black/95 p-0">
-        {/* Close Button */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute right-2 top-2 z-50 text-white hover:bg-white/20"
-          onClick={onClose}
-          aria-label="Close gallery"
-        >
-          <X className="h-6 w-6" />
-        </Button>
+    <FocusScope trapped loop>
+    <div className="fixed inset-0 z-[400] bg-black" role="dialog" aria-modal="true" aria-label="Image gallery">
+      {/* Close button */}
+      <button
+        className="absolute right-4 top-4 z-50 rounded-full bg-white/30 p-3 text-white transition-colors hover:bg-white/50"
+        onClick={onClose}
+        aria-label="Close gallery"
+      >
+        <X className="h-8 w-8" />
+      </button>
 
-        {/* Main Image */}
-        <div className="relative aspect-[16/10] w-full">
-          {currentImage && (
+      {/* Image counter */}
+      <div className="absolute left-4 top-4 z-50 text-sm text-white/75">
+        {currentIndex + 1} / {images.length}
+      </div>
+
+      {/* Main image */}
+      <div className="flex h-full items-center justify-center px-4 pb-24 pt-14">
+        {currentImage && (
+          <div className="relative h-full w-full">
             <Image
               src={currentImage.url}
-              alt={currentImage.alt}
+              alt={currentImage.alt || ''}
               fill
               className="object-contain"
-              sizes="(max-width: 1280px) 100vw, 1280px"
+              sizes="100vw"
               priority
             />
-          )}
-
-          {/* Navigation Arrows */}
-          {images.length > 1 && (
-            <>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute left-2 top-1/2 -translate-y-1/2 text-white hover:bg-white/20"
-                onClick={prev}
-                aria-label="Previous image"
-              >
-                <ChevronLeft className="h-8 w-8" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute right-2 top-1/2 -translate-y-1/2 text-white hover:bg-white/20"
-                onClick={next}
-                aria-label="Next image"
-              >
-                <ChevronRight className="h-8 w-8" />
-              </Button>
-            </>
-          )}
-        </div>
-
-        {/* Thumbnail Dots */}
-        {images.length > 1 && (
-          <div className="flex justify-center gap-2 p-4">
-            {images.map((_, i) => (
-              <button
-                key={i}
-                className={cn(
-                  'h-2 w-2 rounded-full transition-all',
-                  i === currentIndex ? 'w-6 bg-white' : 'bg-white/50 hover:bg-white/75'
-                )}
-                onClick={() => setCurrentIndex(i)}
-                aria-label={`Go to image ${i + 1}`}
-              />
-            ))}
           </div>
         )}
+      </div>
 
-        {/* Image Counter */}
-        <div className="absolute bottom-4 left-4 text-sm text-white/75">
-          {currentIndex + 1} / {images.length}
+      {/* Navigation arrows */}
+      {images.length > 1 && (
+        <>
+          <button
+            className="absolute left-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/30 p-3 text-white transition-colors hover:bg-white/50"
+            onClick={prev}
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="h-8 w-8" />
+          </button>
+          <button
+            className="absolute right-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/30 p-3 text-white transition-colors hover:bg-white/50"
+            onClick={next}
+            aria-label="Next image"
+          >
+            <ChevronRight className="h-8 w-8" />
+          </button>
+        </>
+      )}
+
+      {/* Thumbnail strip */}
+      {images.length > 1 && (
+        <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 overflow-x-auto bg-black/80 p-4">
+          {images.map((img, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentIndex(i)}
+              className={cn(
+                'relative h-14 w-20 flex-shrink-0 overflow-hidden rounded transition-all',
+                i === currentIndex ? 'ring-2 ring-white' : 'opacity-50 hover:opacity-75'
+              )}
+              aria-label={`Go to image ${i + 1}`}
+            >
+              <Image src={img.image.url} alt="" width={80} height={56} className="h-full w-full object-cover" />
+            </button>
+          ))}
         </div>
-      </DialogContent>
-    </Dialog>
+      )}
+    </div>
+    </FocusScope>
   )
 }

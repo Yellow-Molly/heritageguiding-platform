@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import nextDynamic from 'next/dynamic'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 import { getTourBySlug } from '@/lib/api/get-tour-by-slug'
 import { getTourReviews } from '@/lib/api/get-tour-reviews'
 import { TourHero } from '@/components/tour/tour-hero'
@@ -12,7 +12,8 @@ import { GuideCard } from '@/components/tour/guide-card'
 import { ReviewsSection } from '@/components/tour/reviews-section'
 import { RelatedTours } from '@/components/tour/related-tours'
 import { TourSchema } from '@/components/tour/tour-schema'
-import { Breadcrumb } from '@/components/shared/breadcrumb'
+import { Header } from '@/components/layout/header'
+import { Footer } from '@/components/layout/footer'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
 
@@ -46,7 +47,6 @@ export default async function TourPage({ params }: TourPageProps) {
     notFound()
   }
 
-  const t = await getTranslations('tourDetail')
   const tour = await getTourBySlug(slug, locale)
 
   if (!tour) {
@@ -55,21 +55,11 @@ export default async function TourPage({ params }: TourPageProps) {
 
   const reviews = await getTourReviews(tour.id)
 
-  const breadcrumbs = [
-    { label: t('breadcrumb.home'), href: '/' },
-    { label: t('breadcrumb.tours'), href: '/tours' },
-    { label: tour.title, href: `/tours/${tour.slug}` },
-  ]
-
   return (
     <>
       <TourSchema tour={tour} reviews={reviews} />
-      <main className="min-h-screen">
-        {/* Breadcrumb Navigation */}
-        <div className="container py-4">
-          <Breadcrumb items={breadcrumbs} />
-        </div>
-
+      <Header variant="solid" />
+      <main className="min-h-screen pt-20">
         {/* Hero Section */}
         <TourHero tour={tour} />
 
@@ -109,12 +99,18 @@ export default async function TourPage({ params }: TourPageProps) {
         {/* Related Tours */}
         <RelatedTours currentTourId={tour.id} categories={tour.categories} />
       </main>
+      <Footer />
     </>
   )
 }
 
 export async function generateMetadata({ params }: TourPageProps) {
   const { locale, slug } = await params
+
+  if (!isValidSlug(slug)) {
+    return { title: 'Tour Not Found' }
+  }
+
   const tour = await getTourBySlug(slug, locale)
 
   if (!tour) {
@@ -123,7 +119,7 @@ export async function generateMetadata({ params }: TourPageProps) {
 
   return generatePageMetadata({
     title: tour.title,
-    description: tour.description.substring(0, 160),
+    description: (tour.description || '').substring(0, 160),
     locale: locale as Locale,
     pathname: `/tours/${tour.slug}`,
     ogImage: tour.gallery?.[0]?.image?.url,
