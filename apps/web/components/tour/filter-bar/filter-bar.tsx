@@ -182,7 +182,7 @@ export function FilterBar({
               <div className="flex-1">
                 <TourSearch />
               </div>
-              <FilterDrawer />
+              <FilterDrawer categories={categories} />
             </div>
 
             {/* Row 2: Category chips */}

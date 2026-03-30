@@ -64,7 +64,7 @@ function buildWhereClause(filters: ValidatedTourFilters): Where {
   if (filters.categories) {
     const slugs = filters.categories.split(',').filter(Boolean)
     if (slugs.length > 0) {
-      where['categories.slug'] = { in: slugs.join(',') }
+      where['categories.slug'] = { in: slugs }
     }
   }
 
@@ -93,9 +93,14 @@ function buildWhereClause(filters: ValidatedTourFilters): Where {
     where['accessibility.wheelchairAccessible'] = { equals: true }
   }
 
-  // Full-text search on title
+  // Case-insensitive search across title and shortDescription
+  // Note: description is richText (JSON tree), cannot use `contains` on it
   if (filters.q) {
-    where['title'] = { like: filters.q.trim() }
+    const q = filters.q.trim()
+    where.or = [
+      { title: { contains: q } },
+      { shortDescription: { contains: q } },
+    ]
   }
 
   return where

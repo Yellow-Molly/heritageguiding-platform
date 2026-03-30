@@ -7,22 +7,18 @@ import { SlidersHorizontal, X, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { TourSort } from './tour-sort'
+import type { Category } from '@/lib/api/get-categories'
 
-// Consistent categories with CategoryChips and get-tours
-const CATEGORIES = [
-  { id: 'history', translationKey: 'history' },
-  { id: 'architecture', translationKey: 'architecture' },
-  { id: 'nature', translationKey: 'nature' },
-  { id: 'maritime', translationKey: 'maritime' },
-  { id: 'royal', translationKey: 'royal' },
-]
+interface FilterDrawerProps {
+  categories: Category[]
+}
 
 /**
  * Mobile filter drawer component.
  * Provides a slide-out panel for filter controls on mobile devices.
- * Uses 'categories' URL param (plural) for sync with CategoryChips.
+ * Uses CMS categories passed via props — no hardcoded lists.
  */
-export function FilterDrawer() {
+export function FilterDrawer({ categories }: FilterDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
   const t = useTranslations('tours.filters')
   const searchParams = useSearchParams()
@@ -31,8 +27,7 @@ export function FilterDrawer() {
 
   // Parse selected categories from URL (comma-separated)
   const selectedCategories = useMemo(() => {
-    const raw = searchParams.get('categories')?.split(',').filter(Boolean) || []
-    return raw.filter((cat) => CATEGORIES.some((c) => c.id === cat))
+    return searchParams.get('categories')?.split(',').filter(Boolean) || []
   }, [searchParams])
 
   // Toggle a single category (multi-select)
@@ -155,13 +150,13 @@ export function FilterDrawer() {
               {t('category')}
             </span>
             <div className="space-y-2">
-              {CATEGORIES.map((cat) => {
-                const isSelected = selectedCategories.includes(cat.id)
+              {categories.map((cat) => {
+                const isSelected = selectedCategories.includes(cat.slug)
                 return (
                   <button
                     key={cat.id}
                     type="button"
-                    onClick={() => toggleCategory(cat.id)}
+                    onClick={() => toggleCategory(cat.slug)}
                     className={cn(
                       'flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm transition-colors',
                       isSelected
@@ -169,7 +164,7 @@ export function FilterDrawer() {
                         : 'bg-[var(--color-background-alt)] text-[var(--color-text)] hover:bg-[var(--color-border)]'
                     )}
                   >
-                    <span>{t(cat.translationKey)}</span>
+                    <span>{cat.name}</span>
                     {isSelected && <Check className="h-4 w-4" />}
                   </button>
                 )

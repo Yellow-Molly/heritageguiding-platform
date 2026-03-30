@@ -1,33 +1,33 @@
 import { readFile, stat } from 'fs/promises'
 import path from 'path'
 import { NextRequest, NextResponse } from 'next/server'
+import { REST_GET } from '@payloadcms/next/routes'
+import config from '@payload-config'
 
 /**
- * Local media file server — serves images from apps/web/media/ on localhost.
- * On staging/production, images use Vercel Blob URLs and this route is never hit.
- * This dedicated route exists because Payload's built-in file handler has path
- * resolution issues in monorepo setups.
+ * Media file server that tries local files first, then falls through to Payload.
+ * - Localhost: serves from local media/ directory (Payload file handler broken in monorepo)
+ * - Staging/Production: local file missing → delegates to Payload REST handler (Vercel Blob)
  */
 export async function GET(
-  _request: NextRequest,
-  { params }: { params: Promise<{ filename: string }> }
+  request: NextRequest,
+  context: { params: Promise<{ filename: string }> }
 ) {
-  const { filename } = await params
+  const { filename } = await context.params
 
   // Prevent directory traversal
   if (filename.includes('..') || filename.includes('/') || filename.includes('\\')) {
     return NextResponse.json({ error: 'Invalid filename' }, { status: 400 })
   }
 
+  // Try local file first (works on localhost)
   const filePath = path.join(process.cwd(), 'media', filename)
-
   try {
     const [fileBuffer, fileStat] = await Promise.all([
       readFile(filePath),
       stat(filePath),
     ])
 
-    // Determine content type from extension
     const ext = path.extname(filename).toLowerCase()
     const mimeTypes: Record<string, string> = {
       '.jpg': 'image/jpeg',
@@ -47,6 +47,10 @@ export async function GET(
       },
     })
   } catch {
-    return NextResponse.json({ error: 'File not found' }, { status: 404 })
+    // Local file not found — delegate to Payload REST handler (Vercel Blob on staging/prod)
+    const payloadHandler = REST_GET(config)
+    return payloadHandler(request, {
+      params: Promise.resolve({ slug: ['media', 'file', filename] }),
+    })
   }
 }

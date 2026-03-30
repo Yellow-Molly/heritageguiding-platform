@@ -28,9 +28,9 @@ export function TourSearch() {
     // Reset to page 1 when search changes
     params.delete('page')
     startTransition(() => {
-      router.push(`${pathname}?${params.toString()}`)
+      router.replace(`${pathname}?${params.toString()}`)
     })
-  }, 300)
+  }, 500)
 
   return (
     <div className="relative">

@@ -15,8 +15,6 @@ export function sanitizeSearchQuery(query: string): string {
 /**
  * Zod schema for tour filter validation
  */
-const VALID_CATEGORIES = ['history', 'architecture', 'nature', 'maritime', 'royal']
-
 export const tourFiltersSchema = z.object({
   categories: z
     .string()
@@ -24,11 +22,11 @@ export const tourFiltersSchema = z.object({
     .refine(
       (val) => {
         if (!val) return true
-        // Validate comma-separated categories
+        // Validate slug format only — CMS is source of truth for valid slugs
         const cats = val.split(',').filter(Boolean)
-        return cats.every((cat) => VALID_CATEGORIES.includes(cat))
+        return cats.every((cat) => /^[a-z0-9-]+$/.test(cat))
       },
-      { message: 'Invalid category' }
+      { message: 'Invalid category slug format' }
     ),
   priceMin: z
     .string()
