@@ -57,8 +57,20 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
+        source: '/:locale(en|sv)',
+        has: [{ type: 'host', value: 'www.privatetours.se' }],
+        destination: '/:locale/coming-soon',
+        permanent: false,
+      },
+      {
         source: '/:locale(en|sv)/:path((?!coming-soon).*)',
         has: [{ type: 'host', value: 'privatetours.se' }],
+        destination: '/:locale/coming-soon',
+        permanent: false,
+      },
+      {
+        source: '/:locale(en|sv)/:path((?!coming-soon).*)',
+        has: [{ type: 'host', value: 'www.privatetours.se' }],
         destination: '/:locale/coming-soon',
         permanent: false,
       },
