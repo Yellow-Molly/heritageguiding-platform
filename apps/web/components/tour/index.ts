@@ -11,8 +11,7 @@ export { TourPagination } from './tour-pagination'
 // New filter bar components (GetYourGuide-style)
 export { FilterBar, CategoryChips, ResultsCount } from './filter-bar'
 
-// @deprecated - Use FilterBar instead
-export { TourFilters } from './tour-filters'
+export { TourGridLayout } from './tour-grid-layout'
 
 // Tour detail components
 export { TourHero } from './tour-hero'

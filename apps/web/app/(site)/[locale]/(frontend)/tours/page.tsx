@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
-import { TourGrid, TourGridSkeleton } from '@/components/tour'
+import { TourGridLayout } from '@/components/tour'
+import { TourEmptyState } from '@/components/tour/tour-empty-state'
 import { TourCatalogClient } from './tour-catalog-client'
 import { getTours, type TourFilters } from '@/lib/api/get-tours'
 import { getCategories } from '@/lib/api/get-categories'
@@ -33,8 +33,8 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
   const filters = await searchParams
   const t = await getTranslations({ locale, namespace: 'tours' })
 
-  // Fetch categories and tours for FilterBar + schema
-  const [categories, { tours, total }] = await Promise.all([
+  // Single fetch for categories + tours (no double fetch)
+  const [categories, { tours, total, totalPages }] = await Promise.all([
     getCategories('theme', locale),
     getTours(filters, locale),
   ])
@@ -47,9 +47,16 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
         {/* Catalog Section */}
         <section className="container mx-auto px-4 py-6 lg:py-8">
           <TourCatalogClient categories={categories} totalResults={total}>
-            <Suspense fallback={<TourGridSkeleton />}>
-              <TourGrid searchParams={filters} locale={locale} />
-            </Suspense>
+            {tours.length === 0 ? (
+              <TourEmptyState />
+            ) : (
+              <TourGridLayout
+                initialTours={tours}
+                totalPages={totalPages}
+                filters={filters}
+                locale={locale}
+              />
+            )}
           </TourCatalogClient>
         </section>
       </main>

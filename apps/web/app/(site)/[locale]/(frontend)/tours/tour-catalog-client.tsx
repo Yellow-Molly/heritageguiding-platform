@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from 'react'
 import { FilterBar } from '@/components/tour/filter-bar'
+import { ViewModeContext } from '@/components/tour/view-mode-context'
 import type { Category } from '@/lib/api/get-categories'
 
 interface TourCatalogClientProps {
@@ -13,7 +14,7 @@ interface TourCatalogClientProps {
 /**
  * Client wrapper for tour catalog.
  * Manages client-side state like view mode toggle.
- * Integrates new GetYourGuide-style FilterBar.
+ * Provides ViewModeContext so TourGridLayout can consume viewMode.
  */
 export function TourCatalogClient({
   children,
@@ -23,14 +24,16 @@ export function TourCatalogClient({
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
 
   return (
-    <div className="space-y-6">
-      <FilterBar
-        totalResults={totalResults}
-        categories={categories}
-        viewMode={viewMode}
-        onViewModeChange={setViewMode}
-      />
-      {children}
-    </div>
+    <ViewModeContext value={viewMode}>
+      <div className="space-y-6">
+        <FilterBar
+          totalResults={totalResults}
+          categories={categories}
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
+        />
+        {children}
+      </div>
+    </ViewModeContext>
   )
 }

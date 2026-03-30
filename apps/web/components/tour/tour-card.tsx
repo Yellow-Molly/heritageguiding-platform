@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
-import { Clock, Users, Star, MapPin } from 'lucide-react'
+import { Link } from '@/i18n/navigation'
+import { Clock, Users, Star } from 'lucide-react'
 import { cn, formatDuration, formatPrice } from '@/lib/utils'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -23,6 +23,7 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
   const isListView = variant === 'list'
 
   return (
+    <Link href={`/tours/${tour.slug}`} className="block">
     <Card
       className={cn(
         'group overflow-hidden transition-all duration-300',
@@ -89,9 +90,7 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
 
         {/* Title */}
         <h3 className="mb-2 font-serif text-lg font-semibold text-[var(--color-primary)] transition-colors group-hover:text-[var(--color-accent)]">
-          <Link href={`/tours/${tour.slug}`} className="hover:underline">
-            {tour.title}
-          </Link>
+          {tour.title}
         </h3>
 
         {/* Description */}
@@ -118,17 +117,8 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
           )}
         </div>
 
-        {/* CTA for list view */}
-        {isListView && (
-          <Link
-            href={`/tours/${tour.slug}`}
-            className="mt-4 inline-flex items-center gap-1 font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-dark)]"
-          >
-            View Details
-            <MapPin className="h-4 w-4" />
-          </Link>
-        )}
       </CardContent>
     </Card>
+    </Link>
   )
 }
