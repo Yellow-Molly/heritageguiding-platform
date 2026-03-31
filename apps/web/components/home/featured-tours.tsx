@@ -15,7 +15,7 @@ interface FeaturedToursProps {
 
 function TourCard({ tour, index }: { tour: FeaturedTour; index: number }) {
   const t = useTranslations('home.featured')
-  const cardRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLAnchorElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -37,10 +37,11 @@ function TourCard({ tour, index }: { tour: FeaturedTour; index: number }) {
   }, [])
 
   return (
-    <div
+    <Link
       ref={cardRef}
+      href={`/tours/${tour.slug}`}
       className={cn(
-        'group min-w-[260px] snap-start overflow-hidden rounded-xl border border-gray-100 bg-white transition-shadow duration-300',
+        'group block min-w-[260px] snap-start overflow-hidden rounded-xl border border-gray-100 bg-white transition-shadow duration-300',
         'shadow-sm hover:shadow-md',
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       )}
@@ -77,16 +78,13 @@ function TourCard({ tour, index }: { tour: FeaturedTour; index: number }) {
           )}
         </div>
 
-        {/* Read More link */}
-        <Link
-          href={`/tours/${tour.slug}`}
-          className="inline-flex items-center gap-1 text-sm font-medium text-[#d0ad50] transition-colors hover:underline"
-        >
+        {/* Read More indicator */}
+        <span className="inline-flex items-center gap-1 text-sm font-medium text-[#d0ad50] transition-colors group-hover:underline">
           {t('readMore')}
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-        </Link>
+        </span>
       </div>
-    </div>
+    </Link>
   )
 }
 
