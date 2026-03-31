@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { CountdownTimer } from './countdown-timer'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -49,11 +48,6 @@ export default function ComingSoonPage() {
         Premium private tours through Sweden with expert local guides.
       </p>
 
-      {/* Countdown */}
-      <div className="relative mb-14 sm:mb-16">
-        <CountdownTimer />
-      </div>
-
       {/* Decorative separator */}
       <div
         className="relative mb-6 h-px w-16"
@@ -63,7 +57,7 @@ export default function ComingSoonPage() {
 
       {/* Footer note */}
       <p className="relative text-xs text-white/30 sm:text-sm">
-        Launching April 2, 2026 &middot; Stockholm, Sweden
+        Launching April 2026 &middot; Stockholm, Sweden
       </p>
     </main>
   )
