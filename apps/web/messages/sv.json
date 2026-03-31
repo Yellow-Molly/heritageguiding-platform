@@ -28,15 +28,36 @@
       "imageAlt": "Panoramabild av Gamla Stan i Stockholm vid solnedgång"
     },
     "featured": {
-      "title": "Utvalda Turer",
-      "subtitle": "Våra mest älskade kulturarvsupplevelser",
-      "viewAll": "Se alla turer"
+      "title": "Populäraste Turerna",
+      "subtitle": "Upptäck våra mest älskade svenska upplevelser",
+      "viewAll": "Se alla turer",
+      "readMore": "Läs mer",
+      "from": "Från"
     },
     "trust": {
+      "sectionTitle": "Varför Resa Med Oss",
+      "expertGuides": "Expertguider",
+      "expertGuidesDesc": "Certifierade guider med djup kulturarvskunskap",
+      "trustedAgency": "Pålitlig Resebyrå",
+      "trustedAgencyDesc": "Licensierade, försäkrade och fullt granskade",
+      "yearsExperience": "Års Erfarenhet",
+      "yearsExperienceDesc": "Kopplar resenärer till svensk historia",
       "happyTravelers": "Nöjda Resenärer",
-      "uniqueTours": "Unika Turer",
-      "averageRating": "Genomsnittsbetyg",
-      "yearsExperience": "Års Erfarenhet"
+      "happyTravelersDesc": "Baserat på verifierade gästrecensioner"
+    },
+    "guides": {
+      "sectionTitle": "Möt Våra Guider",
+      "meetAll": "Möt Alla Guider"
+    },
+    "seasonal": {
+      "title": "Res Året Runt",
+      "subtitle": "Upptäck säsongsbetonade svenska upplevelser — från snöiga vinterpromenader genom Gamla Stan till midnattssol i skärgården.",
+      "winter": "Vinterturer",
+      "summer": "Sommarturer",
+      "bookNow": "Boka Nu"
+    },
+    "video": {
+      "sectionTitle": "Se Vår Video"
     },
     "categories": {
       "title": "Hitta Din Perfekta Upplevelse",

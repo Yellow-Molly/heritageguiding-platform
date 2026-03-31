@@ -28,15 +28,36 @@
       "imageAlt": "Panoramablick auf Stockholms Altstadt bei Sonnenuntergang"
     },
     "featured": {
-      "title": "Empfohlene Touren",
-      "subtitle": "Unsere beliebtesten Kulturerbe-Erlebnisse",
-      "viewAll": "Alle Touren anzeigen"
+      "title": "Beliebteste Touren",
+      "subtitle": "Entdecken Sie unsere meistgeliebten schwedischen Erlebnisse",
+      "viewAll": "Alle Touren anzeigen",
+      "readMore": "Mehr erfahren",
+      "from": "Ab"
     },
     "trust": {
+      "sectionTitle": "Warum Mit Uns Reisen",
+      "expertGuides": "Fachkundige Guides",
+      "expertGuidesDesc": "Zertifizierte Guides mit tiefem Kulturerbe-Wissen",
+      "trustedAgency": "Vertrauenswürdige Agentur",
+      "trustedAgencyDesc": "Lizenziert, versichert und vollständig geprüft",
+      "yearsExperience": "Jahre Erfahrung",
+      "yearsExperienceDesc": "Verbindung von Reisenden mit schwedischer Geschichte",
       "happyTravelers": "Zufriedene Reisende",
-      "uniqueTours": "Einzigartige Touren",
-      "averageRating": "Durchschnittsbewertung",
-      "yearsExperience": "Jahre Erfahrung"
+      "happyTravelersDesc": "Basierend auf verifizierten Gästebewertungen"
+    },
+    "guides": {
+      "sectionTitle": "Unsere Guides",
+      "meetAll": "Alle Guides kennenlernen"
+    },
+    "seasonal": {
+      "title": "Reisen Sie das ganze Jahr",
+      "subtitle": "Entdecken Sie saisonale schwedische Erlebnisse — von verschneiten Winterspaziergängen durch Gamla Stan bis zu Mitternachtssonne-Archipel-Kreuzfahrten.",
+      "winter": "Wintertouren",
+      "summer": "Sommertouren",
+      "bookNow": "Jetzt buchen"
+    },
+    "video": {
+      "sectionTitle": "Unser Video ansehen"
     },
     "categories": {
       "title": "Finden Sie Ihr Perfektes Erlebnis",

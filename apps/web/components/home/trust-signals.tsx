@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Globe, ShieldCheck, Calendar, Star } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 interface StatItem {
   icon: React.ReactNode
@@ -10,37 +11,6 @@ interface StatItem {
   label: string
   description: string
 }
-
-const stats: StatItem[] = [
-  {
-    icon: <Globe className="h-7 w-7" />,
-    value: 25,
-    suffix: '+',
-    label: 'Expert Local Guides',
-    description: 'Certified guides with deep heritage knowledge',
-  },
-  {
-    icon: <ShieldCheck className="h-7 w-7" />,
-    value: 100,
-    suffix: '%',
-    label: 'Trusted Tour Agency',
-    description: 'Licensed, insured, and fully vetted',
-  },
-  {
-    icon: <Calendar className="h-7 w-7" />,
-    value: 15,
-    suffix: '+',
-    label: 'Years of Experience',
-    description: 'Connecting travelers with Swedish history',
-  },
-  {
-    icon: <Star className="h-7 w-7" />,
-    value: 98,
-    suffix: '%',
-    label: 'Travelers Are Happy',
-    description: 'Based on verified guest reviews',
-  },
-]
 
 function useCountUp(target: number, duration = 2000, isVisible: boolean) {
   const [count, setCount] = useState(0)
@@ -93,9 +63,45 @@ function StatCard({ stat, isVisible }: { stat: StatItem; isVisible: boolean }) {
   )
 }
 
-export function TrustSignals() {
+interface TrustSignalsProps {
+  guideCount?: number
+}
+
+export function TrustSignals({ guideCount = 7 }: TrustSignalsProps) {
+  const t = useTranslations('home.trust')
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
+
+  const stats: StatItem[] = [
+    {
+      icon: <Globe className="h-7 w-7" />,
+      value: guideCount,
+      suffix: '+',
+      label: t('expertGuides'),
+      description: t('expertGuidesDesc'),
+    },
+    {
+      icon: <ShieldCheck className="h-7 w-7" />,
+      value: 100,
+      suffix: '%',
+      label: t('trustedAgency'),
+      description: t('trustedAgencyDesc'),
+    },
+    {
+      icon: <Calendar className="h-7 w-7" />,
+      value: 15,
+      suffix: '+',
+      label: t('yearsExperience'),
+      description: t('yearsExperienceDesc'),
+    },
+    {
+      icon: <Star className="h-7 w-7" />,
+      value: 98,
+      suffix: '%',
+      label: t('happyTravelers'),
+      description: t('happyTravelersDesc'),
+    },
+  ]
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -125,7 +131,7 @@ export function TrustSignals() {
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section heading */}
         <h2 className="mb-12 text-center text-sm font-semibold uppercase tracking-widest text-[#d0ad50]">
-          Why Travel With Us
+          {t('sectionTitle')}
         </h2>
 
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12">

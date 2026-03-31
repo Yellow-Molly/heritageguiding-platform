@@ -3,12 +3,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { Play, X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 /**
  * VideoHighlight — scenic photo with play button that opens a video lightbox.
  * Placeholder thumbnail; real video URL added later.
  */
 export function VideoHighlight() {
+  const t = useTranslations('home.video')
   const [isOpen, setIsOpen] = useState(false)
   const dialogRef = useRef<HTMLDialogElement>(null)
 
@@ -36,7 +38,7 @@ export function VideoHighlight() {
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section title */}
         <h2 className="mb-10 text-center text-sm font-semibold uppercase tracking-widest text-[#d0ad50]">
-          Watch Our Video
+          {t('sectionTitle')}
         </h2>
 
         {/* Video thumbnail container */}
@@ -87,8 +89,8 @@ export function VideoHighlight() {
             <div className="aspect-video overflow-hidden rounded-xl bg-black">
               {isOpen && (
                 <iframe
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0"
-                  title="Heritage Tour Highlight Video"
+                  src="https://www.youtube-nocookie.com/embed/xWYQAztMbKg?autoplay=1&rel=0"
+                  title="Stockholm Aerial Tour — Discover Sweden's Capital"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   className="h-full w-full"

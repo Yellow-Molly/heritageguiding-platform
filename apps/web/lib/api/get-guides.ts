@@ -3,6 +3,7 @@
  * Public API: email and phone fields are NEVER exposed.
  */
 
+import { unstable_cache } from 'next/cache'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Where } from 'payload'
@@ -144,3 +145,13 @@ export async function getGuides(
     totalPages: result.totalPages,
   }
 }
+
+/**
+ * Cached version of getGuides for static/server-rendered pages (e.g. homepage).
+ * Revalidates on-demand via revalidateTag('guides').
+ */
+export const getCachedGuides = unstable_cache(
+  getGuides,
+  ['guides-list'],
+  { tags: ['guides'] }
+)

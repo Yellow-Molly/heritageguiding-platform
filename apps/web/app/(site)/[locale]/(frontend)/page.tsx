@@ -8,9 +8,9 @@ import { VideoHighlight } from '@/components/home/video-highlight'
 import { FeaturedTours } from '@/components/home/featured-tours'
 import { SeasonalCta } from '@/components/home/seasonal-cta'
 import { GuidesPreview } from '@/components/home/guides-preview'
-import { Testimonials } from '@/components/home/testimonials'
-import { LatestPosts } from '@/components/home/latest-posts'
 import { TravelAgencySchema } from '@/components/seo'
+import { getFeaturedTours } from '@/lib/api/get-featured-tours'
+import { getCachedGuides } from '@/lib/api/get-guides'
 
 /**
  * Generate SEO metadata for homepage
@@ -49,9 +49,28 @@ export async function generateMetadata({
 
 /**
  * Homepage - Server Component for optimal SEO and performance.
- * Section order: Hero → TrustSignals → Video → Tours → SeasonalCta → Guides → Testimonials → Blog → Footer
+ * Section order: Hero → TrustSignals → Video → Tours → SeasonalCta → Guides → Footer
  */
-export default async function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  const [allFeaturedTours, guidesResponse] = await Promise.all([
+    getFeaturedTours(locale, 3),
+    getCachedGuides({ limit: '4' }, locale),
+  ])
+
+  // Filter out tours with missing images (CMS can return empty url)
+  const featuredTours = allFeaturedTours.filter((t) => t.image.url)
+
+  // Extract season card images from featured tours
+  const seasonImages = {
+    winter: featuredTours[1]?.image?.url,
+    summer: featuredTours[2]?.image?.url,
+  }
+
   return (
     <>
       {/* Schema.org structured data for SEO */}
@@ -60,13 +79,11 @@ export default async function HomePage() {
       <Header />
       <main>
         <HeroSection />
-        <TrustSignals />
+        <TrustSignals guideCount={guidesResponse.total} />
         <VideoHighlight />
-        <FeaturedTours />
-        <SeasonalCta />
-        <GuidesPreview />
-        <Testimonials />
-        <LatestPosts />
+        <FeaturedTours tours={featuredTours} />
+        <SeasonalCta tourImages={seasonImages} />
+        <GuidesPreview guides={guidesResponse.guides} />
       </main>
       <Footer />
     </>

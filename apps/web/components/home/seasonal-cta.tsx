@@ -2,31 +2,33 @@
 
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
 
-interface SeasonCard {
-  label: string
-  image: string
-  href: string
+const FALLBACK_WINTER = 'https://images.unsplash.com/photo-1548777123-e216912df7d8?auto=format&fit=crop&w=600&q=80'
+const FALLBACK_SUMMER = 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=600&q=80'
+
+interface SeasonalCtaProps {
+  tourImages?: { winter?: string; summer?: string }
 }
-
-const seasons: SeasonCard[] = [
-  {
-    label: 'Winter Tours',
-    image: 'https://images.unsplash.com/photo-1548777123-e216912df7d8?auto=format&fit=crop&w=600&q=80',
-    href: '/tours?season=winter',
-  },
-  {
-    label: 'Summer Tours',
-    image: 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=600&q=80',
-    href: '/tours?season=summer',
-  },
-]
 
 /**
  * SeasonalCta — full-width gold gradient band promoting seasonal tours.
- * Replaces the old FindTourCta / AI-focused CTA section.
+ * Uses real CMS tour images with Unsplash fallbacks.
  */
-export function SeasonalCta() {
+export function SeasonalCta({ tourImages }: SeasonalCtaProps) {
+  const t = useTranslations('home.seasonal')
+  const seasons = [
+    {
+      label: t('winter'),
+      image: tourImages?.winter || FALLBACK_WINTER,
+      href: '/tours?season=winter',
+    },
+    {
+      label: t('summer'),
+      image: tourImages?.summer || FALLBACK_SUMMER,
+      href: '/tours?season=summer',
+    },
+  ]
   return (
     <section
       className="bg-gradient-to-r from-[#d0ad50] to-[#DBC078] py-16 md:py-24"
@@ -37,13 +39,10 @@ export function SeasonalCta() {
           {/* Left text */}
           <div className="text-center md:max-w-md md:text-left">
             <h2 className="mb-4 font-serif text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-              Let&apos;s Travel All
-              <br />
-              Year Round
+              {t('title')}
             </h2>
             <p className="text-white/80">
-              Discover seasonal Swedish experiences — from snowy winter walks
-              through Gamla Stan to midnight sun archipelago cruises.
+              {t('subtitle')}
             </p>
           </div>
 
@@ -69,7 +68,7 @@ export function SeasonalCta() {
                     href={season.href}
                     className="inline-block rounded-full bg-white px-5 py-2 text-xs font-medium text-[#d0ad50] transition-colors hover:bg-white/90"
                   >
-                    Book Now
+                    {t('bookNow')}
                   </Link>
                 </div>
               </div>

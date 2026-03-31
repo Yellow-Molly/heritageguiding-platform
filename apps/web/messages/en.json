@@ -28,15 +28,36 @@
       "imageAlt": "Panoramic view of Stockholm Old Town at sunset"
     },
     "featured": {
-      "title": "Featured Tours",
-      "subtitle": "Our most beloved heritage experiences",
-      "viewAll": "View All Tours"
+      "title": "Most Popular Tours",
+      "subtitle": "Discover our most loved Swedish experiences",
+      "viewAll": "View All Tours",
+      "readMore": "Read More",
+      "from": "From"
     },
     "trust": {
-      "happyTravelers": "Happy Travelers",
-      "uniqueTours": "Unique Tours",
-      "averageRating": "Average Rating",
-      "yearsExperience": "Years Experience"
+      "sectionTitle": "Why Travel With Us",
+      "expertGuides": "Expert Local Guides",
+      "expertGuidesDesc": "Certified guides with deep heritage knowledge",
+      "trustedAgency": "Trusted Tour Agency",
+      "trustedAgencyDesc": "Licensed, insured, and fully vetted",
+      "yearsExperience": "Years of Experience",
+      "yearsExperienceDesc": "Connecting travelers with Swedish history",
+      "happyTravelers": "Travelers Are Happy",
+      "happyTravelersDesc": "Based on verified guest reviews"
+    },
+    "guides": {
+      "sectionTitle": "Meet Our Guides",
+      "meetAll": "Meet All Guides"
+    },
+    "seasonal": {
+      "title": "Let's Travel All Year Round",
+      "subtitle": "Discover seasonal Swedish experiences — from snowy winter walks through Gamla Stan to midnight sun archipelago cruises.",
+      "winter": "Winter Tours",
+      "summer": "Summer Tours",
+      "bookNow": "Book Now"
+    },
+    "video": {
+      "sectionTitle": "Watch Our Video"
     },
     "categories": {
       "title": "Find Your Perfect Experience",
