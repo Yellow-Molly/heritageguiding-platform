@@ -4,6 +4,28 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-04-01] — Custom 404 Error Page ✓ COMPLETE
+
+**Type:** UI Feature Addition
+**Scope:** Custom 404 page with i18n support and interactive elements
+**Build Status:** PASSING (Next.js 16.1.6 Turbopack)
+
+### Changes Implemented
+
+- Custom 404 page component with i18n support (EN/SV/DE)
+- Responsive design: Desktop 1440px, Mobile 390px
+- Functional search bar redirecting to `/tours?q=`
+- Location tags linking to `/tours?city=`
+- Design images exported from Pencil design file
+- Maintains brand consistency with Stepi-inspired aesthetic
+
+### File Changes
+
+- Created: `apps/web/app/[locale]/not-found.tsx`
+- Added design assets to public directory
+
+---
+
 ## [2026-03-04] — Homepage Redesign (Stepi-Inspired Style) ✓ COMPLETE
 
 **Type:** Major UI/UX Redesign

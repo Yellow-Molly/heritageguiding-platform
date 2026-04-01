@@ -610,5 +610,23 @@
         "content": "For privacy-related inquiries or to exercise your rights, please contact our Data Protection Officer."
       }
     }
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "heading": "Oops! Looks like you took a wrong turn",
+    "subtext": "Don't worry — even seasoned explorers get lost in Stockholm's winding streets. Our guide is here to help you find your way back!",
+    "speechBubble": "\"Follow me! I know a shortcut!\"",
+    "homeButton": "Take Me Home",
+    "toursButton": "Show Me Around",
+    "searchPlaceholder": "Search for tours, destinations...",
+    "helpText": "Or try finding your way here",
+    "funFact": "Fun fact: Gamla Stan has 51 streets — no wonder you got lost!",
+    "imageAlt": "Illustrated guide scene in Stockholm",
+    "backgroundAlt": "Stockholm cityscape",
+    "cities": {
+      "stockholm": "Stockholm",
+      "gothenburg": "Gothenburg",
+      "visby": "Visby"
+    }
   }
 }

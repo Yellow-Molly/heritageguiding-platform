@@ -610,5 +610,23 @@
         "content": "För integritetsrelaterade frågor eller för att utöva dina rättigheter, vänligen kontakta vårt dataskyddsombud."
       }
     }
+  },
+  "notFound": {
+    "title": "Sidan hittades inte",
+    "heading": "Hoppsan! Det verkar som att du tog fel väg",
+    "subtext": "Oroa dig inte — även erfarna utforskare går vilse i Stockholms vindlande gator. Vår guide hjälper dig att hitta tillbaka!",
+    "speechBubble": "\"Följ mig! Jag vet en genväg!\"",
+    "homeButton": "Ta mig hem",
+    "toursButton": "Visa mig runt",
+    "searchPlaceholder": "Sök efter turer, destinationer...",
+    "helpText": "Eller prova att hitta din väg här",
+    "funFact": "Visste du att Gamla Stan har 51 gator? Inte konstigt att du gick vilse!",
+    "imageAlt": "Illustrerad guidescen i Stockholm",
+    "backgroundAlt": "Stockholms stadssilhuett",
+    "cities": {
+      "stockholm": "Stockholm",
+      "gothenburg": "Göteborg",
+      "visby": "Visby"
+    }
   }
 }

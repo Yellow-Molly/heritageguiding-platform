@@ -610,5 +610,23 @@
         "content": "Für datenschutzbezogene Anfragen oder zur Ausübung Ihrer Rechte kontaktieren Sie bitte unseren Datenschutzbeauftragten."
       }
     }
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "heading": "Hoppla! Es sieht aus, als hätten Sie eine falsche Abzweigung genommen",
+    "subtext": "Keine Sorge — selbst erfahrene Entdecker verirren sich in Stockholms verwinkelten Gassen. Unser Guide hilft Ihnen, zurückzufinden!",
+    "speechBubble": "\"Folgen Sie mir! Ich kenne eine Abkürzung!\"",
+    "homeButton": "Bring mich nach Hause",
+    "toursButton": "Zeig mir die Umgebung",
+    "searchPlaceholder": "Suche nach Touren, Reisezielen...",
+    "helpText": "Oder versuchen Sie, Ihren Weg hier zu finden",
+    "funFact": "Wussten Sie, dass Gamla Stan 51 Straßen hat? Kein Wunder, dass Sie sich verirrt haben!",
+    "imageAlt": "Illustrierte Guide-Szene in Stockholm",
+    "backgroundAlt": "Stockholmer Stadtansicht",
+    "cities": {
+      "stockholm": "Stockholm",
+      "gothenburg": "Göteborg",
+      "visby": "Visby"
+    }
   }
 }
