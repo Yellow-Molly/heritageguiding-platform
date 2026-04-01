@@ -31,6 +31,7 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, '.'),
       '@payload-config': resolve(__dirname, '../../packages/cms/payload.config.ts'),
+      '@cms': resolve(__dirname, '../../packages/cms'),
     },
   },
 })

@@ -628,5 +628,87 @@
       "gothenburg": "Göteborg",
       "visby": "Visby"
     }
+  },
+  "contact": {
+    "meta": {
+      "title": "Kontakt - Private Tours",
+      "description": "Kontaktieren Sie uns für private Kulturerbe-Touren in Schweden. Wir antworten innerhalb von 24 Stunden."
+    },
+    "hero": {
+      "title": "Planen wir Ihre Reise",
+      "subtitle": "Ob Sie von einer privaten Stadtführung durch Gamla Stan träumen oder einer Kulturreise durch Schweden — wir freuen uns von Ihnen zu hören."
+    },
+    "form": {
+      "title": "Senden Sie uns eine Nachricht",
+      "fullName": "Vollständiger Name",
+      "fullNamePlaceholder": "Geben Sie Ihren vollständigen Namen ein",
+      "email": "E-Mail-Adresse",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+      "phone": "Telefonnummer",
+      "phoneOptional": "(Optional)",
+      "phonePlaceholder": "+46",
+      "subject": "Betreff",
+      "subjectPlaceholder": "Wählen Sie einen Betreff",
+      "subjectOptions": {
+        "general": "Allgemeine Anfrage",
+        "tourBooking": "Tour-Buchung",
+        "groupInquiry": "Gruppenanfrage",
+        "partnership": "Partnerschaft",
+        "other": "Sonstiges"
+      },
+      "message": "Nachricht",
+      "messagePlaceholder": "Erzählen Sie uns von Ihrer Traumreise...",
+      "submit": "Nachricht senden",
+      "sending": "Wird gesendet...",
+      "successTitle": "Nachricht gesendet!",
+      "successMessage": "Vielen Dank für Ihre Nachricht. Wir melden uns innerhalb von 24 Stunden.",
+      "errorMessage": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+      "required": "Dieses Feld ist erforderlich",
+      "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+      "messageTooShort": "Die Nachricht muss mindestens 10 Zeichen lang sein"
+    },
+    "info": {
+      "title": "Kontaktinformationen",
+      "subtitle": "Wir antworten in der Regel innerhalb von 24 Stunden.",
+      "emailLabel": "E-Mail",
+      "emailValue": "info@privatetours.se",
+      "phoneLabel": "Telefon",
+      "phoneValue": "+46 70 123 45 67",
+      "addressLabel": "Besuchen Sie uns",
+      "addressValue": "Drottninggatan 5, 111 51 Stockholm",
+      "hoursLabel": "Geschäftszeiten",
+      "hoursValue": "Mo-Fr, 08:00-18:00 MEZ",
+      "followUs": "Folgen Sie uns"
+    },
+    "quickLinks": {
+      "label": "WIE KÖNNEN WIR HELFEN?",
+      "title": "Schnelllinks",
+      "subtitle": "Finden Sie den richtigen Ausgangspunkt für Ihre Reise",
+      "bookTour": {
+        "title": "Private Tour buchen",
+        "description": "Bereit zum Entdecken? Stöbern Sie in unseren kuratierten Kulturerbe-Erlebnissen und buchen Sie noch heute Ihren privaten Guide.",
+        "link": "Touren erkunden"
+      },
+      "forGuides": {
+        "title": "Für Reiseleiter",
+        "description": "Sind Sie ein lizenzierter Guide? Treten Sie unserem wachsenden Netzwerk von Kulturerbe-Spezialisten bei und verbinden Sie sich mit internationalen Besuchern.",
+        "link": "Partner werden"
+      },
+      "faq": {
+        "title": "Häufig gefragt",
+        "description": "Finden Sie Antworten auf häufige Fragen zu unseren Touren, Buchungsprozess, Stornierungsrichtlinien und Gruppengrößen.",
+        "link": "FAQ besuchen"
+      }
+    },
+    "trust": {
+      "fastResponse": "Schnelle Antwort",
+      "fastResponseSub": "Wir antworten innerhalb von 24 Stunden",
+      "multilingual": "Mehrsprachiger Support",
+      "multilingualSub": "SV / EN / DE",
+      "privacy": "Ihre Privatsphäre zählt",
+      "privacySub": "DSGVO-konform \u2022 Daten verschlüsselt",
+      "fiveStar": "5-Sterne-Bewertung",
+      "fiveStarSub": "Vertraut von 2.000+ Reisenden"
+    }
   }
 }

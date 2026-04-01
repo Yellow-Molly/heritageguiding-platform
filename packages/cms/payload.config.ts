@@ -16,6 +16,7 @@ import {
   Pages,
   Bookings,
   GroupInquiries,
+  ContactInquiries,
 } from './collections/index'
 import { SiteSettings } from './globals/site-settings'
 
@@ -73,6 +74,7 @@ export default buildConfig({
     Pages,
     Bookings,
     GroupInquiries,
+    ContactInquiries,
   ],
   globals: [SiteSettings],
   secret: getPayloadSecret(),

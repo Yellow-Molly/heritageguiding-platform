@@ -628,5 +628,87 @@
       "gothenburg": "Göteborg",
       "visby": "Visby"
     }
+  },
+  "contact": {
+    "meta": {
+      "title": "Kontakta oss - Private Tours",
+      "description": "Kontakta oss för privata kulturarvsvandringar i Sverige. Vi svarar inom 24 timmar."
+    },
+    "hero": {
+      "title": "Låt oss planera din resa",
+      "subtitle": "Oavsett om du drömmer om en privat stadsvandring genom Gamla Stan eller en kulturresa genom Sverige — vi vill gärna höra från dig."
+    },
+    "form": {
+      "title": "Skicka ett meddelande",
+      "fullName": "Fullständigt namn",
+      "fullNamePlaceholder": "Ange ditt fullständiga namn",
+      "email": "E-postadress",
+      "emailPlaceholder": "Ange din e-postadress",
+      "phone": "Telefonnummer",
+      "phoneOptional": "(Valfritt)",
+      "phonePlaceholder": "+46",
+      "subject": "Ämne",
+      "subjectPlaceholder": "Välj ett ämne",
+      "subjectOptions": {
+        "general": "Allmän förfrågan",
+        "tourBooking": "Turbokning",
+        "groupInquiry": "Gruppförfrågan",
+        "partnership": "Samarbete",
+        "other": "Övrigt"
+      },
+      "message": "Meddelande",
+      "messagePlaceholder": "Berätta om din drömresa...",
+      "submit": "Skicka meddelande",
+      "sending": "Skickar...",
+      "successTitle": "Meddelande skickat!",
+      "successMessage": "Tack för att du hörde av dig. Vi återkommer inom 24 timmar.",
+      "errorMessage": "Något gick fel. Försök igen.",
+      "required": "Detta fält är obligatoriskt",
+      "invalidEmail": "Ange en giltig e-postadress",
+      "messageTooShort": "Meddelandet måste vara minst 10 tecken"
+    },
+    "info": {
+      "title": "Kontaktinformation",
+      "subtitle": "Vi svarar vanligtvis inom 24 timmar.",
+      "emailLabel": "E-post",
+      "emailValue": "info@privatetours.se",
+      "phoneLabel": "Telefon",
+      "phoneValue": "+46 70 123 45 67",
+      "addressLabel": "Besök oss",
+      "addressValue": "Drottninggatan 5, 111 51 Stockholm",
+      "hoursLabel": "Öppettider",
+      "hoursValue": "Mån-Fre, 08:00-18:00 CET",
+      "followUs": "Följ oss"
+    },
+    "quickLinks": {
+      "label": "HUR KAN VI HJÄLPA?",
+      "title": "Snabblänkar",
+      "subtitle": "Hitta rätt ställe att börja din resa",
+      "bookTour": {
+        "title": "Boka en privat tur",
+        "description": "Redo att utforska? Bläddra bland våra utvalda kulturarvsupplevelser och boka din privata guide idag.",
+        "link": "Utforska turer"
+      },
+      "forGuides": {
+        "title": "För guider",
+        "description": "Är du en licensierad guide? Gå med i vårt växande nätverk av kulturarvsspecialister och möt internationella besökare.",
+        "link": "Samarbeta med oss"
+      },
+      "faq": {
+        "title": "Vanliga frågor",
+        "description": "Hitta svar på vanliga frågor om våra turer, bokningsprocess, avbokningspolicy och gruppstorlekar.",
+        "link": "Besök FAQ"
+      }
+    },
+    "trust": {
+      "fastResponse": "Snabbt svar",
+      "fastResponseSub": "Vi svarar inom 24 timmar",
+      "multilingual": "Flerspråkig support",
+      "multilingualSub": "SV / EN / DE",
+      "privacy": "Din integritet är viktig",
+      "privacySub": "GDPR-kompatibel \u2022 Krypterad data",
+      "fiveStar": "5-stjärnigt betyg",
+      "fiveStarSub": "Betrodd av 2 000+ resenärer"
+    }
   }
 }
