@@ -3,10 +3,10 @@
 import { useTranslations } from 'next-intl'
 import {
   ShieldCheck,
-  Gem,
+  Star,
   Lock,
-  Route,
-  Languages,
+  Settings,
+  Globe,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -17,49 +17,71 @@ interface ValueItem {
 
 const values: ValueItem[] = [
   { icon: ShieldCheck, key: 'authorizedExperts' },
-  { icon: Gem, key: 'curated' },
+  { icon: Star, key: 'curated' },
   { icon: Lock, key: 'privateByDesign' },
-  { icon: Route, key: 'seamlessHosting' },
-  { icon: Languages, key: 'multilingual' },
+  { icon: Settings, key: 'seamlessHosting' },
+  { icon: Globe, key: 'multilingual' },
 ]
 
 /**
  * Values section showcasing what makes Private Tours different.
- * Displays 5 core differentiators with icons and descriptions.
+ * 3+2 grid layout with bordered icon cards and gold divider accents.
  */
 export function ValuesSection() {
   const t = useTranslations('about.values')
 
   return (
-    <section className="bg-[var(--color-background-alt)] py-16">
-      <div className="container mx-auto px-4">
-        <h2 className="text-center font-serif text-3xl font-bold text-[var(--color-primary)]">
+    <section className="py-16 lg:py-24">
+      <div className="container mx-auto px-4 text-center">
+        <span className="text-xs font-semibold uppercase tracking-[2px] text-[var(--color-secondary)]">
+          {t('label')}
+        </span>
+        <h2 className="mt-3 font-serif text-2xl font-bold text-[var(--color-primary)] md:text-3xl">
           {t('title')}
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-center text-[var(--color-text-muted)]">
+        <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-muted)]">
           {t('subtitle')}
         </p>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {values.map(({ icon: Icon, key }) => (
-            <div
-              key={key}
-              className="flex gap-4 rounded-xl bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
-            >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--color-secondary)]/10">
-                <Icon className="h-6 w-6 text-[var(--color-secondary)]" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-[var(--color-primary)]">
-                  {t(`${key}.title`)}
-                </h3>
-                <p className="mt-1 text-sm text-[var(--color-text-muted)]">
-                  {t(`${key}.description`)}
-                </p>
-              </div>
-            </div>
+
+        {/* Top row: 3 cards */}
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          {values.slice(0, 3).map(({ icon: Icon, key }) => (
+            <ValueCard key={key} icon={Icon} title={t(`${key}.title`)} description={t(`${key}.description`)} />
+          ))}
+        </div>
+
+        {/* Bottom row: 2 centered cards */}
+        <div className="mx-auto mt-6 grid max-w-[800px] gap-6 lg:grid-cols-2">
+          {values.slice(3).map(({ icon: Icon, key }) => (
+            <ValueCard key={key} icon={Icon} title={t(`${key}.title`)} description={t(`${key}.description`)} />
           ))}
         </div>
       </div>
     </section>
+  )
+}
+
+function ValueCard({
+  icon: Icon,
+  title,
+  description,
+}: {
+  icon: LucideIcon
+  title: string
+  description: string
+}) {
+  return (
+    <div className="rounded-2xl border border-[var(--color-border)] p-5 shadow-sm text-center md:p-8 md:text-left">
+      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-lg bg-[var(--color-primary)] md:mx-0">
+        <Icon className="h-6 w-6 text-[var(--color-secondary)]" />
+      </div>
+      <div className="mx-auto mt-4 h-[3px] w-10 bg-[var(--color-secondary)] md:mx-0" />
+      <h3 className="mt-4 font-serif text-xl font-semibold text-[var(--color-primary)]">
+        {title}
+      </h3>
+      <p className="mt-2 text-sm leading-[1.6] text-[var(--color-text-muted)]">
+        {description}
+      </p>
+    </div>
   )
 }

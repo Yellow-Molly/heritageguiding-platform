@@ -96,7 +96,7 @@ privatetours-platform/
 app/
 ├── (frontend)/           # Localized public routes
 │   ├── page.tsx          # Homepage
-│   ├── about-us/         # About page
+│   ├── about-us/         # About page (7-section modular layout)
 │   ├── faq/              # FAQ with accordion
 │   ├── find-tour/        # Concierge Wizard (3-step, audience-interest matching)
 │   ├── guides/           # Guide listing & detail pages
@@ -162,10 +162,16 @@ app/
   - Tests: `category-chips.test.tsx`, `results-count.test.tsx`
 - Tests: `tour-card.test.tsx`, `tour-empty-state.test.tsx`, `tour-grid-skeleton.test.tsx`
 
-**Page Components (5 components):**
+**Page Components (11 components):**
 - `faq-accordion.tsx` - Accordion for FAQs
 - `team-section.tsx` - Guide profiles
-- `values-section.tsx` - Company values
+- `values-section.tsx` - Company values (redesigned)
+- `about-hero-section.tsx` - About page hero with image & overlay
+- `about-story-section.tsx` - Heritage story narrative
+- `about-mission-vision-section.tsx` - Mission and vision statements
+- `about-responsible-tourism-section.tsx` - Sustainability commitment
+- `about-certifications-section.tsx` - Certifications & accreditations
+- `about-cta-section.tsx` - Call-to-action footer
 - Tests: `faq-accordion.test.tsx`, `team-section.test.tsx`, `values-section.test.tsx`
 
 **SEO Components (7 components, Phase 10):**
@@ -654,7 +660,7 @@ npm run payload:generate-types  # Generate TS types from schema
 | **Frontend LOC** | ~69,000 |
 | **CMS LOC** | ~35,000 |
 | **Total Tokens** | 380,000+ |
-| **React Components** | 70+ |
+| **React Components** | 76+ |
 | **API Functions** | 9 (data-fetching) |
 | **API Routes** | 4 (Bokun availability/webhook, semantic search, wizard recommendations) |
 | **SEO Components** | 7 (Schema.org) |

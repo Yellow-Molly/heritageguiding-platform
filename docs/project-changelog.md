@@ -4,6 +4,41 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-04-02] — About Us Page Redesign ✓ COMPLETE
+
+**Type:** Component Architecture Refactor
+**Scope:** Split monolithic 187-line About page into 7 focused, reusable components
+**Build Status:** PASSING (Next.js 16.1.6 Turbopack)
+
+### Changes Implemented
+
+**Component Modularization:**
+- Split single about-us/page.tsx into 7 specialized section components
+- Each component handles single responsibility (hero, story, mission/vision, values, certifications, responsible tourism, CTA)
+- page.tsx now acts as thin orchestrator importing and composing sections
+- values-section.tsx redesigned for improved UI/UX consistency
+
+**New Files Created:**
+- `apps/web/components/pages/about-hero-section.tsx` - Hero with image & overlay
+- `apps/web/components/pages/about-story-section.tsx` - Heritage narrative
+- `apps/web/components/pages/about-mission-vision-section.tsx` - Mission/vision
+- `apps/web/components/pages/about-responsible-tourism-section.tsx` - Sustainability
+- `apps/web/components/pages/about-certifications-section.tsx` - Credentials
+- `apps/web/components/pages/about-cta-section.tsx` - Call-to-action
+- Updated: `apps/web/components/pages/values-section.tsx` (redesigned)
+
+**Translation Updates:**
+- New i18n keys added to messages/en.json, messages/sv.json, messages/de.json
+- All components use t() with namespaced keys for full localization
+
+**Benefits:**
+- Improved code reusability (sections can be composed into different pages)
+- Easier testing and maintenance for individual components
+- Reduced complexity per file (follows 200 LOC guideline)
+- Better component discoverability in codebase
+
+---
+
 ## [2026-04-01] — Custom 404 Error Page ✓ COMPLETE
 
 **Type:** UI Feature Addition

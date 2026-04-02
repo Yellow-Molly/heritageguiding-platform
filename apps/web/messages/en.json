@@ -278,8 +278,14 @@
     "description": "Private, expertly hosted experiences in Stockholm led by authorized professionals",
     "subtitle": "Depth, Trust, and Personal Connection",
     "heroAlt": "Private Tours - expertly hosted experiences in Stockholm",
+    "hero": {
+      "label": "OUR STORY"
+    },
     "story": {
-      "title": "Who We Are",
+      "label": "WHO WE ARE",
+      "imageAlt": "A charming narrow alley in Stockholm's Old Town",
+      "titleLine1": "Created for Travelers",
+      "titleLine2": "Who Value Depth",
       "paragraph1": "Private Tours was created for travelers who value depth, trust, and personal connection over volume and speed.",
       "paragraph2": "We offer private, expertly hosted experiences in Stockholm led exclusively by authorized professionals. Every guide is carefully selected, every route is curated, and every experience is designed to feel seamless from start to finish. This is not an open marketplace — it is a considered collection of people and places chosen for their knowledge, integrity, and ability to host with confidence.",
       "paragraph3": "Our guests are not looking for more options. They are looking for the right one.",
@@ -288,6 +294,7 @@
       "paragraph6": "Private Tours exists to make time in Stockholm feel meaningful, effortless, and personal — guided by people who genuinely care about both their craft and their guests."
     },
     "mission": {
+      "label": "OUR PURPOSE",
       "title": "Our Mission",
       "description": "To provide private access to Stockholm's most trusted experts through a carefully curated system, ensuring every experience is personal, reliable, and deeply engaging."
     },
@@ -296,6 +303,7 @@
       "description": "To set a new standard for cultural tourism where expertise, trust, and human connection define the experience — and where quality is never left to chance."
     },
     "values": {
+      "label": "WHY CHOOSE US",
       "title": "What Makes Us Different",
       "subtitle": "A considered approach to cultural tourism in Stockholm",
       "authorizedExperts": {
@@ -320,10 +328,18 @@
       }
     },
     "responsibleTourism": {
+      "label": "OUR COMMITMENT",
+      "imageAlt": "Stockholm waterfront with nature and historic architecture",
       "title": "A Commitment to Responsible Tourism",
       "paragraph1": "Private Tours is committed to operating with care for both people and places. We collaborate with local professionals and businesses, maintain a low-impact private-only model, and design experiences that respect the environments and communities we visit.",
       "paragraph2": "Accessibility matters to us. Our digital platforms follow recognized accessibility standards, and our routes are designed to be inclusive whenever possible — without compromising depth or quality.",
-      "paragraph3": "Cultural heritage is not a backdrop; it is a responsibility. Our work is grounded in education, preservation, and long-term respect for the stories we share."
+      "paragraph3": "Cultural heritage is not a backdrop; it is a responsibility. Our work is grounded in education, preservation, and long-term respect for the stories we share.",
+      "items": {
+        "item1": "Collaborate with local professionals and businesses",
+        "item2": "Low-impact private-only touring model",
+        "item3": "Inclusive and accessible route design",
+        "item4": "Cultural heritage preservation and education"
+      }
     },
     "team": {
       "title": "Our Team",
@@ -334,8 +350,11 @@
       "title": "Our Certifications",
       "subtitle": "Committed to the highest standards of quality and safety",
       "licensed": "Licensed Guides",
+      "licensedSub": "Authorized professionals",
       "insured": "Fully Insured",
-      "local": "Local Experts"
+      "insuredSub": "Complete coverage",
+      "local": "Local Experts",
+      "localSub": "Born and raised in Stockholm"
     },
     "cta": {
       "title": "Ready to Explore?",

@@ -4,7 +4,27 @@ Living document tracking project phases, milestones, and progress toward MVP lau
 
 ---
 
-## Current Phase: Phase 13 — UI/UX Polish & Homepage Redesign ✓ COMPLETE
+## Current Phase: Phase 14 — Component Architecture & Code Quality ✓ IN PROGRESS
+
+**Date Started:** 2026-04-01
+**Status:** Active - About Us page refactored
+
+### Phase 14 Overview
+
+**Component Architecture Optimization & Code Standards**
+
+Modularization of large components, refactoring page layouts into focused reusable sections, and improving overall code organization to maintain 200 LOC guideline across codebase.
+
+### Milestones & Status
+
+| Milestone | Status | Completion |
+|-----------|--------|-----------|
+| About Us Page Refactor | ✅ Complete | 2026-04-02 |
+| Upcoming: Other large components | Planned | TBD |
+
+---
+
+## Previous Phase: Phase 13 — UI/UX Polish & Homepage Redesign ✓ COMPLETE
 
 **Date Started:** 2026-02-28
 **Date Completed:** 2026-03-04

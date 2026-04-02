@@ -278,8 +278,14 @@
     "description": "Private, fachkundig geführte Erlebnisse in Stockholm mit autorisierten Fachleuten",
     "subtitle": "Tiefe, Vertrauen und Persönliche Verbindung",
     "heroAlt": "Private Tours - fachkundig geführte Erlebnisse in Stockholm",
+    "hero": {
+      "label": "UNSERE GESCHICHTE"
+    },
     "story": {
-      "title": "Wer Wir Sind",
+      "label": "WER WIR SIND",
+      "imageAlt": "Eine charmante enge Gasse in Stockholms Altstadt",
+      "titleLine1": "Geschaffen für Reisende",
+      "titleLine2": "Die Tiefe Schätzen",
       "paragraph1": "Private Tours wurde für Reisende geschaffen, die Tiefe, Vertrauen und persönliche Verbindung über Masse und Geschwindigkeit stellen.",
       "paragraph2": "Wir bieten private, fachkundig geführte Erlebnisse in Stockholm, die ausschließlich von autorisierten Fachleuten geleitet werden. Jeder Guide wird sorgfältig ausgewählt, jede Route ist kuratiert und jedes Erlebnis ist darauf ausgelegt, sich von Anfang bis Ende nahtlos anzufühlen. Dies ist kein offener Marktplatz — es ist eine durchdachte Auswahl von Menschen und Orten, die für ihr Wissen, ihre Integrität und ihre Fähigkeit, mit Zuversicht zu führen, ausgewählt wurden.",
       "paragraph3": "Unsere Gäste suchen nicht nach mehr Optionen. Sie suchen nach der richtigen.",
@@ -288,6 +294,7 @@
       "paragraph6": "Private Tours existiert, um die Zeit in Stockholm bedeutungsvoll, mühelos und persönlich zu gestalten — geführt von Menschen, denen sowohl ihr Handwerk als auch ihre Gäste wirklich am Herzen liegen."
     },
     "mission": {
+      "label": "UNSER ZWECK",
       "title": "Unsere Mission",
       "description": "Privaten Zugang zu Stockholms vertrauenswürdigsten Experten durch ein sorgfältig kuratiertes System zu bieten, das sicherstellt, dass jedes Erlebnis persönlich, zuverlässig und tiefgreifend ansprechend ist."
     },
@@ -296,6 +303,7 @@
       "description": "Einen neuen Standard für Kulturtourismus zu setzen, bei dem Expertise, Vertrauen und menschliche Verbindung das Erlebnis definieren — und bei dem Qualität niemals dem Zufall überlassen wird."
     },
     "values": {
+      "label": "WARUM UNS WÄHLEN",
       "title": "Was Uns Auszeichnet",
       "subtitle": "Ein durchdachter Ansatz für Kulturtourismus in Stockholm",
       "authorizedExperts": {
@@ -320,10 +328,18 @@
       }
     },
     "responsibleTourism": {
+      "label": "UNSER ENGAGEMENT",
+      "imageAlt": "Stockholmer Uferpromenade mit Natur und historischer Architektur",
       "title": "Ein Engagement für Verantwortungsvollen Tourismus",
       "paragraph1": "Private Tours verpflichtet sich zu einem sorgsamen Umgang mit Menschen und Orten. Wir arbeiten mit lokalen Fachleuten und Unternehmen zusammen, pflegen ein umweltschonendes Modell mit ausschließlich privaten Touren und gestalten Erlebnisse, die die Umgebungen und Gemeinschaften respektieren, die wir besuchen.",
       "paragraph2": "Barrierefreiheit ist uns wichtig. Unsere digitalen Plattformen folgen anerkannten Barrierefreiheitsstandards, und unsere Routen sind so gestaltet, dass sie wann immer möglich inklusiv sind — ohne Kompromisse bei Tiefe oder Qualität.",
-      "paragraph3": "Kulturerbe ist keine Kulisse; es ist eine Verantwortung. Unsere Arbeit basiert auf Bildung, Bewahrung und langfristigem Respekt für die Geschichten, die wir teilen."
+      "paragraph3": "Kulturerbe ist keine Kulisse; es ist eine Verantwortung. Unsere Arbeit basiert auf Bildung, Bewahrung und langfristigem Respekt für die Geschichten, die wir teilen.",
+      "items": {
+        "item1": "Zusammenarbeit mit lokalen Fachleuten und Unternehmen",
+        "item2": "Umweltschonendes Modell mit ausschließlich privaten Touren",
+        "item3": "Inklusive und barrierefreie Routengestaltung",
+        "item4": "Bewahrung und Vermittlung des Kulturerbes"
+      }
     },
     "team": {
       "title": "Unser Team",
@@ -334,8 +350,11 @@
       "title": "Unsere Zertifizierungen",
       "subtitle": "Den höchsten Qualitäts- und Sicherheitsstandards verpflichtet",
       "licensed": "Lizenzierte Guides",
+      "licensedSub": "Autorisierte Fachleute",
       "insured": "Vollversichert",
-      "local": "Lokale Experten"
+      "insuredSub": "Umfassender Schutz",
+      "local": "Lokale Experten",
+      "localSub": "In Stockholm geboren und aufgewachsen"
     },
     "cta": {
       "title": "Bereit zu Entdecken?",

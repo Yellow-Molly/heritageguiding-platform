@@ -278,8 +278,14 @@
     "description": "Privata, expertledda upplevelser i Stockholm med auktoriserade guider",
     "subtitle": "Djup, Tillit och Personlig Kontakt",
     "heroAlt": "Private Tours - expertledda upplevelser i Stockholm",
+    "hero": {
+      "label": "VÅR BERÄTTELSE"
+    },
     "story": {
-      "title": "Vilka Vi Är",
+      "label": "VILKA VI ÄR",
+      "imageAlt": "En charmig smal gränd i Stockholms gamla stan",
+      "titleLine1": "Skapad för Resenärer",
+      "titleLine2": "Som Värdesätter Djup",
       "paragraph1": "Private Tours skapades för resenärer som värderar djup, tillit och personlig kontakt framför volym och hastighet.",
       "paragraph2": "Vi erbjuder privata, expertledda upplevelser i Stockholm som uteslutande leds av auktoriserade yrkesverksamma. Varje guide är noggrant utvald, varje rutt är kuraterad och varje upplevelse är utformad för att kännas smidig från början till slut. Detta är ingen öppen marknadsplats — det är en genomtänkt samling av människor och platser valda för sin kunskap, integritet och förmåga att vägleda med självförtroende.",
       "paragraph3": "Våra gäster söker inte fler alternativ. De söker det rätta.",
@@ -288,6 +294,7 @@
       "paragraph6": "Private Tours finns för att göra tiden i Stockholm meningsfull, enkel och personlig — ledd av människor som genuint bryr sig om både sitt hantverk och sina gäster."
     },
     "mission": {
+      "label": "VÅRT SYFTE",
       "title": "Vårt Uppdrag",
       "description": "Att erbjuda privat tillgång till Stockholms mest betrodda experter genom ett noggrant kuraterat system, där varje upplevelse är personlig, pålitlig och djupt engagerande."
     },
@@ -296,6 +303,7 @@
       "description": "Att sätta en ny standard för kulturturism där expertis, tillit och mänsklig kontakt definierar upplevelsen — och där kvalitet aldrig lämnas åt slumpen."
     },
     "values": {
+      "label": "VARFÖR VÄLJA OSS",
       "title": "Vad Som Gör Oss Annorlunda",
       "subtitle": "Ett genomtänkt tillvägagångssätt för kulturturism i Stockholm",
       "authorizedExperts": {
@@ -320,10 +328,18 @@
       }
     },
     "responsibleTourism": {
+      "label": "VÅRT ÅTAGANDE",
+      "imageAlt": "Stockholms strandlinje med natur och historisk arkitektur",
       "title": "Ett Engagemang för Ansvarsfull Turism",
       "paragraph1": "Private Tours är engagerade i att verka med omsorg för både människor och platser. Vi samarbetar med lokala yrkesverksamma och företag, upprätthåller en lågpåverkande modell med enbart privata turer och utformar upplevelser som respekterar de miljöer och samhällen vi besöker.",
       "paragraph2": "Tillgänglighet är viktigt för oss. Våra digitala plattformar följer erkända tillgänglighetsstandarder och våra rutter är utformade för att vara inkluderande när det är möjligt — utan att kompromissa med djup eller kvalitet.",
-      "paragraph3": "Kulturarv är inte en kuliss; det är ett ansvar. Vårt arbete grundas i utbildning, bevarande och långsiktig respekt för de berättelser vi delar."
+      "paragraph3": "Kulturarv är inte en kuliss; det är ett ansvar. Vårt arbete grundas i utbildning, bevarande och långsiktig respekt för de berättelser vi delar.",
+      "items": {
+        "item1": "Samarbete med lokala yrkesverksamma och företag",
+        "item2": "Lågpåverkande modell med enbart privata turer",
+        "item3": "Inkluderande och tillgänglig ruttdesign",
+        "item4": "Bevarande och utbildning av kulturarv"
+      }
     },
     "team": {
       "title": "Vårt Team",
@@ -334,8 +350,11 @@
       "title": "Våra Certifieringar",
       "subtitle": "Engagerade i högsta kvalitets- och säkerhetsstandarder",
       "licensed": "Licensierade Guider",
+      "licensedSub": "Auktoriserade yrkesverksamma",
       "insured": "Fullt Försäkrade",
-      "local": "Lokala Experter"
+      "insuredSub": "Fullständigt skydd",
+      "local": "Lokala Experter",
+      "localSub": "Födda och uppvuxna i Stockholm"
     },
     "cta": {
       "title": "Redo att Utforska?",
