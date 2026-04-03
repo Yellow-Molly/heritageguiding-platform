@@ -102,7 +102,7 @@ export function ContactForm() {
         <h3 className="font-serif !text-2xl font-bold text-[#1E3A5F]">
           {t('form.successTitle')}
         </h3>
-        <p className="mt-2 text-[#6B7280]">{t('form.successMessage')}</p>
+        <p className="mt-2 text-[var(--color-text-muted)]">{t('form.successMessage')}</p>
       </div>
     )
   }
@@ -137,7 +137,7 @@ export function ContactForm() {
             value={form.fullName}
             onChange={(e) => updateField('fullName', e.target.value)}
             placeholder={t('form.fullNamePlaceholder')}
-            className="h-12 rounded-full border border-gray-200 px-5 text-sm text-[#2D3748] placeholder:text-[#9CA3AF] focus:border-[#1E3A5F] focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]/20"
+            className="h-12 rounded-full border border-gray-200 px-5 text-sm text-[#2D3748] placeholder:text-[var(--color-text-muted)] focus:border-[#1E3A5F] focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]/20"
             required
           />
           {errors.fullName && <span className="text-sm text-red-500">{errors.fullName}</span>}
@@ -154,7 +154,7 @@ export function ContactForm() {
             value={form.email}
             onChange={(e) => updateField('email', e.target.value)}
             placeholder={t('form.emailPlaceholder')}
-            className="h-12 rounded-full border border-gray-200 px-5 text-sm text-[#2D3748] placeholder:text-[#9CA3AF] focus:border-[#1E3A5F] focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]/20"
+            className="h-12 rounded-full border border-gray-200 px-5 text-sm text-[#2D3748] placeholder:text-[var(--color-text-muted)] focus:border-[#1E3A5F] focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]/20"
             required
           />
           {errors.email && <span className="text-sm text-red-500">{errors.email}</span>}
@@ -163,7 +163,7 @@ export function ContactForm() {
         {/* Phone */}
         <div className="flex flex-col gap-1.5">
           <label htmlFor="cf-phone" className="text-sm font-medium text-[#2D3748]">
-            {t('form.phone')} <span className="text-[#9CA3AF]">{t('form.phoneOptional')}</span>
+            {t('form.phone')} <span className="text-[var(--color-text-muted)]">{t('form.phoneOptional')}</span>
           </label>
           <input
             id="cf-phone"
@@ -171,7 +171,7 @@ export function ContactForm() {
             value={form.phone}
             onChange={(e) => updateField('phone', e.target.value)}
             placeholder={t('form.phonePlaceholder')}
-            className="h-12 rounded-full border border-gray-200 px-5 text-sm text-[#2D3748] placeholder:text-[#9CA3AF] focus:border-[#1E3A5F] focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]/20"
+            className="h-12 rounded-full border border-gray-200 px-5 text-sm text-[#2D3748] placeholder:text-[var(--color-text-muted)] focus:border-[#1E3A5F] focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]/20"
           />
         </div>
 
@@ -214,7 +214,7 @@ export function ContactForm() {
             onChange={(e) => updateField('message', e.target.value)}
             placeholder={t('form.messagePlaceholder')}
             rows={5}
-            className="min-h-[140px] rounded-2xl border border-gray-200 px-5 py-3 text-sm text-[#2D3748] placeholder:text-[#9CA3AF] focus:border-[#1E3A5F] focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]/20 resize-y"
+            className="min-h-[140px] rounded-2xl border border-gray-200 px-5 py-3 text-sm text-[#2D3748] placeholder:text-[var(--color-text-muted)] focus:border-[#1E3A5F] focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]/20 resize-y"
             required
           />
           {errors.message && <span className="text-sm text-red-500">{errors.message}</span>}
@@ -231,7 +231,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="h-[52px] w-full rounded-full bg-[#E67E5A] text-base font-semibold text-white transition-colors hover:bg-[#d4694a] disabled:cursor-not-allowed disabled:opacity-60"
+          className="h-[52px] w-full rounded-full bg-[var(--color-accent)] text-base font-semibold text-white transition-colors hover:bg-[var(--color-accent-dark)] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {status === 'loading' ? (
             <span className="inline-flex items-center gap-2">

@@ -46,13 +46,13 @@ export function ContactQuickLinks() {
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="text-center">
-          <span className="text-xs font-semibold uppercase tracking-widest text-[#C4A052]">
+          <span className="text-xs font-semibold uppercase tracking-widest text-[var(--color-secondary)]">
             {t('quickLinks.label')}
           </span>
           <h2 className="mt-2 font-serif !text-3xl font-bold text-[#1E3A5F] md:!text-4xl">
             {t('quickLinks.title')}
           </h2>
-          <p className="mt-2 text-[#6B7280]">{t('quickLinks.subtitle')}</p>
+          <p className="mt-2 text-[var(--color-text-muted)]">{t('quickLinks.subtitle')}</p>
         </div>
 
         {/* Desktop cards */}
@@ -65,14 +65,14 @@ export function ContactQuickLinks() {
               <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#1E3A5F]">
                 <Icon className="h-6 w-6 text-white" />
               </div>
-              <div className="mt-4 h-[3px] w-10 rounded-full bg-[#C4A052]" />
+              <div className="mt-4 h-[3px] w-10 rounded-full bg-[var(--color-secondary)]" />
               <h3 className="mt-4 font-serif !text-[22px] font-bold text-[#1E3A5F]">
                 {t(titleKey)}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#6B7280]">{t(descriptionKey)}</p>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)]">{t(descriptionKey)}</p>
               <Link
                 href={href}
-                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#E67E5A] hover:underline"
+                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:underline"
               >
                 {t(linkKey)} <ArrowRight className="h-4 w-4" />
               </Link>
@@ -93,9 +93,9 @@ export function ContactQuickLinks() {
               </div>
               <div className="flex-1">
                 <p className="font-serif text-base font-semibold text-[#1E3A5F]">{t(titleKey)}</p>
-                <p className="text-xs text-[#E67E5A]">{t(linkKey)}</p>
+                <p className="text-xs text-[var(--color-accent)]">{t(linkKey)}</p>
               </div>
-              <ChevronRight className="h-5 w-5 text-[#9CA3AF]" />
+              <ChevronRight className="h-5 w-5 text-[var(--color-text-muted)]" />
             </Link>
           ))}
         </div>

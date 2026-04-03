@@ -8,7 +8,7 @@ interface WizardProgressIndicatorProps {
 /** Visual step progress indicator with animated dots */
 export function WizardProgressIndicator({ currentStep, totalSteps }: WizardProgressIndicatorProps) {
   return (
-    <div className="mb-8 flex justify-center gap-2" role="progressbar" aria-valuenow={currentStep} aria-valuemin={1} aria-valuemax={totalSteps}>
+    <div className="mb-8 flex justify-center gap-2" role="progressbar" aria-valuenow={currentStep} aria-valuemin={1} aria-valuemax={totalSteps} aria-label={`Step ${currentStep} of ${totalSteps}`}>
       {Array.from({ length: totalSteps }).map((_, i) => (
         <div
           key={i}

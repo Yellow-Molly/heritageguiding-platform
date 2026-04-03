@@ -3,6 +3,7 @@
 import {
   createContext,
   useContext,
+  useId,
   useState,
   useCallback,
   type ReactNode,
@@ -14,6 +15,7 @@ import { cn } from '@/lib/utils'
 interface DialogContextType {
   open: boolean
   setOpen: (open: boolean) => void
+  titleId: string
 }
 
 const DialogContext = createContext<DialogContextType | undefined>(undefined)
@@ -43,6 +45,7 @@ export function Dialog({
   defaultOpen = false,
 }: DialogProps) {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen)
+  const titleId = useId()
 
   const isControlled = controlledOpen !== undefined
   const open = isControlled ? controlledOpen : uncontrolledOpen
@@ -57,7 +60,7 @@ export function Dialog({
     [isControlled, onOpenChange]
   )
 
-  return <DialogContext.Provider value={{ open, setOpen }}>{children}</DialogContext.Provider>
+  return <DialogContext.Provider value={{ open, setOpen, titleId }}>{children}</DialogContext.Provider>
 }
 
 interface DialogTriggerProps extends HTMLAttributes<HTMLButtonElement> {
@@ -72,7 +75,16 @@ export function DialogTrigger({ children, asChild, ...props }: DialogTriggerProp
   const { setOpen } = useDialogContext()
 
   if (asChild) {
-    return <span onClick={() => setOpen(true)}>{children}</span>
+    return (
+      <span
+        onClick={() => setOpen(true)}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setOpen(true) }}
+        role="button"
+        tabIndex={0}
+      >
+        {children}
+      </span>
+    )
   }
 
   return (
@@ -90,7 +102,7 @@ interface DialogContentProps extends HTMLAttributes<HTMLDivElement> {
  * Dialog content overlay.
  */
 export function DialogContent({ children, className, ...props }: DialogContentProps) {
-  const { open, setOpen } = useDialogContext()
+  const { open, setOpen, titleId } = useDialogContext()
 
   if (!open) return null
 
@@ -100,19 +112,22 @@ export function DialogContent({ children, className, ...props }: DialogContentPr
       <div
         className="fixed inset-0 bg-black/80 backdrop-blur-sm animate-in fade-in-0"
         onClick={() => setOpen(false)}
-        aria-hidden="true"
+        role="presentation"
       />
-      {/* Content */}
+      {/* Content — dialog role is interactive; lint false-positive on div */}
       <div className="fixed inset-0 flex items-center justify-center p-4">
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <div
           role="dialog"
           aria-modal="true"
+          aria-labelledby={titleId}
           className={cn(
             'relative w-full bg-white rounded-lg shadow-xl',
             'animate-in fade-in-0 zoom-in-95 duration-200',
             className
           )}
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e: React.MouseEvent) => e.stopPropagation()}
+          onKeyDown={(e: React.KeyboardEvent) => e.stopPropagation()}
           {...props}
         >
           {/* Close button */}
@@ -154,8 +169,10 @@ interface DialogTitleProps extends HTMLAttributes<HTMLHeadingElement> {
  * Dialog title.
  */
 export function DialogTitle({ children, className, ...props }: DialogTitleProps) {
+  const { titleId } = useDialogContext()
   return (
     <h2
+      id={titleId}
       className={cn('text-lg font-semibold leading-none tracking-tight', className)}
       {...props}
     >

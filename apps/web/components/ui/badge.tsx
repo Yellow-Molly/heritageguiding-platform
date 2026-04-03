@@ -8,7 +8,7 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 
 const variantClasses = {
   default: 'bg-[var(--color-primary)] text-white',
-  secondary: 'bg-[var(--color-secondary)] text-[var(--color-primary-dark)]',
+  secondary: 'bg-[var(--color-secondary-light)] text-[var(--color-primary-dark)]',
   accent: 'bg-[var(--color-accent)] text-white',
   outline: 'border border-[var(--color-border)] bg-transparent text-[var(--color-text)]',
   success: 'bg-[var(--color-success)] text-white',

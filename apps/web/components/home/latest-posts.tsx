@@ -57,7 +57,7 @@ export function LatestPosts() {
     <section className="bg-white py-16 md:py-24" aria-label="Latest blog posts">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section heading */}
-        <h2 className="mb-12 text-center text-sm font-semibold uppercase tracking-widest text-[#d0ad50]">
+        <h2 className="mb-12 text-center text-sm font-semibold uppercase tracking-widest text-[var(--color-secondary)]">
           Latest From Our Blog
         </h2>
 
@@ -79,7 +79,7 @@ export function LatestPosts() {
                 <time className="mb-2 block text-xs text-[#3e3e3e]">{formatDate(featured.date)}</time>
                 <h3 className="mb-2 font-serif text-xl font-semibold text-[#252525]">{featured.title}</h3>
                 <p className="mb-3 line-clamp-2 text-sm text-[#3e3e3e]">{featured.excerpt}</p>
-                <span className="inline-flex items-center gap-1 text-sm font-medium text-[#d0ad50]">
+                <span className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-secondary)]">
                   Read More <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
@@ -105,7 +105,7 @@ export function LatestPosts() {
                     <h3 className="mb-1 font-serif text-base font-semibold text-[#252525] line-clamp-2">
                       {post.title}
                     </h3>
-                    <span className="inline-flex items-center gap-1 text-xs font-medium text-[#d0ad50]">
+                    <span className="inline-flex items-center gap-1 text-xs font-medium text-[var(--color-secondary)]">
                       Read More <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                     </span>
                   </div>
