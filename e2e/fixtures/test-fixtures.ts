@@ -14,7 +14,9 @@ export const test = base.extend<{
     const builder = () =>
       new AxeBuilder({ page })
         .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-        .exclude('iframe[src*="bokun"]') // Exclude third-party widget
+        .exclude('iframe[src*="bokun"]') // Exclude third-party booking widget
+        .exclude('[data-chat-bubble]') // Exclude third-party chat widget
+        .exclude('#bubblav-iframe') // Exclude BubblaV chat iframe
     await use(builder)
   },
 })

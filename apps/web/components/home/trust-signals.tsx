@@ -1,11 +1,9 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Globe, ShieldCheck, Calendar, Star } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 interface StatItem {
-  icon: React.ReactNode
   value: number
   suffix: string
   label: string
@@ -17,6 +15,12 @@ function useCountUp(target: number, duration = 2000, isVisible: boolean) {
 
   useEffect(() => {
     if (!isVisible) return
+
+    /* Skip animation for users who prefer reduced motion */
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setCount(target)
+      return
+    }
 
     const startTime = Date.now()
     const isDecimal = target % 1 !== 0
@@ -48,17 +52,14 @@ function StatCard({ stat, isVisible }: { stat: StatItem; isVisible: boolean }) {
   const count = useCountUp(stat.value, 2000, isVisible)
 
   return (
-    <div className="flex flex-col items-center text-center">
-      {/* Circular icon container */}
-      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-[#DBC078]/30 bg-[#e6d3a0]/20 text-[#d0ad50]">
-        {stat.icon}
-      </div>
-      <div className="mb-1 font-serif text-4xl font-bold text-[#252525] md:text-5xl">
+    <div className="flex flex-col gap-2 bg-[var(--color-primary)] p-5 md:gap-4 md:p-8">
+      {/* Gold number */}
+      <div className="font-serif text-3xl font-bold text-[var(--color-secondary-light)] md:text-5xl">
         {count}
         {stat.suffix}
       </div>
-      <div className="mb-1 text-sm font-semibold text-[#252525]">{stat.label}</div>
-      <div className="text-xs text-[#3e3e3e]">{stat.description}</div>
+      <div className="text-sm font-bold text-white md:text-base">{stat.label}</div>
+      <div className="text-xs leading-[1.5] text-white/60 md:text-sm">{stat.description}</div>
     </div>
   )
 }
@@ -74,28 +75,24 @@ export function TrustSignals({ guideCount = 7 }: TrustSignalsProps) {
 
   const stats: StatItem[] = [
     {
-      icon: <Globe className="h-7 w-7" />,
       value: guideCount,
       suffix: '+',
       label: t('expertGuides'),
       description: t('expertGuidesDesc'),
     },
     {
-      icon: <ShieldCheck className="h-7 w-7" />,
       value: 100,
       suffix: '%',
       label: t('trustedAgency'),
       description: t('trustedAgencyDesc'),
     },
     {
-      icon: <Calendar className="h-7 w-7" />,
       value: 15,
       suffix: '+',
       label: t('yearsExperience'),
       description: t('yearsExperienceDesc'),
     },
     {
-      icon: <Star className="h-7 w-7" />,
       value: 98,
       suffix: '%',
       label: t('happyTravelers'),
@@ -125,16 +122,20 @@ export function TrustSignals({ guideCount = 7 }: TrustSignalsProps) {
     <section
       id="trust-signals"
       ref={sectionRef}
-      className="bg-white py-16 md:py-24"
+      className="bg-[var(--color-background)] py-10 md:py-20"
       aria-label="Trust statistics"
     >
       <div className="container mx-auto px-4 lg:px-8">
-        {/* Section heading */}
-        <h2 className="mb-12 text-center text-sm font-semibold uppercase tracking-widest text-[#d0ad50]">
-          {t('sectionTitle')}
-        </h2>
+        {/* Desktop: Header row with title left, gold line right */}
+        <div className="mb-8 flex flex-col items-center gap-4 md:mb-12 md:flex-row md:items-end md:justify-between">
+          <h2 className="text-center font-serif text-[28px] font-bold leading-[1.1] text-[var(--color-primary)] md:text-left md:text-[42px]">
+            {t('sectionTitle')}
+          </h2>
+          <div className="hidden h-[3px] w-[200px] bg-[var(--color-secondary)] md:block" />
+        </div>
 
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12">
+        {/* Stat cards grid */}
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-6">
           {stats.map((stat, index) => (
             <StatCard key={index} stat={stat} isVisible={isVisible} />
           ))}

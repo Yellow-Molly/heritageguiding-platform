@@ -13,22 +13,22 @@
   --color-primary-light: #2A4A75;
   --color-primary-dark: #152B47;
 
-  /* Secondary Colors - Rich Gold */
-  --color-secondary: #C4A052;
-  --color-secondary-light: #D4B462;
-  --color-secondary-dark: #B49042;
+  /* Secondary Colors - Rich Gold (WCAG 2.1 AA: 4.5:1+ on #FAFAF8 and white) */
+  --color-secondary: #856C2D;
+  --color-secondary-light: #C4A052;
+  --color-secondary-dark: #7A6529;
 
-  /* Accent Colors - Coral Orange */
-  --color-accent: #E67E5A;
-  --color-accent-light: #EE9273;
-  --color-accent-dark: #D66A45;
+  /* Accent Colors - Coral Orange (WCAG 2.1 AA: 4.5:1 with white text) */
+  --color-accent: #C05030;
+  --color-accent-light: #D4684E;
+  --color-accent-dark: #A84428;
 
   /* Neutral Colors */
   --color-background: #FAFAF8;
   --color-background-alt: #F5F5F3;
   --color-surface: #FFFFFF;
   --color-text: #2D3748;
-  --color-text-muted: #6B7280;
+  --color-text-muted: #636B77;
   --color-text-light: #9CA3AF;
   --color-border: #E5E7EB;
   --color-border-light: #F3F4F6;
@@ -81,7 +81,7 @@
   --transition-slow: 500ms ease;
 
   /* Layout */
-  --header-height: 5rem; /* 80px - matches header h-20 */
+  --header-height: 3.5rem; /* 56px mobile */
 
   /* Z-Index Scale */
   --z-base: 0;
@@ -92,6 +92,12 @@
   --z-modal: 500;
   --z-popover: 600;
   --z-tooltip: 700;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-height: 4.5rem; /* 72px desktop */
+  }
 }
 
 /* Tailwind v4 Theme Configuration */
@@ -144,12 +150,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typography Base */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--color-primary);
+/* Typography Base — wrapped in @layer so Tailwind utility classes can override */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-primary);
+  }
 }
 
 h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }

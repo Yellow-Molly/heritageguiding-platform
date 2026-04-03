@@ -19,8 +19,8 @@ const variantStyles = {
     shadow-md hover:shadow-lg
   `,
   secondary: `
-    bg-[var(--color-secondary)] text-[var(--color-primary-dark)]
-    hover:bg-[var(--color-secondary-dark)]
+    bg-[var(--color-secondary-light)] text-[var(--color-primary-dark)]
+    hover:bg-[var(--color-secondary)]
     focus-visible:ring-[var(--color-secondary)]
     shadow-md hover:shadow-lg
   `,

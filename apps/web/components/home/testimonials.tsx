@@ -100,7 +100,7 @@ export function Testimonials() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           )}
         >
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-widest text-[#d0ad50]">
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-widest text-[var(--color-secondary)]">
             Testimonials
           </h2>
           <p className="font-serif text-3xl font-bold text-[#252525] md:text-4xl">
@@ -177,7 +177,7 @@ export function Testimonials() {
           <div className="mt-8 flex items-center justify-center gap-4">
             <button
               onClick={prevSlide}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#252525] transition-all hover:border-[#d0ad50] hover:text-[#d0ad50]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#252525] transition-all hover:border-[var(--color-secondary)] hover:text-[var(--color-secondary)]"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -191,7 +191,7 @@ export function Testimonials() {
                   className={cn(
                     'h-2.5 rounded-full transition-all',
                     index === currentIndex
-                      ? 'w-8 bg-[#d0ad50]'
+                      ? 'w-8 bg-[var(--color-secondary)]'
                       : 'w-2.5 bg-gray-300 hover:bg-[#DBC078]'
                   )}
                   aria-label={`Go to testimonial ${index + 1}`}
@@ -202,7 +202,7 @@ export function Testimonials() {
 
             <button
               onClick={nextSlide}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#252525] transition-all hover:border-[#d0ad50] hover:text-[#d0ad50]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#252525] transition-all hover:border-[var(--color-secondary)] hover:text-[var(--color-secondary)]"
               aria-label="Next testimonial"
             >
               <ChevronRight className="h-5 w-5" />

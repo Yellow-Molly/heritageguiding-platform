@@ -75,7 +75,7 @@ export function Footer() {
               />
               <button
                 type="submit"
-                className="rounded-lg bg-[#DBC078] px-6 py-3 font-medium text-[#0b0b0b] transition-colors hover:bg-[#d0ad50]"
+                className="rounded-lg bg-[#DBC078] px-6 py-3 font-medium text-[#0b0b0b] transition-colors hover:bg-[var(--color-secondary-light)]"
               >
                 Subscribe
               </button>
@@ -163,7 +163,7 @@ export function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-[#3e3e3e]">
-        <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 py-6 text-sm text-[#e6d3a0]/50 md:flex-row lg:px-8">
+        <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 py-6 text-sm text-[#e6d3a0]/70 md:flex-row lg:px-8">
           <p>&copy; {currentYear} Private Tours. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <span>Language:</span>
