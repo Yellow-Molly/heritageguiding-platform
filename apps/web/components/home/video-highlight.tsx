@@ -96,7 +96,7 @@ export function VideoHighlight() {
           <div className="aspect-video overflow-hidden rounded-xl bg-black">
             {isOpen && (
               <iframe
-                src="https://www.youtube-nocookie.com/embed/0oNX_BHgi3c?autoplay=1&rel=0"
+                src="https://www.youtube-nocookie.com/embed/vaTnvqgBkt4?autoplay=1&rel=0"
                 title="Stockholm Aerial Tour — Discover Sweden's Capital"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
