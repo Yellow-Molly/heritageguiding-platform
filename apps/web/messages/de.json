@@ -132,7 +132,22 @@
       "applyFilters": "Filter Anwenden",
       "resultsCount": "{count, plural, =0 {Keine Ergebnisse} one {# Ergebnis} other {# Ergebnisse}}",
       "selectDates": "Datum wählen",
-      "clearDates": "Datum löschen"
+      "clearDates": "Datum löschen",
+      "pageTitle": "Stockholm Touren",
+      "pageSubtitle": "Entdecken Sie unsere handverlesene Sammlung erstklassiger Privattouren",
+      "categories": "Kategorien",
+      "allTours": "Alle Touren",
+      "priceRange": "Preisbereich",
+      "accessibility": "Barrierefreiheit",
+      "under2hours": "Unter 2 Stunden",
+      "twoToThreeHours": "2-3 Stunden",
+      "threeHoursPlus": "3+ Stunden",
+      "featured": "Empfohlen",
+      "maxCapacity": "Max {count}",
+      "durationAndCapacity": "{duration} · Max {count} Personen",
+      "allToursLoaded": "Alle Touren geladen",
+      "gridView": "Rasteransicht",
+      "listView": "Listenansicht"
     },
     "empty": {
       "title": "Keine Touren gefunden",

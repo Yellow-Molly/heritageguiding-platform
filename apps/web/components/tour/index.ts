@@ -8,8 +8,12 @@ export { FilterDrawer } from './filter-drawer'
 export { TourEmptyState } from './tour-empty-state'
 export { TourPagination } from './tour-pagination'
 
-// New filter bar components (GetYourGuide-style)
+// Filter bar components (mobile)
 export { FilterBar, CategoryChips, ResultsCount } from './filter-bar'
+
+// Desktop page header + shared controls
+export { TourPageHeader } from './tour-page-header'
+export { ViewModeToggle } from './view-mode-toggle'
 
 export { TourGridLayout } from './tour-grid-layout'
 

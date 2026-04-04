@@ -339,6 +339,30 @@ a {
   border-bottom-left-radius: 0;
 }
 
+/* Price Range Slider — custom thumb styling for dual-thumb overlay */
+.price-range-thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  pointer-events: all;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.price-range-thumb::-moz-range-thumb {
+  pointer-events: all;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
 /* Reduced Motion Preference */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -4,22 +4,23 @@ Living document tracking project phases, milestones, and progress toward MVP lau
 
 ---
 
-## Current Phase: Phase 14 — Component Architecture & Code Quality ✓ IN PROGRESS
+## Current Phase: Phase 14 — Tours Listing Page Redesign & Architecture ✓ IN PROGRESS
 
 **Date Started:** 2026-04-01
-**Status:** Active - About Us page refactored
+**Status:** Active - Tours listing page complete, architecture optimization ongoing
 
 ### Phase 14 Overview
 
-**Component Architecture Optimization & Code Standards**
+**Component Architecture Optimization, Tours Listing Redesign, & Code Standards**
 
-Modularization of large components, refactoring page layouts into focused reusable sections, and improving overall code organization to maintain 200 LOC guideline across codebase.
+Modularization of large components, tours catalog redesign with 2-column sidebar layout (desktop) and advanced filters, refactoring page layouts into focused reusable sections, and improving overall code organization to maintain 200 LOC guideline across codebase.
 
 ### Milestones & Status
 
 | Milestone | Status | Completion |
 |-----------|--------|-----------|
 | About Us Page Refactor | ✅ Complete | 2026-04-02 |
+| Tours Listing Page Redesign (Option B) | ✅ Complete | 2026-04-04 |
 | Upcoming: Other large components | Planned | TBD |
 
 ---

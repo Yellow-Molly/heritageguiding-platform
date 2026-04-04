@@ -86,14 +86,11 @@ export function CategoryChips({ categories, containerRef }: CategoryChipsProps) 
 
   return (
     <div className="relative">
-      {/* Left fade gradient */}
-      <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-8 bg-gradient-to-r from-[var(--color-surface)] to-transparent" />
-
       {/* Scrollable chip container */}
       <div
         ref={containerRef}
         className={cn(
-          'flex gap-2 overflow-x-auto px-8 py-2',
+          'flex gap-2 overflow-x-auto py-2',
           'scroll-smooth snap-x snap-mandatory',
           'scrollbar-hide'
         )}
@@ -120,9 +117,6 @@ export function CategoryChips({ categories, containerRef }: CategoryChipsProps) 
           />
         ))}
       </div>
-
-      {/* Right fade gradient */}
-      <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-8 bg-gradient-to-l from-[var(--color-surface)] to-transparent" />
     </div>
   )
 }
@@ -150,7 +144,7 @@ function CategoryChip({ label, isSelected, onClick }: CategoryChipProps) {
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2',
         isSelected
           ? 'bg-[var(--color-primary)] text-white shadow-md'
-          : 'bg-[var(--color-background-alt)] text-[var(--color-text)] hover:bg-[var(--color-border)]'
+          : 'border border-[var(--color-border)] bg-transparent text-[var(--color-text)] hover:bg-[var(--color-background-alt)]'
       )}
     >
       {label}

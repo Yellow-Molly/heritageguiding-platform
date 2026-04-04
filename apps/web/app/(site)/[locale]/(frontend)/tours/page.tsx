@@ -44,21 +44,18 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
       <TourListSchema tours={tours} />
       <Header variant="solid" />
       <main className="min-h-screen bg-[var(--color-background)] pt-[var(--header-height)]">
-        {/* Catalog Section */}
-        <section className="container mx-auto px-4 py-6 lg:py-8">
-          <TourCatalogClient categories={categories} totalResults={total}>
-            {tours.length === 0 ? (
-              <TourEmptyState />
-            ) : (
-              <TourGridLayout
-                initialTours={tours}
-                totalPages={totalPages}
-                filters={filters}
-                locale={locale}
-              />
-            )}
-          </TourCatalogClient>
-        </section>
+        <TourCatalogClient categories={categories} totalResults={total}>
+          {tours.length === 0 ? (
+            <TourEmptyState />
+          ) : (
+            <TourGridLayout
+              initialTours={tours}
+              totalPages={totalPages}
+              filters={filters}
+              locale={locale}
+            />
+          )}
+        </TourCatalogClient>
       </main>
       <Footer />
     </>
