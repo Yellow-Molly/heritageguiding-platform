@@ -17,6 +17,7 @@ export interface FeaturedTour {
   image: {
     url: string
     alt: string
+    blurDataUrl?: string
   }
   duration: number
   maxCapacity: number

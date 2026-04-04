@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { generateBlurOnUploadHook } from '../hooks/generate-blur-on-upload-hook'
 
 /**
  * Media collection for images, videos, and documents
@@ -6,6 +7,9 @@ import type { CollectionConfig } from 'payload'
  */
 export const Media: CollectionConfig = {
   slug: 'media',
+  hooks: {
+    afterChange: [generateBlurOnUploadHook],
+  },
   upload: {
     mimeTypes: ['image/*', 'video/*', 'application/pdf'],
     imageSizes: [
@@ -43,6 +47,15 @@ export const Media: CollectionConfig = {
       label: 'Alt Text',
       admin: {
         description: 'Describe the image for accessibility (localized)',
+      },
+    },
+    {
+      name: 'blurDataUrl',
+      type: 'text',
+      admin: {
+        description: 'Auto-generated blur placeholder (base64)',
+        readOnly: true,
+        position: 'sidebar',
       },
     },
     {

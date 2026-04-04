@@ -12,7 +12,7 @@ export interface GuideListItem {
   id: string
   name: string
   slug: string
-  photo?: { url: string; alt: string }
+  photo?: { url: string; alt: string; blurDataUrl?: string }
   languages: string[]
   additionalLanguages?: string[]
   specializations: Array<{ id: string; name: string; slug: string }>
@@ -67,7 +67,13 @@ function mapGuideToListItem(doc: Record<string, unknown>): GuideListItem {
     id: String(doc.id),
     name: String(doc.name),
     slug: String(doc.slug),
-    photo: photo?.url ? { url: photo.url, alt: photo.alt || String(doc.name) } : undefined,
+    photo: photo?.url
+      ? {
+          url: (photo as { sizes?: { thumbnail?: { url?: string } } }).sizes?.thumbnail?.url || photo.url,
+          alt: photo.alt || String(doc.name),
+          blurDataUrl: (photo as { blurDataUrl?: string }).blurDataUrl ?? undefined,
+        }
+      : undefined,
     languages: (doc.languages ?? []) as string[],
     additionalLanguages: (doc.additionalLanguages ?? []) as string[],
     specializations: specs.map((s) => ({ id: String(s.id), name: s.name, slug: s.slug })),

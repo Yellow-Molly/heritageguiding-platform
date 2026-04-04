@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import Image from 'next/image'
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { AVATAR_BLUR_MAP } from '@/lib/image-blur-constants'
 
 interface Testimonial {
   id: string
@@ -20,7 +21,7 @@ const testimonials: Testimonial[] = [
     id: '1',
     name: 'Sarah Mitchell',
     location: 'London, UK',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=60&w=200',
     rating: 5,
     text: 'An absolutely magical experience! Our guide Johan brought Gamla Stan to life with captivating stories. We discovered hidden gems we never would have found on our own.',
     tourName: 'Gamla Stan Walking Tour',
@@ -29,7 +30,7 @@ const testimonials: Testimonial[] = [
     id: '2',
     name: 'Marcus Weber',
     location: 'Munich, Germany',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=60&w=200',
     rating: 5,
     text: 'Die Tour war fantastisch! The German-speaking guide was incredibly knowledgeable about Swedish-German historical connections. Highly recommended!',
     tourName: 'Royal Palace Experience',
@@ -38,7 +39,7 @@ const testimonials: Testimonial[] = [
     id: '3',
     name: 'Emma Larsson',
     location: 'Oslo, Norway',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=60&w=200',
     rating: 5,
     text: "Perfect for families! My kids were engaged the entire time. The Vasa Museum came alive through our guide's storytelling. We learned so much!",
     tourName: 'Vasa Museum Deep Dive',
@@ -47,7 +48,7 @@ const testimonials: Testimonial[] = [
     id: '4',
     name: 'James Chen',
     location: 'San Francisco, USA',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=60&w=200',
     rating: 5,
     text: "Worth every penny. The private tour allowed us to explore at our own pace with expert guidance. Stockholm's history is fascinating!",
     tourName: 'Private City Tour',
@@ -159,6 +160,8 @@ export function Testimonials() {
                         src={testimonial.avatar}
                         alt={testimonial.name}
                         fill
+                        placeholder={AVATAR_BLUR_MAP[testimonial.avatar.split('/')[4]?.split('?')[0]] ? 'blur' : 'empty'}
+                        blurDataURL={AVATAR_BLUR_MAP[testimonial.avatar.split('/')[4]?.split('?')[0]]}
                         className="object-cover"
                         sizes="48px"
                       />

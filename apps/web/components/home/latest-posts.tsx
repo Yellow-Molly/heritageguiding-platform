@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
+import { BLUR_DATA } from '@/lib/image-blur-constants'
 
 interface BlogPost {
   id: string
@@ -10,6 +11,7 @@ interface BlogPost {
   excerpt: string
   date: string
   image: string
+  blurDataUrl: string
 }
 
 /* Placeholder blog data — CMS integration deferred */
@@ -20,21 +22,24 @@ const posts: BlogPost[] = [
     excerpt:
       'Discover the secret passageways and medieval courtyards tucked behind the colorful facades of Stockholm\'s Old Town.',
     date: '2026-02-28',
-    image: 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=800&q=70',
+    blurDataUrl: BLUR_DATA.ARCHIPELAGO,
   },
   {
     id: 'winter-photography-stockholm',
     title: 'Winter Photography Tips for Stockholm',
     excerpt: 'Capture the magic of Stockholm in winter with these expert photography tips from our guides.',
     date: '2026-02-15',
-    image: 'https://images.unsplash.com/photo-1548777123-e216912df7d8?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1548777123-e216912df7d8?auto=format&fit=crop&w=800&q=70',
+    blurDataUrl: BLUR_DATA.WINTER_SCENE,
   },
   {
     id: 'swedish-fika-tradition',
     title: 'The Art of Swedish Fika: A Cultural Guide',
     excerpt: 'More than just coffee — fika is a cherished tradition woven into the fabric of Swedish daily life.',
     date: '2026-02-01',
-    image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=70',
+    blurDataUrl: BLUR_DATA.CITY_FIKA,
   },
 ]
 
@@ -71,6 +76,8 @@ export function LatestPosts() {
                   src={featured.image}
                   alt={featured.title}
                   fill
+                  placeholder="blur"
+                  blurDataURL={featured.blurDataUrl}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
@@ -96,6 +103,8 @@ export function LatestPosts() {
                       src={post.image}
                       alt={post.title}
                       fill
+                      placeholder="blur"
+                      blurDataURL={post.blurDataUrl}
                       className="object-cover"
                       sizes="96px"
                     />

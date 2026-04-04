@@ -68,6 +68,8 @@ export function GuidesPreview({ guides }: GuidesPreviewProps) {
                   src={guide.photo?.url ?? '/images/guide-placeholder.svg'}
                   alt={guide.name}
                   fill
+                  placeholder={guide.photo?.blurDataUrl ? 'blur' : 'empty'}
+                  blurDataURL={guide.photo?.blurDataUrl}
                   className="object-cover"
                   sizes="(max-width: 768px) 100px, 140px"
                 />

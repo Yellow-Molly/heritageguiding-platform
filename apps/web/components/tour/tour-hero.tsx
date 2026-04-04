@@ -32,6 +32,9 @@ export function TourHero({ tour }: TourHeroProps) {
           alt={heroImage.alt || tour.title}
           fill
           priority
+          fetchPriority="high"
+          placeholder={heroImage.blurDataUrl ? 'blur' : 'empty'}
+          blurDataURL={heroImage.blurDataUrl}
           className="object-cover"
           sizes="100vw"
         />

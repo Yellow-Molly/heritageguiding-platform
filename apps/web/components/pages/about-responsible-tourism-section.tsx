@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { CircleCheck } from 'lucide-react'
+import { BLUR_DATA } from '@/lib/image-blur-constants'
 
 const ITEM_KEYS = ['item1', 'item2', 'item3', 'item4'] as const
 
@@ -19,9 +20,11 @@ export function AboutResponsibleTourismSection() {
         {/* Image */}
         <div className="relative h-[220px] w-full md:h-[400px] md:w-[480px]">
           <Image
-            src="https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=960&q=80"
+            src="https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=960&q=70"
             alt={t('responsibleTourism.imageAlt')}
             fill
+            placeholder="blur"
+            blurDataURL={BLUR_DATA.NATURE_TOURISM}
             className="rounded-2xl object-cover"
             sizes="(max-width: 768px) 100vw, 480px"
           />

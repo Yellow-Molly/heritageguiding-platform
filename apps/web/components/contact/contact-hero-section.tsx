@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { BLUR_DATA } from '@/lib/image-blur-constants'
 
 /**
  * Contact page hero section with full-width background image, dark overlay,
@@ -14,10 +15,13 @@ export function ContactHeroSection() {
       {/* Background image — Stockholm cityscape (design: pzumk/unsplash) */}
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1511635697257-11edf94574d3?auto=format&fit=crop&w=2070&q=80"
+          src="https://images.unsplash.com/photo-1511635697257-11edf94574d3?auto=format&fit=crop&w=1920&q=75"
           alt="Stockholm cityscape with historic buildings"
           fill
           priority
+          fetchPriority="high"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA.CITYSCAPE_CONTACT}
           className="object-cover"
           sizes="100vw"
         />

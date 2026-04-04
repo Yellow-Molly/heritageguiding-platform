@@ -3,9 +3,10 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
+import { BLUR_DATA } from '@/lib/image-blur-constants'
 
-const FALLBACK_WINTER = 'https://images.unsplash.com/photo-1548777123-e216912df7d8?auto=format&fit=crop&w=600&q=80'
-const FALLBACK_SUMMER = 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=600&q=80'
+const FALLBACK_WINTER = 'https://images.unsplash.com/photo-1548777123-e216912df7d8?auto=format&fit=crop&w=600&q=70'
+const FALLBACK_SUMMER = 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=600&q=70'
 
 interface SeasonalCtaProps {
   tourImages?: { winter?: string; summer?: string }
@@ -21,11 +22,13 @@ export function SeasonalCta({ tourImages }: SeasonalCtaProps) {
     {
       label: t('winter'),
       image: tourImages?.winter || FALLBACK_WINTER,
+      blurDataUrl: BLUR_DATA.WINTER_SCENE,
       href: '/tours?season=winter',
     },
     {
       label: t('summer'),
       image: tourImages?.summer || FALLBACK_SUMMER,
+      blurDataUrl: BLUR_DATA.ARCHIPELAGO,
       href: '/tours?season=summer',
     },
   ]
@@ -58,6 +61,8 @@ export function SeasonalCta({ tourImages }: SeasonalCtaProps) {
                     src={season.image}
                     alt={season.label}
                     fill
+                    placeholder="blur"
+                    blurDataURL={season.blurDataUrl}
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="208px"
                   />

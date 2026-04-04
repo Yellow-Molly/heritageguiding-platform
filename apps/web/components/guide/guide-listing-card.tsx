@@ -29,6 +29,8 @@ export function GuideListingCard({ guide }: GuideListingCardProps) {
               src={guide.photo.url}
               alt={guide.photo.alt}
               fill
+              placeholder={guide.photo.blurDataUrl ? 'blur' : 'empty'}
+              blurDataURL={guide.photo.blurDataUrl}
               className="rounded-full object-cover"
               sizes="96px"
             />
