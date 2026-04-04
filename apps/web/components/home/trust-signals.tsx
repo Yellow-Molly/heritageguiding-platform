@@ -59,7 +59,7 @@ function StatCard({ stat, isVisible }: { stat: StatItem; isVisible: boolean }) {
         {stat.suffix}
       </div>
       <div className="text-sm font-bold text-white md:text-base">{stat.label}</div>
-      <div className="text-xs leading-[1.5] text-white/60 md:text-sm">{stat.description}</div>
+      <div className="text-xs leading-[1.5] text-white/70 md:text-sm">{stat.description}</div>
     </div>
   )
 }
@@ -122,7 +122,7 @@ export function TrustSignals({ guideCount = 7 }: TrustSignalsProps) {
     <section
       id="trust-signals"
       ref={sectionRef}
-      className="bg-[var(--color-background)] py-10 md:py-20"
+      className="bg-[var(--color-background)] px-4 py-10 md:px-20 md:py-20"
       aria-label="Trust statistics"
     >
       <div className="container mx-auto px-4 lg:px-8">

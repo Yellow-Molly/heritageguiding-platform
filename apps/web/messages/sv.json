@@ -21,6 +21,7 @@
     "title": "Private Tours - Upptäck Stockholms Historia",
     "description": "Upptäck Stockholm med expertvägledning. Privata och gruppturer på svenska, engelska och tyska.",
     "hero": {
+      "tag": "PREMIUMGUIDNINGAR",
       "title": "Upptäck Stockholms Rika Kulturarv",
       "subtitle": "Expertguidningar som förmedlar stadens historia och kultur",
       "cta": "Utforska våra turer",
@@ -28,9 +29,12 @@
       "imageAlt": "Panoramabild av Gamla Stan i Stockholm vid solnedgång"
     },
     "featured": {
+      "tag": "UPPLEVELSER",
       "title": "Populäraste Turerna",
       "subtitle": "Upptäck våra mest älskade svenska upplevelser",
       "viewAll": "Se alla turer",
+      "viewTour": "VISA TUR",
+      "upTo": "Upp till",
       "readMore": "Läs mer",
       "from": "Från"
     },
@@ -46,6 +50,7 @@
       "happyTravelersDesc": "Baserat på verifierade gästrecensioner"
     },
     "guides": {
+      "tag": "VÅRT TEAM",
       "sectionTitle": "Möt Våra Guider",
       "meetAll": "Möt Alla Guider"
     },
@@ -57,7 +62,9 @@
       "bookNow": "Boka Nu"
     },
     "video": {
-      "sectionTitle": "Se Vår Video"
+      "tag": "UTVALD VIDEO",
+      "sectionTitle": "Se Vår Video",
+      "subtitle": "Upplev Stockholms magi genom våra ögon"
     },
     "categories": {
       "title": "Hitta Din Perfekta Upplevelse",

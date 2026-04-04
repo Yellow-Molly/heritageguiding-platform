@@ -21,6 +21,7 @@
     "title": "Private Tours - Discover Stockholm's History",
     "description": "Discover Stockholm with expert guidance. Private and group tours in Swedish, English, and German.",
     "hero": {
+      "tag": "PREMIUM GUIDED EXPERIENCES",
       "title": "Discover Stockholm's Rich Heritage",
       "subtitle": "Expert-led tours that bring the city's history and culture to life",
       "cta": "Explore Our Tours",
@@ -28,9 +29,12 @@
       "imageAlt": "Panoramic view of Stockholm Old Town at sunset"
     },
     "featured": {
+      "tag": "EXPERIENCES",
       "title": "Most Popular Tours",
       "subtitle": "Discover our most loved Swedish experiences",
       "viewAll": "View All Tours",
+      "viewTour": "VIEW TOUR",
+      "upTo": "Up to",
       "readMore": "Read More",
       "from": "From"
     },
@@ -46,6 +50,7 @@
       "happyTravelersDesc": "Based on verified guest reviews"
     },
     "guides": {
+      "tag": "OUR TEAM",
       "sectionTitle": "Meet Our Guides",
       "meetAll": "Meet All Guides"
     },
@@ -57,7 +62,9 @@
       "bookNow": "Book Now"
     },
     "video": {
-      "sectionTitle": "Watch Our Video"
+      "tag": "FEATURED VIDEO",
+      "sectionTitle": "Watch Our Video",
+      "subtitle": "Experience the magic of Stockholm through our eyes"
     },
     "categories": {
       "title": "Find Your Perfect Experience",

@@ -127,15 +127,18 @@ app/
 
 #### Components (60+ total, organized by feature)
 
-**Home Components (8 components):**
+**Home Components (8 components, 6 currently rendered):**
 - `hero-section.tsx` - Landing hero with parallax
-- `trust-signals.tsx` - Statistics section
-- `featured-tours.tsx` - Grid of featured tours
-- `testimonials.tsx` - Carousel of reviews
-- `why-choose-us.tsx` - Value proposition
-- `find-tour-cta.tsx` - Tour finder CTA
+- `trust-signals.tsx` - Statistics section with guide count
+- `featured-tours.tsx` - Landscape tour cards with description+meta row, duration/capacity, VIEW TOUR CTA
+- `guides-preview.tsx` - Circular guide headshots with abbreviated languages (mobile)
+- `video-highlight.tsx` - Scenic photo with YouTube embed modal
+- `testimonials.tsx` - Carousel of reviews (legacy, not currently rendered)
+- `seasonal-cta.tsx` - Seasonal promo (legacy, not currently rendered)
+- `latest-posts.tsx` - Blog grid (legacy, not currently rendered)
 - `category-nav.tsx` - Category navigation
 - Tests: `category-nav.test.tsx`
+- **Current homepage order:** Hero → TrustSignals → FeaturedTours → GuidesPreview → VideoHighlight → Footer
 
 **Tour Components (15+ components):**
 - `tour-card.tsx` - Individual tour card

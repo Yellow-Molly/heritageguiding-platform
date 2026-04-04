@@ -12,6 +12,21 @@ interface GuidesPreviewProps {
 /**
  * GuidesPreview — navy background section with circular guide headshots.
  */
+/** Map CMS language codes to display labels */
+const langLabels: Record<string, { full: string; short: string }> = {
+  sv: { full: 'Swedish', short: 'SE' },
+  en: { full: 'English', short: 'EN' },
+  de: { full: 'German', short: 'DE' },
+  fr: { full: 'French', short: 'FR' },
+  es: { full: 'Spanish', short: 'ES' },
+  it: { full: 'Italian', short: 'IT' },
+}
+
+function formatLanguages(langs: string[], mode: 'full' | 'short'): string {
+  const separator = mode === 'short' ? ' · ' : ', '
+  return langs.map((code) => langLabels[code]?.[mode] || code).join(separator)
+}
+
 export function GuidesPreview({ guides }: GuidesPreviewProps) {
   const t = useTranslations('home.guides')
   if (guides.length === 0) return null
@@ -48,13 +63,13 @@ export function GuidesPreview({ guides }: GuidesPreviewProps) {
               className="group flex flex-col items-center gap-3 text-center md:gap-4"
             >
               {/* Circular headshot with gold border */}
-              <div className="relative h-28 w-28 overflow-hidden rounded-full border-[3px] border-[var(--color-secondary-light)] md:h-[140px] md:w-[140px]">
+              <div className="relative h-[100px] w-[100px] overflow-hidden rounded-full border-2 border-[var(--color-secondary-light)] md:h-[140px] md:w-[140px] md:border-[3px]">
                 <Image
                   src={guide.photo?.url ?? '/images/guide-placeholder.svg'}
                   alt={guide.name}
                   fill
                   className="object-cover"
-                  sizes="140px"
+                  sizes="(max-width: 768px) 100px, 140px"
                 />
               </div>
               <h3 className="font-serif text-lg font-bold text-white md:text-[22px]">
@@ -66,8 +81,9 @@ export function GuidesPreview({ guides }: GuidesPreviewProps) {
                 </p>
               )}
               {guide.languages && guide.languages.length > 0 && (
-                <p className="text-[13px] text-white/60">
-                  {guide.languages.join(', ')}
+                <p className="text-[13px] text-white/70">
+                  <span className="md:hidden">{formatLanguages(guide.languages, 'short')}</span>
+                  <span className="hidden md:inline">{formatLanguages(guide.languages, 'full')}</span>
                 </p>
               )}
             </Link>

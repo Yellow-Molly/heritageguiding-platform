@@ -21,6 +21,7 @@
     "title": "Private Tours - Entdecken Sie Stockholms Geschichte",
     "description": "Entdecken Sie Stockholm mit fachkundiger Führung. Private und Gruppentouren auf Schwedisch, Englisch und Deutsch.",
     "hero": {
+      "tag": "PREMIUM-GEFÜHRTE ERLEBNISSE",
       "title": "Entdecken Sie Stockholms Reiches Erbe",
       "subtitle": "Expertengeführte Touren, die die Geschichte und Kultur der Stadt lebendig machen",
       "cta": "Unsere Touren entdecken",
@@ -28,9 +29,12 @@
       "imageAlt": "Panoramablick auf Stockholms Altstadt bei Sonnenuntergang"
     },
     "featured": {
+      "tag": "ERLEBNISSE",
       "title": "Beliebteste Touren",
       "subtitle": "Entdecken Sie unsere meistgeliebten schwedischen Erlebnisse",
       "viewAll": "Alle Touren anzeigen",
+      "viewTour": "TOUR ANSEHEN",
+      "upTo": "Bis zu",
       "readMore": "Mehr erfahren",
       "from": "Ab"
     },
@@ -46,6 +50,7 @@
       "happyTravelersDesc": "Basierend auf verifizierten Gästebewertungen"
     },
     "guides": {
+      "tag": "UNSER TEAM",
       "sectionTitle": "Unsere Guides",
       "meetAll": "Alle Guides kennenlernen"
     },
@@ -57,7 +62,9 @@
       "bookNow": "Jetzt buchen"
     },
     "video": {
-      "sectionTitle": "Unser Video ansehen"
+      "tag": "EMPFOHLENES VIDEO",
+      "sectionTitle": "Unser Video ansehen",
+      "subtitle": "Erleben Sie den Zauber Stockholms durch unsere Augen"
     },
     "categories": {
       "title": "Finden Sie Ihr Perfektes Erlebnis",

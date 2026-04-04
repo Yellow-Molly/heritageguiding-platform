@@ -6,7 +6,6 @@ import { HeroSection } from '@/components/home/hero-section'
 import { TrustSignals } from '@/components/home/trust-signals'
 import { VideoHighlight } from '@/components/home/video-highlight'
 import { FeaturedTours } from '@/components/home/featured-tours'
-import { SeasonalCta } from '@/components/home/seasonal-cta'
 import { GuidesPreview } from '@/components/home/guides-preview'
 import { TravelAgencySchema } from '@/components/seo'
 import { getFeaturedTours } from '@/lib/api/get-featured-tours'
@@ -49,7 +48,7 @@ export async function generateMetadata({
 
 /**
  * Homepage - Server Component for optimal SEO and performance.
- * Section order: Hero → TrustSignals → Video → Tours → SeasonalCta → Guides → Footer
+ * Section order: Hero → TrustSignals → Tours → Guides → Video → Footer
  */
 export default async function HomePage({
   params,
@@ -65,12 +64,6 @@ export default async function HomePage({
   // Filter out tours with missing images (CMS can return empty url)
   const featuredTours = allFeaturedTours.filter((t) => t.image.url)
 
-  // Extract season card images from featured tours
-  const seasonImages = {
-    winter: featuredTours[1]?.image?.url,
-    summer: featuredTours[2]?.image?.url,
-  }
-
   return (
     <>
       {/* Schema.org structured data for SEO */}
@@ -80,11 +73,15 @@ export default async function HomePage({
       <main>
         <HeroSection />
         <TrustSignals guideCount={guidesResponse.total} />
-        <VideoHighlight />
         <FeaturedTours tours={featuredTours} />
-        <SeasonalCta tourImages={seasonImages} />
         <GuidesPreview guides={guidesResponse.guides} />
+        <VideoHighlight />
       </main>
+      {/* Gold separator line (decorative) */}
+      <div
+        className="h-[3px] w-full bg-[var(--color-secondary-light)] md:h-1"
+        aria-hidden="true"
+      />
       <Footer />
     </>
   )

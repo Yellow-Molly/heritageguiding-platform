@@ -208,14 +208,14 @@ All animations respect `prefers-reduced-motion` media query.
 
 ## Page Structure
 
-### Homepage Sections
+### Homepage Sections (Current)
 1. Header (fixed, transparent->solid on scroll)
 2. Hero (100vh, full-bleed image, gradient overlay)
-3. Trust Signals Strip (navy background, stats)
-4. Featured Tours Grid (3 columns desktop)
-5. Find Your Tour CTA (full-width, image background)
-6. Why Choose Us (2-column layout)
-7. Testimonials Carousel
+3. Trust Signals (stats with guide count, 80px horizontal padding desktop)
+4. Featured Tours (landscape cards with description + meta row, duration/capacity, "VIEW TOUR" CTA)
+5. Guides Preview (circular guide headshots with abbreviated languages on mobile, 100px photo with 2px border)
+6. Video Highlight (scenic photo with YouTube embed modal)
+7. Gold Separator Line (3px/1px on mobile, `--color-secondary-light`)
 8. Footer (multi-column, newsletter)
 
 ### Container
@@ -269,12 +269,14 @@ apps/web/
 │   │   ├── header.tsx          # Site header with mobile menu
 │   │   └── footer.tsx          # Site footer with newsletter
 │   └── home/
-│       ├── hero-section.tsx    # Hero with parallax
-│       ├── trust-signals.tsx   # Stats with count-up
-│       ├── featured-tours.tsx  # Tour card grid
-│       ├── find-tour-cta.tsx   # CTA section
-│       ├── why-choose-us.tsx   # Benefits grid
-│       └── testimonials.tsx    # Carousel
+│       ├── hero-section.tsx         # Hero with parallax
+│       ├── trust-signals.tsx        # Stats with count-up, guide count
+│       ├── featured-tours.tsx       # Landscape tour cards w/ description+meta
+│       ├── guides-preview.tsx       # Circular guide headshots
+│       ├── video-highlight.tsx      # Scenic photo w/ YouTube modal
+│       ├── testimonials.tsx         # Carousel (legacy)
+│       ├── seasonal-cta.tsx         # Seasonal promo (legacy, not rendered)
+│       └── latest-posts.tsx         # Blog grid (legacy, not rendered)
 ├── lib/
 │   └── utils.ts                # cn() helper, formatters
 └── app/
@@ -322,6 +324,7 @@ useEffect(() => {
 
 | Date | Change |
 |------|--------|
+| 2026-04-04 | Homepage redesign: section reordering (Hero→Trust→Tours→Guides→Video→Footer), landscape featured tours, guides preview with abbreviated languages, gold separator line, WCAG contrast fixes (white/70), new i18n keys (featured.tag/viewTour/upTo, guides.tag, video.tag/subtitle) |
 | 2026-02-02 | Phase 08.1: Bokun booking widget integration (bokun-booking-widget-with-fallback.tsx) |
 | 2026-01-19 | Phase 07 complete: Design system applied across all pages (catalog, detail, footer) |
 | 2026-01-18 | Updated component patterns and accessibility checklist |

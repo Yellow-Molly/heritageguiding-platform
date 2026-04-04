@@ -73,6 +73,20 @@ Complete visual refresh of the Heritage Guiding Platform homepage to match the c
 - Spacing: Consistent py-16 md:py-24 across sections
 - Animations: Scroll-triggered fade-ins with reduced-motion compliance
 
+### Homepage Section Reordering (2026-04-04)
+
+**Current rendering order:** Hero → TrustSignals → FeaturedTours → GuidesPreview → VideoHighlight → Footer
+
+**Updates in latest redesign:**
+- Reordered sections for better content flow (moved GuidesPreview before VideoHighlight)
+- Featured tours redesigned: portrait→landscape cards with description+meta row (duration/capacity)
+- "VIEW TOUR" CTA buttons on tour cards
+- GuidesPreview: mobile photos 100px with 2px border, abbreviated languages on mobile
+- Gold separator line (3px desktop / 1px mobile) before footer using `--color-secondary-light`
+- WCAG contrast fix: white/60→white/70 for text compliance
+- New i18n keys: featured.tag, featured.viewTour, featured.upTo, guides.tag, video.tag, video.subtitle
+- **Note:** SeasonalCta component exists but is no longer rendered in homepage; LatestPosts also not rendered
+
 ---
 
 ## Post-Phase 13: Minor UI Enhancements (Ongoing)
