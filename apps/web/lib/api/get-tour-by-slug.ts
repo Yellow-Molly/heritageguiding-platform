@@ -21,6 +21,7 @@ export interface TourDetail extends FeaturedTour {
     image: {
       url: string
       alt: string
+      blurDataUrl?: string
     }
   }>
   /** Logistics information */
@@ -50,6 +51,7 @@ export interface TourDetail extends FeaturedTour {
     photo?: {
       url: string
       alt: string
+      blurDataUrl?: string
     }
     bio: string
     credentials?: Array<{ credential: string }>

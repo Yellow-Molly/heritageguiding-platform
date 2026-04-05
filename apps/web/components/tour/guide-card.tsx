@@ -29,6 +29,8 @@ export async function GuideCard({ guide }: GuideCardProps) {
                 src={guide.photo.url}
                 alt={guide.photo.alt || guide.name}
                 fill
+                placeholder={guide.photo.blurDataUrl ? 'blur' : 'empty'}
+                blurDataURL={guide.photo.blurDataUrl}
                 className="rounded-full object-cover"
                 sizes="96px"
               />

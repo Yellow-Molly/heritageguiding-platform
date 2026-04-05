@@ -33,8 +33,11 @@ interface LexicalRoot {
 interface PayloadMedia {
   url?: string | null
   alt?: string
+  blurDataUrl?: string | null
   sizes?: {
     card?: { url?: string | null } | null
+    hero?: { url?: string | null } | null
+    thumbnail?: { url?: string | null } | null
   }
 }
 
@@ -135,7 +138,7 @@ export function lexicalToPlainText(lexical: unknown, maxLength?: number): string
 export function resolvePrimaryImage(
   images: TourImageRow[] | null | undefined,
   fallbackAlt = ''
-): { url: string; alt: string } {
+): { url: string; alt: string; blurDataUrl?: string } {
   if (!images || images.length === 0) {
     return { url: '', alt: fallbackAlt }
   }
@@ -151,8 +154,9 @@ export function resolvePrimaryImage(
   const cardUrl = media.sizes?.card?.url
   const url = cardUrl || media.url || ''
   const alt = media.alt || fallbackAlt
+  const blurDataUrl = media.blurDataUrl ?? undefined
 
-  return { url, alt }
+  return { url, alt, blurDataUrl }
 }
 
 // ─── Main mapper ──────────────────────────────────────────────────────────────
@@ -213,13 +217,15 @@ export function mapPayloadTourToTourDetail(doc: Record<string, unknown>): TourDe
 
   // ── Gallery ──
   const rawImages = doc.images as TourImageRow[] | null | undefined
-  const gallery: Array<{ image: { url: string; alt: string } }> = (rawImages ?? []).map((row) => {
+  const gallery: Array<{ image: { url: string; alt: string; blurDataUrl?: string } }> = (rawImages ?? []).map((row) => {
     const media = row.image
     if (!media || typeof media === 'number') return { image: { url: '', alt: '' } }
+    const m = media as PayloadMedia
     return {
       image: {
-        url: (media as PayloadMedia).url ?? '',
-        alt: (media as PayloadMedia).alt ?? '',
+        url: m.sizes?.hero?.url || (m.url ?? ''),
+        alt: m.alt ?? '',
+        blurDataUrl: m.blurDataUrl ?? undefined,
       },
     }
   })
@@ -280,7 +286,11 @@ export function mapPayloadTourToTourDetail(doc: Record<string, unknown>): TourDe
       name: rawGuide.name ?? '',
       photo:
         guidePhoto && typeof guidePhoto !== 'number' && guidePhoto.url
-          ? { url: guidePhoto.url, alt: guidePhoto.alt ?? rawGuide.name ?? '' }
+          ? {
+              url: (guidePhoto as PayloadMedia).sizes?.thumbnail?.url || guidePhoto.url,
+              alt: guidePhoto.alt ?? rawGuide.name ?? '',
+              blurDataUrl: (guidePhoto as PayloadMedia).blurDataUrl ?? undefined,
+            }
           : undefined,
       bio: lexicalToPlainText(rawGuide.bio),
       credentials: rawGuide.credentials?.length ? rawGuide.credentials : undefined,

@@ -44,6 +44,8 @@ export async function GuideToursSection({ tours, guideName }: GuideToursSectionP
                   src={tour.image.url}
                   alt={tour.image.alt}
                   fill
+                  placeholder={tour.image.blurDataUrl ? 'blur' : 'empty'}
+                  blurDataURL={tour.image.blurDataUrl}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />

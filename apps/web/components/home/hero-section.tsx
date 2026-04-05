@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
+import { BLUR_DATA } from '@/lib/image-blur-constants'
 
 export function HeroSection() {
   const t = useTranslations()
@@ -64,10 +65,13 @@ export function HeroSection() {
         className={`relative flex-1 h-full transition-all duration-700 ease-out delay-200 ${imageAnimateClass}`}
       >
         <Image
-          src="https://images.unsplash.com/photo-1508189860359-777d945909ef?auto=format&fit=crop&w=2070&q=80"
+          src="https://images.unsplash.com/photo-1508189860359-777d945909ef?auto=format&fit=crop&w=1920&q=75"
           alt="Gamla Stan, Stockholm Old Town at sunset with historic buildings reflecting on water"
           fill
           priority
+          fetchPriority="high"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA.HERO_GAMLA_STAN}
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 60vw"
         />

@@ -17,6 +17,8 @@ jobs:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
       NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
+      NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_URL }}
+      BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,6 +33,15 @@ jobs:
       # Fresh install resolves correct platform-specific native bindings.
       # npm ci with a Windows-generated lockfile fails to install Linux
       # optional deps (@next/swc, @parcel/watcher) due to npm workspace bug.
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: apps/web/.next/cache
+          key: nextjs-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('apps/web/**/*.ts', 'apps/web/**/*.tsx') }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-
+            nextjs-${{ runner.os }}-
+
       - name: Install dependencies
         run: |
           rm -f package-lock.json

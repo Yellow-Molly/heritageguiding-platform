@@ -10,6 +10,7 @@ interface GalleryImage {
   image: {
     url: string
     alt: string
+    blurDataUrl?: string
   }
 }
 
@@ -110,6 +111,8 @@ export function TourGallery({ images, open, onClose, startIndex = 0 }: TourGalle
               className="object-contain"
               sizes="100vw"
               priority
+              placeholder={currentImage.blurDataUrl ? 'blur' : 'empty'}
+              blurDataURL={currentImage.blurDataUrl}
             />
           </div>
         )}

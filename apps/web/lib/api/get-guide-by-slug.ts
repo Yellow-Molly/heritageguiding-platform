@@ -12,7 +12,7 @@ export interface GuideDetail {
   id: string
   name: string
   slug: string
-  photo?: { url: string; alt: string }
+  photo?: { url: string; alt: string; blurDataUrl?: string }
   languages: string[]
   additionalLanguages?: string[]
   specializations: Array<{ id: string; name: string; slug: string }>
@@ -26,7 +26,7 @@ export interface GuideDetail {
     id: string
     title: string
     slug: string
-    image?: { url: string; alt: string }
+    image?: { url: string; alt: string; blurDataUrl?: string }
     duration: number
     price: number
     rating: number
@@ -78,12 +78,18 @@ export async function getGuideBySlug(
 
   const tours = toursResult.docs.map((tour) => {
     const t = tour as unknown as Record<string, unknown>
-    const tourImage = t.image as { url?: string; alt?: string } | undefined
+    const tourImage = t.image as { url?: string; alt?: string; blurDataUrl?: string; sizes?: { card?: { url?: string } } } | undefined
     return {
       id: String(t.id),
       title: String(t.title ?? ''),
       slug: String(t.slug ?? ''),
-      image: tourImage?.url ? { url: tourImage.url, alt: tourImage.alt || '' } : undefined,
+      image: tourImage?.url
+        ? {
+            url: tourImage.sizes?.card?.url || tourImage.url,
+            alt: tourImage.alt || '',
+            blurDataUrl: tourImage.blurDataUrl ?? undefined,
+          }
+        : undefined,
       duration: Number(t.duration ?? 0),
       price: Number(t.price ?? 0),
       rating: Number(t.rating ?? 0),
@@ -96,7 +102,13 @@ export async function getGuideBySlug(
     name: String(doc.name),
     slug: String(doc.slug),
     status: doc.status as 'active' | 'on-leave',
-    photo: photo?.url ? { url: photo.url, alt: photo.alt || String(doc.name) } : undefined,
+    photo: photo?.url
+      ? {
+          url: (photo as { sizes?: { card?: { url?: string } } }).sizes?.card?.url || photo.url,
+          alt: photo.alt || String(doc.name),
+          blurDataUrl: (photo as { blurDataUrl?: string }).blurDataUrl ?? undefined,
+        }
+      : undefined,
     languages: (doc.languages ?? []) as string[],
     additionalLanguages: (doc.additionalLanguages ?? []) as string[],
     specializations: specs.map((s) => ({ id: String(s.id), name: s.name, slug: s.slug })),

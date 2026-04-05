@@ -42,6 +42,8 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
           src={tour.image.url}
           alt={tour.image.alt}
           fill
+          placeholder={tour.image.blurDataUrl ? 'blur' : 'empty'}
+          blurDataURL={tour.image.blurDataUrl}
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes={
             isListView

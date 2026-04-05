@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { Play, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { BLUR_DATA } from '@/lib/image-blur-constants'
 
 /**
  * VideoHighlight — split layout: navy text left + thumbnail right (desktop).
@@ -57,9 +58,12 @@ export function VideoHighlight() {
           aria-label="Play video"
         >
           <Image
-            src="https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=1600&q=80"
+            src="https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=1200&q=70"
             alt="Aerial view of Stockholm archipelago and historic cityscape"
             fill
+            loading="lazy"
+            placeholder="blur"
+            blurDataURL={BLUR_DATA.ARCHIPELAGO}
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 60vw"
           />

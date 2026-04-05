@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { BLUR_DATA } from '@/lib/image-blur-constants'
 
 /**
  * About page story section with side-by-side text and image layout.
@@ -37,9 +38,11 @@ export function AboutStorySection() {
         {/* Image side */}
         <div className="relative order-1 h-[240px] w-full md:order-2 md:h-[500px] md:w-[480px]">
           <Image
-            src="https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=960&q=80"
+            src="https://images.unsplash.com/photo-1509356843151-3e7d96241e11?auto=format&fit=crop&w=960&q=70"
             alt={t('story.imageAlt')}
             fill
+            placeholder="blur"
+            blurDataURL={BLUR_DATA.ARCHIPELAGO}
             className="rounded-2xl object-cover"
             sizes="(max-width: 768px) 100vw, 480px"
           />

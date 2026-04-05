@@ -30,6 +30,8 @@ export async function GuideDetailHeader({ guide }: GuideDetailHeaderProps) {
               className="rounded-full object-cover"
               sizes="(max-width: 768px) 128px, 160px"
               priority
+              placeholder={guide.photo.blurDataUrl ? 'blur' : 'empty'}
+              blurDataURL={guide.photo.blurDataUrl}
             />
           </div>
         ) : (
