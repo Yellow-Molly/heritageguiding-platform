@@ -1,0 +1,13 @@
+import { sql } from '@payloadcms/db-postgres'
+
+export async function up({ db }: { db: any }): Promise<void> {
+  await db.execute(sql`
+    ALTER TABLE "media" ADD COLUMN "blur_data_url" varchar;
+  `)
+}
+
+export async function down({ db }: { db: any }): Promise<void> {
+  await db.execute(sql`
+    ALTER TABLE "media" DROP COLUMN "blur_data_url";
+  `)
+}
