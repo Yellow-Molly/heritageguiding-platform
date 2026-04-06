@@ -229,15 +229,15 @@ describe('getTours', () => {
 })
 
 describe('getTourCategories', () => {
-  it('returns array of categories', () => {
-    const categories = getTourCategories()
+  it('returns array of categories', async () => {
+    const categories = await getTourCategories()
     expect(categories).toBeInstanceOf(Array)
     expect(categories.length).toBeGreaterThan(0)
   })
 
-  it('each category has id and name', () => {
-    const categories = getTourCategories()
-    categories.forEach((cat) => {
+  it('each category has id and name', async () => {
+    const categories = await getTourCategories()
+    categories.forEach((cat: { id: string; name: string }) => {
       expect(cat).toHaveProperty('id')
       expect(cat).toHaveProperty('name')
       expect(typeof cat.id).toBe('string')
@@ -245,9 +245,9 @@ describe('getTourCategories', () => {
     })
   })
 
-  it('includes expected categories', () => {
-    const categories = getTourCategories()
-    const ids = categories.map((c) => c.id)
+  it('includes expected categories', async () => {
+    const categories = await getTourCategories()
+    const ids = categories.map((c: { id: string; name: string }) => c.id)
 
     expect(ids).toContain('history')
     expect(ids).toContain('architecture')

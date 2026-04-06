@@ -16,13 +16,14 @@
     "./collections/*": "./collections/*.ts"
   },
   "dependencies": {
-    "@payloadcms/db-postgres": "^3.75.0",
-    "@payloadcms/richtext-lexical": "^3.75.0",
-    "@payloadcms/storage-vercel-blob": "^3.75.0",
-    "payload": "^3.75.0"
+    "@payloadcms/db-postgres": "^3.81.0",
+    "@payloadcms/richtext-lexical": "^3.81.0",
+    "@payloadcms/storage-vercel-blob": "^3.81.0",
+    "@payloadcms/ui": "^3.81.0",
+    "payload": "^3.81.0"
   },
   "overrides": {
-    "undici": "^7.19.0",
+    "undici": "^8.0.2",
     "esbuild": "^0.25.0"
   },
   "devDependencies": {

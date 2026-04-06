@@ -72,20 +72,20 @@ function buildWhereClause(filters: ValidatedTourFilters): Where {
   if (filters.priceMin) {
     where['pricing.basePrice'] = {
       ...((where['pricing.basePrice'] as object) ?? {}),
-      greater_than_or_equal: parseInt(filters.priceMin, 10),
+      greater_than_equal: parseInt(filters.priceMin, 10),
     }
   }
   if (filters.priceMax) {
     where['pricing.basePrice'] = {
       ...((where['pricing.basePrice'] as object) ?? {}),
-      less_than_or_equal: parseInt(filters.priceMax, 10),
+      less_than_equal: parseInt(filters.priceMax, 10),
     }
   }
 
   // Duration filter: frontend value is in minutes, schema stores hours
   if (filters.duration) {
     const maxMinutes = parseInt(filters.duration, 10)
-    where['duration.hours'] = { less_than_or_equal: maxMinutes / 60 }
+    where['duration.hours'] = { less_than_equal: maxMinutes / 60 }
   }
 
   // Accessibility filter
