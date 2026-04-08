@@ -101,3 +101,4 @@ docs/booking-management-comparison.md
 .claude/
 docx/
 apps/web/plans/reports/
+.env*.local

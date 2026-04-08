@@ -28,18 +28,6 @@ export const tourFiltersSchema = z.object({
       },
       { message: 'Invalid category slug format' }
     ),
-  priceMin: z
-    .string()
-    .optional()
-    .refine((val) => !val || (!isNaN(parseInt(val, 10)) && parseInt(val, 10) >= 0), {
-      message: 'Invalid minimum price',
-    }),
-  priceMax: z
-    .string()
-    .optional()
-    .refine((val) => !val || (!isNaN(parseInt(val, 10)) && parseInt(val, 10) >= 0), {
-      message: 'Invalid maximum price',
-    }),
   duration: z
     .string()
     .optional()
@@ -65,19 +53,6 @@ export const tourFiltersSchema = z.object({
       message: 'Invalid limit',
     }),
 })
-  .refine(
-    (data) => {
-      // Validate priceMin <= priceMax
-      if (data.priceMin && data.priceMax) {
-        return parseInt(data.priceMin, 10) <= parseInt(data.priceMax, 10)
-      }
-      return true
-    },
-    {
-      message: 'Minimum price must be less than or equal to maximum price',
-      path: ['priceMin'],
-    }
-  )
 
 export type ValidatedTourFilters = z.infer<typeof tourFiltersSchema>
 

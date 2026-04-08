@@ -81,7 +81,7 @@
   --transition-slow: 500ms ease;
 
   /* Layout */
-  --header-height: 3.5rem; /* 56px mobile */
+  --header-height: 5rem; /* 80px — matches nav h-20 */
 
   /* Z-Index Scale */
   --z-base: 0;
@@ -96,7 +96,7 @@
 
 @media (min-width: 768px) {
   :root {
-    --header-height: 4.5rem; /* 72px desktop */
+    --header-height: 5rem; /* 80px — matches nav h-20 */
   }
 }
 
@@ -118,6 +118,9 @@
   --color-foreground: var(--color-text);
   --color-muted: var(--color-text-muted);
   --color-border: var(--color-border);
+
+  /* Breakpoints */
+  --breakpoint-3xl: 2560px;
 
   /* Fonts */
   --font-sans: var(--font-body);
@@ -158,12 +161,12 @@ body {
     line-height: 1.2;
     color: var(--color-primary);
   }
-}
 
-h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
-h2 { font-size: clamp(2rem, 4vw, 3rem); }
-h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
-h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+  h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+  h2 { font-size: clamp(2rem, 4vw, 3rem); }
+  h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+  h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+}
 
 p {
   margin-bottom: 1rem;
@@ -337,6 +340,30 @@ a {
 .day-range-end:not(.day-range-start) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+/* Price Range Slider — custom thumb styling for dual-thumb overlay */
+.price-range-thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  pointer-events: all;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.price-range-thumb::-moz-range-thumb {
+  pointer-events: all;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 /* Reduced Motion Preference */

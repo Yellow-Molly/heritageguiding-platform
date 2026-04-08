@@ -1,6 +1,7 @@
 'use client'
 
 import { useContext, useState, useRef, useEffect, useCallback, useTransition } from 'react'
+import { useTranslations } from 'next-intl'
 import { Loader2 } from 'lucide-react'
 import { TourCard } from './tour-card'
 import { ViewModeContext } from './view-mode-context'
@@ -21,6 +22,7 @@ interface TourGridLayoutProps {
  * Uses IntersectionObserver to auto-load next pages.
  */
 export function TourGridLayout({ initialTours, totalPages, filters, locale }: TourGridLayoutProps) {
+  const t = useTranslations('tours.filters')
   const viewMode = useContext(ViewModeContext)
   const [tours, setTours] = useState(initialTours)
   const [hasMore, setHasMore] = useState(totalPages > 1)
@@ -75,7 +77,7 @@ export function TourGridLayout({ initialTours, totalPages, filters, locale }: To
         className={
           viewMode === 'list'
             ? 'space-y-4'
-            : 'grid gap-6 sm:grid-cols-2 lg:grid-cols-3'
+            : 'grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-5 3xl:grid-cols-4 justify-items-center'
         }
       >
         {tours.map((tour) => (
@@ -93,7 +95,7 @@ export function TourGridLayout({ initialTours, totalPages, filters, locale }: To
       {/* End state */}
       {!hasMore && tours.length > 9 && (
         <p className="text-center text-sm text-[var(--color-text-muted)] py-4">
-          All tours loaded
+          {t('allToursLoaded')}
         </p>
       )}
     </div>

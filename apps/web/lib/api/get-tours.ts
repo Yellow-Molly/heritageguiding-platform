@@ -12,8 +12,6 @@ import { validateTourFilters, type ValidatedTourFilters } from '@/lib/validation
 
 export interface TourFilters {
   categories?: string
-  priceMin?: string
-  priceMax?: string
   duration?: string
   accessible?: string
   sort?: string
@@ -65,20 +63,6 @@ function buildWhereClause(filters: ValidatedTourFilters): Where {
     const slugs = filters.categories.split(',').filter(Boolean)
     if (slugs.length > 0) {
       where['categories.slug'] = { in: slugs }
-    }
-  }
-
-  // Price range filters
-  if (filters.priceMin) {
-    where['pricing.basePrice'] = {
-      ...((where['pricing.basePrice'] as object) ?? {}),
-      greater_than_equal: parseInt(filters.priceMin, 10),
-    }
-  }
-  if (filters.priceMax) {
-    where['pricing.basePrice'] = {
-      ...((where['pricing.basePrice'] as object) ?? {}),
-      less_than_equal: parseInt(filters.priceMax, 10),
     }
   }
 

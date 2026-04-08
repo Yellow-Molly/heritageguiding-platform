@@ -132,7 +132,21 @@
       "applyFilters": "Tillämpa Filter",
       "resultsCount": "{count, plural, =0 {Inga resultat} one {# resultat} other {# resultat}}",
       "selectDates": "Välj datum",
-      "clearDates": "Rensa datum"
+      "clearDates": "Rensa datum",
+      "pageTitle": "Stockholms turer",
+      "pageSubtitle": "Utforska vårt handplockade utbud av privata premiumturer",
+      "categories": "Kategorier",
+      "allTours": "Alla turer",
+      "accessibility": "Tillgänglighet",
+      "under2hours": "Under 2 timmar",
+      "twoToThreeHours": "2-3 timmar",
+      "threeHoursPlus": "3+ timmar",
+      "featured": "Utvald",
+      "maxCapacity": "Max {count}",
+      "durationAndCapacity": "{duration} · Max {count} personer",
+      "allToursLoaded": "Alla turer laddade",
+      "gridView": "Rutnätsvy",
+      "listView": "Listvy"
     },
     "empty": {
       "title": "Inga turer hittades",
