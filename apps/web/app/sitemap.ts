@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { isProductionDeployment } from '@/lib/environment'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 const LOCALES = ['sv', 'en', 'de'] as const
@@ -29,6 +30,11 @@ function buildAlternates(path: string): Record<string, string> {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Don't expose URLs on non-production deployments
+  if (!isProductionDeployment()) {
+    return []
+  }
+
   const entries: MetadataRoute.Sitemap = []
 
   // Static routes - fixed date so crawlers get accurate change signals
@@ -99,8 +105,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         alternates: { languages: buildAlternates(path) },
       })
     }
-  } catch {
-    // If CMS is unavailable, return static routes only
+  } catch (error) {
+    console.error('[sitemap] CMS fetch failed, returning static routes only:', error)
   }
 
   return entries

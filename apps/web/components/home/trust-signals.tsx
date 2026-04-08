@@ -11,7 +11,7 @@ interface StatItem {
 }
 
 function useCountUp(target: number, duration = 2000, isVisible: boolean) {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(target)
 
   useEffect(() => {
     if (!isVisible) return
@@ -22,8 +22,13 @@ function useCountUp(target: number, duration = 2000, isVisible: boolean) {
       return
     }
 
+    /* Reset to 0 before animating up (SSR rendered target value) */
+    setCount(0)
+
     const startTime = Date.now()
     const isDecimal = target % 1 !== 0
+
+    let rafId: number
 
     const animate = () => {
       const elapsed = Date.now() - startTime
@@ -38,11 +43,13 @@ function useCountUp(target: number, duration = 2000, isVisible: boolean) {
       }
 
       if (progress < 1) {
-        requestAnimationFrame(animate)
+        rafId = requestAnimationFrame(animate)
       }
     }
 
-    requestAnimationFrame(animate)
+    rafId = requestAnimationFrame(animate)
+
+    return () => cancelAnimationFrame(rafId)
   }, [target, duration, isVisible])
 
   return count

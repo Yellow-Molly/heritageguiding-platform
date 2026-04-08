@@ -10,6 +10,7 @@ import { WebVitalsReporter } from '@/components/analytics/web-vitals-reporter'
 import { inter, playfairDisplay } from '@/lib/fonts'
 import { getWhatsAppNumber } from '@/lib/get-whatsapp-number-from-cms'
 import { generateHreflangAlternates, generateOgLocaleAlternates } from '@/lib/seo'
+import { isProductionDeployment } from '@/lib/environment'
 import type { Metadata } from 'next'
 
 export function generateStaticParams() {
@@ -69,6 +70,10 @@ export default async function LocaleLayout({
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Block indexing on non-production deployments */}
+        {!isProductionDeployment() && (
+          <meta name="robots" content="noindex, nofollow" />
+        )}
       </head>
       <body className={`${inter.variable} ${playfairDisplay.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>

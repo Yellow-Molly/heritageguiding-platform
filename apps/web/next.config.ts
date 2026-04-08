@@ -97,6 +97,18 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
+      // Block search engine indexing on non-production deployments
+      // Note: inline env check because next.config.ts can't use @/ path aliases
+      ...(process.env.VERCEL_ENV !== 'production'
+        ? [
+            {
+              source: '/:path*',
+              headers: [
+                { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
+              ],
+            },
+          ]
+        : []),
       {
         // Cache static image assets for 1 year (immutable)
         source: '/:all*(svg|jpg|png|webp|avif)',
