@@ -68,6 +68,26 @@ describe('robots.ts', () => {
     })
   })
 
+  describe('staging (VERCEL_ENV=production but IS_STAGING=true)', () => {
+    beforeEach(() => {
+      process.env.VERCEL_ENV = 'production'
+      process.env.IS_STAGING = 'true'
+    })
+
+    it('disallows all crawling', async () => {
+      const { default: robots } = await import('../robots')
+      const result = robots()
+      const rules = result.rules as { disallow: string }
+      expect(rules.disallow).toBe('/')
+    })
+
+    it('does not include sitemap', async () => {
+      const { default: robots } = await import('../robots')
+      const result = robots()
+      expect(result.sitemap).toBeUndefined()
+    })
+  })
+
   describe('local development (no VERCEL_ENV)', () => {
     beforeEach(() => {
       delete process.env.VERCEL_ENV

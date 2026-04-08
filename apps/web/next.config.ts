@@ -99,7 +99,7 @@ const nextConfig: NextConfig = {
     return [
       // Block search engine indexing on non-production deployments
       // Note: inline env check because next.config.ts can't use @/ path aliases
-      ...(process.env.VERCEL_ENV !== 'production'
+      ...(process.env.VERCEL_ENV !== 'production' || process.env.IS_STAGING === 'true'
         ? [
             {
               source: '/:path*',
