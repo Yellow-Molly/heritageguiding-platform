@@ -77,7 +77,7 @@ export function TourGridLayout({ initialTours, totalPages, filters, locale }: To
         className={
           viewMode === 'list'
             ? 'space-y-4'
-            : 'grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-5 3xl:grid-cols-4 justify-items-center'
+            : 'grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-5 3xl:grid-cols-4 justify-items-center'
         }
       >
         {tours.map((tour) => (

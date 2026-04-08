@@ -32,16 +32,16 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
         className={cn(
           'group overflow-hidden transition-all duration-300',
           'hover:shadow-[var(--shadow-card-hover)]',
-          'flex flex-row h-[130px] lg:flex-col lg:h-auto',
-          isListView && 'lg:flex-row lg:h-auto'
+          'flex flex-row h-[160px] md:flex-col md:h-auto',
+          isListView && 'md:flex-row md:h-auto'
         )}
       >
         {/* Image Container */}
         <div
           className={cn(
             'relative overflow-hidden shrink-0',
-            'w-[130px] lg:w-full lg:h-[290px]',
-            isListView && 'lg:w-72 lg:h-auto lg:aspect-[4/3]'
+            'w-[160px] md:w-full md:h-[290px]',
+            isListView && 'md:w-72 md:h-auto md:aspect-[4/3]'
           )}
         >
           <Image
@@ -51,18 +51,18 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
             placeholder={tour.image.blurDataUrl ? 'blur' : 'empty'}
             blurDataURL={tour.image.blurDataUrl}
             className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 1024px) 130px, (max-width: 1280px) 50vw, 33vw"
+            sizes="(max-width: 768px) 160px, (max-width: 1280px) 50vw, 33vw"
           />
 
           {/* Featured Badge — gold pill */}
           {tour.featured && (
-            <Badge className="absolute left-2 top-2 lg:left-3 lg:top-3" variant="secondary" size="sm">
+            <Badge className="absolute left-2 top-2 md:left-3 md:top-3" variant="secondary" size="sm">
               {t('featured')}
             </Badge>
           )}
 
           {/* Duration pill — desktop only, translucent black on image */}
-          <div className="hidden lg:flex absolute bottom-3 left-3 items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-xs text-white">
+          <div className="hidden md:flex absolute bottom-3 left-3 items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-xs text-white">
             {formatDuration(tour.duration)}
           </div>
         </div>
@@ -70,14 +70,14 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
         {/* Content */}
         <div className={cn(
           'flex flex-1 flex-col min-w-0',
-          'p-2.5 gap-1 lg:p-3 lg:gap-1.5',
-          isListView && 'lg:p-5'
+          'p-2.5 gap-1 md:p-3 md:gap-1.5',
+          isListView && 'md:p-5'
         )}>
-          {/* Rating + Price row */}
-          <div className="flex items-center justify-between">
+          {/* Rating + Price row — hidden for MVP, re-enable later */}
+          {/* <div className="flex items-center justify-between">
             <div className="flex items-center gap-1">
-              <Star className="h-3.5 w-3.5 lg:h-4 lg:w-4 fill-[var(--color-secondary)] text-[var(--color-secondary)]" />
-              <span className="text-xs lg:text-sm font-medium text-[var(--color-secondary)]">
+              <Star className="h-3.5 w-3.5 md:h-4 md:w-4 fill-[var(--color-secondary)] text-[var(--color-secondary)]" />
+              <span className="text-xs md:text-sm font-medium text-[var(--color-secondary)]">
                 {tour.rating}
               </span>
               <span className="text-xs text-[var(--color-text-muted)]">
@@ -87,28 +87,28 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
             <span className="text-sm font-bold text-[var(--color-primary)]">
               {formatPrice(tour.price)}
             </span>
-          </div>
+          </div> */}
 
           {/* Title */}
           <h3 className={cn(
-            'font-serif font-semibold text-[var(--color-primary)] transition-colors group-hover:text-[var(--color-accent)] line-clamp-2',
-            'text-sm lg:text-[15px]'
+            'font-serif font-semibold text-[var(--color-primary)] transition-colors group-hover:text-[var(--color-accent)]',
+            'text-base md:text-[20px]'
           )}>
             {tour.title}
           </h3>
 
           {/* Description — desktop only */}
-          <p className="hidden lg:block text-xs leading-[1.4] text-[var(--color-text-muted)] line-clamp-2">
+          <p className="hidden md:block text-xs leading-[1.4] text-[var(--color-text-muted)] line-clamp-2">
             {tour.description}
           </p>
 
           {/* Mobile: duration + capacity inline text */}
-          <span className="lg:hidden text-xs text-[var(--color-text-muted)] truncate">
+          <span className="md:hidden text-xs text-[var(--color-text-muted)] truncate">
             {t('durationAndCapacity', { duration: formatDuration(tour.duration), count: tour.maxCapacity })}
           </span>
 
           {/* Desktop meta */}
-          <div className="hidden lg:flex mt-auto flex-wrap items-center gap-3 text-sm text-[var(--color-text-muted)]">
+          <div className="hidden md:flex mt-auto flex-wrap items-center gap-3 text-sm text-[var(--color-text-muted)]">
             <div className="flex items-center gap-1">
               <Users className="h-4 w-4" />
               <span>{t('maxCapacity', { count: tour.maxCapacity })}</span>

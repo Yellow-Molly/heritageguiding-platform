@@ -22,7 +22,7 @@ export function FilterBar({
   categories,
 }: FilterBarProps) {
   return (
-    <div className="bg-[var(--color-background)] p-4 space-y-3">
+    <div className="bg-[var(--color-background)] px-4 pt-5 pb-4 space-y-3">
       {/* Row 1: Search + Filter pill button */}
       <div className="flex items-center gap-2">
         <div className="flex-1">

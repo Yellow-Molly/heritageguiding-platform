@@ -44,7 +44,7 @@ export function TourCatalogClient({
       </div>
 
       {/* Body: sidebar + grid */}
-      <div className="mx-auto flex max-w-7xl gap-8 px-4 pb-8 lg:px-8">
+      <div className="mx-auto flex max-w-[1536px] gap-8 px-4 pb-8 lg:px-8">
         {/* Desktop sidebar */}
         <aside className="hidden lg:block w-[260px] shrink-0">
           <SidebarFilters categories={categories} />
