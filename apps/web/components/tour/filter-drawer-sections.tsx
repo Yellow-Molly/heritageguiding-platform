@@ -5,12 +5,8 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { PriceRangeSlider } from './sidebar/price-range-slider'
 import { TourSort } from './tour-sort'
 import type { Category } from '@/lib/api/get-categories'
-
-const PRICE_MIN = 0
-const PRICE_MAX = 2000
 
 /** Sanitize category slug to prevent injection */
 function sanitizeSlug(slug: string): string {
@@ -34,11 +30,6 @@ export function DrawerFilterSections({ categories, selectedCategories }: DrawerS
 
   const currentDuration = searchParams.get('duration') || ''
   const isAccessible = searchParams.get('accessible') === 'true'
-  const priceMinParam = searchParams.get('priceMin')
-  const priceMaxParam = searchParams.get('priceMax')
-  const priceMin = priceMinParam !== null ? Number(priceMinParam) : PRICE_MIN
-  const priceMax = priceMaxParam !== null ? Number(priceMaxParam) : PRICE_MAX
-
   const updateFilter = useCallback(
     (key: string, value: string | null) => {
       const params = new URLSearchParams(searchParams.toString())
@@ -69,19 +60,6 @@ export function DrawerFilterSections({ categories, selectedCategories }: DrawerS
       router.push(`${pathname}?${params.toString()}`)
     },
     [searchParams, pathname, router, selectedCategories]
-  )
-
-  const handlePriceChange = useCallback(
-    (newMin: number, newMax: number) => {
-      const params = new URLSearchParams(searchParams.toString())
-      if (newMin > PRICE_MIN) params.set('priceMin', String(newMin))
-      else params.delete('priceMin')
-      if (newMax < PRICE_MAX) params.set('priceMax', String(newMax))
-      else params.delete('priceMax')
-      params.delete('page')
-      router.push(`${pathname}?${params.toString()}`)
-    },
-    [searchParams, pathname, router]
   )
 
   const durationOptions = [
@@ -133,11 +111,6 @@ export function DrawerFilterSections({ categories, selectedCategories }: DrawerS
             </label>
           ))}
         </div>
-      </div>
-
-      {/* Price Range */}
-      <div className="border-t border-[var(--color-border)] pt-4">
-        <PriceRangeSlider min={PRICE_MIN} max={PRICE_MAX} currentMin={priceMin} currentMax={priceMax} onChange={handlePriceChange} />
       </div>
 
       {/* Accessibility */}

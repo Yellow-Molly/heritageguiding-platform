@@ -4,17 +4,12 @@ import { useMemo, useCallback } from 'react'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { FilterCheckboxGroup } from './filter-checkbox-group'
-import { PriceRangeSlider } from './price-range-slider'
 import type { Category } from '@/lib/api/get-categories'
 
 /** Sanitize category slug to prevent injection */
 function sanitizeSlug(slug: string): string {
   return slug.toLowerCase().replace(/[^a-z0-9-]/g, '')
 }
-
-/** Hardcoded price bounds per plan validation (no extra API call) */
-const PRICE_MIN = 0
-const PRICE_MAX = 2000
 
 interface SidebarFiltersProps {
   categories: Category[]
@@ -42,10 +37,6 @@ export function SidebarFilters({ categories }: SidebarFiltersProps) {
     return d ? [d] : []
   }, [searchParams])
 
-  const priceMinParam = searchParams.get('priceMin')
-  const priceMaxParam = searchParams.get('priceMax')
-  const priceMin = priceMinParam !== null ? Number(priceMinParam) : PRICE_MIN
-  const priceMax = priceMaxParam !== null ? Number(priceMaxParam) : PRICE_MAX
   const isAccessible = searchParams.get('accessible') === 'true'
 
   // --- URL update helper ---
@@ -84,17 +75,6 @@ export function SidebarFilters({ categories }: SidebarFiltersProps) {
       updateParams({ duration: selectedDuration.includes(id) ? null : id })
     },
     [selectedDuration, updateParams]
-  )
-
-  // --- Price range ---
-  const handlePriceChange = useCallback(
-    (newMin: number, newMax: number) => {
-      updateParams({
-        priceMin: newMin > PRICE_MIN ? String(newMin) : null,
-        priceMax: newMax < PRICE_MAX ? String(newMax) : null,
-      })
-    },
-    [updateParams]
   )
 
   // --- Accessibility toggle ---
@@ -144,17 +124,6 @@ export function SidebarFilters({ categories }: SidebarFiltersProps) {
           selected={selectedDuration}
           singleSelect
           onChange={handleDurationToggle}
-        />
-      </div>
-
-      {/* Price Range */}
-      <div className="border-t border-[var(--color-border)] pt-6">
-        <PriceRangeSlider
-          min={PRICE_MIN}
-          max={PRICE_MAX}
-          currentMin={priceMin}
-          currentMax={priceMax}
-          onChange={handlePriceChange}
         />
       </div>
 

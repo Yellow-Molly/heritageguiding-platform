@@ -71,30 +71,6 @@ describe('getTours', () => {
     })
   })
 
-  describe('price filtering', () => {
-    it('filters by minimum price', async () => {
-      const result = await getTours({ priceMin: '600' })
-      result.tours.forEach((tour) => {
-        expect(tour.price).toBeGreaterThanOrEqual(600)
-      })
-    })
-
-    it('filters by maximum price', async () => {
-      const result = await getTours({ priceMax: '500' })
-      result.tours.forEach((tour) => {
-        expect(tour.price).toBeLessThanOrEqual(500)
-      })
-    })
-
-    it('filters by price range', async () => {
-      const result = await getTours({ priceMin: '400', priceMax: '600' })
-      result.tours.forEach((tour) => {
-        expect(tour.price).toBeGreaterThanOrEqual(400)
-        expect(tour.price).toBeLessThanOrEqual(600)
-      })
-    })
-  })
-
   describe('duration filtering', () => {
     it('filters by max duration', async () => {
       const result = await getTours({ duration: '120' })
@@ -211,14 +187,6 @@ describe('getTours', () => {
   })
 
   describe('combined filters', () => {
-    it('combines category and price filters', async () => {
-      const result = await getTours({ categories: 'history', priceMax: '600' })
-      result.tours.forEach((tour) => {
-        expect(['gamla-stan-walking', 'viking-history', 'nobel-prize-tour']).toContain(tour.id)
-        expect(tour.price).toBeLessThanOrEqual(600)
-      })
-    })
-
     it('combines search and accessibility', async () => {
       const result = await getTours({ q: 'museum', accessible: 'true' })
       result.tours.forEach((tour) => {

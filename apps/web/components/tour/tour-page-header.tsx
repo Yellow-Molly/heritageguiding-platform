@@ -24,8 +24,8 @@ export function TourPageHeader({
   const t = useTranslations('tours.filters')
 
   return (
-    <div className="hidden lg:block bg-[var(--color-background)] py-6 px-20">
-      <div className="flex items-end justify-between">
+    <div className="hidden lg:block bg-[var(--color-background)] py-6 px-8">
+      <div className="mx-auto flex max-w-7xl items-end justify-between">
         {/* Left: title + subtitle */}
         <div>
           <h1 className="font-serif text-[28px] text-[var(--color-primary)]">

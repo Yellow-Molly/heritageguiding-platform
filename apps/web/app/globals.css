@@ -119,6 +119,9 @@
   --color-muted: var(--color-text-muted);
   --color-border: var(--color-border);
 
+  /* Breakpoints */
+  --breakpoint-3xl: 2560px;
+
   /* Fonts */
   --font-sans: var(--font-body);
   --font-serif: var(--font-heading);

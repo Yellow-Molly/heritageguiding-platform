@@ -27,7 +27,7 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
   const isListView = variant === 'list'
 
   return (
-    <Link href={`/tours/${tour.slug}`} className="block">
+    <Link href={`/tours/${tour.slug}`} className={cn('block', !isListView && 'max-w-[400px] w-full')}>
       <Card
         className={cn(
           'group overflow-hidden transition-all duration-300',
@@ -40,7 +40,7 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
         <div
           className={cn(
             'relative overflow-hidden shrink-0',
-            'w-[130px] lg:w-full lg:h-[180px]',
+            'w-[130px] lg:w-full lg:h-[290px]',
             isListView && 'lg:w-72 lg:h-auto lg:aspect-[4/3]'
           )}
         >
@@ -91,7 +91,7 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
 
           {/* Title */}
           <h3 className={cn(
-            'font-serif font-semibold text-[var(--color-primary)] transition-colors group-hover:text-[var(--color-accent)] line-clamp-1 lg:line-clamp-2',
+            'font-serif font-semibold text-[var(--color-primary)] transition-colors group-hover:text-[var(--color-accent)] line-clamp-2',
             'text-sm lg:text-[15px]'
           )}>
             {tour.title}

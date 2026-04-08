@@ -36,12 +36,10 @@ export function FilterDrawer({ categories }: FilterDrawerProps) {
   // Count active filters
   const currentDuration = searchParams.get('duration') || ''
   const isAccessible = searchParams.get('accessible') === 'true'
-  const hasPriceFilter = searchParams.has('priceMin') || searchParams.has('priceMax')
   const activeFiltersCount = [
     selectedCategories.length > 0 ? 'c' : '',
     currentDuration,
     isAccessible ? 'a' : '',
-    hasPriceFilter ? 'p' : '',
   ].filter(Boolean).length
 
   return (
@@ -78,8 +76,9 @@ export function FilterDrawer({ categories }: FilterDrawerProps) {
         aria-modal="true"
         aria-label={t('filterPanel')}
       >
+        <div className="flex h-full flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-[var(--color-border)] p-4">
+        <div className="flex shrink-0 items-center justify-between border-b border-[var(--color-border)] p-4">
           <h2 className="text-lg font-semibold text-[var(--color-primary)]">{t('filters')}</h2>
           <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)} aria-label={t('closeFilters')}>
             <X className="h-5 w-5" />
@@ -87,7 +86,7 @@ export function FilterDrawer({ categories }: FilterDrawerProps) {
         </div>
 
         {/* Filter sections (scrollable) */}
-        <div className="space-y-6 overflow-y-auto p-4 pb-24">
+        <div className="min-h-0 flex-1 space-y-6 overflow-y-auto p-4">
           <DrawerFilterSections
             categories={categories}
             selectedCategories={selectedCategories}
@@ -95,11 +94,12 @@ export function FilterDrawer({ categories }: FilterDrawerProps) {
         </div>
 
         {/* Footer */}
-        <div className="absolute inset-x-0 bottom-0 border-t border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+        <div className="shrink-0 border-t border-[var(--color-border)] bg-[var(--color-surface)] p-4">
           <div className="flex gap-3">
             <Button variant="outline-dark" onClick={clearAllFilters} className="flex-1">{t('clearAll')}</Button>
             <Button onClick={() => setIsOpen(false)} className="flex-1">{t('applyFilters')}</Button>
           </div>
+        </div>
         </div>
       </div>
     </>
