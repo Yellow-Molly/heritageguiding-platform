@@ -4,10 +4,11 @@ import { setRequestLocale } from 'next-intl/server'
 import { getTourBySlug } from '@/lib/api/get-tour-by-slug'
 import { getTourReviews } from '@/lib/api/get-tour-reviews'
 import { TourHero } from '@/components/tour/tour-hero'
+import { TourTitleSection } from '@/components/tour/tour-title-section'
+import { TourHighlightsSection } from '@/components/tour/tour-highlights-section'
 import { TourContent } from '@/components/tour/tour-content'
-import { TourFacts } from '@/components/tour/tour-facts'
-import { LogisticsSection } from '@/components/tour/logistics-section'
 import { InclusionsSection } from '@/components/tour/inclusions-section'
+import { LogisticsSection } from '@/components/tour/logistics-section'
 import { GuideCard } from '@/components/tour/guide-card'
 import { ReviewsSection } from '@/components/tour/reviews-section'
 import { RelatedTours } from '@/components/tour/related-tours'
@@ -20,7 +21,7 @@ import type { Locale } from '@/i18n'
 // Lazy-load booking sidebar (includes Bokun widget + group inquiry modal)
 const BookingSection = nextDynamic(
   () => import('@/components/tour/booking-section').then((mod) => ({ default: mod.BookingSection })),
-  { loading: () => <div className="h-[400px] animate-pulse rounded-lg bg-[var(--color-surface)]" role="status" aria-label="Loading booking" /> }
+  { loading: () => <div className="h-[400px] animate-pulse rounded-2xl bg-[var(--color-surface)]" role="status" aria-label="Loading booking" /> }
 )
 
 // Force dynamic rendering — tour data comes from Payload CMS database
@@ -60,37 +61,27 @@ export default async function TourPage({ params }: TourPageProps) {
       <TourSchema tour={tour} reviews={reviews} />
       <Header variant="solid" />
       <main className="min-h-screen pt-20">
-        {/* Hero Section */}
+        {/* Image Grid */}
         <TourHero tour={tour} />
 
-        {/* Main Content */}
-        <div className="container py-12">
-          <div className="grid gap-12 lg:grid-cols-3">
-            {/* Left Column - Main Content */}
-            <div className="space-y-12 lg:col-span-2">
-              {/* Quick Facts (Mobile) */}
-              <div className="lg:hidden">
-                <TourFacts tour={tour} />
-              </div>
+        {/* Title Section */}
+        <TourTitleSection tour={tour} />
 
-              {/* Tour Content */}
+        {/* Body: Main Content + Sidebar */}
+        <div className="mt-8 border-t border-[var(--color-border)] px-5 pt-8 lg:px-20">
+          <div className="grid gap-12 lg:grid-cols-[1fr_380px]">
+            {/* Main Content Column */}
+            <div className="space-y-10">
+              <TourHighlightsSection highlights={tour.highlights} />
               <TourContent tour={tour} />
-
-              {/* Logistics Section */}
-              <LogisticsSection tour={tour} />
-
-              {/* Inclusions Section */}
               <InclusionsSection tour={tour} />
-
-              {/* Guide Card */}
+              <LogisticsSection tour={tour} />
               {tour.guide && <GuideCard guide={tour.guide} />}
-
-              {/* Reviews Section */}
               <ReviewsSection reviews={reviews} />
             </div>
 
-            {/* Right Column - Booking Sidebar */}
-            <div className="lg:col-span-1">
+            {/* Booking Sidebar — sticky on desktop, stacks below content on mobile */}
+            <div id="booking" className="scroll-mt-24">
               <BookingSection tour={tour} />
             </div>
           </div>
@@ -125,4 +116,3 @@ export async function generateMetadata({ params }: TourPageProps) {
     ogImage: tour.gallery?.[0]?.image?.url,
   })
 }
-
