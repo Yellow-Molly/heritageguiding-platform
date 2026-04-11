@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { Calendar, ChevronDown, Mail, ShieldCheck, Zap } from 'lucide-react'
+import { Calendar, Mail, ShieldCheck, Zap } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
 import { BokunBookingWidget } from '@/components/bokun-booking-widget-with-fallback'
 import { GroupInquiryModal } from '@/components/booking/group-inquiry-modal'
@@ -21,12 +21,14 @@ export function BookingSection({ tour }: BookingSectionProps) {
 
   return (
     <div className="sticky top-24 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[0_8px_32px_#00000012]">
-      {/* Price Row */}
+      {/* Price Row — flat group price for up to maxCapacity people */}
       <div className="flex items-baseline gap-2">
         <span className="font-serif text-[28px] font-bold text-[var(--color-primary)]">
           {formatPrice(tour.price)}
         </span>
-        <span className="text-sm text-[var(--color-text-muted)]">{t('perPerson')}</span>
+        <span className="text-sm text-[var(--color-text-muted)]">
+          {t('maxGroup', { count: tour.maxCapacity })}
+        </span>
       </div>
 
       {/* Cancellation Badge */}
@@ -57,31 +59,14 @@ export function BookingSection({ tour }: BookingSectionProps) {
             </div>
           </div>
 
-          {/* Guest Field */}
-          <div>
-            <label className="text-[13px] font-bold text-[var(--color-text)]">
-              {t('guests')}
-            </label>
-            <div className="mt-1.5 flex items-center justify-between rounded-lg border border-[var(--color-border)] px-3 py-2.5">
-              <span className="text-sm text-[var(--color-text)]">{t('defaultGuests')}</span>
-              <ChevronDown className="h-4 w-4 text-[var(--color-text-muted)]" />
-            </div>
-          </div>
-
           {/* CTA Button — triggers email inquiry when no Bokun integration */}
           <a
-            href={`mailto:info@privatetours.se?subject=${encodeURIComponent(`Booking: ${tour.title}`)}&body=${encodeURIComponent(`Hello,\n\nI would like to check availability for the "${tour.title}" tour.\n\nPreferred date: \nNumber of guests: 2\n\nThank you!`)}`}
+            href={`mailto:info@privatetours.se?subject=${encodeURIComponent(`Booking: ${tour.title}`)}&body=${encodeURIComponent(`Hello,\n\nI would like to check availability for the "${tour.title}" tour.\n\nPreferred date: \n\nThank you!`)}`}
             className="flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 font-medium text-white shadow-md transition-colors hover:opacity-90"
           >
             <Calendar className="h-4 w-4" />
             {t('checkAvailability')}
           </a>
-
-          {/* Total Row */}
-          <div className="flex items-center justify-between border-t border-[var(--color-border)] pt-4 text-sm">
-            <span className="text-[var(--color-text-muted)]">{t('totalForGuests', { count: 2 })}</span>
-            <span className="font-bold text-[var(--color-text)]">{formatPrice(tour.price * 2)}</span>
-          </div>
         </div>
       )}
 

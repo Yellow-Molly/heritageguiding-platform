@@ -87,13 +87,15 @@ export async function TourTitleSection({ tour }: TourTitleSectionProps) {
         </div>
       </div>
 
-      {/* Mobile Price Bar — visible only on mobile, scrolls to booking or triggers inquiry */}
+      {/* Mobile Price Bar — flat group price for up to maxCapacity people */}
       <div className="mt-5 flex items-center justify-between rounded-xl bg-[var(--color-background-alt)] px-4 py-3 lg:hidden">
-        <div className="flex items-baseline gap-1">
+        <div className="flex items-baseline gap-1.5">
           <span className="font-serif text-xl font-bold text-[var(--color-primary)]">
             {formatPrice(tour.price)}
           </span>
-          <span className="text-xs text-[var(--color-text-muted)]">/ {tBooking('perPerson')}</span>
+          <span className="text-xs text-[var(--color-text-muted)]">
+            {tBooking('maxGroup', { count: tour.maxCapacity })}
+          </span>
         </div>
         <a
           href="#booking"
