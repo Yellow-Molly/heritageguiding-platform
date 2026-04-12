@@ -85,6 +85,14 @@ describe('getTours', () => {
         expect(tour.duration).toBeLessThanOrEqual(90)
       })
     })
+
+    it('filters 3+ hours tours', async () => {
+      const result = await getTours({ duration: '240' })
+      expect(result.tours.length).toBeGreaterThan(0)
+      result.tours.forEach((tour) => {
+        expect(tour.duration).toBeGreaterThanOrEqual(180)
+      })
+    })
   })
 
   describe('accessibility filtering', () => {

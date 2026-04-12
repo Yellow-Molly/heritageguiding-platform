@@ -67,9 +67,14 @@ function buildWhereClause(filters: ValidatedTourFilters): Where {
   }
 
   // Duration filter: frontend value is in minutes, schema stores hours
+  // '240' means "3+ hours" (greater_than_equal 3h), others mean "up to X" (less_than_equal)
   if (filters.duration) {
-    const maxMinutes = parseInt(filters.duration, 10)
-    where['duration.hours'] = { less_than_equal: maxMinutes / 60 }
+    const minutes = parseInt(filters.duration, 10)
+    if (minutes >= 240) {
+      where['duration.hours'] = { greater_than_equal: 3 }
+    } else {
+      where['duration.hours'] = { less_than_equal: minutes / 60 }
+    }
   }
 
   // Accessibility filter
