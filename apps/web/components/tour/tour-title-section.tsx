@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import { Star, Clock, Users } from 'lucide-react'
-import { formatDuration, formatPrice } from '@/lib/utils'
+import { formatDuration } from '@/lib/utils'
 import { AccessibilityBadge } from '@/components/shared/accessibility-badge'
 import type { TourDetail } from '@/lib/api/get-tour-by-slug'
 
@@ -14,7 +14,6 @@ interface TourTitleSectionProps {
  */
 export async function TourTitleSection({ tour }: TourTitleSectionProps) {
   const t = await getTranslations('tourDetail.facts')
-  const tBooking = await getTranslations('tourDetail.booking')
 
   return (
     <div className="px-5 pt-5 lg:px-20 lg:pt-8">
@@ -87,23 +86,6 @@ export async function TourTitleSection({ tour }: TourTitleSectionProps) {
         </div>
       </div>
 
-      {/* Mobile Price Bar — flat group price for up to maxCapacity people */}
-      <div className="mt-5 flex items-center justify-between rounded-xl bg-[var(--color-background-alt)] px-4 py-3 lg:hidden">
-        <div className="flex items-baseline gap-1.5">
-          <span className="font-serif text-xl font-bold text-[var(--color-primary)]">
-            {formatPrice(tour.price)}
-          </span>
-          <span className="text-xs text-[var(--color-text-muted)]">
-            {tBooking('maxGroup', { count: tour.maxCapacity })}
-          </span>
-        </div>
-        <a
-          href="#booking"
-          className="rounded-full bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-white"
-        >
-          {tBooking('bookNow')}
-        </a>
-      </div>
     </div>
   )
 }

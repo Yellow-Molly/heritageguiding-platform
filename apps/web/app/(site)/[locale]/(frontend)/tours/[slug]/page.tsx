@@ -5,6 +5,7 @@ import { getTourBySlug } from '@/lib/api/get-tour-by-slug'
 import { getTourReviews } from '@/lib/api/get-tour-reviews'
 import { TourHero } from '@/components/tour/tour-hero'
 import { TourTitleSection } from '@/components/tour/tour-title-section'
+import { TourMobilePriceBar } from '@/components/tour/tour-mobile-price-bar'
 import { TourHighlightsSection } from '@/components/tour/tour-highlights-section'
 import { TourContent } from '@/components/tour/tour-content'
 import { InclusionsSection } from '@/components/tour/inclusions-section'
@@ -67,6 +68,9 @@ export default async function TourPage({ params }: TourPageProps) {
         {/* Title Section */}
         <TourTitleSection tour={tour} />
 
+        {/* Sticky Mobile Price Bar — sticks below header on scroll, hidden on desktop */}
+        <TourMobilePriceBar tour={tour} />
+
         {/* Body: Main Content + Sidebar */}
         <div className="mt-8 border-t border-[var(--color-border)] px-5 pt-8 lg:px-20">
           <div className="grid gap-12 lg:grid-cols-[1fr_380px]">
@@ -77,7 +81,8 @@ export default async function TourPage({ params }: TourPageProps) {
               <InclusionsSection tour={tour} />
               <LogisticsSection tour={tour} />
               {tour.guide && <GuideCard guide={tour.guide} />}
-              <ReviewsSection reviews={reviews} />
+              {/* TODO: Unhide ReviewsSection when reviews are available */}
+              {/* <ReviewsSection reviews={reviews} /> */}
             </div>
 
             {/* Booking Sidebar — sticky on desktop, stacks below content on mobile */}

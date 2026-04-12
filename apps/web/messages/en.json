@@ -453,7 +453,7 @@
       "visual": "Visual assistance available"
     },
     "facts": {
-      "maxGroup": "Max {count} people",
+      "maxGroup": "Up to {count} people",
       "reviews": "reviews"
     },
     "logistics": {
@@ -481,7 +481,7 @@
       "bookNow": "Book Now",
       "perPerson": "per person",
       "duration": "Duration",
-      "maxGroup": "Max {count} people",
+      "maxGroup": "Up to {count} people",
       "selectDate": "Select Date",
       "chooseDatePlaceholder": "Choose a date...",
       "guests": "Guests",

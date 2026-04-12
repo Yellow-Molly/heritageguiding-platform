@@ -453,7 +453,7 @@
       "visual": "Synhjälp tillgänglig"
     },
     "facts": {
-      "maxGroup": "Max {count} personer",
+      "maxGroup": "Upp till {count} personer",
       "reviews": "omdömen"
     },
     "logistics": {
@@ -481,7 +481,7 @@
       "bookNow": "Boka nu",
       "perPerson": "per person",
       "duration": "Längd",
-      "maxGroup": "Max {count} personer",
+      "maxGroup": "Upp till {count} personer",
       "selectDate": "Välj datum",
       "chooseDatePlaceholder": "Välj ett datum...",
       "guests": "Gäster",

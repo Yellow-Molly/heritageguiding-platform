@@ -48,6 +48,7 @@ export interface TourDetail extends FeaturedTour {
   guide?: {
     id: string
     name: string
+    slug: string
     photo?: {
       url: string
       alt: string

@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
+import { Link } from '@/i18n/navigation'
 import type { TourDetail } from '@/lib/api/get-tour-by-slug'
 
 interface GuideCardProps {
@@ -46,8 +47,13 @@ export async function GuideCard({ guide }: GuideCardProps) {
 
         {/* Info */}
         <div className="min-w-0 flex-1">
-          <h3 className="font-serif text-lg font-semibold text-[var(--color-primary)] lg:text-[22px]">
-            {guide.name}
+          <h3 className="font-serif text-lg font-semibold lg:text-[22px]">
+            <Link
+              href={`/guides/${guide.slug}`}
+              className="text-[var(--color-primary)] underline-offset-2 hover:underline"
+            >
+              {guide.name}
+            </Link>
           </h3>
 
           {metaParts.length > 0 && (
