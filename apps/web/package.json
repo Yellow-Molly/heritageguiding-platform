@@ -33,7 +33,7 @@
     "exceljs": "^4.4.0",
     "graphql": "^16.12.0",
     "lucide-react": "^0.562.0",
-    "next": "16.2.2",
+    "next": "16.2.3",
     "next-intl": "^4.7.0",
     "nodemailer": "^8.0.5",
     "openai": "^6.17.0",
