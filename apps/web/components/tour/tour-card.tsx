@@ -44,15 +44,21 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
             isListView && 'md:w-72 md:h-auto md:aspect-[4/3]'
           )}
         >
-          <Image
-            src={tour.image.url}
-            alt={tour.image.alt}
-            fill
-            placeholder={tour.image.blurDataUrl ? 'blur' : 'empty'}
-            blurDataURL={tour.image.blurDataUrl}
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 768px) 160px, (max-width: 1280px) 50vw, 33vw"
-          />
+          {tour.image.url ? (
+            <Image
+              src={tour.image.url}
+              alt={tour.image.alt}
+              fill
+              placeholder={tour.image.blurDataUrl ? 'blur' : 'empty'}
+              blurDataURL={tour.image.blurDataUrl}
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 160px, (max-width: 1280px) 50vw, 33vw"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-[var(--color-background-alt)] text-[var(--color-text-muted)]">
+              {tour.title.charAt(0)}
+            </div>
+          )}
 
           {/* Featured Badge — gold pill */}
           {tour.featured && (

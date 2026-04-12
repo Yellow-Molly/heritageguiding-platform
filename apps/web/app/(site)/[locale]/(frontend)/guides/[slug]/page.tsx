@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getGuideBySlug, getAllGuideSlugs } from '@/lib/api/get-guide-by-slug'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
-import { GuideDetailHeader, GuideDetailContent, GuideToursSection } from '@/components/guide'
+import { GuideDetailSidebar, GuideDetailBio, GuideToursSection } from '@/components/guide'
 import { Breadcrumb } from '@/components/shared/breadcrumb'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
@@ -47,21 +47,29 @@ export default async function GuideDetailPage({ params }: GuideDetailPageProps) 
       />
       <Header variant="solid" />
       <main className="min-h-screen bg-[var(--color-background)] pt-[var(--header-height)]">
-        <div className="container py-4">
+        {/* Mobile breadcrumb */}
+        <div className="bg-[var(--color-background-alt)] px-5 py-3 lg:hidden">
           <Breadcrumb items={breadcrumbs} />
         </div>
-        <GuideDetailHeader guide={guide} />
-        <div className="container py-12">
-          <div className="grid gap-12 lg:grid-cols-3">
-            <div className="space-y-12 lg:col-span-2">
-              <GuideDetailContent guide={guide} />
+
+        {/* Split panel container */}
+        <div className="mx-auto flex max-w-[1536px] flex-col lg:flex-row">
+          <GuideDetailSidebar guide={guide} />
+
+          {/* Right column */}
+          <div className="flex-1 px-5 py-6 lg:px-16 lg:py-10">
+            {/* Desktop breadcrumb */}
+            <div className="mb-10 hidden lg:block">
+              <Breadcrumb items={breadcrumbs} />
+            </div>
+
+            <div className="space-y-10">
+              <GuideDetailBio guide={guide} />
+              {guide.tours.length > 0 && (
+                <GuideToursSection tours={guide.tours} guideName={guide.name} />
+              )}
             </div>
           </div>
-          {guide.tours.length > 0 && (
-            <div className="mt-12">
-              <GuideToursSection tours={guide.tours} guideName={guide.name} />
-            </div>
-          )}
         </div>
       </main>
       <Footer />
@@ -71,6 +79,7 @@ export default async function GuideDetailPage({ params }: GuideDetailPageProps) 
 
 export async function generateMetadata({ params }: GuideDetailPageProps) {
   const { locale, slug } = await params
+  if (!isValidSlug(slug)) return { title: 'Guide Not Found' }
   const guide = await getGuideBySlug(slug, locale)
 
   if (!guide) {

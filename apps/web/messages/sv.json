@@ -612,7 +612,14 @@
       "tours": "{count} turer",
       "experience": "{years}+ års erfarenhet"
     },
-    "loadMore": "Visa fler guider"
+    "loadMore": "Visa fler guider",
+    "sidebar": {
+      "languages": "Språk",
+      "areasOfExpertise": "Expertområden",
+      "credentials": "Meriter",
+      "specializations": "Specialiseringar",
+      "yearsExperience": "{years}+ år"
+    }
   },
   "privacy": {
     "title": "Integritetspolicy",

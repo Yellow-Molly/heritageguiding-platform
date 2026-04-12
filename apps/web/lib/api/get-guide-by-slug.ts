@@ -7,6 +7,8 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { SerializedEditorState } from 'lexical'
+import type { FeaturedTour } from './get-featured-tours'
+import { mapPayloadTourToFeaturedTour } from './tour-payload-mapper'
 
 export interface GuideDetail {
   id: string
@@ -19,19 +21,11 @@ export interface GuideDetail {
   operatingAreas: Array<{ id: string; name: string; slug: string }>
   credentials?: Array<{ credential: string }>
   status: 'active' | 'on-leave'
+  yearsExperience?: number
   /** Rich text bio as Payload lexical JSON */
   bio: SerializedEditorState | null
-  /** Tours led by this guide */
-  tours: Array<{
-    id: string
-    title: string
-    slug: string
-    image?: { url: string; alt: string; blurDataUrl?: string }
-    duration: number
-    price: number
-    rating: number
-    reviewCount: number
-  }>
+  /** Tours led by this guide, mapped to same shape as tour listing cards */
+  tours: FeaturedTour[]
 }
 
 /**
@@ -63,39 +57,22 @@ export async function getGuideBySlug(
   const areas = (doc.operatingAreas ?? []) as Array<{ id: string; name: string; slug: string }>
   const creds = (doc.credentials ?? []) as Array<{ credential: string }>
 
-  // Fetch tours led by this guide
+  // Fetch tours led by this guide (depth:2 to populate images/relationships like tour listing)
   const toursResult = await payload.find({
     collection: 'tours',
     where: {
       guide: { equals: doc.id },
       status: { equals: 'published' },
     },
-    depth: 1,
+    depth: 2,
     locale: locale as 'sv' | 'en' | 'de',
     limit: 20,
     sort: '-createdAt',
   })
 
-  const tours = toursResult.docs.map((tour) => {
-    const t = tour as unknown as Record<string, unknown>
-    const tourImage = t.image as { url?: string; alt?: string; blurDataUrl?: string; sizes?: { card?: { url?: string } } } | undefined
-    return {
-      id: String(t.id),
-      title: String(t.title ?? ''),
-      slug: String(t.slug ?? ''),
-      image: tourImage?.url
-        ? {
-            url: tourImage.sizes?.card?.url || tourImage.url,
-            alt: tourImage.alt || '',
-            blurDataUrl: tourImage.blurDataUrl ?? undefined,
-          }
-        : undefined,
-      duration: Number(t.duration ?? 0),
-      price: Number(t.price ?? 0),
-      rating: Number(t.rating ?? 0),
-      reviewCount: Number(t.reviewCount ?? 0),
-    }
-  })
+  const tours = toursResult.docs.map((tour) =>
+    mapPayloadTourToFeaturedTour(tour as unknown as Record<string, unknown>)
+  )
 
   return {
     id: String(doc.id),
@@ -111,6 +88,7 @@ export async function getGuideBySlug(
       : undefined,
     languages: (doc.languages ?? []) as string[],
     additionalLanguages: (doc.additionalLanguages ?? []) as string[],
+    yearsExperience: typeof doc.yearsExperience === 'number' ? doc.yearsExperience : undefined,
     specializations: specs.map((s) => ({ id: String(s.id), name: s.name, slug: s.slug })),
     operatingAreas: areas.map((a) => ({ id: String(a.id), name: a.name, slug: a.slug })),
     credentials: creds.length > 0 ? creds : undefined,

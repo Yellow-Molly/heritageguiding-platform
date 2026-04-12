@@ -612,7 +612,14 @@
       "tours": "{count} tours",
       "experience": "{years}+ years experience"
     },
-    "loadMore": "Load more guides"
+    "loadMore": "Load more guides",
+    "sidebar": {
+      "languages": "Languages",
+      "areasOfExpertise": "Areas of Expertise",
+      "credentials": "Credentials",
+      "specializations": "Specializations",
+      "yearsExperience": "{years}+ years"
+    }
   },
   "privacy": {
     "title": "Privacy Policy",

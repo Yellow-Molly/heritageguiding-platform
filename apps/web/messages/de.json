@@ -612,7 +612,14 @@
       "tours": "{count} Touren",
       "experience": "{years}+ Jahre Erfahrung"
     },
-    "loadMore": "Mehr Reiseführer laden"
+    "loadMore": "Mehr Reiseführer laden",
+    "sidebar": {
+      "languages": "Sprachen",
+      "areasOfExpertise": "Fachgebiete",
+      "credentials": "Qualifikationen",
+      "specializations": "Spezialisierungen",
+      "yearsExperience": "{years}+ Jahre"
+    }
   },
   "privacy": {
     "title": "Datenschutzerklärung",
