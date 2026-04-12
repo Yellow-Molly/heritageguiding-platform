@@ -2,11 +2,15 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
-import { GuideGrid } from '@/components/guide'
-import { getGuides, type GuideFilters } from '@/lib/api/get-guides'
+import { GuideListingHero } from '@/components/guide/guide-listing-hero'
+import { GuideFilterBar } from '@/components/guide/guide-filter-bar'
+import { GuideGridClient } from '@/components/guide/guide-grid-client'
+import { getGuides, getGuideFilterOptions, type GuideFilters } from '@/lib/api/get-guides'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
 import { GuideListSchema } from '@/components/seo'
+
+const PAGE_SIZE = 9
 
 interface GuidesPageProps {
   params: Promise<{ locale: string }>
@@ -27,23 +31,31 @@ export async function generateMetadata({ params }: GuidesPageProps): Promise<Met
 export default async function GuidesPage({ params, searchParams }: GuidesPageProps) {
   const { locale } = await params
   const filters = await searchParams
-  const t = await getTranslations({ locale, namespace: 'guides' })
-  const { guides, page, totalPages } = await getGuides(filters, locale)
+
+  const [{ guides, total, totalPages }, filterOptions] = await Promise.all([
+    getGuides({ ...filters, limit: String(PAGE_SIZE) }, locale),
+    getGuideFilterOptions(locale),
+  ])
 
   return (
     <>
       <GuideListSchema guides={guides} />
       <Header variant="solid" />
       <main className="min-h-screen bg-[var(--color-background)] pt-[var(--header-height)]">
+        <GuideListingHero />
         <section className="container mx-auto px-4 py-6 lg:py-8">
-          <h1 className="font-serif text-3xl font-bold text-[var(--color-primary)] lg:text-4xl">
-            {t('title')}
-          </h1>
-          <p className="mt-2 text-lg text-[var(--color-text-muted)]">
-            {t('subtitle')}
-          </p>
-          <div className="mt-8">
-            <GuideGrid guides={guides} page={page} totalPages={totalPages} />
+          <GuideFilterBar
+            totalGuides={total}
+            languages={filterOptions.languages}
+            specializations={filterOptions.specializations}
+            areas={filterOptions.areas}
+          />
+          <div className="mt-6">
+            <GuideGridClient
+              initialGuides={guides}
+              totalGuides={total}
+              pageSize={PAGE_SIZE}
+            />
           </div>
         </section>
       </main>

@@ -592,7 +592,27 @@
     "breadcrumb": {
       "home": "Home",
       "guides": "Guides"
-    }
+    },
+    "hero": {
+      "tag": "MEET OUR TEAM",
+      "title": "Our Expert Guides",
+      "subtitle": "Meet the passionate experts who bring Stockholm's heritage to life. Each guide brings unique expertise and local knowledge."
+    },
+    "filters": {
+      "search": "Search guides...",
+      "language": "Language",
+      "specialization": "Specialization",
+      "area": "Area",
+      "showFilters": "Filters",
+      "clearAll": "Clear all",
+      "apply": "Apply",
+      "count": "{count} guides"
+    },
+    "stats": {
+      "tours": "{count} tours",
+      "experience": "{years}+ years experience"
+    },
+    "loadMore": "Load more guides"
   },
   "privacy": {
     "title": "Privacy Policy",

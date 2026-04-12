@@ -592,7 +592,27 @@
     "breadcrumb": {
       "home": "Hem",
       "guides": "Guider"
-    }
+    },
+    "hero": {
+      "tag": "MÖTE VÅRT TEAM",
+      "title": "Våra expertguider",
+      "subtitle": "Möt de passionerade experterna som ger liv åt Stockholms kulturarv. Varje guide bidrar med unik expertis och lokal kunskap."
+    },
+    "filters": {
+      "search": "Sök guider...",
+      "language": "Språk",
+      "specialization": "Specialisering",
+      "area": "Område",
+      "showFilters": "Filter",
+      "clearAll": "Rensa alla",
+      "apply": "Tillämpa",
+      "count": "{count} guider"
+    },
+    "stats": {
+      "tours": "{count} turer",
+      "experience": "{years}+ års erfarenhet"
+    },
+    "loadMore": "Visa fler guider"
   },
   "privacy": {
     "title": "Integritetspolicy",

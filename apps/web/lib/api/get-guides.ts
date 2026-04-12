@@ -19,6 +19,8 @@ export interface GuideListItem {
   operatingAreas: Array<{ id: string; name: string; slug: string }>
   credentials?: Array<{ credential: string }>
   bioExcerpt?: string
+  tourCount: number
+  yearsExperience?: number
 }
 
 export interface GuideFilters {
@@ -57,14 +59,18 @@ function extractBioExcerpt(bio: unknown, maxLength = 150): string | undefined {
 }
 
 /** Map a Payload guide doc to a public GuideListItem (no email/phone) */
-function mapGuideToListItem(doc: Record<string, unknown>): GuideListItem {
+function mapGuideToListItem(
+  doc: Record<string, unknown>,
+  tourCountMap: Map<string, number>
+): GuideListItem {
   const photo = doc.photo as { url?: string; alt?: string } | undefined
   const specs = (doc.specializations ?? []) as Array<{ id: string; name: string; slug: string }>
   const areas = (doc.operatingAreas ?? []) as Array<{ id: string; name: string; slug: string }>
   const creds = (doc.credentials ?? []) as Array<{ credential: string }>
+  const id = String(doc.id)
 
   return {
-    id: String(doc.id),
+    id,
     name: String(doc.name),
     slug: String(doc.slug),
     photo: photo?.url
@@ -80,6 +86,8 @@ function mapGuideToListItem(doc: Record<string, unknown>): GuideListItem {
     operatingAreas: areas.map((a) => ({ id: String(a.id), name: a.name, slug: a.slug })),
     credentials: creds.length > 0 ? creds : undefined,
     bioExcerpt: extractBioExcerpt(doc.bio),
+    tourCount: tourCountMap.get(id) ?? 0,
+    yearsExperience: typeof doc.yearsExperience === 'number' ? doc.yearsExperience : undefined,
   }
 }
 
@@ -97,12 +105,15 @@ export async function getGuides(
   // Build where clause - only active guides
   const where: Where = { status: { equals: 'active' } }
 
-  // Language filter: check main languages or additionalLanguages
+  // Language filter: main and additional languages have disjoint enum sets in Postgres,
+  // so only query the field whose enum contains the given code.
+  const mainLanguageCodes = new Set(['sv', 'en', 'de', 'fr', 'es', 'it'])
   if (filters.language) {
-    where.or = [
-      { languages: { contains: filters.language } },
-      { additionalLanguages: { contains: filters.language } },
-    ]
+    if (mainLanguageCodes.has(filters.language)) {
+      where.languages = { contains: filters.language }
+    } else {
+      where.additionalLanguages = { contains: filters.language }
+    }
   }
 
   // Search by name
@@ -123,7 +134,28 @@ export async function getGuides(
     sort: 'name',
   })
 
-  let allGuides = result.docs.map((doc) => mapGuideToListItem(doc as unknown as Record<string, unknown>))
+  // Batch-query published tour counts per guide (single query, no N+1)
+  const guideIds = result.docs.map((doc) => String(doc.id))
+  const tourCountMap = new Map<string, number>()
+  if (guideIds.length > 0) {
+    const tours = await payload.find({
+      collection: 'tours',
+      where: { status: { equals: 'published' }, guide: { in: guideIds } },
+      depth: 0,
+      limit: 0,
+      select: { guide: true },
+    })
+    for (const tour of tours.docs) {
+      const gid = typeof tour.guide === 'object' && tour.guide !== null
+        ? String((tour.guide as unknown as { id: number }).id)
+        : String(tour.guide)
+      tourCountMap.set(gid, (tourCountMap.get(gid) ?? 0) + 1)
+    }
+  }
+
+  let allGuides = result.docs.map((doc) =>
+    mapGuideToListItem(doc as unknown as Record<string, unknown>, tourCountMap)
+  )
 
   // Post-query filters for relationship fields (Payload doesn't support deep where on populated relationships)
   if (filters.specialization) {
@@ -161,3 +193,33 @@ export const getCachedGuides = unstable_cache(
   ['guides-list'],
   { tags: ['guides'] }
 )
+
+export interface GuideFilterOptions {
+  languages: string[]
+  specializations: Array<{ id: string; name: string; slug: string }>
+  areas: Array<{ id: string; name: string; slug: string }>
+}
+
+/**
+ * Extract unique filter options from all active guides.
+ * Lightweight — reuses cached guide data.
+ */
+export async function getGuideFilterOptions(locale: string = 'en'): Promise<GuideFilterOptions> {
+  const { guides } = await getGuides({ limit: '200' }, locale)
+
+  const langSet = new Set<string>()
+  const specMap = new Map<string, { id: string; name: string; slug: string }>()
+  const areaMap = new Map<string, { id: string; name: string; slug: string }>()
+
+  for (const g of guides) {
+    for (const l of [...g.languages, ...(g.additionalLanguages ?? [])]) langSet.add(l)
+    for (const s of g.specializations) specMap.set(s.id, s)
+    for (const a of g.operatingAreas) areaMap.set(a.id, a)
+  }
+
+  return {
+    languages: [...langSet].sort(),
+    specializations: [...specMap.values()].sort((a, b) => a.name.localeCompare(b.name)),
+    areas: [...areaMap.values()].sort((a, b) => a.name.localeCompare(b.name)),
+  }
+}

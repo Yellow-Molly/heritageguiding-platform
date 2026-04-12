@@ -21,6 +21,15 @@ vi.mock('@/i18n/navigation', () => ({
   ),
 }))
 
+// Mock next-intl
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string, values?: Record<string, unknown>) => {
+    if (key === 'tours' && values?.count) return `${values.count} tours`
+    if (key === 'experience' && values?.years) return `${values.years}+ years experience`
+    return key
+  },
+}))
+
 const mockGuideWithPhoto: GuideListItem = {
   id: '1',
   name: 'Erik Lindqvist',
@@ -38,6 +47,8 @@ const mockGuideWithPhoto: GuideListItem = {
   ],
   credentials: [{ credential: 'PhD History' }],
   bioExcerpt: 'Expert guide with 10 years of experience',
+  tourCount: 5,
+  yearsExperience: 10,
 }
 
 const mockGuideWithoutPhoto: GuideListItem = {
@@ -47,6 +58,7 @@ const mockGuideWithoutPhoto: GuideListItem = {
   languages: ['sv'],
   specializations: [],
   operatingAreas: [],
+  tourCount: 0,
 }
 
 const mockGuideWithManySpecializations: GuideListItem = {
@@ -62,6 +74,7 @@ const mockGuideWithManySpecializations: GuideListItem = {
     { id: 'cat5', name: 'Food', slug: 'food' },
   ],
   operatingAreas: [],
+  tourCount: 3,
 }
 
 describe('GuideListingCard', () => {
@@ -123,7 +136,7 @@ describe('GuideListingCard', () => {
 
     render(<GuideListingCard guide={mockGuideWithPhoto} />)
 
-    const link = screen.getByRole('link', { name: /Erik Lindqvist/ })
+    const link = screen.getByRole('link')
     expect(link).toHaveAttribute('href', '/guides/erik-lindqvist')
   })
 
@@ -132,25 +145,23 @@ describe('GuideListingCard', () => {
 
     render(<GuideListingCard guide={mockGuideWithPhoto} />)
 
-    expect(screen.getByText('Expert guide with 10 years of experience')).toBeInTheDocument()
+    // Bio is now wrapped in quotes
+    expect(screen.getByText(/Expert guide with 10 years of experience/)).toBeInTheDocument()
   })
 
-  it('limits displayed specializations to 3 and shows overflow badge', async () => {
+  it('limits displayed specializations to 2', async () => {
     const { GuideListingCard } = await import('../guide-listing-card')
 
     render(<GuideListingCard guide={mockGuideWithManySpecializations} />)
 
-    // First 3 should be visible
+    // First 2 should be visible
     expect(screen.getByText('History')).toBeInTheDocument()
     expect(screen.getByText('Architecture')).toBeInTheDocument()
-    expect(screen.getByText('Art')).toBeInTheDocument()
 
-    // 4th and 5th should not be visible
+    // 3rd+ should not be visible
+    expect(screen.queryByText('Art')).not.toBeInTheDocument()
     expect(screen.queryByText('Culture')).not.toBeInTheDocument()
     expect(screen.queryByText('Food')).not.toBeInTheDocument()
-
-    // Overflow badge showing +2 more
-    expect(screen.getByText('+2')).toBeInTheDocument()
   })
 
   it('does not show bio excerpt when not present', async () => {

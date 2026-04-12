@@ -143,6 +143,16 @@ export const Guides: CollectionConfig = {
       },
     },
     {
+      name: 'yearsExperience',
+      type: 'number',
+      min: 0,
+      max: 60,
+      admin: {
+        description: 'Years of guiding experience',
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'additionalLanguages',
       type: 'select',
       hasMany: true,

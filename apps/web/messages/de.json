@@ -592,7 +592,27 @@
     "breadcrumb": {
       "home": "Startseite",
       "guides": "Reiseführer"
-    }
+    },
+    "hero": {
+      "tag": "UNSER TEAM",
+      "title": "Unsere Experten-Reiseführer",
+      "subtitle": "Lernen Sie die leidenschaftlichen Experten kennen, die Stockholms Kulturerbe zum Leben erwecken."
+    },
+    "filters": {
+      "search": "Reiseführer suchen...",
+      "language": "Sprache",
+      "specialization": "Spezialisierung",
+      "area": "Gebiet",
+      "showFilters": "Filter",
+      "clearAll": "Alle löschen",
+      "apply": "Anwenden",
+      "count": "{count} Reiseführer"
+    },
+    "stats": {
+      "tours": "{count} Touren",
+      "experience": "{years}+ Jahre Erfahrung"
+    },
+    "loadMore": "Mehr Reiseführer laden"
   },
   "privacy": {
     "title": "Datenschutzerklärung",
