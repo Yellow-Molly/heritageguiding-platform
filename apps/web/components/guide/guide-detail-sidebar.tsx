@@ -25,13 +25,13 @@ export async function GuideDetailSidebar({ guide }: GuideDetailSidebarProps) {
       {/* Avatar */}
       <div className="flex justify-center">
         {guide.photo ? (
-          <div className="relative h-[120px] w-[120px] lg:h-[160px] lg:w-[160px]">
+          <div className="relative h-[160px] w-[160px] lg:h-[200px] lg:w-[200px]">
             <Image
               src={guide.photo.url}
               alt={guide.photo.alt}
               fill
               className="rounded-full object-cover"
-              sizes="(max-width: 1024px) 120px, 160px"
+              sizes="(max-width: 1024px) 160px, 200px"
               priority
               placeholder={guide.photo.blurDataUrl ? 'blur' : 'empty'}
               blurDataURL={guide.photo.blurDataUrl}
