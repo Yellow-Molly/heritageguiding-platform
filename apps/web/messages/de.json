@@ -783,5 +783,83 @@
       "fiveStar": "5-Sterne-Bewertung",
       "fiveStarSub": "Vertraut von 2.000+ Reisenden"
     }
+  },
+  "cancellation": {
+    "meta": {
+      "title": "Stornierungsrichtlinie",
+      "description": "Lesen Sie unsere transparente Stornierungs- und Rückerstattungsrichtlinie für private Touren in Stockholm."
+    },
+    "hero": {
+      "title": "Stornierungsrichtlinie",
+      "subtitle": "Wir setzen auf transparente, faire Richtlinien. Lesen Sie unsere Stornierungsbedingungen unten.",
+      "breadcrumbHome": "Startseite",
+      "breadcrumbCurrent": "Stornierungsrichtlinie"
+    },
+    "tiers": {
+      "sectionTag": "RÜCKERSTATTUNGSSTUFEN",
+      "title": "Unsere Rückerstattungsrichtlinie auf einen Blick",
+      "subtitle": "Klare, faire Bedingungen je nach Stornierungszeitpunkt.",
+      "card1": {
+        "title": "Volle Rückerstattung",
+        "timeframe": "48+ Stunden vor der Tour",
+        "description": "Stornieren Sie mehr als 48 Stunden vor Ihrer geplanten Tour für eine vollständige Rückerstattung auf Ihre ursprüngliche Zahlungsmethode."
+      },
+      "card2": {
+        "title": "50% Teilrückerstattung",
+        "timeframe": "24–48 Stunden vor der Tour",
+        "description": "Stornierungen 24–48 Stunden vor der Tour erhalten eine 50% Rückerstattung."
+      },
+      "card3": {
+        "title": "Nicht erstattungsfähig",
+        "timeframe": "Unter 24 Stunden / Nichterscheinen",
+        "description": "Stornierungen innerhalb von 24 Stunden oder Nichterscheinen sind nicht erstattungsfähig, da Guides und Logistik vollständig eingeplant sind."
+      }
+    },
+    "stepper": {
+      "title": "So funktioniert die Stornierung",
+      "subtitle": "Ein einfacher Drei-Schritte-Prozess zum Stornieren oder Ändern Ihrer Buchung.",
+      "step1": {
+        "title": "Anfrage senden",
+        "description": "Kontaktieren Sie uns per E-Mail oder Telefon mit Ihrer Buchungsreferenz, um eine Stornierung einzuleiten."
+      },
+      "step2": {
+        "title": "Bestätigung",
+        "description": "Wir prüfen Ihre Anfrage und bestätigen die anwendbare Rückerstattungsstufe innerhalb von 24 Stunden."
+      },
+      "step3": {
+        "title": "Rückerstattung bearbeitet",
+        "description": "Genehmigte Rückerstattungen werden innerhalb von 5–10 Werktagen auf Ihre ursprüngliche Zahlungsmethode überwiesen."
+      }
+    },
+    "prose": {
+      "title": "Detaillierte Richtlinienbedingungen",
+      "block1": {
+        "title": "Standardbedingungen",
+        "content": "Alle Stornierungsanfragen müssen schriftlich per E-Mail oder über Ihren Buchungsbestätigungslink eingereicht werden. Mündliche Stornierungen werden nicht akzeptiert. Die Stornierungszeit wird ab der geplanten Tourstartzeit berechnet."
+      },
+      "block2": {
+        "title": "Gruppenbuchungen",
+        "content": "Bei Gruppenbuchungen ab 8 Teilnehmern muss die Stornierung mindestens 72 Stunden im Voraus erfolgen, um eine volle Rückerstattung zu erhalten. Teilstornierungen, die die Gruppe unter die Mindestgröße reduzieren, können zu angepassten Preisen führen."
+      },
+      "block3": {
+        "title": "Wetter & höhere Gewalt",
+        "content": "Bei schwerem Wetter oder höherer Gewalt bieten wir eine volle Rückerstattung oder kostenlose Umbuchung an. Unsere Guides überwachen die Bedingungen und kontaktieren Sie proaktiv, wenn eine Tour nicht sicher durchgeführt werden kann."
+      },
+      "block4": {
+        "title": "Rückerstattungszeitraum",
+        "content": "Rückerstattungen werden innerhalb von 5–10 Werktagen nach Genehmigung bearbeitet. Kreditkartenrückerstattungen können je nach Finanzinstitut zusätzlich 1–3 Abrechnungszyklen benötigen, um auf Ihrem Kontoauszug zu erscheinen."
+      }
+    },
+    "trust": {
+      "title": "Wir stehen hinter unserer Richtlinie",
+      "item1": "Kostenlose Umbuchung",
+      "item2": "Antwort in 24h",
+      "item3": "Keine versteckten Gebühren"
+    },
+    "cta": {
+      "title": "Fragen zu unserer Richtlinie?",
+      "subtitle": "Unser Team hilft Ihnen gerne bei Fragen zu Stornierungen, Rückerstattungen oder Umbuchungen.",
+      "buttonText": "Kontakt aufnehmen"
+    }
   }
 }

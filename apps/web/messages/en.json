@@ -783,5 +783,83 @@
       "fiveStar": "5-Star Rated",
       "fiveStarSub": "Trusted by 2,000+ travelers"
     }
+  },
+  "cancellation": {
+    "meta": {
+      "title": "Cancellation Policy",
+      "description": "Review our transparent cancellation and refund policy for private tours in Stockholm."
+    },
+    "hero": {
+      "title": "Cancellation Policy",
+      "subtitle": "We believe in transparent, fair policies. Review our cancellation terms below.",
+      "breadcrumbHome": "Home",
+      "breadcrumbCurrent": "Cancellation Policy"
+    },
+    "tiers": {
+      "sectionTag": "REFUND TIERS",
+      "title": "Our Refund Policy at a Glance",
+      "subtitle": "Clear, fair terms depending on when you cancel.",
+      "card1": {
+        "title": "Full Refund",
+        "timeframe": "48+ hours before tour",
+        "description": "Cancel more than 48 hours before your scheduled tour for a complete refund to your original payment method."
+      },
+      "card2": {
+        "title": "50% Partial Refund",
+        "timeframe": "24–48 hours before tour",
+        "description": "Cancellations made 24–48 hours before the tour receive a 50% refund."
+      },
+      "card3": {
+        "title": "Non-Refundable",
+        "timeframe": "Under 24 hours / no-show",
+        "description": "Cancellations within 24 hours or no-shows are non-refundable as guides and logistics are fully committed."
+      }
+    },
+    "stepper": {
+      "title": "How Cancellation Works",
+      "subtitle": "A simple three-step process to cancel or modify your booking.",
+      "step1": {
+        "title": "Submit Request",
+        "description": "Contact us via email or phone with your booking reference to initiate a cancellation."
+      },
+      "step2": {
+        "title": "Confirmation",
+        "description": "We review your request and confirm the applicable refund tier within 24 hours."
+      },
+      "step3": {
+        "title": "Refund Processed",
+        "description": "Approved refunds are processed to your original payment method within 5–10 business days."
+      }
+    },
+    "prose": {
+      "title": "Detailed Policy Terms",
+      "block1": {
+        "title": "Standard Terms",
+        "content": "All cancellation requests must be submitted in writing via email or through your booking confirmation link. Verbal cancellations are not accepted. The cancellation time is calculated from the scheduled tour start time."
+      },
+      "block2": {
+        "title": "Group Bookings",
+        "content": "For group bookings of 8 or more participants, cancellation must be made at least 72 hours in advance for a full refund. Partial cancellations reducing the group below the minimum size may be subject to adjusted pricing."
+      },
+      "block3": {
+        "title": "Weather & Force Majeure",
+        "content": "In the event of severe weather or force majeure circumstances, we will offer a full refund or free rebooking at your convenience. Our guides monitor conditions and will proactively contact you if a tour cannot safely proceed."
+      },
+      "block4": {
+        "title": "Refund Timeline",
+        "content": "Refunds are processed within 5–10 business days from approval. Credit card refunds may take an additional 1–3 billing cycles to appear on your statement depending on your financial institution."
+      }
+    },
+    "trust": {
+      "title": "We Stand Behind Our Policy",
+      "item1": "Free Rebooking",
+      "item2": "24h Response",
+      "item3": "No Hidden Fees"
+    },
+    "cta": {
+      "title": "Questions About Our Policy?",
+      "subtitle": "Our team is happy to help with any questions about cancellations, refunds, or rebooking.",
+      "buttonText": "Get in Touch"
+    }
   }
 }

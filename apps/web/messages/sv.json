@@ -783,5 +783,83 @@
       "fiveStar": "5-stjärnigt betyg",
       "fiveStarSub": "Betrodd av 2 000+ resenärer"
     }
+  },
+  "cancellation": {
+    "meta": {
+      "title": "Avbokningspolicy",
+      "description": "Läs vår transparenta avboknings- och återbetalningspolicy för privata turer i Stockholm."
+    },
+    "hero": {
+      "title": "Avbokningspolicy",
+      "subtitle": "Vi tror på transparenta och rättvisa villkor. Läs våra avbokningsvillkor nedan.",
+      "breadcrumbHome": "Hem",
+      "breadcrumbCurrent": "Avbokningspolicy"
+    },
+    "tiers": {
+      "sectionTag": "ÅTERBETALNINGSNIVÅER",
+      "title": "Vår återbetalningspolicy i korthet",
+      "subtitle": "Tydliga och rättvisa villkor beroende på när du avbokar.",
+      "card1": {
+        "title": "Full återbetalning",
+        "timeframe": "48+ timmar före turen",
+        "description": "Avboka mer än 48 timmar före din schemalagda tur för full återbetalning till din ursprungliga betalningsmetod."
+      },
+      "card2": {
+        "title": "50% delvis återbetalning",
+        "timeframe": "24–48 timmar före turen",
+        "description": "Avbokningar gjorda 24–48 timmar före turen ger 50% återbetalning."
+      },
+      "card3": {
+        "title": "Ej återbetalningsbar",
+        "timeframe": "Under 24 timmar / utebliven",
+        "description": "Avbokningar inom 24 timmar eller uteblivanden är ej återbetalningsbara då guider och logistik är fullt engagerade."
+      }
+    },
+    "stepper": {
+      "title": "Så fungerar avbokning",
+      "subtitle": "En enkel trestegsprocess för att avboka eller ändra din bokning.",
+      "step1": {
+        "title": "Skicka förfrågan",
+        "description": "Kontakta oss via e-post eller telefon med ditt bokningsreferensnummer för att påbörja en avbokning."
+      },
+      "step2": {
+        "title": "Bekräftelse",
+        "description": "Vi granskar din förfrågan och bekräftar tillämplig återbetalningsnivå inom 24 timmar."
+      },
+      "step3": {
+        "title": "Återbetalning behandlad",
+        "description": "Godkända återbetalningar behandlas till din ursprungliga betalningsmetod inom 5–10 arbetsdagar."
+      }
+    },
+    "prose": {
+      "title": "Detaljerade policyvillkor",
+      "block1": {
+        "title": "Standardvillkor",
+        "content": "Alla avbokningsförfrågningar måste skickas skriftligt via e-post eller via din bokningsbekräftelselänk. Muntliga avbokningar accepteras inte. Avbokningstiden beräknas från den schemalagda turens starttid."
+      },
+      "block2": {
+        "title": "Gruppbokningar",
+        "content": "För gruppbokningar med 8 eller fler deltagare måste avbokning göras minst 72 timmar i förväg för full återbetalning. Delavbokningar som minskar gruppen under minimistorleken kan medföra justerad prissättning."
+      },
+      "block3": {
+        "title": "Väder & force majeure",
+        "content": "Vid svårt väder eller force majeure-omständigheter erbjuder vi full återbetalning eller kostnadsfri ombokning. Våra guider övervakar förhållandena och kontaktar dig proaktivt om en tur inte kan genomföras säkert."
+      },
+      "block4": {
+        "title": "Återbetalningstid",
+        "content": "Återbetalningar behandlas inom 5–10 arbetsdagar från godkännande. Kreditkortsåterbetalningar kan ta ytterligare 1–3 faktureringscykler att synas på ditt kontoutdrag beroende på ditt finansinstitut."
+      }
+    },
+    "trust": {
+      "title": "Vi står bakom vår policy",
+      "item1": "Gratis ombokning",
+      "item2": "Svar inom 24h",
+      "item3": "Inga dolda avgifter"
+    },
+    "cta": {
+      "title": "Frågor om vår policy?",
+      "subtitle": "Vårt team hjälper gärna till med frågor om avbokningar, återbetalningar eller ombokningar.",
+      "buttonText": "Kontakta oss"
+    }
   }
 }

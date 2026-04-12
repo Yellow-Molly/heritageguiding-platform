@@ -20,7 +20,7 @@ const footerLinks = {
       { name: 'FAQ', href: '/faq' },
       { name: 'Contact Us', href: '/contact' },
       { name: 'Booking Help', href: '/help/booking' },
-      { name: 'Cancellation Policy', href: '/help/cancellation' },
+      { name: 'Cancellation Policy', href: '/cancellation' },
       { name: 'Accessibility', href: '/accessibility' },
     ],
   },
