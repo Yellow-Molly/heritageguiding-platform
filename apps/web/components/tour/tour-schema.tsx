@@ -19,7 +19,7 @@ export function TourSchema({ tour, reviews }: TourSchemaProps) {
     '@type': 'TouristAttraction',
     name: tour.title,
     description: tour.description,
-    image: tour.gallery?.[0]?.image?.url || tour.image.url,
+    image: tour.gallery?.[0]?.image?.url || tour.image?.url,
     touristType: tour.categories?.map((c) => c.name) || [],
     isAccessibleForFree: false,
     publicAccess: true,
@@ -70,7 +70,7 @@ export function TourSchema({ tour, reviews }: TourSchemaProps) {
     '@type': 'Product',
     name: tour.title,
     description: tour.description,
-    image: tour.gallery?.[0]?.image?.url || tour.image.url,
+    image: tour.gallery?.[0]?.image?.url || tour.image?.url,
     ...(averageRating > 0 && {
       aggregateRating: {
         '@type': 'AggregateRating',
@@ -110,7 +110,7 @@ export function TourSchema({ tour, reviews }: TourSchemaProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
       />
       <script
         type="application/ld+json"

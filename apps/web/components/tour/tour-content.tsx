@@ -1,5 +1,4 @@
 import { getTranslations } from 'next-intl/server'
-import { Sparkles, CheckCircle2 } from 'lucide-react'
 import { sanitizeHtml } from '@/lib/utils/sanitize-html'
 import type { TourDetail } from '@/lib/api/get-tour-by-slug'
 
@@ -8,56 +7,57 @@ interface TourContentProps {
 }
 
 /**
- * Main content section for tour detail page.
- * Displays emotional description and highlights.
+ * Experience section for tour detail page.
+ * Displays emotional description and accessibility info.
+ * Highlights are now in a separate TourHighlightsSection component.
  */
 export async function TourContent({ tour }: TourContentProps) {
   const t = await getTranslations('tourDetail')
 
   return (
     <div className="space-y-8">
-      {/* Emotional Description */}
+      {/* The Experience */}
       <section>
-        <h2 className="flex items-center gap-2 font-serif text-2xl font-semibold text-[var(--color-primary)]">
-          <Sparkles className="h-5 w-5 text-[var(--color-accent)]" />
+        <h2 className="font-serif text-[22px] font-semibold text-[var(--color-primary)] lg:text-[28px]">
           {t('sections.experience')}
         </h2>
-        {tour.descriptionHtml ? (
-          <div
-            className="prose prose-lg mt-4 max-w-none text-[var(--color-text-muted)]"
-            dangerouslySetInnerHTML={{ __html: sanitizeHtml(tour.descriptionHtml) }}
-          />
-        ) : (
-          <p className="mt-4 text-lg leading-relaxed text-[var(--color-text-muted)]">
-            {tour.description}
-          </p>
-        )}
+        {/* Mobile: CSS-only Read More using checkbox hack (no client JS needed).
+            ID uses tour.id for uniqueness — safe as long as only one TourContent per page. */}
+        <div className="group/readmore mt-4 lg:contents">
+          <input type="checkbox" id={`read-more-${tour.id}`} className="peer hidden" aria-hidden="true" />
+          {tour.descriptionHtml ? (
+            <div
+              className="prose max-w-none text-sm leading-[1.7] text-[var(--color-text)] line-clamp-[8] peer-checked:line-clamp-none lg:line-clamp-none lg:text-base"
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(tour.descriptionHtml) }}
+            />
+          ) : (
+            <p className="text-sm leading-[1.7] text-[var(--color-text)] line-clamp-[8] peer-checked:line-clamp-none lg:line-clamp-none lg:text-base">
+              {tour.description}
+            </p>
+          )}
+          {/* Read More — visible when collapsed */}
+          <label
+            htmlFor={`read-more-${tour.id}`}
+            className="mt-2 inline-flex cursor-pointer items-center gap-1 text-sm font-medium text-[var(--color-accent)] peer-checked:hidden lg:hidden"
+          >
+            {t('readMore')}
+            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
+          </label>
+          {/* Read Less — visible when expanded */}
+          <label
+            htmlFor={`read-more-${tour.id}`}
+            className="mt-2 hidden cursor-pointer items-center gap-1 text-sm font-medium text-[var(--color-accent)] peer-checked:inline-flex lg:!hidden"
+          >
+            {t('readLess')}
+            <svg className="h-4 w-4 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
+          </label>
+        </div>
       </section>
-
-      {/* Tour Highlights */}
-      {tour.highlights && tour.highlights.length > 0 && (
-        <section>
-          <h2 className="flex items-center gap-2 font-serif text-2xl font-semibold text-[var(--color-primary)]">
-            <CheckCircle2 className="h-5 w-5 text-green-600" />
-            {t('sections.highlights')}
-          </h2>
-          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-            {tour.highlights.map((item, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-600">
-                  <CheckCircle2 className="h-3.5 w-3.5" />
-                </span>
-                <span className="text-[var(--color-text)]">{item.highlight}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
 
       {/* Accessibility Info */}
       {tour.accessibility && (
         <section>
-          <h2 className="font-serif text-2xl font-semibold text-[var(--color-primary)]">
+          <h2 className="font-serif text-[22px] font-semibold text-[var(--color-primary)] lg:text-[28px]">
             {t('sections.accessibility')}
           </h2>
           <div className="mt-4 space-y-2 text-[var(--color-text-muted)]">

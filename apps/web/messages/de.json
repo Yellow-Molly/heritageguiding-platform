@@ -453,7 +453,7 @@
       "visual": "Sehhilfen verfügbar"
     },
     "facts": {
-      "maxGroup": "Max. {count} Personen",
+      "maxGroup": "Bis zu {count} Personen",
       "reviews": "Bewertungen"
     },
     "logistics": {
@@ -475,14 +475,20 @@
       "title": "Ihr Reiseführer",
       "speaks": "Spricht"
     },
+    "readMore": "Mehr lesen",
+    "readLess": "Weniger lesen",
     "booking": {
-      "bookNow": "Diese Tour buchen",
+      "bookNow": "Jetzt buchen",
       "perPerson": "pro Person",
       "duration": "Dauer",
-      "maxGroup": "Max. {count} Personen",
-      "selectDate": "Wählen Sie ein Datum zur Verfügbarkeitsprüfung",
+      "maxGroup": "Bis zu {count} Personen",
+      "selectDate": "Datum wählen",
+      "chooseDatePlaceholder": "Datum wählen...",
+      "guests": "Gäste",
+      "defaultGuests": "2 Erwachsene",
       "checkAvailability": "Verfügbarkeit prüfen",
-      "freeCancellation": "Kostenlose Stornierung bis 24 Stunden vorher",
+      "totalForGuests": "Gesamt für {count} Gäste",
+      "freeCancellation": "Kostenlose Stornierung bis 48h vorher",
       "instantConfirmation": "Sofortige Bestätigung",
       "inquireAboutTour": "Anfrage zu dieser Tour",
       "contactUsForAvailability": "Kontaktieren Sie uns direkt, um die Verfügbarkeit zu prüfen und Ihren Platz zu buchen.",

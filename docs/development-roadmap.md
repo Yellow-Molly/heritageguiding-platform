@@ -4,14 +4,53 @@ Living document tracking project phases, milestones, and progress toward MVP lau
 
 ---
 
-## Current Phase: Phase 14 — Tours Listing Page Redesign & Architecture ✓ IN PROGRESS
+## Current Phase: Phase 15 — Tour Detail Page Redesign ✓ IN PROGRESS
 
-**Date Started:** 2026-04-01
-**Status:** Active - Tours listing page complete, architecture optimization ongoing
+**Date Started:** 2026-04-08
+**Status:** Active - Booking-first layout implementation, responsive image grid, component redesign
+
+### Phase 15 Overview
+
+**Tour Detail Page Redesign — Booking-First Layout**
+
+Complete redesign of the tour detail page (`/tours/[slug]`) with focus on booking conversion. New responsive image grid replaces full-bleed hero, price visibility on mobile through title section, and simplified content hierarchy. New components added for image grid, title section, highlights, and related tour cards. Seven existing components redesigned for improved layout and visual hierarchy.
+
+### Milestones & Status
+
+| Milestone | Status | Completion |
+|-----------|--------|-----------|
+| Image Grid & Layout | ✅ Complete | 2026-04-08 |
+| Component Redesigns | ✅ Complete | 2026-04-08 |
+| Translation Keys | ✅ Complete | 2026-04-08 |
+| Responsive Polish | In Progress | TBD |
+
+### Key Deliverables
+
+- **New Components (4):**
+  - `tour-image-grid.tsx` — Responsive image grid
+  - `tour-title-section.tsx` — Title, categories, meta, price bar (mobile)
+  - `tour-highlights-section.tsx` — Extracted highlights
+  - `related-tour-card.tsx` — Compact related tour cards
+
+- **Redesigned Components (8):**
+  - `tour-hero.tsx`, `tour-content.tsx`, `inclusions-section.tsx`, `logistics-section.tsx`
+  - `guide-card.tsx`, `reviews-section.tsx`, `booking-section.tsx`, `related-tours.tsx`
+
+- **Page Layout:**
+  - Grid: `lg:grid-cols-[1fr_380px]` (main + sidebar)
+  - Border-top separator between title and content
+  - Lazy-loaded booking sidebar with dynamic imports
+
+---
+
+## Previous Phase: Phase 14 — Tours Listing Page Redesign & Architecture ✓ COMPLETE
+
+**Date Completed:** 2026-04-04
+**Duration:** 3 days
 
 ### Phase 14 Overview
 
-**Component Architecture Optimization, Tours Listing Redesign, & Code Standards**
+**Component Architecture Optimization & Tours Listing Redesign**
 
 Modularization of large components, tours catalog redesign with 2-column sidebar layout (desktop) and advanced filters, refactoring page layouts into focused reusable sections, and improving overall code organization to maintain 200 LOC guideline across codebase.
 
@@ -21,7 +60,6 @@ Modularization of large components, tours catalog redesign with 2-column sidebar
 |-----------|--------|-----------|
 | About Us Page Refactor | ✅ Complete | 2026-04-02 |
 | Tours Listing Page Redesign (Option B) | ✅ Complete | 2026-04-04 |
-| Upcoming: Other large components | Planned | TBD |
 
 ---
 
@@ -103,21 +141,28 @@ Complete visual refresh of the Heritage Guiding Platform homepage to match the c
 
 ## Upcoming Phases
 
-### Phase 14: Additional Content & CMS Integration (Planned)
+### Phase 16: Tour Detail Polish & Testing (Planned)
+
+- Test coverage for redesigned components
+- Performance optimization (image loading, lazy-loading)
+- Accessibility audit for new layout
+- Cross-browser responsive testing
+
+### Phase 17: Additional Content & CMS Integration (Planned)
 
 - Blog collection expansion
-- Guide profile pages
 - Tour category pages
 - Content moderation tools
+- Featured tours rotation
 
-### Phase 15: Booking Flow Optimization (Planned)
+### Phase 18: Booking Flow Optimization (Planned)
 
 - Streamlined checkout
 - Payment integration refinement
 - Confirmation email templates
 - Customer support integration
 
-### Phase 16: Analytics & Marketing (Planned)
+### Phase 19: Analytics & Marketing (Planned)
 
 - Conversion tracking
 - A/B testing infrastructure
@@ -166,7 +211,8 @@ Complete visual refresh of the Heritage Guiding Platform homepage to match the c
 
 ## Next Steps
 
-1. Begin Phase 14: Additional Content & CMS Integration
-2. Monitor production performance metrics
-3. Gather user feedback on new design
-4. Plan Phase 15 booking flow optimizations
+1. Complete Phase 15: Responsive polish and final testing
+2. Begin Phase 16: Unit test coverage for redesigned components
+3. Monitor performance metrics on tour detail pages
+4. Gather user feedback on booking-first layout
+5. Plan Phase 17 additional content integration

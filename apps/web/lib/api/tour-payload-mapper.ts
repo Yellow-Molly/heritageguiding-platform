@@ -52,6 +52,7 @@ interface TourImageRow {
 interface PayloadGuide {
   id: number | string
   name?: string
+  slug?: string
   photo?: PayloadMedia | number | null
   bio?: LexicalRoot | null
   credentials?: Array<{ credential: string }> | null
@@ -284,6 +285,7 @@ export function mapPayloadTourToTourDetail(doc: Record<string, unknown>): TourDe
     guide = {
       id: String(rawGuide.id),
       name: rawGuide.name ?? '',
+      slug: rawGuide.slug ?? '',
       photo:
         guidePhoto && typeof guidePhoto !== 'number' && guidePhoto.url
           ? {

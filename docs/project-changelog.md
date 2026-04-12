@@ -4,6 +4,67 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-04-08] — Tour Detail Page Redesign (Booking-First) ✓ IN PROGRESS
+
+**Type:** Major UI/UX Redesign
+**Scope:** Booking-first layout with responsive image grid, price visibility on mobile, redesigned components
+**Build Status:** PASSING (Next.js 16.1.6 Turbopack)
+
+### Changes Implemented
+
+**4 New Components Created:**
+- `tour-image-grid.tsx` — Responsive image grid (replaces full-bleed hero)
+- `tour-title-section.tsx` — Title, categories, meta row, mobile price bar (server component)
+- `tour-highlights-section.tsx` — Dedicated highlights section (extracted from tour-content)
+- `related-tour-card.tsx` — Compact horizontal card for related tours
+
+**7 Components Redesigned:**
+- `tour-hero.tsx` — Composes ImageGrid + Gallery (removed gradient overlay)
+- `tour-content.tsx` — Experience text only + CSS-only Read More, no highlights
+- `inclusions-section.tsx` — Colored cards with design token borders
+- `logistics-section.tsx` — Alt bg card with map + label-value grid
+- `guide-card.tsx` — Horizontal layout with avatar + credentials line
+- `reviews-section.tsx` — Score badge header, cleaner italic cards
+- `booking-section.tsx` — Price display, cancel badge, date/guest fields, styled CTA
+- `related-tours.tsx` — Compact cards, 4-col grid, alt background
+
+### Page Layout Changes
+
+**New Grid Structure:**
+```tsx
+lg:grid-cols-[1fr_380px]  // Main content + sticky sidebar
+```
+
+**Component Order:**
+1. TourHero (ImageGrid + Gallery)
+2. TourTitleSection (title, categories, meta, price on mobile)
+3. Border-top separator
+4. Main content grid
+5. TourHighlightsSection
+6. TourContent (experience)
+7. InclusionsSection
+8. LogisticsSection
+9. GuideCard
+10. ReviewsSection
+11. RelatedTours
+12. BookingSection (sidebar, lazy-loaded)
+
+### Key Features
+
+- **Responsive Image Grid:** Displays tour images in a flexible grid layout instead of full-bleed hero
+- **Booking Visibility:** Price bar on mobile title section for conversion optimization
+- **Responsive Design:** Works across all breakpoints (375px–1440px+)
+- **Translation Keys:** Added en/sv/de translations for new sections
+- **Lazy Loading:** BookingSection dynamically imported for performance
+- **Sticky Sidebar:** 380px right sidebar with booking widget on desktop
+
+### Files Modified
+
+- `page.tsx` — New grid layout, component reordering, border separator
+- Translation files for new component labels
+
+---
+
 ## [2026-04-04] — Tours Listing Page Redesign (Option B) ✓ COMPLETE
 
 **Type:** Major UI/UX Redesign

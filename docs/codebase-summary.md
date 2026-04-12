@@ -1,8 +1,8 @@
 # Codebase Summary - Private Tours Platform
 
-**Last Updated:** February 21, 2026
-**Phase:** 11 - Performance Optimization (Complete)
-**Status:** Image optimization, dynamic caching, Web Vitals monitoring, Lighthouse CI, 1009 unit tests (90%+ coverage)
+**Last Updated:** April 08, 2026
+**Phase:** 15 - Tour Detail Redesign (In Progress)
+**Status:** Booking-first layout, redesigned components (7 updated, 4 new), responsive image grid, price bar on mobile
 **Codebase Metrics:** 165+ TypeScript files, 380K+ tokens, 69K LOC frontend + 35K LOC CMS
 
 ## Overview
@@ -140,18 +140,23 @@ app/
 - Tests: `category-nav.test.tsx`
 - **Current homepage order:** Hero → TrustSignals → FeaturedTours → GuidesPreview → VideoHighlight → Footer
 
-**Tour Components (15+ components):**
-- `tour-card.tsx` - Individual tour card
+**Tour Components (20+ components):**
+- `tour-card.tsx` - Individual tour card (grid/list variants)
 - `tour-catalog-client.tsx` - Filter logic (client component)
-- `tour-hero.tsx` - Tour header section
+- `tour-hero.tsx` - Composes ImageGrid + Gallery (redesigned Phase 15)
+- `tour-image-grid.tsx` - Responsive image grid replacing full-bleed hero (Phase 15)
 - `tour-gallery.tsx` - Full-screen image gallery
-- `tour-facts.tsx` - Duration, group size, etc.
-- `logistics-section.tsx` - Meeting point, map
-- `guide-card.tsx` - Expert profile
-- `inclusions-section.tsx` - What's included
-- `reviews-section.tsx` - Customer ratings
-- `related-tours.tsx` - Carousel of related tours
-- `booking-section.tsx` - CTA & widget
+- `tour-title-section.tsx` - Title, categories, meta row, mobile price bar (server component, Phase 15)
+- `tour-highlights-section.tsx` - Dedicated highlights section (extracted Phase 15)
+- `tour-content.tsx` - Experience text + CSS-only Read More, no highlights (Phase 15)
+- `tour-facts.tsx` - Duration, group size, etc. (kept for reuse)
+- `logistics-section.tsx` - Alt bg card with map + label-value grid (redesigned Phase 15)
+- `guide-card.tsx` - Horizontal layout with avatar + credentials (redesigned Phase 15)
+- `inclusions-section.tsx` - Colored cards with design token borders (redesigned Phase 15)
+- `reviews-section.tsx` - Score badge header, cleaner italic cards (redesigned Phase 15)
+- `related-tours.tsx` - Compact cards, 4-col grid, alt background (redesigned Phase 15)
+- `booking-section.tsx` - Price display, cancel badge, date/guest fields, styled CTA (redesigned Phase 15)
+- `related-tour-card.tsx` - Compact horizontal card for related tours (new Phase 15)
 - `tour-search.tsx` - Full-text search
 - `tour-filters.tsx` - Category/price/duration filters
 - `tour-sort.tsx` - Sort options
@@ -581,7 +586,7 @@ npm run payload          # Payload CLI
 npm run payload:generate-types  # Generate TS types from schema
 ```
 
-## Current State (Phase 08.1 - Complete, Excel Import/Export included)
+## Current State (Phase 15 - In Progress, Tour Detail Redesign)
 
 ### Completed Phases
 - Phase 01: Foundation ✅
@@ -595,6 +600,11 @@ npm run payload:generate-types  # Generate TS types from schema
 - Phase 08.5: Concierge Wizard ✅
 - Phase 09.5: Guide Profiles ✅
 - Phase 10: Accessibility + SEO ✅
+- Phase 11: Performance Optimization ✅
+- Phase 12: Unit Test Coverage ✅
+- Phase 13: Homepage Redesign ✅
+- Phase 14: Tours Listing Redesign ✅
+- Phase 15: Tour Detail Redesign (In Progress) 🔄
 
 ### Phase 08.1 Deliverables
 - Bokun API client with HMAC-SHA256 authentication
@@ -654,6 +664,28 @@ npm run payload:generate-types  # Generate TS types from schema
   - Web Vitals monitoring and analytics
 - **Coverage Config:** vitest.config.ts updated to exclude type-only (bokun-types.ts) and config-only (fonts.ts) files
 - **Rebrand:** Source code references updated to Private Tours branding
+
+### Phase 15 Deliverables (2026-04-08) — Tour Detail Page Redesign (Booking-First)
+- **New Components (4):**
+  - `tour-image-grid.tsx` — Responsive image grid (replaces full-bleed hero)
+  - `tour-title-section.tsx` — Title, categories, meta row, mobile price bar (server component)
+  - `tour-highlights-section.tsx` — Dedicated highlights section (extracted from tour-content)
+  - `related-tour-card.tsx` — Compact horizontal card for related tours
+- **Redesigned Components (7):**
+  - `tour-hero.tsx` — Now composes ImageGrid + Gallery (removed gradient overlay)
+  - `tour-content.tsx` — Experience only + CSS-only Read More, no highlights
+  - `inclusions-section.tsx` — Colored cards with design token borders
+  - `logistics-section.tsx` — Alt bg card with map + label-value grid
+  - `guide-card.tsx` — Horizontal layout with avatar + credentials line
+  - `reviews-section.tsx` — Score badge header, cleaner italic cards
+  - `booking-section.tsx` — Price display, cancel badge, date/guest fields, styled CTA
+  - `related-tours.tsx` — Compact cards, 4-col grid, alt background
+- **Page Layout Changes:**
+  - New grid: `lg:grid-cols-[1fr_380px]` (main content + sticky sidebar)
+  - Border-top separator between title and content
+  - New component composition order
+  - Translation keys added for en/sv/de
+- **Architecture:** Booking-first layout with price visibility on mobile, responsive design across all breakpoints
 
 ## Codebase Metrics
 
@@ -715,10 +747,14 @@ npm run payload:generate-types  # Generate TS types from schema
 | **09.5** | Guide Profiles | ✅ Complete |
 | **10** | Accessibility + SEO | ✅ Complete |
 | **11** | Performance Optimization | ✅ Complete |
+| **12** | Test Coverage | ✅ Complete |
+| **13** | Homepage Redesign | ✅ Complete |
+| **14** | Catalog Redesign | ✅ Complete |
+| **15** | Tour Detail Redesign | 🔄 In Progress |
 | **09** | Groups & WhatsApp | Pending |
-| **12** | Documentation + Deployment | Planned |
+| **16** | Documentation + Deployment | Planned |
 
 ---
 
-**Last Updated:** February 21, 2026
-**Document Status:** Phase 12 Complete (Unit Test Coverage Improvement: 600→1009 tests, 52%→90%+ coverage)
+**Last Updated:** April 08, 2026
+**Document Status:** Phase 15 In Progress (Tour Detail Page Redesign: Booking-First Layout)

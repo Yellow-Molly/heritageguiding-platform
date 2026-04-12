@@ -22,8 +22,10 @@ export function GoogleMapLink({ lat, lng, title, googleMapsLink }: GoogleMapLink
   const containerRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
-  // Generate Google Maps link if not provided
-  const mapsUrl = googleMapsLink || `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`
+  // Generate Google Maps link if not provided; validate URL scheme to prevent javascript: injection
+  const mapsUrl = (googleMapsLink && /^https?:\/\//i.test(googleMapsLink))
+    ? googleMapsLink
+    : `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`
 
   // Static map preview using OpenStreetMap tiles (free, no API key)
   const staticMapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${lng - 0.005}%2C${lat - 0.003}%2C${lng + 0.005}%2C${lat + 0.003}&layer=mapnik&marker=${lat}%2C${lng}`
