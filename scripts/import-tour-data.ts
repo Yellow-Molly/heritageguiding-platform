@@ -20,7 +20,8 @@ if (!VALID_STATUSES.includes(STATUS as (typeof VALID_STATUSES)[number])) {
   process.exit(1)
 }
 
-const TRANSLATED_JSON = path.resolve(__dirname, '../data/translated-tours.json')
+const inputArg = process.argv.find((a) => a.startsWith('--input='))?.split('=')[1]
+const TRANSLATED_JSON = path.resolve(__dirname, inputArg ? `../${inputArg}` : '../data/translated-tours.json')
 const MEDIA_MAPPING_JSON = path.resolve(__dirname, '../data/photo-media-mapping.json')
 
 // ── Types matching translate-tour-data.ts output ──
@@ -219,9 +220,9 @@ function buildLocaleData(
         childFriendly: passThrough.childFriendly,
         teenFriendly: passThrough.teenFriendly,
       },
-      guide: relationships.guideId,
-      categories: relationships.categoryIds,
-      neighborhoods: relationships.neighborhoodIds,
+      ...(relationships.guideId ? { guide: relationships.guideId } : {}),
+      ...(relationships.categoryIds.length ? { categories: relationships.categoryIds } : {}),
+      ...(relationships.neighborhoodIds.length ? { neighborhoods: relationships.neighborhoodIds } : {}),
       images,
       bokunExperienceId: passThrough.bokunExperienceId,
       availability: 'available', // xlsx has free-text schedules; all tours are "available"
@@ -292,12 +293,15 @@ async function main() {
   for (const tour of tours) {
     console.log(`\nProcessing: ${tour.slug}`)
 
-    // Resolve guide
+    // Resolve guide (optional in update mode — existing tours keep their relationships)
     const guideId = guideMap.get(tour.passThrough.guideSlug)
-    if (!guideId) {
+    if (!guideId && !UPDATE_MODE) {
       console.error(`  ! guide "${tour.passThrough.guideSlug}" not found — SKIPPING`)
       errors++
       continue
+    }
+    if (!guideId) {
+      console.log(`  ⚠ guide "${tour.passThrough.guideSlug}" not found, keeping existing`)
     }
 
     // Resolve categories (warn on missing, don't fail)
