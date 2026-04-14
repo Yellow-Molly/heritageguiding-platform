@@ -1,6 +1,11 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin } from '../access'
-import { formatSlugHook, generateTourEmbeddingOnSaveHook } from '../hooks'
+import {
+  formatSlugHook,
+  generateTourEmbeddingOnSaveHook,
+  createRevalidateTagsAfterChangeHook,
+  createRevalidateTagsAfterDeleteHook,
+} from '../hooks'
 import {
   accessibilityFields,
   seoFields,
@@ -43,7 +48,11 @@ export const Tours: CollectionConfig = {
     delete: isAdmin,
   },
   hooks: {
-    afterChange: [generateTourEmbeddingOnSaveHook],
+    afterChange: [
+      generateTourEmbeddingOnSaveHook,
+      createRevalidateTagsAfterChangeHook(['tours']),
+    ],
+    afterDelete: [createRevalidateTagsAfterDeleteHook(['tours'])],
   },
   fields: [
     // ===== BASIC INFORMATION =====

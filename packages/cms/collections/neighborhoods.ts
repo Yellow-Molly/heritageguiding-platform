@@ -1,6 +1,10 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin } from '../access'
-import { formatSlugHook } from '../hooks'
+import {
+  formatSlugHook,
+  createRevalidateTagsAfterChangeHook,
+  createRevalidateTagsAfterDeleteHook,
+} from '../hooks'
 
 /**
  * Neighborhoods collection for GEO expansion
@@ -18,6 +22,11 @@ export const Neighborhoods: CollectionConfig = {
     create: isAdmin,
     update: isAdmin,
     delete: isAdmin,
+  },
+  hooks: {
+    // Neighborhoods are cached under the `categories` tag; tours embed them via depth:2.
+    afterChange: [createRevalidateTagsAfterChangeHook(['categories', 'tours'])],
+    afterDelete: [createRevalidateTagsAfterDeleteHook(['categories', 'tours'])],
   },
   fields: [
     {

@@ -1,6 +1,10 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin } from '../access'
-import { formatSlugHook } from '../hooks'
+import {
+  formatSlugHook,
+  createRevalidateTagsAfterChangeHook,
+  createRevalidateTagsAfterDeleteHook,
+} from '../hooks'
 
 /**
  * Categories collection for tour classification
@@ -18,6 +22,11 @@ export const Categories: CollectionConfig = {
     create: isAdmin,
     update: isAdmin,
     delete: isAdmin,
+  },
+  hooks: {
+    // Tours and guides both embed category data (depth:2) — invalidate all three.
+    afterChange: [createRevalidateTagsAfterChangeHook(['categories', 'tours', 'guides'])],
+    afterDelete: [createRevalidateTagsAfterDeleteHook(['categories', 'tours', 'guides'])],
   },
   fields: [
     {

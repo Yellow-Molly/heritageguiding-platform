@@ -6,3 +6,9 @@ export { generateTourEmbeddingOnSaveHook } from './generate-tour-embedding-on-sa
 
 // Media blur placeholder generation hook
 export { generateBlurOnUploadHook } from './generate-blur-on-upload-hook'
+
+// Next.js cache tag revalidation hooks (invalidate front-site data cache)
+export {
+  createRevalidateTagsAfterChangeHook,
+  createRevalidateTagsAfterDeleteHook,
+} from './revalidate-cache-tags-hook'

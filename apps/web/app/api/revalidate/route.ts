@@ -25,10 +25,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Missing tag parameter' }, { status: 400 })
   }
 
-  // Revalidate all tags or a specific one
+  // Revalidate all tags or a specific one.
+  // Next.js 16 requires a cache-life profile as the second arg.
+  // `{ expire: 0 }` is the documented way to force immediate hard
+  // invalidation — named profiles like 'max' only trigger SWR with
+  // long TTLs, which isn't what callers of this endpoint expect.
+  const HARD_EXPIRE = { expire: 0 } as const
   if (tag === 'all') {
     for (const t of VALID_TAGS) {
-      revalidateTag(t)
+      revalidateTag(t, HARD_EXPIRE)
     }
     return NextResponse.json({ revalidated: VALID_TAGS, now: Date.now() })
   }
@@ -37,6 +42,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: `Invalid tag. Valid: ${VALID_TAGS.join(', ')}, all` }, { status: 400 })
   }
 
-  revalidateTag(tag)
+  revalidateTag(tag, HARD_EXPIRE)
   return NextResponse.json({ revalidated: [tag], now: Date.now() })
 }

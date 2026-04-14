@@ -1,6 +1,10 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin } from '../access'
-import { formatSlugHook } from '../hooks'
+import {
+  formatSlugHook,
+  createRevalidateTagsAfterChangeHook,
+  createRevalidateTagsAfterDeleteHook,
+} from '../hooks'
 
 /**
  * Guides collection for tour experts
@@ -18,6 +22,11 @@ export const Guides: CollectionConfig = {
     create: isAdmin,
     update: isAdmin,
     delete: isAdmin,
+  },
+  hooks: {
+    // Tour cache embeds guide data (depth:2) — invalidate both tags.
+    afterChange: [createRevalidateTagsAfterChangeHook(['guides', 'tours'])],
+    afterDelete: [createRevalidateTagsAfterDeleteHook(['guides', 'tours'])],
   },
   fields: [
     {

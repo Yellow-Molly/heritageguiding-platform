@@ -380,8 +380,43 @@ async function main() {
   console.log(`Skipped: ${skipped}`)
   console.log(`Errors: ${errors}`)
 
+  // Invalidate the front-site unstable_cache tags. The Payload afterChange
+  // hooks we installed can only call revalidateTag() inside a Next.js
+  // request context — this script runs standalone, so we hit the deployed
+  // /api/revalidate endpoint instead. Skip silently if URL/secret missing
+  // (e.g. local-only runs with no deployed site to talk to).
+  if (!DRY_RUN && (created > 0 || updated > 0)) {
+    await revalidateDeployedCache()
+  }
+
   if (errors > 0) process.exit(1)
   process.exit(0)
+}
+
+/**
+ * POST to the deployed /api/revalidate endpoint to flush front-site caches.
+ * Controlled by REVALIDATE_URL (or NEXT_PUBLIC_URL) + REVALIDATION_SECRET
+ * (falls back to PAYLOAD_SECRET, matching the route handler).
+ */
+async function revalidateDeployedCache(): Promise<void> {
+  const baseUrl = process.env.REVALIDATE_URL || process.env.NEXT_PUBLIC_URL
+  const secret = process.env.REVALIDATION_SECRET || process.env.PAYLOAD_SECRET
+  if (!baseUrl || !secret) {
+    console.log('\n[revalidate] Skipped — set REVALIDATE_URL (or NEXT_PUBLIC_URL) and REVALIDATION_SECRET to auto-flush the front-site cache.')
+    return
+  }
+  const url = `${baseUrl.replace(/\/$/, '')}/api/revalidate?secret=${encodeURIComponent(secret)}&tag=all`
+  try {
+    const res = await fetch(url, { method: 'POST' })
+    if (!res.ok) {
+      console.warn(`\n[revalidate] Failed (${res.status}): ${await res.text()}`)
+      return
+    }
+    const body = await res.json()
+    console.log(`\n[revalidate] OK — invalidated tags: ${(body as { revalidated?: string[] }).revalidated?.join(', ') ?? 'unknown'}`)
+  } catch (err) {
+    console.warn('\n[revalidate] Error:', err instanceof Error ? err.message : err)
+  }
 }
 
 main().catch((err) => {

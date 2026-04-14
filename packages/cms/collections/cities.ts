@@ -1,6 +1,10 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin } from '../access'
-import { formatSlugHook } from '../hooks'
+import {
+  formatSlugHook,
+  createRevalidateTagsAfterChangeHook,
+  createRevalidateTagsAfterDeleteHook,
+} from '../hooks'
 
 /**
  * Cities collection for GEO expansion
@@ -18,6 +22,11 @@ export const Cities: CollectionConfig = {
     create: isAdmin,
     update: isAdmin,
     delete: isAdmin,
+  },
+  hooks: {
+    // Guides show operatingAreas (cities) — invalidate guides cache on city change.
+    afterChange: [createRevalidateTagsAfterChangeHook(['guides'])],
+    afterDelete: [createRevalidateTagsAfterDeleteHook(['guides'])],
   },
   fields: [
     {

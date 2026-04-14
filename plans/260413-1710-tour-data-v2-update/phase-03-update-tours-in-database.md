@@ -72,24 +72,47 @@ Not needed — Option A is simpler.
    ```
    - Verify 10 tours detected, all marked for update
 
-3. Run actual update
+3. Set cache-flush env vars (REQUIRED for staging / prod runs)
+   - The import script runs outside Next.js, so Payload `afterChange` hooks
+     cannot invalidate the front-site `unstable_cache` tags. Instead the
+     script POSTs to the deployed `/api/revalidate` endpoint after success.
+   - Export before running:
+     ```bash
+     export REVALIDATE_URL=https://<staging-or-prod-domain>
+     export REVALIDATION_SECRET=<secret>   # falls back to PAYLOAD_SECRET
+     ```
+   - If both are missing, the script logs a skip notice and exits cleanly,
+     but the front site will keep serving stale data until a manual
+     `POST /api/revalidate?tag=all&secret=…` is made.
+
+4. Run actual update
    ```bash
    npx tsx --require ./scripts/patch-next-env.cjs scripts/import-tour-data.ts \
      --update --status=published --input=data/translated-tours-v2.json
    ```
+   - Watch for `[revalidate] OK — invalidated tags: …` near the end of the
+     output. A `[revalidate] Failed` or `[revalidate] Skipped` line means
+     the front-site cache was not flushed.
 
-4. Verify in Payload admin
+5. Verify in Payload admin
    - Spot-check 3-4 tours across all locales
    - Confirm titles updated (no more "Privat" prefix)
    - Confirm descriptions condensed
    - Confirm featured flags match v2
 
+6. Verify front-site reflects changes
+   - Hit the tour detail page on the target environment with a hard reload.
+   - If still stale, re-run: `curl -X POST "$REVALIDATE_URL/api/revalidate?tag=all&secret=$REVALIDATION_SECRET"`
+
 ## Todo List
 
 - [ ] Add `--input=` flag to `import-tour-data.ts`
 - [ ] Dry-run with v2 data
+- [ ] Export `REVALIDATE_URL` and `REVALIDATION_SECRET` for target env
 - [ ] Run actual update
+- [ ] Confirm `[revalidate] OK` line in script output
 - [ ] Verify in Payload CMS admin
+- [ ] Verify front-site pages show updated data
 
 ## Success Criteria
 
@@ -110,3 +133,4 @@ Not needed — Option A is simpler.
 | Status reset to draft | Medium | Use `--status=published` explicitly |
 | Overwrite good v1 translations | Low | Phase 2 merge strategy preserves unchanged |
 | Missing relationships | Low | Same guides/categories/neighborhoods as v1 |
+| Front site keeps serving stale data after import | Medium | Export `REVALIDATE_URL` + `REVALIDATION_SECRET`; script auto-POSTs to `/api/revalidate?tag=all` on success. Payload `afterChange` hooks don't fire here because the script runs outside a Next.js request context. |
