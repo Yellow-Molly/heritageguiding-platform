@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { Clock, Users, ArrowRight } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn, formatDuration } from '@/lib/utils'
 import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
 import type { FeaturedTour } from '@/lib/api/get-featured-tours'
@@ -76,7 +76,7 @@ function TourCard({ tour, index }: { tour: FeaturedTour; index: number }) {
           {tour.duration > 0 && (
             <span className="flex items-center gap-1">
               <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-              {tour.duration}h
+              {formatDuration(tour.duration)}
             </span>
           )}
           {tour.maxCapacity > 0 && (
