@@ -1,11 +1,13 @@
 /**
  * Guide detail sidebar — left panel on desktop, centered header on mobile.
- * Contains avatar, name, gold divider, language/area pills, credentials, specializations.
+ * Contains avatar, name, gold divider, language pills (split by primary/additional),
+ * operating areas, credentials.
+ * Specializations removed — moved to right column expertise section.
  * No CTA button, no tagline (per design validation).
  */
 
 import Image from 'next/image'
-import { Globe, MapPin, Star } from 'lucide-react'
+import { Globe, MapPin } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { Badge } from '@/components/ui/badge'
 import type { GuideDetail } from '@/lib/api/get-guide-by-slug'
@@ -18,27 +20,26 @@ interface GuideDetailSidebarProps {
 
 export async function GuideDetailSidebar({ guide }: GuideDetailSidebarProps) {
   const t = await getTranslations('guides')
-  const allLanguages = [...new Set([...guide.languages, ...(guide.additionalLanguages ?? [])])]
 
   return (
     <aside className="shrink-0 bg-[var(--color-surface)] px-5 py-8 text-center lg:w-[450px] lg:border-r lg:border-[var(--color-border)] lg:px-12 lg:py-12">
-      {/* Avatar */}
+      {/* Avatar — 160px on all breakpoints */}
       <div className="flex justify-center">
         {guide.photo ? (
-          <div className="relative h-[160px] w-[160px] lg:h-[200px] lg:w-[200px]">
+          <div className="relative h-[160px] w-[160px]">
             <Image
               src={guide.photo.url}
               alt={guide.photo.alt}
               fill
               className="rounded-full object-cover"
-              sizes="(max-width: 1024px) 160px, 200px"
+              sizes="160px"
               priority
               placeholder={guide.photo.blurDataUrl ? 'blur' : 'empty'}
               blurDataURL={guide.photo.blurDataUrl}
             />
           </div>
         ) : (
-          <div className="flex h-[120px] w-[120px] items-center justify-center rounded-full bg-white text-4xl font-bold text-[var(--color-text-muted)] lg:h-[160px] lg:w-[160px]">
+          <div className="flex h-[160px] w-[160px] items-center justify-center rounded-full bg-white text-4xl font-bold text-[var(--color-text-muted)]">
             {guide.name.charAt(0)}
           </div>
         )}
@@ -66,71 +67,67 @@ export async function GuideDetailSidebar({ guide }: GuideDetailSidebarProps) {
 
       {/* Sections below divider: left-aligned on all breakpoints */}
       <div className="text-left">
-      {/* Languages */}
-      {allLanguages.length > 0 && (
-        <SidebarSection icon={<Globe className="h-4 w-4" />} label={t('sidebar.languages')}>
-          <div className="flex flex-wrap gap-2">
-            {allLanguages.map((lang) => (
-              <span key={lang} className="rounded-full bg-[var(--color-background-alt)] px-3 py-1 text-[13px]">
-                {languageDisplayNames[lang] ?? lang}
-              </span>
-            ))}
-          </div>
-        </SidebarSection>
-      )}
-
-      {/* Operating Areas */}
-      {guide.operatingAreas.length > 0 && (
-        <SidebarSection icon={<MapPin className="h-4 w-4" />} label={t('sidebar.areasOfExpertise')}>
-          <div className="flex flex-wrap gap-2">
-            {guide.operatingAreas.map((area) => (
-              <span key={area.id} className="rounded-full bg-[var(--color-background-alt)] px-3 py-1 text-[13px]">
-                {area.name}
-              </span>
-            ))}
-          </div>
-        </SidebarSection>
-      )}
-
-      {/* Credentials */}
-      {guide.credentials && guide.credentials.length > 0 && (
-        <>
-          <hr className="my-5 border-[var(--color-border)]" />
-          <SidebarSection label={t('sidebar.credentials')}>
-            <ul className="space-y-2.5">
-              {guide.credentials.map((cred) => {
-                const { icon: Icon, colorVar } = getCredentialIcon(cred.credential)
-                return (
-                  <li key={cred.credential} className="flex items-center gap-2 text-sm">
-                    <Icon className="h-4 w-4 shrink-0" style={{ color: `var(${colorVar})` }} />
-                    <span>{cred.credential}</span>
-                  </li>
-                )
-              })}
-            </ul>
-          </SidebarSection>
-        </>
-      )}
-
-      {/* Specializations */}
-      {guide.specializations.length > 0 && (
-        <>
-          <hr className="my-5 border-[var(--color-border)]" />
-          <SidebarSection label={t('sidebar.specializations')}>
+        {/* Tour Languages (primary) */}
+        {guide.languages.length > 0 && (
+          <SidebarSection icon={<Globe className="h-4 w-4" />} label={t('sidebar.tourLanguages')}>
             <div className="flex flex-wrap gap-2">
-              {guide.specializations.map((spec) => (
-                <span
-                  key={spec.id}
-                  className="inline-flex items-center gap-1 rounded-full bg-[#FEF3C7] px-3 py-1 text-xs font-medium text-[#8B6914]"
-                >
-                  <Star className="h-3 w-3" />
-                  {spec.name}
+              {guide.languages.map((lang) => (
+                <span key={lang} className="rounded-full bg-[var(--color-background-alt)] px-3 py-1 text-[13px]">
+                  {languageDisplayNames[lang] ?? lang}
                 </span>
               ))}
             </div>
           </SidebarSection>
-        </>
-      )}
+        )}
+
+        {/* Also Speaks (additional languages — outlined pills) */}
+        {guide.additionalLanguages && guide.additionalLanguages.length > 0 && (
+          <SidebarSection label={t('sidebar.alsoSpeaks')}>
+            <div className="flex flex-wrap gap-2">
+              {guide.additionalLanguages.map((lang) => (
+                <span
+                  key={lang}
+                  className="rounded-full border border-[var(--color-border)] px-3 py-1 text-[13px]"
+                >
+                  {languageDisplayNames[lang] ?? lang}
+                </span>
+              ))}
+            </div>
+          </SidebarSection>
+        )}
+
+        {/* Operating Areas */}
+        {guide.operatingAreas.length > 0 && (
+          <SidebarSection icon={<MapPin className="h-4 w-4" />} label={t('sidebar.areasOfExpertise')}>
+            <div className="flex flex-wrap gap-2">
+              {guide.operatingAreas.map((area) => (
+                <span key={area.id} className="rounded-full bg-[var(--color-background-alt)] px-3 py-1 text-[13px]">
+                  {area.name}
+                </span>
+              ))}
+            </div>
+          </SidebarSection>
+        )}
+
+        {/* Credentials */}
+        {guide.credentials && guide.credentials.length > 0 && (
+          <>
+            <hr className="my-5 border-[var(--color-border)]" />
+            <SidebarSection label={t('sidebar.credentials')}>
+              <ul className="space-y-2.5">
+                {guide.credentials.map((cred) => {
+                  const { icon: Icon, colorVar } = getCredentialIcon(cred.credential)
+                  return (
+                    <li key={cred.credential} className="flex items-center gap-2 text-sm">
+                      <Icon className="h-4 w-4 shrink-0" style={{ color: `var(${colorVar})` }} />
+                      <span>{cred.credential}</span>
+                    </li>
+                  )
+                })}
+              </ul>
+            </SidebarSection>
+          </>
+        )}
       </div>
     </aside>
   )

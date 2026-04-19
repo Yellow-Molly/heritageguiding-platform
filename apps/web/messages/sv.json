@@ -613,13 +613,29 @@
       "experience": "{years}+ års erfarenhet"
     },
     "loadMore": "Visa fler guider",
+    "allGuidesLoaded": "Alla guider laddade",
     "sidebar": {
       "languages": "Språk",
-      "areasOfExpertise": "Expertområden",
+      "tourLanguages": "Turspråk",
+      "alsoSpeaks": "Talar även",
+      "areasOfExpertise": "Områden",
       "credentials": "Meriter",
       "specializations": "Specialiseringar",
       "yearsExperience": "{years}+ år"
-    }
+    },
+    "expertise": {
+      "title": "Specialområden"
+    },
+    "quote": {
+      "attribution": "— {name}"
+    },
+    "approach": {
+      "title": "Guidestil"
+    },
+    "guestFeedback": {
+      "title": "Vad gästerna säger"
+    },
+    "bookTour": "Boka en tur med {name}"
   },
   "privacy": {
     "title": "Integritetspolicy",

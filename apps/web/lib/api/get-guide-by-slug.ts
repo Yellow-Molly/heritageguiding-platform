@@ -24,6 +24,12 @@ export interface GuideDetail {
   yearsExperience?: number
   /** Rich text bio as Payload lexical JSON */
   bio: SerializedEditorState | null
+  /** Structured profile fields (populated from v2 import) */
+  guideStyle?: string | null
+  whatGuestsAppreciate?: string | null
+  uniqueAspectsQuote?: string | null
+  uniqueAspectsBody?: string | null
+  specialtyDescriptions?: Array<{ description: string }>
   /** Tours led by this guide, mapped to same shape as tour listing cards */
   tours: FeaturedTour[]
 }
@@ -93,6 +99,11 @@ export async function getGuideBySlug(
     operatingAreas: areas.map((a) => ({ id: String(a.id), name: a.name, slug: a.slug })),
     credentials: creds.length > 0 ? creds : undefined,
     bio: (doc.bio as SerializedEditorState) ?? null,
+    guideStyle: (doc.guideStyle as string) ?? null,
+    whatGuestsAppreciate: (doc.whatGuestsAppreciate as string) ?? null,
+    uniqueAspectsQuote: (doc.uniqueAspectsQuote as string) ?? null,
+    uniqueAspectsBody: (doc.uniqueAspectsBody as string) ?? null,
+    specialtyDescriptions: (doc.specialtyDescriptions ?? []) as Array<{ description: string }>,
     tours,
   }
 }

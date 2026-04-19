@@ -264,7 +264,7 @@ packages/cms/
 | **Users** | Phase 01 ✅ | Admin authentication & authorization |
 | **Media** | Phase 01 ✅ | Image/file upload & management |
 | **Tours** | Phase 03 ✅ | Tour listings with bokunExperienceId for widget integration |
-| **Guides** | Phase 03 ✅ | Expert profiles with credentials |
+| **Guides** | Phase 03/16 ✅ | Expert profiles with credentials (Phase 16: profile section fields) |
 | **Categories** | Phase 03 ✅ | Tour themes/activity classification |
 | **Reviews** | Phase 03 ✅ | Customer feedback with ratings |
 | **Cities** | Phase 03 ✅ | Geographic location data |
@@ -382,7 +382,7 @@ query {
 }
 ```
 
-**Guides (Phase 3)**
+**Guides (Phase 3 + Phase 16 Profile Redesign)**
 ```typescript
 {
   slug: 'guides',
@@ -391,6 +391,14 @@ query {
     { name: 'bio', type: 'richText' },
     { name: 'credentials', type: 'array', fields: [...] },
     { name: 'photo', type: 'upload', relationTo: 'media' },
+    // Profile section fields (Phase 16 - extracted to guide-profile-fields.ts)
+    { name: 'guideStyle', type: 'textarea', localized: true },
+    { name: 'whatGuestsAppreciate', type: 'textarea', localized: true },
+    { name: 'uniqueAspectsQuote', type: 'text', localized: true, maxLength: 500 },
+    { name: 'uniqueAspectsBody', type: 'textarea', localized: true },
+    { name: 'specialtyDescriptions', type: 'array', maxRows: 15, fields: [
+      { name: 'description', type: 'text', localized: true, maxLength: 300 }
+    ]},
   ]
 }
 ```

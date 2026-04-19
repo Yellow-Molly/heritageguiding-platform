@@ -38,8 +38,18 @@ const PHOTO_TO_GUIDE_SLUG: Record<string, string> = {
   'Olof_Na\u2560\u00EAslund': 'olof-naslund',         // corrupted ä on disk
   'Sabine_Gru\u2560\u00EAn': 'sabine-gruen',          // corrupted ü; Excel name: Gruen
   'Sophie_Sahlin': 'sophie-sahlin',
+  // v2 additions (plan: 260414-2310-guides-data-v2-update)
+  'Mattias Wallin 2': 'mattias-wallin',              // stem has a space and "2" suffix
+  'Jack_Voldstad': 'jack-voldstad',                  // v2 addition (guide profile redesign)
+  '_placeholder-silhouette': '_placeholder',         // reserved key, fanned out to PLACEHOLDER_GUIDES
   /* eslint-enable no-irregular-whitespace */
 }
+
+/**
+ * Guides without a real photo that should all point to the shared placeholder
+ * media ID after the upload loop completes. v2 onboarding guides.
+ */
+const PLACEHOLDER_GUIDES = ['asa-ovrelid', 'svante-bergqvist', 'tommy-nilsson']
 
 interface GuidePhotoEntry {
   guideSlug: string
@@ -58,6 +68,8 @@ const CLEAN_ALT_TEXT: Record<string, string> = {
   'Niklas_Lo\u2560\u00EAfstrom': 'Niklas Löfström',
   'Olof_Na\u2560\u00EAslund': 'Olof Näslund',
   'Sabine_Gru\u2560\u00EAn': 'Sabine Grün',
+  'Mattias Wallin 2': 'Mattias Wallin',
+  '_placeholder-silhouette': 'Guide portrait (placeholder)',
 }
 
 /**
@@ -178,6 +190,18 @@ async function main() {
       errors++
       console.error(`  ! failed: ${photo.filename}:`, err instanceof Error ? err.message : err)
     }
+  }
+
+  // Fan out _placeholder media id to all guides that need a placeholder photo
+  // (v2 onboarding: Åsa, Svante, Tommy). If no placeholder was uploaded (file
+  // missing), those guides remain unmapped and Phase 4 falls back to photo:null.
+  if (mapping._placeholder) {
+    for (const slug of PLACEHOLDER_GUIDES) {
+      mapping[slug] = mapping._placeholder
+    }
+    console.log(`  placeholder fanned out to: ${PLACEHOLDER_GUIDES.join(', ')}`)
+  } else {
+    console.warn(`  warn: no _placeholder-silhouette image found; ${PLACEHOLDER_GUIDES.join(', ')} will have no photo`)
   }
 
   // Write output mapping: { guideSlug: mediaId }

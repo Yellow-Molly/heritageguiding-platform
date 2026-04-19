@@ -5,6 +5,7 @@ import {
   createRevalidateTagsAfterChangeHook,
   createRevalidateTagsAfterDeleteHook,
 } from '../hooks'
+import { guideProfileFields } from './fields/guide-profile-fields'
 
 /**
  * Guides collection for tour experts
@@ -74,6 +75,7 @@ export const Guides: CollectionConfig = {
         description: 'Guide biography and background',
       },
     },
+    guideProfileFields,
     {
       name: 'credentials',
       type: 'array',

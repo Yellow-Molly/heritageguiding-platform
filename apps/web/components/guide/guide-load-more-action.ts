@@ -2,14 +2,20 @@
 
 import { getGuides, type GuideListItem } from '@/lib/api/get-guides'
 
+const VALID_LOCALES = ['sv', 'en', 'de'] as const
+
 /**
- * Server action to fetch the next page of guides for load-more.
- * Parses URL search params string to reconstruct filters.
+ * Server action for infinite scroll — fetches next page of guides.
+ * Returns guides array + hasMore flag (same pattern as tour-actions.ts).
  */
 export async function fetchMoreGuides(
   filterString: string,
-  page: number
-): Promise<GuideListItem[]> {
+  page: number,
+  locale: string,
+): Promise<{ guides: GuideListItem[]; hasMore: boolean }> {
+  if (!VALID_LOCALES.includes(locale as (typeof VALID_LOCALES)[number])) {
+    return { guides: [], hasMore: false }
+  }
   const params = new URLSearchParams(filterString)
   const result = await getGuides(
     {
@@ -20,7 +26,10 @@ export async function fetchMoreGuides(
       page: String(page),
       limit: '9',
     },
-    params.get('locale') || 'en'
+    locale,
   )
-  return result.guides
+  return {
+    guides: result.guides,
+    hasMore: result.page < result.totalPages,
+  }
 }

@@ -613,13 +613,29 @@
       "experience": "{years}+ years experience"
     },
     "loadMore": "Load more guides",
+    "allGuidesLoaded": "All guides loaded",
     "sidebar": {
       "languages": "Languages",
-      "areasOfExpertise": "Areas of Expertise",
+      "tourLanguages": "Tour Languages",
+      "alsoSpeaks": "Also Speaks",
+      "areasOfExpertise": "Areas",
       "credentials": "Credentials",
       "specializations": "Specializations",
       "yearsExperience": "{years}+ years"
-    }
+    },
+    "expertise": {
+      "title": "Areas of Expertise"
+    },
+    "quote": {
+      "attribution": "— {name}"
+    },
+    "approach": {
+      "title": "Guiding Approach"
+    },
+    "guestFeedback": {
+      "title": "What Guests Say"
+    },
+    "bookTour": "Book a Tour with {name}"
   },
   "privacy": {
     "title": "Privacy Policy",

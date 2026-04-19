@@ -16,7 +16,7 @@ export async function GuideToursSection({ tours, guideName }: GuideToursSectionP
 
   if (tours.length === 0) {
     return (
-      <section>
+      <section id="tours">
         <h2 className="font-serif text-[28px] font-bold text-[var(--color-primary)]">
           {t('toursBy', { name: guideName })}
         </h2>
@@ -26,11 +26,11 @@ export async function GuideToursSection({ tours, guideName }: GuideToursSectionP
   }
 
   return (
-    <section>
+    <section id="tours">
       <h2 className="font-serif text-[28px] font-bold text-[var(--color-primary)]">
         {t('toursBy', { name: guideName })}
       </h2>
-      <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3 xl:gap-5 justify-items-center">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
         {tours.map((tour) => (
           <TourCard key={tour.id} tour={tour} />
         ))}

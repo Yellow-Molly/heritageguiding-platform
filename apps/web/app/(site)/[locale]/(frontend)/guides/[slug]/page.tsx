@@ -3,7 +3,16 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getGuideBySlug, getAllGuideSlugs } from '@/lib/api/get-guide-by-slug'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
-import { GuideDetailSidebar, GuideDetailBio, GuideToursSection } from '@/components/guide'
+import {
+  GuideDetailSidebar,
+  GuideDetailBio,
+  GuideToursSection,
+  GuideExpertiseSection,
+  GuideQuoteSection,
+  GuideApproachSection,
+  GuideGuestFeedbackSection,
+  GuideStickyCta,
+} from '@/components/guide'
 import { Breadcrumb } from '@/components/shared/breadcrumb'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
@@ -46,7 +55,8 @@ export default async function GuideDetailPage({ params }: GuideDetailPageProps) 
         credentials={guide.credentials}
       />
       <Header variant="solid" />
-      <main className="min-h-screen bg-[var(--color-background)] pt-[var(--header-height)]">
+      {/* pb-20 on mobile to clear the sticky CTA bar; removed on lg+ */}
+      <main className="min-h-screen bg-[var(--color-background)] pb-20 pt-[var(--header-height)] lg:pb-0">
         {/* Mobile breadcrumb */}
         <div className="bg-[var(--color-background-alt)] px-5 py-3 lg:hidden">
           <Breadcrumb items={breadcrumbs} />
@@ -65,13 +75,26 @@ export default async function GuideDetailPage({ params }: GuideDetailPageProps) 
 
             <div className="space-y-10">
               <GuideDetailBio guide={guide} />
+              <hr className="border-[var(--color-border)]" />
+              <GuideExpertiseSection specialtyDescriptions={guide.specialtyDescriptions} />
+              <GuideQuoteSection
+                quote={guide.uniqueAspectsQuote}
+                body={guide.uniqueAspectsBody}
+                guideName={guide.name}
+              />
+              <GuideApproachSection guideStyle={guide.guideStyle} />
+              <GuideGuestFeedbackSection whatGuestsAppreciate={guide.whatGuestsAppreciate} />
               {guide.tours.length > 0 && (
-                <GuideToursSection tours={guide.tours} guideName={guide.name} />
+                <>
+                  <hr className="border-[var(--color-border)]" />
+                  <GuideToursSection tours={guide.tours} guideName={guide.name} />
+                </>
               )}
             </div>
           </div>
         </div>
       </main>
+      {guide.tours.length > 0 && <GuideStickyCta guideName={guide.name} />}
       <Footer />
     </>
   )

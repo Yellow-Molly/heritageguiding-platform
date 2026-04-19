@@ -199,6 +199,14 @@ All animations respect `prefers-reduced-motion` media query.
 - Hover: Scale 1.02, increased shadow
 - Image aspect ratio: 4:3 for tour cards
 
+### Pagination — Infinite Scroll (Platform Standard)
+All listing pages use **infinite scroll** via `IntersectionObserver` — no "Load More" buttons or page numbers.
+- Sentinel element with `rootMargin: 200px` triggers pre-fetch before viewport entry
+- `useTransition` for async state updates; `generationRef` prevents race conditions on filter changes
+- Loading: centered `Loader2` spinner below the grid
+- End state: "All {items} loaded" text when no more pages
+- Reference implementation: `tour-grid-layout.tsx`, `guide-grid-client.tsx`
+
 ### Trust Indicators
 - Star ratings with gold fill
 - Badge styles with subtle backgrounds

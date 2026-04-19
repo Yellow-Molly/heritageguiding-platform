@@ -4,15 +4,29 @@
  * creates real guide entries (3 locales), reassigns tours, deletes placeholders.
  *
  * Usage:
+ *   # v1 (default path): translated-guides.json
  *   npx tsx --require ./scripts/patch-next-env.cjs scripts/import-guide-data.ts [--dry-run] [--update] [--status=active]
+ *
+ *   # v2 (narrative + 4 new guides): pass --input path; auto-detected by shape
+ *   npx tsx --require ./scripts/patch-next-env.cjs scripts/import-guide-data.ts \
+ *     --input=data/translated-guides-v2.json --update --status=active
  */
 import fs from 'fs'
 import path from 'path'
 import { getPayload, payloadConfig } from './payload-bootstrap'
 import { markdownToLexical } from '../packages/cms/lib/csv/tour-csv-markdown-to-lexical-converter'
+import {
+  buildV2BioMarkdown,
+  buildV2FieldData,
+  isV2Shape,
+  NEW_GUIDE_CREDENTIALS,
+  type TranslatedGuideV2,
+  type V2Locale,
+} from './lib/guide-v2-helpers'
 
 const DRY_RUN = process.argv.includes('--dry-run')
 const UPDATE_MODE = process.argv.includes('--update')
+const FULL_UPDATE = process.argv.includes('--full-update')
 const VALID_STATUSES = ['active', 'inactive', 'on-leave'] as const
 const STATUS = process.argv.find((a) => a.startsWith('--status='))?.split('=')[1] || 'active'
 if (!VALID_STATUSES.includes(STATUS as (typeof VALID_STATUSES)[number])) {
@@ -20,7 +34,9 @@ if (!VALID_STATUSES.includes(STATUS as (typeof VALID_STATUSES)[number])) {
   process.exit(1)
 }
 
-const TRANSLATED_JSON = path.resolve(__dirname, '../data/translated-guides.json')
+const INPUT_ARG = process.argv.find((a) => a.startsWith('--input='))?.split('=')[1]
+const DEFAULT_V1_JSON = path.resolve(__dirname, '../data/translated-guides.json')
+const TRANSLATED_JSON = INPUT_ARG ? path.resolve(process.cwd(), INPUT_ARG) : DEFAULT_V1_JSON
 const MEDIA_MAPPING_JSON = path.resolve(__dirname, '../data/guide-photo-media-mapping.json')
 
 // Placeholder guide slugs to delete after creating real guides
@@ -160,8 +176,18 @@ async function main() {
     process.exit(1)
   }
 
-  const guides: TranslatedGuide[] = JSON.parse(fs.readFileSync(TRANSLATED_JSON, 'utf-8'))
+  const rawGuides: unknown[] = JSON.parse(fs.readFileSync(TRANSLATED_JSON, 'utf-8'))
   const photoMapping: Record<string, number> = JSON.parse(fs.readFileSync(MEDIA_MAPPING_JSON, 'utf-8'))
+
+  // Probe first entry for v2 shape. If matched, dispatch to v2 path; the v1
+  // flow below remains untouched for idempotent v1 re-runs.
+  if (rawGuides.length > 0 && isV2Shape(rawGuides[0])) {
+    console.log(`Detected v2 input: ${TRANSLATED_JSON}`)
+    await runV2Import(rawGuides as TranslatedGuideV2[], photoMapping)
+    return
+  }
+
+  const guides = rawGuides as TranslatedGuide[]
 
   console.log(`Loaded ${guides.length} guides, ${Object.keys(photoMapping).length} photo mappings`)
 
@@ -346,6 +372,185 @@ async function main() {
   console.log(`Skipped: ${skipped}`)
   console.log(`Tours reassigned: ${toursReassigned}`)
   console.log(`Placeholders deleted: ${deleted}`)
+  console.log(`Errors: ${errors}`)
+
+  if (errors > 0) process.exit(1)
+  process.exit(0)
+}
+
+/**
+ * v2 import path — merge-mode for existing guides, defaults for new guides.
+ * Preserves v1 email/phone/operatingAreas/yearsExperience/additionalLanguages
+ * on existing guides (unless --full-update). Creates 4 new guides with defaults.
+ * Tour reassignment and placeholder deletion are v1-only concerns, skipped here.
+ */
+async function runV2Import(
+  guides: TranslatedGuideV2[],
+  photoMapping: Record<string, number>,
+) {
+  const onlyBioMode = !FULL_UPDATE
+  console.log(`Loaded ${guides.length} v2 guides, ${Object.keys(photoMapping).length} photo mappings`)
+  console.log(`Merge mode: ${onlyBioMode ? 'only-bio-credentials-specs (default)' : 'full-update'}\n`)
+
+  if (DRY_RUN) {
+    for (const g of guides) {
+      const photoId = photoMapping[g.slug]
+      const isPlaceholder = photoId && photoId === photoMapping._placeholder
+      console.log(`\n  ${g.slug}: ${g.name}`)
+      console.log(`    photo: ${photoId ?? 'none'}${isPlaceholder ? ' (placeholder)' : ''}`)
+      console.log(`    languages: ${g.passThroughLanguages.join(', ')}`)
+      console.log(`    additional: ${g.passThroughAdditionalLanguages.join(', ') || '—'}`)
+      console.log(`    specs: ${g.sv.specializations.length}`)
+      console.log(`    bio.sv: ${g.sv.bio.length} chars`)
+    }
+    console.log('\n[DRY RUN] Would import the above guides via v2 path. Exiting.')
+    process.exit(0)
+  }
+
+  const payload = await getPayload({ config: payloadConfig })
+
+  const { docs: existingGuides } = await payload.find({ collection: 'guides', limit: 1000 })
+  const existingSlugs = new Set(existingGuides.map((g) => g.slug))
+
+  const { docs: categories } = await payload.find({ collection: 'categories', limit: 1000 })
+  const categoryMap = new Map(categories.map((c) => [c.slug, c.id]))
+
+  const { docs: cities } = await payload.find({ collection: 'cities', limit: 1000 })
+  const cityMap = new Map(cities.map((c) => [c.slug, c.id]))
+  const stockholmId = cityMap.get('stockholm')
+  if (!stockholmId) {
+    console.error('Fatal: city "stockholm" not found in CMS — cannot assign operating area for new guides')
+    process.exit(1)
+  }
+
+  let created = 0
+  let updated = 0
+  let errors = 0
+  let placeholderCount = 0
+
+  for (const guide of guides) {
+    console.log(`\nProcessing: ${guide.slug}`)
+
+    const photoId = photoMapping[guide.slug]
+    if (!photoId) console.log(`  ! no photo mapping`)
+    const isPlaceholder = photoId && photoId === photoMapping._placeholder
+    if (isPlaceholder) {
+      console.log(`  note: using placeholder photo`)
+      placeholderCount++
+    }
+
+    const specializationIds = resolveSpecializations(guide.sv.specializations, categoryMap)
+    const wasExisting = existingSlugs.has(guide.slug)
+
+    try {
+      let guideId: string | number
+
+      if (wasExisting) {
+        // UPDATE path — merge v2 narrative into existing record
+        const existing = existingGuides.find((g) => g.slug === guide.slug)!
+        guideId = existing.id
+
+        const svFields = buildV2FieldData(guide.sv)
+        const svData: Record<string, unknown> = {
+          bio: markdownToLexical(guide.sv.bio.trim()),
+          specializations: specializationIds.length > 0 ? specializationIds : undefined,
+          ...svFields,
+        }
+        if (FULL_UPDATE) {
+          // When caller opts in, also refresh name/languages/photo from v2.
+          svData.name = guide.name
+          svData.languages = guide.passThroughLanguages
+          svData.additionalLanguages = guide.passThroughAdditionalLanguages.length > 0
+            ? guide.passThroughAdditionalLanguages
+            : undefined
+          if (photoId) svData.photo = photoId
+        }
+        // Preserve v1 metadata untouched in default only-bio mode: email/phone/
+        // operatingAreas/yearsExperience/additionalLanguages are NOT in svData.
+
+        await payload.update({ collection: 'guides', id: guideId, locale: 'sv', data: svData })
+        updated++
+      } else {
+        // CREATE path — new guides (e.g. Jack Voldstad)
+        const svFields = buildV2FieldData(guide.sv)
+        const svData: Record<string, unknown> = {
+          name: guide.name,
+          slug: guide.slug,
+          status: STATUS,
+          bio: markdownToLexical(guide.sv.bio.trim()),
+          credentials: [{ credential: NEW_GUIDE_CREDENTIALS.sv }],
+          photo: photoId || undefined,
+          email: '',
+          phone: '',
+          languages: guide.passThroughLanguages,
+          additionalLanguages: guide.passThroughAdditionalLanguages.length > 0
+            ? guide.passThroughAdditionalLanguages
+            : undefined,
+          specializations: specializationIds.length > 0 ? specializationIds : undefined,
+          operatingAreas: [stockholmId],
+          ...svFields,
+        }
+        const result = await payload.create({ collection: 'guides', locale: 'sv', data: svData })
+        guideId = result.id
+        existingSlugs.add(guide.slug)
+        created++
+      }
+
+      // EN + DE locale updates — always push fresh bio; for new guides also
+      // push a fresh credential; for existing guides we leave credentials alone
+      // unless full-update to avoid mangling PO-edited translations.
+      // Fetch saved guide to get array item IDs for locale updates (credentials + specialtyDescriptions).
+      const savedGuide = (await payload.findByID({
+        collection: 'guides',
+        id: guideId,
+        locale: 'sv',
+      })) as {
+        credentials?: Array<{ id: string; credential: string }>
+        specialtyDescriptions?: Array<{ id: string; description: string }>
+      }
+      const savedCreds = savedGuide.credentials || []
+      const savedSpecDescs = savedGuide.specialtyDescriptions || []
+
+      for (const locale of ['en', 'de'] as const) {
+        const localeFields = buildV2FieldData(guide[locale])
+        const localeData: Record<string, unknown> = {
+          bio: markdownToLexical(guide[locale].bio.trim()),
+          guideStyle: localeFields.guideStyle,
+          whatGuestsAppreciate: localeFields.whatGuestsAppreciate,
+          uniqueAspectsQuote: localeFields.uniqueAspectsQuote,
+          uniqueAspectsBody: localeFields.uniqueAspectsBody,
+        }
+        // Map specialtyDescriptions onto saved array IDs to preserve row identity
+        if (savedSpecDescs.length > 0) {
+          if (localeFields.specialtyDescriptions.length !== savedSpecDescs.length) {
+            console.warn(`  warn: ${guide.slug} ${locale} specialtyDescriptions count mismatch (${localeFields.specialtyDescriptions.length} vs ${savedSpecDescs.length} saved)`)
+          }
+          localeData.specialtyDescriptions = savedSpecDescs.map((item, i) => ({
+            id: item.id,
+            description: localeFields.specialtyDescriptions[i]?.description ?? item.description,
+          }))
+        }
+        if (!wasExisting && savedCreds[0]) {
+          // New guide: translate the single FSAG credential into en/de.
+          localeData.credentials = [{ id: savedCreds[0].id, credential: NEW_GUIDE_CREDENTIALS[locale] }]
+        } else if (FULL_UPDATE && savedCreds.length > 0) {
+          localeData.credentials = savedCreds.map((c) => ({ id: c.id, credential: c.credential }))
+        }
+        await payload.update({ collection: 'guides', id: guideId, locale, data: localeData })
+      }
+
+      const action = wasExisting ? 'updated' : 'created'
+      console.log(`  OK ${action} (3 locales, specs=${specializationIds.length})`)
+    } catch (err) {
+      errors++
+      console.error(`  ! failed:`, err instanceof Error ? err.message : err)
+    }
+  }
+
+  console.log('\n=== v2 Summary ===')
+  console.log(`Created: ${created}`)
+  console.log(`Updated: ${updated}`)
+  console.log(`Placeholder photos: ${placeholderCount}`)
   console.log(`Errors: ${errors}`)
 
   if (errors > 0) process.exit(1)

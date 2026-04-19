@@ -88,6 +88,7 @@ export function SampleComponent({
 - Use `'use client'` directive only when needed
 - Prefer `next/link` over `<a>` tags
 - Use dynamic imports with `React.lazy()` for code splitting
+- **Pagination**: All listing pages must use **infinite scroll** via `IntersectionObserver` (no "Load More" buttons or numbered pages). See `tour-grid-layout.tsx` for reference.
 
 ## File Organization - Phase 08.1 Complete
 

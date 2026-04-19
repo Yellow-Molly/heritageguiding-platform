@@ -10,8 +10,6 @@ import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
 import { GuideListSchema } from '@/components/seo'
 
-const PAGE_SIZE = 9
-
 interface GuidesPageProps {
   params: Promise<{ locale: string }>
   searchParams: Promise<GuideFilters>
@@ -33,7 +31,7 @@ export default async function GuidesPage({ params, searchParams }: GuidesPagePro
   const filters = await searchParams
 
   const [{ guides, total, totalPages }, filterOptions] = await Promise.all([
-    getGuides({ ...filters, limit: String(PAGE_SIZE) }, locale),
+    getGuides({ ...filters, limit: '9' }, locale),
     getGuideFilterOptions(locale),
   ])
 
@@ -53,8 +51,8 @@ export default async function GuidesPage({ params, searchParams }: GuidesPagePro
           <div className="mt-6">
             <GuideGridClient
               initialGuides={guides}
-              totalGuides={total}
-              pageSize={PAGE_SIZE}
+              totalPages={totalPages}
+              locale={locale}
             />
           </div>
         </section>

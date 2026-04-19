@@ -235,7 +235,7 @@ app/
 
 #### Libraries & Utilities
 
-**Data Fetching (9 functions with full TypeScript typing):**
+**Data Fetching (11 functions with full TypeScript typing):**
 - `lib/api/get-tours.ts` - Fetch all tours with filters
 - `lib/api/get-tour-by-slug.ts` - Single tour detail
 - `lib/api/get-featured-tours.ts` - Featured tours list
@@ -243,6 +243,8 @@ app/
 - `lib/api/get-categories.ts` - All categories
 - `lib/api/get-tour-reviews.ts` - Tour reviews with ratings
 - `lib/api/get-trust-stats.ts` - Trust metrics
+- `lib/api/get-guide-by-slug.ts` - Single guide detail (includes Phase 16 profile fields)
+- `lib/api/get-all-guides.ts` - All guides listing
 - Tests: 8 test files covering all functions
 
 **Bokun Integration (Phase 08.1):**
@@ -362,11 +364,17 @@ app/
    - SEO fields (meta title/description, featured status)
    - Status (draft/published), localized (sv/en/de)
 
-4. **guides** - Tour experts
+4. **guides** - Tour experts (Phase 16 redesign)
    - Name, bio, photo
    - Credentials array (certifications, languages)
-   - Languages spoken
+   - Languages spoken (primary + additional)
    - Contact info, localized
+   - Profile sections (Phase 16):
+     - `guideStyle` - Guiding approach/style description
+     - `whatGuestsAppreciate` - What guests appreciate about guide
+     - `uniqueAspectsQuote` - Pull quote (max 500 chars)
+     - `uniqueAspectsBody` - Context/body for quote
+     - `specialtyDescriptions` - Array of specialty descriptions (max 15)
 
 5. **categories** - Tour themes
    - Name, slug, description
@@ -408,7 +416,7 @@ app/
     - Status (pending/processing/complete/failed)
     - Error log for validation failures
 
-#### Field Modules (7 reusable)
+#### Field Modules (8 reusable)
 
 - `slug-field.ts` - Auto-generates URL slugs
 - `seo-fields.ts` - Meta title/description/OG image
@@ -417,6 +425,7 @@ app/
 - `tour-pricing-fields.ts` - Price, currency, discounts
 - `tour-inclusion-fields.ts` - Inclusions, exclusions, items
 - `tour-audience-fields.ts` - 10 audience tags for recommendations
+- `guide-profile-fields.ts` - Profile sections (guideStyle, whatGuestsAppreciate, etc., Phase 16)
 
 #### Access Control
 
@@ -704,7 +713,7 @@ npm run payload:generate-types  # Generate TS types from schema
 | **Admin Components** | 6 (import/export UI) |
 | **Wizard Components** | 5 (Phase 08.5) |
 | **CMS Collections** | 10+ |
-| **Field Modules** | 7 |
+| **Field Modules** | 8 |
 | **Unit Tests** | 1009 (444 new Phase 12) |
 | **Test Files** | 44 (33 in apps/web, 11 in packages/cms) |
 | **Test Coverage** | apps/web 95.9% stmts, packages/cms 89.7% stmts |

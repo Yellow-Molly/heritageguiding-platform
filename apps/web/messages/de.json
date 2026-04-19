@@ -613,13 +613,29 @@
       "experience": "{years}+ Jahre Erfahrung"
     },
     "loadMore": "Mehr Reiseführer laden",
+    "allGuidesLoaded": "Alle Reiseführer geladen",
     "sidebar": {
       "languages": "Sprachen",
-      "areasOfExpertise": "Fachgebiete",
+      "tourLanguages": "Toursprachen",
+      "alsoSpeaks": "Spricht auch",
+      "areasOfExpertise": "Gebiete",
       "credentials": "Qualifikationen",
       "specializations": "Spezialisierungen",
       "yearsExperience": "{years}+ Jahre"
-    }
+    },
+    "expertise": {
+      "title": "Fachgebiete"
+    },
+    "quote": {
+      "attribution": "— {name}"
+    },
+    "approach": {
+      "title": "Führungsstil"
+    },
+    "guestFeedback": {
+      "title": "Was Gäste sagen"
+    },
+    "bookTour": "Tour buchen mit {name}"
   },
   "privacy": {
     "title": "Datenschutzerklärung",
