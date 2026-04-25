@@ -1,10 +1,10 @@
 # Project Overview & Product Development Requirements (PDR)
 
-**Document Version:** 1.6
-**Last Updated:** February 21, 2026
-**Status:** Phase 12 Complete - Unit Test Coverage Improvement (52%→90%+)
+**Document Version:** 1.7
+**Last Updated:** April 25, 2026
+**Status:** Phase 16 Complete - Guide Profile Redesign + Cache Revalidation + Staging Blocking
 **Project Lead:** Technical Team
-**Latest Changes:** Test coverage dramatically improved from ~52% to 90%+ across both workspaces, 1009 unit tests (444 new), comprehensive service/integration test coverage, rebranded to Private Tours
+**Latest Changes:** Guide profile split-panel layout, infinite scroll pagination, cache invalidation hooks, IS_STAGING crawler blocking, tour/guides data v2, cancellation policy page
 
 ## Executive Summary
 
@@ -425,45 +425,59 @@ The MVP is complete when **ALL** criteria are met:
 | Technical Lead | Approved | Jan 13, 2026 |
 | Stakeholder | Pending | - |
 
-## Current Progress
+## Current Progress (As of April 25, 2026)
 
-**Completed (65K LOC - apps/web):**
-- 70+ React components (responsive, accessible, i18n-ready)
-- 9 API data-fetching functions with full TypeScript typing
-- **500+ unit tests** (95.9% statement coverage, all 4 metrics >80%)
-- 33 test files covering components, APIs, utilities, services, hooks
+**Phases Complete:** 13-16 (Phase 09 WhatsApp/Groups + Phases 10-12 pending completion)
+
+**Completed (69K LOC - apps/web):**
+- 150+ React components (responsive, accessible, i18n-ready)
+- 13 API data-fetching functions + 13 API routes with full TypeScript typing
+- **1009 total unit tests** (95.9% statement coverage, all 4 metrics >80%)
+- 44 test files covering components, APIs, services, hooks, integrations
 - Bokun API client with HMAC-SHA256 authentication + comprehensive tests
-- Semantic search with pgvector + OpenAI embeddings + vector search tests
-- Email services (transporter, admin notifications, customer confirmations) + tests
-- Excel/CSV import-export with 9 service files + 6 admin components + tests
+- Semantic search with pgvector + OpenAI embeddings (1536-dim)
+- Email services (5 transports: Gmail SMTP, Nodemailer) + tests
+- Excel/CSV import-export with 9 service files + tests
 - Web Vitals monitoring hook + analytics endpoint + tests
+- Cache revalidation pattern (CMS hook + /api/revalidate endpoint)
+- IS_STAGING env var for staging crawler blocking (robots.txt + headers)
+- Image blur placeholders via plaiceholder (blur_data_url)
+- Split-panel guide detail layout with infinite scroll pagination
+- Booking-first tour detail layout (lg:grid-cols-[1fr_380px])
+- Homepage Stepi-inspired redesign + tours listing sidebar filters
 - XSS prevention, security headers, input validation
 - ARIA labels, semantic HTML, accessibility badges, skip links
 
 **Completed (35K LOC - packages/cms):**
-- 10 fully configured Payload CMS collections (including Bookings)
-- **500+ unit tests** (89.7% statement coverage, all 4 metrics >80%)
-- 11 test files covering CSV/Excel import-export, access control, embedding hooks
-- 3-locale localization (sv/en/de)
+- 12 fully configured Payload CMS collections
+- **1009 total unit tests** (89.7% statement coverage, all 4 metrics >80%)
+- 11 test files covering CSV/Excel, access control, embedding hooks, cache revalidation
+- 3-locale localization (sv/en/de) + migration path for new fields
 - Vercel Blob cloud storage integration
 - Role-based access control
 - pgvector extension for semantic search with embedding generation on save
 - Excel/CSV import-export services with comprehensive validation
+- Cache revalidation hook (revalidate-cache-tags-hook) on afterChange
 
-**Phase 12 Milestone (Unit Test Coverage):**
-- Total test count: 1009 (up from ~600 Phase 11)
-- New tests: 444 (for email, Bokun API, AI/embeddings, CSV/Excel, Web Vitals)
-- Coverage improvement: ~52% → 90%+ across both workspaces
-- Test files created: 12 new comprehensive test suites
+**Phase Milestones:**
+- Phase 13 (2026-03-04): Homepage redesign (Stepi-inspired)
+- Phase 14 (2026-04-04): Tours listing redesign (sidebar filters)
+- Phase 15 (2026-04-08): Tour detail redesign (booking-first layout)
+- Phase 16 (2026-04-18): Guide profile redesign (split-panel + infinite scroll)
+- Cache revalidation (2026-04-12): CMS hook + /api/revalidate endpoint
+- IS_STAGING blocking (2026-04-05): Staging crawler prevention
+- Tour data v2 (2026-04-13): Delta import pipeline
+- Guides data v2 (2026-04-14): Data update
+- Cancellation policy page (2026-04-12): i18n support
 
-## Next Steps (Phase 09+)
+## Next Steps (Phase 17+)
 
-1. **Phase 09** - Group inquiry form & WhatsApp integration (pending)
-2. **Phase 10-13** - Advanced features (SEO, accessibility audit, schema)
-3. **Phase 14-17** - Performance optimization, testing, launch prep
+1. **Phase 17** - Per-tour cancellation policy (in progress, plan: 260419)
+2. **Phase 09** - Group inquiry form & WhatsApp integration (pending)
+3. **Phase 18+** - Advanced features, launch preparation
 
 ---
 
-**Document Status:** Ready for stakeholder review
+**Document Status:** Phase 16 Complete, Per-Tour Cancellation In Progress
 **Questions?** Contact technical lead
-**Last Review:** February 8, 2026
+**Last Review:** April 25, 2026

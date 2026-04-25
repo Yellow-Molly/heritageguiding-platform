@@ -1,9 +1,9 @@
 # System Architecture - Private Tours Platform
 
-**Last Updated:** February 21, 2026
-**Phase:** 12 - Unit Test Coverage Improvement (Complete)
-**Status:** 1009 unit tests (90%+ coverage), comprehensive service/integration testing, email services, Bokun API tests, AI embeddings tests, CSV/Excel tests
-**Recent Update:** Test coverage expanded from ~52% to 90%+, 444 new unit tests across 12 test files, rebranded to Private Tours
+**Last Updated:** April 25, 2026
+**Phase:** 16 - Guide Profile Redesign (Complete)
+**Status:** Guide profile split-panel layout, infinite scroll pagination, cache revalidation hooks, IS_STAGING blocking, image blur placeholders, tour/guides data v2
+**Recent Update:** Cache invalidation strategy (CMS hook + /api/revalidate endpoint), staging crawler blocking, guide profile layouts
 
 ## High-Level Architecture
 
@@ -592,17 +592,105 @@ access: {
 - ✅ Lighthouse CI integration with GitHub Actions
 - ✅ 21 new performance tests (600 total)
 
-### Phase 09+ (Advanced) - Planned
+### Phase 15 (Tour Detail Redesign) - COMPLETE ✅
+- ✅ Booking-first layout with lg:grid-cols-[1fr_380px] grid
+- ✅ Responsive image grid replacing full-bleed hero
+- ✅ Sticky sidebar with booking widget on desktop
+- ✅ Mobile price bar for conversion optimization
+- ✅ Redesigned tour components (8 total)
+- ✅ New sections: tour-highlights, tour-title-section, related-tour-card
+
+### Phase 16 (Guide Profile Redesign) - COMPLETE ✅
+- ✅ Guide listing portrait gallery layout
+- ✅ Guide detail split-panel sidebar (160-200px avatar)
+- ✅ Infinite scroll pagination via IntersectionObserver
+- ✅ Cache revalidation hook: revalidate-cache-tags-hook (CMS afterChange)
+- ✅ On-demand /api/revalidate endpoint with token auth
+- ✅ IS_STAGING env var blocks crawlers (robots.txt + headers)
+- ✅ Image blur placeholders via plaiceholder (blur_data_url)
+- ✅ Tour data v2 delta import pipeline
+- ✅ Guides data v2 update
+- ✅ Cancellation policy page (i18n)
+- ✅ Tour duration format fix on home cards
+
+### Phase 17+ (Planned)
+- Per-tour cancellation policy (in progress, 260419)
 - WhatsApp Business API integration
 - Group inquiry management system
-- Email notification pipeline
 - Advanced analytics dashboard
+
+## Cache Invalidation Strategy (Phase 16)
+
+### Problem
+Next.js ISR requires explicit invalidation after CMS content changes. Previously, no mechanism existed to invalidate cache on save.
+
+### Solution
+Two-part approach:
+1. **CMS Hook** (`revalidate-cache-tags-hook`) in Payload afterChange fires on save
+2. **API Endpoint** (`/api/revalidate`) accepts POST with token for on-demand invalidation
+
+### Flow
+```
+CMS Editor saves guide
+  ↓
+Payload afterChange hook fires
+  ↓
+Hook calls POST /api/revalidate with token
+  ↓
+Endpoint validates token + calls revalidateTag(tag)
+  ↓
+Next.js ISR cache invalidated
+  ↓
+Guides list/detail pages rebuild on next request
+```
+
+### Environment Variables Required
+- `REVALIDATE_TOKEN` - Secret token for /api/revalidate authentication
+- `NEXT_PUBLIC_URL` - For CMS hook to construct endpoint URL
+
+## Email Services (Phase 09+)
+
+### Nodemailer Setup
+- 5 transports: Gmail, SMTP generic, plus fallbacks
+- Location: `apps/web/lib/email/`
+- Types: Email notifications, confirmations, inquiries
+- Status: Fully tested (email service test suite)
+
+### Collections Triggering Email
+- **group-inquiries** - Sends admin + customer confirmations
+- **contact-inquiries** - Sends acknowledgment to visitors
+- **bookings** - Future: booking confirmations via Bokun webhook
+
+## Staging Crawler Blocking (Phase 16)
+
+### Problem
+Search engines may index staging environment, polluting production analytics.
+
+### Solution
+IS_STAGING env var gates crawler behavior:
+
+**In robots.txt:**
+```typescript
+export default function robots() {
+  if (process.env.IS_STAGING === 'true') {
+    return { rules: { userAgent: '*', disallow: '/' } }
+  }
+  return { rules: [] }
+}
+```
+
+**In Vercel Headers:**
+X-Robots-Tag header set to `noindex` when IS_STAGING=true
+
+### Configuration
+Set `IS_STAGING=true` on staging Vercel project only
 
 ## Deprecations & Compatibility Notes
 
 ### Next.js 16 Changes (from 15)
-- **middleware.ts → proxy.ts:** Rename is deprecation warning only, not breaking. `middleware.ts` still works.
+- **middleware.ts → proxy.ts:** Rename is deprecation warning. Project uses `proxy.ts` (not `middleware.ts`) for next-intl routing.
 - **unstable_cache:** NOT renamed. `cacheLife` and `cacheTag` lost `unstable_` prefix, but `unstable_cache` remains.
+- **Next 16.2.3 override:** Root package.json pins Next to 16.2.3 for DoS/security fix (not using default 16.1.6)
 
 ### Turbopack & Webpack Coexistence
 - Turbopack is the default bundler in Next.js 16

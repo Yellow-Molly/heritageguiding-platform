@@ -4,16 +4,77 @@ Living document tracking project phases, milestones, and progress toward MVP lau
 
 ---
 
-## Current Phase: Phase 15 — Tour Detail Page Redesign ✓ IN PROGRESS
+## Current Phase: Phase 17 — Per-Tour Cancellation Policy 🚧 IN PROGRESS
+
+**Date Started:** 2026-04-19
+**Status:** Planning stage - Plan directory: 260419-1332-per-tour-cancellation-policy/
+**Expected Completion:** TBD
+
+---
+
+## Previous Phase: Phase 16 — Guide Profile Redesign ✓ COMPLETE
+
+**Date Started:** 2026-04-12
+**Date Completed:** 2026-04-18
+**Duration:** 6 days
+
+### Phase 16 Overview
+
+**Guide Profile Redesign & Cache Revalidation Strategy**
+
+Redesign of guide profile pages with split-panel sidebar layout, infinite scroll pagination, and implementation of cache revalidation infrastructure (CMS hook + /api/revalidate endpoint). Added support for guide data v2, tour data v2 delta imports, IS_STAGING environment blocking, image blur placeholders, cancellation policy page, and guide profile migration.
+
+### Milestones & Status
+
+| Milestone | Status | Completion |
+|-----------|--------|-----------|
+| Guide Listing Portrait Gallery | ✅ Complete | 2026-04-18 |
+| Guide Detail Split-Panel | ✅ Complete | 2026-04-18 |
+| Infinite Scroll Pagination | ✅ Complete | 2026-04-18 |
+| Cache Revalidation Hook | ✅ Complete | 2026-04-12 |
+| /api/revalidate Endpoint | ✅ Complete | 2026-04-12 |
+| IS_STAGING Blocking | ✅ Complete | 2026-04-05 |
+| Image Blur Placeholders | ✅ Complete | 2026-04-12 |
+| Tour Data v2 Delta Import | ✅ Complete | 2026-04-13 |
+| Guides Data v2 Update | ✅ Complete | 2026-04-14 |
+| Cancellation Policy Page | ✅ Complete | 2026-04-12 |
+| Tour Duration Format Fix | ✅ Complete | 2026-04-05 |
+
+### Key Deliverables
+
+- **Guide Listing Updates:**
+  - Portrait gallery layout (replaced card-based)
+  - Responsive grid with image-first design
+
+- **Guide Detail Updates:**
+  - Split-panel sidebar (160-200px avatar column)
+  - Infinite scroll via IntersectionObserver
+  - Migration for years_experience field
+
+- **Infrastructure:**
+  - `revalidate-cache-tags-hook` (packages/cms/hooks/)
+  - `/api/revalidate` endpoint with token auth
+  - IS_STAGING env var for staging crawler blocking (robots.txt + headers)
+
+- **Data & Features:**
+  - Tour data v2 delta import pipeline
+  - Guides data v2 update
+  - Cancellation policy page with i18n
+  - Image blur_data_url via plaiceholder
+
+---
+
+## Previous Phase: Phase 15 — Tour Detail Page Redesign ✓ COMPLETE
 
 **Date Started:** 2026-04-08
-**Status:** Active - Booking-first layout implementation, responsive image grid, component redesign
+**Date Completed:** 2026-04-08
+**Duration:** 1 day (PR #12)
 
 ### Phase 15 Overview
 
 **Tour Detail Page Redesign — Booking-First Layout**
 
-Complete redesign of the tour detail page (`/tours/[slug]`) with focus on booking conversion. New responsive image grid replaces full-bleed hero, price visibility on mobile through title section, and simplified content hierarchy. New components added for image grid, title section, highlights, and related tour cards. Seven existing components redesigned for improved layout and visual hierarchy.
+Complete redesign of the tour detail page (`/tours/[slug]`) with focus on booking conversion. New responsive image grid replaces full-bleed hero, price visibility on mobile through title section, and simplified content hierarchy. New components added for image grid, title section, highlights, and related tour cards. Eight existing components redesigned for improved layout and visual hierarchy.
 
 ### Milestones & Status
 
@@ -22,7 +83,7 @@ Complete redesign of the tour detail page (`/tours/[slug]`) with focus on bookin
 | Image Grid & Layout | ✅ Complete | 2026-04-08 |
 | Component Redesigns | ✅ Complete | 2026-04-08 |
 | Translation Keys | ✅ Complete | 2026-04-08 |
-| Responsive Polish | In Progress | TBD |
+| Responsive Polish | ✅ Complete | 2026-04-08 |
 
 ### Key Deliverables
 
@@ -141,33 +202,37 @@ Complete visual refresh of the Heritage Guiding Platform homepage to match the c
 
 ## Upcoming Phases
 
-### Phase 16: Tour Detail Polish & Testing (Planned)
+### Phase 17: Per-Tour Cancellation Policy (In Progress)
 
-- Test coverage for redesigned components
-- Performance optimization (image loading, lazy-loading)
-- Accessibility audit for new layout
-- Cross-browser responsive testing
+**Date Started:** 2026-04-19
+**Plan Directory:** 260419-1332-per-tour-cancellation-policy/
 
-### Phase 17: Additional Content & CMS Integration (Planned)
+- Per-tour cancellation policy configuration
+- Admin UI for policy management
+- Policy display on tour detail pages
+- i18n support (SV/EN/DE)
 
-- Blog collection expansion
-- Tour category pages
-- Content moderation tools
-- Featured tours rotation
+### Phase 09: Group Bookings & WhatsApp (Pending)
 
-### Phase 18: Booking Flow Optimization (Planned)
+- Group inquiry form with validation
+- Email notifications (admin + customer)
+- WhatsApp floating button integration
+- Standalone /group-booking page
+- 39 unit tests with honeypot protection
 
-- Streamlined checkout
-- Payment integration refinement
-- Confirmation email templates
-- Customer support integration
+### Phase 18: Advanced Features (Planned)
 
-### Phase 19: Analytics & Marketing (Planned)
+- Blog/content marketing CMS
+- Neighborhood-specific landing pages
+- Advanced analytics dashboard
+- Customer user accounts
 
-- Conversion tracking
-- A/B testing infrastructure
-- Email marketing setup
-- SEO optimization
+### Phase 19: Mobile Apps & Integrations (Planned)
+
+- iOS/Android native apps
+- TripAdvisor API integration
+- Partner portal for agencies
+- French language support
 
 ---
 
@@ -211,8 +276,8 @@ Complete visual refresh of the Heritage Guiding Platform homepage to match the c
 
 ## Next Steps
 
-1. Complete Phase 15: Responsive polish and final testing
-2. Begin Phase 16: Unit test coverage for redesigned components
-3. Monitor performance metrics on tour detail pages
-4. Gather user feedback on booking-first layout
-5. Plan Phase 17 additional content integration
+1. Complete Phase 17: Per-tour cancellation policy implementation
+2. Begin Phase 09: Group bookings & WhatsApp integration
+3. Phase 10-12: Advanced features (already completed per legacy tracking)
+4. Monitor Phase 16 performance metrics (cache revalidation, guide infinite scroll)
+5. Plan Phase 18+ marketing and analytics features

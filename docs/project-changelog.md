@@ -4,11 +4,214 @@ Complete record of significant changes, features, and releases.
 
 ---
 
-## [2026-04-08] — Tour Detail Page Redesign (Booking-First) ✓ IN PROGRESS
+## [2026-04-25] — Documentation Update ✓ COMPLETE
+
+**Type:** Documentation & Version Updates
+**Scope:** Updated all docs to reflect Phase 16 completion, version pins, cache revalidation strategy, staging blocking
+**Build Status:** PASSING
+
+### Changes
+- README.md: Phase status → Phase 16, version pins (Next 16.2.3, Payload 3.81)
+- codebase-summary.md: Tech stack updates, Phase 15-16 details, component/route counts
+- code-standards.md: Added Phase 15-16 layout patterns (booking-first grid, split-panel sidebar, infinite scroll, cache revalidation pattern, image blur, IS_STAGING)
+- system-architecture.md: Cache invalidation strategy, email services, staging blocking details
+- project-overview-pdr.md: Phase 13-16 completion, current progress updated to Apr 25
+- project-changelog.md: Added Apr 12-25 entries (per-tour cancellation, guide redesign, cache hooks, revalidation endpoint, tour/guides v2, IS_STAGING, cancellation policy, tour duration fix)
+
+---
+
+## [2026-04-19] — Per-Tour Cancellation Policy Planning ✓ IN PROGRESS
+
+**Type:** Feature Planning
+**Scope:** Per-tour cancellation policy implementation
+**Build Status:** PLANNING
+
+### Changes
+- Created plan directory: 260419-1332-per-tour-cancellation-policy/
+
+---
+
+## [2026-04-18] — Guide Profile Redesign (Split-Panel Layout) ✓ COMPLETE
+
+**Type:** Major UI/UX Redesign
+**Scope:** Guide listing portrait gallery, guide detail split-panel sidebar, infinite scroll pagination
+**Build Status:** PASSING
+
+### Changes Implemented
+- Guides listing: Portrait gallery layout (replaced card-based)
+- Guide detail: Split-panel sidebar (160-200px avatar + info column)
+- Infinite scroll pagination via IntersectionObserver (replaced numbered pagination)
+- Guide profile migration for years_experience field
+- Cache revalidation hook integration
+- Image blur data_url migration
+
+### Related Commits
+- a8001bd: Guide profile redesign commit
+- 5b6ef59: Guide profile migration commit
+
+---
+
+## [2026-04-14] — Guides Data v2 Update ✓ COMPLETE
+
+**Type:** Data Migration
+**Scope:** Guides data v2 schema and import updates
+**Build Status:** PASSING
+
+### Changes
+- Guides data v2 update processing
+- Delta import support for guides
+- Plan: 260414-guides-data-v2-update/
+
+---
+
+## [2026-04-13] — Tour Data v2 Delta Import ✓ COMPLETE
+
+**Type:** Data Migration
+**Scope:** Tour data v2 schema changes and delta import pipeline
+**Build Status:** PASSING
+
+### Changes
+- Tour data v2 update processing
+- Delta import pipeline for bulk updates (vs full reimport)
+- Commit: 6c7d6d3
+
+---
+
+## [2026-04-12] — Cancellation Policy Page + Cache Revalidation ✓ COMPLETE
+
+**Type:** Feature Addition + Infrastructure
+**Scope:** New cancellation policy page with i18n, cache revalidation hooks
+**Build Status:** PASSING
+
+### Changes Implemented
+
+**Cancellation Policy Page:**
+- New page route: /cancellation (or /[locale]/cancellation)
+- Full i18n support: EN, SV, DE
+- Responsive design matching brand
+- Commit: 00630d3
+
+**Cache Revalidation System:**
+- CMS afterChange hook: `revalidate-cache-tags-hook` (packages/cms/hooks/)
+- Listens for tour/guide/category saves → calls /api/revalidate
+- On-demand /api/revalidate endpoint (apps/web/app/api/revalidate/route.ts)
+- Token-based authentication (X-Revalidate-Token header)
+- Invalidates Next.js ISR tags for guides, tours, categories
+- Commit: ddfc0ea (cache invalidation hook), 5e5e0b4 (/api/revalidate endpoint)
+
+**Guide Profile Migration:**
+- Added years_experience field to guides collection
+- Payload migration: 20260212+ (approximate)
+
+**Tour Duration Format Fix:**
+- Corrected tour duration format on home page featured tours cards
+- Commit: a5dfae7
+
+---
+
+## [2026-04-05] — Staging Crawler Blocking (IS_STAGING) ✓ COMPLETE
+
+**Type:** SEO Infrastructure
+**Scope:** Environment-based crawler blocking for staging environment
+**Build Status:** PASSING
+
+### Changes Implemented
+- IS_STAGING environment variable (set on staging Vercel project only)
+- robots.txt updated to disallow all crawlers when IS_STAGING=true
+- Vercel headers configuration with X-Robots-Tag: noindex for staging
+- Prevents search engine indexing of staging environment
+- Commits: 202b562, 4f3128c
+
+---
+
+## [2026-04-04] — Tours Listing Redesign (Option B - Sidebar Filters) ✓ COMPLETE
+
+**Type:** Major UI/UX Redesign
+**Scope:** 2-column sidebar layout (desktop), horizontal cards (mobile), advanced filters
+**Build Status:** PASSING (Next.js 16.2.3 Turbopack)
+
+### Changes Implemented
+- **Desktop Layout:** 260px fixed sidebar + flexible grid
+- **Sidebar Filters:** Categories (multi-select), duration (single-select), price range (dual-thumb), accessibility
+- **Page Header:** Full-width static bar with title, results, sort, view toggle
+- **Mobile Design:** Filter header with search + pill, horizontal chips, updated filter drawer
+- **Tour Cards:** Desktop vertical (180px image) vs mobile horizontal (130px height)
+- **All filters:** URL-shareable params
+- **Commit:** b552382
+
+---
+
+## [2026-04-02] — About Us Page Redesign ✓ COMPLETE
+
+**Type:** Component Architecture Refactor
+**Scope:** Split monolithic 187-line About page into 7 focused, reusable components
+**Build Status:** PASSING (Next.js 16.2.3 Turbopack)
+
+### Changes Implemented
+- Split single about-us/page.tsx into 7 specialized section components
+- Each component handles single responsibility
+- page.tsx acts as thin orchestrator
+- Updated: values-section.tsx redesigned for UI/UX consistency
+
+### New Files Created
+- about-hero-section.tsx, about-story-section.tsx, about-mission-vision-section.tsx
+- about-responsible-tourism-section.tsx, about-certifications-section.tsx, about-cta-section.tsx
+
+---
+
+## [2026-04-01] — Custom 404 Error Page ✓ COMPLETE
+
+**Type:** UI Feature Addition
+**Scope:** Custom 404 page with i18n support and interactive elements
+**Build Status:** PASSING (Next.js 16.2.3 Turbopack)
+
+### Changes Implemented
+- Custom 404 page component with i18n support (EN/SV/DE)
+- Responsive design: Desktop 1440px, Mobile 390px
+- Functional search bar redirecting to /tours?q=
+- Location tags linking to /tours?city=
+- Design images exported from Pencil design file
+- Maintains brand consistency with Stepi-inspired aesthetic
+
+### File Changes
+- Created: apps/web/app/[locale]/not-found.tsx
+
+---
+
+## [2026-03-04] — Homepage Redesign (Stepi-Inspired Style) ✓ COMPLETE
+
+**Type:** Major UI/UX Redesign
+**Scope:** Homepage complete visual refresh matching Stepi aesthetic with heritage brand identity
+**Build Status:** PASSING (Next.js 16.2.3 Turbopack)
+**Tests:** 769/769 passed (93.76% coverage)
+
+### Changes Implemented
+- **7 Phases Completed:**
+  1. Hero Section — Full-screen photo-forward design, centered white headline, single CTA
+  2. Trust Signals — White-background 4-column icon grid with stats
+  3. Video Highlight (NEW) — Scenic aerial photo with YouTube embed modal
+  4. Featured Tours — Clean card redesign with portrait images, gold pricing, horizontal scroll mobile
+  5. Seasonal CTA + Guides Preview — Gold gradient band + circular guide headshots
+  6. Testimonials + Blog + Footer — Restyle testimonials, add blog grid, dark footer with gold accents
+  7. Responsive Polish — Cross-section polish, performance, accessibility, integration
+
+### Color Palette Adopted
+| Role | Color | Usage |
+|------|-------|-------|
+| Primary Dark | #252525 | Headers, text, footer bg |
+| Gold Accent | #d0ad50 | CTAs, buttons, emphasis |
+| Gold Light | #DBC078 | Borders, accents |
+| Gold Soft | #e6d3a0 | Badge bg, hover states |
+| Coral | #E67E5A | Secondary CTAs (kept) |
+| Footer BG | #0b0b0b | Dark footer |
+
+---
+
+## [2026-04-08] — Tour Detail Page Redesign (Booking-First) ✓ COMPLETE
 
 **Type:** Major UI/UX Redesign
 **Scope:** Booking-first layout with responsive image grid, price visibility on mobile, redesigned components
-**Build Status:** PASSING (Next.js 16.1.6 Turbopack)
+**Build Status:** PASSING (Next.js 16.2.3 Turbopack)
 
 ### Changes Implemented
 

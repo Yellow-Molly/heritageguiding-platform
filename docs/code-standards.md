@@ -1,10 +1,10 @@
 # Code Standards & Best Practices
 
-**Last Updated:** February 21, 2026
+**Last Updated:** April 25, 2026
 **Project:** Private Tours Platform
-**Phase:** 12 Complete - Unit Test Coverage Improvement
+**Phase:** 16 Complete - Guide Profile Redesign
 **Applies To:** All code in apps/, packages/, and scripts/
-**Recent Update:** Test coverage improved from ~52% to 90%+ across workspaces, 1009 unit tests, email services, Bokun integration tests, AI/semantic search tests, CSV/Excel tests
+**Recent Update:** Phase 15-16 layouts (booking-first grid, split-panel sidebar), cache revalidation pattern, IS_STAGING blocking, image blur placeholders, infinite scroll pagination
 
 ## Core Principles
 
@@ -556,6 +556,130 @@ return (
     {/* Render filtered tours */}
   </>
 )
+```
+
+## Layout Patterns - Phase 15-16
+
+### Booking-First Grid (Phase 15)
+```typescript
+// Tour detail page uses lg:grid-cols-[1fr_380px]
+<div className="grid gap-8 lg:grid-cols-[1fr_380px]">
+  {/* Main content: image grid, title, highlights, etc */}
+  <main>
+    <TourHero />
+    <TourTitleSection />
+    <TourHighlightsSection />
+    <TourContent />
+    {/* More sections... */}
+  </main>
+  {/* Sticky sidebar: booking widget */}
+  <aside className="lg:sticky lg:top-4 lg:h-fit">
+    <BookingSection />
+  </aside>
+</div>
+```
+
+### Split-Panel Sidebar (Phase 16)
+Guide detail layout with 160-200px avatar sidebar:
+```typescript
+// Guide detail: flex layout with sticky avatar panel
+<div className="flex gap-8">
+  <aside className="w-40 shrink-0 lg:sticky lg:top-4 lg:h-fit">
+    <GuideAvatarPanel />
+  </aside>
+  <main className="flex-1">
+    <GuideBio />
+    <GuideCredentials />
+    {/* Infinite scroll list of guides */}
+  </main>
+</div>
+```
+
+### Infinite Scroll Pagination (Phase 16)
+Replace numbered pagination with IntersectionObserver:
+```typescript
+// Guide listing uses infinite scroll
+const observerTarget = useRef<HTMLDivElement>(null)
+useEffect(() => {
+  const observer = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && hasMore) {
+      fetchNextPage()
+    }
+  })
+  if (observerTarget.current) observer.observe(observerTarget.current)
+  return () => observer.disconnect()
+}, [hasMore])
+
+return (
+  <>
+    {guides.map(guide => <GuideCard key={guide.id} {...guide} />)}
+    <div ref={observerTarget} className="h-10" />
+  </>
+)
+```
+
+## Cache Revalidation Pattern (Phase 16)
+
+### CMS Hook: revalidate-cache-tags-hook
+Payload afterChange hook in packages/cms/hooks/revalidate-cache-tags-hook.ts:
+```typescript
+export const revalidateCacheTagsHook = async ({ doc, operation }) => {
+  const tags = ['tours', 'guides', 'categories'] // Add appropriate tags
+  // Call /api/revalidate with token auth
+  await fetch(`${process.env.NEXT_PUBLIC_URL}/api/revalidate`, {
+    method: 'POST',
+    headers: { 'X-Revalidate-Token': process.env.REVALIDATE_TOKEN },
+    body: JSON.stringify({ tags })
+  })
+  return doc
+}
+```
+
+### API Endpoint: /api/revalidate
+Route handler for on-demand revalidation:
+```typescript
+// apps/web/app/api/revalidate/route.ts
+import { revalidateTag } from 'next/cache'
+
+export async function POST(req: Request) {
+  const token = req.headers.get('X-Revalidate-Token')
+  if (token !== process.env.REVALIDATE_TOKEN) {
+    return new Response('Unauthorized', { status: 401 })
+  }
+  const { tags } = await req.json()
+  tags.forEach((tag: string) => revalidateTag(tag))
+  return Response.json({ revalidated: true })
+}
+```
+
+## Staging Blocking Pattern (Phase 16)
+
+### IS_STAGING Env Variable
+Controls crawler blocking on staging environment:
+```typescript
+// robots.ts
+export default function robots() {
+  if (process.env.IS_STAGING === 'true') {
+    return {
+      rules: { userAgent: '*', disallow: '/' }
+    }
+  }
+  return { rules: [] }
+}
+```
+
+## Image Blur Placeholders (Phase 11+)
+
+Using plaiceholder for blur_data_url:
+```typescript
+// Generated via upload hook in packages/cms/hooks/generate-blur-on-upload-hook.ts
+// Stores in blur_data_url column for image display:
+<Image
+  src={tour.heroImage.url}
+  placeholder="blur"
+  blurDataURL={tour.heroImage.blur_data_url}
+  alt={tour.title}
+/>
 ```
 
 ## Development Workflow

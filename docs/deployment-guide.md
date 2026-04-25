@@ -2,7 +2,7 @@
 
 CI/CD pipeline, environment variables, domain configuration, and deployment workflows.
 
-**Last Updated:** February 8, 2026
+**Last Updated:** April 25, 2026
 
 ---
 
@@ -10,10 +10,12 @@ CI/CD pipeline, environment variables, domain configuration, and deployment work
 
 1. CI/CD Pipeline
 2. Environment Variables
-3. Domain & DNS Configuration
-4. Monitoring & Analytics
-5. Development Workflow
-6. Setup Checklist
+3. Cache Revalidation (Phase 16)
+4. Staging Environment (IS_STAGING)
+5. Domain & DNS Configuration
+6. Monitoring & Analytics
+7. Development Workflow
+8. Setup Checklist
 
 ---
 
@@ -189,7 +191,210 @@ vercel env add PAYLOAD_SECRET production
 
 ---
 
-## 3. Domain & DNS Configuration
+## 3. Cache Revalidation (Phase 16)
+
+### Overview
+
+Cache revalidation strategy using Payload CMS hooks + on-demand API endpoint.
+
+### Setup
+
+#### Environment Variables (Required)
+
+Add to Vercel environment variables:
+```bash
+REVALIDATE_TOKEN=your-secret-random-token-here
+```
+
+Example:
+```bash
+REVALIDATE_TOKEN=sk_test_51234567890abcdefg
+```
+
+#### CMS Hook Configuration
+
+File: `packages/cms/hooks/revalidate-cache-tags-hook.ts`
+
+```typescript
+export const revalidateCacheTagsHook = async ({ doc, operation }) => {
+  const tags = ['tours', 'guides', 'categories']
+  
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/revalidate`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Revalidate-Token': process.env.REVALIDATE_TOKEN,
+        },
+        body: JSON.stringify({ tags }),
+      }
+    )
+    if (!response.ok) console.error('Revalidation failed:', response.status)
+  } catch (error) {
+    console.error('Cache revalidation error:', error)
+  }
+  
+  return doc
+}
+```
+
+#### API Endpoint
+
+File: `apps/web/app/api/revalidate/route.ts`
+
+```typescript
+import { revalidateTag } from 'next/cache'
+
+export async function POST(req: Request) {
+  // Token validation
+  const token = req.headers.get('X-Revalidate-Token')
+  if (token !== process.env.REVALIDATE_TOKEN) {
+    return new Response('Unauthorized', { status: 401 })
+  }
+  
+  try {
+    const { tags } = await req.json()
+    if (!Array.isArray(tags)) {
+      return Response.json({ error: 'tags must be an array' }, { status: 400 })
+    }
+    
+    tags.forEach((tag: string) => revalidateTag(tag))
+    return Response.json({ revalidated: true, tags })
+  } catch (error) {
+    console.error('Revalidation error:', error)
+    return Response.json({ error: 'Revalidation failed' }, { status: 500 })
+  }
+}
+```
+
+### Cache Tags
+
+Standard tags for revalidation:
+- `tours` - Tour listing, detail pages
+- `guides` - Guide listing, detail pages
+- `categories` - Filter categories
+- `homepage` - Homepage featured sections
+
+### Testing Cache Revalidation
+
+```bash
+# From server/local machine
+curl -X POST http://localhost:3000/api/revalidate \
+  -H "Content-Type: application/json" \
+  -H "X-Revalidate-Token: your-secret-token" \
+  -d '{"tags": ["tours", "guides"]}'
+
+# Expected response:
+# {"revalidated": true, "tags": ["tours", "guides"]}
+```
+
+### CMS Hook Integration
+
+Add hook to collection's `afterChange` hook array:
+```typescript
+// packages/cms/collections/tours.ts
+import { revalidateCacheTagsHook } from '../hooks/revalidate-cache-tags-hook'
+
+export const Tours: CollectionConfig = {
+  slug: 'tours',
+  // ... other config ...
+  hooks: {
+    afterChange: [revalidateCacheTagsHook],
+  },
+}
+```
+
+---
+
+## 4. Staging Environment (IS_STAGING)
+
+### Purpose
+
+Prevent search engines from indexing staging environment while allowing internal testing.
+
+### Setup
+
+#### Vercel Staging Project
+
+Set environment variable `IS_STAGING` to `true`:
+1. Vercel Dashboard → Project → Settings → Environment Variables
+2. Add variable: `IS_STAGING` = `true`
+3. Select environment: **Preview** only (NOT Production)
+4. Save
+
+#### Production Project
+
+Do NOT set `IS_STAGING` (or set to `false`) on production Vercel project.
+
+### Implementation
+
+#### robots.txt
+
+File: `apps/web/app/robots.ts`
+
+```typescript
+export default function robots() {
+  if (process.env.IS_STAGING === 'true') {
+    // Deny all crawlers on staging
+    return {
+      rules: {
+        userAgent: '*',
+        disallow: '/',
+      },
+    }
+  }
+  // Allow all crawlers on production
+  return {
+    rules: {
+      userAgent: '*',
+      disallow: [],
+    },
+  }
+}
+```
+
+#### Vercel Headers
+
+File: `vercel.json` (root)
+
+```json
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex,nofollow"
+        }
+      ]
+    }
+  ]
+}
+```
+
+Add logic to only apply headers when `IS_STAGING=true`.
+
+### Verification
+
+Test on staging:
+```bash
+curl -I https://staging.privatetours.se/robots.txt
+# Should return: Disallow: /
+
+curl -I https://staging.privatetours.se/
+# Should have header: X-Robots-Tag: noindex,nofollow
+
+# Check production (should be indexed):
+curl -I https://privatetours.se/robots.txt
+# Should allow crawlers
+```
+
+---
+
+## 5. Domain & DNS Configuration
 
 ### Domain Setup
 
@@ -239,7 +444,7 @@ TXT     @       v=DMARC1; p=none
 
 ---
 
-## 4. Monitoring & Analytics
+## 6. Monitoring & Analytics
 
 ### Performance Monitoring
 
@@ -286,7 +491,7 @@ vercel logs --follow
 
 ---
 
-## 5. Development Workflow
+## 7. Development Workflow
 
 ### Daily Workflow
 
@@ -335,13 +540,13 @@ git push origin hotfix/booking-bug
 
 ---
 
-## 6. Setup Checklist
+## 8. Setup Checklist
 
 ### Pre-Development
 
 - [ ] GitHub repository created (private)
 - [ ] privatetours.se registered
-- [ ] Vercel account created
+- [ ] Vercel account created (production + staging projects)
 - [ ] Vercel connected to GitHub
 - [ ] Supabase database created
 - [ ] pgvector extension enabled
@@ -349,20 +554,24 @@ git push origin hotfix/booking-bug
 - [ ] OpenAI API key obtained
 - [ ] Google Workspace Business account created
 - [ ] Email DNS configured
+- [ ] Generate REVALIDATE_TOKEN for cache API (random 32+ char string)
 
 ### Week 1 Setup
 
 - [ ] Repository structure created
-- [ ] Next.js 16 initialized (Turbopack bundler)
-- [ ] Payload CMS 3.75 installed
+- [ ] Next.js 16.2.3 initialized (Turbopack bundler)
+- [ ] Payload CMS 3.81.0 installed
 - [ ] Database migrations run
 - [ ] Development server working
 - [ ] Type checking working
 - [ ] Linting configured
 - [ ] CI/CD pipeline working
-- [ ] Staging deployed
+- [ ] Staging deployed (IS_STAGING=true on preview)
+- [ ] Production project created (IS_STAGING not set or false)
 - [ ] Domain pointed to Vercel
 - [ ] SSL certificate active
+- [ ] Cache revalidation token generated and stored
+- [ ] /api/revalidate endpoint tested
 
 ### Post-Launch
 

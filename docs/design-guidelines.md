@@ -328,10 +328,82 @@ useEffect(() => {
 
 ---
 
+## Phase 15-16 Layout Patterns
+
+### Booking-First Grid (Phase 15 - Tour Detail)
+Responsive grid layout for tour detail pages with main content + sticky sidebar:
+```tsx
+<div className="grid gap-8 lg:grid-cols-[1fr_380px]">
+  <main>
+    <TourHero />           {/* Image grid + gallery */}
+    <TourTitleSection />   {/* Title, price bar on mobile */}
+    <TourHighlights />     {/* Highlights extracted */}
+    <TourContent />        {/* Experience description */}
+    {/* ... more sections ... */}
+  </main>
+  <aside className="lg:sticky lg:top-4 lg:h-fit">
+    <BookingSection />     {/* Booking widget */}
+  </aside>
+</div>
+```
+**Key Points:**
+- Main content fluid width, sidebar fixed 380px on desktop
+- Sticky positioning on desktop (lg:sticky lg:top-4)
+- Mobile: sidebar below content (single column)
+- Price bar on mobile title section for conversion
+
+### Split-Panel Sidebar (Phase 16 - Guide Detail)
+Guide detail layout with fixed-width avatar sidebar:
+```tsx
+<div className="flex gap-8">
+  <aside className="w-40 shrink-0 lg:sticky lg:top-4 lg:h-fit">
+    {/* Avatar: 160-200px container */}
+    <GuideAvatarPanel />
+  </aside>
+  <main className="flex-1">
+    <GuideBio />
+    <GuideCredentials />
+    {/* Content */}
+  </main>
+</div>
+```
+**Key Points:**
+- Avatar sidebar: 160-200px width (w-40 = 10rem = 160px)
+- Sticky on desktop (lg:sticky lg:top-4)
+- Flex layout ensures sidebar doesn't shrink (shrink-0)
+- Mobile: stack vertically
+
+### Infinite Scroll Pagination (Phase 16 - Guide Listing)
+Replace numbered pagination with IntersectionObserver:
+```tsx
+const observerTarget = useRef<HTMLDivElement>(null)
+
+useEffect(() => {
+  const observer = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && hasMore && !loading) {
+      fetchNextPage()
+    }
+  })
+  if (observerTarget.current) observer.observe(observerTarget.current)
+  return () => observer.disconnect()
+}, [hasMore, loading])
+
+return (
+  <>
+    {guides.map(guide => <GuideCard key={guide.id} {...guide} />)}
+    <div ref={observerTarget} className="h-10" />
+    {loading && <LoadingSpinner />}
+  </>
+)
+```
+
 ## Changelog
 
 | Date | Change |
 |------|--------|
+| 2026-04-25 | Phase 15-16 patterns: Booking-first grid (lg:grid-cols-[1fr_380px]), split-panel sidebar (160-200px w-40), infinite scroll via IntersectionObserver |
+| 2026-04-18 | Phase 16: Guide profile redesign (portrait gallery, split-panel detail, infinite scroll) |
+| 2026-04-08 | Phase 15: Tour detail redesign (booking-first layout, image grid, title section with mobile price bar) |
 | 2026-04-04 | Homepage redesign: section reordering (Hero→Trust→Tours→Guides→Video→Footer), landscape featured tours, guides preview with abbreviated languages, gold separator line, WCAG contrast fixes (white/70), new i18n keys (featured.tag/viewTour/upTo, guides.tag, video.tag/subtitle) |
 | 2026-02-02 | Phase 08.1: Bokun booking widget integration (bokun-booking-widget-with-fallback.tsx) |
 | 2026-01-19 | Phase 07 complete: Design system applied across all pages (catalog, detail, footer) |

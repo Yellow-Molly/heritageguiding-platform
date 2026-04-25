@@ -1,13 +1,13 @@
 # Codebase Summary - Private Tours Platform
 
-**Last Updated:** April 08, 2026
-**Phase:** 15 - Tour Detail Redesign (In Progress)
-**Status:** Booking-first layout, redesigned components (7 updated, 4 new), responsive image grid, price bar on mobile
+**Last Updated:** April 25, 2026
+**Phase:** 16 - Guide Profile Redesign (Complete)
+**Status:** Guide profile split-panel layout, infinite scroll, portrait gallery; cache revalidation hooks + endpoint; tour/guides data v2; IS_STAGING blocking; cancellation policy page
 **Codebase Metrics:** 165+ TypeScript files, 380K+ tokens, 69K LOC frontend + 35K LOC CMS
 
 ## Overview
 
-Private Tours is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16.1.6 frontend (69K LOC, 70+ React components, 10 API routes, 1009 unit tests with 90%+ coverage, performance-optimized with image caching, dynamic imports, Web Vitals monitoring, Lighthouse CI) and Payload CMS 3.75 backend (35K LOC, 10 collections, 3-locale support, Bokun integration with HMAC authentication, Excel/CSV import-export, Concierge Wizard with audience-interest matching, comprehensive SEO with sitemap/robots.txt, Schema.org structured data across all public pages).
+Private Tours is an AI-first tourism booking platform consolidating Sweden's heritage tourism market. Monorepo with Next.js 16.2.3 frontend (override; 69K LOC, 150+ React components, 13 API routes, 1009 unit tests with 90%+ coverage, performance-optimized with image blur placeholders, dynamic imports, Web Vitals monitoring, Lighthouse CI) and Payload CMS 3.81.0 backend (35K LOC, 12 collections, 3-locale support, Bokun integration with HMAC authentication, Excel/CSV import-export, Concierge Wizard with audience-interest matching, cache revalidation hooks, comprehensive SEO with sitemap/robots.txt, Schema.org structured data across all public pages).
 
 ## Repository Structure
 
@@ -40,8 +40,8 @@ privatetours-platform/
 
 | Layer | Technology |
 |-------|------------|
-| **Frontend** | Next.js 16.1.6 (App Router, Turbopack), React 19.2.3, TypeScript 5.9.3, Tailwind CSS 4 |
-| **CMS** | Payload CMS 3.75.0, Lexical Editor, PostgreSQL 15+ |
+| **Frontend** | Next.js 16.2.3 (override, App Router, Turbopack), React 19.2.3, TypeScript 5.9.3, Tailwind CSS 4 |
+| **CMS** | Payload CMS 3.81.0, Lexical Editor, PostgreSQL 15+ |
 | **i18n** | next-intl (SV/EN/DE routing & translations) |
 | **Database** | PostgreSQL 15+ with pgvector extension |
 | **Styling** | Tailwind CSS v4, PostCSS, Radix UI 1.2.12 |
@@ -55,9 +55,9 @@ privatetours-platform/
 ## Key Dependencies
 
 ### Critical
-- `next@^16.1.6` - React framework (Turbopack default bundler)
+- `next@16.2.3` - React framework (override in root package.json, Turbopack default bundler)
 - `react@^19.2.3` - UI library
-- `payload@^3.75.0` - Headless CMS
+- `payload@^3.81.0` - Headless CMS
 - `next-intl@^4.7.0` - Internationalization
 - `tailwindcss@^4.0.0` - Styling
 - `typescript@^5.9.3` - Type safety
@@ -613,7 +613,8 @@ npm run payload:generate-types  # Generate TS types from schema
 - Phase 12: Unit Test Coverage ✅
 - Phase 13: Homepage Redesign ✅
 - Phase 14: Tours Listing Redesign ✅
-- Phase 15: Tour Detail Redesign (In Progress) 🔄
+- Phase 15: Tour Detail Redesign ✅
+- Phase 16: Guide Profile Redesign ✅
 
 ### Phase 08.1 Deliverables
 - Bokun API client with HMAC-SHA256 authentication
@@ -696,6 +697,24 @@ npm run payload:generate-types  # Generate TS types from schema
   - Translation keys added for en/sv/de
 - **Architecture:** Booking-first layout with price visibility on mobile, responsive design across all breakpoints
 
+### Phase 16 Deliverables (2026-04-18) — Guide Profile Redesign
+- **Guide Listing Updates:**
+  - Portrait gallery layout replacing previous card layout
+  - Responsive grid with image-first design
+- **Guide Detail Updates:**
+  - Split-panel sidebar (160-200px avatar + info column)
+  - Infinite scroll for guide list pagination via IntersectionObserver
+  - Guide profile migration for years_experience field
+- **Recent Additions:**
+  - Cache revalidation hook (revalidate-cache-tags-hook) on CMS afterChange
+  - On-demand /api/revalidate endpoint with token authentication
+  - IS_STAGING env var gates crawler blocking (robots.txt + Vercel headers)
+  - Tour data v2 delta import pipeline (6c7d6d3)
+  - Guides data v2 update (260414)
+  - Cancellation policy page with i18n support (00630d3)
+- **Image Optimization:** Plaiceholder blur_data_url migration for image placeholders
+- **Tour Duration Fix:** Corrected format on home page cards (a5dfae7)
+
 ## Codebase Metrics
 
 | Metric | Value |
@@ -704,15 +723,15 @@ npm run payload:generate-types  # Generate TS types from schema
 | **Frontend LOC** | ~69,000 |
 | **CMS LOC** | ~35,000 |
 | **Total Tokens** | 380,000+ |
-| **React Components** | 76+ |
-| **API Functions** | 9 (data-fetching) |
-| **API Routes** | 4 (Bokun availability/webhook, semantic search, wizard recommendations) |
+| **React Components** | 150+ |
+| **API Functions** | 13 (data-fetching, guide queries, etc) |
+| **API Routes** | 13 (tours import/export, Bokun availability/webhook, search, recommendations, revalidate, analytics, etc) |
 | **SEO Components** | 7 (Schema.org) |
 | **Accessibility Components** | 2 (skip link, visually-hidden) |
 | **Excel/CSV Services** | 9 |
 | **Admin Components** | 6 (import/export UI) |
 | **Wizard Components** | 5 (Phase 08.5) |
-| **CMS Collections** | 10+ |
+| **CMS Collections** | 12 |
 | **Field Modules** | 8 |
 | **Unit Tests** | 1009 (444 new Phase 12) |
 | **Test Files** | 44 (33 in apps/web, 11 in packages/cms) |
@@ -759,11 +778,12 @@ npm run payload:generate-types  # Generate TS types from schema
 | **12** | Test Coverage | ✅ Complete |
 | **13** | Homepage Redesign | ✅ Complete |
 | **14** | Catalog Redesign | ✅ Complete |
-| **15** | Tour Detail Redesign | 🔄 In Progress |
+| **15** | Tour Detail Redesign | ✅ Complete |
+| **16** | Guide Profile Redesign | ✅ Complete |
 | **09** | Groups & WhatsApp | Pending |
-| **16** | Documentation + Deployment | Planned |
+| **17** | Per-Tour Cancellation Policy | In Progress |
 
 ---
 
-**Last Updated:** April 08, 2026
-**Document Status:** Phase 15 In Progress (Tour Detail Page Redesign: Booking-First Layout)
+**Last Updated:** April 25, 2026
+**Document Status:** Phase 16 Complete (Guide Profile Redesign + Cache Revalidation + Staging Blocking)

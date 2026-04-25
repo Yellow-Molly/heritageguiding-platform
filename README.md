@@ -2,8 +2,8 @@
 
 Premium heritage tour booking platform for Sweden. AI-first architecture with advanced technology stack supporting Swedish/English/German markets.
 
-**Status:** Phase 12 Complete - Unit Test Coverage (1009 tests, 90%+ coverage)
-**Live Demo:** Coming March 2026
+**Status:** Phase 16 Complete - Guide Profile Redesign (split-panel layout, infinite scroll)
+**Live Demo:** Available now
 
 ## Quick Start
 
@@ -48,8 +48,8 @@ npm run dev
 
 | Layer | Technology |
 |-------|-----------|
-| **Frontend** | Next.js 16.1.6, React 19.2.3, TypeScript 5.9.3, Tailwind CSS 4 |
-| **CMS** | Payload CMS 3.75 with PostgreSQL |
+| **Frontend** | Next.js 16.2.3 (override), React 19.2.3, TypeScript 5.9.3, Tailwind CSS 4 |
+| **CMS** | Payload CMS 3.81.0 with PostgreSQL |
 | **i18n** | next-intl (SV/EN/DE routing + persistence) |
 | **Styling** | Tailwind CSS + Radix UI 1.2.12 |
 | **Testing** | Vitest 4.0.17 + React Testing Library |
@@ -135,13 +135,30 @@ privatetours-platform/
 - Integration with tour detail pages
 - GuideListSchema + GuideDetailSchema components
 
-### Phase 10: Accessibility + SEO ✅
-- **SEO Foundation:** Dynamic sitemap.xml (9 static + CMS routes, 3-locale hreflang), robots.txt
-- **Enhanced Metadata:** All 10 public pages with OG/Twitter cards, hreflang alternates, canonical URLs
-- **Schema.org:** 7 components (TravelAgency, FAQPage, TouristAttraction, AboutPage, Person, ItemList for tours/guides)
-- **Accessibility:** Skip-to-content link, ARIA live announcer, focus indicators, reduced motion support
-- **Testing:** 579 unit tests (102 new Phase 10, 100% pass rate)
-- **Commit:** f961c3f (2026-02-15)
+### Phase 13: Homepage Redesign (Stepi-Inspired) ✅
+- Hero section with parallax imagery, trust signals, featured tours grid
+- Why Choose Us section, testimonials carousel, newsletter signup
+- Full i18n (SV/EN/DE), accessibility (WCAG 2.1 AA)
+- Commit: 8fec354 (2026-03-04)
+
+### Phase 14: Tours Listing Redesign (Sidebar Filters) ✅
+- 2-column sidebar layout (desktop), horizontal cards (mobile)
+- Category, duration, price range (dual-thumb), accessibility filters
+- Full-width page header with results, sort, view toggle
+- Commit: b552382 (2026-04-04)
+
+### Phase 15: Tour Detail Redesign (Booking-First) ✅
+- Responsive image grid replacing full-bleed hero
+- Booking visibility: price bar on mobile, sticky sidebar on desktop
+- Redesigned components: tour-title-section, tour-highlights, related-tour-card
+- Grid layout: lg:grid-cols-[1fr_380px] for main + sidebar
+- Commit: ae09e35 (2026-04-08, PR #12)
+
+### Phase 16: Guide Profile Redesign ✅
+- Guides listing with portrait gallery layout
+- Guide detail split-panel sidebar (160-200px avatar + infinite scroll)
+- Redesigned from previous card layout
+- Commit: a8001bd (2026-04-18)
 
 ### Phase 12: Unit Test Coverage Improvement ✅
 - **Test Expansion:** 1009 total unit tests (444 new tests, 90%+ coverage across workspaces)
@@ -366,13 +383,31 @@ Report via GitHub Issues with:
 - Honeypot spam protection
 - 39 unit tests (477 total tests passing)
 
-## Next Phase (Phase 12)
+## Recent Additions (Phase 15-16+)
 
-**Documentation & Deployment** (Pending)
-- Comprehensive deployment guide
-- Architecture documentation updates
-- Developer onboarding guide
-- Production monitoring setup
+### Cache Revalidation Strategy (Apr 12-19)
+- CMS afterChange hook triggers revalidate-cache-tags
+- On-demand /api/revalidate endpoint with token auth
+- Invalidates Next.js ISR on content changes
+- Commit: ddfc0ea, 5e5e0b4
+
+### Tour Data v2 + Guides Data v2 (Apr 13-14)
+- Delta import pipeline for bulk updates
+- Commit: 6c7d6d3
+
+### Staging Crawler Blocking (Apr 4-5)
+- IS_STAGING env var gates staging crawler behavior
+- robots.txt + Vercel headers block indexing
+- Commit: 202b562, 4f3128c
+
+### Cancellation Policy Page (Apr 12)
+- i18n support (SV/EN/DE)
+- Commit: 00630d3
+
+## Next Phase (Per-Tour Cancellation Policy)
+
+**Per-Tour Cancellation Policy** (In Progress)
+- Plan directory: 260419-1332-per-tour-cancellation-policy/
 
 ## License
 
@@ -386,5 +421,5 @@ Proprietary - All rights reserved
 
 ---
 
-**Last Updated:** February 21, 2026
-**Repository Version:** Phase 12 Complete (Test Coverage Improvement)
+**Last Updated:** April 25, 2026
+**Repository Version:** Phase 16 Complete (Guide Profile Redesign)
