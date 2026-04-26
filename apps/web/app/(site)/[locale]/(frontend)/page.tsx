@@ -4,7 +4,8 @@ import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { HeroSection } from '@/components/home/hero-section'
 import { TrustSignals } from '@/components/home/trust-signals'
-import { VideoHighlight } from '@/components/home/video-highlight'
+// MVP: VideoHighlight temporarily hidden — restore import when re-enabling section below
+// import { VideoHighlight } from '@/components/home/video-highlight'
 import { FeaturedTours } from '@/components/home/featured-tours'
 import { GuidesPreview } from '@/components/home/guides-preview'
 import { TravelAgencySchema } from '@/components/seo'
@@ -48,7 +49,8 @@ export async function generateMetadata({
 
 /**
  * Homepage - Server Component for optimal SEO and performance.
- * Section order: Hero → TrustSignals → Tours → Guides → Video → Footer
+ * Section order: Hero → TrustSignals → Tours → Guides → Footer
+ * (Video section temporarily hidden for MVP release)
  */
 export default async function HomePage({
   params,
@@ -75,7 +77,8 @@ export default async function HomePage({
         <TrustSignals guideCount={guidesResponse.total} />
         <FeaturedTours tours={featuredTours} />
         <GuidesPreview guides={guidesResponse.guides} />
-        <VideoHighlight />
+        {/* MVP: VideoHighlight temporarily hidden — re-enable post-MVP */}
+        {/* <VideoHighlight /> */}
       </main>
       {/* Gold separator line (decorative) */}
       <div

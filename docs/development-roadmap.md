@@ -175,7 +175,9 @@ Complete visual refresh of the Heritage Guiding Platform homepage to match the c
 
 ### Homepage Section Reordering (2026-04-04)
 
-**Current rendering order:** Hero → TrustSignals → FeaturedTours → GuidesPreview → VideoHighlight → Footer
+**Current rendering order:** Hero → TrustSignals → FeaturedTours → GuidesPreview → Footer
+
+> **MVP note (2026-04-26):** `VideoHighlight` temporarily hidden in `apps/web/app/(site)/[locale]/(frontend)/page.tsx` for MVP release. Component file retained — re-enable post-MVP by uncommenting import and JSX.
 
 **Updates in latest redesign:**
 - Reordered sections for better content flow (moved GuidesPreview before VideoHighlight)

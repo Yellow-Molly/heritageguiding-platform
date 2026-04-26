@@ -132,11 +132,12 @@ app/
 - `trust-signals.tsx` - Statistics section with guide count
 - `featured-tours.tsx` - Landscape tour cards with description+meta row, duration/capacity, VIEW TOUR CTA
 - `guides-preview.tsx` - Circular guide headshots with abbreviated languages (mobile)
-- `video-highlight.tsx` - Scenic photo with YouTube embed modal
+- `video-highlight.tsx` - Scenic photo with YouTube embed modal (temporarily hidden for MVP — see note below)
 - `seasonal-cta.tsx` - Seasonal promo (legacy, not currently rendered)
 - `category-nav.tsx` - Category navigation
 - Tests: `category-nav.test.tsx`
-- **Current homepage order:** Hero → TrustSignals → FeaturedTours → GuidesPreview → VideoHighlight → Footer
+- **Current homepage order:** Hero → TrustSignals → FeaturedTours → GuidesPreview → Footer
+- **Hidden in MVP release (2026-04-26):** `video-highlight.tsx` — import and JSX commented out in `page.tsx`; component retained for post-MVP restoration
 - **Removed in MVP audit (2026-04-26):** `testimonials.tsx`, `latest-posts.tsx` — placeholder content, deleted per validation decisions #1, #3 (re-add post-MVP when real reviews/blog ship)
 
 **Tour Components (20+ components):**
