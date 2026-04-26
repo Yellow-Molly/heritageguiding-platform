@@ -1,0 +1,4988 @@
+{
+  "version": "2.11",
+  "children": [
+    {
+      "type": "frame",
+      "id": "H4tyS",
+      "x": 1000,
+      "y": 29269,
+      "name": "Cancellation — Option A Desktop (Clean Timeline)",
+      "width": 1440,
+      "fill": "$--color-background",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "HhI9O",
+          "name": "nav",
+          "width": "fill_container",
+          "fill": "$--color-primary",
+          "padding": [
+            20,
+            80
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "9NIA3",
+              "name": "navLeft",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "ngZhi",
+                  "name": "logo",
+                  "geometry": "M3.2 68c0 0 16.9 2.9 29.7-10.4-7 10.3-17.7 22.2-32.2 28.9 0 0 38.7-12.1 42.6-47.6 0 0-9.3 21.3-40.1 29.1z m46.1-35.3a3.7 3.7 0 1 1-7.4 0 3.7 3.7 0 1 1 7.4 0z m-10 9.9c0 0 4.9-8.7-2.6-39.1 0 0 2.7 22.7-0.9 33.9 0 0-9 4.1-19.3-8.3 0 0 10.3 16.3 22.8 13.5z",
+                  "fill": "$--color-secondary",
+                  "width": 14,
+                  "height": 24
+                },
+                {
+                  "type": "text",
+                  "id": "6f4ki",
+                  "name": "logoText",
+                  "fill": "#FFFFFF",
+                  "content": "Heritage Guiding",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 18,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "5kswp",
+              "name": "navLinks",
+              "gap": 32,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "o7oX1",
+                  "fill": "#FFFFFFCC",
+                  "content": "Tours",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "zPd7E",
+                  "fill": "#FFFFFFCC",
+                  "content": "About",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "VKFxz",
+                  "fill": "#FFFFFFCC",
+                  "content": "Guides",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "Dbbnb",
+                  "fill": "#FFFFFFCC",
+                  "content": "Contact",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "LxxRC",
+              "name": "navCta",
+              "fill": "$--color-accent",
+              "cornerRadius": "$--radius-sm",
+              "padding": [
+                10,
+                24
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "72xlV",
+                  "fill": "#FFFFFF",
+                  "content": "Book a Tour",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "aJkpg",
+          "name": "hero",
+          "width": "fill_container",
+          "fill": "$--color-primary",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            64,
+            80
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "P7Wr8",
+              "name": "heroTitle",
+              "fill": "#FFFFFF",
+              "content": "Cancellation Policy",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 42,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "GZ20m",
+              "name": "heroSub",
+              "fill": "#FFFFFFBB",
+              "textGrowth": "fixed-width",
+              "width": 640,
+              "content": "We understand plans change. Here's everything you need to know about modifying or cancelling your tour.",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "uMg39",
+          "name": "tiersSection",
+          "width": "fill_container",
+          "fill": "$--color-background",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            64,
+            80
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "ZoymZ",
+              "name": "tiersTitle",
+              "fill": "$--color-primary",
+              "content": "Cancellation Tiers",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 32,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "4OSnE",
+              "name": "tiersSub",
+              "fill": "$--color-text-muted",
+              "content": "Our transparent refund policy based on when you cancel",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "It28g",
+              "name": "tiersBody",
+              "width": 800,
+              "padding": [
+                32,
+                0,
+                0,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "4CcnD",
+                  "name": "timeline",
+                  "width": 40,
+                  "layout": "vertical",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "h72D8",
+                      "name": "dot1",
+                      "fill": "$--color-success",
+                      "width": 16,
+                      "height": 16
+                    },
+                    {
+                      "type": "frame",
+                      "id": "kUlqr",
+                      "name": "line1",
+                      "width": 2,
+                      "height": 80,
+                      "fill": "$--color-border"
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "xLaVr",
+                      "name": "dot2",
+                      "fill": "$--color-warning",
+                      "width": 16,
+                      "height": 16
+                    },
+                    {
+                      "type": "frame",
+                      "id": "luChk",
+                      "name": "line2",
+                      "width": 2,
+                      "height": 80,
+                      "fill": "$--color-border"
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "Jm8XG",
+                      "name": "dot3",
+                      "fill": "$--color-error",
+                      "width": 16,
+                      "height": 16
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "NCrFn",
+                  "name": "cards",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 24,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "PD1cL",
+                      "name": "card1",
+                      "width": "fill_container",
+                      "fill": "$--color-surface",
+                      "cornerRadius": "$--radius-lg",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "left": 4
+                        },
+                        "fill": "$--color-success"
+                      },
+                      "gap": 16,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "WFmlg",
+                          "name": "icon1",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "circle-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-success"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "i8Ev8",
+                          "name": "txt1",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "TuM7A",
+                              "fill": "$--color-text",
+                              "content": "48+ Hours Before Tour",
+                              "fontFamily": "Playfair Display",
+                              "fontSize": 20,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "aVuEi",
+                              "fill": "$--color-success",
+                              "content": "Full Refund",
+                              "fontFamily": "Inter",
+                              "fontSize": 16,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "7sFc5",
+                              "fill": "$--color-text-muted",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Cancel with complete peace of mind. No questions asked, no fees applied.",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DkFUl",
+                      "name": "card2",
+                      "width": "fill_container",
+                      "fill": "$--color-surface",
+                      "cornerRadius": "$--radius-lg",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "left": 4
+                        },
+                        "fill": "$--color-warning"
+                      },
+                      "gap": 16,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "wS0JP",
+                          "name": "icon2",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "clock-3",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-warning"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "7qHh0",
+                          "name": "txt2",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "p1ArV",
+                              "fill": "$--color-text",
+                              "content": "24–48 Hours Before Tour",
+                              "fontFamily": "Playfair Display",
+                              "fontSize": 20,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ikHQb",
+                              "fill": "$--color-warning",
+                              "content": "50% Partial Refund",
+                              "fontFamily": "Inter",
+                              "fontSize": 16,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "MdQsP",
+                              "fill": "$--color-text-muted",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "We understand last-minute changes. Half of your booking fee will be returned.",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ucWJM",
+                      "name": "card3",
+                      "width": "fill_container",
+                      "fill": "$--color-surface",
+                      "cornerRadius": "$--radius-lg",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "left": 4
+                        },
+                        "fill": "$--color-error"
+                      },
+                      "gap": 16,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "gVJX4",
+                          "name": "icon3",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "circle-x",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-error"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xEG2D",
+                          "name": "txt3",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "wEvW6",
+                              "fill": "$--color-text",
+                              "content": "Under 24 Hours / No-Show",
+                              "fontFamily": "Playfair Display",
+                              "fontSize": 20,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "fV1JZ",
+                              "fill": "$--color-error",
+                              "content": "Non-Refundable",
+                              "fontFamily": "Inter",
+                              "fontSize": 16,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "1fhhD",
+                              "fill": "$--color-text-muted",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Unfortunately we cannot offer refunds for very late cancellations or no-shows.",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "3Cdub",
+          "name": "howSection",
+          "width": "fill_container",
+          "fill": "$--color-background-alt",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            64,
+            80
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "U9aWW",
+              "name": "howTitle",
+              "fill": "$--color-primary",
+              "content": "How to Cancel",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 32,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "1ul0A",
+              "name": "howSub",
+              "fill": "$--color-text-muted",
+              "content": "Three simple steps to cancel or modify your booking",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "qMTdT",
+              "name": "howRow",
+              "width": "fill_container",
+              "gap": 32,
+              "padding": [
+                32,
+                0,
+                0,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "zjFYD",
+                  "name": "step1",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-lg",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ToBXJ",
+                      "name": "s1Num",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$--color-secondary",
+                      "cornerRadius": "$--radius-full",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "LsbdT",
+                          "fill": "#FFFFFF",
+                          "content": "1",
+                          "fontFamily": "Inter",
+                          "fontSize": 20,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "cfFPg",
+                      "name": "s1Icon",
+                      "width": 32,
+                      "height": 32,
+                      "iconFontName": "mail",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-primary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OVGn9",
+                      "fill": "$--color-text",
+                      "content": "Contact Us",
+                      "textAlign": "center",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZIVVx",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Send an email to info@privatetours.se or call +46 8 123 456 78",
+                      "lineHeight": 1.5,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MV0xU",
+                  "name": "step2",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-lg",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "IjP27",
+                      "name": "s2Num",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$--color-secondary",
+                      "cornerRadius": "$--radius-full",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "PvE3n",
+                          "fill": "#FFFFFF",
+                          "content": "2",
+                          "fontFamily": "Inter",
+                          "fontSize": 20,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "lkytV",
+                      "width": 32,
+                      "height": 32,
+                      "iconFontName": "clipboard-check",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-primary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "4rLdz",
+                      "fill": "$--color-text",
+                      "content": "Confirmation",
+                      "textAlign": "center",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LulEu",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "We'll confirm your cancellation within 24 hours via email",
+                      "lineHeight": 1.5,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hihbe",
+                  "name": "step3",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-lg",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "83lwZ",
+                      "name": "s3Num",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$--color-secondary",
+                      "cornerRadius": "$--radius-full",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "TgKh0",
+                          "fill": "#FFFFFF",
+                          "content": "3",
+                          "fontFamily": "Inter",
+                          "fontSize": 20,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "R4GsF",
+                      "width": 32,
+                      "height": 32,
+                      "iconFontName": "wallet",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-primary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "qUosr",
+                      "fill": "$--color-text",
+                      "content": "Refund Processed",
+                      "textAlign": "center",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "o0lWF",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Eligible refunds are processed within 5–10 business days",
+                      "lineHeight": 1.5,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "sl6OK",
+          "name": "faqSection",
+          "width": "fill_container",
+          "fill": "$--color-background",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            64,
+            80
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "zg23w",
+              "fill": "$--color-primary",
+              "content": "Frequently Asked Questions",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 32,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "umSuX",
+              "name": "faqList",
+              "width": 800,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                24,
+                0,
+                0,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "qtkfj",
+                  "name": "faq1",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-lg",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "j7sPX",
+                      "name": "faq1Header",
+                      "width": "fill_container",
+                      "padding": [
+                        20,
+                        24
+                      ],
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "oFEwn",
+                          "fill": "$--color-text",
+                          "content": "Can I reschedule instead of cancelling?",
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "icon_font",
+                          "id": "9duw5",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "chevron-up",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zA8Hk",
+                      "name": "faq1Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        24,
+                        20,
+                        24
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "3ZHJ5",
+                          "fill": "$--color-text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Yes! You can reschedule your tour free of charge up to 24 hours before. Contact us to arrange a new date.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "JrqOE",
+                  "name": "faq2",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-lg",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "fZ9th",
+                      "name": "faq2Header",
+                      "width": "fill_container",
+                      "padding": [
+                        20,
+                        24
+                      ],
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "3WdKp",
+                          "fill": "$--color-text",
+                          "content": "What about group bookings?",
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "icon_font",
+                          "id": "DmMOi",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "chevron-down",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "a6xvf",
+                  "name": "faq3",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-lg",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ctDuX",
+                      "name": "faq3Header",
+                      "width": "fill_container",
+                      "padding": [
+                        20,
+                        24
+                      ],
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "sGzGR",
+                          "fill": "$--color-text",
+                          "content": "What if the tour is cancelled due to weather?",
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "icon_font",
+                          "id": "udsaw",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "chevron-down",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "puU4t",
+          "name": "ctaSection",
+          "width": "fill_container",
+          "fill": "#FBF8F0",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            64,
+            80
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "I7L5a",
+              "fill": "$--color-primary",
+              "content": "Need to Make a Change?",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 32,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "l6mkt",
+              "fill": "$--color-text-muted",
+              "content": "Our team is here to help with any modifications to your booking.",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "TgnBR",
+              "name": "ctaBtn",
+              "fill": "$--color-accent",
+              "cornerRadius": "$--radius-sm",
+              "padding": [
+                14,
+                40
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "EYOLb",
+                  "fill": "#FFFFFF",
+                  "content": "Contact Us",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "RhQpJ",
+              "name": "ctaInfo",
+              "gap": 32,
+              "padding": [
+                8,
+                0,
+                0,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "vDoPb",
+                  "name": "mailRow",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "zpi5L",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "mail",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-text-muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "6Mw0p",
+                      "fill": "$--color-text-muted",
+                      "content": "info@privatetours.se",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "O6oSD",
+                  "name": "phoneRow",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "lg1TB",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "phone",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-text-muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mLoem",
+                      "fill": "$--color-text-muted",
+                      "content": "+46 8 123 456 78",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "OLMtH",
+          "name": "footer",
+          "width": "fill_container",
+          "fill": "$--color-primary",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            32,
+            80
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "IQ3gw",
+              "name": "footerLogo",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "2744B",
+                  "geometry": "M3.2 68c0 0 16.9 2.9 29.7-10.4-7 10.3-17.7 22.2-32.2 28.9 0 0 38.7-12.1 42.6-47.6 0 0-9.3 21.3-40.1 29.1z m46.1-35.3a3.7 3.7 0 1 1-7.4 0 3.7 3.7 0 1 1 7.4 0z m-10 9.9c0 0 4.9-8.7-2.6-39.1 0 0 2.7 22.7-0.9 33.9 0 0-9 4.1-19.3-8.3 0 0 10.3 16.3 22.8 13.5z",
+                  "fill": "$--color-secondary",
+                  "width": 14,
+                  "height": 24
+                },
+                {
+                  "type": "text",
+                  "id": "uhI9o",
+                  "fill": "#FFFFFF",
+                  "content": "Heritage Guiding",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "09sAy",
+              "fill": "#FFFFFF99",
+              "content": "© 2026 Heritage Guiding Stockholm. All rights reserved.",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "S4Cd5",
+      "x": 2540,
+      "y": 29269,
+      "name": "Cancellation — Option A Mobile (Clean Timeline)",
+      "width": 390,
+      "fill": "$--color-background",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "GyEyn",
+          "name": "mNav",
+          "width": "fill_container",
+          "fill": "$--color-primary",
+          "padding": [
+            16,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "YgcN9",
+              "name": "mNavLeft",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "ucJcy",
+                  "geometry": "M3.2 68c0 0 16.9 2.9 29.7-10.4-7 10.3-17.7 22.2-32.2 28.9 0 0 38.7-12.1 42.6-47.6 0 0-9.3 21.3-40.1 29.1z m46.1-35.3a3.7 3.7 0 1 1-7.4 0 3.7 3.7 0 1 1 7.4 0z m-10 9.9c0 0 4.9-8.7-2.6-39.1 0 0 2.7 22.7-0.9 33.9 0 0-9 4.1-19.3-8.3 0 0 10.3 16.3 22.8 13.5z",
+                  "fill": "$--color-secondary",
+                  "width": 12,
+                  "height": 20
+                },
+                {
+                  "type": "text",
+                  "id": "APlve",
+                  "fill": "#FFFFFF",
+                  "content": "Private Tours",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "icon_font",
+              "id": "9JBf6",
+              "width": 24,
+              "height": 24,
+              "iconFontName": "menu",
+              "iconFontFamily": "lucide",
+              "fill": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "5sRSw",
+          "name": "mHero",
+          "width": "fill_container",
+          "fill": "$--color-primary",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            48,
+            24
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "1wV7t",
+              "fill": "#FFFFFF",
+              "content": "Cancellation Policy",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 28,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "80HN7",
+              "fill": "#FFFFFFBB",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "We understand plans change. Here's everything you need to know about modifying or cancelling your tour.",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 15,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "tlGXG",
+          "name": "mTiers",
+          "width": "fill_container",
+          "fill": "$--color-background",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            40,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "5dY4E",
+              "fill": "$--color-primary",
+              "content": "Cancellation Tiers",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 24,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "2a92K",
+              "fill": "$--color-text-muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Our transparent cancellation policy ensures you always know where you stand.",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "dFyfp",
+              "name": "mTC",
+              "width": "fill_container",
+              "padding": [
+                20,
+                0,
+                0,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "r8Ydg",
+                  "name": "mTL",
+                  "width": 32,
+                  "height": "fill_container",
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 2,
+                      "id": "S1Vof",
+                      "x": 13,
+                      "y": 16,
+                      "fill": "$--color-border",
+                      "width": 3,
+                      "height": 480
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "uyCuv",
+                      "x": 8,
+                      "y": 24,
+                      "fill": "$--color-success",
+                      "width": 14,
+                      "height": 14
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "t5qeh",
+                      "x": 8,
+                      "y": 196,
+                      "fill": "$--color-warning",
+                      "width": 14,
+                      "height": 14
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "FbVcJ",
+                      "x": 8,
+                      "y": 370,
+                      "fill": "$--color-error",
+                      "width": 14,
+                      "height": 14
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "BiSvb",
+                  "name": "mCds",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 24,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "0aITR",
+                      "name": "mc1",
+                      "width": "fill_container",
+                      "fill": "$--color-surface",
+                      "cornerRadius": "$--radius-lg",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "left": 3
+                        },
+                        "fill": "$--color-success"
+                      },
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#0000000D",
+                        "offset": {
+                          "x": 0,
+                          "y": 2
+                        },
+                        "blur": 6
+                      },
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "SVwh8",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "circle-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-success"
+                        },
+                        {
+                          "type": "text",
+                          "id": "6G3j0",
+                          "fill": "$--color-success",
+                          "content": "48+ Hours Before Tour",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "600",
+                          "letterSpacing": 0.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "mH8l9",
+                          "fill": "$--color-text",
+                          "content": "Full Refund",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 19,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Bd9oV",
+                          "fill": "$--color-text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Cancel with complete peace of mind. No questions asked, no fees applied.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "7M2NQ",
+                      "name": "mc2",
+                      "width": "fill_container",
+                      "fill": "$--color-surface",
+                      "cornerRadius": "$--radius-lg",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "left": 3
+                        },
+                        "fill": "$--color-warning"
+                      },
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#0000000D",
+                        "offset": {
+                          "x": 0,
+                          "y": 2
+                        },
+                        "blur": 6
+                      },
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "l5rfD",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "clock-3",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-warning"
+                        },
+                        {
+                          "type": "text",
+                          "id": "nU0f5",
+                          "fill": "$--color-warning",
+                          "content": "24–48 Hours Before Tour",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "600",
+                          "letterSpacing": 0.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "7xwg4",
+                          "fill": "$--color-text",
+                          "content": "50% Partial Refund",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 19,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "9FytS",
+                          "fill": "$--color-text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "We understand last-minute changes. Half of your booking fee will be returned.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "pfV74",
+                      "name": "mc3",
+                      "width": "fill_container",
+                      "fill": "$--color-surface",
+                      "cornerRadius": "$--radius-lg",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "left": 3
+                        },
+                        "fill": "$--color-error"
+                      },
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#0000000D",
+                        "offset": {
+                          "x": 0,
+                          "y": 2
+                        },
+                        "blur": 6
+                      },
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "culsf",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "circle-x",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-error"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZKxx0",
+                          "fill": "$--color-error",
+                          "content": "Under 24 Hours / No-Show",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "600",
+                          "letterSpacing": 0.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "o6CCR",
+                          "fill": "$--color-text",
+                          "content": "Non-Refundable",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 19,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "AIlJC",
+                          "fill": "$--color-text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Unfortunately we cannot offer refunds for very late cancellations or no-shows.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "8WMuF",
+          "name": "mHow",
+          "width": "fill_container",
+          "fill": "$--color-background-alt",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            40,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "kdgFq",
+              "fill": "$--color-primary",
+              "content": "How to Cancel",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 24,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "41wLs",
+              "fill": "$--color-text-muted",
+              "content": "Three simple steps to cancel or modify your booking.",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "d1Jc6",
+              "name": "mSt",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "padding": [
+                16,
+                0,
+                0,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "FBUs4",
+                  "name": "ms1",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-lg",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 2
+                    },
+                    "blur": 6
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 24,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Sc8XU",
+                      "name": "ms1n",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "$--color-secondary",
+                      "cornerRadius": "$--radius-full",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Gz5QN",
+                          "fill": "#FFFFFF",
+                          "content": "1",
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "VKkyp",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "mail",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-primary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "51xef",
+                      "fill": "$--color-text",
+                      "content": "Contact Us",
+                      "textAlign": "center",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ld7Pf",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Send an email to info@privatetours.se or call +46 8 123 456 78",
+                      "lineHeight": 1.5,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ko9J7",
+                  "name": "ms2",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-lg",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 2
+                    },
+                    "blur": 6
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 24,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "4X3l4",
+                      "name": "ms2n",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "$--color-secondary",
+                      "cornerRadius": "$--radius-full",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "NoxV2",
+                          "fill": "#FFFFFF",
+                          "content": "2",
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "Bkixv",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "clipboard-check",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-primary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "JQ8Pp",
+                      "fill": "$--color-text",
+                      "content": "Confirmation",
+                      "textAlign": "center",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pQAvE",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "We'll confirm your cancellation within 24 hours via email",
+                      "lineHeight": 1.5,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "3n1gg",
+                  "name": "ms3",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-lg",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 2
+                    },
+                    "blur": 6
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 24,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "7v3Ht",
+                      "name": "ms3n",
+                      "width": 36,
+                      "height": 36,
+                      "fill": "$--color-secondary",
+                      "cornerRadius": "$--radius-full",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "UKgiX",
+                          "fill": "#FFFFFF",
+                          "content": "3",
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "yr8xj",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "wallet",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-primary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "MNNTH",
+                      "fill": "$--color-text",
+                      "content": "Refund Processed",
+                      "textAlign": "center",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "JNSQ9",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Eligible refunds are processed within 5–10 business days",
+                      "lineHeight": 1.5,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "lXrJJ",
+          "name": "mFaq",
+          "width": "fill_container",
+          "fill": "$--color-background",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            40,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "oRszw",
+              "fill": "$--color-primary",
+              "content": "Frequently Asked Questions",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 24,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "PY0FW",
+              "name": "mFqC",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                16,
+                0,
+                0,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YwLfk",
+                  "name": "mf1",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-lg",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 2
+                    },
+                    "blur": 6
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "PF0N8",
+                      "name": "mf1h",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "plWlG",
+                          "fill": "$--color-text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Can I reschedule instead of cancelling?",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "icon_font",
+                          "id": "nm4f5",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "chevron-up",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "9y7AS",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Yes! You can reschedule your tour free of charge up to 24 hours before. Contact us to arrange a new date.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Kxpt4",
+                  "name": "mf2",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-lg",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 2
+                    },
+                    "blur": 6
+                  },
+                  "layout": "vertical",
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "nkLHu",
+                      "name": "mf2h",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "cRwPX",
+                          "fill": "$--color-text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "What about group bookings?",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "icon_font",
+                          "id": "dCiUd",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "chevron-down",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "B7HU7",
+                  "name": "mf3",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-lg",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 2
+                    },
+                    "blur": 6
+                  },
+                  "layout": "vertical",
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "JSJmd",
+                      "name": "mf3h",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Ygz30",
+                          "fill": "$--color-text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "What if the tour is cancelled due to weather?",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "icon_font",
+                          "id": "G5jWm",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "chevron-down",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "6MGcK",
+          "name": "mCta",
+          "width": "fill_container",
+          "fill": "#FDF8F0",
+          "layout": "vertical",
+          "gap": 14,
+          "padding": [
+            40,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "oGyJ1",
+              "fill": "$--color-primary",
+              "content": "Need to Make a Change?",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 24,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "Zlsvu",
+              "fill": "$--color-text-muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Our team is here to help with any modifications to your booking.",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "hXpdQ",
+              "name": "mBtn",
+              "width": "fill_container",
+              "fill": "$--color-accent",
+              "cornerRadius": "$--radius-md",
+              "padding": [
+                14,
+                0
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "gh946",
+                  "fill": "#FFFFFF",
+                  "content": "Contact Us",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "IMkIa",
+              "name": "mInfo",
+              "layout": "vertical",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YQlQL",
+                  "name": "mE",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "XbGlP",
+                      "width": 14,
+                      "height": 14,
+                      "iconFontName": "mail",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-text-muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "WJ0z2",
+                      "fill": "$--color-text-muted",
+                      "content": "info@privatetours.se",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "3FPpU",
+                  "name": "mP",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "UyaVy",
+                      "width": 14,
+                      "height": 14,
+                      "iconFontName": "phone",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-text-muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wkSt0",
+                      "fill": "$--color-text-muted",
+                      "content": "+46 8 123 456 78",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "tQQU5",
+          "name": "mFoot",
+          "width": "fill_container",
+          "fill": "$--color-primary",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            24,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "4NujO",
+              "name": "mFL",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "YFK8V",
+                  "geometry": "M3.2 68c0 0 16.9 2.9 29.7-10.4-7 10.3-17.7 22.2-32.2 28.9 0 0 38.7-12.1 42.6-47.6 0 0-9.3 21.3-40.1 29.1z m46.1-35.3a3.7 3.7 0 1 1-7.4 0 3.7 3.7 0 1 1 7.4 0z m-10 9.9c0 0 4.9-8.7-2.6-39.1 0 0 2.7 22.7-0.9 33.9 0 0-9 4.1-19.3-8.3 0 0 10.3 16.3 22.8 13.5z",
+                  "fill": "$--color-secondary",
+                  "width": 12,
+                  "height": 20
+                },
+                {
+                  "type": "text",
+                  "id": "DR6JH",
+                  "fill": "#FFFFFF",
+                  "content": "Private Tours Stockholm",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "ssdEt",
+              "fill": "#8CA3BF",
+              "content": "© 2026 Private Tours Stockholm.",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "WRdzC",
+      "x": 3030,
+      "y": 29269,
+      "name": "Cancellation — Option B Desktop (Warm & Editorial)",
+      "width": 1440,
+      "fill": "$--color-background",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "mjs7B",
+          "name": "nav",
+          "width": "fill_container",
+          "height": 72,
+          "fill": "$--color-surface",
+          "stroke": {
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "$--color-border"
+          },
+          "padding": [
+            0,
+            80
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "pysTm",
+              "name": "logoFrame",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "0rGKy",
+                  "name": "logoIcon",
+                  "geometry": "M3.2 68c0 0 16.9 2.9 29.7-10.4-7 10.3-17.7 22.2-32.2 28.9 0 0 38.7-12.1 42.6-47.6 0 0-9.3 21.3-40.1 29.1z m46.1-35.3a3.7 3.7 0 1 1-7.4 0 3.7 3.7 0 1 1 7.4 0z m-10 9.9c0 0 4.9-8.7-2.6-39.1 0 0 2.7 22.7-0.9 33.9 0 0-9 4.1-19.3-8.3 0 0 10.3 16.3 22.8 13.5z",
+                  "fill": "$--color-primary",
+                  "width": 14,
+                  "height": 24
+                },
+                {
+                  "type": "text",
+                  "id": "0jg2D",
+                  "name": "logoText",
+                  "fill": "$--color-primary",
+                  "content": "PRIVATE TOURS",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ADNtQ",
+              "name": "navLinks",
+              "gap": 32,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "pGNq3",
+                  "name": "nl1",
+                  "fill": "$--color-text-muted",
+                  "content": "Tours",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Koy6W",
+                  "name": "nl2",
+                  "fill": "$--color-text-muted",
+                  "content": "About",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "TPXr6",
+                  "name": "nl3",
+                  "fill": "$--color-text-muted",
+                  "content": "Guides",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "gQH0o",
+                  "name": "nl4",
+                  "fill": "$--color-text-muted",
+                  "content": "Contact",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "yMtUz",
+              "name": "navCta",
+              "fill": "$--color-accent",
+              "cornerRadius": 8,
+              "padding": [
+                10,
+                24
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "WrhGd",
+                  "name": "navCtaT",
+                  "fill": "#FFFFFF",
+                  "content": "Book a Tour",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Tu6f7",
+          "name": "hero",
+          "width": "fill_container",
+          "height": 320,
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 180,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#FAFAF8",
+                "position": 0
+              },
+              {
+                "color": "#F5F0E8",
+                "position": 1
+              }
+            ]
+          },
+          "children": [
+            {
+              "type": "frame",
+              "id": "8MTmA",
+              "name": "heroLeft",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": [
+                64,
+                80
+              ],
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "bPR7B",
+                  "name": "heroBreadcrumb",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "EfxrU",
+                      "name": "bc1",
+                      "fill": "$--color-text-muted",
+                      "content": "Home",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "5jY4S",
+                      "name": "bcS",
+                      "fill": "$--color-text-light",
+                      "content": "/",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "hbEp4",
+                      "name": "bc2",
+                      "fill": "$--color-text",
+                      "content": "Cancellation Policy",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "WvH9O",
+                  "name": "heroTitle",
+                  "fill": "$--color-primary",
+                  "content": "Cancellation\nPolicy",
+                  "lineHeight": 1.1,
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 52,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 2,
+                  "id": "IiV03",
+                  "name": "goldDivider",
+                  "fill": "$--color-secondary",
+                  "width": 60,
+                  "height": 3
+                },
+                {
+                  "type": "text",
+                  "id": "M7T5c",
+                  "name": "heroSub",
+                  "fill": "$--color-text-muted",
+                  "content": "We understand plans change. Here's everything you need\nto know about modifying or cancelling your tour.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 17,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "PuDfk",
+              "name": "heroRight",
+              "width": 400,
+              "height": "fill_container",
+              "layout": "none",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "7WnHs",
+                  "layoutPosition": "absolute",
+                  "x": 150,
+                  "y": 20,
+                  "name": "motif1",
+                  "opacity": 0.08,
+                  "fill": "$--color-secondary",
+                  "width": 200,
+                  "height": 200
+                },
+                {
+                  "type": "ellipse",
+                  "id": "yRRAV",
+                  "layoutPosition": "absolute",
+                  "x": 80,
+                  "y": 120,
+                  "name": "motif2",
+                  "opacity": 0.12,
+                  "fill": "$--color-secondary",
+                  "width": 140,
+                  "height": 140
+                },
+                {
+                  "type": "ellipse",
+                  "id": "bBHP3",
+                  "layoutPosition": "absolute",
+                  "x": 250,
+                  "y": 180,
+                  "name": "motif3",
+                  "opacity": 0.06,
+                  "fill": "$--color-secondary",
+                  "width": 80,
+                  "height": 80
+                },
+                {
+                  "type": "rectangle",
+                  "id": "9U1Gm",
+                  "layoutPosition": "absolute",
+                  "x": 180,
+                  "y": 80,
+                  "name": "motif4",
+                  "opacity": 0.05,
+                  "rotation": 45,
+                  "fill": "$--color-secondary",
+                  "width": 120,
+                  "height": 120
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "D9k5s",
+          "name": "tiersSection",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            64,
+            80
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Y0f2x",
+              "name": "tiersHeader",
+              "layout": "vertical",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "OP54p",
+                  "name": "tiersTag",
+                  "fill": "$--color-secondary",
+                  "content": "CANCELLATION TIERS",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "WRCtg",
+                  "name": "tiersTitle",
+                  "fill": "$--color-primary",
+                  "content": "Refund Overview",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 36,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "ORHyy",
+                  "name": "tiersSub",
+                  "fill": "$--color-text-muted",
+                  "content": "Our transparent cancellation policy ensures you always know where you stand.",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "FZsJs",
+              "name": "tierGrid",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "lz69V",
+                  "name": "t1",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": 20,
+                  "stroke": {
+                    "thickness": {
+                      "top": 4
+                    },
+                    "fill": "#10B981"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000010",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": [
+                    32,
+                    28
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Jlm3b",
+                      "name": "t1Icon",
+                      "width": 56,
+                      "height": 56,
+                      "fill": "#10B98115",
+                      "cornerRadius": 28,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "pwetq",
+                          "name": "t1Ic",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "circle-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "#10B981"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "bgG9r",
+                      "name": "t1Title",
+                      "fill": "$--color-text",
+                      "content": "Full Refund",
+                      "textAlign": "center",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 24,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "axMqe",
+                      "name": "t1Window",
+                      "fill": "#10B98112",
+                      "cornerRadius": 20,
+                      "padding": [
+                        6,
+                        16
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Kx0Iu",
+                          "name": "t1WindowT",
+                          "fill": "#10B981",
+                          "content": "48+ hours before tour",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "uHWXU",
+                      "name": "t1Desc",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Cancel with complete peace of mind. No questions asked, no fees applied.",
+                      "lineHeight": 1.6,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "kshY7",
+                  "name": "t2",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": 20,
+                  "stroke": {
+                    "thickness": {
+                      "top": 4
+                    },
+                    "fill": "#F59E0B"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000010",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": [
+                    32,
+                    28
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Z4fD5",
+                      "name": "t2Icon",
+                      "width": 56,
+                      "height": 56,
+                      "fill": "#F59E0B15",
+                      "cornerRadius": 28,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "m7Ch4",
+                          "name": "t2Ic",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "clock-3",
+                          "iconFontFamily": "lucide",
+                          "fill": "#F59E0B"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "Pe30l",
+                      "name": "t2Title",
+                      "fill": "$--color-text",
+                      "content": "50% Partial Refund",
+                      "textAlign": "center",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 24,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "CowOg",
+                      "name": "t2Window",
+                      "fill": "#F59E0B12",
+                      "cornerRadius": 20,
+                      "padding": [
+                        6,
+                        16
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "wc6mZ",
+                          "name": "t2WindowT",
+                          "fill": "#F59E0B",
+                          "content": "24–48 hours before tour",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "uBAUx",
+                      "name": "t2Desc",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "We understand last-minute changes. Half of your booking fee will be returned.",
+                      "lineHeight": 1.6,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "m7RyM",
+                  "name": "t3",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": 20,
+                  "stroke": {
+                    "thickness": {
+                      "top": 4
+                    },
+                    "fill": "#EF4444"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000010",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": [
+                    32,
+                    28
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "VpS8h",
+                      "name": "t3Icon",
+                      "width": 56,
+                      "height": 56,
+                      "fill": "#EF444415",
+                      "cornerRadius": 28,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "pfh4g",
+                          "name": "t3Ic",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "circle-x",
+                          "iconFontFamily": "lucide",
+                          "fill": "#EF4444"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "QeTyU",
+                      "name": "t3Title",
+                      "fill": "$--color-text",
+                      "content": "Non-Refundable",
+                      "textAlign": "center",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 24,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DELav",
+                      "name": "t3Window",
+                      "fill": "#EF444412",
+                      "cornerRadius": 20,
+                      "padding": [
+                        6,
+                        16
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Ae9iG",
+                          "name": "t3WindowT",
+                          "fill": "#EF4444",
+                          "content": "Under 24 hours / no-show",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "Abdcb",
+                      "name": "t3Desc",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Unfortunately we cannot offer refunds for very late cancellations or no-shows.",
+                      "lineHeight": 1.6,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "VFR8Y",
+          "name": "stepperSection",
+          "width": "fill_container",
+          "fill": "$--color-background",
+          "layout": "vertical",
+          "gap": 48,
+          "padding": [
+            64,
+            80
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "fqAIU",
+              "name": "stepperHeader",
+              "fill": "$--color-primary",
+              "content": "How to Cancel Your Booking",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 32,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "fOe5t",
+              "name": "stepperSubtitle",
+              "fill": "$--color-text-muted",
+              "content": "A simple, transparent process",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "Lr33r",
+              "name": "stepperRow",
+              "width": "fill_container",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ELtny",
+                  "name": "step1",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "mjqJC",
+                      "name": "step1Circle",
+                      "fill": "$--color-secondary",
+                      "width": 64,
+                      "height": 64
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "nEXCn",
+                      "layoutPosition": "absolute",
+                      "x": 56,
+                      "y": 18,
+                      "name": "step1Icon",
+                      "width": 28,
+                      "height": 28,
+                      "iconFontName": "send",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "text",
+                      "id": "X3QC0",
+                      "name": "step1Label",
+                      "fill": "$--color-text",
+                      "content": "Submit Request",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "CmALM",
+                      "name": "step1Desc",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "Contact us via email\nor phone",
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "bCqUu",
+                  "name": "line1",
+                  "width": 120,
+                  "height": 2,
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "frame",
+                  "id": "3ovuQ",
+                  "name": "step2",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "OZGKb",
+                      "name": "step2Circle",
+                      "fill": "$--color-secondary",
+                      "width": 64,
+                      "height": 64
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "SJroL",
+                      "layoutPosition": "absolute",
+                      "x": 56,
+                      "y": 18,
+                      "name": "step2Icon",
+                      "width": 28,
+                      "height": 28,
+                      "iconFontName": "mail-check",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "text",
+                      "id": "6jgCH",
+                      "name": "step2Label",
+                      "fill": "$--color-text",
+                      "content": "Confirmation",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "FqEFm",
+                      "name": "step2Desc",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "Receive confirmation\nwithin 24 hours",
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "liJ8b",
+                  "name": "line2",
+                  "width": 120,
+                  "height": 2,
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "frame",
+                  "id": "OCdoG",
+                  "name": "step3",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "FgL4m",
+                      "name": "step3Circle",
+                      "fill": "$--color-secondary",
+                      "width": 64,
+                      "height": 64
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "vH3gG",
+                      "layoutPosition": "absolute",
+                      "x": 56,
+                      "y": 18,
+                      "name": "step3Icon",
+                      "width": 28,
+                      "height": 28,
+                      "iconFontName": "wallet",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fK0GM",
+                      "name": "step3Label",
+                      "fill": "$--color-text",
+                      "content": "Refund Processed",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "957Hc",
+                      "name": "step3Desc",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "Funds returned within\n5-10 business days",
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Y4ehU",
+          "name": "proseSection",
+          "width": "fill_container",
+          "fill": "$--color-surface",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            64,
+            160
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "7H9BO",
+              "name": "proseTitle",
+              "fill": "$--color-primary",
+              "content": "Complete Cancellation Policy",
+              "fontFamily": "Playfair Display",
+              "fontSize": 28,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "jQIaq",
+              "name": "proseDivider",
+              "width": 60,
+              "height": 3,
+              "fill": "$--color-secondary"
+            },
+            {
+              "type": "frame",
+              "id": "L4j9q",
+              "name": "block1",
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "xk80M",
+                  "name": "block1Border",
+                  "width": 4,
+                  "height": "fill_container",
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "frame",
+                  "id": "bDlFk",
+                  "name": "block1Content",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "lMoP6",
+                      "name": "block1Title",
+                      "fill": "$--color-text",
+                      "content": "Standard Cancellation Terms",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZZnGk",
+                      "name": "block1Text",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Cancellations made more than 48 hours before the scheduled tour departure receive a full refund. For cancellations between 24 and 48 hours prior, a 50% refund is issued. Unfortunately, cancellations made less than 24 hours before departure are non-refundable, as our guides and arrangements have already been confirmed.",
+                      "lineHeight": 1.7,
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "a86Pd",
+              "name": "block2",
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "wj8h6",
+                  "name": "block2Border",
+                  "width": 4,
+                  "height": "fill_container",
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "frame",
+                  "id": "x43fU",
+                  "name": "block2Content",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "mEj1S",
+                      "name": "block2Title",
+                      "fill": "$--color-text",
+                      "content": "Group Bookings & Exceptions",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DWfql",
+                      "name": "block2Text",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "For group bookings of 6 or more guests, a 72-hour cancellation notice is required for a full refund. Private charter tours and custom experiences may have specific cancellation terms outlined at the time of booking. We recommend reviewing your booking confirmation for any special conditions.",
+                      "lineHeight": 1.7,
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "hKtmi",
+              "name": "block3",
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ZOd4S",
+                  "name": "block3Border",
+                  "width": 4,
+                  "height": "fill_container",
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "frame",
+                  "id": "wMLzP",
+                  "name": "block3Content",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "YhzKX",
+                      "name": "block3Title",
+                      "fill": "$--color-text",
+                      "content": "Weather & Force Majeure",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fL4qM",
+                      "name": "block3Text",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "In the event of severe weather conditions or circumstances beyond our control, Private Tours reserves the right to reschedule or cancel a tour. In such cases, guests will be offered a full refund or the option to reschedule at no additional cost. Our team monitors conditions closely and will notify you as early as possible.",
+                      "lineHeight": 1.7,
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Z3bfX",
+              "name": "block4",
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "4r5Qi",
+                  "name": "block4Border",
+                  "width": 4,
+                  "height": "fill_container",
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "frame",
+                  "id": "sTYpk",
+                  "name": "block4Content",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    20
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "uJ0yA",
+                      "name": "block4Title",
+                      "fill": "$--color-text",
+                      "content": "Refund Processing Timeline",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "FphaV",
+                      "name": "block4Text",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "All approved refunds are processed within 5-10 business days. Refunds are returned to the original payment method. You will receive an email confirmation once your refund has been initiated. Please contact your bank if the refund does not appear within the expected timeframe.",
+                      "lineHeight": 1.7,
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "lpPD6",
+          "name": "trustBanner",
+          "width": "fill_container",
+          "fill": "$--color-primary",
+          "padding": [
+            48,
+            80
+          ],
+          "justifyContent": "space_around",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "Njh4s",
+              "name": "trustTitle",
+              "fill": "#FFFFFF",
+              "content": "Your Satisfaction Matters",
+              "fontFamily": "Playfair Display",
+              "fontSize": 22,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "il6ya",
+              "name": "trustItem1",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "1DZHY",
+                  "name": "trustIcon1",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "refresh-cw",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "RdcGz",
+                  "name": "trustLabel1",
+                  "fill": "#FFFFFF",
+                  "content": "Free Rebooking",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Kh53O",
+              "name": "trustItem2",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "tZhPb",
+                  "name": "trustIcon2",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "clock-3",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "Xqovn",
+                  "name": "trustLabel2",
+                  "fill": "#FFFFFF",
+                  "content": "24h Response",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wkQrq",
+              "name": "trustItem3",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "sIVwM",
+                  "name": "trustIcon3",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "shield-check",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "V2Sqd",
+                  "name": "trustLabel3",
+                  "fill": "#FFFFFF",
+                  "content": "No Hidden Fees",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "ypuqF",
+          "name": "ctaSection",
+          "width": "fill_container",
+          "fill": "$--color-background",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            64,
+            80
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "rSTl5",
+              "name": "ctaTitle",
+              "fill": "$--color-primary",
+              "content": "Questions About Our Policy?",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 32,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "sMRQt",
+              "name": "ctaSub",
+              "fill": "$--color-text-muted",
+              "content": "Our team is here to help with any concerns about cancellations or rebooking.",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "088Op",
+              "name": "ctaBtn",
+              "fill": "$--color-accent",
+              "cornerRadius": 8,
+              "padding": [
+                16,
+                40
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "IV2oc",
+                  "name": "ctaBtnText",
+                  "fill": "#FFFFFF",
+                  "content": "Get in Touch",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "YxJmq",
+              "name": "ctaContact",
+              "gap": 32,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "9fi61",
+                  "name": "ctaEmail",
+                  "fill": "$--color-text-muted",
+                  "content": "hello@privatetours.se",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "AsSEU",
+                  "name": "ctaDot",
+                  "fill": "$--color-text-light",
+                  "content": "•",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "xQ2ny",
+                  "name": "ctaPhone",
+                  "fill": "$--color-text-muted",
+                  "content": "+46 8 123 456",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "EIhCA",
+          "name": "footer",
+          "width": "fill_container",
+          "fill": "$--color-primary",
+          "padding": [
+            32,
+            80
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "8Dvor",
+              "name": "footerLeft",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "Rpq34",
+                  "name": "footerLogo",
+                  "geometry": "M3.2 68c0 0 16.9 2.9 29.7-10.4-7 10.3-17.7 22.2-32.2 28.9 0 0 38.7-12.1 42.6-47.6 0 0-9.3 21.3-40.1 29.1z m46.1-35.3a3.7 3.7 0 1 1-7.4 0 3.7 3.7 0 1 1 7.4 0z m-10 9.9c0 0 4.9-8.7-2.6-39.1 0 0 2.7 22.7-0.9 33.9 0 0-9 4.1-19.3-8.3 0 0 10.3 16.3 22.8 13.5z",
+                  "fill": "$--color-secondary",
+                  "width": 14,
+                  "height": 24
+                },
+                {
+                  "type": "text",
+                  "id": "kBY67",
+                  "name": "footerName",
+                  "fill": "#FFFFFF",
+                  "content": "Private Tours",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "SnM9X",
+              "name": "footerCopy",
+              "fill": "#FFFFFF80",
+              "content": "© 2026 Private Tours Stockholm. All rights reserved.",
+              "fontFamily": "Inter",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Kl3eT",
+      "x": 4570,
+      "y": 29269,
+      "name": "Cancellation — Option B Mobile (Warm & Editorial)",
+      "width": 390,
+      "fill": "$--color-background",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "jQKzt",
+          "name": "mNav",
+          "width": "fill_container",
+          "fill": "$--color-surface",
+          "padding": [
+            16,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "6uuih",
+              "name": "mNavLeft",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "bGZ46",
+                  "name": "mNavLogo",
+                  "geometry": "M3.2 68c0 0 16.9 2.9 29.7-10.4-7 10.3-17.7 22.2-32.2 28.9 0 0 38.7-12.1 42.6-47.6 0 0-9.3 21.3-40.1 29.1z m46.1-35.3a3.7 3.7 0 1 1-7.4 0 3.7 3.7 0 1 1 7.4 0z m-10 9.9c0 0 4.9-8.7-2.6-39.1 0 0 2.7 22.7-0.9 33.9 0 0-9 4.1-19.3-8.3 0 0 10.3 16.3 22.8 13.5z",
+                  "fill": "$--color-primary",
+                  "width": 12,
+                  "height": 20
+                },
+                {
+                  "type": "text",
+                  "id": "fVmLT",
+                  "name": "mNavName",
+                  "fill": "$--color-primary",
+                  "content": "Private Tours",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "icon_font",
+              "id": "vtxcR",
+              "name": "mNavMenu",
+              "width": 24,
+              "height": 24,
+              "iconFontName": "menu",
+              "iconFontFamily": "lucide",
+              "fill": "$--color-primary"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "JgKcJ",
+          "name": "mHero",
+          "width": "fill_container",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 180,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#FDF8F0",
+                "position": 0
+              },
+              {
+                "color": "#FAFAF8",
+                "position": 1
+              }
+            ]
+          },
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            48,
+            24
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "6ODW8",
+              "name": "mBreadcrumb",
+              "fill": "$--color-text-light",
+              "content": "Home  /  Cancellation Policy",
+              "fontFamily": "Inter",
+              "fontSize": 11,
+              "fontWeight": "normal",
+              "letterSpacing": 1
+            },
+            {
+              "type": "text",
+              "id": "bNhci",
+              "name": "mHeroTitle",
+              "fill": "$--color-primary",
+              "content": "Cancellation\nPolicy",
+              "lineHeight": 1.15,
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 36,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "0JL8q",
+              "name": "mHeroDivider",
+              "width": 40,
+              "height": 3,
+              "fill": "$--color-secondary"
+            },
+            {
+              "type": "text",
+              "id": "EbnAV",
+              "name": "mHeroSub",
+              "fill": "$--color-text-muted",
+              "content": "We understand plans change. Here's our clear\npolicy on modifications and cancellations.",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "DU3qn",
+          "name": "mTiers",
+          "width": "fill_container",
+          "fill": "$--color-surface",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            40,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "pwfvk",
+              "name": "mTiersTitle",
+              "fill": "$--color-primary",
+              "content": "Refund Overview",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 24,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "eYx8A",
+              "name": "mTiersSub",
+              "fill": "$--color-text-muted",
+              "content": "Our transparent cancellation tiers",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "Zmk5C",
+              "name": "mCard1",
+              "width": "fill_container",
+              "fill": "$--color-surface",
+              "cornerRadius": 12,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#10B98130"
+              },
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Sakoy",
+                  "name": "mCard1Icon",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "#10B98115",
+                  "cornerRadius": 24,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "oEDsI",
+                      "name": "mCard1IconInner",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "circle-check",
+                      "iconFontFamily": "lucide",
+                      "fill": "#10B981"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "OLEjw",
+                  "name": "mCard1Title",
+                  "fill": "#10B981",
+                  "content": "Full Refund",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "gjP71",
+                  "name": "mCard1Time",
+                  "fill": "$--color-text-muted",
+                  "content": "48+ hours before departure",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "ZTrXk",
+                  "name": "mCard1Desc",
+                  "fill": "$--color-text-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Cancel more than 48 hours in advance for a full refund",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "kNWCU",
+              "name": "mCard2",
+              "width": "fill_container",
+              "fill": "$--color-surface",
+              "cornerRadius": 12,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#F59E0B30"
+              },
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ErbXt",
+                  "name": "mCard2Icon",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "#F59E0B15",
+                  "cornerRadius": 24,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "rt5dw",
+                      "name": "mCard2IconInner",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "clock-3",
+                      "iconFontFamily": "lucide",
+                      "fill": "#F59E0B"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "KRjjW",
+                  "name": "mCard2Title",
+                  "fill": "#F59E0B",
+                  "content": "50% Partial Refund",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "HYLHF",
+                  "name": "mCard2Time",
+                  "fill": "$--color-text-muted",
+                  "content": "24–48 hours before departure",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "8ZeBw",
+                  "name": "mCard2Desc",
+                  "fill": "$--color-text-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Cancellations within this window receive a partial refund",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vflyB",
+              "name": "mCard3",
+              "width": "fill_container",
+              "fill": "$--color-surface",
+              "cornerRadius": 12,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#EF444430"
+              },
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "m5z09",
+                  "name": "mCard3Icon",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "#EF444415",
+                  "cornerRadius": 24,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "fSD3b",
+                      "name": "mCard3IconInner",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "circle-x",
+                      "iconFontFamily": "lucide",
+                      "fill": "#EF4444"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "NWEJI",
+                  "name": "mCard3Title",
+                  "fill": "#EF4444",
+                  "content": "Non-Refundable",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "uZuH7",
+                  "name": "mCard3Time",
+                  "fill": "$--color-text-muted",
+                  "content": "Under 24 hours before departure",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "p8QhI",
+                  "name": "mCard3Desc",
+                  "fill": "$--color-text-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Arrangements are confirmed and refunds cannot be issued",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Z7Hk9",
+          "name": "mStepper",
+          "width": "fill_container",
+          "fill": "$--color-background",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            40,
+            24
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "uLvwh",
+              "name": "mStepTitle",
+              "fill": "$--color-primary",
+              "content": "How to Cancel",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 24,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "QITXZ",
+              "name": "mStepList",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "padding": [
+                0,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "alOVM",
+                  "name": "mS1",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "NmYLp",
+                      "name": "mS1Circle",
+                      "fill": "$--color-secondary",
+                      "width": 48,
+                      "height": 48
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "YGd2D",
+                      "layoutPosition": "absolute",
+                      "x": 13,
+                      "y": 20,
+                      "name": "mS1Icon",
+                      "width": 22,
+                      "height": 22,
+                      "iconFontName": "send",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "C7NWL",
+                      "name": "mS1Text",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "r9VkA",
+                          "name": "mS1Label",
+                          "fill": "$--color-text",
+                          "content": "Submit Request",
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "yzBpZ",
+                          "name": "mS1Desc",
+                          "fill": "$--color-text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Contact us via email or phone to request cancellation",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "1asad",
+                  "layoutPosition": "absolute",
+                  "x": 43,
+                  "y": 72,
+                  "name": "mLine1",
+                  "width": 2,
+                  "height": 24,
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "frame",
+                  "id": "uzqA0",
+                  "name": "mS2",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "I1bvN",
+                      "name": "mS2Circle",
+                      "fill": "$--color-secondary",
+                      "width": 48,
+                      "height": 48
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "L5vyg",
+                      "layoutPosition": "absolute",
+                      "x": 13,
+                      "y": 13,
+                      "name": "mS2Icon",
+                      "width": 22,
+                      "height": 22,
+                      "iconFontName": "mail-check",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zlC66",
+                      "name": "mS2Text",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "yW0lZ",
+                          "name": "mS2Label",
+                          "fill": "$--color-text",
+                          "content": "Confirmation",
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "jZvFH",
+                          "name": "mS2Desc",
+                          "fill": "$--color-text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Receive confirmation within 24 hours",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "FbAym",
+                  "layoutPosition": "absolute",
+                  "x": 43,
+                  "y": 168,
+                  "name": "mLine2",
+                  "width": 2,
+                  "height": 24,
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "frame",
+                  "id": "ijhe3",
+                  "name": "mS3",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "vnSa6",
+                      "name": "mS3Circle",
+                      "fill": "$--color-secondary",
+                      "width": 48,
+                      "height": 48
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "cwTon",
+                      "layoutPosition": "absolute",
+                      "x": 13,
+                      "y": 20,
+                      "name": "mS3Icon",
+                      "width": 22,
+                      "height": 22,
+                      "iconFontName": "wallet",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "g3mh0",
+                      "name": "mS3Text",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "D0XbU",
+                          "name": "mS3Label",
+                          "fill": "$--color-text",
+                          "content": "Refund Processed",
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "A9PRZ",
+                          "name": "mS3Desc",
+                          "fill": "$--color-text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Funds returned within 5-10 business days",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "qej8i",
+          "name": "mProse",
+          "width": "fill_container",
+          "fill": "$--color-surface",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            40,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "8NEVU",
+              "name": "mProseTitle",
+              "fill": "$--color-primary",
+              "content": "Complete Policy",
+              "fontFamily": "Playfair Display",
+              "fontSize": 22,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "Nregi",
+              "name": "mProseDivider",
+              "width": 40,
+              "height": 3,
+              "fill": "$--color-secondary"
+            },
+            {
+              "type": "frame",
+              "id": "wPAah",
+              "name": "mb1",
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "NHDMj",
+                  "name": "mb1b",
+                  "width": 3,
+                  "height": "fill_container",
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "frame",
+                  "id": "ueH6H",
+                  "name": "mb1c",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "1hwLz",
+                      "name": "mb1t",
+                      "fill": "$--color-text",
+                      "content": "Standard Terms",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dXBy5",
+                      "name": "mb1p",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Cancellations 48+ hours before departure receive a full refund. Between 24-48 hours, a 50% refund is issued. Under 24 hours, cancellations are non-refundable.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "rz1AW",
+              "name": "mb2",
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Tbk46",
+                  "name": "mb2b",
+                  "width": 3,
+                  "height": "fill_container",
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "frame",
+                  "id": "aP5nS",
+                  "name": "mb2c",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "cYMJM",
+                      "name": "mb2t",
+                      "fill": "$--color-text",
+                      "content": "Group Bookings",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "BcbQM",
+                      "name": "mb2p",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Groups of 6+ require 72-hour notice for a full refund. Custom experiences may have specific terms outlined at booking.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "EsUhg",
+              "name": "mb3",
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "2AN5F",
+                  "name": "mb3b",
+                  "width": 3,
+                  "height": "fill_container",
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "frame",
+                  "id": "u3I6X",
+                  "name": "mb3c",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "sxBEf",
+                      "name": "mb3t",
+                      "fill": "$--color-text",
+                      "content": "Weather & Force Majeure",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "6c8hZ",
+                      "name": "mb3p",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "In severe weather or force majeure, we offer a full refund or free rescheduling. Our team will notify you as early as possible.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "jvEVJ",
+              "name": "mb4",
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "kkEnl",
+                  "name": "mb4b",
+                  "width": 3,
+                  "height": "fill_container",
+                  "fill": "$--color-secondary"
+                },
+                {
+                  "type": "frame",
+                  "id": "SnNMQ",
+                  "name": "mb4c",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "uQtyG",
+                      "name": "mb4t",
+                      "fill": "$--color-text",
+                      "content": "Refund Timeline",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "4drUE",
+                      "name": "mb4p",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Approved refunds are processed within 5-10 business days to the original payment method.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "hPtlU",
+          "name": "mTrust",
+          "width": "fill_container",
+          "fill": "$--color-primary",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            32,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "cW5z3",
+              "name": "mTrustTitle",
+              "fill": "#FFFFFF",
+              "content": "Your Satisfaction Matters",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 18,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "j7nfj",
+              "name": "mTrustItems",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "8Cmbj",
+                  "name": "mTi1",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "XObbQ",
+                      "name": "mTi1Icon",
+                      "width": 18,
+                      "height": 18,
+                      "iconFontName": "refresh-cw",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-secondary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "PHMjo",
+                      "name": "mTi1Label",
+                      "fill": "#FFFFFF",
+                      "content": "Free Rebooking",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "rUGaE",
+                  "name": "mTi2",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "lYTzV",
+                      "name": "mTi2Icon",
+                      "width": 18,
+                      "height": 18,
+                      "iconFontName": "clock-3",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-secondary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "war2A",
+                      "name": "mTi2Label",
+                      "fill": "#FFFFFF",
+                      "content": "24h Response",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "LOkI3",
+                  "name": "mTi3",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "HP3rb",
+                      "name": "mTi3Icon",
+                      "width": 18,
+                      "height": 18,
+                      "iconFontName": "shield-check",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-secondary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "3nfYo",
+                      "name": "mTi3Label",
+                      "fill": "#FFFFFF",
+                      "content": "No Hidden Fees",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "LrwNp",
+          "name": "mCta",
+          "width": "fill_container",
+          "fill": "$--color-background",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            40,
+            24
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "e5RSv",
+              "name": "mCtaTitle",
+              "fill": "$--color-primary",
+              "content": "Questions?",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 26,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "kz3kX",
+              "name": "mCtaSub",
+              "fill": "$--color-text-muted",
+              "content": "Our team is here to help with any\nconcerns about cancellations.",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "PzSLN",
+              "name": "mCtaBtn",
+              "width": "fill_container",
+              "fill": "$--color-accent",
+              "cornerRadius": 8,
+              "padding": [
+                16,
+                0
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "USz1T",
+                  "name": "mCtaBtnTxt",
+                  "fill": "#FFFFFF",
+                  "content": "Get in Touch",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "JQ7Lp",
+              "name": "mCtaEmail",
+              "fill": "$--color-text-muted",
+              "content": "hello@privatetours.se",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "dvYsr",
+              "name": "mCtaPhone",
+              "fill": "$--color-text-muted",
+              "content": "+46 8 123 456",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "HNjv4",
+          "name": "mFooter",
+          "width": "fill_container",
+          "fill": "$--color-primary",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            24,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "46UA7",
+              "name": "mFooterLogo",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "kFo1I",
+                  "name": "mFooterIcon",
+                  "geometry": "M3.2 68c0 0 16.9 2.9 29.7-10.4-7 10.3-17.7 22.2-32.2 28.9 0 0 38.7-12.1 42.6-47.6 0 0-9.3 21.3-40.1 29.1z m46.1-35.3a3.7 3.7 0 1 1-7.4 0 3.7 3.7 0 1 1 7.4 0z m-10 9.9c0 0 4.9-8.7-2.6-39.1 0 0 2.7 22.7-0.9 33.9 0 0-9 4.1-19.3-8.3 0 0 10.3 16.3 22.8 13.5z",
+                  "fill": "$--color-secondary",
+                  "width": 12,
+                  "height": 20
+                },
+                {
+                  "type": "text",
+                  "id": "93S3U",
+                  "name": "mFooterName",
+                  "fill": "#FFFFFF",
+                  "content": "Private Tours",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "B6cZF",
+              "name": "mFooterCopy",
+              "fill": "#FFFFFF80",
+              "content": "© 2026 Private Tours Stockholm",
+              "fontFamily": "Inter",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "--color-accent": {
+      "type": "color",
+      "value": "#E67E5A"
+    },
+    "--color-accent-dark": {
+      "type": "color",
+      "value": "#D66A45"
+    },
+    "--color-accent-light": {
+      "type": "color",
+      "value": "#EE9273"
+    },
+    "--color-background": {
+      "type": "color",
+      "value": "#FAFAF8"
+    },
+    "--color-background-alt": {
+      "type": "color",
+      "value": "#F5F5F3"
+    },
+    "--color-border": {
+      "type": "color",
+      "value": "#E5E7EB"
+    },
+    "--color-border-light": {
+      "type": "color",
+      "value": "#F3F4F6"
+    },
+    "--color-error": {
+      "type": "color",
+      "value": "#EF4444"
+    },
+    "--color-info": {
+      "type": "color",
+      "value": "#3B82F6"
+    },
+    "--color-primary": {
+      "type": "color",
+      "value": "#1E3A5F"
+    },
+    "--color-primary-dark": {
+      "type": "color",
+      "value": "#152B47"
+    },
+    "--color-primary-light": {
+      "type": "color",
+      "value": "#2A4A75"
+    },
+    "--color-secondary": {
+      "type": "color",
+      "value": "#C4A052"
+    },
+    "--color-secondary-dark": {
+      "type": "color",
+      "value": "#B49042"
+    },
+    "--color-secondary-light": {
+      "type": "color",
+      "value": "#D4B462"
+    },
+    "--color-success": {
+      "type": "color",
+      "value": "#10B981"
+    },
+    "--color-surface": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "--color-text": {
+      "type": "color",
+      "value": "#2D3748"
+    },
+    "--color-text-light": {
+      "type": "color",
+      "value": "#9CA3AF"
+    },
+    "--color-text-muted": {
+      "type": "color",
+      "value": "#6B7280"
+    },
+    "--color-warning": {
+      "type": "color",
+      "value": "#F59E0B"
+    },
+    "--font-body": {
+      "type": "string",
+      "value": "Inter"
+    },
+    "--font-heading": {
+      "type": "string",
+      "value": "Playfair Display"
+    },
+    "--radius-2xl": {
+      "type": "number",
+      "value": 24
+    },
+    "--radius-full": {
+      "type": "number",
+      "value": 9999
+    },
+    "--radius-lg": {
+      "type": "number",
+      "value": 12
+    },
+    "--radius-md": {
+      "type": "number",
+      "value": 8
+    },
+    "--radius-sm": {
+      "type": "number",
+      "value": 6
+    },
+    "--radius-xl": {
+      "type": "number",
+      "value": 16
+    },
+    "--spacing-2xl": {
+      "type": "number",
+      "value": 48
+    },
+    "--spacing-3xl": {
+      "type": "number",
+      "value": 64
+    },
+    "--spacing-4xl": {
+      "type": "number",
+      "value": 96
+    },
+    "--spacing-lg": {
+      "type": "number",
+      "value": 24
+    },
+    "--spacing-md": {
+      "type": "number",
+      "value": 16
+    },
+    "--spacing-sm": {
+      "type": "number",
+      "value": 8
+    },
+    "--spacing-xl": {
+      "type": "number",
+      "value": 32
+    },
+    "--spacing-xs": {
+      "type": "number",
+      "value": 4
+    }
+  }
+}

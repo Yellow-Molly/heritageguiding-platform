@@ -1,0 +1,3749 @@
+{
+  "version": "2.11",
+  "children": [
+    {
+      "type": "frame",
+      "id": "aPIHi",
+      "x": 1000,
+      "y": 3263,
+      "name": "About Us — Desktop",
+      "clip": true,
+      "width": 1440,
+      "fill": "$--color-background",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "2MiCh",
+          "name": "1. Hero",
+          "metadata": {
+            "type": "unsplash",
+            "username": "dana_andreea",
+            "link": "https://unsplash.com/@dana_andreea",
+            "author": "Dana Andreea Gheorghe"
+          },
+          "clip": true,
+          "width": "fill_container",
+          "height": 450,
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "https://images.unsplash.com/photo-1647867695707-19509275174d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzUwODAxMTl8&ixlib=rb-4.1.0&q=80&w=1080",
+            "mode": "fill"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "nTtHJ",
+              "layoutPosition": "absolute",
+              "x": 0,
+              "y": 0,
+              "name": "Overlay",
+              "width": 1440,
+              "height": 450,
+              "fill": "#1E3A5FDD",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "TpHjH",
+                  "name": "Nav",
+                  "width": "fill_container",
+                  "padding": [
+                    20,
+                    64
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "H980v",
+                      "name": "navLeft",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "path",
+                          "id": "LXNzi",
+                          "name": "logoIcon",
+                          "geometry": "M3.2 68c0 0 16.9 2.9 29.7-10.4-7 10.3-17.7 22.2-32.2 28.9 0 0 38.7-12.1 42.6-47.6 0 0-9.3 21.3-40.1 29.1z m46.1-35.3a3.7 3.7 0 1 1-7.4 0 3.7 3.7 0 1 1 7.4 0z m-10 9.9c0 0 4.9-8.7-2.6-39.1 0 0 2.7 22.7-0.9 33.9 0 0-9 4.1-19.3-8.3 0 0 10.3 16.3 22.8 13.5z",
+                          "fill": "#FFFFFF",
+                          "width": 14,
+                          "height": 24
+                        },
+                        {
+                          "type": "text",
+                          "id": "RdB0Y",
+                          "name": "logoText",
+                          "fill": "#FFFFFF",
+                          "content": "PRIVATE TOURS",
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "700",
+                          "letterSpacing": 2.5
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Cyil2",
+                      "name": "navRight",
+                      "gap": 32,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "rdLDz",
+                          "name": "navT",
+                          "fill": "#FFFFFF",
+                          "content": "Tours",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ml7KT",
+                          "name": "navG",
+                          "fill": "#FFFFFF",
+                          "content": "Guides",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "MzSpH",
+                          "name": "navA",
+                          "fill": "#FFFFFF",
+                          "content": "About",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "SWIxw",
+                          "name": "navC",
+                          "fill": "#FFFFFF",
+                          "content": "Contact",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Q9CvO",
+                          "name": "askBtn",
+                          "fill": "$--color-accent",
+                          "cornerRadius": "$--radius-full",
+                          "padding": [
+                            10,
+                            24
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "19rTa",
+                              "name": "askText",
+                              "fill": "#FFFFFF",
+                              "content": "Ask AI",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "DbJLD",
+                  "name": "Hero Content",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": [
+                    0,
+                    120
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "CMWa5",
+                      "name": "heroLabel",
+                      "fill": "$--color-secondary",
+                      "content": "OUR STORY",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "VjAuH",
+                      "name": "heroTitle",
+                      "fill": "#FFFFFF",
+                      "content": "About Private Tours",
+                      "textAlign": "center",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 56,
+                      "fontWeight": "700",
+                      "letterSpacing": -1
+                    },
+                    {
+                      "type": "text",
+                      "id": "L5yAA",
+                      "name": "heroSub",
+                      "fill": "#FFFFFFCC",
+                      "content": "Depth, Trust, and Personal Connection",
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 2,
+                      "id": "z3WxV",
+                      "name": "heroDivider",
+                      "fill": "$--color-secondary",
+                      "width": 60,
+                      "height": 3
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "dPzTd",
+          "name": "2. Our Story",
+          "width": "fill_container",
+          "gap": 64,
+          "padding": [
+            96,
+            120
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "KLaMt",
+              "name": "Story Text",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 32,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "tS3Em",
+                  "name": "storyLabel",
+                  "fill": "$--color-secondary",
+                  "content": "WHO WE ARE",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "e6eh4",
+                  "name": "storyTitle",
+                  "fill": "$--color-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Created for Travelers\nWho Value Depth",
+                  "lineHeight": 1.2,
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 36,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                },
+                {
+                  "type": "text",
+                  "id": "6c2h1",
+                  "name": "storyBody",
+                  "fill": "$--color-text",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Private Tours was created for travelers who value depth, trust, and personal connection over volume and speed. We offer private, expertly hosted experiences in Stockholm led exclusively by authorized professionals.\n\nEvery guide is carefully selected, every route curated. Our tours combine historical expertise with hands-on activities like Swedish culinary culture — making time in Stockholm feel meaningful, effortless, and personal.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "RpVj9",
+                  "name": "quoteFrame",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "left": 4
+                    },
+                    "fill": "$--color-secondary"
+                  },
+                  "padding": [
+                    24,
+                    32
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "oknMF",
+                      "name": "quoteText",
+                      "fill": "$--color-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "“Our guests are not looking for more options. They are looking for the right one.”",
+                      "lineHeight": 1.4,
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 22,
+                      "fontWeight": "normal",
+                      "fontStyle": "italic"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Aq1a9",
+              "name": "Story Image",
+              "metadata": {
+                "type": "unsplash",
+                "username": "ezgideliklitas",
+                "link": "https://unsplash.com/@ezgideliklitas",
+                "author": "Ezgi Deliklitas"
+              },
+              "clip": true,
+              "width": 480,
+              "height": 500,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "https://images.unsplash.com/photo-1758905004265-d5dd1d50c6e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzUwODAxNTN8&ixlib=rb-4.1.0&q=80&w=1080",
+                "mode": "fill"
+              },
+              "cornerRadius": "$--radius-2xl"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "BBPYx",
+          "name": "3. Mission & Vision",
+          "width": "fill_container",
+          "fill": "$--color-background-alt",
+          "layout": "vertical",
+          "gap": 48,
+          "padding": [
+            96,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "SRnRL",
+              "name": "mvHeader",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "KCj1p",
+                  "name": "mvLabel",
+                  "fill": "$--color-secondary",
+                  "content": "OUR PURPOSE",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "m7ZKX",
+                  "name": "mvTitle",
+                  "fill": "$--color-primary",
+                  "content": "Mission & Vision",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 36,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "hqyVX",
+              "name": "mvRow",
+              "width": "fill_container",
+              "gap": 32,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "dpy3C",
+                  "name": "mCard",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-2xl",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000A",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 24
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 48,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "OdjfJ",
+                      "name": "mIconWrap",
+                      "width": 56,
+                      "height": 56,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "6sHmW",
+                          "name": "mIcon",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "compass",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "qsCqB",
+                      "name": "mTitle",
+                      "fill": "$--color-primary",
+                      "content": "Our Mission",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 24,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "s99NU",
+                      "name": "mBody",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "To provide private access to Stockholm’s most trusted experts through a carefully curated system, ensuring every experience is personal, reliable, and deeply engaging.",
+                      "lineHeight": 1.7,
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "kOQkF",
+                  "name": "vCard",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-2xl",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000A",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 24
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 48,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "hwovB",
+                      "name": "vIconWrap",
+                      "width": 56,
+                      "height": 56,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Y7vKr",
+                          "name": "vIcon",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "eye",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "6Dt86",
+                      "name": "vTitle",
+                      "fill": "$--color-primary",
+                      "content": "Our Vision",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 24,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OFvCG",
+                      "name": "vBody",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "To set a new standard for cultural tourism where expertise, trust, and human connection define the experience — and where quality is never left to chance.",
+                      "lineHeight": 1.7,
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "5uSmg",
+          "name": "4. What Makes Us Different",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 48,
+          "padding": [
+            96,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "9Srjm",
+              "name": "diffHeader",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "QjNDO",
+                  "name": "diffLabel",
+                  "fill": "$--color-secondary",
+                  "content": "WHY CHOOSE US",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "EpmeM",
+                  "name": "diffTitle",
+                  "fill": "$--color-primary",
+                  "content": "What Makes Us Different",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 36,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                },
+                {
+                  "type": "text",
+                  "id": "Floea",
+                  "name": "diffSub",
+                  "fill": "$--color-text-muted",
+                  "content": "Five principles that guide everything we do",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Kjh3g",
+              "name": "row1",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "07xwy",
+                  "name": "c1",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-2xl",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--color-border"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "TS0rA",
+                      "name": "c1iw",
+                      "width": 56,
+                      "height": 56,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Z4lxF",
+                          "name": "c1i",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "shield-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 2,
+                      "id": "w8cg8",
+                      "name": "c1d",
+                      "fill": "$--color-secondary",
+                      "width": 40,
+                      "height": 3
+                    },
+                    {
+                      "type": "text",
+                      "id": "RK2e8",
+                      "name": "c1t",
+                      "fill": "$--color-primary",
+                      "content": "Authorized Experts Only",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "37arY",
+                      "name": "c1b",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Licensed guides, verified credentials, academic depth",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "h2FCf",
+                  "name": "c2",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-2xl",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--color-border"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "11RE6",
+                      "name": "c2iw",
+                      "width": 56,
+                      "height": 56,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "8VTbn",
+                          "name": "c2i",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "star",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 2,
+                      "id": "c4LRp",
+                      "name": "c2d",
+                      "fill": "$--color-secondary",
+                      "width": 40,
+                      "height": 3
+                    },
+                    {
+                      "type": "text",
+                      "id": "sC5rN",
+                      "name": "c2t",
+                      "fill": "$--color-primary",
+                      "content": "Curated, Never Crowded",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "0jl7H",
+                      "name": "c2b",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Not an open platform — selected and reviewed",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "FXe5C",
+                  "name": "c3",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-2xl",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--color-border"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "eupqC",
+                      "name": "c3iw",
+                      "width": 56,
+                      "height": 56,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "m9mo2",
+                          "name": "c3i",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "lock",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 2,
+                      "id": "THcVU",
+                      "name": "c3d",
+                      "fill": "$--color-secondary",
+                      "width": 40,
+                      "height": 3
+                    },
+                    {
+                      "type": "text",
+                      "id": "BtQXu",
+                      "name": "c3t",
+                      "fill": "$--color-primary",
+                      "content": "Private by Design",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "1azVj",
+                      "name": "c3b",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Exclusively private, adapted to your interests",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Q7OZ4",
+              "name": "row2",
+              "width": 800,
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "yCSTk",
+                  "name": "c4",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-2xl",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--color-border"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "NhDEn",
+                      "name": "c4iw",
+                      "width": 56,
+                      "height": 56,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "7LZd6",
+                          "name": "c4i",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "settings",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 2,
+                      "id": "T0l9z",
+                      "name": "c4d",
+                      "fill": "$--color-secondary",
+                      "width": 40,
+                      "height": 3
+                    },
+                    {
+                      "type": "text",
+                      "id": "pmfvB",
+                      "name": "c4t",
+                      "fill": "$--color-primary",
+                      "content": "Seamless Hosting",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "9Oxuj",
+                      "name": "c4b",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Guide manages logistics, transportation, transitions",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "O4z9P",
+                  "name": "c5",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-2xl",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--color-border"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "L0bKC",
+                      "name": "c5iw",
+                      "width": 56,
+                      "height": 56,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "QlWOY",
+                          "name": "c5i",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "globe",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-secondary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 2,
+                      "id": "yoGGK",
+                      "name": "c5d",
+                      "fill": "$--color-secondary",
+                      "width": 40,
+                      "height": 3
+                    },
+                    {
+                      "type": "text",
+                      "id": "lnjc6",
+                      "name": "c5t",
+                      "fill": "$--color-primary",
+                      "content": "Multilingual Expertise",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "YqXwD",
+                      "name": "c5b",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Swedish, English, German, French, Portuguese, Spanish",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "dRxAN",
+          "name": "5. Responsible Tourism",
+          "width": "fill_container",
+          "gap": 64,
+          "padding": [
+            96,
+            120
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "EzuEN",
+              "name": "Nature Image",
+              "metadata": {
+                "type": "unsplash",
+                "username": "luters",
+                "link": "https://unsplash.com/@luters",
+                "author": "Arnd-Jan Luters"
+              },
+              "clip": true,
+              "width": 480,
+              "height": 400,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "https://images.unsplash.com/photo-1699083544797-d62d985c6edc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzUwODAyMTR8&ixlib=rb-4.1.0&q=80&w=1080",
+                "mode": "fill"
+              },
+              "cornerRadius": "$--radius-2xl"
+            },
+            {
+              "type": "frame",
+              "id": "jWtXQ",
+              "name": "rtContent",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 32,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "fRaa3",
+                  "name": "rtLabel",
+                  "fill": "$--color-secondary",
+                  "content": "OUR COMMITMENT",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "5hAUC",
+                  "name": "rtTitle",
+                  "fill": "$--color-primary",
+                  "content": "Responsible Tourism",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 36,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                },
+                {
+                  "type": "text",
+                  "id": "KzMuw",
+                  "name": "rtBody",
+                  "fill": "$--color-text",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "We believe cultural heritage is a responsibility, not a backdrop. Our approach prioritizes meaningful connections with local communities while minimizing our footprint.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "vveYP",
+                  "name": "rtItems",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "4RP3A",
+                      "name": "rt1",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "DuRJQ",
+                          "name": "rt1icon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "circle-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-success"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Bb2iG",
+                          "name": "rt1text",
+                          "fill": "$--color-text",
+                          "content": "Collaborates with local professionals and businesses",
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "lwzS2",
+                      "name": "rt2",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "FqHO7",
+                          "name": "rt2icon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "circle-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-success"
+                        },
+                        {
+                          "type": "text",
+                          "id": "jpc10",
+                          "name": "rt2text",
+                          "fill": "$--color-text",
+                          "content": "Low-impact private-only model",
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ACVcT",
+                      "name": "rt3",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "swLIl",
+                          "name": "rt3icon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "circle-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-success"
+                        },
+                        {
+                          "type": "text",
+                          "id": "csNKR",
+                          "name": "rt3text",
+                          "fill": "$--color-text",
+                          "content": "Accessibility standards followed",
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "2rjga",
+                      "name": "rt4",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "r1e84",
+                          "name": "rt4icon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "circle-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-success"
+                        },
+                        {
+                          "type": "text",
+                          "id": "GSWbR",
+                          "name": "rt4text",
+                          "fill": "$--color-text",
+                          "content": "Cultural heritage treated as responsibility",
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "sCUzn",
+          "name": "6. Our Team",
+          "width": "fill_container",
+          "fill": "$--color-background-alt",
+          "layout": "vertical",
+          "gap": 48,
+          "padding": [
+            96,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "kwdtm",
+              "name": "teamHeader",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "W9dbI",
+                  "name": "teamLabel",
+                  "fill": "$--color-secondary",
+                  "content": "THE PEOPLE",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "90MFT",
+                  "name": "teamTitle",
+                  "fill": "$--color-primary",
+                  "content": "Our Team",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 36,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                },
+                {
+                  "type": "text",
+                  "id": "q95Aw",
+                  "name": "teamSub",
+                  "fill": "$--color-text-muted",
+                  "content": "Passionate professionals dedicated to sharing Stockholm’s stories",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "8kRd3",
+                  "name": "teamDesc",
+                  "fill": "$--color-text-muted",
+                  "textGrowth": "fixed-width",
+                  "width": 700,
+                  "content": "Licensed guides, historians, cultural experts — decades of combined experience in heritage tourism, archaeology, art history, and Swedish culture.",
+                  "lineHeight": 1.6,
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "giHg7",
+              "name": "teamGrid",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "tT4Yr",
+                  "name": "tm1",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n99Mk",
+                      "name": "tm1img",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 280,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "images/generated-1775080261444.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": "$--radius-2xl"
+                    },
+                    {
+                      "type": "text",
+                      "id": "kOugL",
+                      "name": "tm1name",
+                      "fill": "$--color-primary",
+                      "content": "Anna Lindqvist",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "0r5WA",
+                      "name": "tm1role",
+                      "fill": "$--color-text-muted",
+                      "content": "Founder & Lead Guide",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "68FVQ",
+                  "name": "tm2",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ehg2w",
+                      "name": "tm2img",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 280,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "images/generated-1775080276384.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": "$--radius-2xl"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ylBc1",
+                      "name": "tm2name",
+                      "fill": "$--color-primary",
+                      "content": "Erik Johansson",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "1MRfV",
+                      "name": "tm2role",
+                      "fill": "$--color-text-muted",
+                      "content": "Cultural Historian",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hoKXa",
+                  "name": "tm3",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "lRFEz",
+                      "name": "tm3img",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 280,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "images/generated-1775080290443.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": "$--radius-2xl"
+                    },
+                    {
+                      "type": "text",
+                      "id": "FwsJb",
+                      "name": "tm3name",
+                      "fill": "$--color-primary",
+                      "content": "Sofia Bergman",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "7UGsD",
+                      "name": "tm3role",
+                      "fill": "$--color-text-muted",
+                      "content": "Art & Architecture Expert",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "S4uof",
+                  "name": "tm4",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "QRpKx",
+                      "name": "tm4img",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 280,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "images/generated-1775080307010.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": "$--radius-2xl"
+                    },
+                    {
+                      "type": "text",
+                      "id": "O9cnb",
+                      "name": "tm4name",
+                      "fill": "$--color-primary",
+                      "content": "Magnus Ek",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "XWXfu",
+                      "name": "tm4role",
+                      "fill": "$--color-text-muted",
+                      "content": "Culinary Culture Guide",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "PxCPP",
+          "name": "7. Certifications",
+          "width": "fill_container",
+          "fill": "$--color-primary",
+          "gap": 64,
+          "padding": [
+            64,
+            120
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "lOZft",
+              "name": "b1",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "IZ72G",
+                  "name": "b1iw",
+                  "width": 64,
+                  "height": 64,
+                  "fill": "#FFFFFF15",
+                  "cornerRadius": "$--radius-full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "8dfhZ",
+                      "name": "b1i",
+                      "width": 28,
+                      "height": 28,
+                      "iconFontName": "shield",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-secondary"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "CTJQX",
+                  "name": "b1t",
+                  "fill": "$--color-surface",
+                  "content": "Licensed Guides",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "vjDt2",
+                  "name": "b1s",
+                  "fill": "#FFFFFFAA",
+                  "content": "Authorized professionals",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "0434W",
+              "name": "divA",
+              "fill": "#FFFFFF20",
+              "width": 1,
+              "height": 60
+            },
+            {
+              "type": "frame",
+              "id": "z6qeC",
+              "name": "b2",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "K5mrJ",
+                  "name": "b2iw",
+                  "width": 64,
+                  "height": 64,
+                  "fill": "#FFFFFF15",
+                  "cornerRadius": "$--radius-full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "4Gr69",
+                      "name": "b2i",
+                      "width": 28,
+                      "height": 28,
+                      "iconFontName": "award",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-secondary"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "oW9hw",
+                  "name": "b2t",
+                  "fill": "$--color-surface",
+                  "content": "Fully Insured",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "SgjFS",
+                  "name": "b2s",
+                  "fill": "#FFFFFFAA",
+                  "content": "Complete coverage",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "FDiU7",
+              "name": "divB",
+              "fill": "#FFFFFF20",
+              "width": 1,
+              "height": 60
+            },
+            {
+              "type": "frame",
+              "id": "rzQ2u",
+              "name": "b3",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "zHX6J",
+                  "name": "b3iw",
+                  "width": 64,
+                  "height": 64,
+                  "fill": "#FFFFFF15",
+                  "cornerRadius": "$--radius-full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "GwP4b",
+                      "name": "b3i",
+                      "width": 28,
+                      "height": 28,
+                      "iconFontName": "map-pin",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-secondary"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "D6WcO",
+                  "name": "b3t",
+                  "fill": "$--color-surface",
+                  "content": "Local Experts",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "mNSKy",
+                  "name": "b3s",
+                  "fill": "#FFFFFFAA",
+                  "content": "Born and raised in Stockholm",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "d0oYN",
+          "name": "8. CTA Section",
+          "width": "fill_container",
+          "fill": "$--color-background",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            96,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "swenh",
+              "name": "ctaTitle",
+              "fill": "$--color-primary",
+              "content": "Ready to Explore?",
+              "fontFamily": "Playfair Display",
+              "fontSize": 42,
+              "fontWeight": "600",
+              "letterSpacing": -1
+            },
+            {
+              "type": "text",
+              "id": "VAYju",
+              "name": "ctaSub",
+              "fill": "$--color-text-muted",
+              "content": "Join us for an unforgettable journey through Stockholm’s heritage",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "zNsWP",
+              "name": "ctaBtns",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Ei9Dn",
+                  "name": "ctaPrimary",
+                  "fill": "$--color-accent",
+                  "cornerRadius": "$--radius-full",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#E67E5A33",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 16
+                  },
+                  "gap": 8,
+                  "padding": [
+                    16,
+                    36
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "ChOwD",
+                      "name": "ctaPIcon",
+                      "width": 18,
+                      "height": 18,
+                      "iconFontName": "compass",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LWBCn",
+                      "name": "ctaPText",
+                      "fill": "#FFFFFF",
+                      "content": "Explore Tours",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "8tb52",
+                  "name": "ctaSecondary",
+                  "cornerRadius": "$--radius-full",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 2,
+                    "fill": "$--color-secondary"
+                  },
+                  "gap": 8,
+                  "padding": [
+                    16,
+                    36
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "yorRH",
+                      "name": "ctaSIcon",
+                      "width": 18,
+                      "height": 18,
+                      "iconFontName": "mail",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-primary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "kFNTv",
+                      "name": "ctaSText",
+                      "fill": "$--color-primary",
+                      "content": "Contact Us",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "MyehN",
+      "x": 3720,
+      "y": 0,
+      "name": "About Us — Mobile",
+      "clip": true,
+      "width": 390,
+      "fill": "$--color-background",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "8aJBu",
+          "name": "1. Hero",
+          "clip": true,
+          "width": "fill_container",
+          "height": 300,
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "https://images.unsplash.com/photo-1647867695707-19509275174d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzUwODAxMTl8&ixlib=rb-4.1.0&q=80&w=1080",
+            "mode": "fill"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "VxHAj",
+              "layoutPosition": "absolute",
+              "x": 0,
+              "y": 0,
+              "name": "overlay",
+              "width": 390,
+              "height": 300,
+              "fill": "#1E3A5FDD",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "cUN94",
+                  "name": "Nav",
+                  "width": "fill_container",
+                  "padding": [
+                    16,
+                    20
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "4vN36",
+                      "name": "navLeft",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "path",
+                          "id": "Uxix8",
+                          "name": "logoIcon",
+                          "geometry": "M3.2 68c0 0 16.9 2.9 29.7-10.4-7 10.3-17.7 22.2-32.2 28.9 0 0 38.7-12.1 42.6-47.6 0 0-9.3 21.3-40.1 29.1z m46.1-35.3a3.7 3.7 0 1 1-7.4 0 3.7 3.7 0 1 1 7.4 0z m-10 9.9c0 0 4.9-8.7-2.6-39.1 0 0 2.7 22.7-0.9 33.9 0 0-9 4.1-19.3-8.3 0 0 10.3 16.3 22.8 13.5z",
+                          "fill": "#FFFFFF",
+                          "width": 14,
+                          "height": 24
+                        },
+                        {
+                          "type": "text",
+                          "id": "uxCx6",
+                          "name": "logoText",
+                          "fill": "#FFFFFF",
+                          "content": "PRIVATE TOURS",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700",
+                          "letterSpacing": 2
+                        }
+                      ]
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "HaJE7",
+                      "name": "hamburger",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "menu",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "TEO43",
+                  "name": "heroContent",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": [
+                    0,
+                    24
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "DmiSy",
+                      "name": "heroLabel",
+                      "fill": "$--color-secondary",
+                      "content": "OUR STORY",
+                      "fontFamily": "Inter",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "sDcHa",
+                      "name": "heroTitle",
+                      "fill": "#FFFFFF",
+                      "content": "About\nPrivate Tours",
+                      "lineHeight": 1.1,
+                      "textAlign": "center",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 36,
+                      "fontWeight": "700",
+                      "letterSpacing": -0.5
+                    },
+                    {
+                      "type": "text",
+                      "id": "3dLVV",
+                      "name": "heroSub",
+                      "fill": "#FFFFFFCC",
+                      "content": "Depth, Trust, and Personal Connection",
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 2,
+                      "id": "Wvw2A",
+                      "name": "heroDivider",
+                      "fill": "$--color-secondary",
+                      "width": 40,
+                      "height": 3
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "f9wsr",
+          "name": "2. Our Story",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "RfX5V",
+              "name": "storyImage",
+              "clip": true,
+              "width": "fill_container",
+              "height": 240,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "https://images.unsplash.com/photo-1758905004265-d5dd1d50c6e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzUwODAxNTN8&ixlib=rb-4.1.0&q=80&w=1080",
+                "mode": "fill"
+              },
+              "cornerRadius": "$--radius-xl"
+            },
+            {
+              "type": "frame",
+              "id": "DmPvO",
+              "name": "storyText",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "wXb0k",
+                  "name": "storyLabel",
+                  "fill": "$--color-secondary",
+                  "content": "WHO WE ARE",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "1bkjp",
+                  "name": "storyTitle",
+                  "fill": "$--color-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Created for Travelers\nWho Value Depth",
+                  "lineHeight": 1.2,
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 28,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                },
+                {
+                  "type": "text",
+                  "id": "jwYHb",
+                  "name": "storyBody",
+                  "fill": "$--color-text",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Private Tours was created for travelers who value depth, trust, and personal connection over volume and speed. We offer private, expertly hosted experiences in Stockholm led exclusively by authorized professionals.\n\nEvery guide is carefully selected, every route curated. Our tours combine historical expertise with hands-on activities like Swedish culinary culture — making time in Stockholm feel meaningful, effortless, and personal.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "ZGXiv",
+                  "name": "quoteFrame",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "left": 4
+                    },
+                    "fill": "$--color-secondary"
+                  },
+                  "padding": [
+                    20,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "TDZxe",
+                      "name": "quoteText",
+                      "fill": "$--color-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "“Our guests are not looking for more options. They are looking for the right one.”",
+                      "lineHeight": 1.4,
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 18,
+                      "fontWeight": "normal",
+                      "fontStyle": "italic"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "xaImr",
+          "name": "3. Mission & Vision",
+          "width": "fill_container",
+          "fill": "$--color-background-alt",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Clrrd",
+              "name": "mvHeader",
+              "layout": "vertical",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "27wCJ",
+                  "name": "mvLabel",
+                  "fill": "$--color-secondary",
+                  "content": "OUR PURPOSE",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "0DJgW",
+                  "name": "mvTitle",
+                  "fill": "$--color-primary",
+                  "content": "Mission & Vision",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 28,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Jts5n",
+              "name": "mvCards",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "XmHxk",
+                  "name": "mCard",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-2xl",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000A",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 24
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 28,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "T3MJx",
+                      "name": "mIconWrap",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "33ElO",
+                          "name": "mIcon",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "compass",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "USwla",
+                      "name": "mTitle",
+                      "fill": "$--color-primary",
+                      "content": "Our Mission",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nFkB3",
+                      "name": "mBody",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "To provide private access to Stockholm's most trusted experts through a carefully curated system, ensuring every experience is personal, reliable, and deeply engaging.",
+                      "lineHeight": 1.7,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "wRSBP",
+                  "name": "vCard",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-2xl",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000A",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 24
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 28,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ghWxJ",
+                      "name": "vIconWrap",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "zvk4p",
+                          "name": "vIcon",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "eye",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "3eIWr",
+                      "name": "vTitle",
+                      "fill": "$--color-primary",
+                      "content": "Our Vision",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 20,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "j7Swq",
+                      "name": "vBody",
+                      "fill": "$--color-text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "To set a new standard for cultural tourism where expertise, trust, and human connection define the experience — and where quality is never left to chance.",
+                      "lineHeight": 1.7,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "NvYlS",
+          "name": "4. What Makes Us Different",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "8YyMb",
+              "name": "diffHeader",
+              "layout": "vertical",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "2nDdM",
+                  "name": "diffLabel",
+                  "fill": "$--color-secondary",
+                  "content": "WHY CHOOSE US",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "TcOeY",
+                  "name": "diffTitle",
+                  "fill": "$--color-primary",
+                  "content": "What Makes Us Different",
+                  "textAlign": "center",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 28,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                },
+                {
+                  "type": "text",
+                  "id": "myTSg",
+                  "name": "diffSub",
+                  "fill": "$--color-text-muted",
+                  "content": "Five principles that guide everything we do",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "SxktA",
+              "name": "diffCards",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "WAEPP",
+                  "name": "c1",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-xl",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--color-border"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "gap": 16,
+                  "padding": 20,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "KdAbD",
+                      "name": "c1iw",
+                      "width": 44,
+                      "height": 44,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "SnxZR",
+                          "name": "c1icon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "shield-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "C62Gu",
+                      "name": "c1text",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "j6ZuC",
+                          "name": "c1t",
+                          "fill": "$--color-primary",
+                          "content": "Authorized Experts Only",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "WSQSI",
+                          "name": "c1b",
+                          "fill": "$--color-text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Licensed guides, verified credentials, academic depth",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ye29N",
+                  "name": "c2",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-xl",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--color-border"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "gap": 16,
+                  "padding": 20,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "DkJ1b",
+                      "name": "c2iw",
+                      "width": 44,
+                      "height": 44,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "sxajb",
+                          "name": "c2icon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "sparkles",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zdPfJ",
+                      "name": "c2text",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "hWR8b",
+                          "name": "c2t",
+                          "fill": "$--color-primary",
+                          "content": "Curated, Never Crowded",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "i8SKi",
+                          "name": "c2b",
+                          "fill": "$--color-text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Not an open platform — selected and reviewed",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "P0qAf",
+                  "name": "c3",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-xl",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--color-border"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "gap": 16,
+                  "padding": 20,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "pJtH7",
+                      "name": "c3iw",
+                      "width": 44,
+                      "height": 44,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "xBj4d",
+                          "name": "c3icon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "lock",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "EB5ZU",
+                      "name": "c3text",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "3jOAd",
+                          "name": "c3t",
+                          "fill": "$--color-primary",
+                          "content": "Private by Design",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "fJy2w",
+                          "name": "c3b",
+                          "fill": "$--color-text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Exclusively private, adapted to your interests",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "7FYlh",
+                  "name": "c4",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-xl",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--color-border"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "gap": 16,
+                  "padding": 20,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Spj63",
+                      "name": "c4iw",
+                      "width": 44,
+                      "height": 44,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "9Do19",
+                          "name": "c4icon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "handshake",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "bJ9x3",
+                      "name": "c4text",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "iWgHF",
+                          "name": "c4t",
+                          "fill": "$--color-primary",
+                          "content": "Seamless Hosting",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "wMoAe",
+                          "name": "c4b",
+                          "fill": "$--color-text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Guide manages logistics, transportation, transitions",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "3q5n4",
+                  "name": "c5",
+                  "width": "fill_container",
+                  "fill": "$--color-surface",
+                  "cornerRadius": "$--radius-xl",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--color-border"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000D",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20,
+                    "spread": -2
+                  },
+                  "gap": 16,
+                  "padding": 20,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "uzmIh",
+                      "name": "c5iw",
+                      "width": 44,
+                      "height": 44,
+                      "fill": "$--color-primary",
+                      "cornerRadius": "$--radius-lg",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Uvtxr",
+                          "name": "c5icon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "languages",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "pFBIC",
+                      "name": "c5text",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "0ZVk3",
+                          "name": "c5t",
+                          "fill": "$--color-primary",
+                          "content": "Multilingual Expertise",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "s1WDP",
+                          "name": "c5b",
+                          "fill": "$--color-text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Swedish, English, German, French, Portuguese, Spanish",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "gWWUB",
+          "name": "5. Responsible Tourism",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "vTC9o",
+              "name": "rtImage",
+              "clip": true,
+              "width": "fill_container",
+              "height": 220,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "https://images.unsplash.com/photo-1699083544797-d62d985c6edc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzUwODAyMTR8&ixlib=rb-4.1.0&q=80&w=1080",
+                "mode": "fill"
+              },
+              "cornerRadius": "$--radius-xl"
+            },
+            {
+              "type": "frame",
+              "id": "5RA0I",
+              "name": "rtContent",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "iyfUb",
+                  "name": "rtLabel",
+                  "fill": "$--color-secondary",
+                  "content": "OUR COMMITMENT",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "wKma4",
+                  "name": "rtTitle",
+                  "fill": "$--color-primary",
+                  "content": "Responsible Tourism",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 28,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                },
+                {
+                  "type": "text",
+                  "id": "Tym9N",
+                  "name": "rtBody",
+                  "fill": "$--color-text",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "We believe cultural heritage is a responsibility, not a backdrop. Our approach prioritizes meaningful connections with local communities while minimizing our footprint.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "NAEPq",
+                  "name": "rtItems",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "1FSnR",
+                      "name": "rt1",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "uwdkb",
+                          "name": "rt1i",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "circle-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-accent"
+                        },
+                        {
+                          "type": "text",
+                          "id": "X0xHu",
+                          "name": "rt1t",
+                          "fill": "$--color-text",
+                          "content": "Supporting local artisans and businesses",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "FG2av",
+                      "name": "rt2",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "CGnVp",
+                          "name": "rt2i",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "circle-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-accent"
+                        },
+                        {
+                          "type": "text",
+                          "id": "OaAdS",
+                          "name": "rt2t",
+                          "fill": "$--color-text",
+                          "content": "Small groups, minimal environmental impact",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "o1ZwF",
+                      "name": "rt3",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "eIA3B",
+                          "name": "rt3i",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "circle-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-accent"
+                        },
+                        {
+                          "type": "text",
+                          "id": "yVg9s",
+                          "name": "rt3t",
+                          "fill": "$--color-text",
+                          "content": "Preserving historical sites through education",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VMtSG",
+                      "name": "rt4",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Zzezc",
+                          "name": "rt4i",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "circle-check",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--color-accent"
+                        },
+                        {
+                          "type": "text",
+                          "id": "iHUqu",
+                          "name": "rt4t",
+                          "fill": "$--color-text",
+                          "content": "Culturally sensitive storytelling",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "MjOU7",
+          "name": "6. Our Team",
+          "width": "fill_container",
+          "fill": "$--color-background-alt",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "5Ry3W",
+              "name": "teamHeader",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "uKgv1",
+                  "name": "teamLabel",
+                  "fill": "$--color-secondary",
+                  "content": "THE PEOPLE",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "WU2IM",
+                  "name": "teamTitle",
+                  "fill": "$--color-primary",
+                  "content": "Our Team",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 28,
+                  "fontWeight": "600",
+                  "letterSpacing": -0.5
+                },
+                {
+                  "type": "text",
+                  "id": "3TfSH",
+                  "name": "teamSub",
+                  "fill": "$--color-text-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Passionate professionals dedicated to sharing Stockholm's stories",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "KB43X",
+              "name": "teamGrid",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "iDEIr",
+                  "name": "row1",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "7Pk04",
+                      "name": "tm1",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "WfdXB",
+                          "name": "tm1img",
+                          "clip": true,
+                          "width": "fill_container",
+                          "height": 200,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "images/generated-1775080261444.png",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": "$--radius-xl"
+                        },
+                        {
+                          "type": "text",
+                          "id": "nVPP3",
+                          "name": "tm1name",
+                          "fill": "$--color-primary",
+                          "content": "Anna Lindqvist",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "0wik0",
+                          "name": "tm1role",
+                          "fill": "$--color-text-muted",
+                          "content": "Founder & Lead Guide",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "sOiwu",
+                      "name": "tm2",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Cvxbd",
+                          "name": "tm2img",
+                          "clip": true,
+                          "width": "fill_container",
+                          "height": 200,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "images/generated-1775080276384.png",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": "$--radius-xl"
+                        },
+                        {
+                          "type": "text",
+                          "id": "vzIBA",
+                          "name": "tm2name",
+                          "fill": "$--color-primary",
+                          "content": "Erik Johansson",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "4kcxb",
+                          "name": "tm2role",
+                          "fill": "$--color-text-muted",
+                          "content": "Cultural Historian",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pGNkL",
+                  "name": "row2",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "mNjUS",
+                      "name": "tm3",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "nQVqz",
+                          "name": "tm3img",
+                          "clip": true,
+                          "width": "fill_container",
+                          "height": 200,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "images/generated-1775080290443.png",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": "$--radius-xl"
+                        },
+                        {
+                          "type": "text",
+                          "id": "18vDM",
+                          "name": "tm3name",
+                          "fill": "$--color-primary",
+                          "content": "Sofia Bergman",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "2MjZs",
+                          "name": "tm3role",
+                          "fill": "$--color-text-muted",
+                          "content": "Art & Architecture Expert",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "V4CFG",
+                      "name": "tm4",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "kI9Qc",
+                          "name": "tm4img",
+                          "clip": true,
+                          "width": "fill_container",
+                          "height": 200,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "images/generated-1775080307010.png",
+                            "mode": "fill"
+                          },
+                          "cornerRadius": "$--radius-xl"
+                        },
+                        {
+                          "type": "text",
+                          "id": "FnZzA",
+                          "name": "tm4name",
+                          "fill": "$--color-primary",
+                          "content": "Magnus Ek",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 16,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "zKc2p",
+                          "name": "tm4role",
+                          "fill": "$--color-text-muted",
+                          "content": "Culinary Culture Guide",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "38YLG",
+          "name": "7. Certifications",
+          "width": "fill_container",
+          "fill": "$--color-primary",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "ponV5",
+              "name": "b1",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "JnTto",
+                  "name": "b1iw",
+                  "width": 56,
+                  "height": 56,
+                  "fill": "#FFFFFF15",
+                  "cornerRadius": "$--radius-full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "6oXxO",
+                      "name": "b1icon",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "shield",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-secondary"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "DL9rC",
+                  "name": "b1t",
+                  "fill": "$--color-surface",
+                  "content": "Licensed Guides",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "QsLAJ",
+                  "name": "b1s",
+                  "fill": "#FFFFFFAA",
+                  "content": "Authorized professionals",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "lDkhz",
+              "name": "divA",
+              "fill": "#FFFFFF20",
+              "width": 60,
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "lACAz",
+              "name": "b2",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ePPFB",
+                  "name": "b2iw",
+                  "width": 56,
+                  "height": 56,
+                  "fill": "#FFFFFF15",
+                  "cornerRadius": "$--radius-full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "UZLx6",
+                      "name": "b2icon",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "award",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-secondary"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "eygKR",
+                  "name": "b2t",
+                  "fill": "$--color-surface",
+                  "content": "Fully Insured",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "CimC5",
+                  "name": "b2s",
+                  "fill": "#FFFFFFAA",
+                  "content": "Complete coverage",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "S3dHZ",
+              "name": "divB",
+              "fill": "#FFFFFF20",
+              "width": 60,
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "iheRO",
+              "name": "b3",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "MG6gE",
+                  "name": "b3iw",
+                  "width": 56,
+                  "height": 56,
+                  "fill": "#FFFFFF15",
+                  "cornerRadius": "$--radius-full",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "OtGDb",
+                      "name": "b3icon",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "map-pin",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-secondary"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "y5abR",
+                  "name": "b3t",
+                  "fill": "$--color-surface",
+                  "content": "Local Experts",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "stPr1",
+                  "name": "b3s",
+                  "fill": "#FFFFFFAA",
+                  "content": "Born and raised in Stockholm",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "FUZKF",
+          "name": "8. CTA Section",
+          "width": "fill_container",
+          "fill": "$--color-background",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            48,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "x89AX",
+              "name": "ctaTitle",
+              "fill": "$--color-primary",
+              "content": "Ready to Explore?",
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 32,
+              "fontWeight": "600",
+              "letterSpacing": -0.5
+            },
+            {
+              "type": "text",
+              "id": "xFgd1",
+              "name": "ctaSub",
+              "fill": "$--color-text-muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Join us for an unforgettable journey through Stockholm's heritage",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 15,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "ji7OE",
+              "name": "ctaBtns",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "rOGXj",
+                  "name": "ctaPrimary",
+                  "width": "fill_container",
+                  "fill": "$--color-accent",
+                  "cornerRadius": "$--radius-full",
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#E67E5A33",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 16
+                  },
+                  "gap": 8,
+                  "padding": [
+                    16,
+                    36
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "elL0K",
+                      "name": "ctaPIcon",
+                      "width": 18,
+                      "height": 18,
+                      "iconFontName": "compass",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Gelvv",
+                      "name": "ctaPText",
+                      "fill": "#FFFFFF",
+                      "content": "Explore Tours",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "M0eqC",
+                  "name": "ctaSecondary",
+                  "width": "fill_container",
+                  "cornerRadius": "$--radius-full",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 2,
+                    "fill": "$--color-secondary"
+                  },
+                  "gap": 8,
+                  "padding": [
+                    16,
+                    36
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "yx0w0",
+                      "name": "ctaSIcon",
+                      "width": 18,
+                      "height": 18,
+                      "iconFontName": "mail",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--color-primary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "CxwNp",
+                      "name": "ctaSText",
+                      "fill": "$--color-primary",
+                      "content": "Contact Us",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "--color-accent": {
+      "type": "color",
+      "value": "#E67E5A"
+    },
+    "--color-accent-dark": {
+      "type": "color",
+      "value": "#D66A45"
+    },
+    "--color-accent-light": {
+      "type": "color",
+      "value": "#EE9273"
+    },
+    "--color-background": {
+      "type": "color",
+      "value": "#FAFAF8"
+    },
+    "--color-background-alt": {
+      "type": "color",
+      "value": "#F5F5F3"
+    },
+    "--color-border": {
+      "type": "color",
+      "value": "#E5E7EB"
+    },
+    "--color-border-light": {
+      "type": "color",
+      "value": "#F3F4F6"
+    },
+    "--color-error": {
+      "type": "color",
+      "value": "#EF4444"
+    },
+    "--color-info": {
+      "type": "color",
+      "value": "#3B82F6"
+    },
+    "--color-primary": {
+      "type": "color",
+      "value": "#1E3A5F"
+    },
+    "--color-primary-dark": {
+      "type": "color",
+      "value": "#152B47"
+    },
+    "--color-primary-light": {
+      "type": "color",
+      "value": "#2A4A75"
+    },
+    "--color-secondary": {
+      "type": "color",
+      "value": "#C4A052"
+    },
+    "--color-secondary-dark": {
+      "type": "color",
+      "value": "#B49042"
+    },
+    "--color-secondary-light": {
+      "type": "color",
+      "value": "#D4B462"
+    },
+    "--color-success": {
+      "type": "color",
+      "value": "#10B981"
+    },
+    "--color-surface": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "--color-text": {
+      "type": "color",
+      "value": "#2D3748"
+    },
+    "--color-text-light": {
+      "type": "color",
+      "value": "#9CA3AF"
+    },
+    "--color-text-muted": {
+      "type": "color",
+      "value": "#6B7280"
+    },
+    "--color-warning": {
+      "type": "color",
+      "value": "#F59E0B"
+    },
+    "--font-body": {
+      "type": "string",
+      "value": "Inter"
+    },
+    "--font-heading": {
+      "type": "string",
+      "value": "Playfair Display"
+    },
+    "--radius-2xl": {
+      "type": "number",
+      "value": 24
+    },
+    "--radius-full": {
+      "type": "number",
+      "value": 9999
+    },
+    "--radius-lg": {
+      "type": "number",
+      "value": 12
+    },
+    "--radius-md": {
+      "type": "number",
+      "value": 8
+    },
+    "--radius-sm": {
+      "type": "number",
+      "value": 6
+    },
+    "--radius-xl": {
+      "type": "number",
+      "value": 16
+    },
+    "--spacing-2xl": {
+      "type": "number",
+      "value": 48
+    },
+    "--spacing-3xl": {
+      "type": "number",
+      "value": 64
+    },
+    "--spacing-4xl": {
+      "type": "number",
+      "value": 96
+    },
+    "--spacing-lg": {
+      "type": "number",
+      "value": 24
+    },
+    "--spacing-md": {
+      "type": "number",
+      "value": 16
+    },
+    "--spacing-sm": {
+      "type": "number",
+      "value": 8
+    },
+    "--spacing-xl": {
+      "type": "number",
+      "value": 32
+    },
+    "--spacing-xs": {
+      "type": "number",
+      "value": 4
+    }
+  }
+}
