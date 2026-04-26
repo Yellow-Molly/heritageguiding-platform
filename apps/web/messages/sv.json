@@ -15,7 +15,9 @@
     "menu": "Meny",
     "guides": "Guider",
     "findYourTour": "Hitta din tur",
-    "askAi": "Fråga AI"
+    "askAi": "Fråga AI",
+    "viewOnGoogleMaps": "Visa på Google Maps",
+    "readMore": "Läs mer"
   },
   "home": {
     "title": "Private Tours - Upptäck Stockholms Historia",
@@ -169,7 +171,46 @@
     "contact": "Kontakta oss",
     "privacy": "Integritetspolicy",
     "terms": "Villkor",
-    "copyright": "© 2026 Private Tours. Alla rättigheter förbehållna."
+    "copyright": "© {year} Private Tours. Alla rättigheter förbehållna.",
+    "tagline": "Upptäck Stockholms rika historia med expertledda kulturarvsturer. Auktoriserade guider, autentiska upplevelser, oförglömliga minnen.",
+    "newsletter": {
+      "heading": "Håll dig uppdaterad",
+      "copy": "Prenumerera för att få exklusiva erbjudanden och kulturarvsinsikter.",
+      "placeholder": "Ange din e-post",
+      "button": "Prenumerera",
+      "ariaLabel": "E-postadress för nyhetsbrev"
+    },
+    "languageSelector": {
+      "label": "Språk",
+      "ariaLabel": "Välj språk",
+      "en": "Engelska",
+      "sv": "Svenska",
+      "de": "Tyska"
+    },
+    "tourLinks": {
+      "heading": "Turer",
+      "privateTours": "Privata turer",
+      "groupTours": "Gruppturer"
+    },
+    "supportLinks": {
+      "heading": "Support",
+      "faq": "FAQ",
+      "contactUs": "Kontakta oss",
+      "bookingHelp": "Bokningshjälp",
+      "cancellationPolicy": "Avbokningspolicy",
+      "accessibility": "Tillgänglighet"
+    },
+    "companyLinks": {
+      "heading": "Företag",
+      "aboutUs": "Om oss",
+      "ourGuides": "Våra guider"
+    },
+    "legalLinks": {
+      "heading": "Juridik",
+      "terms": "Användarvillkor",
+      "privacy": "Integritetspolicy",
+      "cookies": "Cookiepolicy"
+    }
   },
   "meta": {
     "defaultTitle": "Private Tours - Stockholm Turer",

@@ -5,6 +5,8 @@ import { Footer } from '@/components/layout/footer'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
 import { WebPageSchema } from '@/components/seo'
+import { LEGAL_DATES } from '@/lib/legal-dates'
+import { CONTACT_EMAIL } from '@/lib/contact-constants'
 
 export async function generateMetadata({
   params,
@@ -45,7 +47,7 @@ export default async function PrivacyPage({
         <section className="bg-[var(--color-primary)] py-12 text-white">
           <div className="container mx-auto px-4 text-center">
             <h1 className="font-serif text-4xl font-bold text-white">{t('title')}</h1>
-            <p className="mt-2 text-white/80">{t('lastUpdated')}: 2026-01-01</p>
+            <p className="mt-2 text-white/80">{t('lastUpdated')}: {LEGAL_DATES.privacy}</p>
           </div>
         </section>
 
@@ -122,7 +124,7 @@ export default async function PrivacyPage({
             <h2>{t('sections.contact.title')}</h2>
             <p>{t('sections.contact.content')}</p>
             <p>
-              <strong>Email:</strong> privacy@privatetours.se
+              <strong>Email:</strong> {CONTACT_EMAIL}
             </p>
           </div>
         </section>

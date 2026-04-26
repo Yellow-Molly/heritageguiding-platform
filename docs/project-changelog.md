@@ -4,6 +4,32 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-04-26] — MVP Launch Content Audit, Phase 01 (Frontend Code Fixes) ✓ COMPLETE
+
+**Type:** Refactor + Cleanup
+**Scope:** Centralize business contact + legal data, remove placeholder UI, dynamic footer, clean schema.org
+**Build Status:** PASSING (typecheck clean, schema tests 24/24)
+
+### Changes Implemented
+- **Single source of truth** for contact data: new `lib/contact-constants.ts` (email/phone/address/hours/socials, env-overridable). New `lib/legal-dates.ts` for privacy/terms/cancellation effective dates.
+- **Footer rewrite:** server component, async, fetches top-3 featured tours via `getFeaturedTours(locale, 3)`. Extracted client islands `footer-newsletter-form.tsx` (disabled stub awaiting backend) and `footer-language-selector.tsx` (uses `useLocale()` from next-intl).
+- **i18n:** +45 keys per locale (sv/en/de) — `footer.newsletter`, `footer.languageSelector`, `footer.{tour,support,company,legal}Links`, parameterized `copyright`, `common.viewOnGoogleMaps`, `common.readMore`. Parity 608 keys × 3 locales.
+- **Schema.org cleanup:** removed fake `aggregateRating` (4.9/735 reviews) from `travel-agency-schema.tsx` to avoid Google penalties — re-add when real reviews seeded. Both base URLs now use `NEXT_PUBLIC_SITE_URL` env fallback (avoid wrong-canonical leak on staging).
+- **Removed placeholder UI:** deleted `home/testimonials.tsx` and `home/latest-posts.tsx` (validation decisions #1, #3 — hide for MVP). Removed `ReviewsSection` import + JSX from tour detail (decision #4).
+- **Email template fix:** `send-contact-confirmation-to-customer.ts` now uses `CONTACT_EMAIL` + `CONTACT_PHONE` constants (was hardcoded — would diverge from website if env overridden).
+- **Code review hardening:** footer error path logs via `console.error` for observability; `CONTACT_PHONE_TEL` strip widened to `[^\d+]` (handles parens/dashes); newsletter form `disabled` + `aria-disabled` to remove submission deception.
+
+### Pending (gates on human action)
+- Phase 03: business owner sign-off on contact data (current values used as env defaults)
+- Phase 04: legal counsel review of privacy/terms/cancellation content + real effective dates
+- Phase 05: marketing rewrites trust-signals copy + decides on newsletter backend
+- Phase 02: CMS content seeding (5+ tours, 2+ guides, 6+ categories)
+
+### Related Plan
+- `plans/260425-1207-mvp-launch-content-audit/` — 7 phases, 8 assignment briefs, 2 research reports
+
+---
+
 ## [2026-04-25] — Documentation Update ✓ COMPLETE
 
 **Type:** Documentation & Version Updates

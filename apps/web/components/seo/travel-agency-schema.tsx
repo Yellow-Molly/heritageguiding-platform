@@ -1,8 +1,20 @@
 import React from 'react'
+import {
+  CONTACT_ADDRESS,
+  CONTACT_EMAIL,
+  CONTACT_PHONE_TEL,
+  SOCIAL_URLS,
+} from '@/lib/contact-constants'
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
 /**
  * Schema.org TravelAgency structured data for SEO.
  * Improves discoverability in search engines and AI assistants.
+ *
+ * Note: aggregateRating intentionally omitted — re-add only when real reviews
+ * are seeded (validation 2026-04-25, decision #5). Fake structured data
+ * triggers Google penalties.
  */
 
 interface TravelAgencySchemaProps {
@@ -18,10 +30,6 @@ interface TravelAgencySchemaProps {
     postalCode?: string
   }
   priceRange?: string
-  aggregateRating?: {
-    ratingValue: number
-    reviewCount: number
-  }
   sameAs?: string[]
 }
 
@@ -29,25 +37,12 @@ const defaultData: TravelAgencySchemaProps = {
   name: 'Private Tours',
   description:
     'Expert-led Stockholm heritage tours. Discover Swedish history and culture with licensed local guides offering private and group tours in Swedish, English, and German.',
-  url: 'https://privatetours.se',
-  telephone: '+46812345678',
-  email: 'info@privatetours.se',
-  address: {
-    streetAddress: 'Gamla Stan',
-    addressLocality: 'Stockholm',
-    addressCountry: 'SE',
-    postalCode: '111 29',
-  },
+  url: SITE_URL,
+  telephone: CONTACT_PHONE_TEL,
+  email: CONTACT_EMAIL,
+  address: { ...CONTACT_ADDRESS },
   priceRange: '$$',
-  aggregateRating: {
-    ratingValue: 4.9,
-    reviewCount: 735,
-  },
-  sameAs: [
-    'https://facebook.com/privatetours',
-    'https://instagram.com/privatetours',
-    'https://linkedin.com/company/privatetours',
-  ],
+  sameAs: [SOCIAL_URLS.facebook, SOCIAL_URLS.instagram, SOCIAL_URLS.linkedin],
 }
 
 export function TravelAgencySchema(props: TravelAgencySchemaProps = {}) {
@@ -71,15 +66,6 @@ export function TravelAgencySchema(props: TravelAgencySchemaProps = {}) {
         }
       : undefined,
     priceRange: data.priceRange,
-    aggregateRating: data.aggregateRating
-      ? {
-          '@type': 'AggregateRating',
-          ratingValue: data.aggregateRating.ratingValue,
-          reviewCount: data.aggregateRating.reviewCount,
-          bestRating: 5,
-          worstRating: 1,
-        }
-      : undefined,
     sameAs: data.sameAs,
     areaServed: {
       '@type': 'City',
@@ -142,7 +128,7 @@ export function WebPageSchema({ name, description, url, breadcrumb }: WebPageSch
     isPartOf: {
       '@type': 'WebSite',
       name: 'Private Tours',
-      url: 'https://privatetours.se',
+      url: SITE_URL,
     },
     breadcrumb: breadcrumb
       ? {

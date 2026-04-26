@@ -15,7 +15,9 @@
     "menu": "Menu",
     "guides": "Guides",
     "findYourTour": "Find Your Tour",
-    "askAi": "Ask AI"
+    "askAi": "Ask AI",
+    "viewOnGoogleMaps": "View on Google Maps",
+    "readMore": "Read more"
   },
   "home": {
     "title": "Private Tours - Discover Stockholm's History",
@@ -169,7 +171,46 @@
     "contact": "Contact Us",
     "privacy": "Privacy Policy",
     "terms": "Terms & Conditions",
-    "copyright": "© 2026 Private Tours. All rights reserved."
+    "copyright": "© {year} Private Tours. All rights reserved.",
+    "tagline": "Discover Stockholm's rich history with expert-led heritage tours. Licensed guides, authentic experiences, unforgettable memories.",
+    "newsletter": {
+      "heading": "Stay Updated",
+      "copy": "Subscribe to receive exclusive offers and heritage insights.",
+      "placeholder": "Enter your email",
+      "button": "Subscribe",
+      "ariaLabel": "Email address for newsletter"
+    },
+    "languageSelector": {
+      "label": "Language",
+      "ariaLabel": "Select language",
+      "en": "English",
+      "sv": "Swedish",
+      "de": "German"
+    },
+    "tourLinks": {
+      "heading": "Tours",
+      "privateTours": "Private Tours",
+      "groupTours": "Group Tours"
+    },
+    "supportLinks": {
+      "heading": "Support",
+      "faq": "FAQ",
+      "contactUs": "Contact Us",
+      "bookingHelp": "Booking Help",
+      "cancellationPolicy": "Cancellation Policy",
+      "accessibility": "Accessibility"
+    },
+    "companyLinks": {
+      "heading": "Company",
+      "aboutUs": "About Us",
+      "ourGuides": "Our Guides"
+    },
+    "legalLinks": {
+      "heading": "Legal",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy"
+    }
   },
   "meta": {
     "defaultTitle": "Private Tours - Stockholm Tours",

@@ -1,4 +1,9 @@
 import React from 'react'
+import {
+  CONTACT_ADDRESS,
+  CONTACT_EMAIL,
+  CONTACT_PHONE_TEL,
+} from '@/lib/contact-constants'
 
 /**
  * Schema.org WebPage + ContactPage structured data for /contact.
@@ -17,14 +22,11 @@ export function ContactPageSchema() {
       '@type': 'Organization',
       name: 'Private Tours',
       url: baseUrl,
-      email: 'info@privatetours.se',
-      telephone: '+46701234567',
+      email: CONTACT_EMAIL,
+      telephone: CONTACT_PHONE_TEL,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Drottninggatan 5',
-        addressLocality: 'Stockholm',
-        postalCode: '111 51',
-        addressCountry: 'SE',
+        ...CONTACT_ADDRESS,
       },
     },
   }

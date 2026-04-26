@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/footer'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
 import { WebPageSchema } from '@/components/seo'
+import { CONTACT_EMAIL, CONTACT_PHONE } from '@/lib/contact-constants'
 import {
   CancellationHero,
   CancellationTiers,
@@ -92,8 +93,8 @@ export default async function CancellationPage({
           title={t('cta.title')}
           subtitle={t('cta.subtitle')}
           buttonText={t('cta.buttonText')}
-          email="hello@privatetours.se"
-          phone="+46 8 123 456"
+          email={CONTACT_EMAIL}
+          phone={CONTACT_PHONE}
         />
       </main>
       <Footer />

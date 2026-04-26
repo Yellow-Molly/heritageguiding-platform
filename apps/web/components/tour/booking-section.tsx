@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { Calendar, Mail, ShieldCheck, Zap } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
+import { CONTACT_EMAIL } from '@/lib/contact-constants'
 import { BokunBookingWidget } from '@/components/bokun-booking-widget-with-fallback'
 import { GroupInquiryModal } from '@/components/booking/group-inquiry-modal'
 import type { TourDetail } from '@/lib/api/get-tour-by-slug'
@@ -61,7 +62,7 @@ export function BookingSection({ tour }: BookingSectionProps) {
 
           {/* CTA Button — triggers email inquiry when no Bokun integration */}
           <a
-            href={`mailto:info@privatetours.se?subject=${encodeURIComponent(`Booking: ${tour.title}`)}&body=${encodeURIComponent(`Hello,\n\nI would like to check availability for the "${tour.title}" tour.\n\nPreferred date: \n\nThank you!`)}`}
+            href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Booking: ${tour.title}`)}&body=${encodeURIComponent(`Hello,\n\nI would like to check availability for the "${tour.title}" tour.\n\nPreferred date: \n\nThank you!`)}`}
             className="flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 font-medium text-white shadow-md transition-colors hover:opacity-90"
           >
             <Calendar className="h-4 w-4" />
@@ -73,7 +74,7 @@ export function BookingSection({ tour }: BookingSectionProps) {
       {/* Inquiry Button */}
       <div className="mt-4">
         <a
-          href={`mailto:info@privatetours.se?subject=${encodeURIComponent(`Inquiry: ${tour.title}`)}&body=${encodeURIComponent(`Hello,\n\nI am interested in booking the "${tour.title}" tour.\n\nPlease let me know about available dates and pricing.\n\nThank you!`)}`}
+          href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Inquiry: ${tour.title}`)}&body=${encodeURIComponent(`Hello,\n\nI am interested in booking the "${tour.title}" tour.\n\nPlease let me know about available dates and pricing.\n\nThank you!`)}`}
           className="flex w-full items-center justify-center gap-2 rounded-full border-2 border-[var(--color-secondary)] px-6 py-2.5 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-secondary)]/5"
         >
           <Mail className="h-4 w-4" />

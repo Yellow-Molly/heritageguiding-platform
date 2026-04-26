@@ -82,26 +82,11 @@ describe('TravelAgencySchema', () => {
   })
 
   describe('aggregate rating', () => {
-    it('includes aggregate rating with correct @type', () => {
+    it('omits aggregateRating until real reviews are seeded (decision 2026-04-25)', () => {
       const { container } = render(<TravelAgencySchema />)
       const script = container.querySelector('script[type="application/ld+json"]')
       const json = JSON.parse(script!.innerHTML)
-      expect(json.aggregateRating['@type']).toBe('AggregateRating')
-    })
-
-    it('includes rating value', () => {
-      const { container } = render(<TravelAgencySchema />)
-      const script = container.querySelector('script[type="application/ld+json"]')
-      const json = JSON.parse(script!.innerHTML)
-      expect(json.aggregateRating.ratingValue).toBe(4.9)
-    })
-
-    it('includes best and worst rating', () => {
-      const { container } = render(<TravelAgencySchema />)
-      const script = container.querySelector('script[type="application/ld+json"]')
-      const json = JSON.parse(script!.innerHTML)
-      expect(json.aggregateRating.bestRating).toBe(5)
-      expect(json.aggregateRating.worstRating).toBe(1)
+      expect(json.aggregateRating).toBeUndefined()
     })
   })
 

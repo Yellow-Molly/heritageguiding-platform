@@ -15,7 +15,9 @@
     "menu": "Menü",
     "guides": "Reiseführer",
     "findYourTour": "Finden Sie Ihre Tour",
-    "askAi": "KI fragen"
+    "askAi": "KI fragen",
+    "viewOnGoogleMaps": "Auf Google Maps ansehen",
+    "readMore": "Mehr lesen"
   },
   "home": {
     "title": "Private Tours - Entdecken Sie Stockholms Geschichte",
@@ -169,7 +171,46 @@
     "contact": "Kontaktieren Sie uns",
     "privacy": "Datenschutzerklärung",
     "terms": "Geschäftsbedingungen",
-    "copyright": "© 2026 Private Tours. Alle Rechte vorbehalten."
+    "copyright": "© {year} Private Tours. Alle Rechte vorbehalten.",
+    "tagline": "Entdecken Sie Stockholms reiche Geschichte mit fachkundig geführten Kulturerbe-Touren. Lizenzierte Guides, authentische Erlebnisse, unvergessliche Erinnerungen.",
+    "newsletter": {
+      "heading": "Bleiben Sie informiert",
+      "copy": "Abonnieren Sie, um exklusive Angebote und kulturelle Einblicke zu erhalten.",
+      "placeholder": "E-Mail-Adresse eingeben",
+      "button": "Abonnieren",
+      "ariaLabel": "E-Mail-Adresse für den Newsletter"
+    },
+    "languageSelector": {
+      "label": "Sprache",
+      "ariaLabel": "Sprache auswählen",
+      "en": "Englisch",
+      "sv": "Schwedisch",
+      "de": "Deutsch"
+    },
+    "tourLinks": {
+      "heading": "Touren",
+      "privateTours": "Private Touren",
+      "groupTours": "Gruppentouren"
+    },
+    "supportLinks": {
+      "heading": "Support",
+      "faq": "FAQ",
+      "contactUs": "Kontakt",
+      "bookingHelp": "Buchungshilfe",
+      "cancellationPolicy": "Stornierungsbedingungen",
+      "accessibility": "Barrierefreiheit"
+    },
+    "companyLinks": {
+      "heading": "Unternehmen",
+      "aboutUs": "Über uns",
+      "ourGuides": "Unsere Guides"
+    },
+    "legalLinks": {
+      "heading": "Rechtliches",
+      "terms": "Nutzungsbedingungen",
+      "privacy": "Datenschutzerklärung",
+      "cookies": "Cookie-Richtlinie"
+    }
   },
   "meta": {
     "defaultTitle": "Private Tours - Stockholm Touren",

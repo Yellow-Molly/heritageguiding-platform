@@ -127,18 +127,17 @@ app/
 
 #### Components (60+ total, organized by feature)
 
-**Home Components (8 components, 6 currently rendered):**
+**Home Components (6 components, all currently rendered):**
 - `hero-section.tsx` - Landing hero with parallax
 - `trust-signals.tsx` - Statistics section with guide count
 - `featured-tours.tsx` - Landscape tour cards with description+meta row, duration/capacity, VIEW TOUR CTA
 - `guides-preview.tsx` - Circular guide headshots with abbreviated languages (mobile)
 - `video-highlight.tsx` - Scenic photo with YouTube embed modal
-- `testimonials.tsx` - Carousel of reviews (legacy, not currently rendered)
 - `seasonal-cta.tsx` - Seasonal promo (legacy, not currently rendered)
-- `latest-posts.tsx` - Blog grid (legacy, not currently rendered)
 - `category-nav.tsx` - Category navigation
 - Tests: `category-nav.test.tsx`
 - **Current homepage order:** Hero → TrustSignals → FeaturedTours → GuidesPreview → VideoHighlight → Footer
+- **Removed in MVP audit (2026-04-26):** `testimonials.tsx`, `latest-posts.tsx` — placeholder content, deleted per validation decisions #1, #3 (re-add post-MVP when real reviews/blog ship)
 
 **Tour Components (20+ components):**
 - `tour-card.tsx` - Individual tour card (grid/list variants)
@@ -204,9 +203,11 @@ app/
 - `visually-hidden.tsx` - Screen reader only content
 - Tests: 12 new tests (Phase 10)
 
-**Layout Components (3 components):**
+**Layout Components (5 components):**
 - `header.tsx` - Navigation header
-- `footer.tsx` - Footer with links
+- `footer.tsx` - Server component, async; renders i18n footer with dynamic top-3 featured tours fetched server-side via `getFeaturedTours` (graceful catch + console.error)
+- `footer-newsletter-form.tsx` - Client island, **disabled stub** awaiting backend wiring (Brevo/etc.) — `aria-disabled` + visible disabled state, no silent submission
+- `footer-language-selector.tsx` - Client island; uses `useLocale()` from `next-intl` + `router.replace(pathname, { locale })`
 - `container.tsx` - Max-width wrapper
 
 **UI Components (8 shadcn/ui components):**
@@ -269,6 +270,8 @@ app/
 **i18n & Formatting:**
 - `lib/i18n-format.ts` - Locale-specific formatting
 - `lib/i18n/date-format.ts` - Date formatting utilities
+- `lib/contact-constants.ts` - **Single source of truth** for business contact data (email, phone, address, hours, social URLs). Env-overridable via `NEXT_PUBLIC_CONTACT_*` and `NEXT_PUBLIC_*_URL`. Phone TEL stripped to `[+\d]+` for `tel:` URIs.
+- `lib/legal-dates.ts` - Effective dates for legal pages (privacy/terms/cancellation). Updated by Phase 04 legal counsel sign-off.
 - `lib/seo.ts` - SEO utilities with hreflang support
 - `i18n.ts` - Locale configuration
 - `i18n/routing.ts` - Route definitions

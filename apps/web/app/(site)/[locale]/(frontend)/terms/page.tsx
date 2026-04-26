@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/footer'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
 import { WebPageSchema } from '@/components/seo'
+import { LEGAL_DATES } from '@/lib/legal-dates'
 
 export async function generateMetadata({
   params,
@@ -45,7 +46,7 @@ export default async function TermsPage({
         <section className="bg-[var(--color-primary)] py-12 text-white">
           <div className="container mx-auto px-4 text-center">
             <h1 className="font-serif text-4xl font-bold text-white">{t('title')}</h1>
-            <p className="mt-2 text-white/80">{t('lastUpdated')}: 2026-01-01</p>
+            <p className="mt-2 text-white/80">{t('lastUpdated')}: {LEGAL_DATES.terms}</p>
           </div>
         </section>
 

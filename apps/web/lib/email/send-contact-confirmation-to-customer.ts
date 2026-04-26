@@ -1,3 +1,4 @@
+import { CONTACT_EMAIL, CONTACT_PHONE } from '@/lib/contact-constants'
 import { createEmailTransporter } from './create-email-transporter'
 
 export interface ContactConfirmationData {
@@ -19,7 +20,7 @@ export async function sendContactConfirmationToCustomer(data: ContactConfirmatio
       <h2>Thank you, ${escapeHtml(data.name)}!</h2>
       <p>We've received your message and appreciate you reaching out.</p>
       <p>Our team will review your inquiry and get back to you within <strong>24 hours</strong>.</p>
-      <p>If your matter is urgent, you can reach us directly at <a href="mailto:info@privatetours.se">info@privatetours.se</a> or call <strong>+46 70 123 45 67</strong>.</p>
+      <p>If your matter is urgent, you can reach us directly at <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a> or call <strong>${CONTACT_PHONE}</strong>.</p>
       <p>Best regards,<br/>Private Tours Team</p>
     `,
   })

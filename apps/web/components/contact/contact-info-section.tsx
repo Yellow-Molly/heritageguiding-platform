@@ -1,5 +1,14 @@
 import { useTranslations } from 'next-intl'
 import { Mail, Phone, MapPin, Clock, Instagram, Facebook, Linkedin } from 'lucide-react'
+import {
+  CONTACT_ADDRESS,
+  CONTACT_ADDRESS_LINE,
+  SOCIAL_URLS,
+} from '@/lib/contact-constants'
+
+const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  `${CONTACT_ADDRESS.streetAddress}, ${CONTACT_ADDRESS.postalCode} ${CONTACT_ADDRESS.addressLocality}`,
+)}`
 
 /**
  * Contact info section with email, phone, address, hours,
@@ -7,6 +16,7 @@ import { Mail, Phone, MapPin, Clock, Instagram, Facebook, Linkedin } from 'lucid
  */
 export function ContactInfoSection() {
   const t = useTranslations('contact')
+  const tCommon = useTranslations('common')
 
   const infoItems = [
     { icon: Mail, label: t('info.emailLabel'), value: t('info.emailValue'), href: `mailto:${t('info.emailValue')}` },
@@ -16,9 +26,9 @@ export function ContactInfoSection() {
   ]
 
   const socialLinks = [
-    { icon: Instagram, href: 'https://instagram.com/privatetours', label: 'Instagram' },
-    { icon: Facebook, href: 'https://facebook.com/privatetours', label: 'Facebook' },
-    { icon: Linkedin, href: 'https://linkedin.com/company/privatetours', label: 'LinkedIn' },
+    { icon: Instagram, href: SOCIAL_URLS.instagram, label: 'Instagram' },
+    { icon: Facebook, href: SOCIAL_URLS.facebook, label: 'Facebook' },
+    { icon: Linkedin, href: SOCIAL_URLS.linkedin, label: 'LinkedIn' },
   ]
 
   return (
@@ -70,7 +80,7 @@ export function ContactInfoSection() {
 
       {/* Static map — links to Google Maps without loading tracking scripts */}
       <a
-        href="https://www.google.com/maps/place/Drottninggatan+5,+111+51+Stockholm"
+        href={GOOGLE_MAPS_URL}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-8 block overflow-hidden rounded-2xl bg-[#E5E7EB]"
@@ -78,8 +88,8 @@ export function ContactInfoSection() {
         <div className="flex h-[180px] w-full items-center justify-center md:h-[200px]">
           <div className="text-center">
             <MapPin className="mx-auto h-8 w-8 text-[var(--color-secondary)]" />
-            <p className="mt-2 text-sm font-medium text-[#2D3748]">Drottninggatan 5, Stockholm</p>
-            <p className="mt-1 text-xs text-[var(--color-text)]">View on Google Maps</p>
+            <p className="mt-2 text-sm font-medium text-[#2D3748]">{CONTACT_ADDRESS_LINE}</p>
+            <p className="mt-1 text-xs text-[var(--color-text)]">{tCommon('viewOnGoogleMaps')}</p>
           </div>
         </div>
       </a>
