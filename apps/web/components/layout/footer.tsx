@@ -7,7 +7,6 @@ import {
   Clock,
   Facebook,
   Instagram,
-  Youtube,
   Linkedin,
 } from 'lucide-react'
 import {
@@ -20,13 +19,12 @@ import {
 } from '@/lib/contact-constants'
 import { getFeaturedTours } from '@/lib/api/get-featured-tours'
 import type { Locale } from '@/i18n'
-import { FooterNewsletterForm } from './footer-newsletter-form'
+// import { FooterNewsletterForm } from './footer-newsletter-form' // temporarily hidden for MVP
 import { FooterLanguageSelector } from './footer-language-selector'
 
 const socialIcons = [
   { name: 'Facebook', icon: Facebook, href: SOCIAL_URLS.facebook },
   { name: 'Instagram', icon: Instagram, href: SOCIAL_URLS.instagram },
-  { name: 'YouTube', icon: Youtube, href: SOCIAL_URLS.youtube },
   { name: 'LinkedIn', icon: Linkedin, href: SOCIAL_URLS.linkedin },
 ]
 
@@ -63,7 +61,8 @@ export async function Footer() {
 
   return (
     <footer className="bg-[#0b0b0b] text-white" aria-label="Site footer">
-      {/* Newsletter Section */}
+      {/* Newsletter Section — temporarily hidden for MVP. TODO: re-enable post-MVP. */}
+      {/*
       <div className="border-b border-[#3e3e3e]">
         <div className="container mx-auto px-4 py-12 lg:px-8">
           <FooterNewsletterForm
@@ -75,6 +74,7 @@ export async function Footer() {
           />
         </div>
       </div>
+      */}
 
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 py-16 lg:px-8">
