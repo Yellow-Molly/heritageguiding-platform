@@ -49,7 +49,10 @@ function safeRevalidate(tag: string, collectionSlug: string): void {
 export function createRevalidateTagsAfterChangeHook(
   tags: readonly string[]
 ): CollectionAfterChangeHook {
-  return async ({ collection }) => {
+  return async ({ collection, req }) => {
+    // CLI/migration scripts can opt out via context: { disableRevalidation: true }
+    // to avoid the noisy "static generation store missing" warnings.
+    if (req?.context?.disableRevalidation) return
     for (const tag of tags) safeRevalidate(tag, collection.slug)
   }
 }
@@ -60,7 +63,8 @@ export function createRevalidateTagsAfterChangeHook(
 export function createRevalidateTagsAfterDeleteHook(
   tags: readonly string[]
 ): CollectionAfterDeleteHook {
-  return async ({ collection }) => {
+  return async ({ collection, req }) => {
+    if (req?.context?.disableRevalidation) return
     for (const tag of tags) safeRevalidate(tag, collection.slug)
   }
 }

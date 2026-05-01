@@ -131,6 +131,14 @@ export const Tours: CollectionConfig = {
       admin: { description: 'Tour categories/themes' },
     },
     {
+      name: 'cities',
+      type: 'relationship',
+      relationTo: 'cities',
+      hasMany: true,
+      index: true,
+      admin: { description: 'Cities covered by this tour (multi-city day trips supported)' },
+    },
+    {
       name: 'neighborhoods',
       type: 'relationship',
       relationTo: 'neighborhoods',

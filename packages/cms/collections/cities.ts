@@ -24,9 +24,10 @@ export const Cities: CollectionConfig = {
     delete: isAdmin,
   },
   hooks: {
-    // Guides show operatingAreas (cities) — invalidate guides cache on city change.
-    afterChange: [createRevalidateTagsAfterChangeHook(['guides'])],
-    afterDelete: [createRevalidateTagsAfterDeleteHook(['guides'])],
+    // Guides show operatingAreas (cities); Tours now have a direct cities relation.
+    // Filter dropdowns and footer city listings consume the `cities` tag.
+    afterChange: [createRevalidateTagsAfterChangeHook(['guides', 'tours', 'cities'])],
+    afterDelete: [createRevalidateTagsAfterDeleteHook(['guides', 'tours', 'cities'])],
   },
   fields: [
     {
