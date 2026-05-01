@@ -8,6 +8,7 @@ import { cn, formatDuration, formatPrice } from '@/lib/utils'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { AccessibilityBadge } from '@/components/shared/accessibility-badge'
+import { NavigationPending } from '@/components/shared/navigation-pending'
 import type { FeaturedTour } from '@/lib/api/get-featured-tours'
 
 interface TourCardProps {
@@ -28,6 +29,7 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
 
   return (
     <Link href={`/tours/${tour.slug}`} className={cn('block', !isListView && 'max-w-[400px] w-full')}>
+      <NavigationPending>
       <Card
         className={cn(
           'group overflow-hidden transition-all duration-300',
@@ -128,6 +130,7 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
           </div>
         </div>
       </Card>
+      </NavigationPending>
     </Link>
   )
 }

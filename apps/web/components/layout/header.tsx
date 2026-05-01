@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import { getButtonClassName } from '@/components/ui/button'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { locales, localeLabels, type Locale } from '@/i18n/routing'
+import { NavigationPending } from '@/components/shared/navigation-pending'
 
 const navigationItems = [
   { key: 'tours' as const, href: '/tours' as const },
@@ -96,7 +97,7 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
                 showSolidStyle ? 'text-[#2D3748]' : 'text-white text-shadow-sm'
               )}
             >
-              {t(item.key)}
+              <NavigationPending>{t(item.key)}</NavigationPending>
             </Link>
           ))}
 
@@ -182,7 +183,7 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
               onClick={() => setIsMobileMenuOpen(false)}
               className="rounded-lg px-4 py-3 text-base font-medium text-[var(--color-text)] transition-colors hover:bg-[var(--color-background-alt)]"
             >
-              {t(item.key)}
+              <NavigationPending>{t(item.key)}</NavigationPending>
             </Link>
           ))}
 

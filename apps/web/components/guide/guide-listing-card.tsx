@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Globe, MapPin } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Link } from '@/i18n/navigation'
+import { NavigationPending } from '@/components/shared/navigation-pending'
 import type { GuideListItem } from '@/lib/api/get-guides'
 import { languageDisplayNames } from '@/lib/language-display-names'
 
@@ -24,6 +25,7 @@ export function GuideListingCard({ guide }: GuideListingCardProps) {
 
   return (
     <Link href={`/guides/${guide.slug}`} className="block">
+      <NavigationPending>
       <Card className="group overflow-hidden rounded-2xl transition-shadow duration-300 hover:shadow-[var(--shadow-card-hover)] lg:rounded-[20px]">
         <CardContent className="flex flex-col items-center px-4 pb-4 pt-7 lg:px-6 lg:pb-6 lg:pt-10">
           {/* Circular photo */}
@@ -102,6 +104,7 @@ export function GuideListingCard({ guide }: GuideListingCardProps) {
           </div>
         </CardContent>
       </Card>
+      </NavigationPending>
     </Link>
   )
 }
