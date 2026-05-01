@@ -9,7 +9,11 @@ tags: [performance, lighthouse, images, blur-placeholder, ci, core-web-vitals]
 created: 2026-04-04
 blockedBy: []
 blocks: []
+related:
+  - plans/260501-1559-staging-perceived-performance/plan.md
 ---
+
+> **Cross-plan note (2026-05-01):** Plan `260501-1559-staging-perceived-performance` Phase 2 coordinates with this plan's Phase 5 (Lighthouse CI threshold restore). If this plan's Phase 5 stays stale, that plan absorbs it.
 
 # Full Performance Overhaul & Lighthouse CI Fix
 
