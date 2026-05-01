@@ -1,7 +1,7 @@
 ---
 phase: 1
 title: "Quick Wins — Navigation Feedback"
-status: pending
+status: done
 priority: P0
 effort: 1 day (~6h)
 ---
@@ -153,6 +153,8 @@ Convert obvious static components to Server Components. **Verify each** — only
 2. Remove webpack block from `next.config.ts` if not needed.
 3. If module resolution still required, document as Turbopack-pending or convert.
 
+**Outcome (2026-05-01):** SKIPPED. The dev script in `apps/web/package.json:6` is `next dev --webpack`, meaning webpack is the active dev bundler — the block is NOT dead config. `next.config.ts:14` already labels it as `--webpack` fallback. Removing would break local dev. Switching dev to Turbopack is out of scope (Payload integration risk). Webpack block left intact.
+
 ### Step 5: Local validation (1h)
 1. Run on local with `npm run dev`.
 2. Throttle DevTools to "Slow 4G + 4x CPU".
@@ -166,20 +168,26 @@ Convert obvious static components to Server Components. **Verify each** — only
 3. Test on actual mobile device (or BrowserStack) — confirm freeze symptom gone.
 
 ## Todo List
-- [ ] Create 6 `loading.tsx` files reusing existing skeletons
-- [ ] Create `navigation-pending.tsx` shared component
-- [ ] Apply `<NavigationPending>` to tour-card, related-tour-card, guide-listing-card
-- [ ] Apply `<NavigationPending>` to header nav links
-- [ ] Audit + remove `'use client'` from `seo/*` (5 files)
-- [ ] Audit + remove `'use client'` from `pages/about-*` sections (6 files) — build after batch
-- [ ] Audit + remove `'use client'` from `pages/values-section.tsx`
-- [ ] Audit + remove `'use client'` from `home/trust-signals`, `home/seasonal-cta`, `home/guides-preview`
-- [ ] Verify `home/video-highlight` interactivity, decide
-- [ ] Remove or align webpack config in `next.config.ts`
-- [ ] Run full test suite (1009 tests) — must pass
-- [ ] Run full build — must succeed
-- [ ] Test on throttled Chrome DevTools — verify <100ms click feedback
-- [ ] Deploy to staging, test on real mobile
+- [x] Create 6 `loading.tsx` files reusing existing skeletons
+- [x] Create `navigation-pending.tsx` shared component
+- [x] Apply `<NavigationPending>` to tour-card, related-tour-card, guide-listing-card
+- [x] Apply `<NavigationPending>` to header nav links
+- [x] Audit `seo/*` — already RSC, no changes needed
+- [x] Audit + remove `'use client'` from `pages/about-*` sections (6 files)
+- [x] Audit + remove `'use client'` from `pages/values-section.tsx`
+- [x] Audit + remove `'use client'` from `home/seasonal-cta`, `home/guides-preview`
+- [x] Verify `home/video-highlight` interactivity — KEEP client (useState/useRef/onClick)
+- [x] Verify `home/trust-signals` interactivity — KEEP client (scroll observer + count animation)
+- [x] Webpack config — SKIPPED, dev script uses `--webpack`, block is active not dead
+- [x] Run full test suite — 81 preexisting failures (vitest+next-intl ESM, DB integration); NOT phase-1 caused (verified via stash)
+- [x] Run full build with `--webpack` — succeeds, 94 routes
+- [ ] Test on throttled Chrome DevTools — verify <100ms click feedback (manual, post-deploy)
+- [ ] Deploy to staging, test on real mobile (manual, post-deploy)
+
+## Implementation Notes (2026-05-01)
+- Code review caught a Major DOM-validity issue: `<span>` wrapping Card `<div>` auto-closes in browser, defeating the dim effect. Fixed by changing `navigation-pending.tsx` wrapper from `<span>` to `<div>`. Header text usages unaffected.
+- Turbopack production build (`next build` default) hits a preexisting `/api/graphql` Payload module-resolution error, unrelated to Phase 1. Use `--webpack` for builds until resolved (see Phase 2 follow-up).
+- Test infra has 9 failing files (81 tests): vitest cannot resolve `next/navigation` for next-intl Link, plus `lib/api/__tests__/*` integration tests need DB. All preexisting; Phase 1 introduces zero new failures.
 
 ## Success Criteria
 - All 6 `loading.tsx` files render skeleton within 100ms of route navigation.

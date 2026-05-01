@@ -1,7 +1,7 @@
 ---
 title: "Staging Perceived Performance — Click→Freeze Fix"
 description: "Eliminate 1–3s click-freeze symptom on mobile. Approach: ship navigation-feedback quick wins Day 1, measurement infrastructure Day 2, data-driven targeted fixes Day 3–5."
-status: pending
+status: in_progress
 priority: P1
 effort: 3-5 days
 branch: master
@@ -29,7 +29,7 @@ Quick wins (Day 1) + measurement infrastructure (Day 2) + data-driven fixes (Day
 
 | # | Phase | Status | Priority | Effort |
 |---|-------|--------|----------|--------|
-| 1 | [Quick Wins — Navigation Feedback](phase-01-quick-wins-navigation-feedback.md) | pending | P0 | 1 day |
+| 1 | [Quick Wins — Navigation Feedback](phase-01-quick-wins-navigation-feedback.md) | done | P0 | 1 day |
 | 2 | [Measurement Infrastructure](phase-02-measurement-infrastructure.md) | pending | P1 | 1 day |
 | 3 | [Targeted Fixes by Data](phase-03-targeted-fixes-by-data.md) | pending | P1 | 2-3 days |
 
