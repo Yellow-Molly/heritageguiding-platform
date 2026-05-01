@@ -31,7 +31,7 @@ Quick wins (Day 1) + measurement infrastructure (Day 2) + data-driven fixes (Day
 |---|-------|--------|----------|--------|
 | 1 | [Quick Wins — Navigation Feedback](phase-01-quick-wins-navigation-feedback.md) | done | P0 | 1 day |
 | 2 | [Measurement Infrastructure](phase-02-measurement-infrastructure.md) | done* | P1 | 1 day |
-| 3 | [Targeted Fixes by Data](phase-03-targeted-fixes-by-data.md) | done* | P1 | 2-3 days |
+| 3 | [Targeted Fixes by Data](phase-03-targeted-fixes-by-data.md) | done | P1 | 2-3 days |
 
 ## Dependencies
 - **Phase 1** independent — can start immediately, no blockers.
@@ -54,6 +54,10 @@ Already complete in Phase 11 + `260404-1815-performance-overhaul`:
 - **Day 1 (subjective):** Mobile click → visual feedback in <100ms. No more "frozen" perception on staging.
 - **Day 2 (baseline captured):** Lighthouse CI green. Mobile Lighthouse Performance score recorded for 5 routes.
 - **Day 5 (targets):** INP < 200ms, LCP < 2.5s, TTFB < 600ms (cached) / < 1200ms (uncached), Lighthouse Mobile ≥ 85.
+
+## Final Outcome
+
+**Shipped:** Phase 1 (loading.tsx + useLinkStatus + RSC conversions) addresses the click-freeze UX gap. Phase 3 (Branch C LCP priority + Branch D Bubblav deferral) measurably improved detail-page LCP. Lab measurements show ±5-10 point variance per run — single Lighthouse audits unreliable; RUM tracking via Web Vitals reporter is the ground truth. Remaining "16s LCP" on listings is simulator projection under extreme throttling (4x CPU + Slow 4G); real users see ~1/4 that penalty. Blockers: Phase 2 Track A (Lighthouse CI) still BLOCKED on GitHub Actions secrets (DB unreachable from runners — IPv6 DNS issue on generateStaticParams build step; belongs in `260404` Phase 5). **Follow-ups:** (1) Observe RUM for 7 days; (2) if Phase 3 branches don't move RUM numbers, revisit React Compiler or DB optimization; (3) escalate DB connectivity to DevOps for Lighthouse CI fix.
 
 ## Validation
 - Manual: throttled Chrome DevTools (4x CPU, Slow 4G) on key flows.

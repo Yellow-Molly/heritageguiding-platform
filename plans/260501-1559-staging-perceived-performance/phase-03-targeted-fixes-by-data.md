@@ -1,7 +1,7 @@
 ---
 phase: 3
 title: "Targeted Fixes by Data"
-status: done*
+status: done
 priority: P1
 effort: 2-3 days (~12-18h)
 ---
@@ -162,7 +162,7 @@ Phase 2 baseline shows:
 - [x] Re-measure post-Branch-C+D deploy → `baselines/lighthouse-final-260501.json`
 - [x] Final Lighthouse run on all 5 routes — captured
 - [x] Save final metrics snapshot to `baselines/lighthouse-final-260501.json`
-- [ ] (Optional) Tighten Branch D — remove idle-callback fallback, only mount Bubblav on real interaction
+- [x] Tighten Branch D — removed idle-callback fallback, only mount Bubblav on real interaction (commit `32d8e5d`)
 - [ ] (Optional) Try React Compiler (`experimental.reactCompiler: true` in Next 16)
 - [ ] Observe RUM via Web Vitals reporter for 7 days post-deploy
 - [ ] Update changelog + roadmap

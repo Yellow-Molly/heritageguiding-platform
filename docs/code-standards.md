@@ -1,10 +1,10 @@
 # Code Standards & Best Practices
 
-**Last Updated:** April 25, 2026
+**Last Updated:** May 1, 2026
 **Project:** Private Tours Platform
-**Phase:** 16 Complete - Guide Profile Redesign
+**Phase:** 18 Complete - Staging Perceived Performance
 **Applies To:** All code in apps/, packages/, and scripts/
-**Recent Update:** Phase 15-16 layouts (booking-first grid, split-panel sidebar), cache revalidation pattern, IS_STAGING blocking, image blur placeholders, infinite scroll pagination
+**Recent Update:** Phase 18 — loading.tsx fallbacks, NavigationPending (useLinkStatus), image priority, RSC conversions, deferred third-party loading
 
 ## Core Principles
 
@@ -89,6 +89,10 @@ export function SampleComponent({
 - Prefer `next/link` over `<a>` tags
 - Use dynamic imports with `React.lazy()` for code splitting
 - **Pagination**: All listing pages must use **infinite scroll** via `IntersectionObserver` (no "Load More" buttons or numbered pages). See `tour-grid-layout.tsx` for reference.
+- **Route Loading States**: Add `loading.tsx` for every frontend route group (`app/(frontend)/**`) with Skeleton fallback. Example: `apps/web/app/(site)/[locale]/(frontend)/tours/[slug]/loading.tsx`
+- **Navigation Feedback** (Phase 18): Use `NavigationPending` component to wrap Link children for click feedback. Imports `useLinkStatus()` from `'next/link'`. Dims content during pending state; optional `showSpinner` prop. See `tour-card.tsx:34` for usage.
+- **Image Priority** (Phase 18): Set `priority={true}` on image-heavy components (cards, grids) when LCP candidate. Apply only to first 3+ cards in above-fold grids. Pass through to `<Image>` with `priority` prop.
+- **Third-Party Deferral** (Phase 18): Gate heavy widgets (analytics, chat, ads) behind first user interaction (pointerdown/keydown/scroll) OR fallback timeout. Prevents blocking main thread during Lighthouse audits. See `AiChatProvider` for pattern (15s timeout + interaction listeners).
 
 ## File Organization - Phase 08.1 Complete
 
@@ -762,119 +766,21 @@ async function getUserById(id: string): Promise<User | null> {
 - Monitor bundle size
 
 ### Database
-- Use indexes for frequently queried fields
-- Avoid N+1 queries
-- Cache frequently accessed data
+- Use indexes for frequently queried fields; avoid N+1 queries; cache frequently accessed data
 
 ## API Data-Fetching Standards
+- All fetches must have error handling via try-catch
+- Use typed responses (not `any`)
+- Implement caching where appropriate (ISR, unstable_cache, or Redis)
+- Validate response structure before returning
+- Log errors server-side; return user-friendly messages to client
+- See `apps/web/lib/api/` for patterns; `lib/bokun/` for third-party integrations (HMAC signatures, webhook verification, caching)
 
-### Function Patterns
-```typescript
-// apps/web/lib/api/tours.ts
-import type { Tour, TourDetail } from '@/types'
-
-export async function fetchTours(
-  locale: string,
-  filters?: { category?: string; priceMax?: number }
-): Promise<Tour[]> {
-  try {
-    // Query Payload GraphQL
-    const response = await fetch(`${API_URL}/api/graphql`, {
-      method: 'POST',
-      body: JSON.stringify({ query, variables: { locale } }),
-    })
-    if (!response.ok) throw new Error('Failed to fetch tours')
-    return response.json().data.tours
-  } catch (error) {
-    console.error('Tour fetch error:', error)
-    throw new Error('Unable to load tours')
-  }
-}
-
-export async function fetchTourById(
-  slug: string,
-  locale: string
-): Promise<TourDetail> {
-  // Ensure full typing + null checking
-  const tour = await fetch(`/api/tours/${slug}?locale=${locale}`)
-  if (!tour) throw new Error('Tour not found')
-  return tour as TourDetail
-}
-```
-
-### Bokun API Integration Pattern (Phase 08.1)
-```typescript
-// apps/web/lib/bokun/bokun-api-client-with-hmac-authentication.ts
-import crypto from 'crypto'
-
-interface BokunConfig {
-  accessKey: string
-  secretKey: string
-  environment: 'test' | 'production'
-}
-
-export class BokunAPIClient {
-  private config: BokunConfig
-
-  constructor(config: BokunConfig) {
-    this.config = config
-  }
-
-  // Generate HMAC-SHA256 signature for requests
-  private generateSignature(body: string): string {
-    return crypto
-      .createHmac('sha256', this.config.secretKey)
-      .update(body)
-      .digest('hex')
-  }
-
-  // Verify webhook signature
-  static verifyWebhookSignature(
-    body: string,
-    signature: string,
-    secretKey: string
-  ): boolean {
-    const expectedSignature = crypto
-      .createHmac('sha256', secretKey)
-      .update(body)
-      .digest('hex')
-    return signature === expectedSignature
-  }
-
-  async getAvailability(experienceId: string, date: string) {
-    const body = JSON.stringify({ experienceId, date })
-    const signature = this.generateSignature(body)
-    const response = await fetch(`${this.getBaseUrl()}/availability`, {
-      method: 'POST',
-      headers: {
-        'X-Bokun-Access-Key': this.config.accessKey,
-        'X-Bokun-Signature': signature,
-        'Content-Type': 'application/json',
-      },
-      body,
-    })
-    return response.json()
-  }
-
-  private getBaseUrl(): string {
-    return this.config.environment === 'test'
-      ? 'https://api-test.bokun.io/v2'
-      : 'https://api.bokun.io/v2'
-  }
-}
-```
-
-### Error Handling
-- Always throw descriptive errors
-- Log errors server-side only (not client)
-- Return user-friendly error messages
-- Never expose database/API internals
-
-### Type Safety
-- All functions must have return type annotations
-- Use `Promise<T>` for async functions
-- Export types from `/types` directory
-- Validate responses against TypeScript types
+### Error Handling & Type Safety
+- Throw descriptive errors; log server-side only (not client); return user-friendly messages
+- All functions must have return type annotations; use `Promise<T>` for async functions
+- Export types from `/types` directory; validate responses against TypeScript types
+- Never expose database/API internals in error messages
 
 ## Review Checklist
 
@@ -883,23 +789,11 @@ export class BokunAPIClient {
 - [ ] Types are correct (no `any`)
 - [ ] Error handling with try-catch
 - [ ] Tests added/updated (80%+ coverage)
-- [ ] No console logs in production
-- [ ] No hardcoded secrets
+- [ ] No hardcoded secrets or API keys
 - [ ] Security: input validation, CSRF tokens
-- [ ] Performance: no N+1 queries, appropriate caching
+- [ ] Performance: caching, no N+1 queries
 - [ ] Documentation updated
 - [ ] i18n support verified (all locales tested)
-- [ ] **Bokun-Specific Checks (Phase 08.1):**
-  - [ ] HMAC signatures correctly generated and verified
-  - [ ] Webhook payload structure validated
-  - [ ] Availability cache respects 60s TTL
-  - [ ] Rate limiting with exponential backoff implemented
-  - [ ] Environment variables for API keys used
-  - [ ] Bookings collection updated on webhook events
 
-## Questions or Clarifications?
-
-Refer to:
-- `./MVP-PROJECT-PLAN.md` - Project scope and timeline
-- `./system-architecture.md` - System design
-- `./codebase-summary.md` - Repository structure
+---
+**For questions, refer to:** `system-architecture.md`, `codebase-summary.md`, or plan files in `./plans/`

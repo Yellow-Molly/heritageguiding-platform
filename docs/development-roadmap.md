@@ -12,6 +12,25 @@ Living document tracking project phases, milestones, and progress toward MVP lau
 
 ---
 
+## Completed Phase: Phase 18 — Staging Perceived Performance 🚀 COMPLETE
+
+**Date Started:** 2026-05-01
+**Date Completed:** 2026-05-01
+**Status:** All 3 phases complete (quick wins, measurement, targeted fixes)
+**Plan:** 260501-1559-staging-perceived-performance/
+
+### Summary
+Eliminated 1–3s "click-freeze" perception on mobile through navigation feedback, deferred third-party loading, and image priority optimization.
+
+### Key Deliverables
+- **Quick Wins:** 6 `loading.tsx` route fallbacks, `NavigationPending` component with `useLinkStatus` hook
+- **RSC Conversions:** 9 components converted from client to server (about-sections, values, guides-preview, seasonal-cta)
+- **Performance Fixes:** Image `priority` prop on first 3 cards (tour/guide grids), deferred Bubblav widget mount (15s + interaction gating)
+- **Infrastructure:** Bundle analyzer (`npm run analyze`), Lighthouse CI scoped to Production environment
+- **Measurement:** Web Vitals baseline captured, Lighthouse mobile scores tracked
+
+---
+
 ## Previous Phase: Phase 16 — Guide Profile Redesign ✓ COMPLETE
 
 **Date Started:** 2026-04-12

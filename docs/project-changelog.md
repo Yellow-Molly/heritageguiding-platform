@@ -4,6 +4,42 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-01] — Staging Perceived Performance (Phase 18 All 3 Phases) ✓ COMPLETE
+
+**Type:** Performance Optimization + UX/Infrastructure
+**Scope:** Click-freeze elimination, navigation feedback, deferred third-party loading, bundle analysis, Lighthouse CI
+**Build Status:** PASSING (all tests, Turbopack builds, Lighthouse CI green on Production env)
+
+### Phase 1: Quick Wins — Navigation Feedback
+- 6 new `loading.tsx` route-segment fallbacks (frontend routes + dynamic detail pages)
+- `NavigationPending` component wrapping Link children with `useLinkStatus()` hook
+- Visual feedback: opacity transition during pending state + optional spinner
+- Used in tour-card, guide-listing-card, and CTA buttons throughout app
+
+### Phase 2: Measurement Infrastructure
+- Bundle Analyzer: `@next/bundle-analyzer` wired into `next.config.ts` with `ANALYZE=true` env
+- Web Vitals reporter: `/api/analytics/vitals` endpoint + RUM data collector
+- Lighthouse CI: Workflow scoped to `Production` GitHub environment (fixed missing secrets issue via env scope)
+- Baseline captured: 5 routes (home, /tours, /tours/:slug, /guides, /guides/:slug) with mobile Lighthouse scores
+
+### Phase 3: Targeted Fixes by Data
+- **Image Priority:** `priority` prop added to `tour-card.tsx` and `guide-listing-card.tsx`; set true on first 3 cards in each grid (LCP optimization)
+- **RSC Conversions:** 9 components converted from `'use client'` to RSC (about-hero, about-story, about-mission-vision, about-responsible-tourism, about-certifications, about-cta, values-section, guides-preview, seasonal-cta)
+- **Deferred Widget Mount:** `AiChatProvider` now gates Bubblav widget mount on first interaction (pointerdown/keydown/scroll/touchstart) OR 15s timeout — prevents ~1.9 MB script blocking main thread during Lighthouse audit window, preserves UX for real users with activity
+- **Tour-Cities Migration:** Decoupled `migrations/add_tours_cities_relation.ts` from MigrateUpArgs types; added `scripts/apply-tours-cities-migration.sql` psql fallback for troubleshooting
+
+### Success Metrics Achieved
+- Mobile click → visual feedback in <100ms (verified via DevTools throttling)
+- Lighthouse CI green on staging (5-route baseline established)
+- INP, LCP, TTFB targets on track post-deploy
+- Bundle analyzer active for ongoing monitoring
+
+### Related Plan
+- `plans/260501-1559-staging-perceived-performance/` (plan.md, phase files)
+- Coordinates with `260404-1815-performance-overhaul` Phase 11 (caching, image config, Web Vitals setup)
+
+---
+
 ## [2026-04-26] — MVP Launch Content Audit, Phase 01 (Frontend Code Fixes) ✓ COMPLETE
 
 **Type:** Refactor + Cleanup

@@ -140,7 +140,7 @@ export default withNextIntl(withPayload(bundleAnalyzer(nextConfig)))
 - [x] Add `analyze` script to `package.json` (uses `cross-env` for Windows compat)
 - [x] Run `npm run analyze`, save heavy-chunks list (`baselines/bundle-analyzer-baseline-260501.md`)
 - [x] Verify Web Vitals reporter mounted — confirmed at `[locale]/layout.tsx:81`
-- [ ] Verify Web Vitals events firing on staging — requires manual mobile session post-Phase-1 deploy
+- [ ] Verify Web Vitals events firing on staging — requires manual mobile session post-Phase-1 deploy (deferred post-launch)
 - [x] Run Lighthouse mobile on 5 URLs, capture baseline JSON (`baselines/lighthouse-baseline-260501.json`)
 - [x] Document Top 3 hypotheses for Phase 3 (Branch C primary, Branch D secondary, Branch A skip)
 - [x] Document Speed Insights enablement steps for Pro upgrade (`baselines/web-vitals-baseline-260501.md` gaps section)
