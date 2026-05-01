@@ -10,6 +10,7 @@ jobs:
   lighthouse:
     name: Lighthouse Performance Audit
     runs-on: ubuntu-latest
+    environment: Production
     defaults:
       run:
         working-directory: apps/web
