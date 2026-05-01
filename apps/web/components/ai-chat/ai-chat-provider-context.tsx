@@ -47,12 +47,50 @@ export function useAiChat(): AiChatContextValue {
  * Provider that manages AI chat widget state and renders BubblaV widget.
  * Uses window.BubblaV global API directly (the ref-based approach has ESM
  * compatibility issues with Turbopack on Vercel).
+ *
+ * The widget script is ~1.9 MB and dominates main-thread work on every route.
+ * To prevent it from blocking LCP/TTI, mounting is deferred until either
+ * (a) the browser is idle (requestIdleCallback) or (b) the first user
+ * interaction occurs, whichever comes first. This keeps first paint fast
+ * while ensuring the chat is responsive by the time the user wants it.
  */
 export function AiChatProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
+  const [shouldMountWidget, setShouldMountWidget] = useState(false)
+
+  // Defer widget mount: idle callback OR first user interaction OR fallback timeout.
+  useEffect(() => {
+    if (shouldMountWidget) return
+
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
+    let idleId: number | undefined
+    const mount = () => setShouldMountWidget(true)
+
+    const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback
+    if (ric) {
+      idleId = ric(mount, { timeout: 4000 })
+    } else {
+      timeoutId = setTimeout(mount, 2500)
+    }
+
+    const interactionEvents: Array<keyof WindowEventMap> = ['pointerdown', 'keydown', 'scroll', 'touchstart']
+    const onInteraction = () => {
+      mount()
+      interactionEvents.forEach((evt) => window.removeEventListener(evt, onInteraction))
+    }
+    interactionEvents.forEach((evt) => window.addEventListener(evt, onInteraction, { once: true, passive: true }))
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId)
+      const cic = (window as unknown as { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback
+      if (idleId !== undefined && cic) cic(idleId)
+      interactionEvents.forEach((evt) => window.removeEventListener(evt, onInteraction))
+    }
+  }, [shouldMountWidget])
 
   // Sync state when widget is opened/closed via its own bubble UI
   useEffect(() => {
+    if (!shouldMountWidget) return
     const onOpen = () => setIsOpen(true)
     const onClose = () => setIsOpen(false)
     const trySubscribe = () => {
@@ -72,9 +110,11 @@ export function AiChatProvider({ children }: { children: ReactNode }) {
     }, 200)
     const timeout = setTimeout(() => clearInterval(timer), 5000)
     return () => { clearInterval(timer); clearTimeout(timeout) }
-  }, [])
+  }, [shouldMountWidget])
 
   const openChat = useCallback(() => {
+    // If user clicks chat trigger before the deferred mount fires, mount immediately.
+    setShouldMountWidget(true)
     getBubblaV()?.open()
     setIsOpen(true)
   }, [])
@@ -87,14 +127,16 @@ export function AiChatProvider({ children }: { children: ReactNode }) {
   return (
     <AiChatContext.Provider value={{ isOpen, openChat, closeChat }}>
       {children}
-      <BubblaVWidget
-        websiteId={BUBBLAV_SITE_ID}
-        bubbleColor="#1E3A5F"
-        bubbleIconColor="#ffffff"
-        botName="Heritage AI"
-        textboxPlaceholder="Ask me anything about Stockholm tours..."
-        poweredByVisible={false}
-      />
+      {shouldMountWidget && (
+        <BubblaVWidget
+          websiteId={BUBBLAV_SITE_ID}
+          bubbleColor="#1E3A5F"
+          bubbleIconColor="#ffffff"
+          botName="Heritage AI"
+          textboxPlaceholder="Ask me anything about Stockholm tours..."
+          poweredByVisible={false}
+        />
+      )}
     </AiChatContext.Provider>
   )
 }
