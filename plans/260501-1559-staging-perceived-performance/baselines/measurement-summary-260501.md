@@ -75,7 +75,12 @@ Before starting Phase 3:
 4. Why is `/find-tour` LCP only 4.2s while `/tours` is 17s, given both have lazy-loaded heavy widgets? (Compare images-vs-wizard rendering)
 
 ## Coordination with `260404-1815-performance-overhaul`
-- `260404` Phase 5 (Lighthouse CI threshold restore): **BLOCKED** on missing GitHub Actions secrets.
-- `gh secret list` returns empty. Recent CI runs all fail with "PAYLOAD_SECRET is required in production".
-- User action required: set `DATABASE_URL`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_URL`, `BLOB_READ_WRITE_TOKEN` in repo Settings > Secrets and variables > Actions.
-- Once set, threshold restore (0.7 → 0.9 in `lighthouserc.js:30`) is a 1-line change. Decision: **stays in `260404` Phase 5 — do not absorb into this plan.**
+- `260404` Phase 5 (Lighthouse CI threshold restore): **BLOCKED** on DB-from-CI connectivity, not secrets.
+- Initial diagnosis (secrets missing) was incorrect. The 4 secrets exist as **environment-scoped** secrets under the GitHub `Production` environment (and `Preview`). Repository-scoped secrets (what `gh secret list` queries) are empty.
+- Fix shipped in `0945a73` (`fix(ci): scope lighthouse workflow to Production environment`): added `environment: Production` to the lighthouse-ci.yml job so env-scoped secrets resolve.
+- New blocker after that fix: `generateStaticParams` for `/[locale]/guides/[slug]` connects to Postgres at build time → `ENETUNREACH 2a05:d016:...:5432`. GitHub runners cannot reach the DB host (likely IP allowlist or IPv6-only).
+- Threshold restore (0.7 → 0.9 in `lighthouserc.js:30`) remains a 1-line change AFTER `260404` Phase 5 resolves DB-from-CI. Three options for that plan:
+  1. Add GitHub Actions runner IP egress to DB allowlist.
+  2. Skip prerendering at build time (use `force-dynamic` on tour/guide detail pages).
+  3. Mock DB during CI build (use a fixed slug list).
+- Decision: **stays in `260404` Phase 5 — do not absorb into this plan.**

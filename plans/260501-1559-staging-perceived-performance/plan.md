@@ -38,7 +38,7 @@ Quick wins (Day 1) + measurement infrastructure (Day 2) + data-driven fixes (Day
 - **Phase 2** soft dependency on `260404-1815-performance-overhaul` Phase 5 (Lighthouse CI restore). If still pending, absorb that work; if complete, verify and skip.
 - **Phase 3** strictly depends on Phase 2 baseline — without numbers, no targeted fixes.
 
-> **Phase 2 done* note:** Tracks B (bundle analyzer), C (Web Vitals validation), and baseline capture COMPLETE. Track A (Lighthouse CI threshold restore in `260404` Phase 5) **BLOCKED** — `gh secret list` returns empty; CI fails on missing PAYLOAD_SECRET. User must set GitHub Actions secrets (DATABASE_URL, PAYLOAD_SECRET, NEXT_PUBLIC_URL, BLOB_READ_WRITE_TOKEN) before threshold restore can proceed. Decision logged in `baselines/measurement-summary-260501.md`. Phase 3 unblocked.
+> **Phase 2 done* note:** Tracks B (bundle analyzer), C (Web Vitals validation), and baseline capture COMPLETE. Track A (Lighthouse CI threshold restore in `260404` Phase 5) **BLOCKED** — original blocker (missing repository-scope secrets) FIXED in commit `0945a73` by scoping the workflow to the `Production` GitHub environment where the existing 4 env-scoped secrets live. New blocker surfaced: `generateStaticParams` for `/[locale]/guides/[slug]` hits Postgres at build time and the DB host is unreachable from GitHub runners (`ENETUNREACH ...:5432`, IPv6). This belongs in `260404` Phase 5 — needs DB IP allowlist, mock-DB build env, or `force-dynamic` on the affected route. Phase 3 unblocked here either way.
 
 ## Phase 11 Reuse (do NOT duplicate)
 Already complete in Phase 11 + `260404-1815-performance-overhaul`:
