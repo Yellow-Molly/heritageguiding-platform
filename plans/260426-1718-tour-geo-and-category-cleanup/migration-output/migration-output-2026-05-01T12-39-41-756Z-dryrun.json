@@ -1,0 +1,25 @@
+{
+  "startedAt": "2026-05-01T12:39:39.309Z",
+  "applied": false,
+  "preflight": {
+    "ok": false,
+    "errors": [
+      "Required city \"sigtuna\" missing — run scripts/seed-sigtuna-uppsala-cities.ts",
+      "Required city \"uppsala\" missing — run scripts/seed-sigtuna-uppsala-cities.ts"
+    ],
+    "warnings": [
+      "taxonomy slug \"nature-water\" not referenced by any merge/keep — only fresh tour-tagging will populate it"
+    ]
+  },
+  "toursWithBackfilledCities": 0,
+  "newCategoriesCreated": 0,
+  "categoriesUpdated": 0,
+  "toursWithRewrittenRelations": 0,
+  "categoriesDeleted": 0,
+  "categoriesSkippedDelete": 0,
+  "revalidate": {
+    "ok": false,
+    "tags": []
+  },
+  "finishedAt": "2026-05-01T12:39:41.757Z"
+}
