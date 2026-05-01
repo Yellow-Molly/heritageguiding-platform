@@ -1,9 +1,11 @@
 import type { NextConfig } from 'next'
 import { withPayload } from '@payloadcms/next/withPayload'
 import createNextIntlPlugin from 'next-intl/plugin'
+import withBundleAnalyzer from '@next/bundle-analyzer'
 import path from 'path'
 
 const withNextIntl = createNextIntlPlugin('./i18n.ts')
+const bundleAnalyzer = withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })
 
 const nextConfig: NextConfig = {
   // Ignore TypeScript errors from packages/cms during build
@@ -152,4 +154,4 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default withNextIntl(withPayload(nextConfig))
+export default withNextIntl(withPayload(bundleAnalyzer(nextConfig)))

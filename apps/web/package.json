@@ -6,6 +6,7 @@
     "dev": "next dev --webpack",
     "prebuild": "rm -f app/\\(payload\\)/admin/importMap.js && npx payload generate:importmap",
     "build": "next build",
+    "analyze": "cross-env ANALYZE=true next build --webpack",
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -52,6 +53,7 @@
     "react-dom": "$react-dom"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.2.4",
     "@tailwindcss/postcss": "^4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
@@ -63,6 +65,7 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^5.1.2",
     "@vitest/coverage-v8": "^4.0.17",
+    "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
