@@ -31,7 +31,7 @@ Quick wins (Day 1) + measurement infrastructure (Day 2) + data-driven fixes (Day
 |---|-------|--------|----------|--------|
 | 1 | [Quick Wins — Navigation Feedback](phase-01-quick-wins-navigation-feedback.md) | done | P0 | 1 day |
 | 2 | [Measurement Infrastructure](phase-02-measurement-infrastructure.md) | done* | P1 | 1 day |
-| 3 | [Targeted Fixes by Data](phase-03-targeted-fixes-by-data.md) | pending | P1 | 2-3 days |
+| 3 | [Targeted Fixes by Data](phase-03-targeted-fixes-by-data.md) | in_progress | P1 | 2-3 days |
 
 ## Dependencies
 - **Phase 1** independent — can start immediately, no blockers.

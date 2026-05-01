@@ -1,7 +1,7 @@
 ---
 phase: 3
 title: "Targeted Fixes by Data"
-status: pending
+status: in_progress
 priority: P1
 effort: 2-3 days (~12-18h)
 ---
@@ -154,17 +154,37 @@ Phase 2 baseline shows:
 4. Update `docs/project-changelog.md` with summary of fixes.
 
 ## Todo List
-- [ ] Re-measure 5 routes after Phase 1 deploy
-- [ ] Compare to Phase 2 baseline, identify gaps
-- [ ] Pick 1–2 priority branches based on data
-- [ ] Execute Branch A fixes (if TTFB > 800ms)
-- [ ] Execute Branch B fixes (if INP > 200ms)
-- [ ] Execute Branch C fixes (if LCP > 2.5s)
-- [ ] Execute Branch D fixes (if TBT > 300ms)
-- [ ] Re-measure after each fix
+- [x] Re-measure 5 routes after Phase 1 deploy → `baselines/lighthouse-post-phase1-260501.json`
+- [x] Compare to Phase 2 baseline → /tours/[slug] LCP 16.2s→5.7s (Phase 1 win); listings still 16s; TTI 16-17s everywhere
+- [x] Pick priority branches: C (LCP) + D (Bundle/TTI), skip A (TTFB fine), B already covered by Phase 1
+- [x] Branch C: Lighthouse identified first tour card image as LCP element with `loading=lazy` + no `fetchpriority`. Added `priority` prop pass-through to `tour-card.tsx` and `guide-listing-card.tsx`; passing `priority={index < 3}` from `tour-grid-layout.tsx` and `guide-grid-client.tsx`. Commit `d239f02`.
+- [x] Branch D: Lighthouse "unused-javascript" top result is `https://www.bubblav.com/v1.<hash>.js` at 1.9 MB. Deferred BubblaVWidget mount via `requestIdleCallback` + first-interaction listener inside `ai-chat-provider-context.tsx`. Commit `13e4c61`.
+- [ ] Re-measure post-Branch-C+D deploy (waiting on Vercel)
+- [ ] If gaps remain after re-measure: investigate hero image (Unsplash CDN) self-hosting; legacy-javascript audit (~14 KB savings); render-blocking resources
 - [ ] Final Lighthouse run on all 5 routes
-- [ ] Save final metrics snapshot
+- [ ] Save final metrics snapshot to `baselines/lighthouse-final-260501.json`
 - [ ] Update changelog + roadmap
+
+## Implementation Notes (2026-05-01)
+
+### Re-measurement findings
+| Route | Perf Δ | LCP Δ | TBT Δ | TTI Δ |
+|---|---|---|---|---|
+| / | 63→52 | 4.5s→5.4s | 647→638 | 16.5s→17.5s |
+| /tours | 49→43 | 17.1s→16.5s | 694→919 | 17.4s→16.8s |
+| /tours/[slug] | 44→**53** | **16.2s→5.7s** | **950→767** | 16.4s→16.1s |
+| /guides | 43→45 | 16.2s→16.2s | 1176→1168 | 16.2s→16.2s |
+| /find-tour | 57→41 | 4.2s→6.6s | 1127→990 | 15.9s→17.4s |
+
+`/tours/[slug]` improvement (Phase 1 loading.tsx + RSC) confirms the approach. Listings unchanged because they were never the slow-hydration problem — they're slow due to LCP image priority + 1.9 MB chatbot script.
+
+### Lighthouse "redirects" was simulator artifact
+Initial reading of 770ms-1100ms wasted on redirects across all routes. Verified via curl: no actual HTTP 3xx chain. Lighthouse attributes simulated DNS+TLS+queuing time (under throttled mobile) to "redirects". Not fixable from app code.
+
+### Skipped this iteration
+- Self-hosting Unsplash hero image on home (separate work, low ROI vs effort).
+- Adding `fetchpriority="high"` to logo Image (Lighthouse picked it as LCP because Unsplash hero loads slow; logo is small enough that promoting it makes home LCP worse if hero finishes faster).
+- Bokun booking iframe deferral (not yet identified as an issue from Phase 2 data; revisit only if /tours/[slug] LCP stays above 2.5s after Branch D ships).
 
 ## Success Criteria
 - 4 of 5 measured routes meet all 4 targets (INP, LCP, TTFB, Lighthouse Performance).
