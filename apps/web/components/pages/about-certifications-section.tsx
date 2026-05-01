@@ -1,5 +1,3 @@
-'use client'
-
 import { Fragment } from 'react'
 import { useTranslations } from 'next-intl'
 import { Award, Shield, MapPin, type LucideIcon } from 'lucide-react'

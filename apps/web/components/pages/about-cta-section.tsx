@@ -1,5 +1,3 @@
-'use client'
-
 import { useTranslations } from 'next-intl'
 import { Compass, Mail } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
