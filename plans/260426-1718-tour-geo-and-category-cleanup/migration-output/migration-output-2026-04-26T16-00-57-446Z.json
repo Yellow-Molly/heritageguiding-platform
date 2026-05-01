@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-04-26T16:00:55.219Z",
+  "applied": true,
+  "preflight": {
+    "ok": true,
+    "errors": [],
+    "warnings": [
+      "taxonomy slug \"nature-water\" not referenced by any merge/keep — only fresh tour-tagging will populate it"
+    ]
+  },
+  "toursWithBackfilledCities": 10,
+  "newCategoriesCreated": 9,
+  "categoriesUpdated": 1,
+  "toursWithRewrittenRelations": 0,
+  "categoriesDeleted": 0,
+  "categoriesSkippedDelete": 0,
+  "revalidate": {
+    "ok": false,
+    "tags": []
+  },
+  "finishedAt": "2026-04-26T16:00:57.446Z"
+}

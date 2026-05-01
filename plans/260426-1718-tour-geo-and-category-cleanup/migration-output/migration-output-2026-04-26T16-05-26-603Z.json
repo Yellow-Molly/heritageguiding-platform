@@ -1,0 +1,32 @@
+{
+  "startedAt": "2026-04-26T16:05:25.499Z",
+  "applied": true,
+  "preflight": {
+    "ok": false,
+    "errors": [
+      "Category \"day-trip\" in DB but not in migration map",
+      "Category \"chauffeured-tour\" in DB but not in migration map",
+      "Category \"boat-tour\" in DB but not in migration map",
+      "Category \"walking-tour\" in DB but not in migration map",
+      "Category \"nature-water\" in DB but not in migration map",
+      "Category \"culture-local-life\" in DB but not in migration map",
+      "Category \"architecture\" in DB but not in migration map",
+      "Category \"viking-medieval\" in DB but not in migration map",
+      "Category \"history-heritage\" in DB but not in migration map"
+    ],
+    "warnings": [
+      "taxonomy slug \"nature-water\" not referenced by any merge/keep — only fresh tour-tagging will populate it"
+    ]
+  },
+  "toursWithBackfilledCities": 0,
+  "newCategoriesCreated": 0,
+  "categoriesUpdated": 0,
+  "toursWithRewrittenRelations": 0,
+  "categoriesDeleted": 0,
+  "categoriesSkippedDelete": 0,
+  "revalidate": {
+    "ok": false,
+    "tags": []
+  },
+  "finishedAt": "2026-04-26T16:05:26.604Z"
+}
