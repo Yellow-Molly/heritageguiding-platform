@@ -6,10 +6,12 @@ import { FilterDrawer } from '../filter-drawer'
 import { CategoryChips } from './category-chips'
 import { ResultsCount } from './results-count'
 import type { Category } from '@/lib/api/get-categories'
+import type { City } from '@/lib/api/get-cities'
 
 interface FilterBarProps {
   totalResults: number
   categories: Category[]
+  cities: City[]
 }
 
 /**
@@ -20,6 +22,7 @@ interface FilterBarProps {
 export function FilterBar({
   totalResults,
   categories,
+  cities,
 }: FilterBarProps) {
   return (
     <div className="bg-[var(--color-background)] px-4 pt-5 pb-4 space-y-3">
@@ -28,7 +31,10 @@ export function FilterBar({
         <div className="flex-1">
           <TourSearch />
         </div>
-        <FilterDrawer categories={categories} />
+        <FilterDrawer
+          categories={categories}
+          cities={cities}
+        />
       </div>
 
       {/* Row 2: Category chips */}

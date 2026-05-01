@@ -9,7 +9,7 @@
 import { revalidateTag } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
-const VALID_TAGS = ['tours', 'categories', 'guides'] as const
+const VALID_TAGS = ['tours', 'categories', 'guides', 'cities'] as const
 
 export async function POST(request: NextRequest) {
   const secret = request.nextUrl.searchParams.get('secret')

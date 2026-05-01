@@ -12,6 +12,7 @@ import { validateTourFilters, type ValidatedTourFilters } from '@/lib/validation
 
 export interface TourFilters {
   categories?: string
+  cities?: string
   duration?: string
   accessible?: string
   sort?: string
@@ -63,6 +64,14 @@ function buildWhereClause(filters: ValidatedTourFilters): Where {
     const slugs = filters.categories.split(',').filter(Boolean)
     if (slugs.length > 0) {
       where['categories.slug'] = { in: slugs }
+    }
+  }
+
+  // City filter
+  if (filters.cities) {
+    const slugs = filters.cities.split(',').filter(Boolean)
+    if (slugs.length > 0) {
+      where['cities.slug'] = { in: slugs }
     }
   }
 

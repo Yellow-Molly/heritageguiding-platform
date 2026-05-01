@@ -17,7 +17,7 @@ import {
   CONTACT_PHONE_TEL,
   SOCIAL_URLS,
 } from '@/lib/contact-constants'
-import { getFeaturedTours } from '@/lib/api/get-featured-tours'
+import { getCitiesWithTours } from '@/lib/api/get-cities-with-tours'
 import type { Locale } from '@/i18n'
 // import { FooterNewsletterForm } from './footer-newsletter-form' // temporarily hidden for MVP
 import { FooterLanguageSelector } from './footer-language-selector'
@@ -34,13 +34,13 @@ export async function Footer() {
   const tCommon = await getTranslations({ locale, namespace: 'common' })
   const currentYear = new Date().getFullYear()
 
-  // Top 3 featured tours for the footer column. Fallback to empty list if Payload is unreachable.
-  let featuredTours: Awaited<ReturnType<typeof getFeaturedTours>> = []
+  // Cities with ≥1 published tour. Fallback to empty list if Payload is unreachable.
+  let footerCities: Awaited<ReturnType<typeof getCitiesWithTours>> = []
   try {
-    featuredTours = await getFeaturedTours(locale, 3)
+    footerCities = await getCitiesWithTours(locale, 5)
   } catch (err) {
-    console.error('[footer] getFeaturedTours failed; rendering without tour links', err)
-    featuredTours = []
+    console.error('[footer] getCitiesWithTours failed; rendering without city links', err)
+    footerCities = []
   }
 
   const supportLinks = [
@@ -138,19 +138,19 @@ export async function Footer() {
 
           {/* Links Columns */}
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-3 lg:grid-cols-4">
-            {/* Tours — server-fetched featured tours */}
+            {/* Tours — cities with ≥1 published tour */}
             <div>
               <h4 className="mb-4 font-semibold text-[#DBC078]">
                 {t('tourLinks.heading')}
               </h4>
               <ul className="space-y-3">
-                {featuredTours.map((tour) => (
-                  <li key={tour.id}>
+                {footerCities.map((city) => (
+                  <li key={city.id}>
                     <Link
-                      href={`/tours/${tour.slug}`}
+                      href={`/tours?cities=${city.slug}`}
                       className="text-sm text-[#e6d3a0]/70 transition-colors hover:text-white"
                     >
-                      {tour.title}
+                      {city.name}
                     </Link>
                   </li>
                 ))}

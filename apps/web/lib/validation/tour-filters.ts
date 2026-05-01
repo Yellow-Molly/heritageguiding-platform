@@ -15,19 +15,22 @@ export function sanitizeSearchQuery(query: string): string {
 /**
  * Zod schema for tour filter validation
  */
+/** Reusable slug-list refiner shared by categories/cities. */
+const slugListValid = (val: string | undefined) => {
+  if (!val) return true
+  const slugs = val.split(',').filter(Boolean)
+  return slugs.every((s) => /^[a-z0-9-]+$/.test(s))
+}
+
 export const tourFiltersSchema = z.object({
   categories: z
     .string()
     .optional()
-    .refine(
-      (val) => {
-        if (!val) return true
-        // Validate slug format only — CMS is source of truth for valid slugs
-        const cats = val.split(',').filter(Boolean)
-        return cats.every((cat) => /^[a-z0-9-]+$/.test(cat))
-      },
-      { message: 'Invalid category slug format' }
-    ),
+    .refine(slugListValid, { message: 'Invalid category slug format' }),
+  cities: z
+    .string()
+    .optional()
+    .refine(slugListValid, { message: 'Invalid city slug format' }),
   duration: z
     .string()
     .optional()

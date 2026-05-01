@@ -8,16 +8,18 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { DrawerFilterSections } from './filter-drawer-sections'
 import type { Category } from '@/lib/api/get-categories'
+import type { City } from '@/lib/api/get-cities'
 
 interface FilterDrawerProps {
   categories: Category[]
+  cities: City[]
 }
 
 /**
  * Mobile filter drawer shell: trigger button, backdrop, sliding panel.
  * Filter content sections are in filter-drawer-sections.tsx.
  */
-export function FilterDrawer({ categories }: FilterDrawerProps) {
+export function FilterDrawer({ categories, cities }: FilterDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
   const t = useTranslations('tours.filters')
   const searchParams = useSearchParams()
@@ -26,6 +28,10 @@ export function FilterDrawer({ categories }: FilterDrawerProps) {
 
   const selectedCategories = useMemo(() => {
     return searchParams.get('categories')?.split(',').filter(Boolean) || []
+  }, [searchParams])
+
+  const selectedCities = useMemo(() => {
+    return searchParams.get('cities')?.split(',').filter(Boolean) || []
   }, [searchParams])
 
   const clearAllFilters = useCallback(() => {
@@ -37,7 +43,8 @@ export function FilterDrawer({ categories }: FilterDrawerProps) {
   const currentDuration = searchParams.get('duration') || ''
   const isAccessible = searchParams.get('accessible') === 'true'
   const activeFiltersCount = [
-    selectedCategories.length > 0 ? 'c' : '',
+    selectedCities.length > 0 ? 'city' : '',
+    selectedCategories.length > 0 ? 'cat' : '',
     currentDuration,
     isAccessible ? 'a' : '',
   ].filter(Boolean).length
@@ -89,7 +96,9 @@ export function FilterDrawer({ categories }: FilterDrawerProps) {
         <div className="min-h-0 flex-1 space-y-6 overflow-y-auto p-4">
           <DrawerFilterSections
             categories={categories}
+            cities={cities}
             selectedCategories={selectedCategories}
+            selectedCities={selectedCities}
           />
         </div>
 

@@ -3,26 +3,29 @@
 import { useCallback } from 'react'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { Check } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import { TourSort } from './tour-sort'
+import { DrawerSlugListSection } from './drawer-slug-list-section'
 import type { Category } from '@/lib/api/get-categories'
-
-/** Sanitize category slug to prevent injection */
-function sanitizeSlug(slug: string): string {
-  return slug.toLowerCase().replace(/[^a-z0-9-]/g, '')
-}
+import type { City } from '@/lib/api/get-cities'
 
 interface DrawerSectionsProps {
   categories: Category[]
+  cities: City[]
   selectedCategories: string[]
+  selectedCities: string[]
 }
 
 /**
- * Filter drawer content sections: categories, duration, price, accessibility, sort.
- * Extracted from FilterDrawer to keep each file under 200 lines.
+ * Filter drawer content sections.
+ * Order top-to-bottom: City → Categories → Duration → Accessibility → Sort.
+ * Slug-list sections (city/category) reuse `DrawerSlugListSection`.
  */
-export function DrawerFilterSections({ categories, selectedCategories }: DrawerSectionsProps) {
+export function DrawerFilterSections({
+  categories,
+  cities,
+  selectedCategories,
+  selectedCities,
+}: DrawerSectionsProps) {
   const t = useTranslations('tours.filters')
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -30,6 +33,7 @@ export function DrawerFilterSections({ categories, selectedCategories }: DrawerS
 
   const currentDuration = searchParams.get('duration') || ''
   const isAccessible = searchParams.get('accessible') === 'true'
+
   const updateFilter = useCallback(
     (key: string, value: string | null) => {
       const params = new URLSearchParams(searchParams.toString())
@@ -41,27 +45,6 @@ export function DrawerFilterSections({ categories, selectedCategories }: DrawerS
     [searchParams, pathname, router]
   )
 
-  const toggleCategory = useCallback(
-    (categoryId: string) => {
-      const sanitized = sanitizeSlug(categoryId)
-      if (!sanitized) return
-      const params = new URLSearchParams(searchParams.toString())
-      let newSelected: string[]
-
-      if (selectedCategories.includes(sanitized)) {
-        newSelected = selectedCategories.filter((c) => c !== sanitized)
-      } else {
-        newSelected = [...selectedCategories, sanitized]
-      }
-
-      if (newSelected.length > 0) params.set('categories', newSelected.join(','))
-      else params.delete('categories')
-      params.delete('page')
-      router.push(`${pathname}?${params.toString()}`)
-    },
-    [searchParams, pathname, router, selectedCategories]
-  )
-
   const durationOptions = [
     { id: '120', label: t('under2hours') },
     { id: '180', label: t('twoToThreeHours') },
@@ -70,33 +53,22 @@ export function DrawerFilterSections({ categories, selectedCategories }: DrawerS
 
   return (
     <>
-      {/* Category Filter */}
-      <div>
-        <span className="mb-3 block text-sm font-medium text-[var(--color-text)]">{t('category')}</span>
-        <div className="space-y-2">
-          {categories.map((cat) => {
-            const isSelected = selectedCategories.includes(cat.slug)
-            return (
-              <button key={cat.id} type="button" onClick={() => toggleCategory(cat.slug)}
-                className={cn('flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm transition-colors',
-                  isSelected ? 'bg-[var(--color-primary)] text-white' : 'bg-[var(--color-background-alt)] text-[var(--color-text)] hover:bg-[var(--color-border)]'
-                )}>
-                <span>{cat.name}</span>
-                {isSelected && <Check className="h-4 w-4" />}
-              </button>
-            )
-          })}
-        </div>
-        {selectedCategories.length > 0 && (
-          <button type="button" onClick={() => {
-            const params = new URLSearchParams(searchParams.toString())
-            params.delete('categories'); params.delete('page')
-            router.push(`${pathname}?${params.toString()}`)
-          }} className="mt-2 text-xs text-[var(--color-primary)] hover:underline">
-            {t('clearCategories')}
-          </button>
-        )}
-      </div>
+      <DrawerSlugListSection
+        title={t('city')}
+        paramKey="cities"
+        items={cities}
+        selected={selectedCities}
+        clearLabel={t('clearCities')}
+      />
+
+      <DrawerSlugListSection
+        title={t('category')}
+        paramKey="categories"
+        items={categories}
+        selected={selectedCategories}
+        clearLabel={t('clearCategories')}
+        topBorder
+      />
 
       {/* Duration checkboxes (single-select) */}
       <div className="border-t border-[var(--color-border)] pt-4">
@@ -104,9 +76,12 @@ export function DrawerFilterSections({ categories, selectedCategories }: DrawerS
         <div className="space-y-2">
           {durationOptions.map((dur) => (
             <label key={dur.id} className="flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" checked={currentDuration === dur.id}
+              <input
+                type="checkbox"
+                checked={currentDuration === dur.id}
                 onChange={() => updateFilter('duration', currentDuration === dur.id ? null : dur.id)}
-                className="h-5 w-5 rounded border-[var(--color-border)] text-[var(--color-primary)] focus:ring-[var(--color-primary)]" />
+                className="h-5 w-5 rounded border-[var(--color-border)] text-[var(--color-primary)] focus:ring-[var(--color-primary)]"
+              />
               <span className="text-sm text-[var(--color-text)]">{dur.label}</span>
             </label>
           ))}
@@ -116,9 +91,12 @@ export function DrawerFilterSections({ categories, selectedCategories }: DrawerS
       {/* Accessibility */}
       <div className="border-t border-[var(--color-border)] pt-4">
         <label className="flex cursor-pointer items-center gap-3">
-          <input type="checkbox" checked={isAccessible}
+          <input
+            type="checkbox"
+            checked={isAccessible}
             onChange={(e) => updateFilter('accessible', e.target.checked ? 'true' : null)}
-            className="h-5 w-5 rounded border-[var(--color-border)] text-[var(--color-primary)] focus:ring-[var(--color-primary)]" />
+            className="h-5 w-5 rounded border-[var(--color-border)] text-[var(--color-primary)] focus:ring-[var(--color-primary)]"
+          />
           <span className="text-sm text-[var(--color-text)]">{t('wheelchairAccessible')}</span>
         </label>
       </div>

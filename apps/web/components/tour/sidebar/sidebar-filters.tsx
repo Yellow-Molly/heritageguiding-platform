@@ -5,32 +5,36 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { FilterCheckboxGroup } from './filter-checkbox-group'
 import type { Category } from '@/lib/api/get-categories'
+import type { City } from '@/lib/api/get-cities'
 
-/** Sanitize category slug to prevent injection */
+/** Sanitize slug to prevent injection in URL params. */
 function sanitizeSlug(slug: string): string {
   return slug.toLowerCase().replace(/[^a-z0-9-]/g, '')
 }
 
 interface SidebarFiltersProps {
   categories: Category[]
+  cities: City[]
 }
 
 /**
- * Desktop sidebar filter panel with 4 sections:
- * Categories (multi-select), Duration (single-select), Price Range, Accessibility.
+ * Desktop sidebar filter panel.
+ * Order top-to-bottom: City → Categories → Duration → Accessibility.
  * All filters sync to URL search params for shareable links.
  */
-export function SidebarFilters({ categories }: SidebarFiltersProps) {
+export function SidebarFilters({ categories, cities }: SidebarFiltersProps) {
   const t = useTranslations('tours.filters')
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
 
-  // --- Parse URL state ---
-  const selectedCategories = useMemo(() => {
-    const raw = searchParams.get('categories')?.split(',').filter(Boolean) || []
-    return raw.map(sanitizeSlug).filter(Boolean)
-  }, [searchParams])
+  // --- Parse URL state (sanitize + dedupe) ---
+  const parseSlugList = (key: string) => {
+    const raw = searchParams.get(key)?.split(',').filter(Boolean) || []
+    return [...new Set(raw.map(sanitizeSlug).filter(Boolean))]
+  }
+  const selectedCategories = useMemo(() => parseSlugList('categories'), [searchParams])
+  const selectedCities = useMemo(() => parseSlugList('cities'), [searchParams])
 
   const selectedDuration = useMemo(() => {
     const d = searchParams.get('duration')
@@ -53,20 +57,28 @@ export function SidebarFilters({ categories }: SidebarFiltersProps) {
     [searchParams, pathname, router]
   )
 
-  // --- Category toggle (multi-select) ---
-  const handleCategoryToggle = useCallback(
-    (slug: string) => {
-      // "all" clears categories
+  // --- Generic multi-select toggle factory ---
+  const makeMultiToggle = useCallback(
+    (key: string, current: string[]) => (slug: string) => {
       if (slug === 'all') {
-        updateParams({ categories: null })
+        updateParams({ [key]: null })
         return
       }
-      const next = selectedCategories.includes(slug)
-        ? selectedCategories.filter((c) => c !== slug)
-        : [...selectedCategories, slug]
-      updateParams({ categories: next.length > 0 ? next.join(',') : null })
+      const next = current.includes(slug)
+        ? current.filter((c) => c !== slug)
+        : [...current, slug]
+      updateParams({ [key]: next.length > 0 ? next.join(',') : null })
     },
-    [selectedCategories, updateParams]
+    [updateParams]
+  )
+
+  const handleCityToggle = useMemo(
+    () => makeMultiToggle('cities', selectedCities),
+    [makeMultiToggle, selectedCities]
+  )
+  const handleCategoryToggle = useMemo(
+    () => makeMultiToggle('categories', selectedCategories),
+    [makeMultiToggle, selectedCategories]
   )
 
   // --- Duration toggle (single-select: clicking same deselects) ---
@@ -88,6 +100,12 @@ export function SidebarFilters({ categories }: SidebarFiltersProps) {
   )
 
   // --- Build options ---
+  const cityOptions = [
+    { id: 'all', label: t('allCities') },
+    ...cities.map((c) => ({ id: c.slug, label: c.name })),
+  ]
+  const citySelected = selectedCities.length === 0 ? ['all'] : selectedCities
+
   const categoryOptions = [
     { id: 'all', label: t('allTours') },
     ...categories.map((c) => ({ id: c.slug, label: c.name })),
@@ -108,13 +126,23 @@ export function SidebarFilters({ categories }: SidebarFiltersProps) {
 
   return (
     <div className="space-y-6">
-      {/* Categories */}
+      {/* City */}
       <FilterCheckboxGroup
-        title={t('categories')}
-        options={categoryOptions}
-        selected={categorySelected}
-        onChange={handleCategoryToggle}
+        title={t('city')}
+        options={cityOptions}
+        selected={citySelected}
+        onChange={handleCityToggle}
       />
+
+      {/* Categories */}
+      <div className="border-t border-[var(--color-border)] pt-6">
+        <FilterCheckboxGroup
+          title={t('categories')}
+          options={categoryOptions}
+          selected={categorySelected}
+          onChange={handleCategoryToggle}
+        />
+      </div>
 
       {/* Duration */}
       <div className="border-t border-[var(--color-border)] pt-6">
@@ -127,7 +155,7 @@ export function SidebarFilters({ categories }: SidebarFiltersProps) {
         />
       </div>
 
-      {/* Accessibility (wheelchair only — hearing hidden until API supports it) */}
+      {/* Accessibility */}
       <div className="border-t border-[var(--color-border)] pt-6">
         <FilterCheckboxGroup
           title={t('accessibility')}

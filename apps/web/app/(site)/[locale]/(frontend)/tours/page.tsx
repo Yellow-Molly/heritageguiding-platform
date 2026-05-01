@@ -7,6 +7,7 @@ import { TourEmptyState } from '@/components/tour/tour-empty-state'
 import { TourCatalogClient } from './tour-catalog-client'
 import { getTours, type TourFilters } from '@/lib/api/get-tours'
 import { getCategories } from '@/lib/api/get-categories'
+import { getCities } from '@/lib/api/get-cities'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
 import { TourListSchema } from '@/components/seo'
@@ -33,9 +34,10 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
   const filters = await searchParams
   const t = await getTranslations({ locale, namespace: 'tours' })
 
-  // Single fetch for categories + tours (no double fetch)
-  const [categories, { tours, total, totalPages }] = await Promise.all([
+  // Single fetch for categories + cities + tours
+  const [categories, cities, { tours, total, totalPages }] = await Promise.all([
     getCategories('theme', locale),
+    getCities(locale),
     getTours(filters, locale),
   ])
 
@@ -44,7 +46,11 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
       <TourListSchema tours={tours} />
       <Header variant="solid" />
       <main className="min-h-screen bg-[var(--color-background)] pt-[var(--header-height)]">
-        <TourCatalogClient categories={categories} totalResults={total}>
+        <TourCatalogClient
+          categories={categories}
+          cities={cities}
+          totalResults={total}
+        >
           {tours.length === 0 ? (
             <TourEmptyState />
           ) : (
