@@ -1,7 +1,7 @@
 ---
 phase: 2
 title: "Measurement Infrastructure"
-status: pending
+status: done*
 priority: P1
 effort: 1 day (~6h)
 ---
@@ -135,16 +135,22 @@ export default withNextIntl(withPayload(bundleAnalyzer(nextConfig)))
 2. Identify which Phase 3 branch to take (TTFB / INP / LCP / TBT decision tree from brainstorm).
 
 ## Todo List
-- [ ] Read `260404` Phase 5 status, decide absorb vs skip
-- [ ] Install `@next/bundle-analyzer`, add to `next.config.ts`
-- [ ] Add `analyze` script to `package.json`
-- [ ] Run `npm run analyze`, save heavy-chunks list
-- [ ] Verify Web Vitals reporter mounted
-- [ ] Verify Web Vitals events firing on staging
-- [ ] Run Lighthouse mobile on 5 URLs, capture baseline JSON
-- [ ] Document Top 3 hypotheses for Phase 3
-- [ ] Document Speed Insights enablement steps for Pro upgrade
-- [ ] Write `measurement-summary-260501.md` decision package
+- [x] Read `260404` Phase 5 status — BLOCKED on missing GitHub Actions secrets, NOT absorbed
+- [x] Install `@next/bundle-analyzer`, add to `next.config.ts`
+- [x] Add `analyze` script to `package.json` (uses `cross-env` for Windows compat)
+- [x] Run `npm run analyze`, save heavy-chunks list (`baselines/bundle-analyzer-baseline-260501.md`)
+- [x] Verify Web Vitals reporter mounted — confirmed at `[locale]/layout.tsx:81`
+- [ ] Verify Web Vitals events firing on staging — requires manual mobile session post-Phase-1 deploy
+- [x] Run Lighthouse mobile on 5 URLs, capture baseline JSON (`baselines/lighthouse-baseline-260501.json`)
+- [x] Document Top 3 hypotheses for Phase 3 (Branch C primary, Branch D secondary, Branch A skip)
+- [x] Document Speed Insights enablement steps for Pro upgrade (`baselines/web-vitals-baseline-260501.md` gaps section)
+- [x] Write `measurement-summary-260501.md` decision package
+
+## Implementation Notes (2026-05-01)
+- **Track A (Lighthouse CI):** BLOCKED. `gh secret list` returns empty; recent runs fail with "PAYLOAD_SECRET is required in production". User action: set DATABASE_URL, PAYLOAD_SECRET, NEXT_PUBLIC_URL, BLOB_READ_WRITE_TOKEN in repo Settings > Secrets and variables > Actions. Once secrets are restored, the threshold flip from 0.7→0.9 in `lighthouserc.js:30` is a 1-line follow-up that stays in `260404` Phase 5.
+- **Track B (Bundle analyzer):** Wired `@next/bundle-analyzer` via `cross-env ANALYZE=true next build --webpack`. Top finding: 35% of total client size is Payload admin bundles — admin-only, not on public critical path. Public-route gzip ≈ 220 KB which is normal; the 16s TTI cannot be explained by JS size alone — points to third-party scripts (Bokun, Bubblav).
+- **Track C (Web Vitals):** Pipeline correctly wired (sendBeacon, CSP allows, rate limited 30/min/IP). Gap: endpoint logs to `console.info` only — no DB persistence. Pro upgrade + Speed Insights or new Payload `web_vitals_events` collection are the persistence options.
+- **Baseline:** All 5 routes audited via local Lighthouse 13 against staging (PSI rate-limited public quota). LCP catastrophic on listings (16-17s); TTFB excellent (4-5ms). Phase 3 plan locks in Branch C first, Branch D second, skip A, re-measure for B.
 
 ## Success Criteria
 - Lighthouse CI green (or absorbed work delivered green CI).

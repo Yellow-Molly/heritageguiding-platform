@@ -30,13 +30,15 @@ Quick wins (Day 1) + measurement infrastructure (Day 2) + data-driven fixes (Day
 | # | Phase | Status | Priority | Effort |
 |---|-------|--------|----------|--------|
 | 1 | [Quick Wins — Navigation Feedback](phase-01-quick-wins-navigation-feedback.md) | done | P0 | 1 day |
-| 2 | [Measurement Infrastructure](phase-02-measurement-infrastructure.md) | pending | P1 | 1 day |
+| 2 | [Measurement Infrastructure](phase-02-measurement-infrastructure.md) | done* | P1 | 1 day |
 | 3 | [Targeted Fixes by Data](phase-03-targeted-fixes-by-data.md) | pending | P1 | 2-3 days |
 
 ## Dependencies
 - **Phase 1** independent — can start immediately, no blockers.
 - **Phase 2** soft dependency on `260404-1815-performance-overhaul` Phase 5 (Lighthouse CI restore). If still pending, absorb that work; if complete, verify and skip.
 - **Phase 3** strictly depends on Phase 2 baseline — without numbers, no targeted fixes.
+
+> **Phase 2 done* note:** Tracks B (bundle analyzer), C (Web Vitals validation), and baseline capture COMPLETE. Track A (Lighthouse CI threshold restore in `260404` Phase 5) **BLOCKED** — `gh secret list` returns empty; CI fails on missing PAYLOAD_SECRET. User must set GitHub Actions secrets (DATABASE_URL, PAYLOAD_SECRET, NEXT_PUBLIC_URL, BLOB_READ_WRITE_TOKEN) before threshold restore can proceed. Decision logged in `baselines/measurement-summary-260501.md`. Phase 3 unblocked.
 
 ## Phase 11 Reuse (do NOT duplicate)
 Already complete in Phase 11 + `260404-1815-performance-overhaul`:
