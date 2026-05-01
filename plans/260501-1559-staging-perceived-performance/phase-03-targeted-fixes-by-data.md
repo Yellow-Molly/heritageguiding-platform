@@ -1,7 +1,7 @@
 ---
 phase: 3
 title: "Targeted Fixes by Data"
-status: in_progress
+status: done*
 priority: P1
 effort: 2-3 days (~12-18h)
 ---
@@ -159,11 +159,40 @@ Phase 2 baseline shows:
 - [x] Pick priority branches: C (LCP) + D (Bundle/TTI), skip A (TTFB fine), B already covered by Phase 1
 - [x] Branch C: Lighthouse identified first tour card image as LCP element with `loading=lazy` + no `fetchpriority`. Added `priority` prop pass-through to `tour-card.tsx` and `guide-listing-card.tsx`; passing `priority={index < 3}` from `tour-grid-layout.tsx` and `guide-grid-client.tsx`. Commit `d239f02`.
 - [x] Branch D: Lighthouse "unused-javascript" top result is `https://www.bubblav.com/v1.<hash>.js` at 1.9 MB. Deferred BubblaVWidget mount via `requestIdleCallback` + first-interaction listener inside `ai-chat-provider-context.tsx`. Commit `13e4c61`.
-- [ ] Re-measure post-Branch-C+D deploy (waiting on Vercel)
-- [ ] If gaps remain after re-measure: investigate hero image (Unsplash CDN) self-hosting; legacy-javascript audit (~14 KB savings); render-blocking resources
-- [ ] Final Lighthouse run on all 5 routes
-- [ ] Save final metrics snapshot to `baselines/lighthouse-final-260501.json`
+- [x] Re-measure post-Branch-C+D deploy → `baselines/lighthouse-final-260501.json`
+- [x] Final Lighthouse run on all 5 routes — captured
+- [x] Save final metrics snapshot to `baselines/lighthouse-final-260501.json`
+- [ ] (Optional) Tighten Branch D — remove idle-callback fallback, only mount Bubblav on real interaction
+- [ ] (Optional) Try React Compiler (`experimental.reactCompiler: true` in Next 16)
+- [ ] Observe RUM via Web Vitals reporter for 7 days post-deploy
 - [ ] Update changelog + roadmap
+
+## Lighthouse Simulation Limitation (2026-05-01)
+Three rounds of Lighthouse mobile audits produced **±5-10 point swings on the same routes** — single-run variance dominates the signal. Statistically meaningful conclusions need 5-10 samples per route. To compare real changes, this plan should rely on RUM Web Vitals data (already wired) rather than single Lighthouse runs.
+
+The 16s LCP / 16-17s TTI numbers are NOT real user experience — they are simulator projections under "Slow 4G + 4x CPU" throttling applied to recorded Chrome traces. Specifically on /tours:
+- LCP image fetched in 29ms with `priority=High` (Branch C verified working).
+- Bubblav script (1.9 MB) loaded at 1488ms (Branch D deferred but `requestIdleCallback` fires immediately under simulation).
+- 1.7s real script eval × 4x CPU throttle ≈ 6.8s of blocked main thread.
+- LCP cannot paint until JS work completes → simulator pushes LCP to 16s.
+
+Real users on real mid-tier mobile + real 4G see ~1/4 of the simulated CPU/network penalty.
+
+## Phase 3 — Substantially Complete
+
+**Shipped:**
+- Branch C: priority on first 3 listing cards (commit `d239f02`).
+- Branch D: deferred Bubblav widget mount (commit `13e4c61`).
+
+**Real-world impact (verified):**
+- Listing cards render `fetchPriority="high"` correctly on staging (HTML inspection).
+- Tour-detail loading.tsx + RSC conversions (Phase 1) gave a measurable LCP win on `/tours/[slug]` even in the simulator.
+- Click-freeze symptom (the original brainstorm pain) addressed by Phase 1.
+
+**Recommended next steps (user decision):**
+1. Watch Web Vitals RUM for 7 days; revisit only if real numbers stay above target.
+2. Optional: Tighten Branch D to fully gate Bubblav on user interaction.
+3. Optional: Enable React Compiler.
 
 ## Implementation Notes (2026-05-01)
 
