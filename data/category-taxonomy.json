@@ -1,0 +1,96 @@
+{
+  "themes": [
+    {
+      "slug": "history-heritage",
+      "icon": "castle",
+      "name": {
+        "sv": "Historia & arvskap",
+        "en": "History & Heritage",
+        "de": "Geschichte & Erbe"
+      }
+    },
+    {
+      "slug": "viking-medieval",
+      "icon": "swords",
+      "name": {
+        "sv": "Vikingatid & medeltid",
+        "en": "Viking & Medieval",
+        "de": "Wikinger & Mittelalter"
+      }
+    },
+    {
+      "slug": "architecture",
+      "icon": "landmark",
+      "name": {
+        "sv": "Arkitektur",
+        "en": "Architecture",
+        "de": "Architektur"
+      }
+    },
+    {
+      "slug": "culture-local-life",
+      "icon": "users",
+      "name": {
+        "sv": "Kultur & vardagsliv",
+        "en": "Culture & Local Life",
+        "de": "Kultur & Alltagsleben"
+      }
+    },
+    {
+      "slug": "family-friendly",
+      "icon": "baby",
+      "name": {
+        "sv": "Familjevänligt",
+        "en": "Family-Friendly",
+        "de": "Familienfreundlich"
+      }
+    },
+    {
+      "slug": "nature-water",
+      "icon": "trees",
+      "name": {
+        "sv": "Natur & vatten",
+        "en": "Nature & Water",
+        "de": "Natur & Wasser"
+      }
+    }
+  ],
+  "activities": [
+    {
+      "slug": "walking-tour",
+      "icon": "footprints",
+      "name": {
+        "sv": "Vandringstur",
+        "en": "Walking Tour",
+        "de": "Spaziergang"
+      }
+    },
+    {
+      "slug": "boat-tour",
+      "icon": "ship",
+      "name": {
+        "sv": "Båttur",
+        "en": "Boat Tour",
+        "de": "Bootstour"
+      }
+    },
+    {
+      "slug": "chauffeured-tour",
+      "icon": "car",
+      "name": {
+        "sv": "Chaufförsguidad tur",
+        "en": "Chauffeured Tour",
+        "de": "Chauffeurtour"
+      }
+    },
+    {
+      "slug": "day-trip",
+      "icon": "calendar",
+      "name": {
+        "sv": "Dagsutflykt",
+        "en": "Day Trip",
+        "de": "Tagesausflug"
+      }
+    }
+  ]
+}
