@@ -80,8 +80,8 @@ export function TourGridLayout({ initialTours, totalPages, filters, locale }: To
             : 'grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3 xl:gap-5 3xl:grid-cols-4 justify-items-center'
         }
       >
-        {tours.map((tour) => (
-          <TourCard key={tour.id} tour={tour} variant={viewMode} />
+        {tours.map((tour, index) => (
+          <TourCard key={tour.id} tour={tour} variant={viewMode} priority={index < 3} />
         ))}
       </div>
 

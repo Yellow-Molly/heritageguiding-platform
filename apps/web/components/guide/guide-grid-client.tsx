@@ -81,8 +81,8 @@ export function GuideGridClient({ initialGuides, totalPages, locale }: GuideGrid
   return (
     <div className="space-y-6">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {guides.map((guide) => (
-          <GuideListingCard key={guide.id} guide={guide} />
+        {guides.map((guide, index) => (
+          <GuideListingCard key={guide.id} guide={guide} priority={index < 3} />
         ))}
       </div>
 

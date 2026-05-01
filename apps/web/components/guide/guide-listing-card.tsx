@@ -10,13 +10,15 @@ import { languageDisplayNames } from '@/lib/language-display-names'
 
 interface GuideListingCardProps {
   guide: GuideListItem
+  /** Mark the photo as LCP candidate — eager + fetchpriority=high. Set true for first cards above the fold. */
+  priority?: boolean
 }
 
 /**
  * Portrait gallery card for the guides listing page.
  * Circular photo, centered content, stats line with credential-first logic.
  */
-export function GuideListingCard({ guide }: GuideListingCardProps) {
+export function GuideListingCard({ guide, priority = false }: GuideListingCardProps) {
   const allLanguages = [...guide.languages, ...(guide.additionalLanguages ?? [])]
 
   // Credential-first: first credential > yearsExperience > null
@@ -35,6 +37,8 @@ export function GuideListingCard({ guide }: GuideListingCardProps) {
                 src={guide.photo.url}
                 alt={guide.photo.alt}
                 fill
+                priority={priority}
+                fetchPriority={priority ? 'high' : 'auto'}
                 placeholder={guide.photo.blurDataUrl ? 'blur' : 'empty'}
                 blurDataURL={guide.photo.blurDataUrl}
                 className="rounded-full object-cover ring-2 ring-[var(--color-secondary-light)] lg:ring-[3px]"

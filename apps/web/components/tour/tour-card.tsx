@@ -15,6 +15,8 @@ interface TourCardProps {
   tour: FeaturedTour
   /** Display mode: grid (default) or list */
   variant?: 'grid' | 'list'
+  /** Mark the image as LCP candidate — eager + fetchpriority=high. Set true for first cards above the fold. */
+  priority?: boolean
 }
 
 /**
@@ -23,7 +25,7 @@ interface TourCardProps {
  * Mobile: horizontal 130px card with 130px image left, compact info right.
  * Responsive behavior via Tailwind breakpoints — no JS variant switching for mobile.
  */
-export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
+export function TourCard({ tour, variant = 'grid', priority = false }: TourCardProps) {
   const t = useTranslations('tours.filters')
   const isListView = variant === 'list'
 
@@ -51,6 +53,8 @@ export function TourCard({ tour, variant = 'grid' }: TourCardProps) {
               src={tour.image.url}
               alt={tour.image.alt}
               fill
+              priority={priority}
+              fetchPriority={priority ? 'high' : 'auto'}
               placeholder={tour.image.blurDataUrl ? 'blur' : 'empty'}
               blurDataURL={tour.image.blurDataUrl}
               className="object-cover transition-transform duration-500 group-hover:scale-105"
