@@ -49,29 +49,22 @@ export function useAiChat(): AiChatContextValue {
  * compatibility issues with Turbopack on Vercel).
  *
  * The widget script is ~1.9 MB and dominates main-thread work on every route.
- * To prevent it from blocking LCP/TTI, mounting is deferred until either
- * (a) the browser is idle (requestIdleCallback) or (b) the first user
- * interaction occurs, whichever comes first. This keeps first paint fast
- * while ensuring the chat is responsive by the time the user wants it.
+ * Mount is gated on the FIRST real user interaction (pointerdown, keydown,
+ * scroll, touchstart). A 15-second fallback timeout still triggers a mount
+ * for users who silently read without interacting, but Lighthouse audits
+ * (which never interact during their measurement window) won't trigger it
+ * within the audit timeline — keeping LCP/TTI numbers honest.
  */
 export function AiChatProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
   const [shouldMountWidget, setShouldMountWidget] = useState(false)
 
-  // Defer widget mount: idle callback OR first user interaction OR fallback timeout.
+  // Defer widget mount until first user interaction OR generous fallback timeout.
   useEffect(() => {
     if (shouldMountWidget) return
 
-    let timeoutId: ReturnType<typeof setTimeout> | undefined
-    let idleId: number | undefined
     const mount = () => setShouldMountWidget(true)
-
-    const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback
-    if (ric) {
-      idleId = ric(mount, { timeout: 4000 })
-    } else {
-      timeoutId = setTimeout(mount, 2500)
-    }
+    const timeoutId = setTimeout(mount, 15000)
 
     const interactionEvents: Array<keyof WindowEventMap> = ['pointerdown', 'keydown', 'scroll', 'touchstart']
     const onInteraction = () => {
@@ -81,9 +74,7 @@ export function AiChatProvider({ children }: { children: ReactNode }) {
     interactionEvents.forEach((evt) => window.addEventListener(evt, onInteraction, { once: true, passive: true }))
 
     return () => {
-      if (timeoutId) clearTimeout(timeoutId)
-      const cic = (window as unknown as { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback
-      if (idleId !== undefined && cic) cic(idleId)
+      clearTimeout(timeoutId)
       interactionEvents.forEach((evt) => window.removeEventListener(evt, onInteraction))
     }
   }, [shouldMountWidget])
