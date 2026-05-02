@@ -123,15 +123,30 @@ export async function getGuides(
 
   const needsPostFilter = !!(filters.specialization || filters.area)
 
-  // When post-filtering by relationship fields, fetch all results to paginate accurately
+  // When post-filtering by relationship fields, fetch all results to paginate accurately.
+  // `select` excludes email/phone (privacy-critical) and other unused profile fields.
   const result = await payload.find({
     collection: 'guides',
     where,
-    depth: 2,
+    depth: 1,
     locale: locale as 'sv' | 'en' | 'de',
     page: needsPostFilter ? 1 : page,
     limit: needsPostFilter ? 200 : limit,
     sort: 'name',
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      status: true,
+      photo: true,
+      bio: true,
+      languages: true,
+      additionalLanguages: true,
+      specializations: true,
+      operatingAreas: true,
+      credentials: true,
+      yearsExperience: true,
+    },
   })
 
   // Batch-query published tour counts per guide (single query, no N+1)
@@ -204,7 +219,7 @@ export interface GuideFilterOptions {
  * Extract unique filter options from all active guides.
  * Lightweight — reuses cached guide data.
  */
-export async function getGuideFilterOptions(locale: string = 'en'): Promise<GuideFilterOptions> {
+async function fetchGuideFilterOptions(locale: string = 'en'): Promise<GuideFilterOptions> {
   const { guides } = await getGuides({ limit: '200' }, locale)
 
   const langSet = new Set<string>()
@@ -223,3 +238,14 @@ export async function getGuideFilterOptions(locale: string = 'en'): Promise<Guid
     areas: [...areaMap.values()].sort((a, b) => a.name.localeCompare(b.name)),
   }
 }
+
+/**
+ * Cached filter options for the /guides listing.
+ * Revalidates on-demand via guides/categories/cities tag invalidation;
+ * 1 h soft TTL is the failsafe.
+ */
+export const getGuideFilterOptions = unstable_cache(
+  fetchGuideFilterOptions,
+  ['guide-filter-options'],
+  { tags: ['guides', 'categories', 'cities'], revalidate: 3600 }
+)

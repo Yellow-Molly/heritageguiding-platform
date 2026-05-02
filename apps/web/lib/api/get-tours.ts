@@ -3,6 +3,7 @@
  * Builds WHERE clauses from validated filter params and queries Payload directly.
  */
 
+import { unstable_cache } from 'next/cache'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Where } from 'payload'
@@ -105,13 +106,16 @@ function buildWhereClause(filters: ValidatedTourFilters): Where {
 }
 
 /**
- * Get tours with filtering, sorting, and pagination from Payload CMS.
- * @param filters - Filter and sort parameters
- * @returns Paginated tours response
+ * Internal: actual tours fetch. Wrapped below by `unstable_cache`.
+ * Takes already-validated filters so the cache key is keyed on the canonical
+ * shape (`sort` default applied, `q` sanitized) rather than raw searchParams —
+ * prevents key fragmentation across `?sort=popular` vs missing-sort, etc.
+ * Card-only field set — see `tour-payload-mapper.ts` and `tour-card.tsx` for consumers.
  */
-export async function getTours(filters: TourFilters = {}, locale: string = 'sv'): Promise<ToursResponse> {
-  const validatedFilters = validateTourFilters(filters as Record<string, string | undefined>)
-
+async function fetchTours(
+  validatedFilters: ValidatedTourFilters,
+  locale: string
+): Promise<ToursResponse> {
   const payload = await getPayload({ config })
 
   const page = parseInt(validatedFilters.page || '1', 10)
@@ -128,7 +132,19 @@ export async function getTours(filters: TourFilters = {}, locale: string = 'sv')
     locale: payloadLocale,
     page,
     limit,
-    depth: 2,
+    depth: 1,
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      shortDescription: true,
+      pricing: true,
+      duration: true,
+      maxGroupSize: true,
+      featured: true,
+      accessibility: true,
+      images: true,
+    },
   })
 
   const tours = result.docs.map((doc) =>
@@ -141,6 +157,25 @@ export async function getTours(filters: TourFilters = {}, locale: string = 'sv')
     page: result.page ?? page,
     totalPages: result.totalPages,
   }
+}
+
+const cachedFetchTours = unstable_cache(
+  fetchTours,
+  ['tours-list'],
+  { tags: ['tours'], revalidate: 300 }
+)
+
+/**
+ * Get tours with filtering, sorting, and pagination from Payload CMS.
+ * Validates + normalizes filters BEFORE the cache so the cache key is canonical.
+ * Revalidated on tour edits via `revalidateTag('tours')`.
+ */
+export async function getTours(
+  filters: TourFilters = {},
+  locale: string = 'sv'
+): Promise<ToursResponse> {
+  const validatedFilters = validateTourFilters(filters as Record<string, string | undefined>)
+  return cachedFetchTours(validatedFilters, locale)
 }
 
 /**

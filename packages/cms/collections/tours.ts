@@ -128,6 +128,7 @@ export const Tours: CollectionConfig = {
       type: 'relationship',
       relationTo: 'categories',
       hasMany: true,
+      index: true,
       admin: { description: 'Tour categories/themes' },
     },
     {

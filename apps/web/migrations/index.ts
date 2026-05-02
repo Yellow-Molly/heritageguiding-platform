@@ -5,6 +5,7 @@ import * as migration_20260405_add_media_blur_data_url from './20260405_add_medi
 import * as migration_20260412_151100_add_guide_years_experience from './20260412_151100_add_guide_years_experience';
 import * as migration_20260419_154101_add_guide_profile_fields from './20260419_154101_add_guide_profile_fields';
 import * as migration_20260501_083209_add_tours_cities_relation from './20260501_083209_add_tours_cities_relation';
+import * as migration_20260502_181007_add_listing_query_indexes from './20260502_181007_add_listing_query_indexes';
 
 export const migrations = [
   {
@@ -41,5 +42,10 @@ export const migrations = [
     up: migration_20260501_083209_add_tours_cities_relation.up,
     down: migration_20260501_083209_add_tours_cities_relation.down,
     name: '20260501_083209_add_tours_cities_relation'
+  },
+  {
+    up: migration_20260502_181007_add_listing_query_indexes.up,
+    down: migration_20260502_181007_add_listing_query_indexes.down,
+    name: '20260502_181007_add_listing_query_indexes',
   },
 ];

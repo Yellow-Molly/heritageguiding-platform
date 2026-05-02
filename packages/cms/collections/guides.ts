@@ -57,6 +57,7 @@ export const Guides: CollectionConfig = {
       type: 'select',
       required: true,
       defaultValue: 'active',
+      index: true,
       options: [
         { label: 'Active', value: 'active' },
         { label: 'Inactive', value: 'inactive' },
