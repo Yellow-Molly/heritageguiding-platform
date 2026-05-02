@@ -1,14 +1,17 @@
 ---
 title: Cache getGuides for /guides listing (Option A)
 description: Wire /guides + load-more action to existing getCachedGuides; add 10 min revalidate failsafe. Target getGuides warm p95 <100ms (cache hit) vs current 500-600ms.
-status: in-progress
+status: completed
 priority: P2
 effort: ~30m
 branch: master
 tags: [perf, cache, follow-up]
 created: 2026-05-03
+completed: 2026-05-03
+deploy: heritageguiding-platform-qyizwjs3j (alias staging.privatetours.se)
+outcome: gate-pass-getguides-p95-19ms-vs-500ms-baseline
 predecessor: plans/260502-2215-perf-measurement-fix/
-baseline: plans/260502-0048-instant-filter-feedback/baselines/guides-after-deferred.md
+baseline: plans/260503-0038-cache-getguides-listing/baselines/guides-post-cache.md
 ---
 
 # Option A — Cache getGuides for /guides listing
@@ -54,8 +57,12 @@ Three small edits:
 
 | # | Title | Status | Effort |
 |---|---|---|---|
-| 01 | Plan + implement + commit | in-progress | 30m |
-| 02 | Measure staging post-deploy | pending | 30m |
+| 01 | Plan + implement + commit | completed (commit `0aec000`) | 30m |
+| 02 | Measure staging post-deploy | completed (gate pass, p95=18.6ms) | 30m |
+
+## Outcome
+
+`getGuides` warm p95 dropped from ~500-600ms to **18.6ms** (n=34, 85% capture rate vs 1.4% pre-deploy). Wall-clock p50 improved 37% (920→581ms). Render overhead is now the dominant remaining cost. Full distribution: `baselines/guides-post-cache.md`.
 
 ## Gate
 

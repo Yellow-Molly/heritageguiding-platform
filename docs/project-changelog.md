@@ -4,6 +4,23 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-03] — Cache getGuides for /guides Listing (Option A) ✓ GATE PASS
+
+**Type:** Performance / Backend
+**Scope:** `getGuides` cache adoption — `/guides` page + load-more server action
+
+- `/guides/page.tsx` and `guide-load-more-action.ts` were calling `getGuides` directly, bypassing the existing `getCachedGuides` wrap (only homepage was using it). Switched both to `getCachedGuides` and added `revalidate: 600` failsafe.
+- `unstable_cache` auto-keys by call args (filters + locale) so callers get filter-aware entries without manual key listing. Tag `['guides']` is already invalidated by `revalidate-cache-tags-hook` on guide upsert/delete.
+- **Gate <200ms PASSED:** `getGuides` warm p95 dropped from ~500-600ms → **18.6ms** (n=34). Wall-clock p50 improved 37% (920→581ms). Server-side log capture rate jumped from 1.4% → 85% (cache shrunk the get-window enough that events flush before whatever was clipping them).
+- **Caveat:** tour-count drift bound to 10 min — tour CRUD does not tag-bust `'guides'`. Acceptable; revisit if user-visible.
+- **Next candidate:** apply same pattern to `tours/page.tsx` (still calls `getTours` directly).
+
+**Plan:** `plans/260503-0038-cache-getguides-listing/`
+**Baseline:** `plans/260503-0038-cache-getguides-listing/baselines/guides-post-cache.md`
+**Commits:** `0aec000`
+
+---
+
 ## [2026-05-02] — getGuides Tour-Count SQL Aggregate (follow-up to R1+R2+R3) ✗ GATE FAILED
 
 **Type:** Performance / Backend (correctness improvement, perf gate not met)
