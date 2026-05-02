@@ -1,6 +1,6 @@
 'use server'
 
-import { getGuides, type GuideListItem } from '@/lib/api/get-guides'
+import { getCachedGuides, type GuideListItem } from '@/lib/api/get-guides'
 
 const VALID_LOCALES = ['sv', 'en', 'de'] as const
 
@@ -17,7 +17,7 @@ export async function fetchMoreGuides(
     return { guides: [], hasMore: false }
   }
   const params = new URLSearchParams(filterString)
-  const result = await getGuides(
+  const result = await getCachedGuides(
     {
       q: params.get('q') || undefined,
       language: params.get('language') || undefined,

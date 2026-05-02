@@ -207,13 +207,17 @@ export async function getGuides(
 }
 
 /**
- * Cached version of getGuides for static/server-rendered pages (e.g. homepage).
- * Revalidates on-demand via revalidateTag('guides').
+ * Cached version of getGuides for server-rendered pages and the listing route.
+ * `unstable_cache` auto-keys by call args (filters + locale), so callers get
+ * filter-aware cache entries without listing keys manually.
+ * Tag `['guides']` is invalidated by packages/cms `revalidate-cache-tags-hook`
+ * on guide upsert/delete; `revalidate: 600` is a 10 min failsafe that also
+ * bounds tourCount drift (tour CRUD does not tag-bust guides).
  */
 export const getCachedGuides = unstable_cache(
   getGuides,
   ['guides-list'],
-  { tags: ['guides'] }
+  { tags: ['guides'], revalidate: 600 }
 )
 
 export interface GuideFilterOptions {

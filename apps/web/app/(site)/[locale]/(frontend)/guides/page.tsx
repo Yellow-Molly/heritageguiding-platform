@@ -7,7 +7,7 @@ import { GuideListingHero } from '@/components/guide/guide-listing-hero'
 import { GuideFilterBar } from '@/components/guide/guide-filter-bar'
 import { GuideGridClient } from '@/components/guide/guide-grid-client'
 import { GuideCatalogClient } from '@/components/guide/guide-catalog-client'
-import { getGuides, getGuideFilterOptions, type GuideFilters } from '@/lib/api/get-guides'
+import { getCachedGuides, getGuideFilterOptions, type GuideFilters } from '@/lib/api/get-guides'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
 import { GuideListSchema } from '@/components/seo'
@@ -38,7 +38,7 @@ export default async function GuidesPage({ params, searchParams }: GuidesPagePro
   // for late-resolving metrics — see plans/260502-2215-perf-measurement-fix/).
   const t0 = performance.now()
   const tG0 = performance.now()
-  const guidesP = getGuides({ ...filters, limit: '9' }, locale).then((r) => {
+  const guidesP = getCachedGuides({ ...filters, limit: '9' }, locale).then((r) => {
     const dur = performance.now() - tG0
     after(() => console.log(`[guides-perf] guides;dur=${dur.toFixed(1)}`))
     return r
