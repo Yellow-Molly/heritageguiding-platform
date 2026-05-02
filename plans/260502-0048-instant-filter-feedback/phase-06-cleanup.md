@@ -1,10 +1,10 @@
 ---
 phase: 06
 title: Cleanup Measurement + Docs Sync
-status: docs synced (instrumentation removal blocked on Phase 01 staging capture)
+status: docs synced; instrumentation removal deferred until query-optimization follow-ups ship
 priority: medium
 effort: 20m
-depends: [05]
+depends: [05, follow-up perf issues]
 ---
 
 # Phase 06 — Cleanup Measurement + Docs Sync
@@ -15,9 +15,9 @@ depends: [05]
 
 ## Overview
 **Priority:** Medium
-**Status:** Pending (blocked by 05)
+**Status:** Deferred. Phase 01 outcome: BLOCK band on both routes (`getTours` p95 1396ms, `getGuideFilterOptions` p95 821ms). Instrumentation must remain in place for the follow-up perf optimization work to validate against; this phase runs only after those follow-ups ship and the baselines are re-captured.
 
-Apply the Phase 01 decision rule. Remove or convert temporary instrumentation. Update docs. Optionally open follow-up issue if query optimization is warranted.
+Apply the Phase 01 decision rule. Remove or convert temporary instrumentation. Update docs.
 
 ## Key Insights
 - Decision rule (from brainstorm):

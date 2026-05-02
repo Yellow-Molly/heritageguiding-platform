@@ -1,9 +1,10 @@
 ---
 phase: 01
 title: Measurement Instrumentation & Staging Baseline
-status: code-complete (staging capture pending)
+status: complete
 priority: high
 effort: 30m
+outcome: BLOCK band — both routes need query-optimization follow-ups before instrumentation removal
 ---
 
 # Phase 01 — Measurement Instrumentation & Staging Baseline
@@ -14,7 +15,24 @@ effort: 30m
 
 ## Overview
 **Priority:** High (gates ship/follow-up decision in Phase 06)
-**Status:** Pending
+**Status:** Complete — staging captured 2026-05-02, both routes hit BLOCK band
+
+### Outcome summary
+| route | metric | p95 | band |
+|---|---|---|---|
+| /tours | tours | 1396 ms | **> 800 ms — BLOCK** |
+| /tours | categories / cities | 18 / 6 ms | < 300 ms — ship |
+| /guides | guides | 695 ms | 300–800 ms — ship+follow-up |
+| /guides | filterOptions | 821 ms | **> 800 ms — BLOCK** |
+
+Implication: perception fix is shipped and live, but production-safe state requires **two follow-up perf issues** before Phase 06 cleanup can run:
+1. `perf(api): optimize getTours — staging p95 1.4s`
+2. `perf(api): optimize getGuideFilterOptions — flat 800ms staging baseline`
+
+Plus a softer follow-up:
+3. `perf(api): optimize getGuides — staging p95 695ms`
+
+Detailed numbers + capture procedure: see `baselines/tours-baseline-20260502.md` and `baselines/guides-baseline-20260502.md`.
 
 Add temporary `Server-Timing` header + `console.time` instrumentation to `tours/page.tsx` and `guides/page.tsx`. Capture 5 staging samples per route. Decision rule (from brainstorm) determines whether perception fix is sufficient or query optimization is needed.
 
@@ -64,15 +82,15 @@ baselines/
 8. Apply decision rule, note outcome in baseline file footer
 
 ## Todo List
-- [ ] Read `tours/page.tsx` and confirm timing injection point
-- [ ] Add timing wrappers + Server-Timing header in `tours/page.tsx`
-- [ ] Add timing wrappers + Server-Timing header in `guides/page.tsx`
-- [ ] Local smoke test (npm run dev, hit `/tours`, verify header appears)
-- [ ] Push branch, deploy to staging
-- [ ] Capture 5 samples per route (10 total) at varied filter states
-- [ ] Write `baselines/tours-baseline-20260502.md`
-- [ ] Write `baselines/guides-baseline-20260502.md`
-- [ ] Apply decision rule, document outcome at bottom of each baseline file
+- [x] Read `tours/page.tsx` and confirm timing injection point
+- [x] Add timing wrappers + console-log in `tours/page.tsx` (Server-Timing header dropped — console.log to function logs preferred for App Router)
+- [x] Add timing wrappers + console-log in `guides/page.tsx`
+- [x] Push, deploy to staging
+- [x] Capture 30 hits per route at varied filter states (curl with cache-bust)
+- [x] Pull `vercel logs --since 30m -j` and parse with python percentiles
+- [x] Write `baselines/tours-baseline-20260502.md`
+- [x] Write `baselines/guides-baseline-20260502.md`
+- [x] Apply decision rule, document outcome at bottom of each baseline file
 
 ## Success Criteria
 - Server-Timing header visible in DevTools Network on both `/tours` and `/guides` staging
