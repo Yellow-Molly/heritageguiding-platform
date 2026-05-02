@@ -4,6 +4,23 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-02] — Listing Query Perf (R1+R2+R3) ✓ STAGING-MEASURED
+
+**Type:** Performance / Backend
+**Scope:** `getTours`, `getGuides`, `getGuideFilterOptions`; Postgres index on `guides.status`; auto-migrate at build time
+
+- `getGuideFilterOptions` p95 821 ms → **20 ms warm** (40× speedup; cache hit rate ~94%; tags `['guides','categories','cities']` revalidate=3600)
+- `getTours` p95 1396 ms → **10–65 ms warm** (cache; cold path ~1100 ms but bounded by 5-min revalidate). `depth: 2 → 1` + `select` projection.
+- `getGuides` `depth: 2 → 1` + `select` (privacy-safe, excludes email/phone). New index `guides_status_idx`.
+- Build pipeline: `prebuild` now runs `yes | npx payload migrate` so deploys auto-apply pending migrations (one-time `yes` workaround for Payload's residual dev-mode prompt).
+- **Open follow-up:** `getGuides` p95 still ~700–800 ms — bottleneck is the tour-count batch query (`limit:0` over all matching tours), NOT the indexed status filter. Index ships for future scale; query rewrite is the next lever.
+
+**Plan:** `plans/260502-1308-listing-query-perf/`
+**Baselines:** `plans/260502-0048-instant-filter-feedback/baselines/{tours,guides}-post-r1r2r3.md`
+**Commits:** `5dd4b21`, `0c33fb6`, `09e6ce0`, `12df4dd`
+
+---
+
 ## [2026-05-02] — Instant Listing Filter Feedback ✓ IMPLEMENTATION COMPLETE (staging measurement pending)
 
 **Type:** Perceived Performance / UX

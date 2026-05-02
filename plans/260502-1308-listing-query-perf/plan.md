@@ -36,7 +36,7 @@ Three surgical changes — sequenced — per `plans/reports/brainstorm-260502-11
 | 01 | Cache `getGuideFilterOptions` (R1) | done | 30m | — |
 | 02 | Tours depth + select + cache (R2) | done | 1.5–2h | — |
 | 03 | Guides depth + select + indexes (R3) | done | 1.5h | — |
-| 04 | Re-measure + close out | pending (needs staging deploy) | 1h | 01, 02, 03 |
+| 04 | Re-measure + close out | done — R1 PASS, R2 PASS warm, R3 partial (index applied; tour-count batch query is residual bottleneck) | 1h | 01, 02, 03 |
 
 Phases 01–03 are independent; recommended order R1→R2→R3 lets each ship + re-measure on staging using existing `[tours-perf]` / `[guides-perf]` instrumentation. Do NOT remove instrumentation until Phase 04.
 

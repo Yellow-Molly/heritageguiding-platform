@@ -1,7 +1,7 @@
 ---
 phase: 04
 title: Re-measure + close out
-status: pending
+status: done (R1 PASS, R2 PASS warm, R3 partial — index applied but bottleneck shifted to tour-count batch query)
 priority: P1
 effort: 1h
 depends: [01, 02, 03]
