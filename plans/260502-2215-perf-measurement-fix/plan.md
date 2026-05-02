@@ -1,13 +1,17 @@
 ---
 title: Reliable getGuides perf telemetry via after()
 description: Switch listing perf instrumentation to next/server `after()` so logs survive Vercel's serverless log aggregation. Capture a clean baseline to inform the cache/raw-SQL/denormalize follow-up decision.
-status: pending
+status: completed-partial
 priority: P2
 effort: ~45m
 branch: master
 tags: [perf, telemetry, instrumentation, follow-up]
 created: 2026-05-02
+completed: 2026-05-03
+outcome: instrumentation-shipped-but-vercel-still-drops-guides-dur
 ---
+
+> **Outcome:** `after()` instrumentation shipped (`bd7936d`), but Vercel's log aggregator still drops `guides;dur` events at ~99% rate (1 captured / 72 hits). Same drop pattern as before. Hypothesis (timing → log truncation) was wrong — `filterOptions;dur` uses identical `after()` code shape and captures cleanly. Wall-clock E2E + single server-side sample (594.5 ms) confirm `getGuides` warm p95 ≈ 500–600 ms — same conclusion as the post-aggregate baseline. Recommend follow-up A (cache `getGuides` with filter-aware keys). Full analysis: `plans/260502-0048-instant-filter-feedback/baselines/guides-after-deferred.md`.
 
 # Reliable getGuides perf telemetry
 
@@ -44,7 +48,7 @@ Apply to both `/guides` and `/tours` page handlers (parity; tours instrumentatio
 
 | # | Title | Status | Effort | Deps |
 |---|---|---|---|---|
-| 01 | Switch listing instrumentation to `after()` + capture clean baseline | pending | 45m | — |
+| 01 | Switch listing instrumentation to `after()` + capture clean baseline | completed-partial (instrumentation shipped; Vercel still drops guides;dur) | 45m | — |
 
 ## Gate
 
