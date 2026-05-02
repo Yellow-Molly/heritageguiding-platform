@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { after } from 'next/server'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
@@ -34,25 +35,26 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
   const filters = await searchParams
   const t = await getTranslations({ locale, namespace: 'tours' })
 
-  // [PERF-MEASURE] Temporary instrumentation — removed in Phase 06
-  // See plans/260502-0048-instant-filter-feedback/phase-01-measurement.md
+  // [PERF-MEASURE] Temporary instrumentation — removed in Phase 06.
+  // Logs deferred via `after()` so they fire post-response-stream and survive
+  // Vercel's serverless log aggregation (see plans/260502-2215-perf-measurement-fix/).
   const t0 = performance.now()
   const tCat0 = performance.now()
   const categoriesP = getCategories('theme', locale).then((r) => {
     const dur = performance.now() - tCat0
-    console.log(`[tours-perf] categories;dur=${dur.toFixed(1)}`)
+    after(() => console.log(`[tours-perf] categories;dur=${dur.toFixed(1)}`))
     return r
   })
   const tCity0 = performance.now()
   const citiesP = getCities(locale).then((r) => {
     const dur = performance.now() - tCity0
-    console.log(`[tours-perf] cities;dur=${dur.toFixed(1)}`)
+    after(() => console.log(`[tours-perf] cities;dur=${dur.toFixed(1)}`))
     return r
   })
   const tTours0 = performance.now()
   const toursP = getTours(filters, locale).then((r) => {
     const dur = performance.now() - tTours0
-    console.log(`[tours-perf] tours;dur=${dur.toFixed(1)}`)
+    after(() => console.log(`[tours-perf] tours;dur=${dur.toFixed(1)}`))
     return r
   })
   const [categories, cities, { tours, total, totalPages }] = await Promise.all([
@@ -60,7 +62,8 @@ export default async function ToursPage({ params, searchParams }: ToursPageProps
     citiesP,
     toursP,
   ])
-  console.log(`[tours-perf] total;dur=${(performance.now() - t0).toFixed(1)} filters=${JSON.stringify(filters)}`)
+  const totalDur = performance.now() - t0
+  after(() => console.log(`[tours-perf] total;dur=${totalDur.toFixed(1)} filters=${JSON.stringify(filters)}`))
 
   return (
     <>

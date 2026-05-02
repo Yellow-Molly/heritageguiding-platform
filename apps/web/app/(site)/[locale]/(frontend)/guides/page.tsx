@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { after } from 'next/server'
 import { getTranslations } from 'next-intl/server'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
@@ -31,24 +32,29 @@ export default async function GuidesPage({ params, searchParams }: GuidesPagePro
   const { locale } = await params
   const filters = await searchParams
 
-  // [PERF-MEASURE] Temporary instrumentation — removed in Phase 06
-  // See plans/260502-0048-instant-filter-feedback/phase-01-measurement.md
+  // [PERF-MEASURE] Temporary instrumentation — removed in Phase 06.
+  // Logs deferred via `after()` so they fire post-response-stream and survive
+  // Vercel's serverless log aggregation (in-flight `console.log` was being dropped
+  // for late-resolving metrics — see plans/260502-2215-perf-measurement-fix/).
   const t0 = performance.now()
   const tG0 = performance.now()
   const guidesP = getGuides({ ...filters, limit: '9' }, locale).then((r) => {
-    console.log(`[guides-perf] guides;dur=${(performance.now() - tG0).toFixed(1)}`)
+    const dur = performance.now() - tG0
+    after(() => console.log(`[guides-perf] guides;dur=${dur.toFixed(1)}`))
     return r
   })
   const tF0 = performance.now()
   const filterOptionsP = getGuideFilterOptions(locale).then((r) => {
-    console.log(`[guides-perf] filterOptions;dur=${(performance.now() - tF0).toFixed(1)}`)
+    const dur = performance.now() - tF0
+    after(() => console.log(`[guides-perf] filterOptions;dur=${dur.toFixed(1)}`))
     return r
   })
   const [{ guides, total, totalPages }, filterOptions] = await Promise.all([
     guidesP,
     filterOptionsP,
   ])
-  console.log(`[guides-perf] total;dur=${(performance.now() - t0).toFixed(1)} filters=${JSON.stringify(filters)}`)
+  const totalDur = performance.now() - t0
+  after(() => console.log(`[guides-perf] total;dur=${totalDur.toFixed(1)} filters=${JSON.stringify(filters)}`))
 
   return (
     <>
