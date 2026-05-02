@@ -4,6 +4,20 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-03] — Strip Listing Perf Instrumentation (Phase 06) ✓
+
+**Type:** Cleanup
+**Scope:** `apps/web/app/(site)/[locale]/(frontend)/{guides,tours}/page.tsx`
+
+- Removed temporary `after()`/console.log instrumentation (`[guides-perf]`, `[tours-perf]`) from both listing page handlers per parent plan's Phase 06 decision rule (warm p95 < 300ms threshold met).
+- Cache wraps (`getCachedGuides`, `cachedFetchTours`) and tag-revalidation hooks left intact.
+- Verified post-deploy `nt092hnny`: 24 smoke-check hits all 200, wall-clock distribution unchanged, log stream contains 0 `*-perf` strings.
+
+**Plan:** `plans/260503-0055-perf-instrumentation-cleanup/`
+**Commits:** `490d4d6`
+
+---
+
 ## [2026-05-03] — Cache getGuides for /guides Listing (Option A) ✓ GATE PASS
 
 **Type:** Performance / Backend

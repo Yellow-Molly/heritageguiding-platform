@@ -1,12 +1,15 @@
 ---
 title: Strip listing perf instrumentation (Phase 06 cleanup)
 description: Remove temporary [guides-perf] and [tours-perf] after()/console.log instrumentation from listing page handlers per Phase 06 decision rule (both routes warm p95 <300ms).
-status: in-progress
+status: completed
 priority: P3
 effort: ~15m
 branch: master
 tags: [cleanup, perf, instrumentation]
 created: 2026-05-03
+completed: 2026-05-03
+deploy: heritageguiding-platform-nt092hnny (commit 490d4d6)
+outcome: instrumentation-removed-routes-clean
 predecessor: plans/260503-0038-cache-getguides-listing/
 parent: plans/260502-0048-instant-filter-feedback/phase-06-cleanup.md
 ---
@@ -43,10 +46,15 @@ Pre-strip /tours wall-clock check (n=40 sequential, no cache-bust):
 
 ## Verification
 
-Post-deploy:
-1. `grep` source tree for `[guides-perf]` / `[tours-perf]` — must be 0 hits.
-2. Hit `/guides` and `/tours` on staging — 200 responses, no console errors.
-3. Spot-check wall-clock — should be unchanged from pre-strip (instrumentation overhead was sub-ms).
+Post-deploy `nt092hnny` (Ready 2026-05-03 01:11 UTC+2):
+1. ✅ Source tree grep `[guides-perf]` / `[tours-perf]` / `PERF-MEASURE` → 0 hits.
+2. ✅ Smoke check: 24 hits across 8 scenarios × 3 rounds → all HTTP 200.
+3. ✅ Wall-clock distribution (warm hits 350-770 ms with cold-instance outliers) consistent with pre-strip cache-hit profile.
+4. ✅ `vercel logs --since 5m` for the new deploy contains zero `*-perf` event strings.
+
+## Outcome
+
+Both listing pages now serve from cache without observability noise. `getCachedGuides` (revalidate=600, tags=['guides']) and `cachedFetchTours` (revalidate=300, tags=['tours']) remain untouched. Tag-revalidation hooks remain wired (packages/cms `revalidate-cache-tags-hook`).
 
 ## Risk Assessment
 
