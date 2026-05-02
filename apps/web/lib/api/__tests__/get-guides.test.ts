@@ -20,6 +20,7 @@ const mockGuideDoc = {
   credentials: [{ credential: 'PhD History' }],
 }
 
+const mockExecute = vi.fn().mockResolvedValue({ rows: [] })
 const mockPayload = {
   find: vi.fn().mockResolvedValue({
     docs: [mockGuideDoc],
@@ -27,6 +28,7 @@ const mockPayload = {
     totalPages: 1,
     page: 1,
   }),
+  db: { drizzle: { execute: mockExecute } },
 }
 
 vi.mock('payload', () => ({

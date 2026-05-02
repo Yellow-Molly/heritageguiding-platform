@@ -7,6 +7,11 @@ import { unstable_cache } from 'next/cache'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Where } from 'payload'
+import { sql } from 'drizzle-orm'
+
+type DrizzleDB = {
+  execute: (query: unknown) => Promise<{ rows: Record<string, unknown>[] }>
+}
 
 export interface GuideListItem {
   id: string
@@ -149,22 +154,20 @@ export async function getGuides(
     },
   })
 
-  // Batch-query published tour counts per guide (single query, no N+1)
-  const guideIds = result.docs.map((doc) => String(doc.id))
+  // Aggregate published tour counts per guide via raw SQL (single query, no doc hydration).
+  // Replaces a `payload.find({ limit: 0 })` batch that fetched every matching tour just to count them.
+  const guideIds = result.docs.map((doc) => Number(doc.id)).filter((n) => Number.isFinite(n))
   const tourCountMap = new Map<string, number>()
   if (guideIds.length > 0) {
-    const tours = await payload.find({
-      collection: 'tours',
-      where: { status: { equals: 'published' }, guide: { in: guideIds } },
-      depth: 0,
-      limit: 0,
-      select: { guide: true },
-    })
-    for (const tour of tours.docs) {
-      const gid = typeof tour.guide === 'object' && tour.guide !== null
-        ? String((tour.guide as unknown as { id: number }).id)
-        : String(tour.guide)
-      tourCountMap.set(gid, (tourCountMap.get(gid) ?? 0) + 1)
+    const drizzle = (payload.db as unknown as { drizzle: DrizzleDB }).drizzle
+    const tourCounts = await drizzle.execute(sql`
+      SELECT guide_id::text AS guide_id, COUNT(*)::int AS count
+      FROM tours
+      WHERE status = 'published' AND guide_id = ANY(${guideIds})
+      GROUP BY guide_id
+    `)
+    for (const row of tourCounts.rows) {
+      tourCountMap.set(String(row.guide_id), Number(row.count))
     }
   }
 
