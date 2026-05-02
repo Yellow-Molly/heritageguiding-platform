@@ -634,15 +634,15 @@ access: {
 - ✅ Lighthouse CI scoped to Production environment
 - ✅ Web Vitals baseline captured
 
-### Phase 19 (Instant Listing Filter Feedback) - COMPLETE ✅ (measurement pending)
+### Phase 19 (Instant Listing Filter Feedback) - COMPLETE ✅
 - ✅ `FilterStateProvider` (React 19 optimistic URL state + transitions)
 - ✅ `GridPendingOverlay` (absolute spinner, fade transition, accessible)
 - ✅ `GuideCatalogClient` (slot-based wrapper for `/guides`)
 - ✅ 12 consumer migrations (tour/guide chips, sort, search, drawers, grid) → `useFilterState()` hook
 - ✅ Consolidation: −404 / +360 LOC (removed duplicate router/transition logic)
 - ✅ `sanitizeSlug(slug)` extracted to `lib/utils.ts` for slug sanitization
-- ✅ Temp instrumentation: `console.time` in both `page.tsx` files (Phase 01 baseline pending)
-- ✅ Build script: `next build --webpack` (temporary for baseline, revert after measurement)
+- ✅ Listing query perf shipped (R1+R2+R3 + `getCachedGuides` Option A): `getGuides` warm p95 ~500ms → 18.6ms; `getTours` warm p95 ~1396ms → 10–65ms
+- ✅ Phase 06 cleanup: temporary `[guides-perf]` / `[tours-perf]` instrumentation removed (commit `490d4d6`); `next build --webpack` reverted to default `next build` (Turbopack)
 
 ### Phase 17+ (Planned)
 - Per-tour cancellation policy (in progress, 260419)
