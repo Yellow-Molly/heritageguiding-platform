@@ -156,14 +156,18 @@ export async function getGuides(
 
   // Aggregate published tour counts per guide via raw SQL (single query, no doc hydration).
   // Replaces a `payload.find({ limit: 0 })` batch that fetched every matching tour just to count them.
+  // Uses `IN (sql.join(...))` (matches the pattern in pgvector-semantic-search-service.ts) because
+  // Drizzle's `sql` template expands a JS array as a tuple `($1, $2, ...)`, which Postgres
+  // rejects in `ANY()` ("op ANY/ALL (array) requires array on right side").
   const guideIds = result.docs.map((doc) => Number(doc.id)).filter((n) => Number.isFinite(n))
   const tourCountMap = new Map<string, number>()
   if (guideIds.length > 0) {
     const drizzle = (payload.db as unknown as { drizzle: DrizzleDB }).drizzle
+    const idList = sql.join(guideIds.map((id) => sql`${id}`), sql`, `)
     const tourCounts = await drizzle.execute(sql`
       SELECT guide_id::text AS guide_id, COUNT(*)::int AS count
       FROM tours
-      WHERE status = 'published' AND guide_id = ANY(${guideIds})
+      WHERE status = 'published' AND guide_id IN (${idList})
       GROUP BY guide_id
     `)
     for (const row of tourCounts.rows) {
