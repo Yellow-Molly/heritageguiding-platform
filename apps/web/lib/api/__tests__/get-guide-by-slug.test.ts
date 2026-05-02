@@ -20,15 +20,20 @@ const mockGuideDoc = {
   credentials: [{ credential: 'PhD History' }],
 }
 
+// Shape expected by `mapPayloadTourToFeaturedTour` (lib/api/tour-payload-mapper.ts).
+// `description` ← shortDescription, `duration` ← duration.hours×60, `price` ← pricing.basePrice,
+// `image` ← resolvePrimaryImage(images, title), `maxCapacity` ← maxGroupSize.
+// `rating` and `reviewCount` are hardcoded 0 in the current mapper.
 const mockTourDoc = {
   id: 'tour1',
   title: 'Viking History Tour',
   slug: 'viking-history-tour',
-  image: { url: '/tour.jpg', alt: 'Viking tour' },
-  duration: 180,
-  price: 500,
-  rating: 4.8,
-  reviewCount: 42,
+  shortDescription: 'A short tour description',
+  images: [{ image: { url: '/tour.jpg', alt: 'Viking tour' }, isPrimary: true }],
+  duration: { hours: 3 },
+  pricing: { basePrice: 500 },
+  maxGroupSize: 12,
+  featured: false,
 }
 
 const mockPayload = {
@@ -106,12 +111,16 @@ describe('getGuideBySlug', () => {
     expect(result?.tours[0]).toEqual({
       id: 'tour1',
       title: 'Viking History Tour',
+      description: 'A short tour description',
       slug: 'viking-history-tour',
       image: { url: '/tour.jpg', alt: 'Viking tour' },
       duration: 180,
+      maxCapacity: 12,
+      rating: 0,
+      reviewCount: 0,
       price: 500,
-      rating: 4.8,
-      reviewCount: 42,
+      featured: false,
+      accessibility: undefined,
     })
   })
 

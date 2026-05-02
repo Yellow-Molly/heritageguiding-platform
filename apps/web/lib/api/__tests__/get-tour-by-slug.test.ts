@@ -1,7 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import { getTourBySlug, getAllTourSlugs } from '../get-tour-by-slug'
 
-describe('getTourBySlug', () => {
+// Integration test — requires live Postgres + seeded data (`getPayload` connects to DB).
+// Auto-skips when DATABASE_URL is absent (CI without DB); runs locally with .env.local.
+const HAS_DB = !!process.env.DATABASE_URL
+describe.skipIf(!HAS_DB)('getTourBySlug (integration — needs DB)', () => {
   describe('basic functionality', () => {
     it('returns tour details for valid slug', async () => {
       const tour = await getTourBySlug('gamla-stan-walking', 'en')
@@ -91,7 +94,7 @@ describe('getTourBySlug', () => {
   })
 })
 
-describe('getAllTourSlugs', () => {
+describe.skipIf(!HAS_DB)('getAllTourSlugs (integration — needs DB)', () => {
   it('returns array of slugs', async () => {
     const slugs = await getAllTourSlugs()
     expect(slugs).toBeInstanceOf(Array)

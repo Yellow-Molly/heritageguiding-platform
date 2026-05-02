@@ -1,7 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import { getTours, getTourCategories } from '../get-tours'
 
-describe('getTours', () => {
+// Integration test — requires live Postgres + seeded data (`getPayload` connects to DB).
+// Auto-skips when DATABASE_URL is absent (CI without DB); runs locally with .env.local.
+const HAS_DB = !!process.env.DATABASE_URL
+describe.skipIf(!HAS_DB)('getTours (integration — needs DB)', () => {
   describe('basic functionality', () => {
     it('returns tours array', async () => {
       const result = await getTours()
@@ -204,7 +207,7 @@ describe('getTours', () => {
   })
 })
 
-describe('getTourCategories', () => {
+describe.skipIf(!HAS_DB)('getTourCategories (integration — needs DB)', () => {
   it('returns array of categories', async () => {
     const categories = await getTourCategories()
     expect(categories).toBeInstanceOf(Array)

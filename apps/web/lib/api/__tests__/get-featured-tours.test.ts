@@ -1,7 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import { getFeaturedTours, type FeaturedTour } from '../get-featured-tours'
 
-describe('getFeaturedTours', () => {
+// Integration test — requires live Postgres + seeded data (`getPayload` connects to DB).
+// Auto-skips when DATABASE_URL is absent (CI without DB); runs locally with .env.local.
+const HAS_DB = !!process.env.DATABASE_URL
+describe.skipIf(!HAS_DB)('getFeaturedTours (integration — needs DB)', () => {
   describe('basic functionality', () => {
     it('returns an array of tours', async () => {
       const tours = await getFeaturedTours()

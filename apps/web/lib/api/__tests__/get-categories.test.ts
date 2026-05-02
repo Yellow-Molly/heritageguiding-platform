@@ -1,7 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import { getCategories, getAllCategories, type Category, type CategoryType } from '../get-categories'
 
-describe('getCategories', () => {
+// Integration test — requires live Postgres + seeded data (`getPayload` connects to DB).
+// Auto-skips when DATABASE_URL is absent (CI without DB); runs locally with .env.local.
+const HAS_DB = !!process.env.DATABASE_URL
+describe.skipIf(!HAS_DB)('getCategories (integration — needs DB)', () => {
   describe('theme categories', () => {
     it('returns an array of theme categories', async () => {
       const categories = await getCategories('theme')
@@ -83,7 +86,7 @@ describe('getCategories', () => {
   })
 })
 
-describe('getAllCategories', () => {
+describe.skipIf(!HAS_DB)('getAllCategories (integration — needs DB)', () => {
   it('returns both themes and neighborhoods', async () => {
     const result = await getAllCategories()
     expect(result).toHaveProperty('themes')

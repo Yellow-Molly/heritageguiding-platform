@@ -94,19 +94,19 @@ describe('getGuides', () => {
     )
   })
 
-  it('passes language filter to Payload where clause', async () => {
+  it('passes main-language filter (sv) to `languages` field only', async () => {
     const { getGuides } = await import('../get-guides')
 
     await getGuides({ language: 'sv' })
 
+    // Main-language enums and additional-language enums are disjoint in Postgres,
+    // so only the field whose enum contains the code is queried.
     expect(mockPayload.find).toHaveBeenCalledWith(
       expect.objectContaining({
+        collection: 'guides',
         where: expect.objectContaining({
           status: { equals: 'active' },
-          or: [
-            { languages: { contains: 'sv' } },
-            { additionalLanguages: { contains: 'sv' } },
-          ],
+          languages: { contains: 'sv' },
         }),
       })
     )
