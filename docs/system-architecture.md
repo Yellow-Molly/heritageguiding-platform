@@ -1,9 +1,9 @@
 # System Architecture - Private Tours Platform
 
-**Last Updated:** April 25, 2026
-**Phase:** 16 - Guide Profile Redesign (Complete)
-**Status:** Guide profile split-panel layout, infinite scroll pagination, cache revalidation hooks, IS_STAGING blocking, image blur placeholders, tour/guides data v2
-**Recent Update:** Cache invalidation strategy (CMS hook + /api/revalidate endpoint), staging crawler blocking, guide profile layouts
+**Last Updated:** May 2, 2026
+**Phase:** 19 - Instant Listing Filter Feedback (Complete, staging measurement pending)
+**Status:** FilterStateProvider centralizes optimistic URL state, GridPendingOverlay for pending feedback, tour/guide catalog consolidation; Phase 18 perceived-performance shipped (loading.tsx, NavigationPending, deferred widgets)
+**Recent Update:** Optimistic URL state pattern (useOptimistic + useTransition) for filter interactions, consolidated consumer logic (−404 / +360 LOC net)
 
 ## High-Level Architecture
 
@@ -119,7 +119,7 @@
 8. localStorage persists selections for next visit
 ```
 
-### Request Flow - Public Page View (Tour Catalog - Phase 07)
+### Request Flow - Public Page View (Tour Catalog - Phase 07 → Phase 19 optimistic state)
 
 ```
 1. User visits /tours (public route)
@@ -128,30 +128,40 @@
    ↓
 3. Server Component (tours/page.tsx):
    - Fetches all categories via API
-   - Passes categories to TourCatalogClient
+   - Wraps tree with <TourCatalogClient> (slots: filterBar, grid)
    ↓
-4. Client Component (TourCatalogClient):
-   - Manages filter state (categories[], date range)
-   - Updates URL query params (?categories=history,architecture&start=...&end=...)
-   - Supports multi-select categories
-   - Mobile drawer sync with desktop chips
+4. TourCatalogClient mounts <FilterStateProvider> (Phase 19):
+   - Centralizes optimistic URL state + router transitions
+   - Exports useFilterState() hook for all consumers
    ↓
-5. FilterBar renders (sticky at top):
-   - CategoryChips: multi-select chips with URL state sync
-   - Mobile Drawer: accessible drawer for small screens (syncs with desktop)
-   - DatesPicker: select date range
-   - ResultsCount: pluralized display of filtered tour count
+5. Consumers (CategoryChips, Sidebar, Sort, Search, Grid):
+   - Call useFilterState() to get { params, isPending, setParam, toggleListItem, clearAll }
+   - No duplicated useSearchParams/useRouter/usePathname/useTransition logic
    ↓
-6. Tours Grid renders below FilterBar:
-   - Maps through filtered tours array
-   - Each tour card links to /tours/{slug}
+6. User clicks chip/filter:
+   - Chip calls setParam/toggleListItem via useFilterState
+   - useOptimistic updates UI instantly (<16ms)
+   - useTransition wraps router.push/replace, sets isPending=true
    ↓
-7. Browser receives HTML + interactive components
+7. GridPendingOverlay fades in (100ms):
+   - Absolute spinner overlay inside relative grid wrapper
+   - Grid dims opacity-50 pointer-events-none while pending
    ↓
-8. React hydrates filter interactions + lazy loads images
+8. Server resolves new search params, fetch completes:
+   - Next.js returns resolved searchParams
+   - React 19 auto-reverts optimistic state if server differs
+   - isPending=false, overlay fades out
    ↓
-9. Images load from Vercel Blob CDN with WebP format
+9. New grid renders with filtered results
+   ↓
+10. Images load from Vercel Blob CDN with WebP format
 ```
+
+**Pattern Benefits:**
+- Instant visual feedback (chip flips in <16ms, no wait for network)
+- Server authoritative (React auto-reverts on conflict)
+- Consolidated state management (avoid 12 components duping router logic)
+- Pagination auto-resets on every filter change (prevent stale page param)
 
 ### Request Flow - Admin Page View
 
@@ -612,6 +622,27 @@ access: {
 - ✅ Guides data v2 update
 - ✅ Cancellation policy page (i18n)
 - ✅ Tour duration format fix on home cards
+
+### Phase 18 (Staging Perceived Performance) - COMPLETE ✅
+- ✅ 6 `loading.tsx` route fallbacks (frontend routes + detail pages)
+- ✅ `NavigationPending` component with `useLinkStatus()` hook
+- ✅ Visual click feedback: opacity transition during pending state
+- ✅ Image `priority` prop on first 3 cards in grids (LCP optimization)
+- ✅ 9 RSC conversions (about-sections, values, guides-preview, seasonal-cta)
+- ✅ Deferred Bubblav widget mount (15s timeout + first interaction gating)
+- ✅ Bundle analyzer (`@next/bundle-analyzer`, `npm run analyze`)
+- ✅ Lighthouse CI scoped to Production environment
+- ✅ Web Vitals baseline captured
+
+### Phase 19 (Instant Listing Filter Feedback) - COMPLETE ✅ (measurement pending)
+- ✅ `FilterStateProvider` (React 19 optimistic URL state + transitions)
+- ✅ `GridPendingOverlay` (absolute spinner, fade transition, accessible)
+- ✅ `GuideCatalogClient` (slot-based wrapper for `/guides`)
+- ✅ 12 consumer migrations (tour/guide chips, sort, search, drawers, grid) → `useFilterState()` hook
+- ✅ Consolidation: −404 / +360 LOC (removed duplicate router/transition logic)
+- ✅ `sanitizeSlug(slug)` extracted to `lib/utils.ts` for slug sanitization
+- ✅ Temp instrumentation: `console.time` in both `page.tsx` files (Phase 01 baseline pending)
+- ✅ Build script: `next build --webpack` (temporary for baseline, revert after measurement)
 
 ### Phase 17+ (Planned)
 - Per-tour cancellation policy (in progress, 260419)

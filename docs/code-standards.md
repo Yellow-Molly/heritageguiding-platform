@@ -768,6 +768,18 @@ async function getUserById(id: string): Promise<User | null> {
 ### Database
 - Use indexes for frequently queried fields; avoid N+1 queries; cache frequently accessed data
 
+### URL-State Listing Filters (Phase 19)
+Listing pages (`/tours`, `/guides`) centralize optimistic URL state via `<FilterStateProvider>` (`apps/web/components/tour/filter-state-provider.tsx`):
+- **`useOptimistic` pattern:** Wraps `searchParams.toString()` → chip/dropdown/sidebar flip instantly on click before server resolves
+- **`useTransition` wrapper:** `router.push`/`router.replace` → `isPending: boolean` drives `<GridPendingOverlay>` (absolute spinner overlay, dims grid via `opacity-50 pointer-events-none`); React 19 auto-reverts optimistic state if server response differs
+- **API (exported `useFilterState` hook):**
+  - `params: URLSearchParams` (read-only, clone before mutating)
+  - `setParam(key, value | null, { replace? })` — set or delete param, resets `page`
+  - `toggleListItem(key, slug, { replace? })` — toggle comma-delimited list (e.g. `categories=foo,bar`), sanitizes slug, resets `page`
+  - `clearAll({ replace? })` — remove all params, push to bare pathname
+  - `isPending: boolean` — router transition pending (use for overlay visibility + grid opacity)
+- **Implementation:** Consumers call `useFilterState()` instead of duping `useSearchParams + useRouter + usePathname + useTransition` blocks. Grids render `<GridPendingOverlay isPending={isPending} />` inside `relative` wrapper. Search inputs use `{ replace: true }` to keep history clean (no back/forward clutter).
+
 ## API Data-Fetching Standards
 - All fetches must have error handling via try-catch
 - Use typed responses (not `any`)

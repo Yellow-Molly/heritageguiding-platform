@@ -4,6 +4,41 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-02] — Instant Listing Filter Feedback ✓ IMPLEMENTATION COMPLETE (staging measurement pending)
+
+**Type:** Perceived Performance / UX
+**Scope:** `/tours` and `/guides` filter interactions (chips, dropdowns, sort, search)
+**Build Status:** TypeScript clean (only pre-existing `ai-chat-provider-context` error); 14 new/updated tests pass
+
+### Problem
+Phase 18 shipped `loading.tsx` skeletons, but those don't fire on `searchParams` change — only path navigation. Filter clicks on `/tours`, `/guides` waited for full server roundtrip before chips flipped, reported as "slow reaction" on mobile + desktop.
+
+### Solution
+Single React 19 `<FilterStateProvider>` (`apps/web/components/tour/filter-state-provider.tsx`) centralizes optimistic URL state:
+- `useOptimistic` over `searchParams.toString()` → instant chip/dropdown flip on click
+- `useTransition` wraps `router.push`/`router.replace` → `isPending: boolean` drives `<GridPendingOverlay>` spinner; grid dims `opacity-50 pointer-events-none` until server resolves
+- Server authoritative; React 19 auto-reverts optimistic state if response conflicts
+- API: `useFilterState()` hook exports `params: URLSearchParams`, `isPending`, `setParam(key, value, { replace? })`, `toggleListItem(key, slug, { replace? })`, `clearAll({ replace? })`; auto-resets `page` on every change
+
+### Files Changed
+- **New (2):** `filter-state-provider.tsx` (127 LOC), `grid-pending-overlay.tsx` (36 LOC)
+- **New Wrapper:** `guide-catalog-client.tsx` (slot-based provider mounter for `/guides`)
+- **Migrated (12):** tour catalog, category-chips, sidebar-filters, filter drawers, sort, search, grid layout; guide filter-bar, filter drawer, grid client → all call `useFilterState()` instead of duping `useSearchParams + useRouter + usePathname + useTransition` blocks
+- **Consolidation:** net −404 / +360 LOC (removal of duplicate transition logic)
+- **Shared Utils:** `sanitizeSlug(slug)` extracted to `lib/utils.ts`
+- **Temp Instrumentation:** `console.time` in both `page.tsx` files (Phase 01 baseline pending, removal Phase 06)
+- **Build Script:** `apps/web/package.json` `build` changed to `next build --webpack` (temporary baseline comparison)
+
+### Outstanding (blocks Phase 06 cleanup & ship gate)
+- Phase 01 baseline measurement on staging **pending** — instrumentation emits `[tours-perf]` / `[guides-perf]` to Vercel function logs
+- Decision rule: p95 getTours < 300ms → ship perception fix only; 300–800ms → ship + open perf follow-up; > 800ms → block ship, optimize query first
+- Once measurement captured & decision made, Phase 06 removes instrumentation per outcome
+
+### Related Plan
+- `plans/260502-0048-instant-filter-feedback/` (plan.md, phase-01 through phase-06)
+
+---
+
 ## [2026-05-01] — Staging Perceived Performance (Phase 18 All 3 Phases) ✓ COMPLETE
 
 **Type:** Performance Optimization + UX/Infrastructure

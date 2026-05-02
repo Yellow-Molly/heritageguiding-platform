@@ -1,8 +1,8 @@
 # Codebase Summary - Private Tours Platform
 
-**Last Updated:** April 25, 2026
-**Phase:** 16 - Guide Profile Redesign (Complete)
-**Status:** Guide profile split-panel layout, infinite scroll, portrait gallery; cache revalidation hooks + endpoint; tour/guides data v2; IS_STAGING blocking; cancellation policy page
+**Last Updated:** May 2, 2026
+**Phase:** 19 - Instant Listing Filter Feedback (Complete, staging measurement pending)
+**Status:** FilterStateProvider centralized optimistic URL state, GridPendingOverlay spinner, tour/guide catalog consolidation; Phase 18 perceived-performance shipped; Phase 19 measurement instrumentation (p95 decision rule pending)
 **Codebase Metrics:** 165+ TypeScript files, 380K+ tokens, 69K LOC frontend + 35K LOC CMS
 
 ## Overview
@@ -142,7 +142,8 @@ app/
 
 **Tour Components (20+ components):**
 - `tour-card.tsx` - Individual tour card (grid/list variants)
-- `tour-catalog-client.tsx` - Filter logic (client component)
+- `tour-catalog-client.tsx` - Wraps tree in `<FilterStateProvider>` (Phase 19)
+- `filter-state-provider.tsx` - Optimistic URL state + router transitions (Phase 19, `useFilterState()` hook)
 - `tour-hero.tsx` - Composes ImageGrid + Gallery (redesigned Phase 15)
 - `tour-image-grid.tsx` - Responsive image grid replacing full-bleed hero (Phase 15)
 - `tour-gallery.tsx` - Full-screen image gallery
@@ -164,6 +165,12 @@ app/
 - `tour-grid.tsx` - Grid layout
 - `tour-grid-skeleton.tsx` - Loading state
 - `tour-empty-state.tsx` - No results message
+
+**Guide Components (Phase 19 consolidated):**
+- `guide-catalog-client.tsx` - Slot-based wrapper mounting `<FilterStateProvider>` for `/guides`
+- `guide-filter-bar.tsx` - Refactored to use `useFilterState()`
+- `guide-filter-drawer-mobile.tsx` - Refactored to use `useFilterState()`
+- `guide-grid-client.tsx` - Grid with `<GridPendingOverlay>`
 - `filter-bar/` - GetYourGuide-style sticky filter bar
   - `category-chips.tsx` - Multi-select chips with URL state
   - `results-count.tsx` - Pluralized results display
@@ -192,11 +199,12 @@ app/
 - `tour-list-schema.tsx` - ItemList of tours (Phase 10)
 - Tests: 36 new tests (Phase 10)
 
-**Shared Components (5 components):**
+**Shared Components (6 components):**
 - `accessibility-badge.tsx` - WCAG indicators
 - `breadcrumb.tsx` - Navigation breadcrumbs
 - `loading-spinner.tsx` - Loading indicator
 - `rating-stars.tsx` - Star rating display
+- `grid-pending-overlay.tsx` - Optimistic state spinner overlay (Phase 19, listing filters)
 - Tests: `accessibility-badge.test.tsx`, `loading-spinner.test.tsx`, `rating-stars.test.tsx`
 
 **Accessibility Components (2 components, Phase 10):**
@@ -719,6 +727,21 @@ npm run payload:generate-types  # Generate TS types from schema
 - **Image Optimization:** Plaiceholder blur_data_url migration for image placeholders
 - **Tour Duration Fix:** Corrected format on home page cards (a5dfae7)
 
+### Phase 19 Deliverables (2026-05-02) — Instant Listing Filter Feedback
+- **New Components (2):**
+  - `FilterStateProvider` (`apps/web/components/tour/filter-state-provider.tsx`) — React 19 `useOptimistic` + `useTransition` for optimistic URL state
+  - `GridPendingOverlay` (`apps/web/components/shared/grid-pending-overlay.tsx`) — Absolute spinner overlay with fade transition
+- **New Consumer Wrapper:**
+  - `GuideCatalogClient` (`apps/web/components/guide/guide-catalog-client.tsx`) — Slot-based wrapper mounting provider for `/guides`
+- **Consumer Migrations (net −404 / +360 LOC consolidation):**
+  - **Tour:** `tour-catalog-client`, `category-chips`, `sidebar-filters`, `filter-drawer-sections`, `drawer-slug-list-section`, `filter-drawer`, `tour-search`, `tour-sort`, `tour-grid-layout` now call `useFilterState()` instead of duplicating router/transition blocks
+  - **Guide:** `guide-filter-bar`, `guide-filter-drawer-mobile`, `guide-grid-client` migrated similarly
+- **Shared Utilities:**
+  - `sanitizeSlug(slug)` extracted to `lib/utils.ts` for slug sanitization in filter toggles
+- **Temporary Instrumentation (Phase 01 baseline pending):**
+  - `console.time` wrappers in `/tours` and `/guides` page.tsx emit `[tours-perf]` / `[guides-perf]` to logs; scheduled for removal Phase 06
+- **Build Change:** `apps/web/package.json` `build` script switched to `next build --webpack` (temporary for baseline comparison)
+
 ## Codebase Metrics
 
 | Metric | Value |
@@ -784,6 +807,8 @@ npm run payload:generate-types  # Generate TS types from schema
 | **14** | Catalog Redesign | ✅ Complete |
 | **15** | Tour Detail Redesign | ✅ Complete |
 | **16** | Guide Profile Redesign | ✅ Complete |
+| **18** | Staging Perceived Performance | ✅ Complete |
+| **19** | Instant Listing Filter Feedback | ✅ Complete (staging measurement pending) |
 | **09** | Groups & WhatsApp | Pending |
 | **17** | Per-Tour Cancellation Policy | In Progress |
 

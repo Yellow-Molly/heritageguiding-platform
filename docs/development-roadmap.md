@@ -12,6 +12,27 @@ Living document tracking project phases, milestones, and progress toward MVP lau
 
 ---
 
+## Completed Phase: Phase 19 — Instant Listing Filter Feedback 🚀 COMPLETE (measurement pending)
+
+**Date Started:** 2026-05-02
+**Date Completed:** 2026-05-02 (implementation complete; staging measurement pending Phase 01)
+**Status:** All code-complete (Phases 01–05 done; Phase 06 cleanup blocked on Phase 01 measurement)
+**Plan:** 260502-0048-instant-filter-feedback/
+
+### Summary
+Eliminated "slow reaction" on filter clicks (`/tours`, `/guides`) via React 19 optimistic URL state (`useOptimistic` + `useTransition`), instant chip/dropdown flip, grid pending overlay. Server authoritative; auto-revert on conflict.
+
+### Key Deliverables
+- **New Components:** `FilterStateProvider` (optimistic URL state manager), `GridPendingOverlay` (spinner overlay with fade), `GuideCatalogClient` (wrapper for `/guides` provider mounting)
+- **Consolidation:** Migrated 12 filter consumer components (tour/guide chips, sort, search, drawers, grid layout) to call `useFilterState()` instead of duplicating `useSearchParams + useRouter + usePathname + useTransition` blocks (−404 / +360 LOC net)
+- **Shared Utils:** `sanitizeSlug(slug)` extracted to `lib/utils.ts`
+- **Temp Instrumentation:** `console.time` wrappers in `/tours`, `/guides` page.tsx; Phase 01 baseline measurement pending (decision rule: p95 < 300ms ship, 300–800ms ship + perf issue, > 800ms block; Phase 06 removes instrumentation per outcome)
+
+### Outstanding (gates Phase 06 cleanup & ship)
+- Phase 01 staging baseline capture **pending** — determine p95 getTours latency, apply decision rule
+
+---
+
 ## Completed Phase: Phase 18 — Staging Perceived Performance 🚀 COMPLETE
 
 **Date Started:** 2026-05-01
