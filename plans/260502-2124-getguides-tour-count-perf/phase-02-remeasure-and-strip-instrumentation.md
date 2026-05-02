@@ -1,13 +1,17 @@
 ---
 phase: 02
 title: Re-measure + strip listing perf instrumentation
-status: pending
+status: completed-fail
 priority: P2
 effort: 30m
 depends: [01]
 ---
 
 # Phase 02 — Re-measure + close out listing instrumentation
+
+> **Outcome (2026-05-02 22:00 UTC+2): GATE FAILED.** `getGuides` p95 ≈ 700 ms (single captured sample 692.8 ms; wall-clock estimate 500–800 ms on populated scenarios). Phase 01 SQL aggregate is correct (no errors, tour counts render) but does not move `getGuides` p95 under the 300 ms gate — the dominant cost is the guides `find` with `depth:1`, not the tour-count batch. Listing instrumentation stays. Parent plan Phase 06 stays blocked. See `plans/260502-0048-instant-filter-feedback/baselines/guides-post-aggregate.md` for the full analysis and follow-up options (cache, raw-SQL guides find, or denormalize `guide.tourCount`).
+
+> **Mid-flight bug + fix (2026-05-02 21:45–21:50 UTC+2):** First Phase 01 deploy `b8gj3vlju` shipped a broken SQL aggregate using `ANY(${guideIds})` — Drizzle expanded the JS array as a tuple `($1,$2,...)`, Postgres rejected. Pages still 200ed via Next.js error boundary, tour counts silently zeroed. Fix `c31334b fix(api): bind guideIds via IN (sql.join)` switched to `IN (sql.join(...))` (the existing pattern in `pgvector-semantic-search-service.ts`). Verified: 0 SQL errors on `fmxdetg0g`, tour counts render correctly.
 
 ## Context Links
 - Parent plan: `plans/260502-2124-getguides-tour-count-perf/plan.md`

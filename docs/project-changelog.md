@@ -4,6 +4,23 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-02] — getGuides Tour-Count SQL Aggregate (follow-up to R1+R2+R3) ✗ GATE FAILED
+
+**Type:** Performance / Backend (correctness improvement, perf gate not met)
+**Scope:** `getGuides` second query — tour-count batch
+
+- `payload.find({ collection:'tours', limit:0 })` + client-side count loop → raw SQL `SELECT guide_id, COUNT(*) GROUP BY guide_id` via Drizzle. No tour doc hydration; tighter privacy surface.
+- **Mid-flight bug:** first deploy `b8gj3vlju` used `ANY(${guideIds})` — Drizzle expanded JS array as a tuple `($1,$2,...)` which Postgres rejects. Pages 200ed via Next.js error boundary, tour counts silently zeroed. Fix `c31334b` switched to `IN (sql.join(...))` matching `pgvector-semantic-search-service.ts`. 0 SQL errors after fix; tour counts render correctly.
+- **Gate <300ms FAILED:** `getGuides` p95 ≈ 700ms (single captured sample 692.8ms; wall-clock estimate 500–800ms). Tour-count batch was NOT the dominant cost — the guides `find` with `depth:1` + 4-relation hydration is.
+- **Listing instrumentation NOT stripped.** Parent plan `260502-0048-instant-filter-feedback/phase-06-cleanup.md` stays blocked on the guides half.
+- **Open follow-up options:** (A) cache `getGuides` like `getCachedGuides` with filter-aware keys, (B) drop `depth:1` and write the guides find as raw SQL with relation joins, (C) denormalize `guide.tourCount` as a column maintained by tours `afterChange` hook.
+
+**Plan:** `plans/260502-2124-getguides-tour-count-perf/`
+**Baseline:** `plans/260502-0048-instant-filter-feedback/baselines/guides-post-aggregate.md`
+**Commits:** `8223779`, `bef44be`, `c31334b`
+
+---
+
 ## [2026-05-02] — Listing Query Perf (R1+R2+R3) ✓ STAGING-MEASURED
 
 **Type:** Performance / Backend

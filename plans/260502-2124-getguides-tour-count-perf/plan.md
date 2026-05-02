@@ -1,13 +1,17 @@
 ---
 title: getGuides tour-count batch query — replace with SQL aggregate
 description: Drop the residual /guides p95 ~800ms after R1+R2+R3. Replace the limit:0 batch find with a single SQL count-aggregate.
-status: pending
+status: completed-gate-failed
 priority: P2
 effort: ~1.5h
 branch: master
 tags: [perf, payload, postgres, listing, follow-up]
 created: 2026-05-02
+completed: 2026-05-02
+outcome: correctness-shipped-perf-gate-failed
 ---
+
+> **Outcome:** Phase 01 SQL aggregate shipped (correctness — no errors, tour counts render). Required mid-flight fix `c31334b` for an `ANY()` vs `IN()` Drizzle binding bug. Phase 02 gate `<300ms` FAILED — `getGuides` p95 ≈ 700ms; tour-count batch was not the dominant cost. Listing instrumentation NOT stripped. See `plans/260502-0048-instant-filter-feedback/baselines/guides-post-aggregate.md` for analysis + follow-up options.
 
 # getGuides tour-count perf
 
@@ -43,8 +47,8 @@ Returns one row per guide with a count. Zero hydration cost. Index on `tours.gui
 
 | # | Title | Status | Effort | Deps |
 |---|---|---|---|---|
-| 01 | Replace tour-count batch with SQL aggregate | completed | 1h | — |
-| 02 | Re-measure + strip listing perf instrumentation | pending | 30m | 01 |
+| 01 | Replace tour-count batch with SQL aggregate | completed (+1 fix commit `c31334b`) | 1h | — |
+| 02 | Re-measure + strip listing perf instrumentation | completed-fail (gate <300ms not met; ~700ms) | 30m | 01 |
 
 ## Gate
 - `getGuides` staging p95 → **<300 ms** sustained.
