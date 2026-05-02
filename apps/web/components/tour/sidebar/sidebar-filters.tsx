@@ -1,16 +1,12 @@
 'use client'
 
-import { useMemo, useCallback } from 'react'
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
+import { useCallback, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 import { FilterCheckboxGroup } from './filter-checkbox-group'
+import { useFilterState } from '../filter-state-provider'
+import { sanitizeSlug } from '@/lib/utils'
 import type { Category } from '@/lib/api/get-categories'
 import type { City } from '@/lib/api/get-cities'
-
-/** Sanitize slug to prevent injection in URL params. */
-function sanitizeSlug(slug: string): string {
-  return slug.toLowerCase().replace(/[^a-z0-9-]/g, '')
-}
 
 interface SidebarFiltersProps {
   categories: Category[]
@@ -20,86 +16,58 @@ interface SidebarFiltersProps {
 /**
  * Desktop sidebar filter panel.
  * Order top-to-bottom: City → Categories → Duration → Accessibility.
- * All filters sync to URL search params for shareable links.
+ * All filters sync to URL search params via FilterStateProvider for shareable links.
  */
 export function SidebarFilters({ categories, cities }: SidebarFiltersProps) {
   const t = useTranslations('tours.filters')
-  const searchParams = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
+  const { params, setParam, toggleListItem } = useFilterState()
 
-  // --- Parse URL state (sanitize + dedupe) ---
-  const parseSlugList = (key: string) => {
-    const raw = searchParams.get(key)?.split(',').filter(Boolean) || []
+  const parseSlugList = useCallback((key: string) => {
+    const raw = params.get(key)?.split(',').filter(Boolean) ?? []
     return [...new Set(raw.map(sanitizeSlug).filter(Boolean))]
-  }
-  const selectedCategories = useMemo(() => parseSlugList('categories'), [searchParams])
-  const selectedCities = useMemo(() => parseSlugList('cities'), [searchParams])
+  }, [params])
+
+  const selectedCategories = useMemo(() => parseSlugList('categories'), [parseSlugList])
+  const selectedCities = useMemo(() => parseSlugList('cities'), [parseSlugList])
 
   const selectedDuration = useMemo(() => {
-    const d = searchParams.get('duration')
+    const d = params.get('duration')
     return d ? [d] : []
-  }, [searchParams])
+  }, [params])
 
-  const isAccessible = searchParams.get('accessible') === 'true'
+  const isAccessible = params.get('accessible') === 'true'
 
-  // --- URL update helper ---
-  const updateParams = useCallback(
-    (updates: Record<string, string | null>) => {
-      const params = new URLSearchParams(searchParams.toString())
-      for (const [key, value] of Object.entries(updates)) {
-        if (value === null) params.delete(key)
-        else params.set(key, value)
-      }
-      params.delete('page')
-      router.push(`${pathname}?${params.toString()}`)
-    },
-    [searchParams, pathname, router]
-  )
-
-  // --- Generic multi-select toggle factory ---
+  // Multi-select: 'all' clears the key, slug toggles list membership
   const makeMultiToggle = useCallback(
-    (key: string, current: string[]) => (slug: string) => {
+    (key: string) => (slug: string) => {
       if (slug === 'all') {
-        updateParams({ [key]: null })
+        setParam(key, null)
         return
       }
-      const next = current.includes(slug)
-        ? current.filter((c) => c !== slug)
-        : [...current, slug]
-      updateParams({ [key]: next.length > 0 ? next.join(',') : null })
+      toggleListItem(key, slug)
     },
-    [updateParams]
+    [setParam, toggleListItem],
   )
 
-  const handleCityToggle = useMemo(
-    () => makeMultiToggle('cities', selectedCities),
-    [makeMultiToggle, selectedCities]
-  )
-  const handleCategoryToggle = useMemo(
-    () => makeMultiToggle('categories', selectedCategories),
-    [makeMultiToggle, selectedCategories]
-  )
+  const handleCityToggle = useMemo(() => makeMultiToggle('cities'), [makeMultiToggle])
+  const handleCategoryToggle = useMemo(() => makeMultiToggle('categories'), [makeMultiToggle])
 
-  // --- Duration toggle (single-select: clicking same deselects) ---
   const handleDurationToggle = useCallback(
     (id: string) => {
-      updateParams({ duration: selectedDuration.includes(id) ? null : id })
+      setParam('duration', selectedDuration.includes(id) ? null : id)
     },
-    [selectedDuration, updateParams]
+    [selectedDuration, setParam],
   )
 
-  // --- Accessibility toggle ---
   const handleAccessibilityToggle = useCallback(
     (id: string) => {
       if (id === 'wheelchair') {
-        updateParams({ accessible: isAccessible ? null : 'true' })
+        setParam('accessible', isAccessible ? null : 'true')
       }
     },
-    [isAccessible, updateParams]
+    [isAccessible, setParam],
   )
 
-  // --- Build options ---
   const cityOptions = [
     { id: 'all', label: t('allCities') },
     ...cities.map((c) => ({ id: c.slug, label: c.name })),
@@ -126,7 +94,6 @@ export function SidebarFilters({ categories, cities }: SidebarFiltersProps) {
 
   return (
     <div className="space-y-6">
-      {/* City */}
       <FilterCheckboxGroup
         title={t('city')}
         options={cityOptions}
@@ -134,7 +101,6 @@ export function SidebarFilters({ categories, cities }: SidebarFiltersProps) {
         onChange={handleCityToggle}
       />
 
-      {/* Categories */}
       <div className="border-t border-[var(--color-border)] pt-6">
         <FilterCheckboxGroup
           title={t('categories')}
@@ -144,7 +110,6 @@ export function SidebarFilters({ categories, cities }: SidebarFiltersProps) {
         />
       </div>
 
-      {/* Duration */}
       <div className="border-t border-[var(--color-border)] pt-6">
         <FilterCheckboxGroup
           title={t('duration')}
@@ -155,7 +120,6 @@ export function SidebarFilters({ categories, cities }: SidebarFiltersProps) {
         />
       </div>
 
-      {/* Accessibility */}
       <div className="border-t border-[var(--color-border)] pt-6">
         <FilterCheckboxGroup
           title={t('accessibility')}

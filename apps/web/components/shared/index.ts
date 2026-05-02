@@ -14,3 +14,4 @@ export {
   type LoadingOverlayProps,
   type LoadingDotsProps,
 } from './loading-spinner'
+export { GridPendingOverlay } from './grid-pending-overlay'

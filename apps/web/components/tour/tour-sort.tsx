@@ -1,28 +1,20 @@
 'use client'
 
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useFilterState } from './filter-state-provider'
 
 /**
  * Sort dropdown component for tour catalog.
- * Updates URL to maintain shareable sorted views.
+ * Updates URL via FilterStateProvider for instant optimistic flip + shareable views.
  */
 export function TourSort() {
   const t = useTranslations('tours.filters')
-  const searchParams = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
+  const { params, setParam } = useFilterState()
 
-  const currentSort = searchParams.get('sort') || 'popular'
+  const currentSort = params.get('sort') || 'popular'
 
   const handleSort = (value: string) => {
-    const params = new URLSearchParams(searchParams.toString())
-    if (value === 'popular') {
-      params.delete('sort')
-    } else {
-      params.set('sort', value)
-    }
-    router.push(`${pathname}?${params.toString()}`)
+    setParam('sort', value === 'popular' ? null : value)
   }
 
   const sortOptions = [

@@ -50,3 +50,11 @@ export function truncateText(text: string, maxLength: number): string {
 export function generateId(prefix = 'id'): string {
   return `${prefix}-${Math.random().toString(36).slice(2, 9)}`
 }
+
+/**
+ * Sanitize a slug to a safe URL token: lowercase + only [a-z0-9-].
+ * Used by URL-state filters where user-driven values flow into search params.
+ */
+export function sanitizeSlug(slug: string): string {
+  return slug.toLowerCase().replace(/[^a-z0-9-]/g, '')
+}

@@ -16,6 +16,7 @@ export { TourPageHeader } from './tour-page-header'
 export { ViewModeToggle } from './view-mode-toggle'
 
 export { TourGridLayout } from './tour-grid-layout'
+export { FilterStateProvider, useFilterState } from './filter-state-provider'
 
 // Tour detail components
 export { TourHero } from './tour-hero'

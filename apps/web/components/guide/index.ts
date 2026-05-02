@@ -1,6 +1,7 @@
 export { GuideListingCard } from './guide-listing-card'
 export { GuideGrid } from './guide-grid'
 export { GuideGridClient } from './guide-grid-client'
+export { GuideCatalogClient } from './guide-catalog-client'
 export { GuideListingHero } from './guide-listing-hero'
 export { GuideFilterBar } from './guide-filter-bar'
 export { GuideFilterDrawerMobile } from './guide-filter-drawer-mobile'

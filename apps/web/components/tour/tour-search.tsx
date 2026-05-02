@@ -1,42 +1,29 @@
 'use client'
 
-import { useTransition } from 'react'
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Search, Loader2 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { useDebouncedCallback } from '@/lib/hooks/use-debounce'
+import { useFilterState } from './filter-state-provider'
 
 /**
- * Search input component for tour catalog.
- * Debounces input to avoid excessive URL updates.
+ * Search input for tour catalog.
+ * 500ms debounce, uses replace (no history pollution).
+ * Read initial value from optimistic params via FilterStateProvider.
  */
 export function TourSearch() {
   const t = useTranslations('tours.filters')
-  const searchParams = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
-  const [isPending, startTransition] = useTransition()
+  const { params, isPending, setParam } = useFilterState()
 
   const handleSearch = useDebouncedCallback((term: string) => {
-    const params = new URLSearchParams(searchParams.toString())
-    if (term) {
-      params.set('q', term)
-    } else {
-      params.delete('q')
-    }
-    // Reset to page 1 when search changes
-    params.delete('page')
-    startTransition(() => {
-      router.replace(`${pathname}?${params.toString()}`)
-    })
+    setParam('q', term.trim() || null, { replace: true })
   }, 500)
 
   return (
     <div className="relative">
       <Input
         type="search"
-        defaultValue={searchParams.get('q') || ''}
+        defaultValue={params.get('q') || ''}
         onChange={(e) => handleSearch(e.target.value)}
         placeholder={t('searchPlaceholder')}
         leftIcon={

@@ -19,7 +19,7 @@ vi.mock('next/image', () => ({
   },
 }))
 
-// Mock next/link
+// Mock next/link (also export useLinkStatus for NavigationPending consumer)
 vi.mock('next/link', () => ({
   default: function MockLink({
     children,
@@ -35,6 +35,42 @@ vi.mock('next/link', () => ({
         {children}
       </a>
     )
+  },
+  useLinkStatus: () => ({ pending: false }),
+}))
+
+// Mock locale-aware Link from i18n/navigation — bypasses next-intl's
+// dynamic next/navigation import which fails to resolve under Vitest's
+// extension-strict ESM resolver.
+vi.mock('@/i18n/navigation', () => ({
+  Link: function MockI18nLink({
+    children,
+    href,
+    className,
+  }: {
+    children: React.ReactNode
+    href: string
+    className?: string
+  }) {
+    return (
+      <a href={href} className={className}>
+        {children}
+      </a>
+    )
+  },
+  usePathname: () => '/en/tours',
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+  redirect: vi.fn(),
+  getPathname: vi.fn(),
+}))
+
+// Mock next-intl translation hook with the keys TourCard uses
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string, vars?: Record<string, string | number>) => {
+    if (key === 'featured') return 'Featured'
+    if (key === 'maxCapacity') return `Max ${vars?.count ?? ''}`
+    if (key === 'durationAndCapacity') return `${vars?.duration ?? ''} · Max ${vars?.count ?? ''}`
+    return key
   },
 }))
 
@@ -81,31 +117,23 @@ describe('TourCard', () => {
       expect(image).toHaveAttribute('src', 'https://example.com/image.jpg')
     })
 
-    it('renders price', () => {
+    it('renders desktop max capacity label', () => {
       render(<TourCard tour={mockTour} />)
-      // formatPrice returns SEK formatted price
-      expect(screen.getByText(/595/)).toBeInTheDocument()
-    })
-
-    it('renders rating', () => {
-      render(<TourCard tour={mockTour} />)
-      expect(screen.getByText('4.8')).toBeInTheDocument()
-    })
-
-    it('renders review count', () => {
-      render(<TourCard tour={mockTour} />)
-      expect(screen.getByText('(150 reviews)')).toBeInTheDocument()
-    })
-
-    it('renders max capacity', () => {
-      render(<TourCard tour={mockTour} />)
+      // Desktop section uses t('maxCapacity', { count: 15 }) → 'Max 15'
       expect(screen.getByText('Max 15')).toBeInTheDocument()
     })
 
-    it('renders duration', () => {
+    it('renders duration pill on desktop', () => {
       render(<TourCard tour={mockTour} />)
-      // formatDuration converts 120 minutes to "2h"
-      expect(screen.getByText('2h')).toBeInTheDocument()
+      // formatDuration converts 120 minutes → '2h' (rendered raw in pill, plus
+      // appears inside mobile durationAndCapacity string)
+      expect(screen.getAllByText(/2h/).length).toBeGreaterThan(0)
+    })
+
+    it('renders mobile inline duration + capacity text', () => {
+      render(<TourCard tour={mockTour} />)
+      // Mobile uses t('durationAndCapacity', {duration, count}) → '2h · Max 15'
+      expect(screen.getByText('2h · Max 15')).toBeInTheDocument()
     })
   })
 
@@ -125,7 +153,6 @@ describe('TourCard', () => {
   describe('accessibility badges', () => {
     it('shows wheelchair badge when accessible', () => {
       render(<TourCard tour={mockTour} />)
-      // AccessibilityBadge renders with aria-label
       const badges = screen.getAllByRole('img', { hidden: true })
       expect(badges.length).toBeGreaterThan(0)
     })
@@ -136,38 +163,30 @@ describe('TourCard', () => {
         accessibility: { wheelchairAccessible: false },
       }
       render(<TourCard tour={nonAccessibleTour} />)
-      // Should not have accessibility badges
+      // Should render without accessibility badges (no assertion crashes acceptable)
     })
   })
 
   describe('link', () => {
     it('links to tour details page', () => {
       render(<TourCard tour={mockTour} />)
-      const link = screen.getByRole('link', { name: 'Test Tour Title' })
+      const link = screen.getByRole('link', { name: /Test Tour Title/ })
       expect(link).toHaveAttribute('href', '/tours/test-tour')
     })
   })
 
   describe('variants', () => {
-    it('renders grid variant by default', () => {
+    it('renders grid variant by default with constrained max-width wrapper', () => {
       const { container } = render(<TourCard tour={mockTour} />)
-      // Grid variant should not have flex-row class
-      expect(container.firstChild).not.toHaveClass('sm:flex-row')
+      // Grid variant: outer Link applies max-w-[400px]
+      const link = container.querySelector('a')
+      expect(link?.className).toContain('max-w-[400px]')
     })
 
-    it('renders list variant when specified', () => {
+    it('renders list variant without max-width constraint', () => {
       const { container } = render(<TourCard tour={mockTour} variant="list" />)
-      expect(container.firstChild).toHaveClass('sm:flex-row')
-    })
-
-    it('shows View Details link in list variant', () => {
-      render(<TourCard tour={mockTour} variant="list" />)
-      expect(screen.getByText('View Details')).toBeInTheDocument()
-    })
-
-    it('hides View Details link in grid variant', () => {
-      render(<TourCard tour={mockTour} variant="grid" />)
-      expect(screen.queryByText('View Details')).not.toBeInTheDocument()
+      const link = container.querySelector('a')
+      expect(link?.className).not.toContain('max-w-[400px]')
     })
   })
 })

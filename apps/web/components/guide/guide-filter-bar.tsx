@@ -1,12 +1,11 @@
 'use client'
 
-import { useTransition } from 'react'
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Search, Loader2, SlidersHorizontal } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { useDebouncedCallback } from '@/lib/hooks/use-debounce'
 import { languageDisplayNames } from '@/lib/language-display-names'
+import { useFilterState } from '@/components/tour/filter-state-provider'
 import { GuideFilterDrawerMobile } from './guide-filter-drawer-mobile'
 
 interface GuideFilterBarProps {
@@ -18,30 +17,14 @@ interface GuideFilterBarProps {
 
 /**
  * Filter bar for guides listing: search input + desktop dropdowns + mobile filter button.
- * Syncs all filter state to URL search params for shareable, SSR-compatible URLs.
+ * Uses FilterStateProvider for optimistic URL state — instant flip + transition spinner.
  */
 export function GuideFilterBar({ totalGuides, languages, specializations, areas }: GuideFilterBarProps) {
   const t = useTranslations('guides.filters')
-  const searchParams = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
-  const [isPending, startTransition] = useTransition()
-
-  const updateParam = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString())
-    if (value) {
-      params.set(key, value)
-    } else {
-      params.delete(key)
-    }
-    params.delete('page')
-    startTransition(() => {
-      router.replace(`${pathname}?${params.toString()}`, { scroll: false })
-    })
-  }
+  const { params, isPending, setParam } = useFilterState()
 
   const handleSearch = useDebouncedCallback((term: string) => {
-    updateParam('q', term.trim())
+    setParam('q', term.trim() || null, { replace: true })
   }, 300)
 
   return (
@@ -51,7 +34,7 @@ export function GuideFilterBar({ totalGuides, languages, specializations, areas 
         <div className="flex-1">
           <Input
             type="search"
-            defaultValue={searchParams.get('q') || ''}
+            defaultValue={params.get('q') || ''}
             onChange={(e) => handleSearch(e.target.value)}
             placeholder={t('search')}
             leftIcon={
@@ -85,8 +68,8 @@ export function GuideFilterBar({ totalGuides, languages, specializations, areas 
       {/* Desktop dropdowns + count */}
       <div className="hidden items-center gap-3 lg:flex">
         <select
-          value={searchParams.get('language') || ''}
-          onChange={(e) => updateParam('language', e.target.value)}
+          value={params.get('language') || ''}
+          onChange={(e) => setParam('language', e.target.value || null, { replace: true })}
           className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm text-[var(--color-text)]"
           aria-label={t('language')}
         >
@@ -97,8 +80,8 @@ export function GuideFilterBar({ totalGuides, languages, specializations, areas 
         </select>
 
         <select
-          value={searchParams.get('specialization') || ''}
-          onChange={(e) => updateParam('specialization', e.target.value)}
+          value={params.get('specialization') || ''}
+          onChange={(e) => setParam('specialization', e.target.value || null, { replace: true })}
           className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm text-[var(--color-text)]"
           aria-label={t('specialization')}
         >
@@ -109,8 +92,8 @@ export function GuideFilterBar({ totalGuides, languages, specializations, areas 
         </select>
 
         <select
-          value={searchParams.get('area') || ''}
-          onChange={(e) => updateParam('area', e.target.value)}
+          value={params.get('area') || ''}
+          onChange={(e) => setParam('area', e.target.value || null, { replace: true })}
           className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-sm text-[var(--color-text)]"
           aria-label={t('area')}
         >

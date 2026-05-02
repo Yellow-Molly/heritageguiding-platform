@@ -1,14 +1,9 @@
 'use client'
 
 import { useCallback } from 'react'
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
-
-/** Sanitize slug to prevent injection in URL params. */
-function sanitizeSlug(slug: string): string {
-  return slug.toLowerCase().replace(/[^a-z0-9-]/g, '')
-}
+import { useFilterState } from './filter-state-provider'
 
 interface SlugItem {
   id: string | number
@@ -29,6 +24,7 @@ interface DrawerSlugListSectionProps {
  * Generic chip-list section for the mobile filter drawer.
  * Used by category and city filters — they share the same URL-state pattern
  * (comma-separated slug list under `paramKey`).
+ * Reads/writes optimistic URL state via FilterStateProvider.
  */
 export function DrawerSlugListSection({
   title,
@@ -38,32 +34,18 @@ export function DrawerSlugListSection({
   clearLabel,
   topBorder = false,
 }: DrawerSlugListSectionProps) {
-  const searchParams = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
+  const { setParam, toggleListItem } = useFilterState()
 
   const toggle = useCallback(
     (slug: string) => {
-      const sanitized = sanitizeSlug(slug)
-      if (!sanitized) return
-      const params = new URLSearchParams(searchParams.toString())
-      const next = selected.includes(sanitized)
-        ? selected.filter((c) => c !== sanitized)
-        : [...selected, sanitized]
-      if (next.length > 0) params.set(paramKey, next.join(','))
-      else params.delete(paramKey)
-      params.delete('page')
-      router.push(`${pathname}?${params.toString()}`)
+      toggleListItem(paramKey, slug)
     },
-    [searchParams, pathname, router, selected, paramKey]
+    [paramKey, toggleListItem],
   )
 
   const clear = useCallback(() => {
-    const params = new URLSearchParams(searchParams.toString())
-    params.delete(paramKey)
-    params.delete('page')
-    router.push(`${pathname}?${params.toString()}`)
-  }, [searchParams, pathname, router, paramKey])
+    setParam(paramKey, null)
+  }, [paramKey, setParam])
 
   if (items.length === 0) return null
 
@@ -82,7 +64,7 @@ export function DrawerSlugListSection({
                 'flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm transition-colors',
                 isSelected
                   ? 'bg-[var(--color-primary)] text-white'
-                  : 'bg-[var(--color-background-alt)] text-[var(--color-text)] hover:bg-[var(--color-border)]'
+                  : 'bg-[var(--color-background-alt)] text-[var(--color-text)] hover:bg-[var(--color-border)]',
               )}
             >
               <span>{item.name}</span>

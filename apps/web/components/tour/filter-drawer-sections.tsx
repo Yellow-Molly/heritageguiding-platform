@@ -1,10 +1,10 @@
 'use client'
 
 import { useCallback } from 'react'
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { TourSort } from './tour-sort'
 import { DrawerSlugListSection } from './drawer-slug-list-section'
+import { useFilterState } from './filter-state-provider'
 import type { Category } from '@/lib/api/get-categories'
 import type { City } from '@/lib/api/get-cities'
 
@@ -19,6 +19,7 @@ interface DrawerSectionsProps {
  * Filter drawer content sections.
  * Order top-to-bottom: City → Categories → Duration → Accessibility → Sort.
  * Slug-list sections (city/category) reuse `DrawerSlugListSection`.
+ * Reads/writes URL state via FilterStateProvider for instant optimistic flip.
  */
 export function DrawerFilterSections({
   categories,
@@ -27,22 +28,16 @@ export function DrawerFilterSections({
   selectedCities,
 }: DrawerSectionsProps) {
   const t = useTranslations('tours.filters')
-  const searchParams = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
+  const { params, setParam } = useFilterState()
 
-  const currentDuration = searchParams.get('duration') || ''
-  const isAccessible = searchParams.get('accessible') === 'true'
+  const currentDuration = params.get('duration') || ''
+  const isAccessible = params.get('accessible') === 'true'
 
   const updateFilter = useCallback(
     (key: string, value: string | null) => {
-      const params = new URLSearchParams(searchParams.toString())
-      if (value) params.set(key, value)
-      else params.delete(key)
-      params.delete('page')
-      router.push(`${pathname}?${params.toString()}`)
+      setParam(key, value)
     },
-    [searchParams, pathname, router]
+    [setParam],
   )
 
   const durationOptions = [

@@ -1,12 +1,12 @@
 'use client'
 
 import { useState, type ReactNode } from 'react'
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { languageDisplayNames } from '@/lib/language-display-names'
+import { useFilterState } from '@/components/tour/filter-state-provider'
 
 interface GuideFilterDrawerMobileProps {
   languages: string[]
@@ -17,7 +17,8 @@ interface GuideFilterDrawerMobileProps {
 
 /**
  * Mobile filter drawer for guide listing.
- * Opens from the left with language, specialization, and area selects.
+ * Per-change commit — selecting an option fires `setParam` immediately;
+ * the close/apply button only dismisses the drawer.
  */
 export function GuideFilterDrawerMobile({
   languages,
@@ -27,42 +28,19 @@ export function GuideFilterDrawerMobile({
 }: GuideFilterDrawerMobileProps) {
   const [isOpen, setIsOpen] = useState(false)
   const t = useTranslations('guides.filters')
-  const searchParams = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
-
-  // Local state mirrors URL params while drawer is open
-  const [lang, setLang] = useState(searchParams.get('language') || '')
-  const [spec, setSpec] = useState(searchParams.get('specialization') || '')
-  const [area, setArea] = useState(searchParams.get('area') || '')
-
-  const handleOpen = () => {
-    setLang(searchParams.get('language') || '')
-    setSpec(searchParams.get('specialization') || '')
-    setArea(searchParams.get('area') || '')
-    setIsOpen(true)
-  }
-
-  const handleApply = () => {
-    const params = new URLSearchParams(searchParams.toString())
-    lang ? params.set('language', lang) : params.delete('language')
-    spec ? params.set('specialization', spec) : params.delete('specialization')
-    area ? params.set('area', area) : params.delete('area')
-    params.delete('page')
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
-    setIsOpen(false)
-  }
+  const { params, setParam, clearAll } = useFilterState()
 
   const handleClear = () => {
-    router.replace(pathname, { scroll: false })
+    clearAll()
     setIsOpen(false)
   }
 
-  const selectClass = 'w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2.5 text-sm'
+  const selectClass =
+    'w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2.5 text-sm'
 
   return (
     <>
-      <div onClick={handleOpen}>{trigger}</div>
+      <div onClick={() => setIsOpen(true)}>{trigger}</div>
 
       {/* Backdrop */}
       {isOpen && (
@@ -74,7 +52,7 @@ export function GuideFilterDrawerMobile({
         className={cn(
           'fixed inset-y-0 left-0 z-50 w-80 bg-[var(--color-surface)] shadow-xl',
           'transform transition-transform duration-300 ease-in-out',
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+          isOpen ? 'translate-x-0' : '-translate-x-full',
         )}
         role="dialog"
         aria-modal="true"
@@ -93,23 +71,41 @@ export function GuideFilterDrawerMobile({
           <div className="flex-1 space-y-5 overflow-y-auto p-4">
             <div>
               <label className="mb-1.5 block text-sm font-medium">{t('language')}</label>
-              <select value={lang} onChange={(e) => setLang(e.target.value)} className={selectClass}>
+              <select
+                value={params.get('language') || ''}
+                onChange={(e) => setParam('language', e.target.value || null)}
+                className={selectClass}
+              >
                 <option value="">{t('language')}</option>
-                {languages.map((l) => <option key={l} value={l}>{languageDisplayNames[l] ?? l}</option>)}
+                {languages.map((l) => (
+                  <option key={l} value={l}>{languageDisplayNames[l] ?? l}</option>
+                ))}
               </select>
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">{t('specialization')}</label>
-              <select value={spec} onChange={(e) => setSpec(e.target.value)} className={selectClass}>
+              <select
+                value={params.get('specialization') || ''}
+                onChange={(e) => setParam('specialization', e.target.value || null)}
+                className={selectClass}
+              >
                 <option value="">{t('specialization')}</option>
-                {specializations.map((s) => <option key={s.id} value={s.slug}>{s.name}</option>)}
+                {specializations.map((s) => (
+                  <option key={s.id} value={s.slug}>{s.name}</option>
+                ))}
               </select>
             </div>
             <div>
               <label className="mb-1.5 block text-sm font-medium">{t('area')}</label>
-              <select value={area} onChange={(e) => setArea(e.target.value)} className={selectClass}>
+              <select
+                value={params.get('area') || ''}
+                onChange={(e) => setParam('area', e.target.value || null)}
+                className={selectClass}
+              >
                 <option value="">{t('area')}</option>
-                {areas.map((a) => <option key={a.id} value={a.slug}>{a.name}</option>)}
+                {areas.map((a) => (
+                  <option key={a.id} value={a.slug}>{a.name}</option>
+                ))}
               </select>
             </div>
           </div>
@@ -118,7 +114,7 @@ export function GuideFilterDrawerMobile({
           <div className="shrink-0 border-t border-[var(--color-border)] p-4">
             <div className="flex gap-3">
               <Button variant="outline-dark" onClick={handleClear} className="flex-1">{t('clearAll')}</Button>
-              <Button onClick={handleApply} className="flex-1">{t('apply')}</Button>
+              <Button onClick={() => setIsOpen(false)} className="flex-1">{t('apply')}</Button>
             </div>
           </div>
         </div>
