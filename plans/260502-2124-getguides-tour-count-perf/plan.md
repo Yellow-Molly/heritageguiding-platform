@@ -43,7 +43,7 @@ Returns one row per guide with a count. Zero hydration cost. Index on `tours.gui
 
 | # | Title | Status | Effort | Deps |
 |---|---|---|---|---|
-| 01 | Replace tour-count batch with SQL aggregate | pending | 1h | — |
+| 01 | Replace tour-count batch with SQL aggregate | completed | 1h | — |
 | 02 | Re-measure + strip listing perf instrumentation | pending | 30m | 01 |
 
 ## Gate
