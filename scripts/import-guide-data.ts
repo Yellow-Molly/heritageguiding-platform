@@ -472,13 +472,33 @@ async function runV2Import(
         updated++
       } else {
         // CREATE path — new guides (e.g. Jack Voldstad)
+        // v3: resolve operating areas from raw city names if supplied; fall
+        // back to Stockholm for backward compat with v2 inputs.
+        const opAreaIds = guide.operatingAreasRaw && guide.operatingAreasRaw.length > 0
+          ? resolveOperatingAreas(guide.operatingAreasRaw, cityMap)
+          : []
+        const operatingAreas = opAreaIds.length > 0 ? opAreaIds : [stockholmId]
+        if (guide.operatingAreasRaw && opAreaIds.length < guide.operatingAreasRaw.length) {
+          const unresolved = guide.operatingAreasRaw.filter((raw) => {
+            const slug = AREA_TO_CITY[raw.toLowerCase().trim()]
+            return !slug || !cityMap.get(slug)
+          })
+          if (unresolved.length > 0) {
+            console.log(`  [warn] unresolved cities for ${guide.slug}: ${unresolved.join(', ')}`)
+          }
+        }
+        // v3: build credentials list — FSAG default + optional extras (e.g. Meänkieli)
+        const extraCreds = guide.extraCredentialsByLocale?.sv ?? []
         const svFields = buildV2FieldData(guide.sv)
         const svData: Record<string, unknown> = {
           name: guide.name,
           slug: guide.slug,
           status: STATUS,
           bio: markdownToLexical(guide.sv.bio.trim()),
-          credentials: [{ credential: NEW_GUIDE_CREDENTIALS.sv }],
+          credentials: [
+            { credential: NEW_GUIDE_CREDENTIALS.sv },
+            ...extraCreds.map((c) => ({ credential: c })),
+          ],
           photo: photoId || undefined,
           email: '',
           phone: '',
@@ -487,7 +507,7 @@ async function runV2Import(
             ? guide.passThroughAdditionalLanguages
             : undefined,
           specializations: specializationIds.length > 0 ? specializationIds : undefined,
-          operatingAreas: [stockholmId],
+          operatingAreas,
           ...svFields,
         }
         const result = await payload.create({ collection: 'guides', locale: 'sv', data: svData })
@@ -531,8 +551,16 @@ async function runV2Import(
           }))
         }
         if (!wasExisting && savedCreds[0]) {
-          // New guide: translate the single FSAG credential into en/de.
-          localeData.credentials = [{ id: savedCreds[0].id, credential: NEW_GUIDE_CREDENTIALS[locale] }]
+          // New guide: translate FSAG + extras into en/de, preserving array IDs.
+          const extras = guide.extraCredentialsByLocale?.[locale] ?? []
+          const expected: string[] = [NEW_GUIDE_CREDENTIALS[locale], ...extras]
+          if (savedCreds.length !== expected.length) {
+            console.warn(`  warn: ${guide.slug} ${locale} credentials count mismatch (${savedCreds.length} saved vs ${expected.length} expected)`)
+          }
+          localeData.credentials = savedCreds.map((c, i) => ({
+            id: c.id,
+            credential: expected[i] ?? c.credential,
+          }))
         } else if (FULL_UPDATE && savedCreds.length > 0) {
           localeData.credentials = savedCreds.map((c) => ({ id: c.id, credential: c.credential }))
         }

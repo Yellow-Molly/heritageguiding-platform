@@ -23,6 +23,18 @@ export interface TranslatedGuideV2 {
   de: V2LocaleBlock
   passThroughLanguages: string[]
   passThroughAdditionalLanguages: string[]
+  /**
+   * v3 extension: raw city/area names extracted from docx header, mapped to
+   * Payload city slugs via AREA_TO_CITY. Falls back to ['stockholm'] if empty
+   * or unmapped. Existing v2 inputs without this field default to Stockholm.
+   */
+  operatingAreasRaw?: string[]
+  /**
+   * v3 extension: per-locale extra credential strings appended to the FSAG
+   * default for new guides. Used to surface non-enum capabilities (e.g.
+   * Meänkieli) that don't fit Payload's additionalLanguages select.
+   */
+  extraCredentialsByLocale?: Record<V2Locale, string[]>
 }
 
 export type V2Locale = 'sv' | 'en' | 'de'

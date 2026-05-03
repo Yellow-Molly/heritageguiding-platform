@@ -4,6 +4,24 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-03] — Guides Data v3 Update (3 New Guides + Photo Web-Optimization) ✓
+
+**Type:** Data Import / Content
+**Scope:** Add 3 new guides (Anette Gustafsson, Leo Eriksson, Mats Quist), refresh photos for 7 existing guides, web-optimize all uploaded photos.
+
+- **3 new guides** parsed from `docx/Guides data v3/` (12 v2 docx files were byte-identical → not re-imported). Claude in-session SV→EN/DE translation; v2 import script extended with `operatingAreasRaw` + `extraCredentialsByLocale` to handle Anette's Göteborg + Leo's Meänkieli credential.
+- **Photo conversion**: 9 oversized originals (incl. Leo 3.1MB / 5712px and Svante 3.6MB / 5712px) resized to ≤1600px / JPEG q85 / EXIF-stripped via `convert-guide-photos-for-web.py`. Leo 3.1MB→148KB (-95%), Svante 3.6MB→260KB (-93%).
+- **Photo refreshes**: 3 placeholder users (Asa/Svante/Tommy on media id 86) replaced with real photos; 4 stale-file refreshes (Jack/Sophie/Anders/Annika) via `update-guide-photos-v3.ts`. CMS now has 0 placeholder references.
+- **Result**: 15 guides live, 0 import errors, all 3 locales populated for new guides, all 15 photo IDs resolved.
+- **Pre-existing follow-ups surfaced** (NOT v3 regressions): Anders Boysen 0 credentials, all guides specializations=0 (keyword resolver gap), `gothenburg` city missing in Cities collection.
+
+**Plan:** `plans/260503-1105-guides-data-v3-update/`
+**Report:** `plans/reports/verify-guides-v3-260503.md`
+**New scripts:** `convert-guide-photos-for-web.py`, `parse-guides-v3-docx.py`, `upload-v3-guide-photos.ts`, `update-guide-photos-v3.ts`
+**Modified:** `import-guide-data.ts`, `lib/guide-v2-helpers.ts`, `parse-guides-v2-docx.py`
+
+---
+
 ## [2026-05-03] — Backfill Tour Theme Categories (Tours Filter Fix) ✓
 
 **Type:** Bugfix / Data Migration

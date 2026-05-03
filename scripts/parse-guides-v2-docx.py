@@ -16,8 +16,8 @@ from pathlib import Path
 from docx import Document
 
 ROOT = Path(__file__).resolve().parents[1]
-DOCX_DIR = ROOT / "docx" / "Guides data v2"
-OUT_PATH = ROOT / "data" / "guides-v2-sv.json"
+DEFAULT_DOCX_DIR = ROOT / "docx" / "Guides data v2"
+DEFAULT_OUT_PATH = ROOT / "data" / "guides-v2-sv.json"
 
 # Section header prefixes (tolerant startswith match, lowercased)
 SECTION_PREFIXES = {
@@ -42,6 +42,10 @@ LANGUAGE_MAP = {
 ADDITIONAL_LANGUAGE_MAP = {
     "japanska": "ja", "norska": "no", "danska": "da", "finska": "fi",
     "holländska": "nl", "polska": "pl", "ryska": "ru",
+    # v3: Meänkieli — Finnish minority language; not a standard ISO code.
+    # Surfaced through this slug so downstream import can map to credential string
+    # if Payload's additionalLanguages enum lacks it.
+    "meänkieli": "meankieli",
 }
 
 # Quote characters to strip from pull quote
@@ -89,6 +93,7 @@ def parse_languages(raw: str) -> tuple[list[str], list[str]]:
     for sep in ("\u2022", "\u00B7"):  # bullet, middle dot
         if sep in body:
             body = body.rsplit(sep, 1)[1]
+            break
     items = [s.strip().lower() for s in re.split(r"[,/]", body) if s.strip()]
     main: list[str] = []
     additional: list[str] = []
