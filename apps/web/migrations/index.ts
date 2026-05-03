@@ -7,6 +7,7 @@ import * as migration_20260419_154101_add_guide_profile_fields from './20260419_
 import * as migration_20260501_083209_add_tours_cities_relation from './20260501_083209_add_tours_cities_relation';
 import * as migration_20260502_181007_add_listing_query_indexes from './20260502_181007_add_listing_query_indexes';
 import * as migration_20260503_131600_enable_rls_public_tables from './20260503_131600_enable_rls_public_tables';
+import * as migration_20260503_153500_postgis_security_hardening from './20260503_153500_postgis_security_hardening';
 
 export const migrations = [
   {
@@ -53,5 +54,10 @@ export const migrations = [
     up: migration_20260503_131600_enable_rls_public_tables.up,
     down: migration_20260503_131600_enable_rls_public_tables.down,
     name: '20260503_131600_enable_rls_public_tables',
+  },
+  {
+    up: migration_20260503_153500_postgis_security_hardening.up,
+    down: migration_20260503_153500_postgis_security_hardening.down,
+    name: '20260503_153500_postgis_security_hardening',
   },
 ];

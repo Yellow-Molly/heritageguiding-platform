@@ -31,13 +31,39 @@ Single idempotent Payload migration:
 - `ALTER TABLE ... ENABLE ROW LEVEL SECURITY` is idempotent in Postgres → safe to re-run on tables already protected.
 - Registered in `apps/web/migrations/index.ts`.
 
-## Out of Scope (Manual Action Required)
+## Phase 2 (Resolved): PostGIS Hardening
 
-`public.spatial_ref_sys` — PostGIS system table, app-role can't ALTER it.
-Options (pick one in Supabase dashboard):
-- Move PostGIS to `extensions` schema: `ALTER EXTENSION postgis SET SCHEMA extensions;`
-  (Then `spatial_ref_sys` no longer in public, advisor stops flagging.)
-- Or, in Supabase SQL Editor as `postgres` role: `ALTER TABLE public.spatial_ref_sys ENABLE ROW LEVEL SECURITY;` (may require `supabase_admin`).
+After Phase 1 cleared 44 ERRORs, the advisor surfaced 1 ERROR + 7 WARN that
+all root in PostGIS being installed in `public`. Investigation showed:
+- The `postgres` connection role OWNS `spatial_ref_sys` and `st_estimatedextent`
+  on this managed Postgres → no `supabase_admin` action needed.
+- `ALTER EXTENSION postgis SET SCHEMA extensions` errors with "extension
+  postgis does not support SET SCHEMA" (PostGIS is non-relocatable). The only
+  alternative is DROP CASCADE + CREATE in new schema → restore data, which
+  destroys 3 geometry columns (cities/neighborhoods/tours.coordinates).
+  Trade-off rejected.
+- `st_estimatedextent` overloads are NOT actually `SECURITY DEFINER`
+  (`pg_proc.prosecdef = false`); the linter mislabels them, but the underlying
+  problem — `EXECUTE` granted to `PUBLIC` — is real and the fix is the same.
+
+**Migration:** `apps/web/migrations/20260503_153500_postgis_security_hardening.ts`
+1. `ALTER TABLE public.spatial_ref_sys ENABLE ROW LEVEL SECURITY`
+2. `REVOKE EXECUTE ON FUNCTION public.st_estimatedextent(<3 overloads>) FROM PUBLIC`
+
+Idempotent, with `pg_tables`/`pg_proc` existence guards.
+
+**Applied to staging:** 2026-05-03 via `psql` (validated in ROLLBACK transaction
+first). Will be recorded in `payload_migrations` on next Vercel deploy.
+
+## Accepted (No Action)
+
+- **WARN `extension_in_public` for `postgis`** — non-relocatable; contained
+  objects (`spatial_ref_sys`, functions) are individually hardened above.
+  Cosmetic.
+- **43 × INFO `rls_enabled_no_policy`** — RLS-on-with-no-policy = deny-all
+  for non-bypass roles, which is the *intended* posture for tables that
+  should never be PostgREST-readable. Adding a "deny all" policy would
+  silence the lint but not change behavior.
 
 ## Verification
 
