@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@anthropic-ai/sdk": "^0.82.0",
+    "@anthropic-ai/sdk": "^0.92.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
@@ -24,6 +24,8 @@
     "immutable": "4.3.8",
     "dompurify": "^3.4.0",
     "esbuild": "^0.25.0",
-    "drizzle-orm": "0.45.2"
+    "drizzle-orm": "0.45.2",
+    "postcss": "^8.5.13",
+    "uuid": "^14.0.0"
   }
 }
