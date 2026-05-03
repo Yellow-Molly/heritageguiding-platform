@@ -1,0 +1,74 @@
+{
+  "startedAt": "2026-05-03T08:36:15.293Z",
+  "applied": true,
+  "toursChecked": 10,
+  "toursUpdated": 8,
+  "toursSkippedAlreadySuperset": 2,
+  "toursSkippedUnknown": [],
+  "perTourDiffs": [
+    {
+      "slug": "slow-travel-stockholm-archipelago-classic-boat",
+      "added": [
+        "nature-water"
+      ]
+    },
+    {
+      "slug": "slow-travel-malaren-classic-boat-stockholm",
+      "added": [
+        "nature-water"
+      ]
+    },
+    {
+      "slug": "gamla-stan-and-vasa-museum-private-walking-tour",
+      "added": [
+        "walking-tour"
+      ]
+    },
+    {
+      "slug": "private-uppsala-day-tour-from-stockholm",
+      "added": [
+        "history-heritage",
+        "day-trip"
+      ]
+    },
+    {
+      "slug": "private-sigtuna-heritage-tour-from-stockholm",
+      "added": [
+        "history-heritage",
+        "viking-medieval",
+        "day-trip"
+      ]
+    },
+    {
+      "slug": "stockholm-islands-and-districts-private-overview-by-car-3-hour",
+      "added": [
+        "architecture"
+      ]
+    },
+    {
+      "slug": "private-medieval-stockholm-walking-tour",
+      "added": [
+        "viking-medieval"
+      ]
+    },
+    {
+      "slug": "private-rib-tour-stockholm-3h",
+      "added": [
+        "nature-water"
+      ]
+    }
+  ],
+  "preflight": {
+    "ok": true,
+    "missingDesiredSlugs": [],
+    "unmappedPublishedTours": []
+  },
+  "revalidate": {
+    "ok": true,
+    "tags": [
+      "tours",
+      "categories"
+    ]
+  },
+  "finishedAt": "2026-05-03T08:36:16.976Z"
+}

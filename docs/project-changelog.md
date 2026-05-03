@@ -4,6 +4,22 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-03] — Backfill Tour Theme Categories (Tours Filter Fix) ✓
+
+**Type:** Bugfix / Data Migration
+**Scope:** Tours filter visibility — backfill missing theme categories on 6 of 10 published tours
+
+- **Bug:** Selecting all 6 themes in `/en/tours` Categories filter showed only 4 tours instead of 10. Root cause: Phase 03 migration left 6 published tours with zero theme categories (net-new themes like `nature-water` never assigned, tours with all-delete source categories got nothing).
+- **Fix:** Additive backfill script (`scripts/backfill-tour-theme-categories.ts`) applies hard-coded desired theme mapping from phase-02 plan. Result: **10 tours checked, 8 updated, 2 already-superset**. SQL verification confirms all published tours now have ≥1 theme.
+- **Guard:** New regression test `apps/web/lib/api/__tests__/get-tours.published-tours-have-themes.test.ts` (Payload Local API integration, auto-skips if no DATABASE_URL) ensures data drift cannot recur silently.
+- **Idempotency:** Script is safe to re-run; second apply writes 0 rows.
+
+**Plan:** `plans/260503-1005-tours-category-backfill-fix/`
+**Artifacts:** Backfill script, apply log, SQL snapshot, regression test
+**Pre-existing Tech Debt Noted:** `get-tours.test.ts` has 7 failing tests due to Phase 03 slug renames — out of scope, flagged for follow-up.
+
+---
+
 ## [2026-05-03] — Strip Listing Perf Instrumentation (Phase 06) ✓
 
 **Type:** Cleanup

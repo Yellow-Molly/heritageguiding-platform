@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-05-03T08:37:00.759Z",
+  "applied": true,
+  "toursChecked": 10,
+  "toursUpdated": 0,
+  "toursSkippedAlreadySuperset": 10,
+  "toursSkippedUnknown": [],
+  "perTourDiffs": [],
+  "preflight": {
+    "ok": true,
+    "missingDesiredSlugs": [],
+    "unmappedPublishedTours": []
+  },
+  "revalidate": {
+    "ok": true,
+    "tags": [
+      "tours",
+      "categories"
+    ]
+  },
+  "finishedAt": "2026-05-03T08:37:02.045Z"
+}
