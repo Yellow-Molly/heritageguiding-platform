@@ -19,6 +19,12 @@ import { getPayload, payloadConfig } from './payload-bootstrap'
 const DRY_RUN = process.argv.includes('--dry-run')
 const SRC_DIR = path.resolve(__dirname, '../docx/Guide-photos-web')
 const MAPPING_PATH = path.resolve(__dirname, '../data/guide-photo-media-mapping.json')
+/**
+ * Optional filename prefix — required for staging because dev and staging share
+ * the same Vercel Blob bucket and identical filenames collide. Pass `--prefix=stg-`
+ * to match the existing staging convention (e.g. `stg-jack-voldstad.jpg`).
+ */
+const PREFIX = process.argv.find((a) => a.startsWith('--prefix='))?.split('=')[1] ?? ''
 
 interface UploadTarget {
   slug: string
@@ -71,11 +77,14 @@ async function main(): Promise<void> {
   console.log(`Loaded mapping with ${Object.keys(mapping).length} existing entries`)
   console.log(`Targets: ${TARGETS.length} photos\n`)
 
+  if (PREFIX) console.log(`Filename prefix: "${PREFIX}"\n`)
+
   if (DRY_RUN) {
     for (const t of TARGETS) {
       const oldId = mapping[t.slug] ?? '(none)'
       const sz = fs.statSync(path.join(SRC_DIR, t.file)).size
-      console.log(`  ${t.slug.padEnd(22)} ← ${t.file.padEnd(28)} ${(sz / 1024).toFixed(0)}KB  oldId=${oldId}`)
+      const name = `${PREFIX}${t.file}`
+      console.log(`  ${t.slug.padEnd(22)} ← ${name.padEnd(32)} ${(sz / 1024).toFixed(0)}KB  oldId=${oldId}`)
     }
     console.log('\n[DRY RUN] Would upload the above. Exiting.')
     process.exit(0)
@@ -97,7 +106,7 @@ async function main(): Promise<void> {
         file: {
           data: buf,
           mimetype: 'image/jpeg',
-          name: t.file,
+          name: `${PREFIX}${t.file}`,
           size: buf.length,
         },
       })
