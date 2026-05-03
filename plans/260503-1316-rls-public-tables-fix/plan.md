@@ -52,8 +52,32 @@ all root in PostGIS being installed in `public`. Investigation showed:
 
 Idempotent, with `pg_tables`/`pg_proc` existence guards.
 
-**Applied to staging:** 2026-05-03 via `psql` (validated in ROLLBACK transaction
-first). Will be recorded in `payload_migrations` on next Vercel deploy.
+**Privilege caveat (discovered via failed Vercel build fb0f187):**
+PostGIS objects are owned by Supabase's *real* `postgres` superuser exposed
+only on the direct connection (`db.<ref>.supabase.co:5432`). Vercel/Payload
+typically connects via the pooler (`*.pooler.supabase.com:6543`) using a
+shadow `postgres.<projectref>` role that lacks ownership and gets
+`must be owner of table spatial_ref_sys`. The migration now wraps each
+operation in `EXCEPTION WHEN insufficient_privilege THEN RAISE NOTICE` so
+deploys stay green — but the actual work then needs **one-time manual apply**
+per env via Supabase SQL Editor:
+
+```sql
+ALTER TABLE public.spatial_ref_sys ENABLE ROW LEVEL SECURITY;
+REVOKE EXECUTE ON FUNCTION public.st_estimatedextent(text, text) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.st_estimatedextent(text, text, text) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.st_estimatedextent(text, text, text, boolean) FROM PUBLIC;
+```
+
+**Staging:** Already applied 2026-05-03 via direct-connection `psql` (back when
+`apps/web/.env.local` temporarily pointed at staging). State verified:
+`spatial_ref_sys.rowsecurity=true`, function ACLs collapsed to
+`{postgres=X/postgres}`. The new soft-fail migration will record itself in
+`payload_migrations` on next Vercel deploy without touching anything (no-op
+under pooler role).
+
+**Production:** Will need the manual SQL Editor step the first time the env
+is set up. Document in deployment runbook.
 
 ## Accepted (No Action)
 
