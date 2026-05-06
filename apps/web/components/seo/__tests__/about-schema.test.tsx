@@ -35,10 +35,11 @@ describe('AboutSchema', () => {
       expect(json.mainEntity.name).toBe('Private Tours')
     })
 
-    it('includes areaServed Stockholm', () => {
+    it('includes areaServed Sweden', () => {
       const { container } = render(<AboutSchema />)
       const json = getJson(container)
-      expect(json.mainEntity.areaServed.name).toBe('Stockholm')
+      expect(json.mainEntity.areaServed.name).toBe('Sweden')
+      expect(json.mainEntity.areaServed['@type']).toBe('Country')
     })
   })
 

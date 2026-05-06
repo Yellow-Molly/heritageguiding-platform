@@ -22,14 +22,20 @@ export function AboutStorySection() {
             <br />
             {t('story.titleLine2')}
           </h2>
-          <p className="mt-6 text-base leading-[1.7] text-[var(--color-text)]">
+          <p className="mt-6 font-serif text-lg italic leading-[1.7] text-[var(--color-text)] md:text-xl">
             {t('story.paragraph1')}
           </p>
           <p className="mt-4 text-base leading-[1.7] text-[var(--color-text)]">
             {t('story.paragraph2')}
           </p>
-          <blockquote className="mt-6 border-l-4 border-[var(--color-secondary)] pl-6 font-serif text-lg italic text-[var(--color-text)] md:pl-8 md:text-[22px] md:leading-[1.6]">
+          <p className="mt-4 text-base leading-[1.7] text-[var(--color-text)]">
             {t('story.paragraph3')}
+          </p>
+          <p className="mt-4 text-base leading-[1.7] text-[var(--color-text)]">
+            {t('story.paragraph4')}
+          </p>
+          <blockquote className="mt-6 border-l-4 border-[var(--color-secondary)] pl-6 font-serif text-lg italic text-[var(--color-text)] md:pl-8 md:text-[22px] md:leading-[1.6]">
+            {t('story.paragraph5')}
           </blockquote>
         </div>
 

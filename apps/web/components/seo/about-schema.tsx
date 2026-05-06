@@ -12,7 +12,7 @@ interface AboutSchemaProps {
 }
 
 const defaultDescription =
-  'Private Tours offers expert-led Stockholm heritage tours. Discover Swedish history and culture with licensed local guides.'
+  'Private Tours offers expertly hosted experiences across Sweden. Discover Swedish culture, nature, and food with licensed guides, chefs, and artisans.'
 
 export function AboutSchema({ founders, description }: AboutSchemaProps) {
   const schema = {
@@ -28,9 +28,9 @@ export function AboutSchema({ founders, description }: AboutSchemaProps) {
       url: process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se',
       foundingDate: '2024',
       areaServed: {
-        '@type': 'City',
-        name: 'Stockholm',
-        '@id': 'https://www.wikidata.org/wiki/Q1754',
+        '@type': 'Country',
+        name: 'Sweden',
+        '@id': 'https://www.wikidata.org/wiki/Q34',
       },
       ...(founders &&
         founders.length > 0 && {

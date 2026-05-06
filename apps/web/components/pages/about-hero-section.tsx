@@ -13,7 +13,7 @@ export function AboutHeroSection() {
     <section className="relative h-[300px] overflow-hidden md:h-[450px]">
       {/* Background image */}
       <Image
-        src="https://images.unsplash.com/photo-1508189860359-777d945909ef?auto=format&fit=crop&w=1920&q=75"
+        src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?auto=format&fit=crop&w=1920&q=75"
         alt={t('heroAlt')}
         fill
         priority

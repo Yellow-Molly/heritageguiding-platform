@@ -340,76 +340,75 @@
   },
   "about": {
     "title": "Über Private Tours",
-    "description": "Private, fachkundig geführte Erlebnisse in Stockholm mit autorisierten Fachleuten",
+    "description": "Private, fachkundig geführte Erlebnisse in ganz Schweden mit autorisierten Fachleuten",
     "subtitle": "Tiefe, Vertrauen und Persönliche Verbindung",
-    "heroAlt": "Private Tours - fachkundig geführte Erlebnisse in Stockholm",
+    "heroAlt": "Private Tours - kuratierte Erlebnisse in ganz Schweden",
     "hero": {
       "label": "UNSERE GESCHICHTE"
     },
     "story": {
       "label": "WER WIR SIND",
-      "imageAlt": "Eine charmante enge Gasse in Stockholms Altstadt",
-      "titleLine1": "Geschaffen für Reisende",
-      "titleLine2": "Die Tiefe Schätzen",
-      "paragraph1": "Private Tours wurde für Reisende geschaffen, die Tiefe, Vertrauen und persönliche Verbindung über Masse und Geschwindigkeit stellen.",
-      "paragraph2": "Wir bieten private, fachkundig geführte Erlebnisse in Stockholm, die ausschließlich von autorisierten Fachleuten geleitet werden. Jeder Guide wird sorgfältig ausgewählt, jede Route ist kuratiert und jedes Erlebnis ist darauf ausgelegt, sich von Anfang bis Ende nahtlos anzufühlen. Dies ist kein offener Marktplatz — es ist eine durchdachte Auswahl von Menschen und Orten, die für ihr Wissen, ihre Integrität und ihre Fähigkeit, mit Zuversicht zu führen, ausgewählt wurden.",
-      "paragraph3": "Unsere Gäste suchen nicht nach mehr Optionen. Sie suchen nach der richtigen.",
-      "paragraph4": "Deshalb arbeiten wir ausschließlich mit lizenzierten Guides und Fachexperten, die Ihre Sprache fließend sprechen und die Stadt, die sie vertreten, bestens kennen. Indem wir die volle Verantwortung für Logistik, Tempo und Inhalt übernehmen, beseitigen wir Reibung und ermöglichen es Ihnen, sich ganz auf das Erlebnis selbst zu konzentrieren.",
-      "paragraph5": "Viele unserer Touren verbinden historische Expertise mit praktischen Aktivitäten — wie der schwedischen Esskultur — denn einen Ort versteht man oft am besten durch Geschichte und Handlung zugleich. Während der gesamten Reise bleibt Ihr Gastgeber an Ihrer Seite und bietet Kontext, Kontinuität und persönliche Aufmerksamkeit.",
-      "paragraph6": "Private Tours existiert, um die Zeit in Stockholm bedeutungsvoll, mühelos und persönlich zu gestalten — geführt von Menschen, denen sowohl ihr Handwerk als auch ihre Gäste wirklich am Herzen liegen."
+      "imageAlt": "Schwedens vielfältige Landschaften — Küste, Wald und historische Städte",
+      "titleLine1": "Es Beginnt Immer",
+      "titleLine2": "Mit Einer Frage",
+      "paragraph1": "Es beginnt immer mit einer Frage.",
+      "paragraph2": "Nicht danach, was Sie sehen möchten — sondern wie Sie sich fühlen möchten, wenn Sie wieder gehen.",
+      "paragraph3": "Private Tours ist eine kuratierte Plattform für Erlebnisse in ganz Schweden. Hier finden Sie Stadtführungen und Naturguides, kulinarische Reisen und Handwerks-Workshops, Bierverkostungen und stille Morgen im Wald — alle aus einem einzigen Grund ausgewählt: dass die Person hinter jedem Erlebnis wirklich versteht, was sie anbietet.",
+      "paragraph4": "Wenn Sie ein Erlebnis mit einem autorisierten Guide oder Fachexperten kombinieren möchten, der es in einen größeren Zusammenhang stellt, ist das jederzeit möglich. Es ist jedoch nie eine Voraussetzung. Die Plattform ist so konzipiert, dass sie Sie dort abholt, wo Sie stehen — ob Sie ein paar Stunden oder etwas suchen, das sich über mehrere Tage und Reiseziele erstreckt.",
+      "paragraph5": "Was alles, was wir anbieten, verbindet, ist nicht das Format. Es ist die Qualität der Menschen dahinter."
     },
     "mission": {
       "label": "UNSER ZWECK",
       "title": "Unsere Mission",
-      "description": "Privaten Zugang zu Stockholms vertrauenswürdigsten Experten durch ein sorgfältig kuratiertes System zu bieten, das sicherstellt, dass jedes Erlebnis persönlich, zuverlässig und tiefgreifend ansprechend ist."
+      "description": "Schwedens vertrauenswürdigste Plattform für kuratierte Erlebnisse zu sein — wo Kultur, Natur und Kulinarik zusammenkommen, und wo jedes Erlebnis persönlich, zuverlässig und tiefgreifend ansprechend ist."
     },
     "vision": {
       "title": "Unsere Vision",
-      "description": "Einen neuen Standard für Kulturtourismus zu setzen, bei dem Expertise, Vertrauen und menschliche Verbindung das Erlebnis definieren — und bei dem Qualität niemals dem Zufall überlassen wird."
+      "description": "Einen neuen Standard dafür zu setzen, wie Schweden erlebt wird — wo Expertise, Authentizität und menschliche Verbindung jede Begegnung mit dem Land, seiner Natur, seiner Küche und seinen Geschichten prägen."
     },
     "values": {
       "label": "WARUM UNS WÄHLEN",
       "title": "Was Uns Auszeichnet",
-      "subtitle": "Ein durchdachter Ansatz für Kulturtourismus in Stockholm",
+      "subtitle": "Ein durchdachter Ansatz für kuratierte Erlebnisse in ganz Schweden",
       "authorizedExperts": {
-        "title": "Nur Autorisierte Experten",
-        "description": "Jedes Erlebnis wird von einem vollständig lizenzierten Guide oder verifizierten Experten geleitet. Wir prüfen persönlich die Qualifikationen, um akademische Tiefe, Professionalität und Klarheit im Erzählen sicherzustellen."
+        "title": "Nur Verifizierte Experten",
+        "description": "Jedes Erlebnis wird von einem lizenzierten Stadtguide, Naturguide, Koch, Handwerker oder Fachexperten geleitet. Wir prüfen persönlich Qualifikationen, Erfahrung und die Fähigkeit, zu begeistern. Nichts wird dem Zufall überlassen."
       },
       "curated": {
         "title": "Kuratiert, Nie Überlaufen",
-        "description": "Wir sind keine offene Plattform. Jede Route, Aktivität und jeder Gastgeber wird ausgewählt und überprüft, um Konsistenz, Qualität und Authentizität zu gewährleisten."
+        "description": "Wir sind keine offene Plattform. Jedes Erlebnis — ob Naturtour, kulinarische Reise oder Handwerks-Workshop — wird handverlesen und überprüft. Wir bieten nicht alles an. Nur das, wofür wir wirklich einstehen."
       },
       "privateByDesign": {
         "title": "Privat Konzipiert",
-        "description": "Alle Erlebnisse sind ausschließlich privat. Dies ermöglicht es uns, Tempo, Fokus und Tiefe vollständig an Ihre Interessen anzupassen."
+        "description": "Alle Erlebnisse sind ausschließlich privat. Tempo, Fokus und Tiefe richten sich vollständig nach Ihnen und Ihrer Gruppe — nicht nach dem Zeitplan anderer."
       },
       "seamlessHosting": {
         "title": "Nahtlose Betreuung",
-        "description": "Ihr Guide übernimmt Logistik, Transport und Übergänge und schafft ein reibungsloses, ununterbrochenes Erlebnis von Anfang bis Ende."
+        "description": "Wir kümmern uns um Logistik, Transport und Übergänge. Sie sollen nie über den nächsten Schritt nachdenken müssen — nur in dem präsent sein, in dem Sie sich gerade befinden."
       },
       "multilingual": {
         "title": "Mehrsprachige Expertise",
-        "description": "Touren werden auf Schwedisch, Englisch, Deutsch, Französisch, Portugiesisch und Spanisch angeboten — immer von zertifizierten Fachleuten."
+        "description": "Erlebnisse werden auf Schwedisch, Englisch, Deutsch, Niederländisch, Französisch, Portugiesisch und Spanisch angeboten — immer von zertifizierten Fachleuten."
       }
     },
     "responsibleTourism": {
       "label": "UNSER ENGAGEMENT",
-      "imageAlt": "Stockholmer Uferpromenade mit Natur und historischer Architektur",
-      "title": "Ein Engagement für Verantwortungsvollen Tourismus",
-      "paragraph1": "Private Tours verpflichtet sich zu einem sorgsamen Umgang mit Menschen und Orten. Wir arbeiten mit lokalen Fachleuten und Unternehmen zusammen, pflegen ein umweltschonendes Modell mit ausschließlich privaten Touren und gestalten Erlebnisse, die die Umgebungen und Gemeinschaften respektieren, die wir besuchen.",
-      "paragraph2": "Barrierefreiheit ist uns wichtig. Unsere digitalen Plattformen folgen anerkannten Barrierefreiheitsstandards, und unsere Routen sind so gestaltet, dass sie wann immer möglich inklusiv sind — ohne Kompromisse bei Tiefe oder Qualität.",
-      "paragraph3": "Kulturerbe ist keine Kulisse; es ist eine Verantwortung. Unsere Arbeit basiert auf Bildung, Bewahrung und langfristigem Respekt für die Geschichten, die wir teilen.",
+      "imageAlt": "Schwedische Landschaft — Natur und historische Schauplätze im ganzen Land",
+      "title": "Eine Verantwortung für Orte und Menschen",
+      "paragraph1": "Private Tours arbeitet mit Sorgfalt für Menschen und Umwelt. Wir kooperieren mit lokalen Fachleuten und Unternehmen in ganz Schweden, pflegen ein umweltschonendes Modell mit ausschließlich privaten Erlebnissen und gestalten Erlebnisse, die die Landschaften und Gemeinschaften respektieren, die wir besuchen — von Stadtzentren bis in die Wildnis.",
+      "paragraph2": "Barrierefreiheit ist uns wichtig. Unsere digitalen Plattformen folgen anerkannten Barrierefreiheitsstandards, und unsere Erlebnisse sind so gestaltet, dass sie wann immer möglich inklusiv sind — ohne Kompromisse bei Tiefe oder Qualität.",
+      "paragraph3": "Kulturerbe, Naturerbe und kulinarische Traditionen sind keine Kulisse. Sie sind eine Verantwortung. Unsere Arbeit basiert auf Bildung, Bewahrung und langfristigem Respekt für die Geschichten, die wir teilen — wo immer in Schweden sie sich entfalten.",
       "items": {
-        "item1": "Zusammenarbeit mit lokalen Fachleuten und Unternehmen",
-        "item2": "Umweltschonendes Modell mit ausschließlich privaten Touren",
-        "item3": "Inklusive und barrierefreie Routengestaltung",
-        "item4": "Bewahrung und Vermittlung des Kulturerbes"
+        "item1": "Lokale Partnerschaften in ganz Schweden",
+        "item2": "Umweltschonendes Modell mit ausschließlich privaten Erlebnissen",
+        "item3": "Inklusive und barrierefreie Erlebnisgestaltung",
+        "item4": "Bewahrung von Kultur- und Naturerbe"
       }
     },
     "team": {
       "title": "Unser Team",
-      "subtitle": "Leidenschaftliche Fachleute, die sich dem Teilen von Stockholms Geschichten widmen",
-      "description": "Unser Team besteht aus lizenzierten Guides, Historikern und Kulturexperten — jeder sorgfältig geprüft auf sein Wissen, seine Professionalität und seine Fähigkeit, mit aufrichtiger Fürsorge zu begleiten. Gemeinsam bringen wir jahrzehntelange Erfahrung in Kulturerbetourismus, Archäologie, Kunstgeschichte und schwedischer Kultur ein."
+      "subtitle": "Leidenschaftliche Fachleute, die sich dem Teilen von Schwedens Geschichten widmen",
+      "description": "Unser Team besteht aus lizenzierten Guides, Naturguides, Köchen, Handwerkern und Fachexperten — jeder sorgfältig geprüft auf sein Wissen, seine Professionalität und seine Fähigkeit, mit aufrichtiger Fürsorge zu begleiten. Gemeinsam bringen wir jahrzehntelange Erfahrung in Kultur, Natur, Kulinarik und Handwerk ein."
     },
     "certifications": {
       "title": "Unsere Zertifizierungen",
@@ -419,11 +418,11 @@
       "insured": "Vollversichert",
       "insuredSub": "Umfassender Schutz",
       "local": "Lokale Experten",
-      "localSub": "In Stockholm geboren und aufgewachsen"
+      "localSub": "In ganz Schweden"
     },
     "cta": {
       "title": "Bereit zu Entdecken?",
-      "description": "Begleiten Sie uns auf einer unvergesslichen Reise durch Stockholms Kulturerbe",
+      "description": "Entdecken Sie Schweden mit den Menschen, die es am besten kennen",
       "exploreTours": "Touren Entdecken",
       "contactUs": "Kontaktieren Sie Uns"
     }

@@ -340,76 +340,75 @@
   },
   "about": {
     "title": "Om Private Tours",
-    "description": "Privata, expertledda upplevelser i Stockholm med auktoriserade guider",
+    "description": "Privata, expertledda upplevelser i hela Sverige med auktoriserade yrkesverksamma",
     "subtitle": "Djup, Tillit och Personlig Kontakt",
-    "heroAlt": "Private Tours - expertledda upplevelser i Stockholm",
+    "heroAlt": "Private Tours - kurerade upplevelser i hela Sverige",
     "hero": {
       "label": "VÅR BERÄTTELSE"
     },
     "story": {
       "label": "VILKA VI ÄR",
-      "imageAlt": "En charmig smal gränd i Stockholms gamla stan",
-      "titleLine1": "Skapad för Resenärer",
-      "titleLine2": "Som Värdesätter Djup",
-      "paragraph1": "Private Tours skapades för resenärer som värderar djup, tillit och personlig kontakt framför volym och hastighet.",
-      "paragraph2": "Vi erbjuder privata, expertledda upplevelser i Stockholm som uteslutande leds av auktoriserade yrkesverksamma. Varje guide är noggrant utvald, varje rutt är kuraterad och varje upplevelse är utformad för att kännas smidig från början till slut. Detta är ingen öppen marknadsplats — det är en genomtänkt samling av människor och platser valda för sin kunskap, integritet och förmåga att vägleda med självförtroende.",
-      "paragraph3": "Våra gäster söker inte fler alternativ. De söker det rätta.",
-      "paragraph4": "Därför arbetar vi enbart med licensierade guider och ämnesexperter som talar ditt språk flytande och har djup kännedom om staden de representerar. Genom att ta fullt ansvar för logistik, tempo och innehåll tar vi bort friktion och låter dig fokusera helt på upplevelsen i sig.",
-      "paragraph5": "Många av våra turer kombinerar historisk expertis med praktiska aktiviteter — som svensk matkultur — eftersom förståelse för en plats ofta bäst sker genom både berättelse och handling. Under hela resan förblir din värd vid din sida och erbjuder sammanhang, kontinuitet och personlig uppmärksamhet.",
-      "paragraph6": "Private Tours finns för att göra tiden i Stockholm meningsfull, enkel och personlig — ledd av människor som genuint bryr sig om både sitt hantverk och sina gäster."
+      "imageAlt": "Sveriges varierade landskap — kust, skog och historiska städer",
+      "titleLine1": "Det Börjar Alltid",
+      "titleLine2": "Med en Fråga",
+      "paragraph1": "Det börjar alltid med en fråga.",
+      "paragraph2": "Inte om vad du vill se — utan om hur du vill känna dig när du går härifrån.",
+      "paragraph3": "Private Tours är en kurerad plattform för upplevelser i hela Sverige. Här samlas stadsvandringar och naturguider, måltidsresor och hantverksworkshops, ölprovningar och tysta skogsmornar — alla valda för en och samma sak: att det ska finnas någon som verkligen kan det de erbjuder.",
+      "paragraph4": "Vill du kombinera en upplevelse med en auktoriserad guide eller expert som sätter den i ett större sammanhang, är det alltid möjligt. Men det är aldrig ett krav. Plattformen är byggd för att möta dig där du är — vare sig du vill ha ett par timmar eller något som sträcker sig över flera dagar och destinationer.",
+      "paragraph5": "Det som förenar allt vi erbjuder är inte formatet. Det är kvaliteten på människorna bakom det."
     },
     "mission": {
       "label": "VÅRT SYFTE",
       "title": "Vårt Uppdrag",
-      "description": "Att erbjuda privat tillgång till Stockholms mest betrodda experter genom ett noggrant kuraterat system, där varje upplevelse är personlig, pålitlig och djupt engagerande."
+      "description": "Att vara Sveriges mest pålitliga plattform för kurerade upplevelser — där kultur, natur och måltid möts, och där varje upplevelse är personlig, tillförlitlig och djupt engagerande."
     },
     "vision": {
       "title": "Vår Vision",
-      "description": "Att sätta en ny standard för kulturturism där expertis, tillit och mänsklig kontakt definierar upplevelsen — och där kvalitet aldrig lämnas åt slumpen."
+      "description": "Att sätta en ny standard för hur Sverige upplevs — där expertis, äkthet och mänsklig kontakt definierar varje möte med landet, dess natur, dess mat och dess berättelser."
     },
     "values": {
       "label": "VARFÖR VÄLJA OSS",
-      "title": "Vad Som Gör Oss Annorlunda",
-      "subtitle": "Ett genomtänkt tillvägagångssätt för kulturturism i Stockholm",
+      "title": "Det Här Är Vi",
+      "subtitle": "Ett genomtänkt tillvägagångssätt för kurerade upplevelser i hela Sverige",
       "authorizedExperts": {
-        "title": "Enbart Auktoriserade Experter",
-        "description": "Varje upplevelse leds av en fullt licensierad guide eller verifierad expert. Vi granskar personligen meriter för att säkerställa akademiskt djup, professionalism och tydlighet i berättandet."
+        "title": "Enbart Verifierade Experter",
+        "description": "Varje upplevelse leds av en auktoriserad stadsguide, naturguide, köksmästare, hantverkare eller ämnesexpert. Vi granskar personligen kompetens, erfarenhet och förmåga att engagera. Ingenting lämnas åt slumpen."
       },
       "curated": {
-        "title": "Kuraterat, Aldrig Överfyllt",
-        "description": "Vi är ingen öppen plattform. Varje rutt, aktivitet och värd är utvald och granskad för att säkerställa konsekvens, kvalitet och autenticitet."
+        "title": "Kurerat – Aldrig Trivel",
+        "description": "Vi är ingen öppen plattform. Varje upplevelse — oavsett om det är en naturtur, en måltidsresa eller en hantverksworkshop — är handplockad och granskad. Vi erbjuder inte allt. Bara det vi helhjärtat står bakom."
       },
       "privateByDesign": {
-        "title": "Privat Från Grunden",
-        "description": "Alla upplevelser är uteslutande privata. Detta gör det möjligt för oss att anpassa tempo, fokus och djup helt efter dina intressen."
+        "title": "Privat av Princip",
+        "description": "Alla upplevelser är exklusivt privata. Tempo, fokus och djup anpassas helt efter dig och ditt sällskap — inte efter någon annans schema."
       },
       "seamlessHosting": {
-        "title": "Smidigt Värdskap",
-        "description": "Din guide hanterar logistik, transport och övergångar, vilket skapar en smidig, oavbruten upplevelse från början till slut."
+        "title": "Sömlöst Värdskap",
+        "description": "Vi hanterar logistik, transport och övergångar. Du ska aldrig behöva tänka på nästa steg — bara vara närvarande i det du upplever."
       },
       "multilingual": {
         "title": "Flerspråkig Expertis",
-        "description": "Turer erbjuds på svenska, engelska, tyska, franska, portugisiska och spanska — alltid av certifierade yrkesverksamma."
+        "description": "Upplevelser erbjuds på svenska, engelska, tyska, nederländska, franska, portugisiska och spanska — alltid av certifierade proffs."
       }
     },
     "responsibleTourism": {
       "label": "VÅRT ÅTAGANDE",
-      "imageAlt": "Stockholms strandlinje med natur och historisk arkitektur",
-      "title": "Ett Engagemang för Ansvarsfull Turism",
-      "paragraph1": "Private Tours är engagerade i att verka med omsorg för både människor och platser. Vi samarbetar med lokala yrkesverksamma och företag, upprätthåller en lågpåverkande modell med enbart privata turer och utformar upplevelser som respekterar de miljöer och samhällen vi besöker.",
-      "paragraph2": "Tillgänglighet är viktigt för oss. Våra digitala plattformar följer erkända tillgänglighetsstandarder och våra rutter är utformade för att vara inkluderande när det är möjligt — utan att kompromissa med djup eller kvalitet.",
-      "paragraph3": "Kulturarv är inte en kuliss; det är ett ansvar. Vårt arbete grundas i utbildning, bevarande och långsiktig respekt för de berättelser vi delar.",
+      "imageAlt": "Svenskt landskap — natur och historiska miljöer runt om i landet",
+      "title": "Ett Ansvar för Platser och Människor",
+      "paragraph1": "Private Tours driver sin verksamhet med omsorg om både människor och miljö. Vi samarbetar med lokala aktörer runt om i Sverige, upprätthåller en lågpåverkansmodell med enbart privata upplevelser och utformar upplevelser som respekterar de landskap och samhällen vi besöker — från stadskärna till vildmark.",
+      "paragraph2": "Tillgänglighet är viktigt för oss. Våra digitala plattformar följer erkända tillgänglighetsstandarder och våra upplevelser är utformade för att vara inkluderande när det är möjligt — utan att kompromissa med djup eller kvalitet.",
+      "paragraph3": "Kulturarv, naturarv och mattraditioner är inga bakgrundskulisser. Det är ett ansvar. Vårt arbete grundar sig på utbildning, bevarande och långsiktig respekt för de berättelser vi delar — var i Sverige de än utspelar sig.",
       "items": {
-        "item1": "Samarbete med lokala yrkesverksamma och företag",
-        "item2": "Lågpåverkande modell med enbart privata turer",
-        "item3": "Inkluderande och tillgänglig ruttdesign",
-        "item4": "Bevarande och utbildning av kulturarv"
+        "item1": "Lokala samarbeten i hela Sverige",
+        "item2": "Lågpåverkansmodell med enbart privata upplevelser",
+        "item3": "Inkluderande och tillgänglig upplevelsedesign",
+        "item4": "Bevarande av kultur- och naturarv"
       }
     },
     "team": {
       "title": "Vårt Team",
-      "subtitle": "Passionerade yrkesverksamma dedikerade till att dela Stockholms berättelser",
-      "description": "Vårt team består av licensierade guider, historiker och kulturexperter — var och en noggrant granskad för sin kunskap, professionalism och förmåga att vägleda med genuin omsorg. Tillsammans bidrar vi med decennier av samlad erfarenhet inom kulturarvsturism, arkeologi, konsthistoria och svensk kultur."
+      "subtitle": "Passionerade yrkesverksamma dedikerade till att dela Sveriges berättelser",
+      "description": "Vårt team består av licensierade guider, naturguider, köksmästare, hantverkare och ämnesexperter — var och en noggrant granskad för sin kunskap, professionalism och förmåga att vägleda med genuin omsorg. Tillsammans bidrar vi med decennier av samlad erfarenhet inom kultur, natur, mat och hantverk."
     },
     "certifications": {
       "title": "Våra Certifieringar",
@@ -419,11 +418,11 @@
       "insured": "Fullt Försäkrade",
       "insuredSub": "Fullständigt skydd",
       "local": "Lokala Experter",
-      "localSub": "Födda och uppvuxna i Stockholm"
+      "localSub": "Över hela Sverige"
     },
     "cta": {
       "title": "Redo att Utforska?",
-      "description": "Följ med oss på en oförglömlig resa genom Stockholms kulturarv",
+      "description": "Upptäck Sverige genom de människor som känner det bäst",
       "exploreTours": "Utforska Turer",
       "contactUs": "Kontakta Oss"
     }
