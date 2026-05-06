@@ -10,7 +10,7 @@ export const CONTACT_EMAIL =
   process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? 'info@privatetours.se'
 
 export const CONTACT_PHONE =
-  process.env.NEXT_PUBLIC_CONTACT_PHONE ?? '+46 70 123 45 67'
+  process.env.NEXT_PUBLIC_CONTACT_PHONE ?? '+46 72 441 19 01'
 
 /** Phone in tel:-link format — keep digits and leading +, drop everything else. */
 export const CONTACT_PHONE_TEL = CONTACT_PHONE.replace(/[^\d+]/g, '')
