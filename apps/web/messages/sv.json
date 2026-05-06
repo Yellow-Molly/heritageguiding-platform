@@ -429,55 +429,126 @@
     }
   },
   "terms": {
-    "title": "Villkor",
-    "description": "Villkor för användning av Private Tours tjänster",
+    "title": "Allmänna villkor",
+    "description": "Allmänna villkor för bokning av guidade turer hos Private Tours, drivet av Yellow Molly Aktiebolag (Stockholm).",
     "lastUpdated": "Senast uppdaterad",
+    "tocLabel": "PÅ DEN HÄR SIDAN",
+    "tocJumpLabel": "Hoppa till avsnitt",
+    "help": {
+      "title": "Behöver du hjälp att förstå villkoren?",
+      "subtitle": "Vårt team förklarar gärna det som är oklart innan du bokar.",
+      "primaryCta": "Kontakta oss",
+      "secondaryLink": "Se vår avbokningspolicy"
+    },
+    "company": {
+      "labelLegalName": "Juridiskt namn",
+      "labelOrgNr": "Organisationsnummer",
+      "labelVat": "Momsregistreringsnummer",
+      "labelAddress": "Sätesadress",
+      "labelEmail": "Kontakt-e-post",
+      "labelCourt": "Behörig domstol"
+    },
+    "crossLinks": {
+      "cancellationTitle": "Läs hela avbokningspolicyn",
+      "cancellationDescription": "Regler per tur, återbetalningstider och avbokning från oss.",
+      "privacyTitle": "Läs vår integritetspolicy",
+      "privacyDescription": "Hur vi samlar in, använder och skyddar dina personuppgifter."
+    },
     "sections": {
-      "intro": {
-        "title": "Introduktion",
-        "content": "Välkommen till Private Tours. Dessa villkor reglerar din användning av vår webbplats och tjänster. Genom att boka en tur eller använda våra tjänster godkänner du dessa villkor."
+      "parties": {
+        "title": "Parter",
+        "content": "Dessa allmänna villkor (\"Villkoren\") utgör avtal mellan kunden (\"du\", \"Kunden\") och Yellow Molly Aktiebolag, organisationsnummer 559577-5080, med sätesadress Karlavägen 18, 114 31 Stockholm, som driver verksamheten under varumärket Private Tours (\"vi\", \"oss\", \"Leverantören\"). Fullständiga registreringsuppgifter, inklusive momsregistreringsnummer och behörig domstol, framgår av företagsinformationen nedan. Du når oss på info@privatetours.se."
+      },
+      "definitions": {
+        "title": "Definitioner",
+        "content": "\"Leverantören\" avser Yellow Molly Aktiebolag, som tillhandahåller den guidade turen. \"Bokningsplattformen\" avser Bokun, som drivs av Tripadvisor LLC och som vi använder för online-checkout, voucherleverans och leverantörsadministration. \"Betalningsförmedlaren\" avser Bokun Pay med Adyen N.V. som inlösande bank, som behandlar kort- och alternativa betalningar för Leverantörens räkning. \"Kunden\" avser den person som genomför en bokning. \"Deltagare\" avser varje person som deltar i turen enligt den bokningen. \"Turen\" avser den guidade upplevelse som beskrivs på respektive produktsida på privatetours.se."
+      },
+      "service": {
+        "title": "Tjänsten",
+        "content": "Vi tillhandahåller guidade turer i Stockholm och på andra platser enligt beskrivningen på respektive produktsida. Varje tursida anger längd, rutt, mötesplats, vad som ingår och vad som inte ingår. Om inte annat uttryckligen anges ingår inte transport till mötesplatsen, mat och dryck, valfria museibiljetter eller personlig reseförsäkring. Mötesplats bekräftas i din bokningsvoucher; var god kom minst tio minuter före starttid."
       },
       "booking": {
-        "title": "Bokningsvillkor",
-        "intro": "När du gör en bokning hos oss:",
-        "point1": "Du måste vara minst 18 år för att göra en bokning",
-        "point2": "All information som lämnas måste vara korrekt och fullständig",
-        "point3": "Bokningsbekräftelse sker under förutsättning av tillgänglighet",
-        "point4": "Du ansvarar för att anlända till mötesplatsen i tid"
+        "title": "Så bokar du",
+        "intro": "Bokningar görs via vår Bokningsplattform (Bokun) på privatetours.se. När du bokar:",
+        "items": [
+          "Du ska ha fyllt 18 år och ha rätt att acceptera dessa Villkor för samtliga Deltagare i bokningen.",
+          "Alla bokningsuppgifter (namn, kontakt-e-post, datum, antal deltagare) ska vara korrekta och fullständiga.",
+          "En bokning är bekräftad först när Bokun utfärdar en voucher till den e-postadress du angett. Före voucherutfärdande är tillgängligheten inte garanterad.",
+          "Du kan ombes visa voucher (utskrivet eller på telefon) och giltig legitimation vid mötesplatsen."
+        ]
+      },
+      "pricing": {
+        "title": "Priser, valuta och skatter",
+        "content": "Priser anges på respektive tursida i svenska kronor (SEK) och inkluderar tillämplig svensk mervärdesskatt (moms). Inga ytterligare valutor utöver SEK erbjuds för närvarande. Om Bokningsplattformen visar ett omräknat pris i annan valuta är den omräkningen en service från Bokningsplattformen och det SEK-belopp som visas på vår webbplats är det som gäller för avtalet. Det pris som visas vid checkout är det pris som gäller för din bokning."
       },
       "payment": {
         "title": "Betalning",
-        "content": "Full betalning krävs vid bokningstillfället. Vi accepterar de flesta kreditkort, Swish och banköverföringar. Alla priser är i svenska kronor (SEK) om inte annat anges och inkluderar tillämpliga skatter."
+        "content": "Betalning behandlas av Bokun Pay, med Adyen N.V. som inlösare, för Leverantörens räkning. Vilka betalningsmetoder som accepteras visas av Bokningsplattformen vid checkout och kan komma att ändras. Ditt kort eller valda betalsätt debiteras vid bokningstillfället. Kvitto utfärdas av Bokningsplattformen för Leverantörens räkning och skickas till den e-postadress du angett. Vi är inte merchant of record för själva korttransaktionen; betalningsnätverkens regler och Adyens villkor gäller för behandlingen av betalningen."
       },
       "cancellation": {
-        "title": "Avbokningspolicy",
-        "intro": "Vår avbokningspolicy är följande:",
-        "point1": "Gratis avbokning upp till 48 timmar före turens starttid",
-        "point2": "Avbokningar inom 48 timmar återbetalas inte",
-        "point3": "Uteblivna gäster återbetalas inte"
+        "title": "Avbokning och återbetalning",
+        "intro": "Avbokningsregler bestäms per tur och visas vid checkout innan du bekräftar betalning. Dessa regler per tur utgör en del av Villkoren genom hänvisning. Utöver detta gäller:",
+        "items": [
+          "Om vi avbokar en bekräftad tur erbjuds du full återbetalning av erlagt pris eller ombokning till annat tillfälle, efter ditt val.",
+          "Återbetalning sker av Adyen tillbaka till ursprungligt betalsätt. Återbetalning syns normalt inom 5–10 bankdagar beroende på din kortutgivare eller betalmetod.",
+          "Frivilliga ändringar som du begär efter bokning (datum, antal deltagare, namnändring) hanteras enligt de regler per tur som visas vid checkout och eventuella serviceavgifter som Bokningsplattformen tillämpar."
+        ]
+      },
+      "withdrawalExclusion": {
+        "title": "Ingen 14-dagars ångerrätt för datumbestämda turer",
+        "content": "Den 14-dagars ångerrätt som följer av distansavtalslagen gäller inte för bokning av fritidsaktiviteter på en bestämd dag. Undantaget framgår av 2 kap. 11 § p. 12 distansavtalslagen (2005:59). När en tur för ett bestämt datum är bokad och bekräftad gäller de avbokningsregler per tur som visades vid checkout i stället för den allmänna 14-dagars ångerrätten."
+      },
+      "modifications": {
+        "title": "Ändringar från Kundens sida",
+        "content": "Önskemål om att ändra datum, tid, antal deltagare eller namn på huvudbokare efter bekräftad bokning hanteras i mån av tillgänglighet och enligt de regler per tur som visas vid checkout. Bokningsplattformen kan komma att ta ut administrations- eller serviceavgifter för sådana ändringar. Namnändring för övriga Deltagare i samma bokning är normalt avgiftsfri men ska meddelas före turens start."
+      },
+      "forceMajeure": {
+        "title": "Force majeure och avbokning från Leverantörens sida",
+        "content": "Vi kan komma att ställa in eller boka om en tur när omständigheter utanför vår rimliga kontroll gör det osäkert eller opraktiskt att genomföra den. Exempel är hård väderlek, transportstrejker, beslut från myndighet, smittskyddsrestriktioner, civila oroligheter eller naturhändelser. I sådana fall erbjuds du full återbetalning av erlagt pris eller ombokning, efter ditt val. Vi ansvarar inte för indirekta kostnader (såsom flyg, hotell, parkering eller andra biljetter) som kan uppstå till följd av en avbokning från vår sida."
+      },
+      "participantObligations": {
+        "title": "Deltagarens åtaganden",
+        "intro": "Genom att delta i en tur åtar sig varje Deltagare att:",
+        "items": [
+          "Lämna korrekta bokningsuppgifter och komma till mötesplatsen i tid.",
+          "Följa guidens instruktioner och eventuella säkerhetsgenomgångar.",
+          "Uppträda respektfullt mot övriga Deltagare, guiden, boende och de offentliga platser som besöks.",
+          "Inte delta påverkad av alkohol eller droger i sådan grad att säkerheten eller övriga Deltagares upplevelse påverkas; guiden får i sådana fall neka deltagande utan återbetalning.",
+          "Själv bedöma sin fysik och hälsa för turer som beskrivs som fysiskt aktiva och i förväg upplysa oss om relevanta medicinska tillstånd eller tillgänglighetsbehov.",
+          "Acceptera att tillfälliga foton eller filmer kan tas under turen för vår marknadsföring; om du inte vill synas, meddela guiden före turens start."
+        ]
+      },
+      "minors": {
+        "title": "Underåriga",
+        "content": "Du måste vara minst 18 år för att göra en bokning. Deltagare under 18 år är välkomna men ska åtföljas av en bokande vuxen som ansvarar för deras uppförande, säkerhet och lämplighet för aktiviteten."
       },
       "liability": {
         "title": "Ansvarsbegränsning",
-        "content": "Även om vi vidtar alla försiktighetsåtgärder för att säkerställa din säkerhet sker deltagande i turer på egen risk. Private Tours ansvarar inte för personskada, förlust eller skada på egendom utom vid vår försumlighet."
-      },
-      "conduct": {
-        "title": "Uppförande under Tur",
-        "intro": "Deltagare förbinder sig att:",
-        "point1": "Följa guidens instruktioner hela tiden",
-        "point2": "Uppträda respektfullt mot andra deltagare och offentliga platser",
-        "point3": "Inte delta i olagliga aktiviteter under turen"
+        "content": "Deltagande i en tur sker på egen risk. Vi ansvarar för direkt skada som orsakats av vår egen vårdslöshet eller uppsåtliga åsidosättande av våra åtaganden. I den utsträckning det är förenligt med tvingande konsumentskyddslagstiftning är vårt sammanlagda ansvar med anledning av en bokning begränsat till det pris som har betalats för den bokningen. Vi ansvarar inte för indirekt skada eller följdskada, inklusive förlorad vinst, förlorad möjlighet eller kostnader för anslutande resor. Vi rekommenderar att du har en personlig reseförsäkring som täcker sjukvård, avbokning och personliga tillhörigheter."
       },
       "ip": {
-        "title": "Immateriella Rättigheter",
-        "content": "Allt innehåll på denna webbplats, inklusive text, bilder och turmaterial, tillhör Private Tours och skyddas av upphovsrättslagen."
+        "title": "Immateriella rättigheter",
+        "content": "Allt innehåll på privatetours.se — inklusive text, bilder, ljud, video, kartor och program — tillhör oss eller våra licensgivare och skyddas av upphovsrätt och närliggande rättigheter. Du får visa och skriva ut sidor för personligt, icke-kommersiellt bruk. All annan användning, inklusive återpublicering, vidaredistribution eller användning för att träna automatiserade system, kräver vårt skriftliga medgivande i förväg. Om du delar foton eller filmer från en tur med oss (till exempel genom att tagga oss i sociala medier eller svara vårt team) ger du oss en världsomspännande, royaltyfri och icke-exklusiv licens att använda materialet i våra egna marknadskanaler med rimlig källangivelse där så är möjligt."
       },
-      "law": {
-        "title": "Tillämplig Lag",
-        "content": "Dessa villkor regleras av svensk lag. Eventuella tvister ska lösas i svenska domstolar."
+      "privacy": {
+        "title": "Personuppgifter och personuppgiftsbiträden",
+        "content": "Dina personuppgifter behandlas i enlighet med vår integritetspolicy. För att leverera bokningar, betalningar, kartfunktioner och e-postbekräftelser använder vi följande personuppgiftsbiträden: Bokun (Tripadvisor LLC) för bokningsplattformen, Adyen N.V. för betalningsförmedling via Bokun Pay, Google LLC för kartvisning, Vercel Inc. för webbhotell och edge-leverans, Supabase Inc. för databashotell inom EU-regionen samt Resend för transaktionell e-post. Integritetspolicyn beskriver rättslig grund för respektive behandling, lagringstider och hur du utövar dina rättigheter som registrerad."
       },
-      "contact": {
-        "title": "Kontaktinformation",
-        "content": "För frågor om dessa villkor, vänligen kontakta oss på info@privatetours.se"
+      "complaints": {
+        "title": "Reklamation och tvistlösning",
+        "content": "Om något har gått fel, kontakta oss så snart som möjligt — gärna under eller direkt efter turen — på info@privatetours.se. Vi bekräftar reklamationer inom fem arbetsdagar och strävar efter att lämna ett substantiellt svar inom trettio dagar. Om du inte är nöjd med vår hantering kan du vända dig till Allmänna reklamationsnämnden (ARN), www.arn.se. Konsumenter inom EU kan också använda Europeiska kommissionens plattform för online-tvistlösning på https://ec.europa.eu/consumers/odr/."
+      },
+      "governingLaw": {
+        "title": "Tillämplig lag och behörig domstol",
+        "content": "På Villkoren och avtal som ingås under dem tillämpas svensk lag. Tvister som inte kan lösas genom förhandling, ARN eller EU:s ODR-plattform ska prövas av Stockholms tingsrätt som första instans, utan inskränkning av sådan tvingande rätt som du som konsument kan ha att väcka talan vid domstol i ditt hemland."
+      },
+      "changes": {
+        "title": "Ändringar av Villkoren",
+        "content": "Vi kan komma att uppdatera Villkoren från tid till annan, exempelvis till följd av ändrad lag, ändringar i Bokningsplattformen eller vår operativa praxis. Datum för den aktuella versionen anges som \"Senast uppdaterad\" högst upp på sidan. Uppdateringar gäller bokningar som görs på eller efter ikraftträdandedatumet; redan bekräftade bokningar omfattas fortsatt av den version av Villkoren som accepterades vid bokningstillfället."
+      },
+      "acceptance": {
+        "title": "Godkännande och språk",
+        "content": "Genom att slutföra checkout bekräftar du att du har läst, förstått och accepterat Villkoren för egen del och för samtliga Deltagare i bokningen. Villkoren publiceras på svenska, engelska (English) och tyska (Deutsch). Den svenska versionen är juridiskt bindande; den engelska och tyska versionen är artighetsöversättningar. Vid eventuell motstridighet eller olikhet mellan språkversionerna äger den svenska texten företräde."
       }
     }
   },
@@ -711,8 +782,8 @@
         "point4": "Skicka marknadsföringskommunikation (med ditt samtycke)"
       },
       "dataSharing": {
-        "title": "Informationsdelning",
-        "content": "Vi säljer inte din personliga information. Vi kan dela data med betrodda tjänsteleverantörer som hjälper till att driva vår verksamhet, alltid under strikta sekretessavtal."
+        "title": "Informationsdelning och personuppgiftsbiträden",
+        "content": "Vi säljer inte dina personuppgifter. Vi delar begränsade uppgifter med följande personuppgiftsbiträden enbart för att leverera tjänsten, var och en under skriftligt personuppgiftsbiträdesavtal: Bokun, som drivs av Tripadvisor LLC, för bokning, voucherleverans och leverantörsadministration; Adyen N.V. som inlösare via Bokun Pay; Google LLC för kartvisning; Vercel Inc. för webbhotell och edge-leverans; Supabase Inc. för databashotell inom EU; samt Resend för transaktionell e-post (bokningsbekräftelser och driftsmeddelanden). Vi kan komma att lägga till eller byta personuppgiftsbiträden allteftersom tjänsten utvecklas och uppdaterar då denna lista."
       },
       "cookies": {
         "title": "Cookies",

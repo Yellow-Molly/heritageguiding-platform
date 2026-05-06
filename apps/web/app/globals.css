@@ -17,6 +17,11 @@
   --color-secondary: #856C2D;
   --color-secondary-light: #C4A052;
   --color-secondary-dark: #7A6529;
+  --color-secondary-tint: #C4A05219; /* gold @ 10% opacity — legal-callout bg */
+
+  /* On-primary text tokens (white text over deep navy) */
+  --color-text-on-primary: #FFFFFF;
+  --color-text-on-primary-muted: #FFFFFFCC; /* white @ 80% opacity — hero subtitle */
 
   /* Accent Colors - Coral Orange (WCAG 2.1 AA: 4.5:1 with white text) */
   --color-accent: #C05030;
@@ -109,6 +114,9 @@
   --color-secondary: var(--color-secondary);
   --color-secondary-light: var(--color-secondary-light);
   --color-secondary-dark: var(--color-secondary-dark);
+  --color-secondary-tint: var(--color-secondary-tint);
+  --color-text-on-primary: var(--color-text-on-primary);
+  --color-text-on-primary-muted: var(--color-text-on-primary-muted);
   --color-accent: var(--color-accent);
   --color-accent-light: var(--color-accent-light);
   --color-accent-dark: var(--color-accent-dark);
@@ -364,6 +372,56 @@ a {
   border: 2px solid white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+}
+
+/* Print stylesheet — active when a .terms-page <main> is present in the body.
+   Header/Footer are NOT direct children of <body> in our locale layout (they
+   sit inside <div id="main"> alongside the page <main>), so we match by
+   descendant — the site has a single global <header> and <footer> per page,
+   so this is unambiguous. Floating widgets (WhatsApp etc.) are direct body
+   children rendered by the layout, so a direct-child .fixed selector hides
+   them in print without affecting in-page positioned elements. */
+@media print {
+  body:has(main.terms-page) header,
+  body:has(main.terms-page) footer,
+  body:has(main.terms-page) > .fixed,
+  .terms-page .terms-toc-sidebar,
+  .terms-page .terms-help-band {
+    display: none !important;
+  }
+  .terms-page .terms-hero {
+    background: none !important;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    padding: 1rem;
+  }
+  .terms-page .terms-hero h1,
+  .terms-page .terms-hero p {
+    color: var(--color-text) !important;
+    text-shadow: none !important;
+  }
+  .terms-page .container {
+    padding: 0 !important;
+  }
+  .terms-page article {
+    max-width: none !important;
+  }
+  .terms-page section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .terms-page a {
+    color: var(--color-text);
+    text-decoration: underline;
+  }
+  .terms-page a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: var(--color-text-muted);
+  }
+  @page {
+    margin: 2cm;
+  }
 }
 
 /* Reduced Motion Preference */

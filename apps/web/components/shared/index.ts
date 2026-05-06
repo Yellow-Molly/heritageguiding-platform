@@ -15,3 +15,4 @@ export {
   type LoadingDotsProps,
 } from './loading-spinner'
 export { GridPendingOverlay } from './grid-pending-overlay'
+export { InlineCrossLinkCard } from './inline-cross-link-card'

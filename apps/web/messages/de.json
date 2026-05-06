@@ -429,55 +429,126 @@
     }
   },
   "terms": {
-    "title": "Geschäftsbedingungen",
-    "description": "Geschäftsbedingungen für die Nutzung der Private Tours-Dienste",
+    "title": "Allgemeine Geschäftsbedingungen",
+    "description": "Allgemeine Geschäftsbedingungen für die Buchung geführter Touren bei Private Tours, betrieben von Yellow Molly Aktiebolag (Stockholm, Schweden).",
     "lastUpdated": "Zuletzt aktualisiert",
+    "tocLabel": "AUF DIESER SEITE",
+    "tocJumpLabel": "Zum Abschnitt springen",
+    "help": {
+      "title": "Sie haben Fragen zu diesen Bedingungen?",
+      "subtitle": "Unser Team erläutert Ihnen gerne alles Unklare, bevor Sie buchen.",
+      "primaryCta": "Kontakt aufnehmen",
+      "secondaryLink": "Stornierungsrichtlinie ansehen"
+    },
+    "company": {
+      "labelLegalName": "Firmenbezeichnung",
+      "labelOrgNr": "Organisationsnummer (SE)",
+      "labelVat": "Umsatzsteuer-Identifikationsnummer",
+      "labelAddress": "Geschäftsanschrift",
+      "labelEmail": "Kontakt-E-Mail",
+      "labelCourt": "Zuständiges Gericht"
+    },
+    "crossLinks": {
+      "cancellationTitle": "Vollständige Stornierungsrichtlinie lesen",
+      "cancellationDescription": "Regeln pro Tour, Rückerstattungsfristen und Stornierungen durch den Anbieter.",
+      "privacyTitle": "Datenschutzerklärung lesen",
+      "privacyDescription": "Wie wir Ihre personenbezogenen Daten erfassen, verwenden und schützen."
+    },
     "sections": {
-      "intro": {
-        "title": "Einführung",
-        "content": "Willkommen bei Private Tours. Diese Geschäftsbedingungen regeln Ihre Nutzung unserer Website und Dienste. Durch die Buchung einer Tour oder Nutzung unserer Dienste stimmen Sie diesen Bedingungen zu."
+      "parties": {
+        "title": "Vertragsparteien",
+        "content": "Diese Allgemeinen Geschäftsbedingungen (\"AGB\") bilden den Vertrag zwischen dem Kunden (\"Sie\", \"der Kunde\") und Yellow Molly Aktiebolag, Organisationsnummer 559577-5080, mit Geschäftsanschrift Karlavägen 18, 114 31 Stockholm, Schweden, tätig unter der Marke Private Tours (\"wir\", \"uns\", \"der Anbieter\"). Die vollständigen Registerangaben, einschließlich Umsatzsteuer-Identifikationsnummer und zuständigem Gericht, sind der Unternehmensinformationskarte unten zu entnehmen. Sie erreichen uns unter info@privatetours.se."
+      },
+      "definitions": {
+        "title": "Begriffsbestimmungen",
+        "content": "\"Anbieter\" bezeichnet Yellow Molly Aktiebolag als Erbringer der geführten Tour. \"Buchungsplattform\" bezeichnet Bokun, betrieben von Tripadvisor LLC, die wir für Online-Checkout, Voucher-Versand und Anbieterverwaltung nutzen. \"Zahlungsabwickler\" bezeichnet Bokun Pay mit Adyen N.V. als Acquirer-Bank, der Karten- und alternative Zahlungen im Namen des Anbieters verarbeitet. \"Kunde\" bezeichnet die Person, die eine Buchung abschließt. \"Teilnehmer\" bezeichnet jede Person, die im Rahmen dieser Buchung an der Tour teilnimmt. \"Tour\" bezeichnet das geführte Erlebnis, wie es auf der jeweiligen Produktseite auf privatetours.se beschrieben ist."
+      },
+      "service": {
+        "title": "Leistung",
+        "content": "Wir erbringen geführte Touren in Stockholm und an weiteren Orten gemäß der Beschreibung auf der jeweiligen Produktseite. Jede Tourseite nennt Dauer, Verlauf, Treffpunkt sowie enthaltene und nicht enthaltene Leistungen. Sofern nicht ausdrücklich angegeben, sind Anreise zum Treffpunkt, Speisen und Getränke, optionale Museumstickets und persönliche Reiseversicherungen nicht im Preis enthalten. Der Treffpunkt wird in Ihrem Buchungsvoucher bestätigt; bitte erscheinen Sie mindestens zehn Minuten vor Beginn."
       },
       "booking": {
-        "title": "Buchungsbedingungen",
-        "intro": "Wenn Sie bei uns eine Buchung vornehmen:",
-        "point1": "Sie müssen mindestens 18 Jahre alt sein, um eine Buchung vorzunehmen",
-        "point2": "Alle angegebenen Informationen müssen korrekt und vollständig sein",
-        "point3": "Die Buchungsbestätigung erfolgt vorbehaltlich der Verfügbarkeit",
-        "point4": "Sie sind dafür verantwortlich, pünktlich am Treffpunkt zu erscheinen"
+        "title": "So buchen Sie",
+        "intro": "Buchungen erfolgen über unsere Buchungsplattform (Bokun) auf privatetours.se. Bei einer Buchung gilt:",
+        "items": [
+          "Sie müssen mindestens 18 Jahre alt sein und befugt sein, diese AGB für sämtliche Teilnehmer Ihrer Buchung anzunehmen.",
+          "Alle Buchungsangaben (Namen, Kontakt-E-Mail, Datum, Gruppengröße) müssen korrekt und vollständig sein.",
+          "Eine Buchung gilt erst dann als bestätigt, wenn Bokun einen Voucher an die von Ihnen angegebene E-Mail-Adresse versendet. Bis zum Versand dieses Vouchers ist die Verfügbarkeit nicht garantiert.",
+          "Sie können am Treffpunkt zur Vorlage des Vouchers (gedruckt oder mobil) sowie eines gültigen Ausweisdokuments aufgefordert werden."
+        ]
+      },
+      "pricing": {
+        "title": "Preise, Währung und Steuern",
+        "content": "Die Preise werden auf der jeweiligen Tourseite in Schwedischen Kronen (SEK) angezeigt und enthalten die anwendbare schwedische Mehrwertsteuer (moms). Andere Währungen als SEK werden derzeit nicht angeboten. Zeigt die Buchungsplattform einen umgerechneten Preis in einer anderen Währung an, dient diese Umrechnung allein Ihrer Orientierung; vertraglich maßgeblich ist der auf unserer Website angezeigte SEK-Betrag. Maßgeblich für Ihre Buchung ist der zum Zeitpunkt des Checkouts angezeigte Preis."
       },
       "payment": {
         "title": "Zahlung",
-        "content": "Die vollständige Zahlung ist zum Zeitpunkt der Buchung erforderlich. Wir akzeptieren alle gängigen Kreditkarten, Swish und Banküberweisungen. Alle Preise sind in Schwedischen Kronen (SEK), sofern nicht anders angegeben, und beinhalten alle anfallenden Steuern."
+        "content": "Die Zahlung wird von Bokun Pay mit Adyen N.V. als Acquirer im Namen des Anbieters verarbeitet. Die akzeptierten Zahlungsmethoden werden von der Buchungsplattform beim Checkout angezeigt und können sich ändern. Ihre Karte oder die gewählte Zahlungsmethode wird zum Zeitpunkt der Buchung belastet. Eine Quittung wird von der Buchungsplattform im Namen des Anbieters ausgestellt und an die von Ihnen angegebene E-Mail-Adresse gesendet. Wir sind nicht Merchant of Record für die eigentliche Kartentransaktion; auf die Zahlungsabwicklung finden die Regeln der Zahlungsnetzwerke und die Bedingungen von Adyen Anwendung."
       },
       "cancellation": {
-        "title": "Stornierungsrichtlinie",
-        "intro": "Unsere Stornierungsrichtlinie lautet wie folgt:",
-        "point1": "Kostenlose Stornierung bis 48 Stunden vor Tourbeginn",
-        "point2": "Stornierungen innerhalb von 48 Stunden werden nicht erstattet",
-        "point3": "Nichterscheinen wird nicht erstattet"
+        "title": "Stornierung und Rückerstattung",
+        "intro": "Stornierungsregeln werden pro Tour festgelegt und beim Checkout vor Bestätigung der Zahlung angezeigt. Diese tourspezifischen Regeln werden durch Bezugnahme Bestandteil dieser AGB. Darüber hinaus gilt:",
+        "items": [
+          "Wenn wir eine bestätigte Tour aus irgendeinem Grund stornieren, erhalten Sie nach Ihrer Wahl eine vollständige Rückerstattung des gezahlten Preises oder eine Umbuchung.",
+          "Steht Ihnen eine Rückerstattung zu, wird diese von Adyen auf das ursprüngliche Zahlungsmittel zurückgeführt. Rückerstattungen sind in der Regel innerhalb von 5–10 Bankarbeitstagen sichtbar, abhängig von Ihrem Kartenherausgeber oder Zahlungsanbieter.",
+          "Vom Kunden gewünschte Änderungen nach der Buchung (Datum, Gruppengröße, Namensänderung) richten sich nach den beim Checkout angezeigten tourspezifischen Regeln und etwaigen Servicegebühren der Buchungsplattform."
+        ]
+      },
+      "withdrawalExclusion": {
+        "title": "Kein 14-tägiges Widerrufsrecht für terminierte Touren",
+        "content": "Das schwedische Widerrufsrecht von 14 Tagen für Fernabsatzverträge gilt nicht für die Buchung von Freizeitaktivitäten an einem bestimmten Tag. Diese Ausnahme ergibt sich aus 2 kap. 11 § p. 12 distansavtalslagen (2005:59) (schwedisches Fernabsatzgesetz, Ausnahme für terminierte Freizeitaktivitäten). Sobald eine Tour für ein bestimmtes Datum gebucht und bestätigt ist, gelten anstelle des allgemeinen 14-tägigen Widerrufsrechts die beim Checkout angezeigten tourspezifischen Stornierungsregeln."
+      },
+      "modifications": {
+        "title": "Änderungen durch den Kunden",
+        "content": "Wünsche zur Änderung von Datum, Uhrzeit, Gruppengröße oder benannter Hauptperson nach Bestätigung der Buchung werden nach Verfügbarkeit und gemäß den beim Checkout angezeigten tourspezifischen Regeln berücksichtigt. Die Buchungsplattform kann hierfür Bearbeitungs- oder Servicegebühren erheben. Eine Namensänderung weiterer Teilnehmer derselben Buchung ist in der Regel kostenfrei, muss jedoch vor Beginn der Tour mitgeteilt werden."
+      },
+      "forceMajeure": {
+        "title": "Höhere Gewalt und Stornierung durch den Anbieter",
+        "content": "Wir können eine Tour absagen oder verlegen, wenn Umstände außerhalb unserer angemessenen Kontrolle die Durchführung unsicher oder unzumutbar machen. Beispiele sind extreme Witterung, Verkehrsstreiks, behördliche Anordnungen, Maßnahmen des Infektionsschutzes, zivile Unruhen oder Naturereignisse. In solchen Fällen erhalten Sie nach Ihrer Wahl eine vollständige Rückerstattung des gezahlten Preises oder eine Umbuchung. Wir haften nicht für Folgekosten (etwa Flüge, Hotels, Parkgebühren oder andere Tickets), die infolge einer Stornierung durch den Anbieter entstehen."
+      },
+      "participantObligations": {
+        "title": "Pflichten der Teilnehmer",
+        "intro": "Mit der Teilnahme an einer Tour verpflichtet sich jeder Teilnehmer, ",
+        "items": [
+          "korrekte Buchungsangaben zu machen und pünktlich am Treffpunkt zu erscheinen.",
+          "den Anweisungen des Guides und etwaigen Sicherheitseinweisungen Folge zu leisten.",
+          "sich gegenüber anderen Teilnehmern, dem Guide, Anwohnern und in den besuchten öffentlichen Räumen respektvoll zu verhalten.",
+          "nicht in einem Zustand teilzunehmen, in dem Alkohol oder Drogen die Sicherheit oder das Erlebnis der übrigen Teilnehmer beeinträchtigen; der Guide kann in solchen Fällen die Teilnahme ohne Rückerstattung verweigern.",
+          "die eigene körperliche Eignung für als aktiv beschriebene Touren selbst einzuschätzen und uns vorab über relevante medizinische Bedingungen oder Bedürfnisse hinsichtlich Barrierefreiheit zu informieren.",
+          "zu akzeptieren, dass im Rahmen der Tour gelegentlich Foto- oder Videoaufnahmen für unsere eigenen Werbezwecke entstehen können; wenn Sie nicht erscheinen möchten, teilen Sie dies dem Guide bitte vor Beginn mit."
+        ]
+      },
+      "minors": {
+        "title": "Minderjährige",
+        "content": "Eine Buchung kann nur von Personen vorgenommen werden, die mindestens 18 Jahre alt sind. Teilnehmer unter 18 Jahren sind willkommen, müssen jedoch von einem buchenden Erwachsenen begleitet werden, der für ihr Verhalten, ihre Sicherheit und ihre Eignung für die Aktivität verantwortlich ist."
       },
       "liability": {
         "title": "Haftungsbeschränkung",
-        "content": "Obwohl wir alle Vorkehrungen treffen, um Ihre Sicherheit zu gewährleisten, erfolgt die Teilnahme an Touren auf eigene Gefahr. Private Tours haftet nicht für Personenschäden, Verluste oder Sachschäden, außer wenn sie durch unsere Fahrlässigkeit verursacht wurden."
-      },
-      "conduct": {
-        "title": "Verhalten während der Tour",
-        "intro": "Teilnehmer verpflichten sich zu:",
-        "point1": "Den Anweisungen des Guides jederzeit zu folgen",
-        "point2": "Respektvolles Verhalten gegenüber anderen Teilnehmern und öffentlichen Räumen",
-        "point3": "Keine illegalen Aktivitäten während der Tour"
+        "content": "Die Teilnahme an einer Tour erfolgt auf eigene Gefahr. Wir haften für unmittelbare Schäden, die durch unsere eigene Fahrlässigkeit oder vorsätzliche Pflichtverletzung entstehen. Soweit zwingendes Verbraucherschutzrecht dem nicht entgegensteht, ist unsere Gesamthaftung im Zusammenhang mit einer Buchung auf den für diese Buchung gezahlten Preis begrenzt. Wir haften nicht für mittelbare Schäden oder Folgeschäden, einschließlich entgangenen Gewinns, entgangener Möglichkeiten oder Kosten für Anschlussreisen. Wir empfehlen dringend den Abschluss einer persönlichen Reiseversicherung, die Krankheitskosten, Stornierungen und persönliche Gegenstände abdeckt."
       },
       "ip": {
         "title": "Geistiges Eigentum",
-        "content": "Alle Inhalte dieser Website, einschließlich Texte, Bilder und Tourmaterialien, sind Eigentum von Private Tours und urheberrechtlich geschützt."
+        "content": "Sämtliche Inhalte auf privatetours.se — Texte, Bilder, Audio, Video, Karten und Routen — gehören uns oder unseren Lizenzgebern und sind urheberrechtlich und durch verwandte Schutzrechte geschützt. Sie dürfen Seiten zu Ihrem persönlichen, nicht gewerblichen Gebrauch ansehen und ausdrucken. Jede weitergehende Nutzung, einschließlich Vervielfältigung, Weiterverbreitung oder Verwendung zum Training automatisierter Systeme, bedarf unserer vorherigen schriftlichen Zustimmung. Wenn Sie Fotos oder Videos einer Tour mit uns teilen (z. B. durch Markierung in sozialen Medien oder als Antwort auf eine Anfrage unseres Teams), räumen Sie uns ein weltweites, lizenzgebührenfreies, nicht ausschließliches Nutzungsrecht zur Verwendung dieser Inhalte in unseren eigenen Werbekanälen mit angemessener Quellenangabe ein, soweit dies möglich ist."
       },
-      "law": {
-        "title": "Anwendbares Recht",
-        "content": "Diese Bedingungen unterliegen schwedischem Recht. Etwaige Streitigkeiten werden vor schwedischen Gerichten gelöst."
+      "privacy": {
+        "title": "Datenschutz und Auftragsverarbeiter",
+        "content": "Ihre personenbezogenen Daten werden gemäß unserer Datenschutzerklärung verarbeitet. Zur Abwicklung von Buchungen, Zahlungen, Kartenanzeige und E-Mail-Bestätigungen setzen wir die folgenden Auftragsverarbeiter ein: Bokun (Tripadvisor LLC) für die Buchungsplattform, Adyen N.V. für die Zahlungsabwicklung über Bokun Pay, Google LLC für die Kartenanzeige, Vercel Inc. für Hosting und Edge-Auslieferung, Supabase Inc. für Datenbank-Hosting in der EU-Region sowie Resend für transaktionale E-Mails. In der Datenschutzerklärung finden Sie die Rechtsgrundlagen der jeweiligen Verarbeitung, die Speicherfristen und Hinweise zur Ausübung Ihrer Betroffenenrechte."
       },
-      "contact": {
-        "title": "Kontaktinformationen",
-        "content": "Bei Fragen zu diesen Bedingungen kontaktieren Sie uns bitte unter info@privatetours.se"
+      "complaints": {
+        "title": "Beschwerden und Streitbeilegung",
+        "content": "Sollte etwas nicht in Ordnung sein, melden Sie sich bitte so bald wie möglich — idealerweise während oder unmittelbar nach der Tour — unter info@privatetours.se. Wir bestätigen Beschwerden in der Regel innerhalb von fünf Werktagen und bemühen uns, innerhalb von dreißig Tagen inhaltlich zu antworten. Sind Sie mit unserer Bearbeitung nicht zufrieden, können Sie sich an die schwedische Verbraucherbeschwerdestelle Allmänna reklamationsnämnden (ARN), www.arn.se, wenden. Verbrauchern in der EU steht zudem die Online-Streitbeilegungs-Plattform der Europäischen Kommission unter https://ec.europa.eu/consumers/odr/ zur Verfügung."
+      },
+      "governingLaw": {
+        "title": "Anwendbares Recht und Gerichtsstand",
+        "content": "Diese AGB und die unter ihnen geschlossenen Verträge unterliegen schwedischem Recht. Streitigkeiten, die nicht durch Verhandlung, ARN oder die EU-ODR-Plattform beigelegt werden können, werden in erster Instanz vom Stockholms tingsrätt entschieden, unbeschadet zwingender Verbraucherrechte, an einem Gericht Ihres Wohnsitzlandes Klage zu erheben."
+      },
+      "changes": {
+        "title": "Änderungen dieser AGB",
+        "content": "Wir können diese AGB von Zeit zu Zeit ändern, etwa aufgrund geänderter Gesetzeslage, Änderungen der Buchungsplattform oder unserer betrieblichen Praxis. Das Datum der jeweils geltenden Fassung wird oben auf der Seite als \"Zuletzt aktualisiert\" angegeben. Änderungen gelten für Buchungen, die am oder nach dem Inkrafttretensdatum erfolgen; bereits bestätigte Buchungen unterliegen weiterhin der Fassung der AGB, die zum Zeitpunkt der Buchung angenommen wurde."
+      },
+      "acceptance": {
+        "title": "Annahme und Sprache",
+        "content": "Mit Abschluss des Checkouts bestätigen Sie, dass Sie diese AGB für sich und alle Teilnehmer Ihrer Buchung gelesen, verstanden und angenommen haben. Diese AGB werden auf Schwedisch (svenska), Englisch (English) und Deutsch (Deutsch) veröffentlicht. Die schwedische Fassung ist die rechtlich verbindliche Fassung; die englische und deutsche Fassung sind Service-Übersetzungen. Bei Widersprüchen oder Unstimmigkeiten zwischen den Sprachfassungen ist die schwedische Fassung maßgebend."
       }
     }
   },
@@ -711,8 +782,8 @@
         "point4": "Marketing-Kommunikation zu senden (mit Ihrer Zustimmung)"
       },
       "dataSharing": {
-        "title": "Informationsweitergabe",
-        "content": "Wir verkaufen Ihre persönlichen Daten nicht. Wir können Daten mit vertrauenswürdigen Dienstleistern teilen, die uns beim Betrieb unseres Geschäfts unterstützen, immer unter strengen Vertraulichkeitsvereinbarungen."
+        "title": "Informationsweitergabe und Auftragsverarbeiter",
+        "content": "Wir verkaufen Ihre personenbezogenen Daten nicht. Wir geben begrenzte Daten ausschließlich zur Erbringung unserer Dienste an die folgenden Auftragsverarbeiter weiter, jeweils auf Grundlage eines schriftlichen Auftragsverarbeitungsvertrags: Bokun, betrieben von Tripadvisor LLC, für Buchung, Voucher-Versand und Anbieterverwaltung; Adyen N.V. als Acquirer über Bokun Pay; Google LLC für die Kartenanzeige; Vercel Inc. für Hosting und Edge-Auslieferung; Supabase Inc. für Datenbank-Hosting in der EU-Region; sowie Resend für transaktionale E-Mails (Buchungsbestätigungen und betriebliche Mitteilungen). Wir können Auftragsverarbeiter im Laufe der Zeit hinzufügen oder austauschen und aktualisieren diese Liste entsprechend."
       },
       "cookies": {
         "title": "Cookies",

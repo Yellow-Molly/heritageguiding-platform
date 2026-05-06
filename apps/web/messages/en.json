@@ -430,54 +430,125 @@
   },
   "terms": {
     "title": "Terms & Conditions",
-    "description": "Terms and conditions for using Private Tours services",
+    "description": "Terms and conditions for booking guided tours with Private Tours, operated by Yellow Molly Aktiebolag (Stockholm, Sweden).",
     "lastUpdated": "Last updated",
+    "tocLabel": "ON THIS PAGE",
+    "tocJumpLabel": "Jump to section",
+    "help": {
+      "title": "Need help understanding these terms?",
+      "subtitle": "Our team is happy to walk you through anything that is unclear before you book.",
+      "primaryCta": "Contact us",
+      "secondaryLink": "View our cancellation policy"
+    },
+    "company": {
+      "labelLegalName": "Legal name",
+      "labelOrgNr": "Organisationsnummer",
+      "labelVat": "VAT number",
+      "labelAddress": "Registered address",
+      "labelEmail": "Contact email",
+      "labelCourt": "Competent court"
+    },
+    "crossLinks": {
+      "cancellationTitle": "Read the full cancellation policy",
+      "cancellationDescription": "Per-tour rules, refund timing and operator-side cancellations.",
+      "privacyTitle": "Read our Privacy Policy",
+      "privacyDescription": "How we collect, use and protect your personal data."
+    },
     "sections": {
-      "intro": {
-        "title": "Introduction",
-        "content": "Welcome to Private Tours. These terms and conditions govern your use of our website and services. By booking a tour or using our services, you agree to these terms."
+      "parties": {
+        "title": "Parties",
+        "content": "These Terms & Conditions (the \"Terms\") form an agreement between the customer (\"you\", \"the Customer\") and Yellow Molly Aktiebolag, organisationsnummer 559577-5080, with registered address Karlavägen 18, 114 31 Stockholm, Sweden, trading as Private Tours (\"we\", \"us\", \"the Supplier\"). The full registered identity, including VAT number and competent court, is set out in the company-info card below. You can reach us at info@privatetours.se."
+      },
+      "definitions": {
+        "title": "Definitions",
+        "content": "\"Supplier\" means Yellow Molly Aktiebolag, the operator that provides the guided tour. \"Booking Platform\" means Bokun, operated by Tripadvisor LLC, which we use for online checkout, voucher delivery and supplier administration. \"Payment Processor\" means Bokun Pay, powered by Adyen N.V. as acquiring bank, which processes card and alternative-method payments on the Supplier's behalf. \"Customer\" means the person who completes a booking. \"Participant\" means each person attending the tour under that booking. \"Tour\" means the guided experience described on the relevant product page on privatetours.se."
+      },
+      "service": {
+        "title": "The Service",
+        "content": "We provide guided tours in Stockholm and other locations as described on the relevant product page. Each tour page sets out the duration, itinerary, meeting point, included items and exclusions. Unless explicitly stated, prices do not include transport to the meeting point, food and drink, optional museum tickets, or personal travel insurance. Meeting points are confirmed in your booking voucher; please arrive at least ten minutes before the start time."
       },
       "booking": {
-        "title": "Booking Terms",
-        "intro": "When you make a booking with us:",
-        "point1": "You must be at least 18 years old to make a booking",
-        "point2": "All information provided must be accurate and complete",
-        "point3": "Booking confirmation is subject to availability",
-        "point4": "You are responsible for arriving at the meeting point on time"
+        "title": "How to Book",
+        "intro": "Bookings are made through our Booking Platform (Bokun) on privatetours.se. When you book:",
+        "items": [
+          "You must be at least 18 years old and have authority to accept these Terms on behalf of all Participants in your booking.",
+          "All booking details (names, contact email, dates, group size) must be accurate and complete.",
+          "A booking is confirmed only when Bokun issues a voucher to the email address you provided. Until that voucher is issued, availability is not guaranteed.",
+          "You may be asked to show the voucher (printed or on a phone) and a valid ID at the meeting point."
+        ]
+      },
+      "pricing": {
+        "title": "Prices, Currency and Taxes",
+        "content": "Prices are shown on each tour page in Swedish Kronor (SEK) and include applicable Swedish VAT (moms). No additional currencies beyond SEK are offered at this time. If the Booking Platform displays a converted price in another currency, that conversion is provided by the Booking Platform for your convenience and the SEK amount on our website governs the contract. The price displayed at the moment you complete checkout is the price that applies to your booking."
       },
       "payment": {
         "title": "Payment",
-        "content": "Full payment is required at the time of booking. We accept major credit cards, Swish, and bank transfers. All prices are in Swedish Kronor (SEK) unless otherwise stated and include applicable taxes."
+        "content": "Payment is processed by Bokun Pay, powered by Adyen N.V., on the Supplier's behalf. The accepted payment methods are those displayed at checkout by the Booking Platform and may change over time. Your card or chosen method is charged at the time of booking. A receipt is issued by the Booking Platform on the Supplier's behalf and sent to the email address you provided. We are not the merchant of record for the card transaction itself; payment-network rules and Adyen's terms apply to the processing of the payment."
       },
       "cancellation": {
-        "title": "Cancellation Policy",
-        "intro": "Our cancellation policy is as follows:",
-        "point1": "Free cancellation up to 48 hours before the tour start time",
-        "point2": "Cancellations within 48 hours are non-refundable",
-        "point3": "No-shows are non-refundable"
+        "title": "Cancellation and Refunds",
+        "intro": "Cancellation rules are set per tour and are displayed at checkout before you confirm payment. Those per-tour rules form part of these Terms by reference. In addition:",
+        "items": [
+          "If we cancel a confirmed tour for any reason, you will be offered a full refund of the price paid or the option to reschedule, at your choice.",
+          "Where a refund is due, it is processed by Adyen back to the original payment method. Refunds typically appear within 5–10 business days, depending on your card issuer or payment method.",
+          "Voluntary changes you request after booking (date, group size, name change) are subject to the per-tour rules displayed at checkout and any service fees the Booking Platform applies."
+        ]
+      },
+      "withdrawalExclusion": {
+        "title": "No 14-Day Right of Withdrawal for Dated Tours",
+        "content": "The 14-day right of withdrawal under the Swedish Distance Contracts Act does not apply to bookings of dated leisure activities. This exception is set out in 2 kap. 11 § p. 12 distansavtalslagen (2005:59). Once a tour for a specified date has been booked and confirmed, the per-tour cancellation rules displayed at checkout apply instead of the general 14-day withdrawal right."
+      },
+      "modifications": {
+        "title": "Modifications by the Customer",
+        "content": "Requests to change the date, time, group size, or named lead Participant after a booking is confirmed are accommodated subject to availability and the per-tour rules displayed at checkout. The Booking Platform may apply administration or service fees to such changes. Name changes for additional Participants in the same booking are normally free of charge but must be communicated in advance of the tour."
+      },
+      "forceMajeure": {
+        "title": "Force Majeure and Operator Cancellation",
+        "content": "We may cancel or reschedule a tour where circumstances beyond our reasonable control make it unsafe or impractical to operate. Examples include severe weather, transport strikes, public-authority orders, public-health restrictions, civil unrest, or acts of God. In such cases you will be offered a full refund of the price paid or a reschedule, at your choice. We are not liable for any ancillary costs you may incur (such as flights, hotels, parking, or other tickets) as a result of an operator-side cancellation."
+      },
+      "participantObligations": {
+        "title": "Participant Obligations",
+        "intro": "By participating in a tour, each Participant agrees to:",
+        "items": [
+          "Provide accurate booking information and arrive at the meeting point on time.",
+          "Follow the guide's instructions and any safety briefings.",
+          "Behave respectfully towards other Participants, the guide, residents and the public spaces visited.",
+          "Refrain from participating while under the influence of alcohol or drugs to a degree that compromises safety or the experience of others; the guide may refuse participation in such cases without refund.",
+          "Self-assess fitness and health for any tour described as physically active and notify us in advance of relevant medical conditions or accessibility needs.",
+          "Accept that incidental photography or video may be taken during the tour for our promotional use; if you do not wish to appear, please tell the guide before the tour starts."
+        ]
+      },
+      "minors": {
+        "title": "Minors",
+        "content": "You must be at least 18 years old to make a booking. Participants under 18 are welcome on tours but must be accompanied by a booking adult who takes responsibility for their conduct, safety and fitness for the activity."
       },
       "liability": {
         "title": "Limitation of Liability",
-        "content": "While we take every precaution to ensure your safety, participation in tours is at your own risk. Private Tours is not liable for personal injury, loss, or damage to property except where caused by our negligence."
-      },
-      "conduct": {
-        "title": "Tour Conduct",
-        "intro": "Participants agree to:",
-        "point1": "Follow the guide's instructions at all times",
-        "point2": "Behave respectfully towards other participants and public spaces",
-        "point3": "Not engage in illegal activities during the tour"
+        "content": "Participation in a tour is at your own risk. We are liable for direct loss caused by our own negligence or wilful misconduct. To the extent permitted by mandatory consumer-protection law, our total liability arising from or in connection with a booking is capped at the price paid for that booking. We are not liable for indirect or consequential losses, including (without limitation) loss of profit, loss of opportunity, or onward travel costs. We strongly recommend that you hold personal travel insurance covering medical costs, cancellation, and personal effects."
       },
       "ip": {
         "title": "Intellectual Property",
-        "content": "All content on this website, including text, images, and tour materials, is the property of Private Tours and protected by copyright law."
+        "content": "All content on privatetours.se — including written material, images, audio, video, route maps, and itineraries — is owned by us or our licensors and is protected by copyright and related rights. You may view and print pages for your personal, non-commercial use. Any other use, including reproduction, redistribution, or use to train automated systems, requires our prior written consent. If you share photos or videos taken on a tour with us (for example by tagging us on social media or replying to a request from our team), you grant us a worldwide, royalty-free, non-exclusive licence to use that content in our own promotional channels with attribution where reasonable."
       },
-      "law": {
-        "title": "Governing Law",
-        "content": "These terms are governed by Swedish law. Any disputes will be resolved in Swedish courts."
+      "privacy": {
+        "title": "Privacy and Sub-Processors",
+        "content": "Your personal data is processed in accordance with our Privacy Policy. To deliver bookings, payments, mapping and email confirmations we use the following sub-processors: Bokun (Tripadvisor LLC) for the booking platform, Adyen N.V. for payment acquiring through Bokun Pay, Google LLC for map display, Vercel Inc. for website hosting and edge delivery, Supabase Inc. for database hosting in the EU, and Resend for transactional email. The Privacy Policy explains the lawful basis for each processing activity, retention periods, and how to exercise your data-subject rights."
       },
-      "contact": {
-        "title": "Contact Information",
-        "content": "For questions about these terms, please contact us at info@privatetours.se"
+      "complaints": {
+        "title": "Complaints and Dispute Resolution",
+        "content": "If something goes wrong, please tell us as soon as possible — ideally during or immediately after the tour — by emailing info@privatetours.se. We aim to acknowledge complaints within five business days and to provide a substantive reply within thirty days. If you remain dissatisfied with our handling of a complaint, you may refer the matter to the Swedish National Board for Consumer Disputes, Allmänna reklamationsnämnden (ARN), www.arn.se. EU consumers may also use the European Commission's Online Dispute Resolution platform at https://ec.europa.eu/consumers/odr/."
+      },
+      "governingLaw": {
+        "title": "Governing Law and Venue",
+        "content": "These Terms and any contract formed under them are governed by Swedish law. Disputes that cannot be resolved through negotiation, ARN, or the EU ODR platform shall be heard before Stockholms tingsrätt as the court of first instance, without prejudice to any mandatory rights you have as a consumer to bring proceedings in the courts of your country of residence."
+      },
+      "changes": {
+        "title": "Changes to These Terms",
+        "content": "We may update these Terms from time to time, for example to reflect changes in law, the Booking Platform, or our operational practice. The effective date of the current version is shown as \"Last updated\" at the top of this page. Updates apply to bookings made on or after the effective date; bookings already confirmed remain governed by the version of the Terms accepted at the time of booking."
+      },
+      "acceptance": {
+        "title": "Acceptance and Language",
+        "content": "By completing checkout you confirm that you have read, understood and accepted these Terms on behalf of yourself and all Participants in your booking. These Terms are published in English, Swedish (svenska) and German (Deutsch). The Swedish version is the legally binding text; the English and German versions are courtesy translations. In case of any conflict or inconsistency between language versions, the Swedish text prevails."
       }
     }
   },
@@ -711,8 +782,8 @@
         "point4": "Send marketing communications (with your consent)"
       },
       "dataSharing": {
-        "title": "Information Sharing",
-        "content": "We do not sell your personal information. We may share data with trusted service providers who assist in operating our business, always under strict confidentiality agreements."
+        "title": "Information Sharing and Sub-Processors",
+        "content": "We do not sell your personal information. We share limited data with the following sub-processors strictly to deliver our service, each under a written data-processing agreement: Bokun, operated by Tripadvisor LLC, for booking, voucher delivery and supplier administration; Adyen N.V., as payment acquirer through Bokun Pay; Google LLC for map display; Vercel Inc. for website hosting and edge delivery; Supabase Inc. for database hosting in the EU region; and Resend for transactional email (booking confirmations and operational notices). We may add or replace sub-processors as our service evolves and will update this list when we do."
       },
       "cookies": {
         "title": "Cookies",

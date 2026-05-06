@@ -7,8 +7,8 @@
  */
 
 export const LEGAL_DATES = {
-  privacy: '2026-04-25',
-  terms: '2026-04-25',
+  privacy: '2026-05-04',
+  terms: '2026-05-04',
   cancellation: '2026-04-25',
 } as const
 

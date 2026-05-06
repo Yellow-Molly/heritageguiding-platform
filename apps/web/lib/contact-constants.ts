@@ -31,6 +31,25 @@ export const CONTACT_HOURS = {
   de: 'Mo–Fr 08:00–18:00 CET',
 } as const
 
+/**
+ * Legal entity identifiers — single source of truth for the registered
+ * business identity (rendered in T&C §01 CompanyInfoCard, schema.org
+ * Organization, invoices). The §01 narrative paragraph in
+ * messages/{en,sv,de}.json deliberately omits the VAT number and points
+ * readers to this card so there is exactly one place to update.
+ *
+ * `vat`: NEXT_PUBLIC_LEGAL_VAT is inlined at build time by Next.js — setting
+ * it on Vercel requires a redeploy to propagate. Until set, the literal
+ * "<VAT-TBD>" renders in the CompanyInfoCard so reviewers can spot the gap.
+ */
+export const LEGAL_ENTITY = {
+  legalName: 'Yellow Molly Aktiebolag',
+  orgNr: '559577-5080',
+  vat: process.env.NEXT_PUBLIC_LEGAL_VAT ?? '<VAT-TBD>',
+  tradingName: 'Private Tours',
+  competentCourt: 'Stockholms tingsrätt',
+} as const
+
 export const SOCIAL_URLS = {
   instagram:
     process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? 'https://instagram.com/privatetours',
