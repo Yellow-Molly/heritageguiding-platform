@@ -11,30 +11,33 @@ import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
 
 type CategoryKey =
+  | 'understanding'
+  | 'comparing'
   | 'booking'
-  | 'payment'
+  | 'afterBooking'
   | 'cancellation'
   | 'experience'
-  | 'guides'
-  | 'accessibility'
+  | 'about'
 
 const categoryKeys: CategoryKey[] = [
+  'understanding',
+  'comparing',
   'booking',
-  'payment',
+  'afterBooking',
   'cancellation',
   'experience',
-  'guides',
-  'accessibility',
+  'about',
 ]
 
 /** Number of Q&A items per category — must match faq.questions keys in locale JSON */
 const categoryQuestionCounts: Record<CategoryKey, number> = {
-  booking: 5,
-  payment: 3,
-  cancellation: 3,
+  understanding: 5,
+  comparing: 5,
+  booking: 6,
+  afterBooking: 4,
+  cancellation: 6,
   experience: 5,
-  guides: 3,
-  accessibility: 3,
+  about: 2,
 }
 
 /**

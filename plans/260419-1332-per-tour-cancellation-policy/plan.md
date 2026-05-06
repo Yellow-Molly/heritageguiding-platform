@@ -7,7 +7,7 @@ effort: 8-12h
 branch: master
 tags: [cms, bokun, tour-detail, cancellation, i18n, faq]
 created: 2026-04-19
-blockedBy: []
+blockedBy: [260506-2220-faq-content-update]
 blocks: []
 ---
 
@@ -42,7 +42,7 @@ Bokun API ──sync script──▶ Tour.cancellationPolicy (CMS)
 | 03 | [Bokun cancellation sync script](./phase-03-bokun-cancellation-sync-script.md) | pending | 2h | 02 |
 | 04 | [Tour detail UI — badge + section](./phase-04-tour-detail-badge-and-section.md) | pending | 2-3h | 02 |
 | 05 | [/cancellation page copy rewrite](./phase-05-cancellation-page-copy-rewrite.md) | pending | 1h | 04 (UX alignment) |
-| 06 | [FAQ cancellation Q&A rewrite](./phase-06-faq-cancellation-rewrite.md) | pending | 30m | 04 |
+| 06 | [FAQ cancellation Q&A rewrite](./phase-06-faq-cancellation-rewrite.md) | superseded by 260506-2220-faq-content-update | 30m | 04 |
 | 07 | [QA, drift verification, launch](./phase-07-qa-and-launch.md) | pending | 1h | 03,04,05,06 |
 
 ## Key Dependencies
