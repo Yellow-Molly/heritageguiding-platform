@@ -29,7 +29,10 @@ export async function GuideCard({ guide }: GuideCardProps) {
         {t('title')}
       </h2>
 
-      <div className="mt-4 flex gap-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 lg:p-6">
+      <Link
+        href={`/guides/${guide.slug}`}
+        className="group mt-4 flex gap-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 transition-all duration-300 hover:shadow-[var(--shadow-card-hover)] lg:p-6"
+      >
         {/* Avatar */}
         {guide.photo?.url && (
           <div className="relative h-20 w-20 shrink-0">
@@ -47,13 +50,8 @@ export async function GuideCard({ guide }: GuideCardProps) {
 
         {/* Info */}
         <div className="min-w-0 flex-1">
-          <h3 className="font-serif text-lg font-semibold lg:text-[22px]">
-            <Link
-              href={`/guides/${guide.slug}`}
-              className="text-[var(--color-primary)] underline-offset-2 hover:underline"
-            >
-              {guide.name}
-            </Link>
+          <h3 className="font-serif text-lg font-semibold text-[var(--color-primary)] underline-offset-2 group-hover:underline lg:text-[22px]">
+            {guide.name}
           </h3>
 
           {metaParts.length > 0 && (
@@ -68,7 +66,7 @@ export async function GuideCard({ guide }: GuideCardProps) {
             </p>
           )}
         </div>
-      </div>
+      </Link>
     </section>
   )
 }
