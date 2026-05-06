@@ -1,7 +1,7 @@
 # Phase 02 — Env + CMS Operational Rollout
 
 **Priority:** Medium (operational, not code-blocking)
-**Status:** Code completed (2026-05-06); ops pending (user actions in Vercel + CMS)
+**Status:** Completed (2026-05-06) — Vercel env set, CMS updated, prod redeployed, phone verified live
 **Effort:** ~5 min code + Vercel/CMS admin actions
 **Depends on:** Phase 01
 
@@ -71,9 +71,9 @@ This drives `apps/web/lib/get-whatsapp-number-from-cms.ts` for the floating What
 - [x] **(user)** Set `WHATSAPP_NUMBER` in Vercel (production)
 - [x] **(user)** Set `WHATSAPP_NUMBER` in Vercel (preview)
 - [x] **(user)** Update Payload CMS Site Settings → `whatsappNumber`
-- [ ] **(user, pending)** Trigger production redeploy
-- [ ] **(user, post-deploy)** Verify production footer shows real number
-- [ ] **(user, post-deploy)** Verify production WhatsApp button opens correct chat
+- [x] **(user)** Trigger production redeploy
+- [x] **(user)** Verify production footer shows real number
+- [x] **(user)** Verify production WhatsApp button opens correct chat
 
 ## Success Criteria
 

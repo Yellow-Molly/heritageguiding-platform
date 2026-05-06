@@ -2,7 +2,7 @@
 name: Real Company Phone Rollout
 slug: real-company-phone-rollout
 created: 2026-05-06
-status: in-progress
+status: completed
 mode: fast
 blockedBy: []
 blocks: []
@@ -32,7 +32,7 @@ Display strings only — test fixtures (`+46701234567`) are synthetic and stay a
 | # | Phase | Status |
 |---|-------|--------|
 | 1 | [Sync code constants & i18n messages](phase-01-sync-code-constants-and-messages.md) | completed (2026-05-06) |
-| 2 | [Env + CMS operational rollout](phase-02-env-and-cms-rollout.md) | code + Vercel env + CMS done (2026-05-06); only redeploy & post-deploy verification pending |
+| 2 | [Env + CMS operational rollout](phase-02-env-and-cms-rollout.md) | completed (2026-05-06) — verified live in production |
 
 ## Key Files
 
