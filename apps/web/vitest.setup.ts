@@ -1,5 +1,8 @@
 import '@testing-library/jest-dom'
-import { vi } from 'vitest'
+import { expect, vi } from 'vitest'
+import { toHaveNoViolations } from 'jest-axe'
+
+expect.extend(toHaveNoViolations)
 
 // Mock next/cache unstable_cache as a passthrough for tests.
 // unstable_cache requires Next.js server runtime (incrementalCache) which is

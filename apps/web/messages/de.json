@@ -799,66 +799,174 @@
     "bookTour": "Tour buchen mit {name}"
   },
   "privacy": {
-    "title": "Datenschutzerklärung",
-    "description": "Wie wir Ihre persönlichen Daten erfassen, verwenden und schützen",
-    "lastUpdated": "Zuletzt aktualisiert",
-    "gdpr": {
-      "title": "DSGVO-Konformität",
-      "content": "Private Tours verpflichtet sich zum Schutz Ihrer Privatsphäre gemäß der Datenschutz-Grundverordnung (DSGVO). Diese Richtlinie erklärt, wie wir mit Ihren personenbezogenen Daten umgehen."
+    "meta": {
+      "title": "Datenschutzerklärung",
+      "description": "Wie Private Tours Ihre personenbezogenen Daten erfasst, verwendet und schützt — DSGVO-konform."
     },
-    "sections": {
-      "intro": {
-        "title": "Einführung",
-        "content": "Diese Datenschutzerklärung erklärt, wie Private Tours Ihre persönlichen Daten erfasst, verwendet und schützt, wenn Sie unsere Website und Dienste nutzen."
-      },
-      "dataCollected": {
-        "title": "Informationen, die Wir Erfassen",
-        "intro": "Wir können die folgenden Informationen erfassen:",
-        "point1": "Name und Kontaktdaten (E-Mail, Telefonnummer)",
-        "point2": "Buchungsdetails und Tour-Präferenzen",
-        "point3": "Zahlungsinformationen (sicher über unseren Zahlungsanbieter verarbeitet)",
-        "point4": "Website-Nutzungsdaten durch Cookies und Analysen"
-      },
-      "dataUse": {
-        "title": "Wie Wir Ihre Informationen Verwenden",
-        "intro": "Wir verwenden Ihre Informationen, um:",
-        "point1": "Ihre Buchungen zu verarbeiten und zu bestätigen",
-        "point2": "Über Ihre Touren und eventuelle Änderungen zu kommunizieren",
-        "point3": "Unsere Dienste und Website-Erfahrung zu verbessern",
-        "point4": "Marketing-Kommunikation zu senden (mit Ihrer Zustimmung)"
-      },
-      "dataSharing": {
-        "title": "Informationsweitergabe und Auftragsverarbeiter",
-        "content": "Wir verkaufen Ihre personenbezogenen Daten nicht. Wir geben begrenzte Daten ausschließlich zur Erbringung unserer Dienste an die folgenden Auftragsverarbeiter weiter, jeweils auf Grundlage eines schriftlichen Auftragsverarbeitungsvertrags: Bokun, betrieben von Tripadvisor LLC, für Buchung, Voucher-Versand und Anbieterverwaltung; Adyen N.V. als Acquirer über Bokun Pay; Google LLC für die Kartenanzeige; Vercel Inc. für Hosting und Edge-Auslieferung; Supabase Inc. für Datenbank-Hosting in der EU-Region; sowie Resend für transaktionale E-Mails (Buchungsbestätigungen und betriebliche Mitteilungen). Wir können Auftragsverarbeiter im Laufe der Zeit hinzufügen oder austauschen und aktualisieren diese Liste entsprechend."
-      },
-      "cookies": {
-        "title": "Cookies",
-        "intro": "Unsere Website verwendet Cookies für:",
-        "point1": "Notwendige Cookies für die Website-Funktionalität",
-        "point2": "Analyse-Cookies zum Verständnis von Nutzungsmustern",
-        "point3": "Marketing-Cookies für personalisierte Inhalte (mit Zustimmung)"
-      },
-      "rights": {
-        "title": "Ihre Rechte",
-        "intro": "Nach der DSGVO haben Sie das Recht auf:",
-        "point1": "Zugang zu Ihren personenbezogenen Daten",
-        "point2": "Berichtigung unrichtiger Daten",
-        "point3": "Löschung Ihrer Daten",
-        "point4": "Widerspruch gegen die Datenverarbeitung",
-        "point5": "Datenübertragbarkeit"
-      },
-      "retention": {
-        "title": "Datenspeicherung",
-        "content": "Wir speichern Ihre personenbezogenen Daten nur so lange, wie es für die in dieser Richtlinie beschriebenen Zwecke erforderlich ist oder gesetzlich vorgeschrieben. Buchungsdaten werden in der Regel 7 Jahre aus steuerlichen Gründen aufbewahrt."
-      },
-      "security": {
-        "title": "Sicherheit",
-        "content": "Wir implementieren angemessene technische und organisatorische Maßnahmen zum Schutz Ihrer personenbezogenen Daten vor unbefugtem Zugriff, Änderung oder Zerstörung."
-      },
-      "contact": {
-        "title": "Kontaktieren Sie Uns",
-        "content": "Für datenschutzbezogene Anfragen oder zur Ausübung Ihrer Rechte kontaktieren Sie bitte unseren Datenschutzbeauftragten."
+    "hero": {
+      "breadcrumbHome": "Startseite",
+      "breadcrumbCurrent": "Datenschutzerklärung",
+      "title": "Datenschutzerklärung",
+      "subtitle": "Wie Private Tours Ihre personenbezogenen Daten erfasst, verwendet und schützt — verständlich erklärt, im Einklang mit der DSGVO.",
+      "updatedLabel": "Aktualisiert"
+    },
+    "toc": {
+      "title": "Zum Abschnitt springen",
+      "closeLabel": "Menü schließen",
+      "items": {
+        "controller": "Verantwortlicher",
+        "scope": "Geltungsbereich & Definitionen",
+        "dataCollected": "Erhobene personenbezogene Daten",
+        "purposes": "Zwecke & Rechtsgrundlage",
+        "subProcessors": "Auftragsverarbeiter & Empfänger",
+        "transfers": "Internationale Übermittlungen",
+        "retention": "Speicherdauer",
+        "rights": "Ihre Rechte",
+        "complaint": "Beschwerderecht",
+        "cookies": "Cookies",
+        "children": "Daten von Kindern",
+        "automated": "Automatisierte Entscheidungen",
+        "security": "Sicherheit",
+        "changes": "Änderungen dieser Erklärung"
       }
+    },
+    "controller": {
+      "heading": "Verantwortlicher",
+      "controllerLabel": "WER WIR SIND",
+      "contactLabel": "KONTAKT",
+      "emailLabel": "E-Mail",
+      "legalName": "Yellow Molly Aktiebolag (handelnd unter Private Tours)",
+      "orgNumber": "Org. nr 559577-5080",
+      "address": ["Karlavägen 18", "114 31 Stockholm", "Schweden"]
+    },
+    "scope": {
+      "heading": "Geltungsbereich & Definitionen",
+      "paragraphs": [
+        "Diese Datenschutzerklärung gilt für personenbezogene Daten, die von Private Tours (\"wir\", \"uns\") über diese Website, unseren Buchungsablauf und jegliche direkte Kommunikation mit uns verarbeitet werden. Sie gilt nicht für verlinkte Drittanbieter-Dienste, die nicht von uns betrieben werden.",
+        "\"Personenbezogene Daten\" sind alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen. \"Verarbeitung\" bezeichnet jeden Vorgang, den wir mit personenbezogenen Daten durchführen — Erfassung, Speicherung, Nutzung, Offenlegung oder Löschung. \"Verantwortlicher\" ist die Stelle, die über Zwecke und Mittel der Verarbeitung entscheidet; im Sinne dieser Erklärung sind das wir."
+      ]
+    },
+    "dataCollected": {
+      "heading": "Erhobene personenbezogene Daten",
+      "intro": "Wir erheben folgende Kategorien personenbezogener Daten:",
+      "bullets": [
+        "Identität & Kontakt: Name, E-Mail, Telefon",
+        "Buchung: Tourwahl, Datum, Gruppengröße, besondere Wünsche",
+        "Zahlungsmetadaten: letzte 4 Stellen der Karte, Zahlungsstatus (vollständige Kartendaten verarbeitet Stripe via Bokun — sie erreichen unsere Server nie)",
+        "Technisch: anonymisierte IP, User Agent, Seitenaufrufe (Web Vitals)",
+        "Abgeleitet: Spracheinstellung, Wiedererkennung wiederkehrender Besucher (nur localStorage)"
+      ]
+    },
+    "purposes": {
+      "heading": "Zwecke & Rechtsgrundlage",
+      "caption": "Wie wir Ihre Daten nutzen — Zwecke und Rechtsgrundlagen",
+      "columnHeaders": {
+        "activity": "Tätigkeit",
+        "data": "Datenkategorien",
+        "basis": "Rechtsgrundlage",
+        "retention": "Speicherdauer"
+      },
+      "rows": [
+        { "activity": "Tourbuchungen über Bokun verarbeiten", "dataCategories": "Name, E-Mail, Telefon, Buchungsmetadaten", "legalBasis": "Art. 6(1)(b) — Vertrag", "retention": "7 Jahre (Bokföringslag)" },
+        { "activity": "Gruppenanfrage-Formular", "dataCategories": "Name, E-Mail, Telefon, Gruppengröße, Anforderungen", "legalBasis": "Art. 6(1)(b) — Vorvertraglich", "retention": "24 Monate" },
+        { "activity": "Antworten aus Kontaktformular", "dataCategories": "Name, E-Mail, Nachricht", "legalBasis": "Art. 6(1)(f) — Berechtigtes Interesse", "retention": "24 Monate" },
+        { "activity": "Buchungsbestätigungs-E-Mails", "dataCategories": "E-Mail, Buchungsdetails", "legalBasis": "Art. 6(1)(b) — Vertrag", "retention": "An Buchung gebunden" },
+        { "activity": "Concierge-Assistent-Präferenzen", "dataCategories": "Auswahl von Zielgruppe + Interessen", "legalBasis": "Art. 6(1)(a) — Einwilligung (nur localStorage)", "retention": "Bis zur Löschung" },
+        { "activity": "Web-Vitals-Messwerte", "dataCategories": "Anonymisierte Performance-Daten, gekürzte IP", "legalBasis": "Art. 6(1)(f) — Berechtigtes Interesse", "retention": "90 Tage" },
+        { "activity": "Semantische Tour-Katalog-Suche", "dataCategories": "Nur Embeddings der Tour-Inhalte — keine Nutzerdaten", "legalBasis": "Art. 6(1)(f) — Berechtigtes Interesse", "retention": "Bei Inhaltsänderung neu erstellt" },
+        { "activity": "Spam- / Missbrauchsprävention", "dataCategories": "IP, Anfragefrequenz", "legalBasis": "Art. 6(1)(f) — Berechtigtes Interesse", "retention": "30 Tage" },
+        { "activity": "Aufbewahrung steuerlicher Unterlagen", "dataCategories": "Buchungs- + Rechnungsdaten", "legalBasis": "Art. 6(1)(c) — Rechtliche Verpflichtung", "retention": "7 Jahre (Bokföringslag)" }
+      ]
+    },
+    "subProcessors": {
+      "heading": "Auftragsverarbeiter & Empfänger",
+      "intro": "Wir geben Daten nur an Anbieter weiter, die zur Bereitstellung des Dienstes notwendig sind. Jeder davon ist durch einen Auftragsverarbeitungsvertrag gebunden.",
+      "caption": "Vertrauenswürdige Partner, die uns bei der Bereitstellung helfen",
+      "columnHeaders": {
+        "provider": "Anbieter",
+        "role": "Rolle",
+        "location": "Standort",
+        "transfer": "Übermittlungsmechanismus"
+      },
+      "rows": [
+        { "provider": "Bokun (Tripadvisor LLC)", "monogram": "B", "role": "Buchungsplattform", "location": "Island / USA", "transfer": "EU SCCs" },
+        { "provider": "Stripe (über Bokun Pay)", "monogram": "S", "role": "Zahlungsabwicklung", "location": "Irland (EU) / USA", "transfer": "EU SCCs + DPF" },
+        { "provider": "Vercel Inc.", "monogram": "V", "role": "Webhosting + Blob-Speicher", "location": "USA (EU-Edge-Regionen)", "transfer": "EU SCCs + DPF" },
+        { "provider": "Supabase Inc.", "monogram": "S", "role": "PostgreSQL-Datenbank (EU-Region)", "location": "Europäische Union", "transfer": "DPA + EU-Region" },
+        { "provider": "OpenAI", "monogram": "O", "role": "Embeddings — nur Tour-Katalog-Inhalte, keine Nutzerdaten", "location": "USA", "transfer": "EU SCCs" },
+        { "provider": "Google Workspace", "monogram": "G", "role": "Transaktionale E-Mails (SMTP)", "location": "USA (EU-Region)", "transfer": "EU SCCs + DPF" },
+        { "provider": "Meta Platforms (WhatsApp)", "monogram": "W", "role": "Nur Deep-Link — vom Nutzer initiierter Chat", "location": "EU / USA", "transfer": "Vom Nutzer initiiert; keine Verarbeitung durch uns" }
+      ]
+    },
+    "transfers": {
+      "heading": "Internationale Übermittlungen",
+      "paragraphs": [
+        "Einige unserer Auftragsverarbeiter agieren aus Ländern außerhalb des Europäischen Wirtschaftsraums (EWR), insbesondere den USA. Wo Übermittlungen stattfinden, stützen wir uns auf die EU-Standardvertragsklauseln (SCCs) und, sofern anwendbar, das EU–US-Datenschutzrahmen-Abkommen (DPF).",
+        "Wir wählen Anbieter mit EU-Regionen oder EU-vorgelagerter Edge-Präsenz, wo dies praktikabel ist — beispielsweise liegt unsere Datenbank in einer EU-Region, und unsere Hosting-Plattform bedient EU-Verkehr über europäische Edge-Knoten."
+      ]
+    },
+    "retention": {
+      "heading": "Speicherdauer",
+      "intro": "Wir speichern personenbezogene Daten nur so lange wie nötig:",
+      "bullets": [
+        "Buchungs- + Rechnungsunterlagen: 7 Jahre (schwedisches Buchführungsgesetz)",
+        "Gruppen- / Kontaktanfragen: 24 Monate ab letztem Kontakt",
+        "Anonymisierte Analytik: 90 Tage",
+        "Spam- / Missbrauchsprotokolle: 30 Tage",
+        "Concierge-Präferenzen: bis Sie den localStorage Ihres Browsers leeren"
+      ]
+    },
+    "rights": {
+      "heading": "Ihre Rechte",
+      "items": [
+        { "id": "access", "numeral": "01", "name": "Auskunftsrecht", "description": "Erhalten Sie eine Kopie der personenbezogenen Daten, die wir über Sie speichern.", "exerciseInstruction": "Schreiben Sie uns eine E-Mail mit dem unten angegebenen Betreff.", "ctaLabel": "Auskunft anfragen", "mailtoSubject": "DSGVO-Auskunftsanfrage" },
+        { "id": "rectification", "numeral": "02", "name": "Recht auf Berichtigung", "description": "Korrektur unrichtiger oder unvollständiger Daten.", "exerciseInstruction": "Schreiben Sie uns mit der gewünschten Korrektur.", "ctaLabel": "Berichtigung anfragen", "mailtoSubject": "DSGVO-Berichtigungsanfrage" },
+        { "id": "erasure", "numeral": "03", "name": "Recht auf Löschung", "description": "Löschen Ihrer Daten, sofern keine vorrangige rechtliche Aufbewahrungspflicht besteht.", "exerciseInstruction": "Schreiben Sie uns; steuerrelevante Unterlagen müssen wir ggf. 7 Jahre aufbewahren.", "ctaLabel": "Löschung anfragen", "mailtoSubject": "DSGVO-Löschungsanfrage" },
+        { "id": "restriction", "numeral": "04", "name": "Recht auf Einschränkung", "description": "Begrenzen, wie wir Ihre Daten während eines Streitfalls verwenden.", "exerciseInstruction": "Schreiben Sie uns mit der Begründung der Einschränkung.", "ctaLabel": "Einschränkung anfragen", "mailtoSubject": "DSGVO-Einschränkungsanfrage" },
+        { "id": "portability", "numeral": "05", "name": "Recht auf Datenübertragbarkeit", "description": "Erhalten Sie Ihre Daten in einem maschinenlesbaren Format.", "exerciseInstruction": "Schreiben Sie uns; wir liefern einen strukturierten Export.", "ctaLabel": "Export anfragen", "mailtoSubject": "DSGVO-Anfrage Datenübertragbarkeit" },
+        { "id": "object", "numeral": "06", "name": "Widerspruchsrecht", "description": "Widersprechen Sie der auf unserem berechtigten Interesse beruhenden Verarbeitung.", "exerciseInstruction": "Schreiben Sie uns mit Ihrer konkreten Situation.", "ctaLabel": "Widerspruch einlegen", "mailtoSubject": "DSGVO-Widerspruch" },
+        { "id": "withdraw", "numeral": "07", "name": "Recht auf Widerruf der Einwilligung", "description": "Widerrufen Sie eine Einwilligung jederzeit, ohne die Rechtmäßigkeit vorheriger Verarbeitung zu berühren.", "exerciseInstruction": "Schreiben Sie uns; einwilligungsbasierte Verarbeitung endet beim Widerruf.", "ctaLabel": "Einwilligung widerrufen", "mailtoSubject": "DSGVO-Widerruf der Einwilligung" },
+        { "id": "automated", "numeral": "08", "name": "Recht keinen automatisierten Entscheidungen unterworfen zu werden", "description": "Wir treffen über Sie keine rein automatisierten Entscheidungen mit rechtlicher Wirkung.", "exerciseInstruction": "Schreiben Sie uns bei Fragen zu unserem Concierge-Assistenten.", "ctaLabel": "Mehr erfahren", "mailtoSubject": "DSGVO-Anfrage automatisierte Entscheidung" }
+      ],
+      "slaCallout": "Wir beantworten alle Anfragen zu Betroffenenrechten innerhalb von 30 Tagen. Kostenlos."
+    },
+    "complaint": {
+      "heading": "Beschwerderecht",
+      "body": "Wenn Sie der Auffassung sind, dass wir Ihre personenbezogenen Daten unrichtig behandelt haben, kontaktieren Sie uns bitte zuerst — wir bemühen uns um eine Lösung. Sie haben außerdem das Recht, sich direkt bei der schwedischen Datenschutzbehörde (IMY) zu beschweren.",
+      "primaryCtaLabel": "Zuerst Kontakt aufnehmen",
+      "secondaryCtaLabel": "IMY besuchen (imy.se)",
+      "secondaryCtaAriaLabel": "IMY-Website besuchen (öffnet in neuem Tab)"
+    },
+    "cookies": {
+      "heading": "Cookies & ähnliche Technologien",
+      "intro": "Wir verwenden ausschließlich unbedingt erforderliche Cookies und entsprechenden Speicher:",
+      "bullets": [
+        "Sprach-Cookie (damit Ihre Sprachwahl erhalten bleibt)",
+        "Sicherheitstokens für die Sitzung (CSRF-Schutz)",
+        "Anonymisierte Web Vitals — Erstanbieter, keine Drittanbieter-Tracker"
+      ],
+      "trailing": "Da wir nur unbedingt erforderliche Cookies einsetzen, ist nach ePrivacy kein Einwilligungsbanner erforderlich."
+    },
+    "children": {
+      "heading": "Daten von Kindern",
+      "body": "Unser Angebot richtet sich an Erwachsene ab 16 Jahren. Kinder unter 16 Jahren können auf dieser Website keine Buchungen vornehmen. Kinder können als begleitete Gäste eines volljährigen Buchers an Touren teilnehmen. Erfahren wir, dass wir personenbezogene Daten einer Person unter 16 erfasst haben, löschen wir diese innerhalb von 30 Tagen."
+    },
+    "automated": {
+      "heading": "Automatisierte Entscheidungen & Profiling",
+      "body": "Unser Concierge-Assistent schlägt Touren basierend auf Ihrer Zielgruppen- und Interessenwahl vor. Diese Auswahl wird ausschließlich im localStorage Ihres Browsers gespeichert — sie erreicht unsere Server nicht. Der Assistent gibt nur Empfehlungen; die Entscheidungshoheit bleibt vollständig bei Ihnen. Es liegt keine automatisierte Entscheidung im Sinne von Art. 22 DSGVO vor."
+    },
+    "security": {
+      "heading": "Sicherheit",
+      "body": "Wir schützen personenbezogene Daten mit Industriestandards: TLS-Verschlüsselung bei der Übertragung, Verschlüsselung im Ruhezustand, rollenbasierte Zugriffskontrolle und Audit-Protokollierung. Bei einer Datenschutzverletzung mit Auswirkung auf Ihre Rechte benachrichtigen wir die Aufsichtsbehörde innerhalb von 72 Stunden und informieren betroffene Personen unverzüglich."
+    },
+    "changes": {
+      "heading": "Änderungen dieser Erklärung",
+      "body": "Wir aktualisieren diese Erklärung, wenn sich unsere Verarbeitung ändert. Das \"Aktualisiert\"-Datum im Header zeigt die jüngste Revision. Wesentliche Änderungen kommunizieren wir per Hinweis auf der Website. Frühere Versionen sind in der öffentlichen Git-Historie des Projekts einsehbar."
+    },
+    "contactCta": {
+      "heading": "Fragen zum Datenschutz?",
+      "emailDisplay": "info@privatetours.se",
+      "responseSla": "Wir antworten innerhalb von 12 Stunden."
     }
   },
   "notFound": {

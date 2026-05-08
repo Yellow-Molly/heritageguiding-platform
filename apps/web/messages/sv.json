@@ -799,66 +799,174 @@
     "bookTour": "Boka en tur med {name}"
   },
   "privacy": {
-    "title": "Integritetspolicy",
-    "description": "Hur vi samlar in, använder och skyddar din personliga information",
-    "lastUpdated": "Senast uppdaterad",
-    "gdpr": {
-      "title": "GDPR-efterlevnad",
-      "content": "Private Tours är engagerat i att skydda din integritet i enlighet med den allmänna dataskyddsförordningen (GDPR). Denna policy förklarar hur vi hanterar dina personuppgifter."
+    "meta": {
+      "title": "Integritetspolicy",
+      "description": "Så samlar Private Tours in, använder och skyddar dina personuppgifter — i linje med GDPR."
     },
-    "sections": {
-      "intro": {
-        "title": "Introduktion",
-        "content": "Denna integritetspolicy förklarar hur Private Tours samlar in, använder och skyddar din personliga information när du använder vår webbplats och tjänster."
-      },
-      "dataCollected": {
-        "title": "Information Vi Samlar In",
-        "intro": "Vi kan samla in följande information:",
-        "point1": "Namn och kontaktinformation (e-post, telefonnummer)",
-        "point2": "Bokningsdetaljer och turpreferenser",
-        "point3": "Betalningsinformation (behandlas säkert via vår betalningsleverantör)",
-        "point4": "Webbplatsanvändningsdata genom cookies och analys"
-      },
-      "dataUse": {
-        "title": "Hur Vi Använder Din Information",
-        "intro": "Vi använder din information för att:",
-        "point1": "Behandla och bekräfta dina bokningar",
-        "point2": "Kommunicera om dina turer och eventuella ändringar",
-        "point3": "Förbättra våra tjänster och webbplatsupplevelse",
-        "point4": "Skicka marknadsföringskommunikation (med ditt samtycke)"
-      },
-      "dataSharing": {
-        "title": "Informationsdelning och personuppgiftsbiträden",
-        "content": "Vi säljer inte dina personuppgifter. Vi delar begränsade uppgifter med följande personuppgiftsbiträden enbart för att leverera tjänsten, var och en under skriftligt personuppgiftsbiträdesavtal: Bokun, som drivs av Tripadvisor LLC, för bokning, voucherleverans och leverantörsadministration; Adyen N.V. som inlösare via Bokun Pay; Google LLC för kartvisning; Vercel Inc. för webbhotell och edge-leverans; Supabase Inc. för databashotell inom EU; samt Resend för transaktionell e-post (bokningsbekräftelser och driftsmeddelanden). Vi kan komma att lägga till eller byta personuppgiftsbiträden allteftersom tjänsten utvecklas och uppdaterar då denna lista."
-      },
-      "cookies": {
-        "title": "Cookies",
-        "intro": "Vår webbplats använder cookies för att:",
-        "point1": "Nödvändiga cookies för webbplatsens funktionalitet",
-        "point2": "Analyskookies för att förstå användningsmönster",
-        "point3": "Marknadsföringscookies för personligt innehåll (med samtycke)"
-      },
-      "rights": {
-        "title": "Dina Rättigheter",
-        "intro": "Enligt GDPR har du rätt att:",
-        "point1": "Få tillgång till dina personuppgifter",
-        "point2": "Rätta felaktiga uppgifter",
-        "point3": "Begära radering av dina uppgifter",
-        "point4": "Invända mot databehandling",
-        "point5": "Dataportabilitet"
-      },
-      "retention": {
-        "title": "Datalagring",
-        "content": "Vi behåller dina personuppgifter endast så länge som nödvändigt för de ändamål som beskrivs i denna policy, eller som krävs enligt lag. Bokningsdata lagras vanligtvis i 7 år av skatteskäl."
-      },
-      "security": {
-        "title": "Säkerhet",
-        "content": "Vi implementerar lämpliga tekniska och organisatoriska åtgärder för att skydda dina personuppgifter mot obehörig åtkomst, ändring eller förstörelse."
-      },
-      "contact": {
-        "title": "Kontakta Oss",
-        "content": "För integritetsrelaterade frågor eller för att utöva dina rättigheter, vänligen kontakta vårt dataskyddsombud."
+    "hero": {
+      "breadcrumbHome": "Hem",
+      "breadcrumbCurrent": "Integritetspolicy",
+      "title": "Integritetspolicy",
+      "subtitle": "Så samlar Private Tours in, använder och skyddar dina personuppgifter — skrivet i klarspråk i linje med GDPR.",
+      "updatedLabel": "Uppdaterad"
+    },
+    "toc": {
+      "title": "Hoppa till avsnitt",
+      "closeLabel": "Stäng meny",
+      "items": {
+        "controller": "Personuppgiftsansvarig",
+        "scope": "Omfattning & Definitioner",
+        "dataCollected": "Personuppgifter vi samlar in",
+        "purposes": "Ändamål & Rättslig grund",
+        "subProcessors": "Personuppgiftsbiträden & Mottagare",
+        "transfers": "Internationella överföringar",
+        "retention": "Lagringstider",
+        "rights": "Dina rättigheter",
+        "complaint": "Rätt att klaga",
+        "cookies": "Cookies",
+        "children": "Barns uppgifter",
+        "automated": "Automatiserade beslut",
+        "security": "Säkerhet",
+        "changes": "Ändringar i policyn"
       }
+    },
+    "controller": {
+      "heading": "Personuppgiftsansvarig",
+      "controllerLabel": "VEM VI ÄR",
+      "contactLabel": "KONTAKT",
+      "emailLabel": "E-post",
+      "legalName": "Yellow Molly Aktiebolag (under firma Private Tours)",
+      "orgNumber": "Org. nr 559577-5080",
+      "address": ["Karlavägen 18", "114 31 Stockholm", "Sverige"]
+    },
+    "scope": {
+      "heading": "Omfattning & Definitioner",
+      "paragraphs": [
+        "Denna integritetspolicy gäller personuppgifter som behandlas av Private Tours (\"vi\", \"oss\") via denna webbplats, vårt bokningsflöde och eventuell direktkommunikation med oss. Den gäller inte tredjepartstjänster vi länkar till men inte själva driver.",
+        "Med \"personuppgifter\" avses information som rör en identifierad eller identifierbar fysisk person. Med \"behandling\" avses varje åtgärd vi utför med personuppgifter — insamling, lagring, användning, utlämning eller radering. Med \"personuppgiftsansvarig\" avses den part som bestämmer ändamål och medel för behandlingen; det är vi i denna policy."
+      ]
+    },
+    "dataCollected": {
+      "heading": "Personuppgifter vi samlar in",
+      "intro": "Vi samlar in följande kategorier av personuppgifter:",
+      "bullets": [
+        "Identitet & kontakt: namn, e-post, telefon",
+        "Bokning: turval, datum, gruppstorlek, särskilda önskemål",
+        "Betalningsmetadata: kortets sista 4 siffror, betalstatus (fullständiga kortuppgifter hanteras av Stripe via Bokun — når aldrig våra servrar)",
+        "Tekniskt: anonymiserad IP, user agent, sidvisningar (web vitals)",
+        "Härledd: språkpreferens, igenkänning av återkommande besökare (endast localStorage)"
+      ]
+    },
+    "purposes": {
+      "heading": "Ändamål & Rättslig grund",
+      "caption": "Så använder vi dina uppgifter — ändamål och rättsliga grunder",
+      "columnHeaders": {
+        "activity": "Aktivitet",
+        "data": "Datakategorier",
+        "basis": "Rättslig grund",
+        "retention": "Lagring"
+      },
+      "rows": [
+        { "activity": "Behandla turbokningar via Bokun", "dataCategories": "Namn, e-post, telefon, bokningsmetadata", "legalBasis": "Art. 6(1)(b) — Avtal", "retention": "7 år (Bokföringslagen)" },
+        { "activity": "Förfrågningsformulär för grupper", "dataCategories": "Namn, e-post, telefon, gruppstorlek, krav", "legalBasis": "Art. 6(1)(b) — Föravtal", "retention": "24 månader" },
+        { "activity": "Svar på kontaktformulär", "dataCategories": "Namn, e-post, meddelande", "legalBasis": "Art. 6(1)(f) — Berättigat intresse", "retention": "24 månader" },
+        { "activity": "Bokningsbekräftelser via e-post", "dataCategories": "E-post, bokningsdetaljer", "legalBasis": "Art. 6(1)(b) — Avtal", "retention": "Knutet till bokningen" },
+        { "activity": "Concierge-guidens preferenser", "dataCategories": "Val av målgrupp + intressen", "legalBasis": "Art. 6(1)(a) — Samtycke (endast localStorage)", "retention": "Tills användaren rensar" },
+        { "activity": "Web Vitals-mätningar", "dataCategories": "Anonymiserad prestandadata, trunkerad IP", "legalBasis": "Art. 6(1)(f) — Berättigat intresse", "retention": "90 dagar" },
+        { "activity": "Semantisk sökning i turkatalog", "dataCategories": "Endast inbäddningar av turinnehåll — inga användardata", "legalBasis": "Art. 6(1)(f) — Berättigat intresse", "retention": "Byggs om vid innehållsändring" },
+        { "activity": "Skydd mot skräppost / missbruk", "dataCategories": "IP, förfrågningsfrekvens", "legalBasis": "Art. 6(1)(f) — Berättigat intresse", "retention": "30 dagar" },
+        { "activity": "Bevarande av skatteunderlag", "dataCategories": "Boknings- och fakturadata", "legalBasis": "Art. 6(1)(c) — Rättslig förpliktelse", "retention": "7 år (Bokföringslagen)" }
+      ]
+    },
+    "subProcessors": {
+      "heading": "Personuppgiftsbiträden & Mottagare",
+      "intro": "Vi delar uppgifter endast med leverantörer som krävs för att leverera tjänsten. Var och en omfattas av personuppgiftsbiträdesavtal.",
+      "caption": "Betrodda partners som hjälper oss leverera tjänsten",
+      "columnHeaders": {
+        "provider": "Leverantör",
+        "role": "Roll",
+        "location": "Plats",
+        "transfer": "Överföringsmekanism"
+      },
+      "rows": [
+        { "provider": "Bokun (Tripadvisor LLC)", "monogram": "B", "role": "Bokningsplattform", "location": "Island / USA", "transfer": "EU SCCs" },
+        { "provider": "Stripe (via Bokun Pay)", "monogram": "S", "role": "Betalningsbehandling", "location": "Irland (EU) / USA", "transfer": "EU SCCs + DPF" },
+        { "provider": "Vercel Inc.", "monogram": "V", "role": "Webbhotell + Blob-lagring", "location": "USA (EU edge-regioner)", "transfer": "EU SCCs + DPF" },
+        { "provider": "Supabase Inc.", "monogram": "S", "role": "PostgreSQL-databas (EU-region)", "location": "Europeiska unionen", "transfer": "DPA + EU-region" },
+        { "provider": "OpenAI", "monogram": "O", "role": "Inbäddningar — endast turkataloginnehåll, inga användardata", "location": "USA", "transfer": "EU SCCs" },
+        { "provider": "Google Workspace", "monogram": "G", "role": "Transaktionell e-post (SMTP)", "location": "USA (EU-region)", "transfer": "EU SCCs + DPF" },
+        { "provider": "Meta Platforms (WhatsApp)", "monogram": "W", "role": "Endast djuplänk — chatt initierad av användaren", "location": "EU / USA", "transfer": "Initierad av användaren; ingen behandling av oss" }
+      ]
+    },
+    "transfers": {
+      "heading": "Internationella överföringar",
+      "paragraphs": [
+        "Några av våra personuppgiftsbiträden verkar från länder utanför Europeiska ekonomiska samarbetsområdet (EES), särskilt USA. När sådana överföringar sker stödjer vi oss på EU:s standardavtalsklausuler (SCCs) och, där tillämpligt, EU–US Data Privacy Framework (DPF).",
+        "Vi väljer leverantörer med EU-regioner eller EU-baserad edge-närvaro där det är praktiskt möjligt — exempelvis ligger vår databas i en EU-region och vår hostingplattform betjänar EU-trafik från europeiska edge-noder."
+      ]
+    },
+    "retention": {
+      "heading": "Lagringstider",
+      "intro": "Vi sparar personuppgifter endast så länge det är nödvändigt:",
+      "bullets": [
+        "Boknings- och fakturaunderlag: 7 år (Bokföringslagen)",
+        "Grupp- / kontaktförfrågningar: 24 månader från senaste kontakt",
+        "Anonymiserad analys: 90 dagar",
+        "Skräppost- / missbruksloggar: 30 dagar",
+        "Concierge-preferenser: tills du rensar webbläsarens localStorage"
+      ]
+    },
+    "rights": {
+      "heading": "Dina rättigheter",
+      "items": [
+        { "id": "access", "numeral": "01", "name": "Rätt till tillgång", "description": "Få en kopia av de personuppgifter vi har om dig.", "exerciseInstruction": "E-posta oss med ämnet nedan.", "ctaLabel": "Begär tillgång", "mailtoSubject": "GDPR-begäran om tillgång" },
+        { "id": "rectification", "numeral": "02", "name": "Rätt till rättelse", "description": "Rätta felaktiga eller ofullständiga uppgifter.", "exerciseInstruction": "E-posta oss och beskriv vad som behöver rättas.", "ctaLabel": "Begär rättelse", "mailtoSubject": "GDPR-begäran om rättelse" },
+        { "id": "erasure", "numeral": "03", "name": "Rätt till radering", "description": "Få dina uppgifter raderade där vi inte har en överordnad rättslig skyldighet att bevara dem.", "exerciseInstruction": "E-posta oss; vi kan behöva spara skatterelevanta underlag i 7 år.", "ctaLabel": "Begär radering", "mailtoSubject": "GDPR-begäran om radering" },
+        { "id": "restriction", "numeral": "04", "name": "Rätt till begränsning", "description": "Begränsa hur vi använder dina uppgifter medan en tvist utreds.", "exerciseInstruction": "E-posta oss med grunden för begränsningen.", "ctaLabel": "Begär begränsning", "mailtoSubject": "GDPR-begäran om begränsning" },
+        { "id": "portability", "numeral": "05", "name": "Rätt till dataportabilitet", "description": "Få dina uppgifter i ett maskinläsbart format.", "exerciseInstruction": "E-posta oss; vi tillhandahåller ett strukturerat utdrag.", "ctaLabel": "Begär utdrag", "mailtoSubject": "GDPR-begäran om dataportabilitet" },
+        { "id": "object", "numeral": "06", "name": "Rätt att invända", "description": "Invänd mot behandling som grundas på vårt berättigade intresse.", "exerciseInstruction": "E-posta oss och beskriv din situation.", "ctaLabel": "Invänd mot behandling", "mailtoSubject": "GDPR-invändning" },
+        { "id": "withdraw", "numeral": "07", "name": "Rätt att återkalla samtycke", "description": "Återkalla samtycke när som helst, utan att det påverkar tidigare laglig behandling.", "exerciseInstruction": "E-posta oss; samtyckesgrundad behandling upphör vid återkallelse.", "ctaLabel": "Återkalla samtycke", "mailtoSubject": "GDPR-återkallelse av samtycke" },
+        { "id": "automated", "numeral": "08", "name": "Rätt att inte bli föremål för automatiserade beslut", "description": "Vi fattar inte beslut med rättslig verkan om dig enbart genom automatik.", "exerciseInstruction": "E-posta oss om du har frågor om vår concierge-guide.", "ctaLabel": "Läs mer", "mailtoSubject": "GDPR-fråga om automatiserat beslut" }
+      ],
+      "slaCallout": "Vi besvarar alla rättighetsförfrågningar inom 30 dagar. Kostnadsfritt."
+    },
+    "complaint": {
+      "heading": "Rätt att klaga",
+      "body": "Om du anser att vi hanterat dina personuppgifter felaktigt, kontakta oss först — vi arbetar för att lösa det. Du har också rätt att klaga direkt till Integritetsskyddsmyndigheten (IMY).",
+      "primaryCtaLabel": "Kontakta oss först",
+      "secondaryCtaLabel": "Besök IMY (imy.se)",
+      "secondaryCtaAriaLabel": "Besök IMY:s webbplats (öppnas i ny flik)"
+    },
+    "cookies": {
+      "heading": "Cookies & liknande tekniker",
+      "intro": "Vi använder endast strikt nödvändiga cookies och motsvarande lagring:",
+      "bullets": [
+        "Cookie för språkval (så att ditt språk består)",
+        "Säkerhetstoken för session (CSRF-skydd)",
+        "Anonymiserade Web Vitals — förstapart, inga tredjepartsspårare"
+      ],
+      "trailing": "Eftersom vi endast använder nödvändiga cookies krävs ingen samtyckesbanner enligt ePrivacy."
+    },
+    "children": {
+      "heading": "Barns uppgifter",
+      "body": "Vår tjänst riktar sig till vuxna, 16 år och äldre. Barn under 16 år kan inte göra bokningar på denna webbplats. Barn kan delta i turer som medföljande gäster till en vuxen bokare. Får vi kännedom om att vi samlat in personuppgifter från någon under 16 år raderar vi dessa inom 30 dagar."
+    },
+    "automated": {
+      "heading": "Automatiserade beslut & profilering",
+      "body": "Vår concierge-guide föreslår turer baserat på de val av målgrupp och intressen som du anger. Dessa val sparas endast i din webbläsares localStorage — vi tar aldrig emot dem på våra servrar. Guiden ger endast rekommendationer; du behåller fullt beslutsutrymme. Detta utgör inte ett automatiserat beslut enligt artikel 22 GDPR."
+    },
+    "security": {
+      "heading": "Säkerhet",
+      "body": "Vi skyddar personuppgifter med branschstandard: TLS-kryptering vid överföring, kryptering i vila, rollbaserad åtkomstkontroll och revisionsloggning. Vid en personuppgiftsincident som påverkar dina rättigheter underrättar vi tillsynsmyndigheten inom 72 timmar och informerar berörda personer utan onödigt dröjsmål."
+    },
+    "changes": {
+      "heading": "Ändringar i policyn",
+      "body": "Vi uppdaterar denna policy när vår behandling ändras. Datumet \"Uppdaterad\" i hjältesektionen återspeglar senaste revisionen. Väsentliga ändringar kommuniceras via meddelande på webbplatsen. Tidigare versioner finns i projektets publika git-historik."
+    },
+    "contactCta": {
+      "heading": "Frågor om integritet?",
+      "emailDisplay": "info@privatetours.se",
+      "responseSla": "Vi svarar inom 12 timmar."
     }
   },
   "notFound": {

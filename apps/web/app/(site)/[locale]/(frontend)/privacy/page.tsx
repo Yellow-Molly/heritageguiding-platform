@@ -7,6 +7,39 @@ import type { Locale } from '@/i18n'
 import { WebPageSchema } from '@/components/seo'
 import { LEGAL_DATES } from '@/lib/legal-dates'
 import { CONTACT_EMAIL } from '@/lib/contact-constants'
+import {
+  PrivacyHero,
+  PrivacyTableOfContents,
+  PrivacyControllerCard,
+  PrivacyProcessingTable,
+  PrivacySubProcessorTable,
+  PrivacyRightsAccordion,
+  PrivacyProse,
+  PrivacyComplaintCallout,
+  PrivacyContactCta,
+  type ProcessingRow,
+  type SubProcessorRow,
+  type RightItem,
+  type ProseSection,
+  type TocItem,
+} from '@/components/privacy'
+
+const TOC_KEYS = [
+  'controller',
+  'scope',
+  'dataCollected',
+  'purposes',
+  'subProcessors',
+  'transfers',
+  'retention',
+  'rights',
+  'complaint',
+  'cookies',
+  'children',
+  'automated',
+  'security',
+  'changes',
+] as const
 
 export async function generateMetadata({
   params,
@@ -17,8 +50,8 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'privacy' })
 
   return generatePageMetadata({
-    title: t('title'),
-    description: t('description'),
+    title: t('meta.title'),
+    description: t('meta.description'),
     locale: locale as Locale,
     pathname: '/privacy',
   })
@@ -31,103 +64,177 @@ export default async function PrivacyPage({
 }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'privacy' })
-
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+
+  const tocItems: TocItem[] = TOC_KEYS.map((k, i) => ({
+    id: k,
+    numeral: String(i + 1).padStart(2, '0'),
+    label: t(`toc.items.${k}`),
+  }))
+
+  const proseBefore: ProseSection[] = [
+    {
+      id: 'scope',
+      heading: t('scope.heading'),
+      paragraphs: t.raw('scope.paragraphs') as string[],
+    },
+    {
+      id: 'dataCollected',
+      heading: t('dataCollected.heading'),
+      intro: t('dataCollected.intro'),
+      bullets: t.raw('dataCollected.bullets') as string[],
+    },
+  ]
+
+  const proseMiddle: ProseSection[] = [
+    {
+      id: 'transfers',
+      heading: t('transfers.heading'),
+      paragraphs: t.raw('transfers.paragraphs') as string[],
+    },
+    {
+      id: 'retention',
+      heading: t('retention.heading'),
+      intro: t('retention.intro'),
+      bullets: t.raw('retention.bullets') as string[],
+    },
+  ]
+
+  const proseAfter: ProseSection[] = [
+    {
+      id: 'cookies',
+      heading: t('cookies.heading'),
+      intro: t('cookies.intro'),
+      bullets: t.raw('cookies.bullets') as string[],
+      paragraphs: [t('cookies.trailing')],
+    },
+    {
+      id: 'children',
+      heading: t('children.heading'),
+      paragraphs: [t('children.body')],
+    },
+    {
+      id: 'automated',
+      heading: t('automated.heading'),
+      paragraphs: [t('automated.body')],
+    },
+    {
+      id: 'security',
+      heading: t('security.heading'),
+      paragraphs: [t('security.body')],
+    },
+    {
+      id: 'changes',
+      heading: t('changes.heading'),
+      paragraphs: [t('changes.body')],
+    },
+  ]
 
   return (
     <>
       <WebPageSchema
-        name={t('title')}
-        description={t('description')}
+        name={t('meta.title')}
+        description={t('meta.description')}
         url={`${baseUrl}/${locale}/privacy`}
       />
-      <Header />
-      <main className="min-h-screen bg-[var(--color-background)]">
-        {/* Hero Section */}
-        <section className="bg-[var(--color-primary)] py-12 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="font-serif text-4xl font-bold text-white">{t('title')}</h1>
-            <p className="mt-2 text-white/80">{t('lastUpdated')}: {LEGAL_DATES.privacy}</p>
+      <Header variant="solid" />
+      <main className="min-h-screen bg-[var(--color-background)] pt-[var(--header-height)]">
+        <PrivacyHero
+          breadcrumb={[
+            { label: t('hero.breadcrumbHome'), href: `/${locale}` },
+            { label: t('hero.breadcrumbCurrent') },
+          ]}
+          title={t('hero.title')}
+          subtitle={t('hero.subtitle')}
+          updatedChip={{ label: t('hero.updatedLabel'), date: LEGAL_DATES.privacy }}
+        />
+
+        <div className="container mx-auto px-4 py-12 lg:grid lg:grid-cols-[260px_1fr] lg:gap-12 lg:px-8 lg:py-20">
+          <PrivacyTableOfContents
+            items={tocItems}
+            title={t('toc.title')}
+            closeLabel={t('toc.closeLabel')}
+          />
+
+          <div className="space-y-16">
+            <PrivacyControllerCard
+              id="controller"
+              heading={t('controller.heading')}
+              controllerLabel={t('controller.controllerLabel')}
+              contactLabel={t('controller.contactLabel')}
+              emailLabel={t('controller.emailLabel')}
+              controller={{
+                legalName: t('controller.legalName'),
+                orgNumber: t('controller.orgNumber'),
+                address: t.raw('controller.address') as string[],
+                email: CONTACT_EMAIL,
+              }}
+            />
+
+            <PrivacyProse sections={proseBefore} />
+
+            <PrivacyProcessingTable
+              id="purposes"
+              heading={t('purposes.heading')}
+              caption={t('purposes.caption')}
+              columnHeaders={t.raw('purposes.columnHeaders') as {
+                activity: string
+                data: string
+                basis: string
+                retention: string
+              }}
+              rows={t.raw('purposes.rows') as ProcessingRow[]}
+            />
+
+            <PrivacySubProcessorTable
+              id="subProcessors"
+              heading={t('subProcessors.heading')}
+              intro={t('subProcessors.intro')}
+              caption={t('subProcessors.caption')}
+              columnHeaders={t.raw('subProcessors.columnHeaders') as {
+                provider: string
+                role: string
+                location: string
+                transfer: string
+              }}
+              rows={t.raw('subProcessors.rows') as SubProcessorRow[]}
+            />
+
+            <PrivacyProse sections={proseMiddle} />
+
+            <PrivacyRightsAccordion
+              id="rights"
+              heading={t('rights.heading')}
+              items={t.raw('rights.items') as RightItem[]}
+              slaCallout={t('rights.slaCallout')}
+              contactEmail={CONTACT_EMAIL}
+            />
+
+            <PrivacyProse sections={proseAfter} />
           </div>
-        </section>
+        </div>
 
-        {/* Content */}
-        <section className="container mx-auto px-4 py-12">
-          <div className="prose prose-lg mx-auto max-w-3xl">
-            {/* GDPR Notice */}
-            <div className="rounded-lg bg-[var(--color-background-alt)] p-6 not-prose mb-8">
-              <h2 className="font-semibold text-[var(--color-primary)]">
-                {t('gdpr.title')}
-              </h2>
-              <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-                {t('gdpr.content')}
-              </p>
-            </div>
+        <PrivacyComplaintCallout
+          id="complaint"
+          heading={t('complaint.heading')}
+          body={t('complaint.body')}
+          primaryCta={{
+            label: t('complaint.primaryCtaLabel'),
+            mailto: `mailto:${CONTACT_EMAIL}`,
+          }}
+          secondaryCta={{
+            label: t('complaint.secondaryCtaLabel'),
+            href: 'https://www.imy.se',
+            ariaLabel: t('complaint.secondaryCtaAriaLabel'),
+          }}
+        />
 
-            {/* Introduction */}
-            <h2>{t('sections.intro.title')}</h2>
-            <p>{t('sections.intro.content')}</p>
-
-            {/* Data We Collect */}
-            <h2>{t('sections.dataCollected.title')}</h2>
-            <p>{t('sections.dataCollected.intro')}</p>
-            <ul>
-              <li>{t('sections.dataCollected.point1')}</li>
-              <li>{t('sections.dataCollected.point2')}</li>
-              <li>{t('sections.dataCollected.point3')}</li>
-              <li>{t('sections.dataCollected.point4')}</li>
-            </ul>
-
-            {/* How We Use Data */}
-            <h2>{t('sections.dataUse.title')}</h2>
-            <p>{t('sections.dataUse.intro')}</p>
-            <ul>
-              <li>{t('sections.dataUse.point1')}</li>
-              <li>{t('sections.dataUse.point2')}</li>
-              <li>{t('sections.dataUse.point3')}</li>
-              <li>{t('sections.dataUse.point4')}</li>
-            </ul>
-
-            {/* Data Sharing */}
-            <h2>{t('sections.dataSharing.title')}</h2>
-            <p>{t('sections.dataSharing.content')}</p>
-
-            {/* Cookies */}
-            <h2>{t('sections.cookies.title')}</h2>
-            <p>{t('sections.cookies.intro')}</p>
-            <ul>
-              <li>{t('sections.cookies.point1')}</li>
-              <li>{t('sections.cookies.point2')}</li>
-              <li>{t('sections.cookies.point3')}</li>
-            </ul>
-
-            {/* Your Rights */}
-            <h2>{t('sections.rights.title')}</h2>
-            <p>{t('sections.rights.intro')}</p>
-            <ul>
-              <li>{t('sections.rights.point1')}</li>
-              <li>{t('sections.rights.point2')}</li>
-              <li>{t('sections.rights.point3')}</li>
-              <li>{t('sections.rights.point4')}</li>
-              <li>{t('sections.rights.point5')}</li>
-            </ul>
-
-            {/* Data Retention */}
-            <h2>{t('sections.retention.title')}</h2>
-            <p>{t('sections.retention.content')}</p>
-
-            {/* Security */}
-            <h2>{t('sections.security.title')}</h2>
-            <p>{t('sections.security.content')}</p>
-
-            {/* Contact */}
-            <h2>{t('sections.contact.title')}</h2>
-            <p>{t('sections.contact.content')}</p>
-            <p>
-              <strong>Email:</strong> {CONTACT_EMAIL}
-            </p>
-          </div>
-        </section>
+        <PrivacyContactCta
+          heading={t('contactCta.heading')}
+          email={CONTACT_EMAIL}
+          emailDisplay={t('contactCta.emailDisplay')}
+          responseSla={t('contactCta.responseSla')}
+        />
       </main>
       <Footer />
     </>
