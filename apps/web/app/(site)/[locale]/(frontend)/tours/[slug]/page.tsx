@@ -90,7 +90,7 @@ export default async function TourPage({ params }: TourPageProps) {
         </div>
 
         {/* Related Tours */}
-        <RelatedTours currentTourId={tour.id} categories={tour.categories} />
+        <RelatedTours currentTourId={tour.id} categories={tour.categories} locale={locale} />
       </main>
       <Footer />
     </>

@@ -9,12 +9,15 @@ import config from '@payload-config'
 import type { FeaturedTour } from './get-featured-tours'
 import { mapPayloadTourToFeaturedTour } from './tour-payload-mapper'
 
+type PayloadLocale = 'sv' | 'en' | 'de'
+
 /**
  * Cached inner function — accepts only serializable args (strings + string[]).
  */
 async function fetchRelatedTours(
   currentTourId: string,
   categorySlugs: string[],
+  locale: PayloadLocale,
   limit: number = 3
 ): Promise<FeaturedTour[]> {
   const payload = await getPayload({ config })
@@ -30,6 +33,7 @@ async function fetchRelatedTours(
       },
       limit,
       depth: 2,
+      locale,
     })
 
     const tours = docs.map((doc) =>
@@ -47,6 +51,7 @@ async function fetchRelatedTours(
         },
         limit: limit - tours.length,
         depth: 2,
+        locale,
       })
       tours.push(
         ...moreDocs.map((doc) =>
@@ -67,6 +72,7 @@ async function fetchRelatedTours(
     },
     limit,
     depth: 2,
+    locale,
   })
 
   return docs.map((doc) =>
@@ -80,14 +86,20 @@ const getCachedRelatedTours = unstable_cache(
   { tags: ['tours'] }
 )
 
+const SUPPORTED_LOCALES: readonly PayloadLocale[] = ['sv', 'en', 'de'] as const
+
 /**
  * Public API — accepts category objects, extracts slugs for cache-safe call.
  */
 export async function getRelatedTours(
   currentTourId: string,
   categories?: Array<{ id?: string; slug?: string }>,
+  locale: string = 'sv',
   limit: number = 3
 ): Promise<FeaturedTour[]> {
   const slugs = (categories?.map((c) => c.slug).filter(Boolean) as string[]) ?? []
-  return getCachedRelatedTours(currentTourId, slugs, limit)
+  const safeLocale: PayloadLocale = (SUPPORTED_LOCALES as readonly string[]).includes(locale)
+    ? (locale as PayloadLocale)
+    : 'sv'
+  return getCachedRelatedTours(currentTourId, slugs, safeLocale, limit)
 }

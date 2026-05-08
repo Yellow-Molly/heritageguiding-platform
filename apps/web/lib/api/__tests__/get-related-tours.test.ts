@@ -7,44 +7,44 @@ const HAS_DB = !!process.env.DATABASE_URL
 describe.skipIf(!HAS_DB)('getRelatedTours (integration — needs DB)', () => {
   describe('basic functionality', () => {
     it('returns related tours array', async () => {
-      const tours = await getRelatedTours('gamla-stan-walking', [{ id: 'history', slug: 'history' }])
+      const tours = await getRelatedTours('gamla-stan-walking', [{ id: 'history', slug: 'history' }], 'en')
       expect(tours).toBeInstanceOf(Array)
     })
 
     it('excludes current tour from results', async () => {
-      const tours = await getRelatedTours('gamla-stan-walking', [{ id: 'history', slug: 'history' }])
+      const tours = await getRelatedTours('gamla-stan-walking', [{ id: 'history', slug: 'history' }], 'en')
       const ids = tours.map((t) => t.id)
       expect(ids).not.toContain('gamla-stan-walking')
     })
 
     it('respects limit parameter', async () => {
-      const tours = await getRelatedTours('gamla-stan-walking', [{ id: 'history', slug: 'history' }], 2)
+      const tours = await getRelatedTours('gamla-stan-walking', [{ id: 'history', slug: 'history' }], 'en', 2)
       expect(tours.length).toBeLessThanOrEqual(2)
     })
   })
 
   describe('category matching', () => {
     it('returns tours from same category', async () => {
-      const tours = await getRelatedTours('gamla-stan-walking', [{ id: 'history', slug: 'history' }])
+      const tours = await getRelatedTours('gamla-stan-walking', [{ id: 'history', slug: 'history' }], 'en')
       // Should return other history tours
       const ids = tours.map((t) => t.id)
       expect(ids.some((id) => ['royal-palace', 'viking-history', 'nobel-prize-tour'].includes(id))).toBe(true)
     })
 
     it('returns museum tours for museum category', async () => {
-      const tours = await getRelatedTours('vasa-museum', [{ id: 'museum', slug: 'museum' }])
+      const tours = await getRelatedTours('vasa-museum', [{ id: 'museum', slug: 'museum' }], 'en')
       // Should return other museum tours
       expect(tours.length).toBeGreaterThan(0)
     })
 
     it('returns tours when no categories provided', async () => {
-      const tours = await getRelatedTours('gamla-stan-walking', undefined)
+      const tours = await getRelatedTours('gamla-stan-walking', undefined, 'en')
       expect(tours).toBeInstanceOf(Array)
       expect(tours.length).toBeGreaterThan(0)
     })
 
     it('returns tours with empty categories array', async () => {
-      const tours = await getRelatedTours('gamla-stan-walking', [])
+      const tours = await getRelatedTours('gamla-stan-walking', [], 'en')
       expect(tours).toBeInstanceOf(Array)
       expect(tours.length).toBeGreaterThan(0)
     })
@@ -52,7 +52,7 @@ describe.skipIf(!HAS_DB)('getRelatedTours (integration — needs DB)', () => {
 
   describe('tour structure', () => {
     it('returns valid tour objects', async () => {
-      const tours = await getRelatedTours('gamla-stan-walking', [{ id: 'history', slug: 'history' }])
+      const tours = await getRelatedTours('gamla-stan-walking', [{ id: 'history', slug: 'history' }], 'en')
       if (tours.length > 0) {
         const tour = tours[0]
         expect(tour).toHaveProperty('id')

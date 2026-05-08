@@ -5,15 +5,16 @@ import { RelatedTourCard } from './related-tour-card'
 interface RelatedToursProps {
   currentTourId: string
   categories?: Array<{ id: string; slug: string; name: string }>
+  locale: string
 }
 
 /**
  * Related tours section with compact horizontal cards.
  * Alt background, 4 cards on desktop, 2 tablet, 1 mobile.
  */
-export async function RelatedTours({ currentTourId, categories }: RelatedToursProps) {
+export async function RelatedTours({ currentTourId, categories, locale }: RelatedToursProps) {
   const t = await getTranslations('tourDetail')
-  const tours = await getRelatedTours(currentTourId, categories, 4)
+  const tours = await getRelatedTours(currentTourId, categories, locale, 4)
 
   if (tours.length === 0) return null
 
