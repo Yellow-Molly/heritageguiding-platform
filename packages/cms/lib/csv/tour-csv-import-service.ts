@@ -134,13 +134,27 @@ export async function importToursFromCSV(
       continue
     }
 
-    // Resolve guide relationship
-    const guideId = guideMap.get(data.guide_slug)
-    if (!guideId) {
+    // Resolve guide relationships (hasMany — at least one required)
+    const guideIds: (string | number)[] = []
+    const missingGuideSlugs: string[] = []
+    for (const slug of data.guides_slugs) {
+      const id = guideMap.get(slug)
+      if (id) guideIds.push(id)
+      else missingGuideSlugs.push(slug)
+    }
+    if (missingGuideSlugs.length > 0) {
       result.errors.push({
         row: rowNumber,
-        field: 'guide_slug',
-        message: `Guide with slug "${data.guide_slug}" not found`,
+        field: 'guides_slugs',
+        message: `Guide slug(s) not found: ${missingGuideSlugs.join(', ')}`,
+      })
+      continue
+    }
+    if (guideIds.length === 0) {
+      result.errors.push({
+        row: rowNumber,
+        field: 'guides_slugs',
+        message: 'At least one guide slug is required',
       })
       continue
     }
@@ -182,7 +196,7 @@ export async function importToursFromCSV(
 
     // Convert CSV row to tour document structure
     const tourData = csvRowToTourData(data, {
-      guideId,
+      guideIds,
       categoryIds,
       neighborhoodIds,
     })

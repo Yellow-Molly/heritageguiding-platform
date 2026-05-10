@@ -277,28 +277,29 @@ export function mapPayloadTourToTourDetail(doc: Record<string, unknown>): TourDe
     ? rawWhatToBring.filter((r) => r.item).map((r) => ({ item: r.item! }))
     : undefined
 
-  // ── Guide ──
-  const rawGuide = doc.guide as PayloadGuide | number | null | undefined
-  let guide: TourDetail['guide'] = undefined
-  if (rawGuide && typeof rawGuide !== 'number') {
-    const guidePhoto = rawGuide.photo as PayloadMedia | number | null | undefined
-    guide = {
-      id: String(rawGuide.id),
-      name: rawGuide.name ?? '',
-      slug: rawGuide.slug ?? '',
-      photo:
-        guidePhoto && typeof guidePhoto !== 'number' && guidePhoto.url
-          ? {
-              url: (guidePhoto as PayloadMedia).sizes?.thumbnail?.url || guidePhoto.url,
-              alt: guidePhoto.alt ?? rawGuide.name ?? '',
-              blurDataUrl: (guidePhoto as PayloadMedia).blurDataUrl ?? undefined,
-            }
-          : undefined,
-      bio: lexicalToPlainText(rawGuide.bio),
-      credentials: rawGuide.credentials?.length ? rawGuide.credentials : undefined,
-      languages: rawGuide.languages ?? [],
-    }
-  }
+  // ── Guides (hasMany) ──
+  const rawGuides = doc.guides as Array<PayloadGuide | number> | null | undefined
+  const guides: TourDetail['guides'] = (rawGuides ?? [])
+    .filter((g): g is PayloadGuide => typeof g !== 'number')
+    .map((rawGuide) => {
+      const guidePhoto = rawGuide.photo as PayloadMedia | number | null | undefined
+      return {
+        id: String(rawGuide.id),
+        name: rawGuide.name ?? '',
+        slug: rawGuide.slug ?? '',
+        photo:
+          guidePhoto && typeof guidePhoto !== 'number' && guidePhoto.url
+            ? {
+                url: (guidePhoto as PayloadMedia).sizes?.thumbnail?.url || guidePhoto.url,
+                alt: guidePhoto.alt ?? rawGuide.name ?? '',
+                blurDataUrl: (guidePhoto as PayloadMedia).blurDataUrl ?? undefined,
+              }
+            : undefined,
+        bio: lexicalToPlainText(rawGuide.bio),
+        credentials: rawGuide.credentials?.length ? rawGuide.credentials : undefined,
+        languages: rawGuide.languages ?? [],
+      }
+    })
 
   // ── Categories ──
   const rawCategories = doc.categories as Array<PayloadCategory | number> | null | undefined
@@ -322,7 +323,7 @@ export function mapPayloadTourToTourDetail(doc: Record<string, unknown>): TourDe
     included,
     notIncluded,
     whatToBring,
-    guide,
+    guides,
     categories,
     audienceTags,
     bokunExperienceId: (doc.bokunExperienceId as string | null | undefined) ?? undefined,

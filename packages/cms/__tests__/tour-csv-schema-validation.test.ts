@@ -13,7 +13,7 @@ describe('tourCSVRowSchema', () => {
     pricing_basePrice: '500',
     pricing_priceType: 'per_person',
     duration_hours: '2',
-    guide_slug: 'erik-guide',
+    guides_slugs: 'erik-guide',
     logistics_meetingPointName_sv: 'Central Station',
   }
 
@@ -279,6 +279,52 @@ describe('tourCSVRowSchema', () => {
   })
 })
 
+describe('guides_slugs preprocessor', () => {
+  const baseRow: Record<string, unknown> = {
+    slug: 'test-tour',
+    title_sv: 'Test Tour',
+    shortDescription_sv: 'A short description',
+    pricing_basePrice: '500',
+    pricing_priceType: 'per_person',
+    duration_hours: '2',
+    logistics_meetingPointName_sv: 'Central Station',
+  }
+
+  it('splits semicolon-separated string into array', () => {
+    const result = tourCSVRowSchema.safeParse({ ...baseRow, guides_slugs: 'anna;erik' })
+    expect(result.success).toBe(true)
+    if (result.success) expect(result.data.guides_slugs).toEqual(['anna', 'erik'])
+  })
+
+  it('accepts pre-split array unchanged', () => {
+    const result = tourCSVRowSchema.safeParse({ ...baseRow, guides_slugs: ['anna', 'erik'] })
+    expect(result.success).toBe(true)
+    if (result.success) expect(result.data.guides_slugs).toEqual(['anna', 'erik'])
+  })
+
+  it('trims whitespace and drops empty entries', () => {
+    const result = tourCSVRowSchema.safeParse({ ...baseRow, guides_slugs: ' anna ; ; erik ' })
+    expect(result.success).toBe(true)
+    if (result.success) expect(result.data.guides_slugs).toEqual(['anna', 'erik'])
+  })
+
+  it('rejects empty string', () => {
+    const result = tourCSVRowSchema.safeParse({ ...baseRow, guides_slugs: '' })
+    expect(result.success).toBe(false)
+  })
+
+  it('rejects empty array', () => {
+    const result = tourCSVRowSchema.safeParse({ ...baseRow, guides_slugs: [] })
+    expect(result.success).toBe(false)
+  })
+
+  it('accepts single slug', () => {
+    const result = tourCSVRowSchema.safeParse({ ...baseRow, guides_slugs: 'anna' })
+    expect(result.success).toBe(true)
+    if (result.success) expect(result.data.guides_slugs).toEqual(['anna'])
+  })
+})
+
 describe('validateCSVRow', () => {
   const validRow: Record<string, string> = {
     slug: 'test-tour',
@@ -287,7 +333,7 @@ describe('validateCSVRow', () => {
     pricing_basePrice: '500',
     pricing_priceType: 'per_person',
     duration_hours: '2',
-    guide_slug: 'erik-guide',
+    guides_slugs: 'erik-guide',
     logistics_meetingPointName_sv: 'Central Station',
   }
 
@@ -323,7 +369,7 @@ describe('validateCSVRow', () => {
   })
 
   it('returns multiple errors for multiple invalid fields', () => {
-    const row = { ...validRow, slug: '', title_sv: '', guide_slug: '' }
+    const row = { ...validRow, slug: '', title_sv: '', guides_slugs: '' }
     const result = validateCSVRow(row, 2)
     expect(result.valid).toBe(false)
     expect(result.errors?.length).toBeGreaterThan(1)

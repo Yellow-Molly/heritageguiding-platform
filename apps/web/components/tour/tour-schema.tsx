@@ -39,13 +39,21 @@ export function TourSchema({ tour, reviews }: TourSchemaProps) {
       availability: 'https://schema.org/InStock',
       validFrom: new Date().toISOString(),
     },
-    ...(tour.guide && {
-      provider: {
-        '@type': 'Person',
-        name: tour.guide.name,
-        description: tour.guide.bio,
-        image: tour.guide.photo?.url,
-      },
+    ...(tour.guides.length > 0 && {
+      provider:
+        tour.guides.length === 1
+          ? {
+              '@type': 'Person',
+              name: tour.guides[0].name,
+              description: tour.guides[0].bio,
+              image: tour.guides[0].photo?.url,
+            }
+          : tour.guides.map((g) => ({
+              '@type': 'Person',
+              name: g.name,
+              description: g.bio,
+              image: g.photo?.url,
+            })),
     }),
     ...(tour.logistics?.coordinates && {
       geo: {

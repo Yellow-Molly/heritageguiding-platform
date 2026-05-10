@@ -20,8 +20,8 @@ import { getPayload } from 'payload'
 
 /**
  * Minimal valid row data using column keys from getCSVHeaders()
- * Note: uses 'guide' (column key) not 'guide_slug' (Zod field) —
- * the import service aliases 'guide' → 'guide_slug' for Zod compatibility
+ * Note: uses 'guides' (column key) not 'guides_slugs' (Zod field) —
+ * the import service aliases 'guides' (or legacy 'guide') → 'guides_slugs' for Zod compatibility.
  */
 const validTourRecord: Record<string, string> = {
   slug: 'test-tour',
@@ -30,7 +30,7 @@ const validTourRecord: Record<string, string> = {
   pricing_basePrice: '500',
   pricing_priceType: 'per_person',
   duration_hours: '2',
-  guide: 'erik-guide',
+  guides: 'erik-guide',
   logistics_meetingPointName_sv: 'Stortorget',
 }
 
@@ -72,7 +72,7 @@ async function buildBufferWithRecordKeys(
 /**
  * Build buffer using display headers from getCSVHeaders()
  * Maps Zod schema keys to their display header equivalents
- * Note: guide_slug maps to Guide (slug) display header via the 'guide' column
+ * Note: guides_slugs maps to Guides (slugs) display header via the 'guides' column
  */
 async function buildBufferWithDisplayHeaders(
   rows: Record<string, string>[]
@@ -211,7 +211,7 @@ describe('importToursFromExcel', () => {
 
     expect(mockPayload.create).toHaveBeenCalledOnce()
     const createCall = mockPayload.create.mock.calls[0][0]
-    expect(createCall.data.guide).toBe('guide-42')
+    expect(createCall.data.guides).toEqual(['guide-42'])
   })
 
   it('reports error for missing guide', async () => {
@@ -224,6 +224,26 @@ describe('importToursFromExcel', () => {
     expect(result.created).toBe(0)
     expect(result.errors.some((e) => e.message.includes('Guide'))).toBe(true)
   })
+
+  it('resolves multiple semicolon-separated guides in order', async () => {
+    const mockPayload = setupMockPayload({
+      guides: [
+        { slug: 'anna-guide', id: 'g-a' },
+        { slug: 'erik-guide', id: 'g-e' },
+      ],
+    })
+    const buffer = await buildBufferWithRecordKeys([
+      { ...validTourRecord, guides: 'anna-guide;erik-guide' },
+    ])
+    const { importToursFromExcel } = await getImportService()
+
+    await importToursFromExcel(buffer)
+
+    expect(mockPayload.create).toHaveBeenCalledOnce()
+    const createCall = mockPayload.create.mock.calls[0][0]
+    expect(createCall.data.guides).toEqual(['g-a', 'g-e'])
+  })
+
 
   it('handles display headers (fuzzy matching)', async () => {
     const mockPayload = setupMockPayload()

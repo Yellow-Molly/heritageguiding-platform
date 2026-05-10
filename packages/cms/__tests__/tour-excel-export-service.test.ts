@@ -55,7 +55,7 @@ const createMockTour = (slug: string, titleSv: string) => ({
     visualAssistance: false,
     serviceAnimalsAllowed: false,
   },
-  guide: { id: 1, slug: 'erik-guide', name: 'Erik' },
+  guides: [{ id: 1, slug: 'erik-guide', name: 'Erik' }],
   categories: [{ id: 1, slug: 'history', name: 'History' }],
   neighborhoods: [{ id: 1, slug: 'gamla-stan', name: 'Gamla Stan' }],
   images: [],

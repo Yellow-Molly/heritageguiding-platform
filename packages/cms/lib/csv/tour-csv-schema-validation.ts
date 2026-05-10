@@ -64,7 +64,20 @@ export const tourCSVRowSchema = z.object({
   pricing_basePrice: requiredNumber.pipe(z.number().min(0, 'Price must be >= 0')),
   pricing_priceType: z.enum(['per_person', 'per_group', 'custom']),
   duration_hours: requiredNumber.pipe(z.number().min(0.5, 'Minimum 0.5 hours')),
-  guide_slug: z.string().min(1, 'Guide slug is required'),
+  // Accepts semicolon-separated string ('a;b') or pre-split array. Empty array rejected.
+  guides_slugs: z.preprocess(
+    (val) => {
+      if (typeof val === 'string') {
+        return val
+          .split(';')
+          .map((s) => s.trim())
+          .filter(Boolean)
+      }
+      if (Array.isArray(val)) return val
+      return val
+    },
+    z.array(z.string().min(1)).min(1, 'At least one guide slug is required'),
+  ),
   logistics_meetingPointName_sv: z.string().min(1, 'Swedish meeting point name required'),
 
   // === OPTIONAL LOCALIZED TEXT ===

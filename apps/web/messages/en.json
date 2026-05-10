@@ -632,8 +632,8 @@
       "notIncluded": "Not Included",
       "whatToBring": "What to Bring"
     },
-    "guide": {
-      "title": "Your Guide",
+    "guides": {
+      "title": "{count, plural, one {Your Guide} other {Your Guides}}",
       "speaks": "Speaks"
     },
     "readMore": "Read More",

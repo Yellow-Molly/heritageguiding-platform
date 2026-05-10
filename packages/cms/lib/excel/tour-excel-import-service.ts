@@ -86,8 +86,10 @@ export async function importToursFromExcel(
     return result
   }
 
-  // Column key aliases: export uses 'guide' but Zod schema expects 'guide_slug'
-  const COLUMN_KEY_ALIASES: Record<string, string> = { guide: 'guide_slug' }
+  // Column key aliases: CSV column is 'guides' but Zod schema expects 'guides_slugs'
+  const COLUMN_KEY_ALIASES: Record<string, string> = {
+    guides: 'guides_slugs',
+  }
 
   // Convert data rows to Record<string, string>[]
   const records: Record<string, string>[] = []
@@ -98,7 +100,7 @@ export async function importToursFromExcel(
     colIndexToKey.forEach((key, colIndex) => {
       const cell = row.getCell(colIndex)
       const value = cell.value != null ? String(cell.value).trim() : ''
-      // Apply alias if exists (e.g., 'guide' → 'guide_slug' for Zod compatibility)
+      // Apply alias if exists (e.g., 'guides' → 'guides_slugs' for Zod compatibility)
       const aliasedKey = COLUMN_KEY_ALIASES[key] || key
       // Only include non-empty values so Zod .optional().default() works correctly
       if (value) {
@@ -156,13 +158,27 @@ export async function importToursFromExcel(
       continue
     }
 
-    // Resolve guide relationship
-    const guideId = guideMap.get(data.guide_slug)
-    if (!guideId) {
+    // Resolve guide relationships (hasMany — at least one required)
+    const guideIds: (string | number)[] = []
+    const missingGuideSlugs: string[] = []
+    for (const slug of data.guides_slugs) {
+      const id = guideMap.get(slug)
+      if (id) guideIds.push(id)
+      else missingGuideSlugs.push(slug)
+    }
+    if (missingGuideSlugs.length > 0) {
       result.errors.push({
         row: rowNumber,
-        field: 'guide_slug',
-        message: `Guide with slug "${data.guide_slug}" not found`,
+        field: 'guides_slugs',
+        message: `Guide slug(s) not found: ${missingGuideSlugs.join(', ')}`,
+      })
+      continue
+    }
+    if (guideIds.length === 0) {
+      result.errors.push({
+        row: rowNumber,
+        field: 'guides_slugs',
+        message: 'At least one guide slug is required',
       })
       continue
     }
@@ -203,7 +219,7 @@ export async function importToursFromExcel(
     }
 
     // Convert row to tour document and create
-    const tourData = csvRowToTourData(data, { guideId, categoryIds, neighborhoodIds })
+    const tourData = csvRowToTourData(data, { guideIds, categoryIds, neighborhoodIds })
 
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

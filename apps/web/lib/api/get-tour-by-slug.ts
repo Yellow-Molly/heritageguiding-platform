@@ -44,8 +44,8 @@ export interface TourDetail extends FeaturedTour {
   notIncluded?: Array<{ item: string }>
   /** What to bring */
   whatToBring?: Array<{ item: string }>
-  /** Guide information */
-  guide?: {
+  /** Guides leading this tour (>=1, ordered as set in CMS) */
+  guides: Array<{
     id: string
     name: string
     slug: string
@@ -57,7 +57,7 @@ export interface TourDetail extends FeaturedTour {
     bio: string
     credentials?: Array<{ credential: string }>
     languages?: string[]
-  }
+  }>
   /** Tour categories */
   categories?: Array<{
     id: string

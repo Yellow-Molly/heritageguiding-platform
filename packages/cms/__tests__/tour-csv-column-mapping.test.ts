@@ -36,9 +36,9 @@ describe('TOUR_CSV_COLUMNS', () => {
   })
 
   it('contains relationship columns', () => {
-    const guideCol = TOUR_CSV_COLUMNS.find((c) => c.csvColumn === 'guide')
-    expect(guideCol).toBeDefined()
-    expect(guideCol?.type).toBe('relationship')
+    const guidesCol = TOUR_CSV_COLUMNS.find((c) => c.csvColumn === 'guides')
+    expect(guidesCol).toBeDefined()
+    expect(guidesCol?.type).toBe('relationshipMany')
 
     const categoriesCol = TOUR_CSV_COLUMNS.find((c) => c.csvColumn === 'categories')
     expect(categoriesCol).toBeDefined()
@@ -244,7 +244,7 @@ describe('flattenTourToCSVRow', () => {
       visualAssistance: false,
       serviceAnimalsAllowed: true,
     },
-    guide: { id: 1, slug: 'erik-guide', name: 'Erik' } as any,
+    guides: [{ id: 1, slug: 'erik-guide', name: 'Erik' }] as any,
     categories: [
       { id: 1, slug: 'history', name: 'History' },
       { id: 2, slug: 'walking', name: 'Walking' },
@@ -326,15 +326,10 @@ describe('flattenTourToCSVRow', () => {
     expect(row.targetAudience).toBe('family_friendly;couples')
   })
 
-  it('exports single relationship as slug', () => {
-    const tour = createMockTour()
-    const row = flattenTourToCSVRow(tour)
-    expect(row.guide).toBe('erik-guide')
-  })
-
   it('exports hasMany relationship as semicolon-separated slugs', () => {
     const tour = createMockTour()
     const row = flattenTourToCSVRow(tour)
+    expect(row.guides).toBe('erik-guide')
     expect(row.categories).toBe('history;walking')
     expect(row.neighborhoods).toBe('gamla-stan')
   })
@@ -372,12 +367,12 @@ describe('flattenTourToCSVRow', () => {
     expect(row.categories).toBe('')
   })
 
-  it('handles unpopulated relationships (ID only)', () => {
+  it('handles unpopulated guide relationships (ID only)', () => {
     const tour = createMockTour({
-      guide: 123 as any,
+      guides: [123] as any,
     })
     const row = flattenTourToCSVRow(tour)
-    expect(row.guide).toBe('123')
+    expect(row.guides).toBe('123')
   })
 
   it('handles empty images array', () => {
@@ -420,7 +415,7 @@ describe('csvRowToTourData', () => {
     duration_durationText_sv: '2-3 timmar',
     duration_durationText_en: '',
     duration_durationText_de: '',
-    guide_slug: 'erik-guide',
+    guides_slugs: ['erik-guide'],
     logistics_meetingPointName_sv: 'Central Station SV',
     logistics_meetingPointName_en: 'Central Station EN',
     logistics_meetingPointName_de: '',
@@ -477,7 +472,7 @@ describe('csvRowToTourData', () => {
   } as TourCSVRow)
 
   const mockRelationships: CSVImportRelationships = {
-    guideId: 'guide-123',
+    guideIds: ['guide-123'],
     categoryIds: ['cat-1', 'cat-2'],
     neighborhoodIds: ['hood-1'],
   }
@@ -611,9 +606,20 @@ describe('csvRowToTourData', () => {
   it('maps relationships from provided IDs', () => {
     const row = createMockCSVRow()
     const result = csvRowToTourData(row, mockRelationships)
-    expect(result.guide).toBe('guide-123')
+    expect(result.guides).toEqual(['guide-123'])
     expect(result.categories).toEqual(['cat-1', 'cat-2'])
     expect(result.neighborhoods).toEqual(['hood-1'])
+  })
+
+  it('maps multiple guide IDs preserving order', () => {
+    const row = createMockCSVRow()
+    const multiGuideRels: CSVImportRelationships = {
+      guideIds: ['guide-1', 'guide-2', 'guide-3'],
+      categoryIds: [],
+      neighborhoodIds: [],
+    }
+    const result = csvRowToTourData(row, multiGuideRels)
+    expect(result.guides).toEqual(['guide-1', 'guide-2', 'guide-3'])
   })
 
   it('handles empty optional fields gracefully', () => {
@@ -683,7 +689,7 @@ describe('flattenTourToCSVRow edge cases', () => {
     difficultyLevel: 'easy',
     ageRecommendation: { minimumAge: null, childFriendly: false, teenFriendly: false },
     accessibility: { wheelchairAccessible: false, mobilityNotes: { sv: 'SV', en: 'EN', de: 'DE' }, hearingAssistance: false, visualAssistance: false, serviceAnimalsAllowed: false },
-    guide: { id: 1, slug: 'guide-1', name: 'Guide' } as any,
+    guides: [{ id: 1, slug: 'guide-1', name: 'Guide' }] as any,
     categories: [] as any,
     neighborhoods: [] as any,
     images: [],

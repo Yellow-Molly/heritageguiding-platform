@@ -632,8 +632,8 @@
       "notIncluded": "Ingår ej",
       "whatToBring": "Vad du behöver ta med"
     },
-    "guide": {
-      "title": "Din guide",
+    "guides": {
+      "title": "{count, plural, one {Din guide} other {Dina guider}}",
       "speaks": "Talar"
     },
     "readMore": "Läs mer",

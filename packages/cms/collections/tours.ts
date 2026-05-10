@@ -31,7 +31,7 @@ export const Tours: CollectionConfig = {
   slug: 'tours',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'status', 'featured', 'guide'],
+    defaultColumns: ['title', 'status', 'featured', 'guides'],
     group: 'Content',
     components: {
       beforeListTable: [
@@ -116,12 +116,14 @@ export const Tours: CollectionConfig = {
 
     // ===== RELATIONSHIPS =====
     {
-      name: 'guide',
+      name: 'guides',
       type: 'relationship',
       relationTo: 'guides',
+      hasMany: true,
       required: true,
       index: true,
-      admin: { description: 'Tour guide/expert' },
+      minRows: 1,
+      admin: { description: 'Tour guides/experts (1+). Drag to reorder.' },
     },
     {
       name: 'categories',

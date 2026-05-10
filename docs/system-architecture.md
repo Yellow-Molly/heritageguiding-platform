@@ -383,7 +383,7 @@ query {
     { name: 'description', type: 'richText' },
     { name: 'price', type: 'number' },
     { name: 'duration', type: 'number' },
-    { name: 'guide', type: 'relationship', relationTo: 'guides' },
+    { name: 'guides', type: 'relationship', relationTo: 'guides', hasMany: true, required: true, minRows: 1 },
     { name: 'category', type: 'relationship', relationTo: 'categories' },
     { name: 'media', type: 'array', fields: [...] },
     { name: 'accessibility', type: 'checkbox' },

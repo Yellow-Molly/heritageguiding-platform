@@ -24,7 +24,7 @@ describe.skipIf(!HAS_DB)('getTourBySlug (integration — needs DB)', () => {
       expect(tour).toHaveProperty('highlights')
       expect(tour).toHaveProperty('gallery')
       expect(tour).toHaveProperty('logistics')
-      expect(tour).toHaveProperty('guide')
+      expect(tour).toHaveProperty('guides')
     })
   })
 
@@ -61,12 +61,13 @@ describe.skipIf(!HAS_DB)('getTourBySlug (integration — needs DB)', () => {
       expect(tour?.whatToBring).toBeInstanceOf(Array)
     })
 
-    it('returns guide information', async () => {
+    it('returns guides array with >=1 guide', async () => {
       const tour = await getTourBySlug('gamla-stan-walking', 'en')
-      expect(tour?.guide).toBeDefined()
-      expect(tour?.guide?.name).toBeDefined()
-      expect(tour?.guide?.bio).toBeDefined()
-      expect(tour?.guide?.credentials).toBeInstanceOf(Array)
+      expect(Array.isArray(tour?.guides)).toBe(true)
+      expect(tour?.guides.length).toBeGreaterThanOrEqual(1)
+      expect(tour?.guides[0].name).toBeDefined()
+      expect(tour?.guides[0].bio).toBeDefined()
+      expect(tour?.guides[0].credentials).toBeInstanceOf(Array)
     })
 
     it('returns categories', async () => {

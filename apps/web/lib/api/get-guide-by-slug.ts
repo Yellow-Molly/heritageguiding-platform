@@ -63,11 +63,13 @@ export async function getGuideBySlug(
   const areas = (doc.operatingAreas ?? []) as Array<{ id: string; name: string; slug: string }>
   const creds = (doc.credentials ?? []) as Array<{ credential: string }>
 
-  // Fetch tours led by this guide (depth:2 to populate images/relationships like tour listing)
+  // Fetch tours led by this guide (hasMany: this guide may be primary or secondary).
+  // Payload v3 hasMany filter: `in` operator matches if the relationship array
+  // contains any of the given IDs.
   const toursResult = await payload.find({
     collection: 'tours',
     where: {
-      guide: { equals: doc.id },
+      guides: { in: [doc.id] },
       status: { equals: 'published' },
     },
     depth: 2,

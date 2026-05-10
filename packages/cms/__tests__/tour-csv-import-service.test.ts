@@ -31,7 +31,7 @@ vi.mock('../lib/csv/tour-csv-column-mapping', () => ({
 import { importToursFromCSV } from '../lib/csv/tour-csv-import-service'
 
 // Minimal valid CSV for testing
-const CSV_HEADERS = 'slug,title_sv,title_en,guide_slug'
+const CSV_HEADERS = 'slug,title_sv,title_en,guides_slugs'
 const validRow = 'new-tour,Ny Tour,New Tour,erik-guide'
 const validCSV = `${CSV_HEADERS}\n${validRow}`
 
@@ -57,7 +57,7 @@ describe('importToursFromCSV', () => {
 
     mockValidateCSVRow.mockReturnValue({
       valid: true,
-      data: { slug: 'new-tour', guide_slug: 'erik-guide', categories: [], neighborhoods: [] },
+      data: { slug: 'new-tour', guides_slugs: ['erik-guide'], categories: [], neighborhoods: [] },
     })
     mockCreate.mockResolvedValue({ id: 1 })
   })
@@ -145,7 +145,7 @@ describe('importToursFromCSV', () => {
       valid: true,
       data: {
         slug: 'new-tour',
-        guide_slug: 'erik-guide',
+        guides_slugs: ['erik-guide'],
         categories: ['unknown-category'],
         neighborhoods: [],
       },
@@ -160,7 +160,7 @@ describe('importToursFromCSV', () => {
       valid: true,
       data: {
         slug: 'new-tour',
-        guide_slug: 'erik-guide',
+        guides_slugs: ['erik-guide'],
         categories: [],
         neighborhoods: ['unknown-neighborhood'],
       },
@@ -168,6 +168,61 @@ describe('importToursFromCSV', () => {
     const result = await importToursFromCSV(validCSV)
     expect(result.warnings.some((w) => w.message.includes('Neighborhood'))).toBe(true)
     expect(result.created).toBe(1)
+  })
+
+  it('imports multi-guide tour resolving all slugs in order', async () => {
+    mockFind.mockImplementation(({ collection }: { collection: string }) => {
+      if (collection === 'tours') return Promise.resolve({ docs: [] })
+      if (collection === 'guides') {
+        return Promise.resolve({
+          docs: [
+            { slug: 'anna-guide', id: 'g1' },
+            { slug: 'erik-guide', id: 'g2' },
+          ],
+        })
+      }
+      return Promise.resolve({ docs: [] })
+    })
+    mockValidateCSVRow.mockReturnValue({
+      valid: true,
+      data: {
+        slug: 'multi-tour',
+        guides_slugs: ['anna-guide', 'erik-guide'],
+        categories: [],
+        neighborhoods: [],
+      },
+    })
+    const result = await importToursFromCSV(validCSV)
+    expect(result.created).toBe(1)
+    expect(mockCsvRowToTourData).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({ guideIds: ['g1', 'g2'] }),
+    )
+  })
+
+  it('lists all missing guide slugs in the error message', async () => {
+    mockFind.mockImplementation(({ collection }: { collection: string }) => {
+      if (collection === 'guides') {
+        return Promise.resolve({ docs: [{ slug: 'anna-guide', id: 'g1' }] })
+      }
+      return Promise.resolve({ docs: [] })
+    })
+    mockValidateCSVRow.mockReturnValue({
+      valid: true,
+      data: {
+        slug: 'bad-tour',
+        guides_slugs: ['anna-guide', 'missing-1', 'missing-2'],
+        categories: [],
+        neighborhoods: [],
+      },
+    })
+    const result = await importToursFromCSV(validCSV)
+    expect(result.created).toBe(0)
+    expect(
+      result.errors.some(
+        (e) => e.message.includes('missing-1') && e.message.includes('missing-2'),
+      ),
+    ).toBe(true)
   })
 
   it('skips completely empty rows without counting as error or created', async () => {

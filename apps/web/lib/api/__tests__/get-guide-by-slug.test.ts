@@ -144,7 +144,7 @@ describe('getGuideBySlug', () => {
     expect(mockPayload.find).toHaveBeenNthCalledWith(2, expect.objectContaining({
       collection: 'tours',
       where: {
-        guide: { equals: '1' },
+        guides: { in: ['1'] },
         status: { equals: 'published' },
       },
     }))

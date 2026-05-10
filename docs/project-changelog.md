@@ -4,6 +4,24 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-10] — Multi-Guide Tours (Tours hasMany Guides) ✓
+
+**Type:** Schema Change / Feature
+**Scope:** Tours collection — convert `guide` (single, required) → `guides` (hasMany, min 1)
+
+- **CMS schema**: `tours.guide` (single relationship) renamed to `tours.guides` (hasMany, required, minRows: 1). Drag-to-reorder in admin.
+- **DB migration** (`20260510_215812_convert_tour_guide_to_hasmany.ts`): atomic backfill copies legacy `tours.guide_id` → `tours_rels` junction (path='guides') with sanity-check abort, then drops legacy column. Reversible `down()` (multi-guide tours collapse to first guide on rollback — documented data loss).
+- **Frontend**: `TourDetail.guide` → `guides: GuideSummary[]`. New `GuidesSection` component wraps a stack of `GuideCard`s with ICU-pluralized heading ("Your Guide" / "Your Guides") across SV/EN/DE.
+- **schema.org**: `provider` emits a single `Person` for one guide, an array of `Person` for multiple.
+- **Backend queries**: `getGuideBySlug` uses `where: { guides: { in: [id] } }`; `getGuides` raw SQL aggregation rewritten to join `tours_rels` with `tours.status='published'` (`COUNT(DISTINCT t.id)`).
+- **CSV/Excel pipelines**: column renamed `guide` → `guides`, `relationship` → `relationshipMany`. Zod schema preprocessor accepts semicolon-separated string OR pre-split array; trims whitespace; rejects empty. Missing-slug errors list every unresolved slug.
+- **Data migrated**: 10 existing tours, 10 junction rows, 7 distinct guides (multi-tour guides preserved).
+
+**Plan:** `plans/260510-2342-multi-guide-tours/`
+**Migration:** `apps/web/migrations/20260510_215812_convert_tour_guide_to_hasmany.ts`
+
+---
+
 ## [2026-05-03] — Guides Data v3 Update (3 New Guides + Photo Web-Optimization) ✓
 
 **Type:** Data Import / Content

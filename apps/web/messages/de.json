@@ -632,8 +632,8 @@
       "notIncluded": "Nicht enthalten",
       "whatToBring": "Was Sie mitbringen sollten"
     },
-    "guide": {
-      "title": "Ihr Reiseführer",
+    "guides": {
+      "title": "{count, plural, one {Ihr Reiseführer} other {Ihre Reiseführer}}",
       "speaks": "Spricht"
     },
     "readMore": "Mehr lesen",

@@ -8,6 +8,7 @@ import * as migration_20260501_083209_add_tours_cities_relation from './20260501
 import * as migration_20260502_181007_add_listing_query_indexes from './20260502_181007_add_listing_query_indexes';
 import * as migration_20260503_131600_enable_rls_public_tables from './20260503_131600_enable_rls_public_tables';
 import * as migration_20260503_153500_postgis_security_hardening from './20260503_153500_postgis_security_hardening';
+import * as migration_20260510_215812_convert_tour_guide_to_hasmany from './20260510_215812_convert_tour_guide_to_hasmany';
 
 export const migrations = [
   {
@@ -43,7 +44,7 @@ export const migrations = [
   {
     up: migration_20260501_083209_add_tours_cities_relation.up,
     down: migration_20260501_083209_add_tours_cities_relation.down,
-    name: '20260501_083209_add_tours_cities_relation'
+    name: '20260501_083209_add_tours_cities_relation',
   },
   {
     up: migration_20260502_181007_add_listing_query_indexes.up,
@@ -59,5 +60,10 @@ export const migrations = [
     up: migration_20260503_153500_postgis_security_hardening.up,
     down: migration_20260503_153500_postgis_security_hardening.down,
     name: '20260503_153500_postgis_security_hardening',
+  },
+  {
+    up: migration_20260510_215812_convert_tour_guide_to_hasmany.up,
+    down: migration_20260510_215812_convert_tour_guide_to_hasmany.down,
+    name: '20260510_215812_convert_tour_guide_to_hasmany'
   },
 ];

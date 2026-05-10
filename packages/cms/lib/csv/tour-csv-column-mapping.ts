@@ -93,7 +93,7 @@ export const TOUR_CSV_COLUMNS: CSVColumnDefinition[] = [
   { csvColumn: 'accessibility_serviceAnimalsAllowed', tourPath: 'accessibility.serviceAnimalsAllowed', type: 'boolean', label: 'Service Animals Allowed?' },
 
   // ===== Relationships =====
-  { csvColumn: 'guide', tourPath: 'guide', type: 'relationship', label: 'Guide (slug)' },
+  { csvColumn: 'guides', tourPath: 'guides', type: 'relationshipMany', label: 'Guides (slugs)' },
   { csvColumn: 'categories', tourPath: 'categories', type: 'relationshipMany', label: 'Categories (slugs)' },
   { csvColumn: 'neighborhoods', tourPath: 'neighborhoods', type: 'relationshipMany', label: 'Neighborhoods (slugs)' },
   { csvColumn: 'images', tourPath: 'images', type: 'array', arrayItemField: 'image', label: 'Images (URLs)' },
@@ -391,7 +391,7 @@ import { markdownToLexical } from './tour-csv-markdown-to-lexical-converter'
 import type { TourCSVRow } from './tour-csv-schema-validation'
 
 export interface CSVImportRelationships {
-  guideId: string | number
+  guideIds: (string | number)[]
   categoryIds: (string | number)[]
   neighborhoodIds: (string | number)[]
 }
@@ -516,7 +516,7 @@ export function csvRowToTourData(
       visualAssistance: row.accessibility_visualAssistance || false,
       serviceAnimalsAllowed: row.accessibility_serviceAnimalsAllowed || false,
     },
-    guide: relationships.guideId,
+    guides: relationships.guideIds,
     categories: relationships.categoryIds,
     neighborhoods: relationships.neighborhoodIds,
     bokunExperienceId: row.bokunExperienceId || null,
