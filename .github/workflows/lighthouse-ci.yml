@@ -1,8 +1,10 @@
 name: Lighthouse CI
 
+# PR-only: Vercel auto-creates a Preview deployment for every PR. Auditing
+# that URL avoids needing local DATABASE_URL/seed data. Master-push deploys
+# go to Vercel Production, which is configured separately and not audited
+# here (Lighthouse on PRs catches regressions before merge).
 on:
-  push:
-    branches: [master, main, staging]
   pull_request:
     branches: [master, main, staging]
 
@@ -18,14 +20,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Vercel auto-deploys every commit/PR. Wait for that deployment instead
-      # of building+migrating locally — avoids needing DATABASE_URL secrets
-      # (which Dependabot PRs cannot access) and seed data for live tour pages.
-      - name: Wait for Vercel deployment
+      - name: Wait for Vercel Preview deployment
         id: vercel
         uses: patrickedqvist/wait-for-vercel-preview@v1.3.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          environment: Preview
           max_timeout: 600
           check_interval: 10
 
