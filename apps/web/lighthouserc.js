@@ -1,27 +1,37 @@
 /**
  * Lighthouse CI configuration for automated performance assertions.
- * Runs against local production build to validate Core Web Vitals.
+ * Validates Core Web Vitals against either a remote deployment or a local build.
  *
- * Usage: npx @lhci/cli autorun
- * Requires: npm run build && npm run start (or startServerCommand below)
+ * CI usage (audits remote Vercel deployment):
+ *   LHCI_BASE_URL=https://your-deployment.vercel.app npx @lhci/cli autorun
+ *
+ * Local usage (builds + serves locally):
+ *   npm run build && npx @lhci/cli autorun
  */
+
+const baseUrl = process.env.LHCI_BASE_URL
+const isRemote = Boolean(baseUrl)
+const targetUrl = baseUrl || 'http://localhost:3000'
 
 module.exports = {
   ci: {
     collect: {
-      // Start production server automatically
-      startServerCommand: 'npm run start',
-      startServerReadyPattern: 'Ready',
-      startServerReadyTimeout: 30000,
+      // Only spin up a local server when no remote URL was provided
+      ...(isRemote
+        ? {}
+        : {
+            startServerCommand: 'npm run start',
+            startServerReadyPattern: 'Ready',
+            startServerReadyTimeout: 30000,
+          }),
       url: [
-        'http://localhost:3000/en',           // Homepage
-        'http://localhost:3000/en/tours',      // Tour catalog
-        'http://localhost:3000/en/tours/gamla-stan-walking', // Tour detail
+        `${targetUrl}/en`,                              // Homepage
+        `${targetUrl}/en/tours`,                         // Tour catalog
+        `${targetUrl}/en/tours/gamla-stan-walking`,      // Tour detail
       ],
       numberOfRuns: 3,
       settings: {
         // Use mobile simulation (Lighthouse default) for realistic CWV testing
-        // Desktop can be tested separately if needed
       },
     },
     assert: {
@@ -41,7 +51,7 @@ module.exports = {
       },
     },
     upload: {
-      // Store results locally (use 'lhci' server for team dashboards)
+      // Store results in LHCI's temporary public storage (no auth required)
       target: 'temporary-public-storage',
     },
   },

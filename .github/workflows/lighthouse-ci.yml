@@ -10,51 +10,36 @@ jobs:
   lighthouse:
     name: Lighthouse Performance Audit
     runs-on: ubuntu-latest
-    environment: Production
-    defaults:
-      run:
-        working-directory: apps/web
-    env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
-      NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
-      NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_URL }}
-      BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
+    permissions:
+      pull-requests: read
+      statuses: read
+      deployments: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # Vercel auto-deploys every commit/PR. Wait for that deployment instead
+      # of building+migrating locally — avoids needing DATABASE_URL secrets
+      # (which Dependabot PRs cannot access) and seed data for live tour pages.
+      - name: Wait for Vercel deployment
+        id: vercel
+        uses: patrickedqvist/wait-for-vercel-preview@v1.3.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 600
+          check_interval: 10
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
 
-      # Fresh install resolves correct platform-specific native bindings.
-      # npm ci with a Windows-generated lockfile fails to install Linux
-      # optional deps (@next/swc, @parcel/watcher) due to npm workspace bug.
-      - name: Cache Next.js build
-        uses: actions/cache@v4
-        with:
-          path: apps/web/.next/cache
-          key: nextjs-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('apps/web/**/*.ts', 'apps/web/**/*.tsx') }}
-          restore-keys: |
-            nextjs-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-
-            nextjs-${{ runner.os }}-
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.14.x
 
-      - name: Install dependencies
-        run: |
-          rm -f package-lock.json
-          npm install
-        working-directory: .
-
-      - name: Build
-        run: npm run build
-
-      - name: Run Lighthouse CI
-        run: |
-          npm install -g @lhci/cli@0.14.x
-          lhci autorun
+      - name: Run Lighthouse against deployment
+        working-directory: apps/web
         env:
+          LHCI_BASE_URL: ${{ steps.vercel.outputs.url }}
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        run: lhci autorun
