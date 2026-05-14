@@ -99,6 +99,110 @@ interface SyncTourOutput {
   error?: string
 }
 
+/**
+ * Core sync logic, factored out so it can run BOTH inside Payload Jobs Queue
+ * (with retries / backoff via the TaskConfig wrapper) AND directly from the
+ * manual admin endpoint without depending on the payload_jobs table existing.
+ *
+ * Returns the same shape as the task `output`. Throws on transient errors
+ * (so the task wrapper can re-raise to Payload for retry); the manual caller
+ * should catch and surface as 500.
+ *
+ * @see plans/260514-1437-bokun-integration/phase-05-payload-jobs-task-and-after-change-hook.md
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function runBokunSyncForTour(
+  payload: any,
+  tourId: number | string
+): Promise<SyncTourOutput> {
+  const tour = (await payload.findByID({
+    collection: 'tours',
+    id: tourId,
+    depth: 2,
+    locale: 'all',
+  })) as unknown as
+    | (TourSource & {
+        id: number | string
+        bokunExperienceId?: string | null
+        bokunSyncStatus?: 'pending' | 'synced' | 'failed' | 'disabled' | null
+      })
+    | null
+
+  // Tour deleted between enqueue and execution — bail without retrying.
+  if (!tour) {
+    return { action: 'skipped', error: 'Tour not found (deleted?)' }
+  }
+
+  if (tour.bokunSyncStatus === 'disabled') {
+    return { action: 'skipped' }
+  }
+
+  try {
+    const bokunPayload = tourToBokunExperiencePayload(tour)
+    const client = getBokunClient()
+
+    let experienceId = tour.bokunExperienceId ?? undefined
+    let action: 'create' | 'update'
+
+    if (experienceId) {
+      await client.updateExperience(experienceId, bokunPayload)
+      action = 'update'
+    } else {
+      const created = await client.createExperience(bokunPayload)
+      experienceId = created.id ?? created.experienceId
+      action = 'create'
+      if (!experienceId) {
+        // Bokun returned 2xx but no id — treat as permanent (4xx-class) so we don't
+        // pointlessly retry; surface the failure in the admin UI for human follow-up.
+        throw new BokunError(
+          'Bokun create returned no experience id',
+          422,
+          'NO_ID_IN_RESPONSE'
+        )
+      }
+    }
+
+    // Cast `data` because the generated Tour type doesn't yet include the new
+    // bokunSyncStatus / bokunLastSyncedAt / bokunLastError fields until Payload
+    // regenerates payload-types.ts on next dev-server boot (additive schema change).
+    await payload.update({
+      collection: 'tours',
+      id: tour.id,
+      data: {
+        bokunExperienceId: experienceId,
+        bokunSyncStatus: 'synced',
+        bokunLastSyncedAt: new Date().toISOString(),
+        bokunLastError: null,
+      } as Record<string, unknown>,
+      context: { skipBokunSync: true },
+    })
+
+    return { experienceId, action }
+  } catch (err) {
+    const message = sanitizeBokunError(err)
+    const permanent = isPermanentClientError(err)
+    const gone = isExperienceGone(err)
+
+    await payload.update({
+      collection: 'tours',
+      id: tour.id,
+      data: {
+        bokunSyncStatus: permanent ? 'failed' : tour.bokunSyncStatus ?? 'pending',
+        bokunLastError: message,
+        // 410 Gone → wipe the stale id so the NEXT sync re-creates the Experience.
+        ...(gone ? { bokunExperienceId: null } : {}),
+      } as Record<string, unknown>,
+      context: { skipBokunSync: true },
+    })
+
+    if (permanent) {
+      // Don't throw — caller surfaces error from output instead of treating as retry.
+      return { error: message }
+    }
+    throw err // transient (408/425/429/5xx) or network → caller decides retry
+  }
+}
+
 export const syncTourToBokunTask: TaskConfig<{
   input: SyncTourInput
   output: SyncTourOutput
@@ -110,94 +214,7 @@ export const syncTourToBokunTask: TaskConfig<{
   },
   inputSchema: [{ name: 'tourId', type: 'text', required: true }],
   handler: async ({ input, req }) => {
-    const { payload } = req
-    const tourId = input.tourId
-
-    const tour = (await payload.findByID({
-      collection: 'tours',
-      id: tourId,
-      depth: 2,
-      locale: 'all',
-    })) as unknown as
-      | (TourSource & {
-          id: number | string
-          bokunExperienceId?: string | null
-          bokunSyncStatus?: 'pending' | 'synced' | 'failed' | 'disabled' | null
-        })
-      | null
-
-    // Tour deleted between enqueue and execution — bail without retrying.
-    if (!tour) {
-      return { output: { action: 'skipped', error: 'Tour not found (deleted?)' } }
-    }
-
-    if (tour.bokunSyncStatus === 'disabled') {
-      return { output: { action: 'skipped' } }
-    }
-
-    try {
-      const bokunPayload = tourToBokunExperiencePayload(tour)
-      const client = getBokunClient()
-
-      let experienceId = tour.bokunExperienceId ?? undefined
-      let action: 'create' | 'update'
-
-      if (experienceId) {
-        await client.updateExperience(experienceId, bokunPayload)
-        action = 'update'
-      } else {
-        const created = await client.createExperience(bokunPayload)
-        experienceId = created.id ?? created.experienceId
-        action = 'create'
-        if (!experienceId) {
-          // Bokun returned 2xx but no id — treat as permanent (4xx-class) so we don't
-          // pointlessly retry; surface the failure in the admin UI for human follow-up.
-          throw new BokunError(
-            'Bokun create returned no experience id',
-            422,
-            'NO_ID_IN_RESPONSE'
-          )
-        }
-      }
-
-      // Cast `data` because the generated Tour type doesn't yet include the new
-      // bokunSyncStatus / bokunLastSyncedAt / bokunLastError fields until Payload
-      // regenerates payload-types.ts on next dev-server boot (additive schema change).
-      await payload.update({
-        collection: 'tours',
-        id: tour.id,
-        data: {
-          bokunExperienceId: experienceId,
-          bokunSyncStatus: 'synced',
-          bokunLastSyncedAt: new Date().toISOString(),
-          bokunLastError: null,
-        } as Record<string, unknown>,
-        context: { skipBokunSync: true },
-      })
-
-      return { output: { experienceId, action } }
-    } catch (err) {
-      const message = sanitizeBokunError(err)
-      const permanent = isPermanentClientError(err)
-      const gone = isExperienceGone(err)
-
-      await payload.update({
-        collection: 'tours',
-        id: tour.id,
-        data: {
-          bokunSyncStatus: permanent ? 'failed' : tour.bokunSyncStatus ?? 'pending',
-          bokunLastError: message,
-          // 410 Gone → wipe the stale id so the NEXT sync re-creates the Experience.
-          ...(gone ? { bokunExperienceId: null } : {}),
-        } as Record<string, unknown>,
-        context: { skipBokunSync: true },
-      })
-
-      if (permanent) {
-        // Don't throw — Payload would retry. Return the error in the output instead.
-        return { output: { error: message } }
-      }
-      throw err // transient (408/425/429/5xx) or network → Payload retries with exponential backoff
-    }
+    const output = await runBokunSyncForTour(req.payload, input.tourId)
+    return { output }
   },
 }

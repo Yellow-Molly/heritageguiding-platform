@@ -16,6 +16,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { headers } from 'next/headers'
 import { getPayload } from 'payload'
 import config from '@cms/payload.config'
+import { runBokunSyncForTour } from '@cms/lib/bokun-sync-job'
 
 async function getAdminUser() {
   try {
@@ -81,27 +82,19 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    // Cast: generated payload-types.ts has `jobs.tasks: unknown` until the dev server
-    // boots once with the syncTourToBokun task registered and regenerates types.
-    const job = (await session.payload.jobs.queue({
-      task: 'syncTourToBokun',
-      input: { tourId },
-    } as Parameters<typeof session.payload.jobs.queue>[0])) as { id?: string | number }
-
-    // Drain the queue inline so the manual button gives immediate feedback.
-    // Payload Jobs `autoRun` cron is not configured (Vercel serverless cannot
-    // host an in-process scheduler), and we have no Vercel Cron hitting a
-    // runner endpoint yet — without this call, the just-queued job would sit
-    // indefinitely. Synchronous run is safe: the sync task is short
-    // (<10s typically) and well under the function timeout.
-    await session.payload.jobs.run({ queue: 'default', limit: 5 })
-
-    return NextResponse.json({ ok: true, jobId: job?.id ?? null })
+    // Call the sync logic directly rather than via payload.jobs.queue + run.
+    // The `payload_jobs` table is not yet provisioned on this DB (no migration
+    // exists for it), so going through the Jobs Queue would fail with
+    // `relation "payload_jobs" does not exist`. Direct invocation also gives
+    // immediate feedback to the operator clicking "Sync to Bokun now"; retries
+    // are unnecessary for a manual trigger (user can click again on failure).
+    const output = await runBokunSyncForTour(session.payload, tourId)
+    return NextResponse.json({ ok: true, ...output })
   } catch (err) {
     session.payload.logger.error(
       { err, tourId },
-      '[admin/bokun/sync-tour] failed to enqueue or run job'
+      '[admin/bokun/sync-tour] sync failed with transient error'
     )
-    return NextResponse.json({ error: 'Failed to enqueue sync job' }, { status: 500 })
+    return NextResponse.json({ error: 'Sync failed (transient)' }, { status: 500 })
   }
 }
