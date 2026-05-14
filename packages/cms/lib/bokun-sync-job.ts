@@ -49,6 +49,17 @@ export function sanitizeBokunError(err: unknown): string {
   // and is long enough to skip ordinary URL paths and small hex digests.
   message = message.replace(/[A-Za-z0-9+/=_-]{40,}/g, '[REDACTED]')
 
+  // Always prepend HTTP status + errorCode for BokunError. Bokun sometimes
+  // returns 4xx with no message body, leaving sanitizeBokunError to produce an
+  // empty string that's useless in the admin UI; this guarantees the operator
+  // sees at least the status code for diagnosis.
+  if (err instanceof BokunError) {
+    const trimmed = message.trim()
+    const codeLabel = err.errorCode ? ` (${err.errorCode})` : ''
+    const prefix = `Bokun HTTP ${err.status}${codeLabel}`
+    message = trimmed ? `${prefix}: ${trimmed}` : prefix
+  }
+
   if (message.length > MAX_ERROR_LENGTH) {
     message = `${message.slice(0, MAX_ERROR_LENGTH)}…`
   }
