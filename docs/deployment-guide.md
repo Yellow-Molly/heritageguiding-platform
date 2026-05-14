@@ -139,9 +139,17 @@ PAYLOAD_SECRET=your-secret-key-minimum-32-characters
 PAYLOAD_CONFIG_PATH=packages/cms/payload.config.ts
 
 # Bokun Integration (Phase 08.1-08.2: inbound + outbound sync)
-BOKUN_ACCESS_KEY=your-bokun-access-key
+# REST API credentials (Bokun extranet → Settings → Connections → API keys)
+BOKUN_API_KEY=your-bokun-access-key
 BOKUN_SECRET_KEY=your-bokun-secret-key
-BOKUN_ENVIRONMENT=test
+# Public booking channel UUID (Settings → Sales settings → Booking channels)
+NEXT_PUBLIC_BOKUN_UUID=your-booking-channel-uuid
+# Webhook signature (Bokun PLUS plan or higher — leave blank on START)
+BOKUN_WEBHOOK_SECRET=
+# Base URL switches automatically: NODE_ENV=production → api.bokun.io,
+# otherwise api.bokuntest.com. On Vercel both Preview and Production have
+# NODE_ENV=production, so staging hits the live Bokun account — mitigated
+# by canary tour pattern (see plans/260514-1437-bokun-integration/phase-07).
 
 # OpenAI (Semantic Search)
 OPENAI_API_KEY=sk-your-openai-key
@@ -181,7 +189,9 @@ vercel env add PAYLOAD_SECRET production
 **Never Commit:**
 - DATABASE_URL
 - PAYLOAD_SECRET
+- BOKUN_API_KEY
 - BOKUN_SECRET_KEY
+- BOKUN_WEBHOOK_SECRET
 - OPENAI_API_KEY
 - GMAIL_APP_PASSWORD
 

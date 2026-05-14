@@ -4,6 +4,29 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-14] — Staging Deploy Stabilization (Bokun rollout) ✓
+
+**Type:** Build / Migration / Runtime fixes
+**Scope:** Unblock Vercel staging deploy that started failing after Bokun outbound sync (Phase 08.2) was merged on top of the hasMany-guides change
+
+Four related defects surfaced during the first attempt to ship Phases 04–06 + hasMany guides to staging on Node 24. Each was a real regression that would have hit production on the next deploy.
+
+- **`76df5f0` + `4b32fb9` — apps/web ESM declaration.** `packages/cms` (`"type": "module"`) imported from `apps/web/lib/bokun/`, but `apps/web/package.json` had no `"type"` field → Node 24 parsed the `.ts` files as CommonJS, hiding the `BokunError` named export across the boundary. `payload migrate` failed with `does not provide an export named 'BokunError'`. Local Node 22 re-parsed as ESM on warning; Node 24 does not. **Fix:** added `"type": "module"` to `apps/web/package.json`; renamed `lighthouserc.js` → `lighthouserc.cjs` (the only CommonJS config in apps/web; `lhci autorun` auto-discovers `.cjs`).
+- **`126dd37` — idempotent `convert_tour_guide_to_hasmany` migration.** Migration `up()` ran a single transaction with non-idempotent DDL. Staging DB had a `guides_status_idx` index pre-applied by Payload dev-mode push, so `CREATE INDEX` aborted the whole transaction and the deploy was permanently stuck. **Fix:** every step rewritten as `IF EXISTS` / `IF NOT EXISTS` / `DO/EXCEPTION duplicate_object`; backfill `INSERT` guarded with `information_schema` column check + `WHERE NOT EXISTS` so reruns don't duplicate junction rows. End state is identical on fresh / partially-pushed / fully-migrated DBs.
+- **`d24baec` — Bokun sync-fields migration relocation.** Phase 04 wrote the migration to `packages/cms/migrations/20260514-add-bokun-sync-fields.ts` but Payload reads only from `apps/web/migrations/` (registered via `index.ts`). Build succeeded with the migration silently skipped → runtime queries 500 with `column tours.bokun_sync_status does not exist`. **Fix:** moved to `apps/web/migrations/20260514_174200_add_bokun_sync_fields.ts`, registered in `index.ts`. Migration body was already idempotent.
+- **`520d284` — `getTourBySlug` cache key bump.** Vercel Data Cache held entries shaped `{ guide: ... }` from a previous deploy. The hasMany change made the mapper return `{ guides: [...] }`, but `unstable_cache(['tour-by-slug'], { tags: ['tours'] })` has no TTL and no tour save had fired `revalidateTag('tours')` since the deploy. Mixed 500s: cache hits crashed on `tour.guides.length`, cache misses succeeded. **Fix:** appended `'v2-hasmany-guides'` to the `keyParts` array, forcing fresh fetches on the next read.
+
+**Patterns codified in `docs/code-standards.md`:**
+- unstable_cache shape versioning (bump `keyParts` when output shape changes)
+- Payload migration standards (location, registration, idempotent DDL, Node 24 strip-types compatibility)
+- ESM workspace rules (`"type": "module"` required on `apps/web`; `.cjs` for CJS configs)
+
+**Bokun env vars corrected in `docs/deployment-guide.md`** (`BOKUN_ACCESS_KEY` → `BOKUN_API_KEY`, added `NEXT_PUBLIC_BOKUN_UUID`, noted `BOKUN_WEBHOOK_SECRET` requires PLUS plan).
+
+**Outstanding (not blocking):** `packages/cms/migrations/20260203-add-pgvector-extension.ts` is also orphaned (not registered). Pgvector extension is presumably installed manually; worth a separate audit if semantic search relies on it.
+
+---
+
 ## [2026-05-14] — Bokun Outbound Sync v1 (Phase 08.2) ✓
 
 **Type:** Feature / Integration

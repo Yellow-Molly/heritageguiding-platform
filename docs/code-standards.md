@@ -622,6 +622,112 @@ return (
 )
 ```
 
+## unstable_cache Shape Versioning (2026-05-14)
+
+### Why
+`unstable_cache` entries persist in Vercel's Data Cache across deploys until either a TTL expires or `revalidateTag()` is fired. When a cached function's **output shape** changes between deploys, old-shape entries survive and crash the new code on read (e.g. `tour.guides.length` on a cached `{ guide: ... }` from before the hasMany migration).
+
+### Rule
+**Bump the `keyParts` array whenever the cached function's return shape changes**:
+
+```typescript
+// BEFORE shape change
+export const getTourBySlug = unstable_cache(
+  fetchTourBySlug,
+  ['tour-by-slug'],
+  { tags: ['tours'] }
+)
+
+// AFTER shape change — append a version suffix
+export const getTourBySlug = unstable_cache(
+  fetchTourBySlug,
+  ['tour-by-slug', 'v2-hasmany-guides'],
+  { tags: ['tours'] }
+)
+```
+
+The new keyParts make all old-key entries unreachable; first read after deploy fetches fresh. Tag-based revalidation still works for editorial updates — this is purely for deploy-time shape changes.
+
+### Applies to
+Any cached mapper output (tour, guide, category, listing pages). Type-only changes (renaming a field in a TS interface without changing the runtime value) do not require a bump.
+
+## Payload Migration Standards (2026-05-14)
+
+### Location
+**All Payload migrations live in `apps/web/migrations/`.** Payload's CLI reads from that single directory (`Reading migration files from /vercel/path0/apps/web/migrations`). Files placed elsewhere — e.g. `packages/cms/migrations/` — are silently ignored.
+
+### Registration
+Every migration must be imported and listed in `apps/web/migrations/index.ts`:
+
+```typescript
+import * as migration_20260514_174200_add_bokun_sync_fields from './20260514_174200_add_bokun_sync_fields'
+
+export const migrations = [
+  // ...earlier entries
+  {
+    up: migration_20260514_174200_add_bokun_sync_fields.up,
+    down: migration_20260514_174200_add_bokun_sync_fields.down,
+    name: '20260514_174200_add_bokun_sync_fields',
+  },
+]
+```
+
+### Filename convention
+`YYYYMMDD_HHMMSS_descriptive_name.ts` — underscore separators, matches existing entries.
+
+### Idempotent DDL (required)
+Migrations run on environments where Payload **dev-mode** may have already pushed some schema. The entire `up()` runs in one transaction; any single conflict rolls back everything and the deploy is stuck forever. Use idempotent forms:
+
+| Operation | Required form |
+|---|---|
+| ADD COLUMN | `ADD COLUMN IF NOT EXISTS` |
+| CREATE INDEX | `CREATE INDEX IF NOT EXISTS` |
+| ADD CONSTRAINT | wrap in `DO $$ BEGIN ... EXCEPTION WHEN duplicate_object THEN NULL; END $$` |
+| DROP COLUMN | `DROP COLUMN IF EXISTS` |
+| DROP CONSTRAINT | `DROP CONSTRAINT IF EXISTS` |
+| DROP INDEX | `DROP INDEX IF EXISTS` |
+| INSERT backfill | guard with `information_schema` check + `WHERE NOT EXISTS` |
+
+End state must be the same whether the DB is fresh, partially dev-pushed, or fully migrated.
+
+### Avoid TypeScript parameter properties in Payload-imported code
+Node 24 (Vercel default) loads `.ts` files via `--experimental-strip-types`, which only erases types. Constructs that require **transformation** silently produce malformed modules:
+
+```typescript
+// BAD — Node strip-types can't lower this; class loses its exports
+export class BokunError extends Error {
+  constructor(message: string, public status: number, public errorCode?: string) {
+    super(message)
+  }
+}
+
+// GOOD — declare fields, assign in body
+export class BokunError extends Error {
+  status: number
+  errorCode?: string
+  constructor(message: string, status: number, errorCode?: string) {
+    super(message)
+    this.status = status
+    this.errorCode = errorCode
+  }
+}
+```
+
+Applies to any module imported by Payload (`payload.config.ts`, collections, hooks, jobs).
+
+## ESM Workspace Rules (2026-05-14)
+
+### Package-level `"type"` fields
+- `apps/web/package.json` → `"type": "module"` (ESM)
+- `packages/cms/package.json` → `"type": "module"` (ESM)
+
+Required because `packages/cms` imports from `apps/web/lib/bokun/`. If either workspace is left CommonJS, the .ts files in it are parsed as CJS by Node 24 and named ESM imports fail with `does not provide an export named X`.
+
+### CommonJS configs
+Any plain `.js` config file in `apps/web` that uses `module.exports` (e.g. `lighthouserc.cjs`) **must use the `.cjs` extension**. Auto-discoverable tools like `lhci autorun` find `.cjs` configs natively.
+
+`.mjs` and `.ts` configs work as-is.
+
 ## Cache Revalidation Pattern (Phase 16)
 
 ### CMS Hook: revalidate-cache-tags-hook
