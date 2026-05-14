@@ -21,14 +21,17 @@ import type {
   BokunExperienceUpdatePayload,
 } from '../bokun-types'
 
-// Reusable mock Response factory
+// Reusable mock Response factory.
+// Provides both json() and text() — the client reads non-2xx bodies as text first.
 function mockResponse(body: unknown, status = 200, headers: Record<string, string> = {}) {
+  const bodyText = typeof body === 'string' ? body : JSON.stringify(body)
   return {
     ok: status >= 200 && status < 300,
     status,
     statusText: status === 200 ? 'OK' : 'Error',
     headers: new Headers(headers),
     json: vi.fn().mockResolvedValue(body),
+    text: vi.fn().mockResolvedValue(bodyText),
   }
 }
 
@@ -75,12 +78,21 @@ describe('BokunApiClient.createExperience', () => {
     expect(init.method).toBe('POST')
   })
 
-  it('serializes payload as JSON body', async () => {
+  it('serializes payload to Bokun wire shape (flat strings, not localized arrays)', async () => {
+    // 2026-05-15 regression: Bokun returned 400 (Jackson MismatchedInputException)
+    // when title was sent as an array. The client must flatten via the serializer.
     mockFetch.mockResolvedValueOnce(mockResponse({ id: 'exp_123' }, 201))
-    const payload = buildPayload()
-    await client.createExperience(payload)
+    await client.createExperience(buildPayload())
     const [, init] = mockFetch.mock.calls[0]
-    expect(init.body).toBe(JSON.stringify(payload))
+    const parsed = JSON.parse(init.body)
+    expect(parsed.title).toBe('Test Tour')
+    expect(parsed.shortDescription).toBe('Brief summary')
+    expect(parsed.description).toBe('<p>Test</p>')
+    // Fields with no Bokun equivalent must be omitted in v1
+    expect(parsed).not.toHaveProperty('summary')
+    expect(parsed).not.toHaveProperty('rates')
+    expect(parsed).not.toHaveProperty('meetingPoint')
+    expect(parsed).not.toHaveProperty('durationISO')
   })
 
   it('sends HMAC signature headers', async () => {
@@ -107,14 +119,15 @@ describe('BokunApiClient.createExperience', () => {
     expect(mockFetch).toHaveBeenCalledTimes(1) // no retry on 4xx
   })
 
-  it('preserves monetary values as strings in payload', async () => {
+  it('omits rates payload until DTO mapping is wired (v1 sends text only)', async () => {
+    // v1 wire payload only covers title/description/etc. Rates require an
+    // ExperiencePricingDto mapping that is not yet implemented; meanwhile the
+    // experience pricing remains whatever was set up manually in Bokun.
     mockFetch.mockResolvedValueOnce(mockResponse({ id: 'x' }, 201))
-    const payload = buildPayload()
-    await client.createExperience(payload)
+    await client.createExperience(buildPayload())
     const [, init] = mockFetch.mock.calls[0]
-    expect(init.body).toContain('"pricePerCategoryUnit":"199.00"')
-    // Verify the value was not coerced to a number anywhere in transit
-    expect(init.body).not.toContain('"pricePerCategoryUnit":199')
+    expect(init.body).not.toContain('pricePerCategoryUnit')
+    expect(init.body).not.toContain('rates')
   })
 
   it('retries on 429 then succeeds (reuses fetch backoff)', async () => {
@@ -159,14 +172,15 @@ describe('BokunApiClient.updateExperience', () => {
     expect(url).toContain('/restapi/v2.0/experience/id%20with%2Fslash/components')
   })
 
-  it('passes partial payload through unchanged', async () => {
+  it('translates partial payload through the wire serializer', async () => {
     mockFetch.mockResolvedValueOnce(mockResponse({}, 204))
     const partial: BokunExperienceUpdatePayload = {
       summary: [{ locale: 'sv', value: 'Uppdatering' }],
     }
     await client.updateExperience('exp_42', partial)
     const [, init] = mockFetch.mock.calls[0]
-    expect(init.body).toBe(JSON.stringify(partial))
+    // summary → shortDescription, sv used as fallback since en is absent
+    expect(JSON.parse(init.body)).toEqual({ shortDescription: 'Uppdatering' })
   })
 
   it('propagates BokunError on 404 (id not found)', async () => {

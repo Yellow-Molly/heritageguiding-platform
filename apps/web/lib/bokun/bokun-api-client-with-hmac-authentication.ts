@@ -12,6 +12,7 @@ import type {
   BokunExperienceUpdatePayload,
   BokunExperienceUpdateResponse,
 } from './bokun-types'
+import { serializeBokunExperiencePayload } from './serialize-bokun-wire-payload'
 
 // Bokun API base URLs
 const BOKUN_TEST_URL = 'https://api.bokuntest.com'
@@ -263,9 +264,13 @@ export class BokunApiClient {
   async createExperience(
     payload: BokunExperienceCreatePayload
   ): Promise<BokunExperienceCreateResponse> {
+    // Serialize to Bokun's ExperienceComponentsDto wire shape (flat strings, not
+    // localized arrays). Internal payload retains the rich localized form for
+    // future translation flows; this is the boundary where it gets flattened.
+    const wireBody = serializeBokunExperiencePayload(payload)
     return this.fetch<BokunExperienceCreateResponse>('/restapi/v2.0/experience', {
       method: 'POST',
-      body: JSON.stringify(payload),
+      body: JSON.stringify(wireBody),
     })
   }
 
@@ -284,11 +289,12 @@ export class BokunApiClient {
     payload: BokunExperienceUpdatePayload
   ): Promise<BokunExperienceUpdateResponse> {
     const safeId = encodeURIComponent(experienceId)
+    const wireBody = serializeBokunExperiencePayload(payload)
     return this.fetch<BokunExperienceUpdateResponse>(
       `/restapi/v2.0/experience/${safeId}/components`,
       {
         method: 'PUT',
-        body: JSON.stringify(payload),
+        body: JSON.stringify(wireBody),
       }
     )
   }
