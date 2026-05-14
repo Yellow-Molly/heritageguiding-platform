@@ -5,6 +5,7 @@ import {
   generateTourEmbeddingOnSaveHook,
   createRevalidateTagsAfterChangeHook,
   createRevalidateTagsAfterDeleteHook,
+  syncTourToBokunAfterChangeHook,
 } from '../hooks'
 import {
   accessibilityFields,
@@ -51,6 +52,7 @@ export const Tours: CollectionConfig = {
     afterChange: [
       generateTourEmbeddingOnSaveHook,
       createRevalidateTagsAfterChangeHook(['tours']),
+      syncTourToBokunAfterChangeHook,
     ],
     afterDelete: [createRevalidateTagsAfterDeleteHook(['tours'])],
   },
@@ -169,6 +171,52 @@ export const Tours: CollectionConfig = {
       admin: {
         description: 'Bokun experience/activity ID for booking integration',
         position: 'sidebar',
+      },
+    },
+    {
+      name: 'bokunSyncStatus',
+      type: 'select',
+      defaultValue: 'pending',
+      index: true,
+      options: [
+        { label: 'Pending', value: 'pending' },
+        { label: 'Synced', value: 'synced' },
+        { label: 'Failed', value: 'failed' },
+        { label: 'Disabled', value: 'disabled' },
+      ],
+      admin: {
+        position: 'sidebar',
+        description: 'Bokun outbound sync state (auto-managed; set Disabled to opt-out)',
+      },
+    },
+    {
+      name: 'bokunLastSyncedAt',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+        date: { pickerAppearance: 'dayAndTime' },
+        readOnly: true,
+        description: 'Last successful Bokun sync timestamp',
+      },
+    },
+    {
+      name: 'bokunLastError',
+      type: 'textarea',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Last Bokun sync failure (cleared on success)',
+      },
+    },
+    {
+      name: 'bokunSyncPanel',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field:
+            '@cms/components/admin/tour-bokun-sync-panel#TourBokunSyncPanel',
+        },
       },
     },
     {

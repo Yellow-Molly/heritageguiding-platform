@@ -341,7 +341,7 @@ query {
 - `fetchRelatedTours()` - Get related tour recommendations
 - `fetchTourSchema()` - Generate JSON-LD schema
 
-**Bokun Integration (Phase 08.1 - In Progress):**
+**Bokun Integration (Phase 08.1 - Complete):**
 - `GET /api/bokun/availability` - Real-time availability with 60s caching (lib/bokun/bokun-availability-service-with-caching.ts)
 - `POST /api/bokun/webhook` - Webhook handler with HMAC-SHA256 signature verification (app/api/bokun/webhook/route.ts)
 
@@ -351,6 +351,16 @@ query {
 - Webhook signature verification using HMAC
 - Rate limit handling with exponential backoff (400 req/min)
 - Webhook event types: BOOKING_CREATED, BOOKING_CONFIRMED, PAYMENT_RECEIVED, etc.
+
+**Bokun Outbound Sync (Phase 08.2 - Complete):**
+- Automatic push: Tour create/update in Payload → enqueue `syncTourToBokun` Payload Job via `afterChange` hook
+- `POST /api/admin/bokun/sync-tour` - Manual retry endpoint (admin role, origin-CSRF checked)
+- Job flow: mapper (`tour-to-bokun-experience-mapper.ts`) → `createExperience` (no ID) or `updateExperience` (ID present) → client HMAC methods
+- Retry policy: exponential backoff (30s, 2m, 10m, 1h), 4 attempts total. Transient classification: 408/425/429/500/502/503/504 retry; 410 clears `bokunExperienceId` for re-create
+- Recursive guard: `context.skipBokunSync` flag on job write-back prevents hook re-trigger
+- Admin UI: sidebar fields `bokunSyncStatus` (pending|synced|failed|disabled), `bokunLastSyncedAt`, `bokunLastError`, plus custom panel with manual "Sync now" button
+- Mapping: title, description, highlights, pricing (per_person→Adult+Child; per_group→flat), duration, meeting point, inclusions/exclusions, group sizes, difficulty, accessibility. Lexical RTE → HTML via `lexical-to-bokun-html.ts`
+- Migration: `20260514-add-bokun-sync-fields.ts` (additive ALTER TABLE, no data loss)
 
 **Excel/CSV Import-Export (Phase 08.1):**
 - `POST /api/admin/import` - Upload Excel/CSV file

@@ -12,6 +12,32 @@ Living document tracking project phases, milestones, and progress toward MVP lau
 
 ---
 
+## Completed Phase: Phase 08.2 — Bokun Outbound Sync v1 🚀 COMPLETE
+
+**Date Started:** 2026-05-14
+**Date Completed:** 2026-05-14
+**Status:** Code-complete (Phases 01–06 done; canary validation pending)
+**Plan:** 260514-1437-bokun-integration/
+
+### Summary
+Automatic push: Tour create/update in Payload enqueues `syncTourToBokun` Payload Job via afterChange hook. Job runs pure mapper → calls createExperience (no ID) or updateExperience (ID present) on existing HMAC client. Retries with exponential backoff (30s/2m/10m/1h, 4 attempts), transient classification (408/425/429/500/502/503/504), 410 clears ID for re-create. Admin UI surfaces sync status + manual "Sync now" button. Reuses existing bokun-api-client-with-hmac-authentication.ts — added 2 methods, no fork.
+
+### Key Deliverables
+- **Client Extensions:** createExperience (POST) + updateExperience (PUT) methods on existing HMAC client
+- **Mapper:** tour-to-bokun-experience-mapper.ts (all 3 priceTypes, all locales sv/en/de)
+- **Job:** syncTourToBokun with retry policy (exponential backoff, transient whitelist, 410 recovery, recursive guard)
+- **Hook:** afterChange enqueues job; hook respects skipBokunSync context flag
+- **Admin UI:** bokunSyncStatus, bokunLastSyncedAt, bokunLastError sidebar fields + custom panel with manual sync button
+- **Endpoint:** POST /api/admin/bokun/sync-tour (admin role, origin-CSRF verified)
+- **Migration:** 20260514-add-bokun-sync-fields.ts (additive)
+- **HTML Conversion:** lexical-to-bokun-html.ts (RTE → Bokun HTML format)
+- **Tests:** 40+ covering mapper all branches, client methods, job logic, hook behavior
+
+### Outstanding
+- Phase 07 canary validation (requires prod Bokun credentials + test tour)
+
+---
+
 ## Completed Phase: Phase 19 — Instant Listing Filter Feedback 🚀 COMPLETE (measurement pending)
 
 **Date Started:** 2026-05-02

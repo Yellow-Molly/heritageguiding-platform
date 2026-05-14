@@ -257,13 +257,21 @@ app/
 - `lib/api/get-all-guides.ts` - All guides listing
 - Tests: 8 test files covering all functions
 
-**Bokun Integration (Phase 08.1):**
+**Bokun Integration (Phase 08.1-08.2):**
 - `lib/bokun/bokun-types.ts` - Type definitions
-- `lib/bokun/bokun-api-client-with-hmac-authentication.ts` - HMAC-SHA256 API client
+- `lib/bokun/bokun-api-client-with-hmac-authentication.ts` - HMAC-SHA256 API client (extended Phase 08.2 with createExperience/updateExperience)
 - `lib/bokun/bokun-availability-service-with-caching.ts` - 60s TTL caching
 - `lib/bokun/bokun-booking-service-and-widget-url-generator.ts` - Widget URL generation
 - `app/api/bokun/availability/route.ts` - GET availability endpoint
 - `app/api/bokun/webhook/route.ts` - POST webhook with signature verification
+- `app/api/admin/bokun/sync-tour/route.ts` - Manual sync trigger endpoint (admin only, origin-CSRF verified)
+- `lib/bokun/tour-to-bokun-experience-mapper.ts` - Pure transform: Tour → Bokun Experience payload (all 3 priceType branches, all locales)
+- `lib/bokun/lexical-to-bokun-html.ts` - RTE HTML converter (Lexical → Bokun API HTML format)
+- `packages/cms/hooks/sync-tour-to-bokun-hook.ts` - afterChange hook enqueues syncTourToBokun Payload Job
+- `packages/cms/jobs/sync-tour-to-bokun-job.ts` - Job task with exponential backoff retry (30s/2m/10m/1h, 4 attempts), transient classification, 410 recovery, recursive guard
+- `packages/cms/migrations/20260514-add-bokun-sync-fields.ts` - Add bokunSyncStatus, bokunLastSyncedAt, bokunLastError to Tours
+- `packages/cms/fields/tour-bokun-sync-panel.tsx` - Admin UI panel: status display, manual "Sync now" button, last error
+- Tests: 40+ tests covering mapper (all priceTypes + locales), client methods, job retry logic, hook behavior
 
 **AI/Semantic Search (Phase 08.1+):**
 - `lib/ai/openai-embeddings-service.ts` - OpenAI text-embedding-3-small (1536 dims)

@@ -243,3 +243,132 @@ export interface BokunWidgetConfig {
     backgroundColor?: string
   }
 }
+
+// ============================================================================
+// EXPERIENCE WRITE TYPES (outbound CMS → Bokun sync)
+// ============================================================================
+
+/**
+ * Bokun locale codes for Experience write payloads.
+ * Verified in Phase 01 findings against `https://api-docs.bokun.dev/rest-v2`.
+ * Bokun accepts ISO 639-1 two-letter codes (sv, en, de) for these markets.
+ */
+export type BokunExperienceLocale = 'sv' | 'en' | 'de'
+
+/**
+ * Localized string entry for Experience write payloads.
+ * Use one entry per non-empty translation; omit empty ones to keep payload clean.
+ */
+export interface BokunExperienceLocalizedString {
+  locale: BokunExperienceLocale
+  value: string
+}
+
+/**
+ * Pricing category within a rate plan (Adult, Child, Group, etc.).
+ * Bokun's pricing model: each rate has a `pricePerBooking` flag at the rate level.
+ *  - Per-person rate (`pricePerBooking: false`): use `pricePerCategoryUnit` (price per participant)
+ *  - Flat rate     (`pricePerBooking: true`):  use `flatPrice` for the whole booking
+ * Monetary values are strings to preserve precision per Bokun spec (never floats).
+ */
+export interface BokunExperiencePricingCategory {
+  /** Display title, e.g. "Adult", "Child", "Per group" */
+  title: string
+  /** Per-person price (used when parent rate has pricePerBooking=false). */
+  pricePerCategoryUnit?: string
+  /** Flat per-booking price (used when parent rate has pricePerBooking=true). */
+  flatPrice?: string
+  /** Minimum age inclusive (e.g. 13 for Adult). */
+  minAge?: number
+  /** Maximum age inclusive (e.g. 12 for Child). */
+  maxAge?: number
+}
+
+/**
+ * Rate plan grouping pricing categories. v1 emits a single "Standard" rate per Experience.
+ * `pricePerBooking` switches between per-person (false) and flat-rate (true) pricing.
+ */
+export interface BokunExperienceRate {
+  /** Display title for the rate plan, e.g. "Standard" */
+  title: string
+  /** ISO 4217 currency code */
+  currency: 'SEK' | 'EUR' | 'USD'
+  /**
+   * Whether the rate is priced per booking (true → flat) or per participant (false).
+   * Maps from CMS Tour.pricing.priceType: per_group → true, per_person/custom → false.
+   */
+  pricePerBooking: boolean
+  /** One or more pricing categories (Adult, Child, Per group, etc.) */
+  pricingCategories: BokunExperiencePricingCategory[]
+}
+
+/**
+ * Meeting point block. Latitude/longitude are decimal degrees in WGS84.
+ */
+export interface BokunExperienceMeetingPoint {
+  title: BokunExperienceLocalizedString[]
+  address?: BokunExperienceLocalizedString[]
+  instructions?: BokunExperienceLocalizedString[]
+  latitude?: number
+  longitude?: number
+}
+
+/**
+ * Activity exertion level. Maps to CMS difficultyLevel (easy → EASY, etc.).
+ */
+export type BokunExperienceActivityLevel = 'EASY' | 'MODERATE' | 'CHALLENGING'
+
+/**
+ * Payload for POST /restapi/v2.0/experience (CREATE Experience).
+ * All fields validated against Bokun spec in Phase 01 findings.
+ */
+export interface BokunExperienceCreatePayload {
+  title: BokunExperienceLocalizedString[]
+  /** Full description, HTML allowed. Sanitized in mapper. */
+  description: BokunExperienceLocalizedString[]
+  /** Brief summary shown on listings. */
+  summary: BokunExperienceLocalizedString[]
+  highlights?: BokunExperienceLocalizedString[]
+  /** ISO 8601 duration string (e.g. "PT1H30M" for 90 minutes). */
+  durationISO: string
+  minParticipants: number
+  maxParticipants: number
+  rates: BokunExperienceRate[]
+  meetingPoint: BokunExperienceMeetingPoint
+  inclusions?: BokunExperienceLocalizedString[]
+  exclusions?: BokunExperienceLocalizedString[]
+  bringList?: BokunExperienceLocalizedString[]
+  activityLevel?: BokunExperienceActivityLevel
+  wheelchairAccessible?: boolean
+}
+
+/**
+ * Payload for PUT /restapi/v2.0/experience/{id} (UPDATE Experience).
+ * Bokun accepts a partial body; only provided fields are updated.
+ */
+export type BokunExperienceUpdatePayload = Partial<BokunExperienceCreatePayload>
+
+/**
+ * Response from POST /restapi/v2.0/experience.
+ * Bokun is documented to return the new Experience id, but the exact key is not in
+ * public docs — accept both `id` and `experienceId` shapes; mapper picks whichever is set.
+ */
+export interface BokunExperienceCreateResponse {
+  /** Bokun-assigned Experience ID. Persist on the Tour. */
+  id?: string
+  /** Alternate name some Bokun endpoints use for the same value. */
+  experienceId?: string
+  status?: string
+  createdAt?: number
+}
+
+/**
+ * Response from PUT /restapi/v2.0/experience/{id}/components.
+ * Bokun's component-PUT endpoint commonly returns 204 No Content; treat all fields as optional.
+ */
+export interface BokunExperienceUpdateResponse {
+  id?: string
+  experienceId?: string
+  status?: string
+  updatedAt?: number
+}

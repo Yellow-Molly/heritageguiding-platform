@@ -19,6 +19,7 @@ import {
   ContactInquiries,
 } from './collections/index'
 import { SiteSettings } from './globals/site-settings'
+import { syncTourToBokunTask } from './lib/bokun-sync-job'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -77,6 +78,9 @@ export default buildConfig({
     ContactInquiries,
   ],
   globals: [SiteSettings],
+  jobs: {
+    tasks: [syncTourToBokunTask],
+  },
   secret: getPayloadSecret(),
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

@@ -4,6 +4,28 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-14] — Bokun Outbound Sync v1 (Phase 08.2) ✓
+
+**Type:** Feature / Integration
+**Scope:** Automatic push CMS Tour → Bokun Experience on create/update
+
+- **Auto-sync flow:** Payload afterChange hook enqueues `syncTourToBokun` Payload Job when Tour published/updated
+- **Job execution:** Mapper (`tour-to-bokun-experience-mapper.ts`) transforms Tour → Bokun Experience payload; calls createExperience (POST, no ID) or updateExperience (PUT, ID present) on existing HMAC client
+- **Retry policy:** Exponential backoff (30s, 2m, 10m, 1h), 4 attempts total. Transient classification: 408/425/429/500/502/503/504 retry; 410 Gone clears bokunExperienceId for re-create on next sync
+- **Mapping:** Title, description, highlights, pricing (per_person→Adult+Child; per_group→flat), duration, meeting point, inclusions/exclusions, group sizes, difficulty, accessibility. Lexical RTE → HTML via lexical-to-bokun-html.ts
+- **Admin UI:** Sidebar fields (bokunSyncStatus: pending|synced|failed|disabled, bokunLastSyncedAt, bokunLastError) + custom panel with manual "Sync now" button
+- **Manual endpoint:** POST /api/admin/bokun/sync-tour (admin role, origin-CSRF verified) triggers immediate retry
+- **Recursive guard:** Job write-back sets context.skipBokunSync flag; hook checks it to prevent re-trigger
+- **Code reuse:** Extended existing bokun-api-client-with-hmac-authentication.ts with 2 new methods; no fork
+- **Migration:** 20260514-add-bokun-sync-fields.ts (additive ALTER TABLE, no data loss)
+- **Tests:** 40+ covering mapper all priceType branches + all locales, client methods, job retry logic, hook behavior
+
+**Plan:** `plans/260514-1437-bokun-integration/`
+**Files:** See codebase-summary.md Bokun Integration (Phase 08.1-08.2) section for complete file list
+**Status:** Code-complete; Phase 07 canary validation pending (prod Bokun test tour)
+
+---
+
 ## [2026-05-10] — Multi-Guide Tours (Tours hasMany Guides) ✓
 
 **Type:** Schema Change / Feature

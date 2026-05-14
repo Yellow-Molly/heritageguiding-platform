@@ -12,3 +12,6 @@ export {
   createRevalidateTagsAfterChangeHook,
   createRevalidateTagsAfterDeleteHook,
 } from './revalidate-cache-tags-hook'
+
+// Bokun outbound sync (CMS → Bokun) — enqueues a Payload job per tour save
+export { syncTourToBokunAfterChangeHook } from './sync-tour-to-bokun-after-change-hook'

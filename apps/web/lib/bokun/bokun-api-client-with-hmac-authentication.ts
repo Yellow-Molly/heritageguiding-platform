@@ -5,7 +5,13 @@
  */
 
 import { createHmac } from 'crypto'
-import type { BokunApiError } from './bokun-types'
+import type {
+  BokunApiError,
+  BokunExperienceCreatePayload,
+  BokunExperienceCreateResponse,
+  BokunExperienceUpdatePayload,
+  BokunExperienceUpdateResponse,
+} from './bokun-types'
 
 // Bokun API base URLs
 const BOKUN_TEST_URL = 'https://api.bokuntest.com'
@@ -208,6 +214,48 @@ export class BokunApiClient {
    */
   async delete<T>(endpoint: string): Promise<T> {
     return this.fetch<T>(endpoint, { method: 'DELETE' })
+  }
+
+  /**
+   * Create a new Experience in Bokun.
+   * Endpoint: POST /restapi/v2.0/experience
+   * Persist the returned `id` (or `experienceId`) on the Tour as `bokunExperienceId`.
+   *
+   * @param payload - Full Experience create payload (see Phase 03 mapper)
+   * @returns Bokun response containing the new Experience id
+   * @throws BokunError on non-2xx (4xx → no retry, 5xx/429 → retried per fetch())
+   */
+  async createExperience(
+    payload: BokunExperienceCreatePayload
+  ): Promise<BokunExperienceCreateResponse> {
+    return this.fetch<BokunExperienceCreateResponse>('/restapi/v2.0/experience', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    })
+  }
+
+  /**
+   * Update an existing Experience in Bokun by replacing its components.
+   * Endpoint: PUT /restapi/v2.0/experience/{id}/components
+   * Bokun's update model is component-level full-replacement (no PATCH).
+   *
+   * @param experienceId - Bokun-assigned Experience id (URL-encoded for safety)
+   * @param payload - Partial Experience payload; only included components are replaced
+   * @returns Bokun response (204 No Content is common — all fields optional)
+   * @throws BokunError on non-2xx
+   */
+  async updateExperience(
+    experienceId: string,
+    payload: BokunExperienceUpdatePayload
+  ): Promise<BokunExperienceUpdateResponse> {
+    const safeId = encodeURIComponent(experienceId)
+    return this.fetch<BokunExperienceUpdateResponse>(
+      `/restapi/v2.0/experience/${safeId}/components`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(payload),
+      }
+    )
   }
 }
 

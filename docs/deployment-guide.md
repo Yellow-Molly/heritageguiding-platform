@@ -138,7 +138,7 @@ DATABASE_URL=postgresql://user:password@localhost:5432/privatetours
 PAYLOAD_SECRET=your-secret-key-minimum-32-characters
 PAYLOAD_CONFIG_PATH=packages/cms/payload.config.ts
 
-# Bokun Integration (Phase 08.1)
+# Bokun Integration (Phase 08.1-08.2: inbound + outbound sync)
 BOKUN_ACCESS_KEY=your-bokun-access-key
 BOKUN_SECRET_KEY=your-bokun-secret-key
 BOKUN_ENVIRONMENT=test
@@ -305,6 +305,38 @@ export const Tours: CollectionConfig = {
   },
 }
 ```
+
+---
+
+## 3.1 Payload Jobs Queue (Phase 08.2)
+
+### Purpose
+
+Async task execution for long-running operations (e.g., Bokun tour sync). Jobs run via Payload's built-in queue.
+
+### Behavior
+
+**Local Development:**
+- Jobs execute inline (synchronously) by default
+- No worker scheduler required
+- Useful for testing
+
+**Production:**
+- Jobs require a worker scheduler (e.g., Vercel Cron, AWS Lambda, BullMQ queue)
+- Production implementation depends on deployment platform
+- **TODO:** Configure production worker scheduler (not yet implemented; see risk register Phase 08.2 plan)
+
+### Current Usage
+
+**Bokun Outbound Sync (Phase 08.2):**
+- Hook: `packages/cms/hooks/sync-tour-to-bokun-hook.ts` enqueues `syncTourToBokun` job on Tour afterChange
+- Job: `packages/cms/jobs/sync-tour-to-bokun-job.ts` with exponential backoff retry
+- Runs inline in dev; production deployment pending
+
+### Reference
+
+- Payload Jobs documentation: https://payloadcms.com/docs/jobs
+- Existing usage in codebase: Search for `job.enqueue()` or `defineJob()`
 
 ---
 

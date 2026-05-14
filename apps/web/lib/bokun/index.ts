@@ -14,6 +14,12 @@ export {
   getBokunClient,
 } from './bokun-api-client-with-hmac-authentication'
 
+// Tour → Experience transform (pure)
+export {
+  tourToBokunExperiencePayload,
+  type TourSource,
+} from './tour-to-bokun-experience-mapper'
+
 // Availability Service
 export {
   getBokunAvailability,
