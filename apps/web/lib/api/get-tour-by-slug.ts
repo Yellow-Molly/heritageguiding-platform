@@ -101,9 +101,13 @@ async function fetchTourBySlug(
  * @param locale - The locale for content (sv, en, de)
  * @returns Tour detail or null if not found
  */
+// Cache key suffix is bumped whenever the cached TourDetail shape changes,
+// to invalidate Vercel Data Cache entries from previous deploys. Bumping
+// avoids serving e.g. the legacy `{ guide }` object after the hasMany
+// migration converted it to `{ guides: [...] }`.
 export const getTourBySlug = unstable_cache(
   fetchTourBySlug,
-  ['tour-by-slug'],
+  ['tour-by-slug', 'v2-hasmany-guides'],
   { tags: ['tours'] }
 )
 
