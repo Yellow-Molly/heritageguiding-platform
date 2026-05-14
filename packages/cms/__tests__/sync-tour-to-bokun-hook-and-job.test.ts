@@ -50,7 +50,11 @@ function buildTourDoc(overrides: Record<string, unknown> = {}) {
     minGroupSize: 1,
     maxGroupSize: 10,
     bokunSyncStatus: 'pending' as const,
-    bokunExperienceId: null,
+    // Default to having an Experience ID so tours hit the UPDATE path — that's
+    // the only supported flow on the Start plan and the only mode v1 fully
+    // serializes. Tests that specifically exercise CREATE override this to null
+    // AND set BOKUN_ALLOW_CREATE=true via vi.stubEnv.
+    bokunExperienceId: 'exp_test',
     ...overrides,
   }
 }
@@ -211,7 +215,8 @@ const handler = syncTourToBokunTask.handler as Extract<
 describe('syncTourToBokunTask handler', () => {
   beforeEach(() => vi.clearAllMocks())
 
-  it('calls createExperience when no bokunExperienceId, persists returned id and synced status', async () => {
+  it('calls createExperience when BOKUN_ALLOW_CREATE=true and no bokunExperienceId', async () => {
+    vi.stubEnv('BOKUN_ALLOW_CREATE', 'true')
     const client = buildMockClient()
     client.createExperience.mockResolvedValueOnce({ id: 'exp_999' })
     mockedGetBokunClient.mockReturnValue(client as never)
@@ -239,6 +244,46 @@ describe('syncTourToBokunTask handler', () => {
       })
     )
     expect(result).toEqual({ output: { experienceId: 'exp_999', action: 'create' } })
+    vi.unstubAllEnvs()
+  })
+
+  it('fails fast with MISSING_EXPERIENCE_ID when bokunExperienceId is empty and CREATE not allowed', async () => {
+    const client = buildMockClient()
+    mockedGetBokunClient.mockReturnValue(client as never)
+
+    const { req, findByID, update } = buildMockReq()
+    findByID.mockResolvedValueOnce(buildTourDoc({ bokunExperienceId: null }))
+
+    const result = await handler({ input: { tourId: 42 }, req: req as never } as never)
+
+    expect(client.createExperience).not.toHaveBeenCalled()
+    expect(client.updateExperience).not.toHaveBeenCalled()
+    expect(update).toHaveBeenCalledWith(
+      expect.objectContaining({
+        data: expect.objectContaining({
+          bokunSyncStatus: 'failed',
+          bokunLastError: expect.stringContaining('bokunExperienceId is empty'),
+        }),
+      })
+    )
+    expect(result).toMatchObject({
+      output: { error: expect.stringContaining('MISSING_EXPERIENCE_ID') },
+    })
+  })
+
+  it('trims whitespace-only bokunExperienceId and triggers fail-fast', async () => {
+    const client = buildMockClient()
+    mockedGetBokunClient.mockReturnValue(client as never)
+
+    const { req, findByID } = buildMockReq()
+    findByID.mockResolvedValueOnce(buildTourDoc({ bokunExperienceId: '   ' }))
+
+    const result = await handler({ input: { tourId: 42 }, req: req as never } as never)
+
+    expect(client.updateExperience).not.toHaveBeenCalled()
+    expect(result).toMatchObject({
+      output: { error: expect.stringContaining('MISSING_EXPERIENCE_ID') },
+    })
   })
 
   it('calls updateExperience when bokunExperienceId already set', async () => {
@@ -275,7 +320,7 @@ describe('syncTourToBokunTask handler', () => {
 
   it('marks failed and does NOT throw on 4xx (no retry)', async () => {
     const client = buildMockClient()
-    client.createExperience.mockRejectedValueOnce(
+    client.updateExperience.mockRejectedValueOnce(
       new BokunError('Validation failed', 400, 'VALIDATION')
     )
     mockedGetBokunClient.mockReturnValue(client as never)
@@ -301,7 +346,7 @@ describe('syncTourToBokunTask handler', () => {
 
   it('throws on 5xx so Payload retries (status NOT marked failed)', async () => {
     const client = buildMockClient()
-    client.createExperience.mockRejectedValueOnce(
+    client.updateExperience.mockRejectedValueOnce(
       new BokunError('Upstream timeout', 502, 'BAD_GATEWAY')
     )
     mockedGetBokunClient.mockReturnValue(client as never)
@@ -326,7 +371,7 @@ describe('syncTourToBokunTask handler', () => {
 
   it('throws on 429 so Payload retries (transient)', async () => {
     const client = buildMockClient()
-    client.createExperience.mockRejectedValueOnce(
+    client.updateExperience.mockRejectedValueOnce(
       new BokunError('Rate limited', 429, 'RATE_LIMIT')
     )
     mockedGetBokunClient.mockReturnValue(client as never)
@@ -339,13 +384,14 @@ describe('syncTourToBokunTask handler', () => {
     ).rejects.toThrow('Rate limited')
   })
 
-  it('treats 2xx with no id as permanent error', async () => {
+  it('treats 2xx with no id as permanent error (CREATE path)', async () => {
+    vi.stubEnv('BOKUN_ALLOW_CREATE', 'true')
     const client = buildMockClient()
     client.createExperience.mockResolvedValueOnce({}) // missing id
     mockedGetBokunClient.mockReturnValue(client as never)
 
     const { req, findByID, update } = buildMockReq()
-    findByID.mockResolvedValueOnce(buildTourDoc())
+    findByID.mockResolvedValueOnce(buildTourDoc({ bokunExperienceId: null }))
 
     const result = await handler({ input: { tourId: 42 }, req: req as never } as never)
 
@@ -357,6 +403,7 @@ describe('syncTourToBokunTask handler', () => {
     expect(result).toMatchObject({
       output: { error: expect.stringContaining('no experience id') },
     })
+    vi.unstubAllEnvs()
   })
 
   it('returns skipped when tour was deleted between enqueue and execution', async () => {
@@ -398,7 +445,7 @@ describe('syncTourToBokunTask handler', () => {
     'throws on %s so Payload retries (transient)',
     async (status) => {
       const client = buildMockClient()
-      client.createExperience.mockRejectedValueOnce(
+      client.updateExperience.mockRejectedValueOnce(
         new BokunError(`Status ${status}`, status, 'TRANSIENT')
       )
       mockedGetBokunClient.mockReturnValue(client as never)
@@ -416,7 +463,7 @@ describe('syncTourToBokunTask handler', () => {
     'marks failed (no retry) on permanent %s',
     async (status) => {
       const client = buildMockClient()
-      client.createExperience.mockRejectedValueOnce(
+      client.updateExperience.mockRejectedValueOnce(
         new BokunError(`Status ${status}`, status, 'PERMANENT')
       )
       mockedGetBokunClient.mockReturnValue(client as never)
@@ -440,11 +487,11 @@ describe('syncTourToBokunTask handler', () => {
 
   it('passes skipBokunSync context flag on success write-back (recursive guard)', async () => {
     const client = buildMockClient()
-    client.createExperience.mockResolvedValueOnce({ id: 'exp_1' })
+    client.updateExperience.mockResolvedValueOnce({})
     mockedGetBokunClient.mockReturnValue(client as never)
 
     const { req, findByID, update } = buildMockReq()
-    findByID.mockResolvedValueOnce(buildTourDoc())
+    findByID.mockResolvedValueOnce(buildTourDoc({ bokunExperienceId: 'exp_1' }))
 
     await handler({ input: { tourId: 42 }, req: req as never } as never)
 

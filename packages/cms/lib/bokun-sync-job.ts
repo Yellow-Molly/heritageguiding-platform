@@ -152,25 +152,37 @@ export async function runBokunSyncForTour(
     const bokunPayload = tourToBokunExperiencePayload(tour)
     const client = getBokunClient()
 
-    let experienceId = tour.bokunExperienceId ?? undefined
+    const trimmedId = tour.bokunExperienceId?.trim() || undefined
+    let experienceId = trimmedId
     let action: 'create' | 'update'
 
     if (experienceId) {
       await client.updateExperience(experienceId, bokunPayload)
       action = 'update'
-    } else {
+    } else if (process.env.BOKUN_ALLOW_CREATE === 'true') {
+      // CREATE is gated off by default. Reasons:
+      //  1. Bokun's Start plan rejects CREATE without BOX_SETTINGS (manual
+      //     creation in the Bokun UI is the supported flow at that tier).
+      //  2. Our v1 wire serializer only covers text fields; CREATE additionally
+      //     requires rates, duration, location, etc. as typed DTOs that aren't
+      //     mapped yet.
+      // Set BOKUN_ALLOW_CREATE=true once both conditions are resolved.
       const created = await client.createExperience(bokunPayload)
       experienceId = created.id ?? created.experienceId
       action = 'create'
       if (!experienceId) {
-        // Bokun returned 2xx but no id — treat as permanent (4xx-class) so we don't
-        // pointlessly retry; surface the failure in the admin UI for human follow-up.
         throw new BokunError(
           'Bokun create returned no experience id',
           422,
           'NO_ID_IN_RESPONSE'
         )
       }
+    } else {
+      throw new BokunError(
+        'bokunExperienceId is empty. Create the Experience manually in Bokun, then paste its ID into the tour sidebar and click Sync again.',
+        422,
+        'MISSING_EXPERIENCE_ID'
+      )
     }
 
     // Cast `data` because the generated Tour type doesn't yet include the new
