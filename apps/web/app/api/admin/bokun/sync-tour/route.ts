@@ -81,11 +81,20 @@ export async function POST(request: NextRequest) {
       task: 'syncTourToBokun',
       input: { tourId },
     } as Parameters<typeof session.payload.jobs.queue>[0])) as { id?: string | number }
+
+    // Drain the queue inline so the manual button gives immediate feedback.
+    // Payload Jobs `autoRun` cron is not configured (Vercel serverless cannot
+    // host an in-process scheduler), and we have no Vercel Cron hitting a
+    // runner endpoint yet — without this call, the just-queued job would sit
+    // indefinitely. Synchronous run is safe: the sync task is short
+    // (<10s typically) and well under the function timeout.
+    await session.payload.jobs.run({ queue: 'default', limit: 5 })
+
     return NextResponse.json({ ok: true, jobId: job?.id ?? null })
   } catch (err) {
     session.payload.logger.error(
       { err, tourId },
-      '[admin/bokun/sync-tour] failed to enqueue job'
+      '[admin/bokun/sync-tour] failed to enqueue or run job'
     )
     return NextResponse.json({ error: 'Failed to enqueue sync job' }, { status: 500 })
   }
