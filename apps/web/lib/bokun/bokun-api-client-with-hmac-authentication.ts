@@ -76,7 +76,7 @@ export class BokunApiClient {
    *
    * @param method - HTTP method (GET, POST, etc.)
    * @param path - API endpoint path (e.g., /restapi/v2.0/activity/123/availabilities)
-   * @param date - ISO date string
+   * @param date - Bokun-formatted UTC date string ("yyyy-MM-dd HH:mm:ss")
    * @returns Base64-encoded HMAC signature
    */
   private generateSignature(method: string, path: string, date: string): string {
@@ -84,6 +84,19 @@ export class BokunApiClient {
     const hmac = createHmac('sha1', this.secretKey)
     hmac.update(stringToSign)
     return hmac.digest('base64')
+  }
+
+  /**
+   * Format a Date as the UTC string Bokun's HMAC scheme expects:
+   * "yyyy-MM-dd HH:mm:ss" (space separator, no milliseconds, no timezone suffix).
+   *
+   * Bokun rejects ISO-8601 (`...T...Z`) with HTTP 403 because the signature
+   * input is concatenated verbatim — any deviation from the documented format
+   * breaks server-side HMAC verification.
+   * @see https://bokun.dev — "Configuring the platform for API usage and authentication"
+   */
+  private formatBokunDate(date: Date): string {
+    return date.toISOString().slice(0, 19).replace('T', ' ')
   }
 
   /**
@@ -114,7 +127,7 @@ export class BokunApiClient {
   async fetch<T>(endpoint: string, options: RequestInit = {}, retryCount = 0): Promise<T> {
     // Credentials are validated in the constructor — fetch can trust them.
     const method = options.method || 'GET'
-    const date = new Date().toISOString()
+    const date = this.formatBokunDate(new Date())
     const signature = this.generateSignature(method, endpoint, date)
 
     const headers: HeadersInit = {

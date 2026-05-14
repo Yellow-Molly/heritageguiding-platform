@@ -145,12 +145,17 @@ describe('BokunApiClient', () => {
       expect(headers['X-Bokun-AccessKey']).toBe('test-access-key')
     })
 
-    it('sets X-Bokun-Date header as ISO string', async () => {
+    it('sets X-Bokun-Date header in Bokun UTC format "yyyy-MM-dd HH:mm:ss"', async () => {
+      // Regression guard: Bokun's HMAC scheme rejects ISO-8601 (`...T...Z`) with 403
+      // because the signature input is concatenated verbatim. Format must be
+      // space-separated, no milliseconds, no timezone suffix.
       mockFetch.mockResolvedValueOnce(mockResponse({ data: 'ok' }))
       await client.fetch('/test')
       const headers = mockFetch.mock.calls[0][1].headers
-      expect(headers['X-Bokun-Date']).toBeDefined()
-      expect(headers['X-Bokun-Date'].length).toBeGreaterThan(0)
+      expect(headers['X-Bokun-Date']).toMatch(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/)
+      expect(headers['X-Bokun-Date']).not.toContain('T')
+      expect(headers['X-Bokun-Date']).not.toContain('Z')
+      expect(headers['X-Bokun-Date']).not.toContain('.')
     })
 
     it('sets X-Bokun-Signature header with non-empty HMAC value', async () => {
