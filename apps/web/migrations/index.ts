@@ -9,6 +9,7 @@ import * as migration_20260502_181007_add_listing_query_indexes from './20260502
 import * as migration_20260503_131600_enable_rls_public_tables from './20260503_131600_enable_rls_public_tables';
 import * as migration_20260503_153500_postgis_security_hardening from './20260503_153500_postgis_security_hardening';
 import * as migration_20260510_215812_convert_tour_guide_to_hasmany from './20260510_215812_convert_tour_guide_to_hasmany';
+import * as migration_20260514_174200_add_bokun_sync_fields from './20260514_174200_add_bokun_sync_fields';
 
 export const migrations = [
   {
@@ -65,5 +66,10 @@ export const migrations = [
     up: migration_20260510_215812_convert_tour_guide_to_hasmany.up,
     down: migration_20260510_215812_convert_tour_guide_to_hasmany.down,
     name: '20260510_215812_convert_tour_guide_to_hasmany'
+  },
+  {
+    up: migration_20260514_174200_add_bokun_sync_fields.up,
+    down: migration_20260514_174200_add_bokun_sync_fields.down,
+    name: '20260514_174200_add_bokun_sync_fields',
   },
 ];
