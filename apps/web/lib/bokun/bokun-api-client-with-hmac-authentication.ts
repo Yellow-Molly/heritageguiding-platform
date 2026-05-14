@@ -22,16 +22,22 @@ const MAX_RETRIES = 3
 const MAX_BACKOFF_MS = 30000
 
 /**
- * Custom error class for Bokun API errors
+ * Custom error class for Bokun API errors.
+ *
+ * Fields declared explicitly (rather than via TypeScript parameter properties)
+ * so the class remains valid under Node's `--experimental-strip-types` loader,
+ * which only erases types and cannot transform parameter properties. Payload's
+ * `migrate` CLI on Vercel (Node 24) loads this file directly via that loader.
  */
 export class BokunError extends Error {
-  constructor(
-    message: string,
-    public status: number,
-    public errorCode?: string
-  ) {
+  status: number
+  errorCode?: string
+
+  constructor(message: string, status: number, errorCode?: string) {
     super(message)
     this.name = 'BokunError'
+    this.status = status
+    this.errorCode = errorCode
   }
 }
 
