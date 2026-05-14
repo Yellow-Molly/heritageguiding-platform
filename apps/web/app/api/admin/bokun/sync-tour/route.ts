@@ -34,13 +34,19 @@ async function getAdminUser() {
  * Browser-issued cross-site fetches always send Origin; missing or mismatched origin
  * means the request is forged or scripted from a foreign tab. SameSite=Lax cookies
  * do NOT block POSTs, so this header check is the load-bearing protection.
+ *
+ * Self-referencing same-origin: compare Origin.host to the request's own Host
+ * header (or X-Forwarded-Host on Vercel). This works on staging, production,
+ * and localhost without depending on an env var being set per environment.
  */
 function isAllowedOrigin(request: NextRequest): boolean {
   const origin = request.headers.get('origin')
-  const expected = process.env.NEXT_PUBLIC_SITE_URL
-  if (!origin || !expected) return false
+  if (!origin) return false
+  const expectedHost =
+    request.headers.get('x-forwarded-host') || request.headers.get('host')
+  if (!expectedHost) return false
   try {
-    return new URL(origin).host === new URL(expected).host
+    return new URL(origin).host === expectedHost
   } catch {
     return false
   }
