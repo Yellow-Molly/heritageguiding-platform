@@ -21,18 +21,23 @@ import {
   __resetBokunClientForTests,
 } from '../bokun-api-client-with-hmac-authentication'
 
-// Helper to create a mock Response-like object
+// Helper to create a mock Response-like object.
+// Both `json()` and `text()` are provided because successful responses parse via
+// json() while non-2xx responses now read raw body via text() first (so we can
+// surface ANY shape Bokun returns, not just the documented `{message}` envelope).
 function mockResponse(
   body: unknown,
   status = 200,
   headers: Record<string, string> = {}
 ) {
+  const bodyText = typeof body === 'string' ? body : JSON.stringify(body)
   return {
     ok: status >= 200 && status < 300,
     status,
     statusText: status === 200 ? 'OK' : status === 429 ? 'Too Many Requests' : 'Error',
     headers: new Headers(headers),
     json: vi.fn().mockResolvedValue(body),
+    text: vi.fn().mockResolvedValue(bodyText),
   }
 }
 
@@ -216,9 +221,35 @@ describe('BokunApiClient', () => {
         statusText: 'Bad Gateway',
         headers: new Headers(),
         json: vi.fn().mockRejectedValue(new Error('parse error')),
+        text: vi.fn().mockResolvedValue(''),
       }
       mockFetch.mockResolvedValueOnce(resp)
       await expect(client.fetch('/test')).rejects.toThrow('Bad Gateway')
+    })
+
+    it('surfaces non-JSON error body text in BokunError message', async () => {
+      // Bokun sometimes returns plain text or HTML on 4xx — must not be silently dropped.
+      mockFetch.mockResolvedValueOnce(mockResponse('title is required', 400))
+      try {
+        await client.fetch('/test')
+        throw new Error('should have thrown')
+      } catch (err) {
+        expect(err).toBeInstanceOf(BokunError)
+        expect((err as BokunError).message).toContain('title is required')
+        expect((err as BokunError).status).toBe(400)
+      }
+    })
+
+    it('surfaces { error } shape from Bokun 400 responses', async () => {
+      mockFetch.mockResolvedValueOnce(
+        mockResponse({ error: 'Invalid pricing category' }, 400)
+      )
+      try {
+        await client.fetch('/test')
+        throw new Error('should have thrown')
+      } catch (err) {
+        expect((err as BokunError).message).toContain('Invalid pricing category')
+      }
     })
 
     it('wraps network errors in BokunError with NETWORK_ERROR code', async () => {

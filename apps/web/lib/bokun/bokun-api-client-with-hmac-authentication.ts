@@ -162,19 +162,42 @@ export class BokunApiClient {
         return this.fetch<T>(endpoint, options, retryCount + 1)
       }
 
-      // Handle other error responses
+      // Handle other error responses.
+      // Read body as text first so we can ALWAYS surface something — Bokun's 4xx
+      // responses come back in several shapes (`{message}`, `{error}`, `{errors:[]}`,
+      // plain string, or empty body) and silently dropping the body leaves operators
+      // staring at a bare status code with no actionable detail.
       if (!response.ok) {
-        let errorData: BokunApiError
+        const rawBody = await response.text().catch(() => '')
+        let parsed: Partial<BokunApiError> & {
+          error?: string
+          errors?: unknown
+        } = {}
         try {
-          errorData = await response.json()
+          parsed = rawBody ? JSON.parse(rawBody) : {}
         } catch {
-          errorData = {
-            errorCode: 'UNKNOWN',
-            message: response.statusText || 'Unknown error',
-          }
+          // body wasn't JSON — keep rawBody as-is for the message
         }
 
-        throw new BokunError(errorData.message, response.status, errorData.errorCode)
+        // Server-side breadcrumb so Vercel logs always retain the full Bokun
+        // response body, even when our sanitizer redacts it on the way out.
+        console.error('[BokunApiClient] non-2xx response', {
+          method,
+          endpoint,
+          status: response.status,
+          body: rawBody.slice(0, 1000),
+        })
+
+        const message =
+          parsed.message ||
+          parsed.error ||
+          (parsed.errors ? JSON.stringify(parsed.errors).slice(0, 400) : '') ||
+          rawBody.slice(0, 400) ||
+          response.statusText ||
+          'Unknown error'
+        const errorCode = parsed.errorCode || 'UNKNOWN'
+
+        throw new BokunError(message, response.status, errorCode)
       }
 
       // Parse and return successful response
