@@ -5,7 +5,7 @@
  */
 
 import { unstable_cache } from 'next/cache'
-import { bokunClient } from './bokun-api-client-with-hmac-authentication'
+import { getBokunClient } from './bokun-api-client-with-hmac-authentication'
 import type { BokunAvailability, AvailabilityRequest, AvailabilityResponse } from './bokun-types'
 
 // Cache TTL in seconds (60s for near-real-time accuracy while reducing API calls)
@@ -29,8 +29,8 @@ export async function getBokunAvailability(
     end: endDate,
   })
 
-  // Fetch from Bokun API
-  const data = await bokunClient.fetch<AvailabilityResponse>(
+  // Fetch from Bokun API (lazy client; throws if creds missing)
+  const data = await getBokunClient().fetch<AvailabilityResponse>(
     `/restapi/v2.0/activity/${experienceId}/availabilities?${queryParams}`
   )
 

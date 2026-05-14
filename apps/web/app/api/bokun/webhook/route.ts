@@ -7,7 +7,13 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createHmac, timingSafeEqual } from 'crypto'
+import { revalidateTag } from 'next/cache'
 import type { BokunWebhookPayload, BokunBooking } from '@/lib/bokun'
+
+// Hard cache invalidation profile. `{ expire: 0 }` forces immediate eviction
+// of unstable_cache entries; named profiles only trigger SWR with long TTLs.
+// Same pattern used in apps/web/app/api/revalidate/route.ts.
+const HARD_EXPIRE = { expire: 0 } as const
 
 // Max webhook payload size (1MB) to prevent DoS attacks
 const MAX_BODY_SIZE = 1024 * 1024
@@ -91,6 +97,8 @@ async function logWebhookEvent(
  */
 async function handleBookingCreated(booking: BokunBooking): Promise<void> {
   console.log(`[Bokun] Booking created: ${booking.confirmationCode}`)
+  // Invalidate cached availability so the next read reflects the booked slot
+  revalidateTag('bokun-availability', HARD_EXPIRE)
 
   // TODO: Send confirmation email via Resend
   // await sendBookingConfirmationEmail({
@@ -107,6 +115,7 @@ async function handleBookingCreated(booking: BokunBooking): Promise<void> {
  */
 async function handleBookingConfirmed(booking: BokunBooking): Promise<void> {
   console.log(`[Bokun] Booking confirmed: ${booking.confirmationCode}`)
+  revalidateTag('bokun-availability', HARD_EXPIRE)
 
   // TODO: Update booking status in database
   // TODO: Send confirmation email if not already sent
@@ -117,6 +126,8 @@ async function handleBookingConfirmed(booking: BokunBooking): Promise<void> {
  */
 async function handleBookingCancelled(booking: BokunBooking): Promise<void> {
   console.log(`[Bokun] Booking cancelled: ${booking.confirmationCode}`)
+  // Cancellation frees a slot; invalidate cache so it reappears as available
+  revalidateTag('bokun-availability', HARD_EXPIRE)
 
   // TODO: Update booking status in database
   // TODO: Send cancellation email to customer

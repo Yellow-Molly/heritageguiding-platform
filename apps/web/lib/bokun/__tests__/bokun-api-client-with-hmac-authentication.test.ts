@@ -1,6 +1,7 @@
 /**
  * Tests for BokunApiClient with HMAC authentication
- * Covers: BokunError, isConfigured, fetch (auth headers, retry, error handling), convenience methods, singleton
+ * Covers: BokunError, constructor credential validation, fetch (auth headers, retry, error handling),
+ *         convenience methods, lazy factory (getBokunClient)
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
@@ -16,8 +17,8 @@ vi.stubEnv('BOKUN_SECRET_KEY', 'test-secret-key')
 import {
   BokunError,
   BokunApiClient,
-  bokunClient,
   getBokunClient,
+  __resetBokunClientForTests,
 } from '../bokun-api-client-with-hmac-authentication'
 
 // Helper to create a mock Response-like object
@@ -77,46 +78,59 @@ describe('BokunApiClient', () => {
   })
 
   // --------------------------------------------------------------------------
-  // isConfigured
+  // constructor — credential validation (fails fast on missing env)
   // --------------------------------------------------------------------------
-  describe('isConfigured', () => {
-    it('returns true when both API keys are set', () => {
-      expect(client.isConfigured()).toBe(true)
+  describe('constructor credential validation', () => {
+    it('constructs successfully when both API keys are set', () => {
+      expect(() => new BokunApiClient()).not.toThrow()
     })
 
-    it('returns false when keys missing in non-production', () => {
+    it('throws BokunError when both keys missing', () => {
       vi.stubEnv('BOKUN_API_KEY', '')
       vi.stubEnv('BOKUN_SECRET_KEY', '')
-      const c = new BokunApiClient()
-      expect(c.isConfigured()).toBe(false)
+      expect(() => new BokunApiClient()).toThrow(BokunError)
     })
 
-    it('returns false when only access key missing', () => {
+    it('throws when only access key missing', () => {
       vi.stubEnv('BOKUN_API_KEY', '')
-      const c = new BokunApiClient()
-      expect(c.isConfigured()).toBe(false)
+      expect(() => new BokunApiClient()).toThrow(BokunError)
     })
 
-    it('throws BokunError in production when keys are missing', () => {
+    it('throws when only secret key missing', () => {
+      vi.stubEnv('BOKUN_SECRET_KEY', '')
+      expect(() => new BokunApiClient()).toThrow(BokunError)
+    })
+
+    it('thrown error carries CREDENTIALS_MISSING code', () => {
       vi.stubEnv('BOKUN_API_KEY', '')
       vi.stubEnv('BOKUN_SECRET_KEY', '')
-      vi.stubEnv('NODE_ENV', 'production')
-      const c = new BokunApiClient()
-      expect(() => c.isConfigured()).toThrow(BokunError)
-      vi.stubEnv('NODE_ENV', 'test')
-    })
-
-    it('throws with CREDENTIALS_MISSING error code in production', () => {
-      vi.stubEnv('BOKUN_API_KEY', '')
-      vi.stubEnv('BOKUN_SECRET_KEY', '')
-      vi.stubEnv('NODE_ENV', 'production')
-      const c = new BokunApiClient()
       try {
-        c.isConfigured()
+        new BokunApiClient()
+        throw new Error('should have thrown')
       } catch (err) {
+        expect(err).toBeInstanceOf(BokunError)
         expect((err as BokunError).errorCode).toBe('CREDENTIALS_MISSING')
       }
-      vi.stubEnv('NODE_ENV', 'test')
+    })
+
+    it('thrown error mentions both env var names', () => {
+      vi.stubEnv('BOKUN_API_KEY', '')
+      vi.stubEnv('BOKUN_SECRET_KEY', '')
+      try {
+        new BokunApiClient()
+        throw new Error('should have thrown')
+      } catch (err) {
+        const message = (err as BokunError).message
+        expect(message).toContain('BOKUN_API_KEY')
+        expect(message).toContain('BOKUN_SECRET_KEY')
+      }
+    })
+
+    it('fails fast at construction, not at first fetch call', () => {
+      vi.stubEnv('BOKUN_API_KEY', '')
+      vi.stubEnv('BOKUN_SECRET_KEY', '')
+      // Mere construction must throw — no need to call fetch()
+      expect(() => new BokunApiClient()).toThrow()
     })
   })
 
@@ -333,14 +347,36 @@ describe('BokunApiClient', () => {
 })
 
 // ============================================================================
-// Singleton exports
+// Lazy factory: getBokunClient
 // ============================================================================
-describe('bokunClient / getBokunClient', () => {
-  it('exports bokunClient as a BokunApiClient instance', () => {
-    expect(bokunClient).toBeInstanceOf(BokunApiClient)
+describe('getBokunClient (lazy singleton)', () => {
+  beforeEach(() => {
+    __resetBokunClientForTests()
+    vi.stubEnv('BOKUN_API_KEY', 'test-access-key')
+    vi.stubEnv('BOKUN_SECRET_KEY', 'test-secret-key')
   })
 
-  it('getBokunClient returns the same singleton instance', () => {
-    expect(getBokunClient()).toBe(bokunClient)
+  it('returns a BokunApiClient instance', () => {
+    expect(getBokunClient()).toBeInstanceOf(BokunApiClient)
+  })
+
+  it('returns the same instance across repeated calls', () => {
+    const first = getBokunClient()
+    const second = getBokunClient()
+    expect(first).toBe(second)
+  })
+
+  it('reset helper clears the cached instance', () => {
+    const first = getBokunClient()
+    __resetBokunClientForTests()
+    const second = getBokunClient()
+    expect(first).not.toBe(second)
+  })
+
+  it('propagates constructor errors when env vars missing', () => {
+    __resetBokunClientForTests()
+    vi.stubEnv('BOKUN_API_KEY', '')
+    vi.stubEnv('BOKUN_SECRET_KEY', '')
+    expect(() => getBokunClient()).toThrow(BokunError)
   })
 })

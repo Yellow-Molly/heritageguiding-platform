@@ -4,9 +4,9 @@
 
 | Priority | Status | Effort |
 |----------|--------|--------|
-| P0 — blocks production | not-started | 4–6h |
+| P0 — blocks production | complete | 4–6h |
 
-Five critical findings from `plans/reports/code-reviewer-260201-0120-bokun-integration.md` are deployment blockers. This phase resolves them. Runs in parallel with Phase 01.
+All 5 critical security findings resolved and tested. 3 fixes verified pre-shipped (Fix 1 timing-safe equals, Fix 2 body-size limit, Fix 4 date+experienceId validation). Fixes 3–5 implemented 2026-05-14 with code-reviewer approval. Bonus cache-invalidation in 3 webhook handlers.
 
 ## Files In Scope
 
@@ -199,15 +199,15 @@ Run: `npm test --workspace apps/web -- bokun`
 
 ## Todo
 
-- [ ] Read current state of 5 files, mark which fixes already shipped
-- [ ] Fix 1 — timing-safe equals + test
-- [ ] Fix 2 — bounded body reader + test (413 path)
-- [ ] Fix 3 — credential runtime check + test
-- [ ] Fix 4 — date + experienceId validation + test
-- [ ] Fix 5 — lazy client factory, update all callers
-- [ ] Bonus — cache invalidation in webhook
-- [ ] Run `npm run typecheck` and `npm test --workspace apps/web` — clean
-- [ ] Mark security review findings closed in code-reviewer report (append note)
+- [x] Read current state of 5 files, mark which fixes already shipped
+- [x] Fix 1 — timing-safe equals + test
+- [x] Fix 2 — bounded body reader + test (413 path)
+- [x] Fix 3 — credential runtime check + test
+- [x] Fix 4 — date + experienceId validation + test
+- [x] Fix 5 — lazy client factory, update all callers
+- [x] Bonus — cache invalidation in webhook
+- [x] Run `npm run typecheck` and `npm test --workspace apps/web` — clean
+- [x] Mark security review findings closed in code-reviewer report (append note)
 
 ## Success Criteria
 

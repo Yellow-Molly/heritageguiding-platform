@@ -3,7 +3,7 @@
  * Handles booking creation via API and widget checkout URL generation
  */
 
-import { bokunClient } from './bokun-api-client-with-hmac-authentication'
+import { getBokunClient } from './bokun-api-client-with-hmac-authentication'
 import type {
   BokunBooking,
   CreateBookingRequest,
@@ -35,7 +35,7 @@ export async function createBokunBooking(
     promoCode: params.promoCode,
   }
 
-  const response = await bokunClient.post<BookingResponse>(
+  const response = await getBokunClient().post<BookingResponse>(
     '/restapi/v2.0/booking',
     requestBody
   )
@@ -50,7 +50,7 @@ export async function createBokunBooking(
  * @returns Full booking details
  */
 export async function getBokunBooking(bookingId: string): Promise<BokunBooking> {
-  const response = await bokunClient.get<{ booking: BokunBooking }>(
+  const response = await getBokunClient().get<{ booking: BokunBooking }>(
     `/restapi/v2.0/booking/${bookingId}`
   )
   return response.booking
@@ -65,7 +65,7 @@ export async function getBokunBooking(bookingId: string): Promise<BokunBooking> 
 export async function getBokunBookingByConfirmationCode(
   confirmationCode: string
 ): Promise<BokunBooking> {
-  const response = await bokunClient.get<{ booking: BokunBooking }>(
+  const response = await getBokunClient().get<{ booking: BokunBooking }>(
     `/restapi/v2.0/booking/confirmation/${confirmationCode}`
   )
   return response.booking
@@ -78,7 +78,7 @@ export async function getBokunBookingByConfirmationCode(
  * @returns Updated booking with cancelled status
  */
 export async function cancelBokunBooking(bookingId: string): Promise<BokunBooking> {
-  const response = await bokunClient.post<{ booking: BokunBooking }>(
+  const response = await getBokunClient().post<{ booking: BokunBooking }>(
     `/restapi/v2.0/booking/${bookingId}/cancel`,
     {}
   )

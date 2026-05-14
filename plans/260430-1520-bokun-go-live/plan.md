@@ -3,10 +3,12 @@ plan: bokun-go-live
 created: 2026-04-30
 status: in-progress
 blockedBy: []
-blocks: []
+blocks:
+  - 260514-1506-go-live-readiness-review  # Bokun security fixes + commercial onboarding are P0 launch blockers
 related:
   - plans/mvp-implementation/phase-08.1-bokun-integration.md
   - plans/reports/code-reviewer-260201-0120-bokun-integration.md
+  - plans/260514-1437-bokun-integration/  # Outbound push (CMS Tour → Bokun Experience); runs in parallel, shares HMAC client
 ---
 
 # Bokun Booking System — Go-Live Plan
@@ -28,7 +30,7 @@ This plan closes that gap.
 | # | Phase | Owner | Effort | Status |
 |---|-------|-------|--------|--------|
 | 01 | [Commercial onboarding (manual)](./phase-01-commercial-onboarding.md) | Business + Finance | 2–4 weeks elapsed | not-started |
-| 02 | [Security fixes (5 critical)](./phase-02-security-fixes.md) | Dev | 4–6h | not-started |
+| 02 | [Security fixes (5 critical)](./phase-02-security-fixes.md) | Dev | 4–6h | complete |
 | 03 | [Bokun config & test-env validation](./phase-03-bokun-config-and-test.md) | Dev (needs creds from 01) | 6–10h | not-started |
 | 04 | [Production go-live](./phase-04-production-go-live.md) | Dev + Business | 2–4h elapsed | not-started |
 

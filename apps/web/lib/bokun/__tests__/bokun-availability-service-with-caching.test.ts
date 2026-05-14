@@ -8,7 +8,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 // Use vi.hoisted so the mock variable is available inside the vi.mock factory
 const { mockBokunFetch } = vi.hoisted(() => ({ mockBokunFetch: vi.fn() }))
 vi.mock('../bokun-api-client-with-hmac-authentication', () => ({
-  bokunClient: { fetch: mockBokunFetch },
+  getBokunClient: () => ({ fetch: mockBokunFetch }),
 }))
 
 import {
@@ -46,7 +46,7 @@ function makeSlot(
 describe('getBokunAvailability', () => {
   beforeEach(() => vi.clearAllMocks())
 
-  it('calls bokunClient.fetch with correct availability endpoint', async () => {
+  it('calls Bokun client fetch with correct availability endpoint', async () => {
     mockBokunFetch.mockResolvedValueOnce({ availabilities: [] })
     await getBokunAvailability({ experienceId: '123', startDate: '2025-06-01', endDate: '2025-06-30' })
     expect(mockBokunFetch).toHaveBeenCalledWith(

@@ -12,7 +12,7 @@ const { mockGet, mockPost } = vi.hoisted(() => ({
   mockPost: vi.fn(),
 }))
 vi.mock('../bokun-api-client-with-hmac-authentication', () => ({
-  bokunClient: { get: mockGet, post: mockPost },
+  getBokunClient: () => ({ get: mockGet, post: mockPost }),
 }))
 
 import {
