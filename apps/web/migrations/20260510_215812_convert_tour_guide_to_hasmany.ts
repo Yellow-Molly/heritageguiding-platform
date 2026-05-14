@@ -14,19 +14,38 @@ import { sql } from '@payloadcms/db-postgres'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function up({ db }: { db: any }): Promise<void> {
   await db.execute(sql`
-    -- 1. Add hasMany junction column + FK + index in tours_rels
-    ALTER TABLE "tours_rels" ADD COLUMN "guides_id" integer;
-    ALTER TABLE "tours_rels"
-      ADD CONSTRAINT "tours_rels_guides_fk"
-      FOREIGN KEY ("guides_id") REFERENCES "public"."guides"("id")
-      ON DELETE cascade ON UPDATE no action;
-    CREATE INDEX "tours_rels_guides_id_idx" ON "tours_rels" USING btree ("guides_id");
+    -- 1. Add hasMany junction column + FK + index in tours_rels.
+    -- IF [NOT] EXISTS clauses make this migration idempotent against staging /
+    -- production databases that may have had partial schema pushes via
+    -- Payload dev mode before formal migrations were introduced.
+    ALTER TABLE "tours_rels" ADD COLUMN IF NOT EXISTS "guides_id" integer;
+    DO $$ BEGIN
+      ALTER TABLE "tours_rels"
+        ADD CONSTRAINT "tours_rels_guides_fk"
+        FOREIGN KEY ("guides_id") REFERENCES "public"."guides"("id")
+        ON DELETE cascade ON UPDATE no action;
+    EXCEPTION WHEN duplicate_object THEN NULL;
+    END $$;
+    CREATE INDEX IF NOT EXISTS "tours_rels_guides_id_idx" ON "tours_rels" USING btree ("guides_id");
 
-    -- 2. Backfill: copy each tour's existing guide_id into tours_rels with path='guides', order=0
-    INSERT INTO "tours_rels" ("parent_id", "path", "order", "guides_id")
-    SELECT id, 'guides', 0, guide_id
-    FROM "tours"
-    WHERE guide_id IS NOT NULL;
+    -- 2. Backfill: copy each tour's existing guide_id into tours_rels with path='guides', order=0.
+    -- Skip when guide_id column has already been dropped (migration partially applied).
+    -- Skip rows already backfilled to avoid duplicate junction entries.
+    DO $$ BEGIN
+      IF EXISTS (
+        SELECT 1 FROM information_schema.columns
+        WHERE table_name = 'tours' AND column_name = 'guide_id'
+      ) THEN
+        INSERT INTO "tours_rels" ("parent_id", "path", "order", "guides_id")
+        SELECT t.id, 'guides', 0, t.guide_id
+        FROM "tours" t
+        WHERE t.guide_id IS NOT NULL
+          AND NOT EXISTS (
+            SELECT 1 FROM "tours_rels" r
+            WHERE r.parent_id = t.id AND r.path = 'guides'
+          );
+      END IF;
+    END $$;
 
     -- 3. Sanity check: every tour now has at least one row in tours_rels with path='guides'
     DO $$
@@ -44,13 +63,13 @@ export async function up({ db }: { db: any }): Promise<void> {
       END IF;
     END $$;
 
-    -- 4. Drop legacy single-relationship FK + index + column
-    ALTER TABLE "tours" DROP CONSTRAINT "tours_guide_id_guides_id_fk";
-    DROP INDEX "tours_guide_idx";
-    ALTER TABLE "tours" DROP COLUMN "guide_id";
+    -- 4. Drop legacy single-relationship FK + index + column (idempotent).
+    ALTER TABLE "tours" DROP CONSTRAINT IF EXISTS "tours_guide_id_guides_id_fk";
+    DROP INDEX IF EXISTS "tours_guide_idx";
+    ALTER TABLE "tours" DROP COLUMN IF EXISTS "guide_id";
 
     -- 5. Incidental: index on guides.status added by Payload reconciliation
-    CREATE INDEX "guides_status_idx" ON "guides" USING btree ("status");
+    CREATE INDEX IF NOT EXISTS "guides_status_idx" ON "guides" USING btree ("status");
   `)
 }
 
