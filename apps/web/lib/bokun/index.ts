@@ -10,7 +10,6 @@ export * from './bokun-types'
 export {
   BokunApiClient,
   BokunError,
-  bokunClient,
   getBokunClient,
 } from './bokun-api-client-with-hmac-authentication'
 

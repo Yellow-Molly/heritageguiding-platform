@@ -45,27 +45,23 @@ export class BokunApiClient {
   private baseUrl: string
 
   constructor() {
-    this.accessKey = process.env.BOKUN_API_KEY || ''
-    this.secretKey = process.env.BOKUN_SECRET_KEY || ''
-    this.baseUrl = process.env.NODE_ENV === 'production' ? BOKUN_PROD_URL : BOKUN_TEST_URL
-  }
+    const accessKey = process.env.BOKUN_API_KEY
+    const secretKey = process.env.BOKUN_SECRET_KEY
 
-  /**
-   * Check if client is properly configured with credentials.
-   * In production, throws if not configured.
-   */
-  isConfigured(): boolean {
-    const configured = Boolean(this.accessKey && this.secretKey)
-
-    if (!configured && process.env.NODE_ENV === 'production') {
+    // Fail fast: refuse to construct an unauthenticated client. Eliminates the
+    // class of bug where empty creds silently produce HMAC-with-empty-secret
+    // and yield Bokun 401s rather than a clear configuration error at startup.
+    if (!accessKey || !secretKey) {
       throw new BokunError(
-        'BOKUN_API_KEY and BOKUN_SECRET_KEY are required in production',
+        'Bokun credentials missing: set BOKUN_API_KEY and BOKUN_SECRET_KEY',
         500,
         'CREDENTIALS_MISSING'
       )
     }
 
-    return configured
+    this.accessKey = accessKey
+    this.secretKey = secretKey
+    this.baseUrl = process.env.NODE_ENV === 'production' ? BOKUN_PROD_URL : BOKUN_TEST_URL
   }
 
   /**
@@ -110,10 +106,7 @@ export class BokunApiClient {
    * @throws BokunError on API errors
    */
   async fetch<T>(endpoint: string, options: RequestInit = {}, retryCount = 0): Promise<T> {
-    if (!this.isConfigured()) {
-      throw new BokunError('Bokun API credentials not configured', 401, 'CREDENTIALS_MISSING')
-    }
-
+    // Credentials are validated in the constructor — fetch can trust them.
     const method = options.method || 'GET'
     const date = new Date().toISOString()
     const signature = this.generateSignature(method, endpoint, date)
@@ -259,8 +252,22 @@ export class BokunApiClient {
   }
 }
 
-// Module-level singleton instance (Node.js modules are cached)
-export const bokunClient = new BokunApiClient()
+// Lazy singleton: instantiated on first call rather than at module load.
+// Avoids throwing CREDENTIALS_MISSING during build-time module evaluation
+// (e.g. typegen, route discovery) when env vars are not yet available.
+// Each worker scopes its own instance via module-level caching.
+let _bokunClient: BokunApiClient | null = null
 
-// Alias for backwards compatibility
-export const getBokunClient = () => bokunClient
+export function getBokunClient(): BokunApiClient {
+  if (!_bokunClient) {
+    _bokunClient = new BokunApiClient()
+  }
+  return _bokunClient
+}
+
+// Test helper: clears the cached instance so the next getBokunClient() call
+// re-runs the constructor against current vi.stubEnv values. Double-underscore
+// prefix signals "internal/test only" (React/Jest/Vitest convention).
+export function __resetBokunClientForTests(): void {
+  _bokunClient = null
+}

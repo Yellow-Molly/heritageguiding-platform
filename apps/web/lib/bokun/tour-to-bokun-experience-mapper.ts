@@ -295,7 +295,7 @@ const FALLBACK_MAX_PARTICIPANTS = 12
  * Experience create payload. Pure: no I/O, deterministic.
  *
  * @param tour - Payload Tour fetched with depth=2 and locale='all'
- * @returns Typed Bokun create payload ready for `bokunClient.createExperience()`
+ * @returns Typed Bokun create payload ready for `getBokunClient().createExperience()`
  */
 export function tourToBokunExperiencePayload(
   tour: TourSource
