@@ -43,7 +43,7 @@ export function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1508189860359-777d945909ef?auto=format&fit=crop&w=1920&q=75"
+          src="https://images.unsplash.com/photo-1508189860359-777d945909ef?auto=format&fit=crop&w=1600&q=60"
           alt="Gamla Stan, Stockholm Old Town at sunset with historic buildings reflecting on water"
           fill
           priority
@@ -52,6 +52,7 @@ export function HeroSection() {
           blurDataURL={BLUR_DATA.HERO_GAMLA_STAN}
           className="object-cover"
           sizes="100vw"
+          quality={60}
           data-parallax="0.3"
         />
         {/* Subtle gradient — bottom-heavy for text readability */}

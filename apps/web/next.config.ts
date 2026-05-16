@@ -136,8 +136,8 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.bubblav.com https://widgets.bokun.io",
-              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://widgets.bokun.io",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.bubblav.com https://widgets.bokun.io https://static.bokun.io",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://widgets.bokun.io https://static.bokun.io",
               "img-src 'self' data: blob: https://*.blob.vercel-storage.com https://images.unsplash.com https://*.privatetours.se https://www.gravatar.com https://*.bokun.io",
               "font-src 'self' data: https://fonts.gstatic.com https://widgets.bokun.io",
               "frame-src 'self' https://www.bubblav.com https://www.youtube.com https://www.youtube-nocookie.com https://*.bokun.io",
