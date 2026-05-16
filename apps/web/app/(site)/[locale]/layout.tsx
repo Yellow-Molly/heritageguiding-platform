@@ -70,6 +70,17 @@ export default async function LocaleLayout({
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/*
+          Intercept dynamic Google Maps JS API loads (injected by Bokun widget without loading=async)
+          and append loading=async + script.async=true so Google's loader doesn't log the
+          "loaded directly without loading=async" warning. Narrow URL match (only maps.googleapis.com
+          /maps/api/js) keeps blast radius minimal. Must run before any third-party bundle.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var c=document.createElement;document.createElement=function(t,o){var e=c.call(document,t,o);if(String(t).toLowerCase()==='script'){var d=Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype,'src');if(d&&d.set){Object.defineProperty(e,'src',{configurable:true,get:function(){return d.get.call(e)},set:function(v){if(typeof v==='string'&&/maps\\.googleapis\\.com\\/maps\\/api\\/js/.test(v)&&!/[?&]loading=async/.test(v)){v=v+(v.indexOf('?')>-1?'&':'?')+'loading=async';e.async=true}d.set.call(e,v)}})}}return e}})();`,
+          }}
+        />
         {/* Block indexing on non-production deployments */}
         {!isProductionDeployment() && (
           <meta name="robots" content="noindex, nofollow" />
