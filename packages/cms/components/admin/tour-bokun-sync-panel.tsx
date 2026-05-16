@@ -81,7 +81,9 @@ export function TourBokunSyncPanel() {
       }}
     >
       <div style={{ fontSize: '11px', color: '#6B7280', marginBottom: '8px' }}>
-        CMS is the source of truth — edits here overwrite Bokun on next sync.
+        Syncs <strong>English content only</strong> to Bokun. Swedish and German
+        translations must be edited directly in Bokun — this button does not push
+        them, regardless of which language tab is open.
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
