@@ -438,3 +438,17 @@ a {
     scroll-behavior: auto;
   }
 }
+
+/* Bokun widget global cart — pin to bottom-right so its async DOM injection doesn't shift page layout.
+   Bokun renders #bokun-widgets-root as a sibling of <main> with the cart inside it; without this,
+   the cart wrapper takes inline layout space causing CLS spikes on TourDetails (~0.47). */
+#bokun-widgets-root {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 60;
+  pointer-events: none;
+}
+#bokun-widgets-root > * {
+  pointer-events: auto;
+}
