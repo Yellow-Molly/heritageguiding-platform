@@ -71,14 +71,27 @@ export default async function LocaleLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/*
+          Inline Bokun cart pin — must be parsed before Bokun's JS inserts #bokun-widgets-root,
+          otherwise the wrapper renders inline (taking layout space, pushing content) and
+          causes CLS 0.467 on TourDetails. External globals.css loads concurrently with JS so
+          this rule must be inline. !important wins specificity over any Bokun inline styles.
+        */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `#bokun-widgets-root,.bokun-widgets-cart-wrapper{position:fixed!important;inset:auto 1rem 1rem auto!important;z-index:60!important}#bokun-widgets-root{pointer-events:none}#bokun-widgets-root>*{pointer-events:auto}`,
+          }}
+        />
+        {/*
           Intercept dynamic Google Maps JS API loads (injected by Bokun widget without loading=async)
           and append loading=async + script.async=true so Google's loader doesn't log the
           "loaded directly without loading=async" warning. Narrow URL match (only maps.googleapis.com
           /maps/api/js) keeps blast radius minimal. Must run before any third-party bundle.
+          Note: cross-origin iframes (Bokun checkout) are sealed sandboxes — patches here only
+          affect the parent window's HTMLScriptElement prototype.
         */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){function r(v){return typeof v==='string'&&/maps\\.googleapis\\.com\\/maps\\/api\\/js/.test(v)&&!/[?&]loading=async/.test(v)?v+(v.indexOf('?')>-1?'&':'?')+'loading=async':v}var p=HTMLScriptElement.prototype,d=Object.getOwnPropertyDescriptor(p,'src');if(d&&d.set){Object.defineProperty(p,'src',{configurable:true,get:function(){return d.get.call(this)},set:function(v){var n=r(v);if(n!==v){this.async=true}d.set.call(this,n)}})}var sa=p.setAttribute;p.setAttribute=function(n,v){if(n==='src'){var nv=r(v);if(nv!==v){this.async=true}return sa.call(this,n,nv)}return sa.call(this,n,v)}})();`,
+            __html: `(function(){function r(v){return typeof v==='string'&&/maps\\.googleapis\\.com\\/maps\\/api\\/js/.test(v)&&!/[?&]loading=async/.test(v)?v+(v.indexOf('?')>-1?'&':'?')+'loading=async':v}var p=HTMLScriptElement.prototype,d=Object.getOwnPropertyDescriptor(p,'src');if(d&&d.set){Object.defineProperty(p,'src',{configurable:true,get:function(){return d.get.call(this)},set:function(v){var n=r(v);if(n!==v){this.async=true}d.set.call(this,n)}})}var sa=p.setAttribute;p.setAttribute=function(n,v){if(n==='src'){var nv=r(v);if(nv!==v){this.async=true}return sa.call(this,n,nv)}return sa.call(this,n,v)};if(typeof MutationObserver!=='undefined'){new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.tagName==='SCRIPT'){var s=n.getAttribute('src');var ns=r(s);if(ns&&ns!==s){var rep=document.createElement('script');rep.async=true;rep.src=ns;n.parentNode&&n.parentNode.replaceChild(rep,n)}}})})}).observe(document,{childList:true,subtree:true})}})();`,
           }}
         />
         {/* Block indexing on non-production deployments */}
