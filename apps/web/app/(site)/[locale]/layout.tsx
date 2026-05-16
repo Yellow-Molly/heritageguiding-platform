@@ -78,7 +78,7 @@ export default async function LocaleLayout({
         */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var c=document.createElement;document.createElement=function(t,o){var e=c.call(document,t,o);if(String(t).toLowerCase()==='script'){var d=Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype,'src');if(d&&d.set){Object.defineProperty(e,'src',{configurable:true,get:function(){return d.get.call(e)},set:function(v){if(typeof v==='string'&&/maps\\.googleapis\\.com\\/maps\\/api\\/js/.test(v)&&!/[?&]loading=async/.test(v)){v=v+(v.indexOf('?')>-1?'&':'?')+'loading=async';e.async=true}d.set.call(e,v)}})}}return e}})();`,
+            __html: `(function(){function r(v){return typeof v==='string'&&/maps\\.googleapis\\.com\\/maps\\/api\\/js/.test(v)&&!/[?&]loading=async/.test(v)?v+(v.indexOf('?')>-1?'&':'?')+'loading=async':v}var p=HTMLScriptElement.prototype,d=Object.getOwnPropertyDescriptor(p,'src');if(d&&d.set){Object.defineProperty(p,'src',{configurable:true,get:function(){return d.get.call(this)},set:function(v){var n=r(v);if(n!==v){this.async=true}d.set.call(this,n)}})}var sa=p.setAttribute;p.setAttribute=function(n,v){if(n==='src'){var nv=r(v);if(nv!==v){this.async=true}return sa.call(this,n,nv)}return sa.call(this,n,v)}})();`,
           }}
         />
         {/* Block indexing on non-production deployments */}
