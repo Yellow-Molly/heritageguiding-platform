@@ -136,12 +136,12 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.bubblav.com",
-              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              "img-src 'self' data: blob: https://*.blob.vercel-storage.com https://images.unsplash.com https://*.privatetours.se https://www.gravatar.com",
-              "font-src 'self' data: https://fonts.gstatic.com",
-              "frame-src 'self' https://www.bubblav.com https://www.youtube.com https://www.youtube-nocookie.com",
-              "connect-src 'self' https://www.bubblav.com https://*.bubblav.com https://*.ably.net https://*.ably-realtime.com wss://*.ably.net wss://*.ably-realtime.com",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.bubblav.com https://widgets.bokun.io",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://widgets.bokun.io",
+              "img-src 'self' data: blob: https://*.blob.vercel-storage.com https://images.unsplash.com https://*.privatetours.se https://www.gravatar.com https://*.bokun.io",
+              "font-src 'self' data: https://fonts.gstatic.com https://widgets.bokun.io",
+              "frame-src 'self' https://www.bubblav.com https://www.youtube.com https://www.youtube-nocookie.com https://*.bokun.io",
+              "connect-src 'self' https://www.bubblav.com https://*.bubblav.com https://*.ably.net https://*.ably-realtime.com wss://*.ably.net wss://*.ably-realtime.com https://*.bokun.io",
             ].join('; '),
           },
           {

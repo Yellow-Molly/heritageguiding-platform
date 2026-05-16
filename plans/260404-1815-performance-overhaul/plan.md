@@ -7,13 +7,14 @@ effort: 8h
 branch: feat/performance-overhaul
 tags: [performance, lighthouse, images, blur-placeholder, ci, core-web-vitals]
 created: 2026-04-04
-blockedBy: []
+blockedBy: [260516-1746-staging-lighthouse-perf-seo]
 blocks: []
 related:
   - plans/260501-1559-staging-perceived-performance/plan.md
+  - plans/260516-1746-staging-lighthouse-perf-seo/plan.md
 ---
 
-> **Cross-plan note (2026-05-01):** Plan `260501-1559-staging-perceived-performance` Phase 2 coordinates with this plan's Phase 5 (Lighthouse CI threshold restore). If this plan's Phase 5 stays stale, that plan absorbs it.
+> **Cross-plan note (2026-05-16):** Phase 5 (validation + threshold restore) has been **absorbed by `plans/260516-1746-staging-lighthouse-perf-seo/`**. Phases 1–4 shipped in commit `665f6deaa32816beb53c4d7891a6335c9f4aa868`. This plan flips to `superseded` when the successor plan's Phase 5 completes. See `plans/reports/validate-260516-1725-performance-overhaul.md` for the validation that triggered the supersession.
 
 # Full Performance Overhaul & Lighthouse CI Fix
 

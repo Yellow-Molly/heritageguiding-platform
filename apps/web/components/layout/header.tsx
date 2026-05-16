@@ -81,7 +81,6 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
             alt="Private Tours"
             fill
             className="object-contain object-left"
-            priority
             unoptimized
           />
         </Link>

@@ -149,7 +149,7 @@ export function BokunBookingWidget({
           Please try again or contact us for assistance.
         </p>
         <Button
-          variant="outline"
+          variant="outline-dark"
           size="sm"
           className="mt-4"
           onClick={loadWidget}

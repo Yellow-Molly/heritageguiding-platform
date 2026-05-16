@@ -36,8 +36,8 @@ module.exports = {
     },
     assert: {
       assertions: {
-        // Performance score > 70 (temporarily lowered during image optimization, restore to 0.9 in Phase 5)
-        'categories:performance': ['error', { minScore: 0.7 }],
+        // Performance score >= 90 (restored 2026-05-16; staging Lighthouse reports show 0.90-0.99 across all pages)
+        'categories:performance': ['error', { minScore: 0.9 }],
         // Accessibility score > 95
         'categories:accessibility': ['warn', { minScore: 0.95 }],
         // Best practices > 90

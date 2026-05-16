@@ -22,7 +22,7 @@ export function GroupInquiryModal({ tourName }: { tourName?: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-full">
+        <Button variant="outline-dark" className="w-full">
           <Users className="mr-2 h-4 w-4" />
           {t('modalTrigger')}
         </Button>
