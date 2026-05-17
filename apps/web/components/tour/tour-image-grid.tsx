@@ -40,12 +40,13 @@ export function TourImageGrid({ gallery, title, onImageClick }: TourImageGridPro
         <Image
           src={images[0].image.url}
           alt={images[0].image.alt || title}
-          fill
+          width={1600}
+          height={900}
           priority
           fetchPriority="high"
           placeholder={images[0].image.blurDataUrl ? 'blur' : 'empty'}
           blurDataURL={images[0].image.blurDataUrl}
-          className="object-cover"
+          className="h-full w-full object-cover"
           sizes="100vw"
         />
       </button>
@@ -90,12 +91,13 @@ function SingleImageGrid({
       <Image
         src={image.image.url}
         alt={image.image.alt || title}
-        fill
+        width={1600}
+        height={900}
         priority
         fetchPriority="high"
         placeholder={image.image.blurDataUrl ? 'blur' : 'empty'}
         blurDataURL={image.image.blurDataUrl}
-        className="object-cover"
+        className="h-full w-full object-cover"
         sizes="(min-width: 1024px) calc(100vw - 160px), 100vw"
       />
     </button>
@@ -190,12 +192,13 @@ function GridImageButton({
       <Image
         src={image.image.url}
         alt={image.image.alt || ''}
-        fill
+        width={1600}
+        height={900}
         priority={priority}
         fetchPriority={priority ? 'high' : undefined}
         placeholder={image.image.blurDataUrl ? 'blur' : 'empty'}
         blurDataURL={image.image.blurDataUrl}
-        className="object-cover"
+        className="h-full w-full object-cover"
         sizes="(min-width: 1024px) 420px, 100vw"
       />
     </button>
