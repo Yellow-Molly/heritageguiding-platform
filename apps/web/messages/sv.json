@@ -212,6 +212,7 @@
       "heading": "Juridik",
       "terms": "Användarvillkor",
       "privacy": "Integritetspolicy",
+      "imprint": "Företagsuppgifter",
       "cookies": "Cookiepolicy"
     }
   },
@@ -968,6 +969,52 @@
       "heading": "Frågor om integritet?",
       "emailDisplay": "info@privatetours.se",
       "responseSla": "Vi svarar inom 12 timmar."
+    }
+  },
+  "imprint": {
+    "meta": {
+      "title": "Företagsuppgifter",
+      "description": "Juridisk information och leverantörsuppgifter för Private Tours enligt tysk TMG §5."
+    },
+    "hero": {
+      "breadcrumbHome": "Hem",
+      "breadcrumbCurrent": "Företagsuppgifter",
+      "title": "Företagsuppgifter",
+      "subtitle": "Leverantörsuppgifter enligt tysk TMG §5 och §55 RStV.",
+      "updatedLabel": "Uppdaterad"
+    },
+    "tradingAs": "verksamhetsnamn",
+    "sections": {
+      "provider": {
+        "heading": "Leverantör",
+        "intro": "Leverantören av denna webbplats, ansvarig enligt TMG §5, är den juridiska person som anges nedan."
+      },
+      "contact": {
+        "heading": "Kontakt",
+        "phoneLabel": "Telefon",
+        "emailLabel": "E-post"
+      },
+      "registration": {
+        "heading": "Registrering",
+        "authorityLabel": "Registreringsmyndighet",
+        "authorityValue": "Bolagsverket",
+        "orgNumberLabel": "Organisationsnummer",
+        "courtLabel": "Behörig domstol"
+      },
+      "vat": {
+        "heading": "Momsregistrering",
+        "idLabel": "VAT-nummer",
+        "pendingNote": "Registrering hos Bolagsverket pågår. Sidan uppdateras så snart VAT-numret har utfärdats."
+      },
+      "editorial": {
+        "heading": "Redaktionellt ansvar",
+        "intro": "Ansvarig för redaktionellt innehåll enligt §55 (2) RStV:"
+      },
+      "odr": {
+        "heading": "EU-tvistlösning online",
+        "body": "Europeiska kommissionen tillhandahåller en plattform för tvistlösning online:",
+        "consumerNote": "Vi är inte skyldiga och inte villiga att delta i tvistlösningsförfaranden inför en konsumentskiljenämnd."
+      }
     }
   },
   "notFound": {

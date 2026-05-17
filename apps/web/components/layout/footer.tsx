@@ -57,6 +57,7 @@ export async function Footer() {
   const legalLinks = [
     { label: t('legalLinks.terms'), href: '/terms' },
     { label: t('legalLinks.privacy'), href: '/privacy' },
+    { label: t('legalLinks.imprint'), href: '/imprint' },
   ]
 
   return (

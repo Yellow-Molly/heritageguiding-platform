@@ -212,6 +212,7 @@
       "heading": "Legal",
       "terms": "Terms of Service",
       "privacy": "Privacy Policy",
+      "imprint": "Imprint",
       "cookies": "Cookie Policy"
     }
   },
@@ -968,6 +969,52 @@
       "heading": "Privacy questions?",
       "emailDisplay": "info@privatetours.se",
       "responseSla": "We respond within 12 hours."
+    }
+  },
+  "imprint": {
+    "meta": {
+      "title": "Imprint",
+      "description": "Legal notice and provider information for Private Tours under Germany's TMG §5."
+    },
+    "hero": {
+      "breadcrumbHome": "Home",
+      "breadcrumbCurrent": "Imprint",
+      "title": "Imprint",
+      "subtitle": "Provider information under Germany's TMG §5 and §55 RStV.",
+      "updatedLabel": "Updated"
+    },
+    "tradingAs": "trading as",
+    "sections": {
+      "provider": {
+        "heading": "Provider",
+        "intro": "The provider of this website, responsible under TMG §5, is the legal entity below."
+      },
+      "contact": {
+        "heading": "Contact",
+        "phoneLabel": "Phone",
+        "emailLabel": "Email"
+      },
+      "registration": {
+        "heading": "Registration",
+        "authorityLabel": "Registration authority",
+        "authorityValue": "Bolagsverket (Swedish Companies Registration Office)",
+        "orgNumberLabel": "Registration number",
+        "courtLabel": "Competent court"
+      },
+      "vat": {
+        "heading": "VAT identification",
+        "idLabel": "VAT ID",
+        "pendingNote": "Bolagsverket VAT registration in progress. This page will be updated as soon as the VAT ID is issued."
+      },
+      "editorial": {
+        "heading": "Editorial responsibility",
+        "intro": "Responsible for editorial content under §55 (2) RStV:"
+      },
+      "odr": {
+        "heading": "EU online dispute resolution",
+        "body": "The European Commission provides a platform for online dispute resolution:",
+        "consumerNote": "We are not obliged and not willing to participate in dispute resolution proceedings before a consumer arbitration board."
+      }
     }
   },
   "notFound": {

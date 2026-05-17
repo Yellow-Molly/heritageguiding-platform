@@ -31,16 +31,16 @@ Privacy, Terms, Cancellation pages ✅ implemented and i18n-complete. **Critical
 - **Files (only if implementation needed):** `apps/web/components/analytics/web-vitals-reporter.tsx`, `apps/web/app/(site)/[locale]/layout.tsx`, `messages/{sv,en,de}.json`
 - **Effort:** 0h (stance ratified) or 3-5h (CMP required)
 
-#### L2. Impressum / Imprint page missing
-- **Risk:** German Telemediengesetz §5 requires Impressum for commercial sites targeting DE. Currently footer contact info only.
-- **Action:**
-  1. Create `apps/web/app/(site)/[locale]/(frontend)/imprint/page.tsx` (mirror privacy/terms structure).
-  2. Add i18n keys `imprint.{title,heading,sections.*}` to all 3 locale files.
-  3. Required content: legal entity (Yellow Molly AB, org #559577-5080), address, phone, email, VAT (pending env), commercial register court (Bolagsverket), responsible editor.
-  4. Link from footer legal cluster.
-- **Files:** new page + i18n keys + footer update
-- **Effort:** 2-3h
-- **Dependency:** Business sign-off on VAT (Phase 02 / `260425-1207` phase-03)
+#### L2. Impressum / Imprint page — ✅ DONE (2026-05-17)
+- **Done:**
+  1. ✅ `apps/web/app/(site)/[locale]/(frontend)/imprint/page.tsx` — single-file page, mirrors privacy hero style, body is flat fact-sheet (provider / contact / registration / VAT / editorial responsibility / EU ODR) using semantic `<address>` + `<dl>`.
+  2. ✅ `imprint` namespace added to sv/en/de with TMG §5 + §55 RStV terminology.
+  3. ✅ Values sourced from `lib/contact-constants.ts` (`LEGAL_ENTITY`, `CONTACT_ADDRESS`, `CONTACT_PHONE`, `CONTACT_EMAIL`) — one source of truth. VAT shows `<VAT-TBD>` with an in-page pending note until Bolagsverket registration completes.
+  4. ✅ Footer `legalLinks` cluster includes `/imprint` in all locales.
+  5. ✅ `app/sitemap.ts` registers `/imprint` (priority 0.3, yearly).
+  6. ✅ `lib/legal-dates.ts` adds `imprint: '2026-05-17'`.
+- **Verified:** Dev server smoke — `/en/imprint`, `/sv/imprint`, `/de/imprint` all return 200 with no missing-key markers; footer link renders on home and imprint pages in all locales.
+- **Remaining dependency:** VAT number from Bolagsverket → flips `<VAT-TBD>` to real ID (Phase 02 / `260425-1207` phase-03).
 
 #### L3. Legal copy dates are placeholder
 - **Risk:** Privacy lastUpdated = `2026-05-09`, Terms = `2026-05-04`, but Phase-04 legal review in `260425-1207` says these are **drafts not counsel-signed**. Phase-04 plan flags effective dates as `2026-01-01` mock.

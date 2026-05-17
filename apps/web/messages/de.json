@@ -212,6 +212,7 @@
       "heading": "Rechtliches",
       "terms": "Nutzungsbedingungen",
       "privacy": "Datenschutzerklärung",
+      "imprint": "Impressum",
       "cookies": "Cookie-Richtlinie"
     }
   },
@@ -968,6 +969,52 @@
       "heading": "Fragen zum Datenschutz?",
       "emailDisplay": "info@privatetours.se",
       "responseSla": "Wir antworten innerhalb von 12 Stunden."
+    }
+  },
+  "imprint": {
+    "meta": {
+      "title": "Impressum",
+      "description": "Anbieterkennzeichnung nach § 5 TMG für Private Tours."
+    },
+    "hero": {
+      "breadcrumbHome": "Startseite",
+      "breadcrumbCurrent": "Impressum",
+      "title": "Impressum",
+      "subtitle": "Anbieterkennzeichnung gemäß § 5 TMG und § 55 RStV.",
+      "updatedLabel": "Stand"
+    },
+    "tradingAs": "geschäftlich tätig als",
+    "sections": {
+      "provider": {
+        "heading": "Anbieter",
+        "intro": "Anbieter dieser Website und verantwortlich gemäß § 5 TMG ist die nachstehende juristische Person."
+      },
+      "contact": {
+        "heading": "Kontakt",
+        "phoneLabel": "Telefon",
+        "emailLabel": "E-Mail"
+      },
+      "registration": {
+        "heading": "Handelsregister",
+        "authorityLabel": "Registergericht",
+        "authorityValue": "Bolagsverket (schwedisches Handelsregister)",
+        "orgNumberLabel": "Registernummer",
+        "courtLabel": "Zuständiges Gericht"
+      },
+      "vat": {
+        "heading": "Umsatzsteuer-Identifikationsnummer",
+        "idLabel": "USt-IdNr.",
+        "pendingNote": "Die Registrierung beim Bolagsverket läuft. Diese Seite wird aktualisiert, sobald die USt-IdNr. erteilt wurde."
+      },
+      "editorial": {
+        "heading": "Redaktionell verantwortlich",
+        "intro": "Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:"
+      },
+      "odr": {
+        "heading": "EU-Streitbeilegung",
+        "body": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung bereit:",
+        "consumerNote": "Wir sind nicht bereit und nicht verpflichtet, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
+      }
     }
   },
   "notFound": {

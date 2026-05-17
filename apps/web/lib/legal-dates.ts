@@ -10,6 +10,7 @@ export const LEGAL_DATES = {
   privacy: '2026-05-09',
   terms: '2026-05-04',
   cancellation: '2026-04-25',
+  imprint: '2026-05-17',
 } as const
 
 export type LegalPage = keyof typeof LEGAL_DATES

@@ -17,6 +17,7 @@ const STATIC_ROUTES = [
   { path: '/group-booking', priority: 0.7, changeFrequency: 'monthly' as const },
   { path: '/privacy', priority: 0.3, changeFrequency: 'yearly' as const },
   { path: '/terms', priority: 0.3, changeFrequency: 'yearly' as const },
+  { path: '/imprint', priority: 0.3, changeFrequency: 'yearly' as const },
 ]
 
 /** Build hreflang alternates map for a given path */
