@@ -8,6 +8,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { checkRateLimit } from '@/lib/rate-limit-by-ip'
+
+// 20 requests/minute per IP — generous for a wizard flow that fires one request per submit.
+const RECOMMEND_RATE_LIMIT = { maxRequests: 20, windowMs: 60_000 }
 
 // Valid targetAudience values from the CMS schema
 const validTags = [
@@ -22,6 +26,14 @@ const requestSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    // Read forwarded IP directly off the request — avoids `next/headers` async
+    // context, which would require tests to mock the module.
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+    const { success } = checkRateLimit(`recommend:${ip}`, RECOMMEND_RATE_LIMIT)
+    if (!success) {
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
+    }
+
     const body = await request.json()
     const parsed = requestSchema.safeParse(body)
 

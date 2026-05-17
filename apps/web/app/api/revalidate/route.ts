@@ -8,10 +8,22 @@
  */
 import { revalidateTag } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
+import { checkRateLimit } from '@/lib/rate-limit-by-ip'
 
 const VALID_TAGS = ['tours', 'categories', 'guides', 'cities'] as const
 
+// Defense-in-depth: even with secret-auth, cap requests/min/IP to slow brute-force
+// guessing of REVALIDATION_SECRET. Legitimate use (CMS afterChange hooks) fires
+// only a handful of requests per minute.
+const REVALIDATE_RATE_LIMIT = { maxRequests: 10, windowMs: 60_000 }
+
 export async function POST(request: NextRequest) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+  const { success } = checkRateLimit(`revalidate:${ip}`, REVALIDATE_RATE_LIMIT)
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
+  }
+
   const secret = request.nextUrl.searchParams.get('secret')
   const tag = request.nextUrl.searchParams.get('tag')
 

@@ -10,6 +10,14 @@ vi.mock('@payload-config', () => ({
   default: {},
 }))
 
+// Mock rate limiter — these tests focus on validation, not throttling.
+// Without this, the 25-case suite trips the 20/min/IP limit on the shared
+// "unknown" key after the 20th request and returns 429 instead of the
+// expected 400/200.
+vi.mock('@/lib/rate-limit-by-ip', () => ({
+  checkRateLimit: vi.fn().mockReturnValue({ success: true }),
+}))
+
 // Import after mocks are set up
 const { POST } = await import('../route')
 
