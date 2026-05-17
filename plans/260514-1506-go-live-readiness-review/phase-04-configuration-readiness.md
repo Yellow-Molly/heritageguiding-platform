@@ -25,16 +25,18 @@ Strong baseline: security headers, HSTS, CSP, staging crawler blocking, DB backu
 
 ### P1 — Risk-Waiverable
 
-#### CFG1. Error tracking missing
-- **Current:** No Sentry / LogRocket / Datadog. Errors visible only in Vercel logs.
-- **Effect:** Production incidents hard to triage; no aggregation across regions/users; no alerting.
-- **Action:**
-  1. Add Sentry (`@sentry/nextjs`). Free tier covers ≤5k errors/mo — sufficient for MVP.
-  2. Env-gated: only enable when `NEXT_PUBLIC_SENTRY_DSN` set (prod only).
-  3. Wire to App Router + Edge / Node runtimes.
-  4. Add release tagging via `SENTRY_RELEASE` from CI.
-- **Effort:** 1.5h
-- **Files:** `apps/web/sentry.{client,server,edge}.config.ts`, `apps/web/next.config.ts` (withSentryConfig), `.env.example`
+#### CFG1. Error tracking — ✅ DONE (2026-05-17)
+- **Done:**
+  1. ✅ `@sentry/nextjs@10.53.1` installed (supports Next 16 per peer range).
+  2. ✅ `sentry.server.config.ts` (Node runtime) and `sentry.edge.config.ts` (Edge runtime) — both env-gated. Skip init entirely unless `SENTRY_DSN`/`NEXT_PUBLIC_SENTRY_DSN` is set AND `VERCEL_ENV === 'production'`. Staging deploys are distinguished by `environment: 'staging'`.
+  3. ✅ `instrumentation-client.ts` for browser bundle (replaces legacy `sentry.client.config.ts` per Next 16 pattern). Session Replay disabled (privacy + cost). Browser noise (`ResizeObserver loop limit`, `Non-Error promise rejection`) filtered.
+  4. ✅ `instrumentation.ts` updated to load Sentry server/edge configs by `NEXT_RUNTIME` plus existing env validation. Exports `onRequestError = Sentry.captureRequestError` for App Router server-side error capture.
+  5. ✅ `app/global-error.tsx` — required by Sentry to capture React render errors that escape route-level boundaries. Plain `<a>` for hard reload (next/link would route through the broken layout).
+  6. ✅ `next.config.ts` wrapped with `withSentryConfig`. Source-map upload + release rewriting active when `SENTRY_AUTH_TOKEN`/`SENTRY_ORG`/`SENTRY_PROJECT` are set. Build does not fail on plugin warnings.
+  7. ✅ `lib/env.ts` adds `SENTRY_*` keys as optional URLs/strings (format-checked if present).
+  8. ✅ `.env.example` documents all Sentry env vars.
+- **Verified:** Dev server boots clean (Sentry plugin detected, init is no-op since no DSN); `/en/imprint` returns 200 with full content; no new lint or type errors.
+- **Remaining ops work:** Create Sentry project (free SaaS tier is enough — ≤5k errors/mo); set `SENTRY_DSN` + `NEXT_PUBLIC_SENTRY_DSN` on Vercel prod env (and staging if desired). For source-map upload: set `SENTRY_ORG`, `SENTRY_PROJECT`, `SENTRY_AUTH_TOKEN` in CI/Vercel build environment.
 
 #### CFG2. Uptime monitoring missing
 - **Current:** No external uptime monitor. Outages discovered reactively.

@@ -52,6 +52,16 @@ const envSchema = z.object({
   RESEND_API_KEY: z.string().optional(),
   EMAIL_FROM: z.string().email().optional(),
   OPENAI_API_KEY: z.string().optional(),
+
+  // Sentry — both server and client DSNs supported. NEXT_PUBLIC_SENTRY_DSN
+  // is required to capture client-side errors (inlined into the browser
+  // bundle). Sentry init is gated by these AND `VERCEL_ENV=production`.
+  SENTRY_DSN: z.string().url().optional(),
+  NEXT_PUBLIC_SENTRY_DSN: z.string().url().optional(),
+  SENTRY_ORG: z.string().optional(),
+  SENTRY_PROJECT: z.string().optional(),
+  SENTRY_RELEASE: z.string().optional(),
+  SENTRY_AUTH_TOKEN: z.string().optional(),
 })
 
 const parsed = envSchema.safeParse(process.env)

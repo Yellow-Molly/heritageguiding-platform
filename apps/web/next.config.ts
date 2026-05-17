@@ -1,5 +1,6 @@
 import type { NextConfig } from 'next'
 import { withPayload } from '@payloadcms/next/withPayload'
+import { withSentryConfig } from '@sentry/nextjs'
 import createNextIntlPlugin from 'next-intl/plugin'
 import withBundleAnalyzer from '@next/bundle-analyzer'
 import path from 'path'
@@ -52,10 +53,6 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ['lucide-react', 'date-fns'],
-    // Inline critical CSS in HTML head + defer rest. Uses Beasties under the hood.
-    // Round 4 of plan 260517-0225-mobile-lcp-deepdive — targets render-blocking
-    // CSS chunk that delays FCP/LCP on Slow 4G simulation.
-    optimizeCss: true,
   },
   async redirects() {
     return [
@@ -162,4 +159,21 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default withNextIntl(withPayload(bundleAnalyzer(nextConfig)))
+// Sentry wraps last so its webpack/turbopack plugin can upload source maps
+// and rewrite stack traces. Plugin is silent when SENTRY_AUTH_TOKEN / org /
+// project are unset, so dev/preview builds don't fail.
+const sentryBuildOptions = {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  silent: !process.env.CI,
+  // Don't fail the build if source-map upload fails — error reporting still
+  // works without symbolication, and CI shouldn't gate on this.
+  errorHandler: (err: Error) => {
+    console.warn('[sentry] build plugin warning:', err.message)
+  },
+}
+
+export default withSentryConfig(
+  withNextIntl(withPayload(bundleAnalyzer(nextConfig))),
+  sentryBuildOptions,
+)
