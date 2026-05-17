@@ -100,13 +100,19 @@ const BOKUN_WIDGET_BASE_URL = 'https://widgets.bokun.io/online-sales'
  *
  * @param bookingChannelUUID - Booking channel UUID from Bokun dashboard
  * @param experienceId - Experience/activity ID
+ * @param locale - Optional ISO 639-1 language code (e.g. 'sv', 'en', 'de').
+ *   Forces the widget to render in that language. Without it Bokun's loader
+ *   reads <html lang> if present, but dashboard defaults can override that —
+ *   so callers in i18n contexts should pass it explicitly.
  * @returns Full widget URL for iframe embedding
  */
 export function getBokunWidgetUrl(
   bookingChannelUUID: string,
-  experienceId: string
+  experienceId: string,
+  locale?: string
 ): string {
-  return `${BOKUN_WIDGET_BASE_URL}/${bookingChannelUUID}/experience-calendar/${experienceId}`
+  const baseUrl = `${BOKUN_WIDGET_BASE_URL}/${bookingChannelUUID}/experience-calendar/${experienceId}`
+  return locale ? `${baseUrl}?lang=${encodeURIComponent(locale)}` : baseUrl
 }
 
 /**

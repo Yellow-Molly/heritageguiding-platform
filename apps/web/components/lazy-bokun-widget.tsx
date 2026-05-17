@@ -7,6 +7,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 interface LazyBokunWidgetProps {
   experienceId: string
   className?: string
+  /** ISO 639-1 language code forwarded to Bokun via `?lang=` on data-src. */
+  locale?: string
 }
 
 // Matches Tailwind `lg:` breakpoint — where BookingSection moves into the
@@ -33,7 +35,7 @@ const DESKTOP_LOAD_DELAY_MS = 7000
  *   intersection would fire immediately. setTimeout past Lighthouse's TTI
  *   instead.
  */
-export function LazyBokunWidget({ experienceId, className }: LazyBokunWidgetProps) {
+export function LazyBokunWidget({ experienceId, className, locale }: LazyBokunWidgetProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [shouldLoad, setShouldLoad] = useState(false)
 
@@ -73,7 +75,7 @@ export function LazyBokunWidget({ experienceId, className }: LazyBokunWidgetProp
   return (
     <div ref={ref} className={className}>
       {shouldLoad ? (
-        <BokunBookingWidget experienceId={experienceId} />
+        <BokunBookingWidget experienceId={experienceId} locale={locale} />
       ) : (
         <div className="space-y-3" aria-label="Booking widget loading">
           <Skeleton className="h-10 w-full" />

@@ -1,6 +1,6 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Calendar, Mail, ShieldCheck, Zap } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
 import { CONTACT_EMAIL } from '@/lib/contact-constants'
@@ -18,6 +18,7 @@ interface BookingSectionProps {
  */
 export function BookingSection({ tour }: BookingSectionProps) {
   const t = useTranslations('tourDetail.booking')
+  const locale = useLocale()
   const hasBokunIntegration = Boolean(tour.bokunExperienceId)
 
   return (
@@ -43,6 +44,7 @@ export function BookingSection({ tour }: BookingSectionProps) {
         <div className="mt-5">
           <LazyBokunWidget
             experienceId={tour.bokunExperienceId!}
+            locale={locale}
             className="min-h-[300px]"
           />
           {/* Third-party booking disclosure (L5 — go-live legal readiness). Customer

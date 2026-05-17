@@ -10,12 +10,19 @@ import { useEffect, useRef, useState } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { AlertCircle, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { getBokunWidgetUrl } from '@/lib/bokun'
 
 interface BokunBookingWidgetProps {
   /** Bokun experience/activity ID */
   experienceId: string
   /** Optional CSS class name */
   className?: string
+  /**
+   * ISO 639-1 language code passed to Bokun's data-src as `?lang=`.
+   * Required when site is multi-language — Bokun otherwise falls back to the
+   * booking channel's dashboard default (English), ignoring <html lang>.
+   */
+  locale?: string
   /** Callback when widget fails to load */
   onError?: (error: string) => void
   /** Callback when widget loads successfully */
@@ -46,6 +53,7 @@ const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9
 export function BokunBookingWidget({
   experienceId,
   className = '',
+  locale,
   onError,
   onLoad,
 }: BokunBookingWidgetProps) {
@@ -131,11 +139,12 @@ export function BokunBookingWidget({
     document.head.appendChild(script)
   }
 
-  // Load widget on mount
+  // Load widget on mount. Includes `locale` so language switches re-init the
+  // iframe with a fresh data-src.
   useEffect(() => {
     loadWidget()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bookingChannelUUID, experienceId])
+  }, [bookingChannelUUID, experienceId, locale])
 
   // Error state with retry option
   if (error) {
@@ -172,13 +181,16 @@ export function BokunBookingWidget({
         </div>
       )}
 
-      {/* Bokun widget container */}
+      {/* Bokun widget container.
+          `key` forces React to remount the div on locale change so Bokun's
+          loader picks up the new data-src instead of reusing the cached iframe. */}
       <div
+        key={locale}
         ref={containerRef}
         className="bokunWidget"
         data-src={
           bookingChannelUUID
-            ? `https://widgets.bokun.io/online-sales/${bookingChannelUUID}/experience-calendar/${experienceId}`
+            ? getBokunWidgetUrl(bookingChannelUUID, experienceId, locale)
             : undefined
         }
         style={{ display: loading ? 'none' : 'block' }}

@@ -187,6 +187,28 @@ describe('getBokunWidgetUrl', () => {
     const url = getBokunWidgetUrl('uuid-abc', 'exp-123')
     expect(url).toContain('widgets.bokun.io')
   })
+
+  it('appends ?lang= when locale is provided', () => {
+    const url = getBokunWidgetUrl('uuid-abc', 'exp-123', 'sv')
+    expect(url).toBe(
+      'https://widgets.bokun.io/online-sales/uuid-abc/experience-calendar/exp-123?lang=sv'
+    )
+  })
+
+  it('supports German locale', () => {
+    const url = getBokunWidgetUrl('uuid-abc', 'exp-123', 'de')
+    expect(url).toContain('?lang=de')
+  })
+
+  it('omits lang param when locale is undefined', () => {
+    const url = getBokunWidgetUrl('uuid-abc', 'exp-123', undefined)
+    expect(url).not.toContain('lang=')
+  })
+
+  it('url-encodes unusual locale values', () => {
+    const url = getBokunWidgetUrl('uuid-abc', 'exp-123', 'pt-BR')
+    expect(url).toContain('?lang=pt-BR')
+  })
 })
 
 // ============================================================================
