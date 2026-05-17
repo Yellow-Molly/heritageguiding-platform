@@ -115,7 +115,7 @@ function TwoImageGrid({
   onImageClick: (i: number) => void
 }) {
   return (
-    <div className="grid h-[420px] grid-cols-[1fr_420px] gap-1">
+    <div className="grid h-[420px] grid-cols-[1fr_420px] grid-rows-1 gap-1">
       <GridImageButton image={images[0]} index={0} title={title} onImageClick={onImageClick} className="rounded-l-2xl" priority />
       <GridImageButton image={images[1]} index={1} title={title} onImageClick={onImageClick} className="rounded-r-2xl" />
     </div>
@@ -133,11 +133,11 @@ function ThreeImageGrid({
   onImageClick: (i: number) => void
 }) {
   return (
-    <div className="grid h-[420px] grid-cols-[1fr_420px] gap-1">
+    <div className="grid h-[420px] grid-cols-[1fr_420px] grid-rows-1 gap-1">
       <GridImageButton image={images[0]} index={0} title={title} onImageClick={onImageClick} className="rounded-l-2xl" priority />
-      <div className="flex flex-col gap-1">
-        <GridImageButton image={images[1]} index={1} title={title} onImageClick={onImageClick} className="flex-1 rounded-tr-2xl" />
-        <GridImageButton image={images[2]} index={2} title={title} onImageClick={onImageClick} className="flex-1 rounded-br-2xl" />
+      <div className="grid grid-rows-2 gap-1">
+        <GridImageButton image={images[1]} index={1} title={title} onImageClick={onImageClick} className="rounded-tr-2xl" />
+        <GridImageButton image={images[2]} index={2} title={title} onImageClick={onImageClick} className="rounded-br-2xl" />
       </div>
     </div>
   )
@@ -154,13 +154,13 @@ function FullImageGrid({
   onImageClick: (i: number) => void
 }) {
   return (
-    <div className="grid h-[420px] grid-cols-[1fr_420px] gap-1">
+    <div className="grid h-[420px] grid-cols-[1fr_420px] grid-rows-1 gap-1">
       <GridImageButton image={images[0]} index={0} title={title} onImageClick={onImageClick} className="rounded-l-2xl" priority />
-      <div className="flex flex-col gap-1">
-        <GridImageButton image={images[1]} index={1} title={title} onImageClick={onImageClick} className="flex-1 rounded-tr-2xl" />
-        <div className="flex flex-1 gap-1">
-          <GridImageButton image={images[2]} index={2} title={title} onImageClick={onImageClick} className="flex-1" />
-          <GridImageButton image={images[3]} index={3} title={title} onImageClick={onImageClick} className="flex-1 rounded-br-2xl" />
+      <div className="grid grid-rows-2 gap-1">
+        <GridImageButton image={images[1]} index={1} title={title} onImageClick={onImageClick} className="rounded-tr-2xl" />
+        <div className="grid grid-cols-2 gap-1">
+          <GridImageButton image={images[2]} index={2} title={title} onImageClick={onImageClick} />
+          <GridImageButton image={images[3]} index={3} title={title} onImageClick={onImageClick} className="rounded-br-2xl" />
         </div>
       </div>
     </div>
