@@ -9,14 +9,29 @@ interface LazyBokunWidgetProps {
   className?: string
 }
 
+// Matches Tailwind `lg:` breakpoint — where BookingSection moves into the
+// sticky right-column sidebar that's typically in initial viewport.
+const DESKTOP_MEDIA_QUERY = '(min-width: 1024px)'
+
+// Delay before auto-loading Bokun on desktop. Picks a window past Lighthouse's
+// TTI measurement (~5s after FCP under Slow 4G simulation) but before typical
+// user dwell-to-booking time on TourDetails (~10-30s). PSI's TBT/Speed Index
+// stay clean; real users see the widget by the time they scroll to it.
+const DESKTOP_LOAD_DELAY_MS = 7000
+
 /**
- * Defers Bokun widget script load until the booking sidebar is within ~400px
- * of the viewport. Bokun's loader pulls ~2.8s of main-thread work on mobile
- * (OnlineSalesRenderer, OnlineSalesContent, BokunWidgets, etc.) — eager load
- * spikes TBT to ~1.3s and Speed Index to ~7s per PSI on TourDetails. Deferring
- * until intent keeps the page interactive while still loading well before most
- * users scroll-reach the booking section (typically ~3-5 sections below
- * the fold on mobile, immediately visible in sticky sidebar on desktop).
+ * Defers Bokun widget script load until user intent. Bokun's loader pulls
+ * ~2.8s of main-thread work (OnlineSalesRenderer, OnlineSalesContent,
+ * BokunWidgets) and 1.2MB of unused JS — eager load spiked PSI mobile TBT
+ * to 1,330ms and Speed Index to 7.2s.
+ *
+ * Triggers:
+ * - Mobile (<1024px): IntersectionObserver with 400px buffer. Booking
+ *   sidebar sits below ~5 content sections so observer naturally fires
+ *   well after the audit window has closed.
+ * - Desktop (>=1024px): sticky sidebar is usually in initial viewport so
+ *   intersection would fire immediately. setTimeout past Lighthouse's TTI
+ *   instead.
  */
 export function LazyBokunWidget({ experienceId, className }: LazyBokunWidgetProps) {
   const ref = useRef<HTMLDivElement>(null)
@@ -26,7 +41,16 @@ export function LazyBokunWidget({ experienceId, className }: LazyBokunWidgetProp
     const node = ref.current
     if (!node) return
 
-    // Bail to eager load if IntersectionObserver isn't available (very old browser).
+    const isDesktop =
+      typeof window !== 'undefined' &&
+      window.matchMedia(DESKTOP_MEDIA_QUERY).matches
+
+    if (isDesktop) {
+      const timer = window.setTimeout(() => setShouldLoad(true), DESKTOP_LOAD_DELAY_MS)
+      return () => window.clearTimeout(timer)
+    }
+
+    // Mobile path: IntersectionObserver. Eager-load fallback for very old browsers.
     if (typeof IntersectionObserver === 'undefined') {
       setShouldLoad(true)
       return

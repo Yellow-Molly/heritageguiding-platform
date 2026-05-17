@@ -59,6 +59,7 @@ export function TourCard({ tour, variant = 'grid', priority = false }: TourCardP
               blurDataURL={tour.image.blurDataUrl}
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 160px, (max-width: 1280px) 50vw, 33vw"
+              quality={60}
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-[var(--color-background-alt)] text-[var(--color-text-muted)]">
