@@ -23,10 +23,13 @@ implemented_at: 2026-05-16
 - Perf threshold restore (honest, supported)
 - Honest documentation of CI status
 
-**What's deferred:**
+**What's deferred to follow-up plan `260517-0225-mobile-lcp-deepdive`:**
+- Mobile LCP < 2500ms across all 3 pages on 3 consecutive runs (current gap: 60-367ms)
 - Green CI run end-to-end (blocked by LCP gate)
 - Old plan supersession (blocked by green CI)
 - Journal entry (writes once everything actually green)
+
+**Status as of 2026-05-17:** all other Phase 5 outcomes locked in (mobile CLS=0, BP=1.00, A11y=1.00, perf 0.93-0.97). Only the LCP gate blocks the final green. User chose conservative path: keep 2500ms strict, fix via structural Home hero refactor + priority audit (see follow-up plan).
 
 
 

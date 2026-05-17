@@ -39,8 +39,10 @@ Performance already meets 0.9 threshold across all 6 reports. **SEO 0.61 is full
 | 1 | [Verify Production SEO Env-Gating](phase-01-verify-production-seo.md) | complete | P1 | 0.5h |
 | 2 | [CSP Whitelist Bokun Widget Origin](phase-02-csp-bokun-widget.md) | complete | P0 | 0.5h |
 | 3 | [Fix Booking Button Color Contrast](phase-03-booking-button-contrast.md) | complete | P1 | 0.5h |
-| 4 | [LCP Resource Load Delay](phase-04-lcp-resource-load-delay.md) | partial | P2 | 1.5h |
-| 5 | [Restore Lighthouse Threshold & Close Old Plan](phase-05-restore-threshold.md) | partial | P1 | 1h |
+| 4 | [LCP Resource Load Delay](phase-04-lcp-resource-load-delay.md) | partial → follow-up | P2 | 1.5h |
+| 5 | [Restore Lighthouse Threshold & Close Old Plan](phase-05-restore-threshold.md) | partial → blocked | P1 | 1h |
+
+**Follow-up plan:** `plans/260517-0225-mobile-lcp-deepdive/` tracks the remaining mobile LCP gap (60-367ms over 2500ms gate). Phase 5 unblocks when that plan ships.
 
 ## Findings Summary
 
