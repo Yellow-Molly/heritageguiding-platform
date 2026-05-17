@@ -7,10 +7,11 @@
  */
 
 import { useEffect, useRef, useState } from 'react'
+import * as Sentry from '@sentry/nextjs'
 import { Skeleton } from '@/components/ui/skeleton'
-import { AlertCircle, RefreshCw } from 'lucide-react'
+import { AlertCircle, ExternalLink, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { getBokunWidgetUrl } from '@/lib/bokun'
+import { getBokunCheckoutUrl, getBokunWidgetUrl } from '@/lib/bokun'
 
 interface BokunBookingWidgetProps {
   /** Bokun experience/activity ID */
@@ -107,6 +108,11 @@ export function BokunBookingWidget({
       if (!containerRef.current?.querySelector('iframe')) {
         cancelPendingVerification()
         const errorMsg = 'Failed to initialize booking widget'
+        Sentry.captureMessage('Bokun widget iframe did not load', {
+          level: 'error',
+          tags: { component: 'BokunBookingWidget', reason: 'iframe-timeout' },
+          extra: { experienceId, locale, timeoutMs: IFRAME_LOAD_TIMEOUT_MS },
+        })
         setError(errorMsg)
         onError?.(errorMsg)
       }
@@ -125,10 +131,16 @@ export function BokunBookingWidget({
       try {
         window.BokunWidgets?.init()
       } catch (err) {
-        // init() throws transiently on re-init (duplicate channel, stale node);
-        // the iframe usually still mounts. verifyIframeLoaded() is the source
-        // of truth for whether we surface a user-facing error.
-        console.warn('[BokunWidget] init() threw; verifying iframe presence:', err)
+        // init() throws on essentially every call in practice (verified on
+        // staging across initial mount + locale switches); the iframe still
+        // mounts. verifyIframeLoaded() is the source of truth. Drop the
+        // throw into Sentry breadcrumbs only — captureMessage would flood.
+        Sentry.addBreadcrumb({
+          category: 'bokun',
+          level: 'debug',
+          message: 'BokunWidgets.init() threw',
+          data: { error: String(err), experienceId, locale },
+        })
       }
       verifyIframeLoaded()
     })
@@ -185,6 +197,11 @@ export function BokunBookingWidget({
 
     script.onerror = () => {
       const errorMsg = 'Failed to load booking widget'
+      Sentry.captureMessage('Bokun loader script failed to load', {
+        level: 'error',
+        tags: { component: 'BokunBookingWidget', reason: 'script-error' },
+        extra: { experienceId, locale, scriptUrl: script.src },
+      })
       setError(errorMsg)
       setLoading(false)
       onError?.(errorMsg)
@@ -202,8 +219,13 @@ export function BokunBookingWidget({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookingChannelUUID, experienceId, locale])
 
-  // Error state with retry option
+  // Error state with retry option and a direct hosted-checkout escape hatch.
+  // The hosted URL bypasses the embedded iframe entirely — useful when Bokun's
+  // loader is in a stuck state that "Try Again" can't recover from.
   if (error) {
+    const hostedCheckoutUrl = bookingChannelUUID
+      ? getBokunCheckoutUrl(bookingChannelUUID, experienceId, locale ? { locale } : undefined)
+      : null
     return (
       <div
         className={`rounded-lg border border-destructive/50 bg-destructive/10 p-6 text-center ${className}`}
@@ -211,17 +233,29 @@ export function BokunBookingWidget({
         <AlertCircle className="mx-auto mb-3 h-8 w-8 text-destructive" />
         <p className="font-medium text-destructive">{error}</p>
         <p className="mt-2 text-sm text-muted-foreground">
-          Please try again or contact us for assistance.
+          Please try again or book on Bokun directly.
         </p>
-        <Button
-          variant="outline-dark"
-          size="sm"
-          className="mt-4"
-          onClick={loadWidget}
-        >
-          <RefreshCw className="mr-2 h-4 w-4" />
-          Try Again
-        </Button>
+        <div className="mt-4 flex flex-col items-center gap-2">
+          <Button
+            variant="outline-dark"
+            size="sm"
+            onClick={loadWidget}
+          >
+            <RefreshCw className="mr-2 h-4 w-4" />
+            Try Again
+          </Button>
+          {hostedCheckoutUrl && (
+            <a
+              href={hostedCheckoutUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-sm text-muted-foreground underline hover:text-foreground"
+            >
+              Book on Bokun directly
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          )}
+        </div>
       </div>
     )
   }
