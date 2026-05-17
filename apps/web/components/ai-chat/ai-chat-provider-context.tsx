@@ -8,10 +8,21 @@ import {
   useEffect,
   type ReactNode,
 } from 'react'
-import { BubblaVWidget } from '@bubblav/ai-chatbot-react'
+import dynamic from 'next/dynamic'
+
+// Lazy-load BubblaVWidget so its bundle is only fetched when chat is actually enabled.
+// When NEXT_PUBLIC_ENABLE_AI_CHAT !== 'true', the provider short-circuits and this
+// dynamic chunk is never requested — saves ~the widget React wrapper from initial JS bundle.
+const BubblaVWidget = dynamic(
+  () => import('@bubblav/ai-chatbot-react').then((m) => m.BubblaVWidget),
+  { ssr: false }
+)
 
 /** Bubblav site ID from dashboard */
 const BUBBLAV_SITE_ID = 'c09d8606-f999-4dd4-8220-0e924e741636'
+
+/** Chat enable flag — set NEXT_PUBLIC_ENABLE_AI_CHAT=true to opt in. Disabled for MVP launch. */
+const IS_CHAT_ENABLED = process.env.NEXT_PUBLIC_ENABLE_AI_CHAT === 'true'
 
 /** Type for the global BubblaV API exposed by widget.js */
 interface BubblaVGlobal {
@@ -55,12 +66,20 @@ export function useAiChat(): AiChatContextValue {
  * (which never interact during their measurement window) won't trigger it
  * within the audit timeline — keeping LCP/TTI numbers honest.
  */
+/** No-op context value used when chat is disabled — keeps `useAiChat` consumers (e.g. WhatsApp button) safe. */
+const DISABLED_CONTEXT: AiChatContextValue = {
+  isOpen: false,
+  openChat: () => {},
+  closeChat: () => {},
+}
+
 export function AiChatProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
   const [shouldMountWidget, setShouldMountWidget] = useState(false)
 
   // Defer widget mount until first user interaction OR generous fallback timeout.
   useEffect(() => {
+    if (!IS_CHAT_ENABLED) return
     if (shouldMountWidget) return
 
     const mount = () => setShouldMountWidget(true)
@@ -81,6 +100,7 @@ export function AiChatProvider({ children }: { children: ReactNode }) {
 
   // Sync state when widget is opened/closed via its own bubble UI
   useEffect(() => {
+    if (!IS_CHAT_ENABLED) return
     if (!shouldMountWidget) return
     const onOpen = () => setIsOpen(true)
     const onClose = () => setIsOpen(false)
@@ -104,6 +124,7 @@ export function AiChatProvider({ children }: { children: ReactNode }) {
   }, [shouldMountWidget])
 
   const openChat = useCallback(() => {
+    if (!IS_CHAT_ENABLED) return
     // If user clicks chat trigger before the deferred mount fires, mount immediately.
     setShouldMountWidget(true)
     getBubblaV()?.open()
@@ -111,9 +132,16 @@ export function AiChatProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const closeChat = useCallback(() => {
+    if (!IS_CHAT_ENABLED) return
     getBubblaV()?.close()
     setIsOpen(false)
   }, [])
+
+  // When chat is disabled (MVP launch), short-circuit with a no-op context.
+  // useAiChat consumers (e.g. WhatsApp button) keep working but isOpen stays false.
+  if (!IS_CHAT_ENABLED) {
+    return <AiChatContext.Provider value={DISABLED_CONTEXT}>{children}</AiChatContext.Provider>
+  }
 
   return (
     <AiChatContext.Provider value={{ isOpen, openChat, closeChat }}>
