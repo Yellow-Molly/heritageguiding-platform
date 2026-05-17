@@ -28,13 +28,20 @@ const envSchema = z.object({
     ? z.string().min(32, 'must be ≥32 chars in production')
     : z.string().min(1).optional(),
 
-  // Bokun — required in prod (booking flow); optional in dev to allow UI-only work.
+  // Bokun — server-side keys required in prod for availability fetches; widget
+  // UUID required in prod for the booking script to load.
   BOKUN_API_KEY: prodRequired(),
   BOKUN_SECRET_KEY: prodRequired(),
-  BOKUN_WEBHOOK_SECRET: prodRequired(),
   NEXT_PUBLIC_BOKUN_UUID: isProd
     ? z.string().uuid()
     : z.string().uuid().optional(),
+
+  // Bokun webhook — optional even in prod. Webhooks only fire after Bokun
+  // commercial onboarding (`260430-1520` phase-01) registers our endpoint
+  // and may require the Bokun PLUS plan tier. The webhook handler already
+  // 401s when this is unset, so missing config fails closed at request
+  // time rather than blocking unrelated pages from booting.
+  BOKUN_WEBHOOK_SECRET: z.string().optional(),
 
   // Public site origin — required in prod for canonical URLs, sitemaps, og:url.
   NEXT_PUBLIC_URL: isProd ? z.string().url() : z.string().url().optional(),
