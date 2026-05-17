@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { Calendar, Mail, ShieldCheck, Zap } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
 import { CONTACT_EMAIL } from '@/lib/contact-constants'
-import { BokunBookingWidget } from '@/components/bokun-booking-widget-with-fallback'
+import { LazyBokunWidget } from '@/components/lazy-bokun-widget'
 import { GroupInquiryModal } from '@/components/booking/group-inquiry-modal'
 import type { TourDetail } from '@/lib/api/get-tour-by-slug'
 
@@ -41,7 +41,7 @@ export function BookingSection({ tour }: BookingSectionProps) {
       {/* Bokun Widget — replaces date/guest/CTA when active */}
       {hasBokunIntegration ? (
         <div className="mt-5">
-          <BokunBookingWidget
+          <LazyBokunWidget
             experienceId={tour.bokunExperienceId!}
             className="min-h-[300px]"
           />
