@@ -41,6 +41,10 @@ const nextConfig: NextConfig = {
         hostname: 'images.unsplash.com',
       },
       {
+        protocol: 'https',
+        hostname: '*.bokun.io',
+      },
+      {
         protocol: 'http',
         hostname: 'localhost',
       },
@@ -48,6 +52,10 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ['lucide-react', 'date-fns'],
+    // Inline critical CSS in HTML head + defer rest. Uses Beasties under the hood.
+    // Round 4 of plan 260517-0225-mobile-lcp-deepdive — targets render-blocking
+    // CSS chunk that delays FCP/LCP on Slow 4G simulation.
+    optimizeCss: true,
   },
   async redirects() {
     return [
