@@ -165,6 +165,12 @@ EMAIL_FROM=bookings@privatetours.se
 # Analytics (optional)
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 
+# AI chat (Bubblav) — temporarily DISABLED for MVP launch.
+# Set to 'true' to re-enable the floating chat widget. When unset/false,
+# AiChatProvider returns a no-op context and the ~1.9 MB widget script
+# never loads. WhatsApp floating button is unaffected.
+NEXT_PUBLIC_ENABLE_AI_CHAT=false
+
 # i18n
 DEFAULT_LOCALE=sv
 SUPPORTED_LOCALES=sv,en,de
@@ -198,6 +204,8 @@ vercel env add PAYLOAD_SECRET production
 **Public Variables (NEXT_PUBLIC_*):**
 - NEXT_PUBLIC_URL
 - NEXT_PUBLIC_GA_ID
+- NEXT_PUBLIC_BOKUN_UUID
+- NEXT_PUBLIC_ENABLE_AI_CHAT (set to `true` post-launch to re-enable Bubblav)
 
 ---
 

@@ -4,6 +4,22 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-17] — Bubblav AI chat disabled for MVP launch ⏸️
+
+**Type:** Feature flag / performance
+**Scope:** Temporarily disable the Bubblav AI chatbot until post-launch.
+
+- Added `NEXT_PUBLIC_ENABLE_AI_CHAT` env var (default off). When unset/false, `AiChatProvider` short-circuits to a no-op context (`isOpen: false`, no-op `openChat`/`closeChat`) and `BubblaVWidget` is `next/dynamic`-imported so its chunk is never fetched.
+- WhatsApp floating button (which gates visibility on `isAiChatOpen`) keeps working — it just always sees `false` and shows itself per normal logic.
+- `useAiChat` consumers are unaffected (still safe to call).
+- ~1.9 MB Bubblav widget runtime no longer loads on any page; should reduce TBT/INP on real users and remove one third-party DNS+TLS round-trip.
+- **Re-enable:** set `NEXT_PUBLIC_ENABLE_AI_CHAT=true` on Vercel (per environment) and redeploy. No code change.
+- CSP entries for `www.bubblav.com` / `*.bubblav.com` kept as-is for trivial re-enable.
+
+Files: `apps/web/components/ai-chat/ai-chat-provider-context.tsx`, `docs/deployment-guide.md`, `docs/system-architecture.md`.
+
+---
+
 ## [2026-05-14] — Staging Deploy Stabilization (Bokun rollout) ✓
 
 **Type:** Build / Migration / Runtime fixes

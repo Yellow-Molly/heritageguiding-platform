@@ -640,6 +640,7 @@ access: {
 - ✅ Image `priority` prop on first 3 cards in grids (LCP optimization)
 - ✅ 9 RSC conversions (about-sections, values, guides-preview, seasonal-cta)
 - ✅ Deferred Bubblav widget mount (15s timeout + first interaction gating)
+- ⏸️ Bubblav AI chat **DISABLED for MVP launch** (2026-05-17): gated behind `NEXT_PUBLIC_ENABLE_AI_CHAT` env var. `AiChatProvider` returns no-op context when off; `BubblaVWidget` is `next/dynamic`-imported so its chunk never loads. Re-enable post-launch by setting env to `true`. See `apps/web/components/ai-chat/ai-chat-provider-context.tsx`.
 - ✅ Bundle analyzer (`@next/bundle-analyzer`, `npm run analyze`)
 - ✅ Lighthouse CI scoped to Production environment
 - ✅ Web Vitals baseline captured
