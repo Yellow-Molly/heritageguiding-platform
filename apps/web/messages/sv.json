@@ -653,7 +653,8 @@
       "instantConfirmation": "Omedelbar bekräftelse",
       "inquireAboutTour": "Förfrågan om denna tur",
       "contactUsForAvailability": "Kontakta oss direkt för att kontrollera tillgänglighet och boka din plats.",
-      "sendInquiry": "Skicka förfrågan"
+      "sendInquiry": "Skicka förfrågan",
+      "bokunDisclosure": "Bokning hanteras av <link>Bókun</link>. Deras villkor gäller vid checkout."
     },
     "reviews": {
       "title": "Gästomdömen",

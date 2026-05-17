@@ -653,7 +653,8 @@
       "instantConfirmation": "Sofortige Bestätigung",
       "inquireAboutTour": "Anfrage zu dieser Tour",
       "contactUsForAvailability": "Kontaktieren Sie uns direkt, um die Verfügbarkeit zu prüfen und Ihren Platz zu buchen.",
-      "sendInquiry": "Anfrage senden"
+      "sendInquiry": "Anfrage senden",
+      "bokunDisclosure": "Buchung über <link>Bókun</link>. Beim Checkout gelten deren Bedingungen."
     },
     "reviews": {
       "title": "Gästebewertungen",

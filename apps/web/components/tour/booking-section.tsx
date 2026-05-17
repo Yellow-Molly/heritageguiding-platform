@@ -45,6 +45,22 @@ export function BookingSection({ tour }: BookingSectionProps) {
             experienceId={tour.bokunExperienceId!}
             className="min-h-[300px]"
           />
+          {/* Third-party booking disclosure (L5 — go-live legal readiness). Customer
+              must know Bokun's terms apply at checkout in addition to our own T&Cs. */}
+          <p className="mt-3 text-[11px] leading-snug text-[var(--color-text-muted)]">
+            {t.rich('bokunDisclosure', {
+              link: (chunks) => (
+                <a
+                  href="https://www.bokun.io/legal/terms-of-service"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-[var(--color-text)]"
+                >
+                  {chunks}
+                </a>
+              ),
+            })}
+          </p>
         </div>
       ) : (
         /* Visual placeholder fields when no Bokun integration */

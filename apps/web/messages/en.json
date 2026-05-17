@@ -653,7 +653,8 @@
       "instantConfirmation": "Instant confirmation",
       "inquireAboutTour": "Inquire About This Tour",
       "contactUsForAvailability": "Contact us directly to check availability and book your spot.",
-      "sendInquiry": "Send Inquiry"
+      "sendInquiry": "Send Inquiry",
+      "bokunDisclosure": "Booking handled by <link>Bókun</link>. Their terms apply during checkout."
     },
     "reviews": {
       "title": "Guest Reviews",
