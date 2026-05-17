@@ -74,7 +74,8 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
       )}
     >
       <nav className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
-        {/* Logo */}
+        {/* Logo — fetchPriority=low keeps the High-priority bandwidth lane reserved for the
+            hero image. Logo is tiny (~2KB SVG) and only briefly invisible if delayed. */}
         <Link href="/" className="relative h-10 w-56 transition-opacity hover:opacity-80">
           <Image
             src={showSolidStyle ? '/logo-black.svg' : '/logo.svg'}
@@ -82,6 +83,7 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
             fill
             className="object-contain object-left"
             unoptimized
+            fetchPriority="low"
           />
         </Link>
 

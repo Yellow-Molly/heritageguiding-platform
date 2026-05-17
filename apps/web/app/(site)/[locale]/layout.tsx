@@ -65,6 +65,23 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={localeMetadata[locale as Locale]?.dir || 'ltr'} suppressHydrationWarning>
       <head>
+        {/*
+          High-priority bandwidth lane intent (Slow 4G simulation):
+            1. Document, Stylesheet (auto) — VeryHigh, structural
+            2. Inter font (auto) — High, body text
+            3. Hero image (Next/Image priority) — High, LCP candidate
+          Everything else should be Low/VeryLow. SVG favicon is moved from
+          app/icon.svg → public/icon.svg and re-declared with fetchpriority="low"
+          here so Chrome doesn't auto-promote it to High and steal a slot from
+          the hero image preload.
+        */}
+        <link
+          rel="icon"
+          href="/icon.svg"
+          type="image/svg+xml"
+          sizes="any"
+          fetchPriority="low"
+        />
         {/* Preconnect to critical third-party origins */}
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
