@@ -40,17 +40,19 @@ export function HeroSection() {
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
       aria-label="Hero section"
     >
-      {/* Background Image */}
+      {/* Background Image — explicit width/height so Lighthouse classifies as LCP candidate.
+          object-cover fills the wrapper visually regardless of intrinsic ratio. */}
       <div className="absolute inset-0 z-0">
         <Image
           src="https://images.unsplash.com/photo-1508189860359-777d945909ef?fm=avif&fit=crop&w=1600&q=55"
           alt="Gamla Stan, Stockholm Old Town at sunset with historic buildings reflecting on water"
-          fill
+          width={1600}
+          height={900}
           priority
           fetchPriority="high"
           placeholder="blur"
           blurDataURL={BLUR_DATA.HERO_GAMLA_STAN}
-          className="object-cover"
+          className="h-full w-full object-cover"
           sizes="100vw"
           quality={60}
           data-parallax="0.3"
