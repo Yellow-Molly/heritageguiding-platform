@@ -45,6 +45,11 @@ const BOKUN_WIDGET_SCRIPT_URL =
 // UUID v4 format validation (prevents accidental API key exposure)
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
+// How long to wait for Bokun to inject the iframe before declaring failure.
+// Bokun's own iFrameSizer warningTimeout is 5s; we add headroom for slow
+// networks and re-init races on locale switch / tour navigation.
+const IFRAME_LOAD_TIMEOUT_MS = 12_000
+
 /**
  * Bokun booking widget wrapper for React/Next.js.
  * Loads Bokun script dynamically and renders iframe-based booking calendar.
@@ -60,9 +65,74 @@ export function BokunBookingWidget({
   const containerRef = useRef<HTMLDivElement>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  // Track async iframe verification so locale switches / unmounts can cancel it.
+  const verifyTimerRef = useRef<number | null>(null)
+  const observerRef = useRef<MutationObserver | null>(null)
 
   // Get booking channel UUID from environment
   const bookingChannelUUID = process.env.NEXT_PUBLIC_BOKUN_UUID
+
+  const cancelPendingVerification = () => {
+    if (verifyTimerRef.current !== null) {
+      window.clearTimeout(verifyTimerRef.current)
+      verifyTimerRef.current = null
+    }
+    observerRef.current?.disconnect()
+    observerRef.current = null
+  }
+
+  /**
+   * Watch the widget container for an iframe to appear. Bokun's loader injects
+   * the iframe inside the `.bokunWidget` div on init — its presence is the
+   * honest signal of success. Only flips to error if no iframe appears within
+   * IFRAME_LOAD_TIMEOUT_MS, which avoids false positives from transient
+   * `init()` throws (locale switch, tour navigation re-init).
+   */
+  const verifyIframeLoaded = () => {
+    const container = containerRef.current
+    if (!container) return
+    cancelPendingVerification()
+
+    if (container.querySelector('iframe')) return
+
+    const observer = new MutationObserver(() => {
+      if (containerRef.current?.querySelector('iframe')) {
+        cancelPendingVerification()
+      }
+    })
+    observer.observe(container, { childList: true, subtree: true })
+    observerRef.current = observer
+
+    verifyTimerRef.current = window.setTimeout(() => {
+      if (!containerRef.current?.querySelector('iframe')) {
+        cancelPendingVerification()
+        const errorMsg = 'Failed to initialize booking widget'
+        setError(errorMsg)
+        onError?.(errorMsg)
+      }
+    }, IFRAME_LOAD_TIMEOUT_MS)
+  }
+
+  /**
+   * Invoke Bokun's DOM scan on the next animation frame. Deferring past the
+   * current React cycle lets the freshly-keyed widget div commit before
+   * Bokun's loader walks the DOM — without it, locale switches and tour
+   * navigation hit a transient throw that the existing-script path previously
+   * surfaced as a fatal error.
+   */
+  const initializeBokunWidget = () => {
+    requestAnimationFrame(() => {
+      try {
+        window.BokunWidgets?.init()
+      } catch (err) {
+        // init() throws transiently on re-init (duplicate channel, stale node);
+        // the iframe usually still mounts. verifyIframeLoaded() is the source
+        // of truth for whether we surface a user-facing error.
+        console.warn('[BokunWidget] init() threw; verifying iframe presence:', err)
+      }
+      verifyIframeLoaded()
+    })
+  }
 
   /**
    * Load Bokun widget script
@@ -96,17 +166,9 @@ export function BokunBookingWidget({
     ) as HTMLScriptElement | null
 
     if (existingScript && window.BokunWidgets) {
-      // Re-initialize widgets for dynamic content
-      try {
-        window.BokunWidgets.init()
-        setLoading(false)
-        onLoad?.()
-      } catch {
-        const errorMsg = 'Failed to initialize booking widget'
-        setError(errorMsg)
-        setLoading(false)
-        onError?.(errorMsg)
-      }
+      setLoading(false)
+      onLoad?.()
+      initializeBokunWidget()
       return
     }
 
@@ -118,15 +180,7 @@ export function BokunBookingWidget({
     script.onload = () => {
       setLoading(false)
       onLoad?.()
-
-      // Trigger manual init for dynamic content
-      if (window.BokunWidgets) {
-        try {
-          window.BokunWidgets.init()
-        } catch (err) {
-          console.error('[BokunWidget] Init error:', err)
-        }
-      }
+      initializeBokunWidget()
     }
 
     script.onerror = () => {
@@ -140,9 +194,11 @@ export function BokunBookingWidget({
   }
 
   // Load widget on mount. Includes `locale` so language switches re-init the
-  // iframe with a fresh data-src.
+  // iframe with a fresh data-src. Cleanup cancels any pending iframe-presence
+  // verification so a remount doesn't surface the previous cycle's timeout.
   useEffect(() => {
     loadWidget()
+    return cancelPendingVerification
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookingChannelUUID, experienceId, locale])
 
