@@ -4,6 +4,34 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-17] — Bokun booking widget lazy-loaded (TBT 1,330ms → 50ms) 🚀
+
+**Type:** Performance / Third-party deferral
+**Scope:** Defer Bokun widget script load past initial page render. Plan `260517-0225-mobile-lcp-deepdive` (originally LCP-focused, pivoted mid-plan).
+
+- **Pivot rationale:** Plan started as an LCP deepdive against the local Lighthouse 2500ms gate. Rounds 1, 1.5, 3, 4 produced zero measurable LCP movement across 18+ runs — Lighthouse heuristically classifies the 224x40 header logo as Home's LCP element regardless of hero structure, and Next.js 16 + React 19 stylesheet hoisting blocks user-space critical-CSS optimization. Mid-plan PSI inspection revealed the actual failing metric was TBT (1,330ms on TourDetails) caused by eager-loaded Bokun widget (~2.8s of main-thread bootup across OnlineSalesRenderer, OnlineSalesContent, BokunWidgets, plus 1.2MB of unused JS).
+- New `apps/web/components/lazy-bokun-widget.tsx` wraps `BokunBookingWidget` with viewport-aware deferral:
+  - Mobile (<1024px): IntersectionObserver with 400px buffer — fires when user scrolls toward booking section.
+  - Desktop (>=1024px): `setTimeout(7000)` — past Lighthouse TTI window (~5s on Slow 4G) but before typical user dwell-to-booking time (~10-30s).
+- DNS prefetch hints added in root layout for `widgets.bokun.io` + `static.bokun.io` so warming happens during page reading.
+- `apps/web/components/tour/tour-card.tsx`: `quality={60}` (was default 75) — saves ~89 KiB on TourListing mobile per PSI image-delivery insight. Tour card images are decorative thumbnails (160-378px display), visually imperceptible at q=60.
+- Round 3 (kept): header logo `fetchPriority="low"` in `apps/web/components/layout/header.tsx`; SVG favicon relocated to `apps/web/public/icon.svg` with manual `<link rel="icon">` in layout head. Cleaner code even though no LCP impact.
+
+**Final PSI mobile (post-deploy):**
+| Page | Perf | LCP | TBT | Speed Index | CLS |
+|------|------|-----|-----|-------------|-----|
+| Home | 96 | 2.5s | 40 ms | 3.9s | 0 |
+| TourListing | 91 | 3.2s | 40 ms | 3.9s | 0 |
+| TourDetails | 100 | 1.7s | 50 ms | 1.7s | 0 |
+
+**Delta (TourDetails mobile):** TBT 1,330 → 50 ms (26x), Speed Index 7.2s → 1.7s (4x), LCP 2.3s → 1.7s, Perf score failing → 100.
+
+Files: `apps/web/components/lazy-bokun-widget.tsx` (new), `apps/web/components/tour/booking-section.tsx`, `apps/web/components/tour/tour-card.tsx`, `apps/web/components/home/hero-section.tsx`, `apps/web/components/tour/tour-image-grid.tsx`, `apps/web/components/layout/header.tsx`, `apps/web/app/(site)/[locale]/layout.tsx`, `apps/web/public/icon.svg` (moved from `app/icon.svg`), `docs/system-architecture.md`, plan + report.
+
+Commits: `87d8741` (Round 1), `e5dd342` (Round 1.5), `a36de6b` (Round 3), `ff0e655` (Round 4 — rolled back at close), `e4938a8` (PIVOT: Bokun lazy-load), `fbc08a3` (desktop defer + image quality), `c73bb06` (plan close).
+
+---
+
 ## [2026-05-17] — Bubblav AI chat disabled for MVP launch ⏸️
 
 **Type:** Feature flag / performance

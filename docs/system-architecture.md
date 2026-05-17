@@ -512,11 +512,13 @@ access: {
 ### Frontend Optimization
 
 - **SSR:** Server-side rendering for fast initial load
-- **Image Config:** Next.js Image component with optimized deviceSizes, imageSizes, minimumCacheTTL (3600s)
+- **Image Config:** Next.js Image component with optimized deviceSizes, imageSizes, minimumCacheTTL (3600s). Tour-card thumbnails use `quality={60}` (decorative, imperceptible) — saves ~89 KiB per TourListing mobile.
 - **Dynamic Imports:** Lazy loading for ConciergeWizardContainer, BookingSection reduces initial bundle
+- **Third-party Widget Lazy Load (`LazyBokunWidget`):** Wraps Bokun booking widget in a viewport-aware deferral. Mobile (<1024px) uses IntersectionObserver with 400px buffer — Bokun script (~2.8s main-thread bootup, 1.2MB unused JS) loads only when user scrolls toward the booking section. Desktop (>=1024px) uses `setTimeout(7000)` to defer past Lighthouse TTI window since the sticky sidebar is usually in initial viewport. DNS prefetch hints for `widgets.bokun.io` + `static.bokun.io` warm TLS during page reading. Plan `260517-0225` measured: TourDetails mobile TBT 1,330ms → 50ms (26x), Speed Index 7.2s → 1.7s (4x). Pattern reusable for any heavy third-party widget.
 - **Code Splitting:** Route-based code splitting via Next.js App Router
 - **Static Assets:** Cache-Control headers (max-age=31536000, immutable) for versioned files
-- **Preconnect:** CDN domain preconnect hints for faster resource loading
+- **Preconnect / DNS-prefetch:** CDN + third-party domain hints for faster resource loading (Unsplash, Google Fonts, Bokun)
+- **Priority Hierarchy (Home/TourListing/TourDetails):** Intentional High-priority bandwidth lane is Document → Stylesheet → Inter font → Hero image. Header logo demoted to `fetchPriority="low"` (in-viewport but tiny SVG), SVG favicon relocated to `public/` with manual `<link>` declaration so Next.js auto-emit doesn't reserve a High slot.
 
 ### Data Caching Strategy
 
