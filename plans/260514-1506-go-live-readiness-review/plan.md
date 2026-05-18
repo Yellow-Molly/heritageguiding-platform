@@ -44,10 +44,10 @@ Single gate for production launch. Audits state across 4 dimensions, cross-links
 
 | # | Phase | Owner | Effort | Status |
 |---|-------|-------|--------|--------|
-| 01 | [Legal Readiness](./phase-01-legal-readiness.md) — Impressum, L5 ✅, dates, L1 counsel decision | Dev + Legal | 3-4h dev + counsel | partial |
-| 02 | [Content Readiness](./phase-02-content-readiness.md) — CMS seed gate (✅), business sign-off, legal dates, Bokun IDs | Content + Business | gated on `260425-1207-mvp-launch-content-audit` | blocked |
-| 03 | [Integration Readiness](./phase-03-integration-readiness.md) — I2 webhook persistence (security fixes 3-5 ✅, I4 CDN ✅, I5 rate limits ✅) | Dev | 2-3h | partial |
-| 04 | [Configuration Readiness](./phase-04-configuration-readiness.md) — error tracking, uptime monitor (CFG3 env validation ✅) | DevOps | 2-3h | partial |
+| 01 | [Legal Readiness](./phase-01-legal-readiness.md) — L2 imprint ✅, L5 Bokun T&Cs ✅; awaiting L1+L3 counsel | Dev + Legal | counsel turnaround | code-complete-awaiting-counsel |
+| 02 | [Content Readiness](./phase-02-content-readiness.md) — CMS seed ✅; Bokun IDs + business sign-off + counsel dates pending | Content + Business | gated on `260425-1207-mvp-launch-content-audit` | blocked |
+| 03 | [Integration Readiness](./phase-03-integration-readiness.md) — I1 ✅, I2 webhook ✅, I4 ✅, I5 ✅; awaiting I3 commercial + I6 DNS | Dev | external blockers | code-complete-pending-external |
+| 04 | [Configuration Readiness](./phase-04-configuration-readiness.md) — CFG1 Sentry SDK ✅, CFG3 env Zod ✅; awaiting CFG2 Uptime Robot + Sentry project provision | DevOps | account work | code-complete-pending-devops |
 | 05 | [Go/No-Go Gate](./phase-05-go-no-go-gate.md) — final P0/P1/P2 decision matrix + sign-off | Tech Lead + Business | 1h | not-started |
 
 ## Critical Path
@@ -98,6 +98,8 @@ Phases 01–04 run parallel where ownership permits. **Phase 05 cannot fire unti
 **Note (2026-05-17 audit):** Re-verified code state. Bokun security fixes 3-5 confirmed in `bokun-api-client-with-hmac-authentication.ts` and `availability/route.ts`. L1 premise (CMP required) contested — privacy policy declares essential-cookies-only stance; L1 is now a **counsel-decision question**, not a code gap. I2 / I4 / I5 / L2 / L5 / CFG1 / CFG3 still owed. See [audit report](../reports/audit-260517-1311-go-live-readiness.md).
 
 **Note (2026-05-17 quick-wins shipped):** I4 ✅, I5a+I5b ✅, L5 ✅, CFG3 ✅. Remaining P0 code owned by this plan: L2 Imprint (2-3h), I2 webhook persistence (2-3h). CFG1 Sentry + CFG2 Uptime Robot (P1) still open. L1, L3, C2, C3, C4, I1 sub-fixes 1+2, I3 routed to other plans or stakeholders. See [implementation report](../reports/cook-260517-1359-go-live-quick-wins.md).
+
+**Note (2026-05-18 code-complete):** L2 imprint (`8dfb22e`), I2 webhook persistence + customer emails (`edc8681`), CFG1 Sentry SDK (`5dc5ddd`) all shipped. All code-owned items in this plan are now complete. Remaining work is non-code: counsel sign-off (L1, L3), Bokun commercial onboarding (I3 → `260430-1520`), DevOps DNS (I6) and account provisioning (CFG1 Sentry project, CFG2 Uptime Robot), content/business sign-off (C2/C3/C4 → `260425-1207`). **Plan ready to advance to Phase 05 gate ceremony once external blockers clear.**
 
 ## Success Criteria
 

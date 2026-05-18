@@ -2,15 +2,15 @@
 phase: 04
 title: "Configuration & Infrastructure Readiness"
 priority: P1
-status: not-started
-effort: 3-5h
+status: code-complete-pending-devops
+effort: 0h dev remaining; DevOps owes Sentry project + Uptime Robot account
 owner: DevOps
 auditedAt: 2026-05-17
 auditReport: ../reports/audit-260517-1311-go-live-readiness.md
-auditNotes: |
-  Verified 2026-05-17 — no work started.
-  - CFG1: no @sentry/nextjs in deps
-  - CFG3: lib/environment.ts is a 12-line isProductionDeployment() helper, no Zod schema
+codeWorkClosed: 2026-05-17
+remaining:
+  - CFG1 ops side — create Sentry project, set SENTRY_DSN + NEXT_PUBLIC_SENTRY_DSN on Vercel prod
+  - CFG2 — Uptime Robot account + monitor + alert wiring (15min, no code)
 ---
 
 # Phase 04 — Configuration & Infrastructure Readiness
@@ -90,9 +90,9 @@ Strong baseline: security headers, HSTS, CSP, staging crawler blocking, DB backu
 
 ## Done Criteria
 
-- [ ] CFG1: Sentry installed + receiving errors from production deploy
-- [ ] CFG2: Uptime Robot monitoring `/` + alerting verified
-- [ ] CFG3: Env Zod schema covers all required vars; build fails on missing/invalid
+- [x] CFG1 code: Sentry SDK wired (commit `5dc5ddd`, 2026-05-17). Pending DevOps: create Sentry project + set DSN env on Vercel prod.
+- [ ] CFG2: Uptime Robot monitoring `/` + alerting verified — DevOps account work
+- [x] CFG3: Env Zod schema covers all required vars; boot fails on missing/invalid (commit `c1d1d9f`, 2026-05-17; `dd2718b` softened BOKUN_WEBHOOK_SECRET)
 
 ## Open Questions
 

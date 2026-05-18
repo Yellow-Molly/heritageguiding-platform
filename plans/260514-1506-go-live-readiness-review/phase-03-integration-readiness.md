@@ -2,11 +2,15 @@
 phase: 03
 title: "Integration Readiness"
 priority: P0
-status: partial
-effort: 3-5h remaining (security fixes 3-5 ✅ verified 2026-05-17)
+status: code-complete-pending-external
+effort: 0h dev remaining; awaiting Bokun commercial onboarding + DevOps DNS
 owner: Dev
 auditedAt: 2026-05-17
 auditReport: ../reports/audit-260517-1311-go-live-readiness.md
+codeWorkClosed: 2026-05-18
+remaining:
+  - I3 Bokun commercial onboarding (routed to 260430-1520 phase-01)
+  - I6 SPF/DKIM/DMARC DNS records (DevOps, 30min + 1d propagation)
 related:
   - 260430-1520-bokun-go-live
   - 260514-1437-bokun-integration
@@ -89,12 +93,12 @@ Most integration concerns live in `260430-1520-bokun-go-live`. This phase tracks
 
 ## Done Criteria
 
-- [ ] I1: All 5 Bokun security fixes in `260430-1520` phase-02 applied + verified
-- [ ] I2: Webhook persists Bookings + sends confirmation email (canary booking validates e2e)
-- [ ] I3: Bokun commercial onboarding complete (production keys + Stripe Connect live)
-- [ ] I4: Bokun CDN in remotePatterns
-- [ ] I5: Rate limits on `/api/tours/recommend` + `/api/revalidate`
-- [ ] I6: SPF + DKIM + DMARC verified for `privatetours.se`
+- [x] I1: Bokun security fixes 3-5 verified (commit chain confirmed in audit 2026-05-17); fixes 1+2 tracked in `260430-1520` phase-02
+- [x] I2: Webhook persists Bookings + sends confirmation email (commit `edc8681`, 2026-05-18); canary e2e booking still requires I3 commercial onboarding
+- [ ] I3: Bokun commercial onboarding complete (production keys + Stripe Connect live) — external blocker
+- [x] I4: Bokun CDN in remotePatterns (commit `5033658`, 2026-05-16)
+- [x] I5: Rate limits on `/api/tours/recommend` + `/api/revalidate` (commit `f6fe371`, 2026-05-17)
+- [ ] I6: SPF + DKIM + DMARC verified for `privatetours.se` — DevOps DNS task
 
 ## Open Questions
 

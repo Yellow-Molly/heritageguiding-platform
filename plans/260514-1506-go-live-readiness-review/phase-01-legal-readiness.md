@@ -2,11 +2,16 @@
 phase: 01
 title: "Legal Readiness"
 priority: P0
-status: partial
-effort: 4-7h dev + counsel turnaround
+status: code-complete-awaiting-counsel
+effort: 0h dev remaining; counsel turnaround owed
 owner: Dev + Legal counsel
 auditedAt: 2026-05-17
 auditReport: ../reports/audit-260517-1311-go-live-readiness.md
+codeWorkClosed: 2026-05-17
+remaining:
+  - L1 counsel decision (essential-cookies stance)
+  - L3 counsel sign-off on legal dates (routed to 260425-1207 phase-04)
+  - L6 newsletter (stays disabled at launch)
 ---
 
 # Phase 01 — Legal Readiness
@@ -76,11 +81,11 @@ Privacy, Terms, Cancellation pages ✅ implemented and i18n-complete. **Critical
 
 ## Done Criteria
 
-- [ ] L1: CMP installed and Web Vitals gated on consent (test in 3 locales)
-- [ ] L2: Imprint page live in sv/en/de + linked from footer
+- [ ] L1: counsel decision on essential-cookies-only stance — code action only if disagreed
+- [x] L2: Imprint page live in sv/en/de + linked from footer (commit `8dfb22e`, 2026-05-17)
 - [ ] L3: Privacy + Terms counsel-signed with real `lastUpdated` dates (via `260425-1207` phase-04)
-- [ ] L5: Bokun T&C disclosure in widget container
-- [ ] L6: Newsletter remains disabled OR consent flow implemented before enabling
+- [x] L5: Bokun T&C disclosure in widget container (commit `61e6a52`, 2026-05-17)
+- [x] L6: Newsletter remains disabled at launch (decision locked — consent flow deferred until newsletter goes live)
 
 ## Open Questions
 
