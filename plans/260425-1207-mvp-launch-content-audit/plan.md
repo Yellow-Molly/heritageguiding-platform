@@ -7,6 +7,9 @@ effort: ~12h planning + content delivery (5-10 days)
 branch: master
 tags: [mvp, content, launch, audit, i18n, cms, payload]
 created: 2026-04-25
+blockedBy: []
+blocks:
+  - 260514-1506-go-live-readiness-review  # CMS empty + business sign-off + legal dates are P0 launch blockers
 ---
 
 ## Context

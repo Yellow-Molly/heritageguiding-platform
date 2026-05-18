@@ -2,13 +2,15 @@
 plan: bokun-go-live
 created: 2026-04-30
 status: in-progress
-blockedBy: []
+blockedBy:
+  - 260516-1716-bokun-tour-detail-widget-load-fix  # Widget must render on tour detail before Phase 04 production go-live
 blocks:
   - 260514-1506-go-live-readiness-review  # Bokun security fixes + commercial onboarding are P0 launch blockers
 related:
   - plans/mvp-implementation/phase-08.1-bokun-integration.md
   - plans/reports/code-reviewer-260201-0120-bokun-integration.md
   - plans/260514-1437-bokun-integration/  # Outbound push (CMS Tour → Bokun Experience); runs in parallel, shares HMAC client
+  - plans/260516-1716-bokun-tour-detail-widget-load-fix/  # CSP fix unblocking widget on tour detail page
 ---
 
 # Bokun Booking System — Go-Live Plan
