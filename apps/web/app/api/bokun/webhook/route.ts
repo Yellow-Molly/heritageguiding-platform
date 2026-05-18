@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createHmac, timingSafeEqual } from 'crypto'
 import { revalidateTag } from 'next/cache'
 import type { BokunWebhookPayload, BokunBooking } from '@/lib/bokun'
+import { persistBokunBooking } from '@/lib/bokun/persist-bokun-booking'
 
 // Hard cache invalidation profile. `{ expire: 0 }` forces immediate eviction
 // of unstable_cache entries; named profiles only trigger SWR with long TTLs.
@@ -54,98 +55,33 @@ function verifyWebhookSignature(rawBody: string, signature: string): boolean {
 }
 
 /**
- * Log webhook event to console (and optionally to database)
+ * Compact line for searchable webhook audit log — full event detail lives
+ * in the `bookings.rawPayload` JSON column.
  */
-async function logWebhookEvent(
-  event: string,
-  bookingId: string,
-  booking: BokunBooking
-): Promise<void> {
-  const logEntry = {
-    timestamp: new Date().toISOString(),
-    event,
-    bookingId,
-    confirmationCode: booking.confirmationCode,
-    status: booking.status,
-    customerEmail: booking.customerDetails.email,
-    totalPrice: booking.totalPrice,
-    currency: booking.currency,
-  }
-
-  console.log('[Bokun Webhook] Event received:', JSON.stringify(logEntry, null, 2))
-
-  // TODO: Persist to Bookings collection in Payload CMS
-  // const payload = await getPayload({ config })
-  // await payload.create({
-  //   collection: 'bookings',
-  //   data: {
-  //     bokunBookingId: bookingId,
-  //     confirmationCode: booking.confirmationCode,
-  //     status: booking.status,
-  //     customerName: `${booking.customerDetails.firstName} ${booking.customerDetails.lastName}`,
-  //     customerEmail: booking.customerDetails.email,
-  //     totalPrice: booking.totalPrice,
-  //     currency: booking.currency,
-  //     webhookEvent: event,
-  //     rawPayload: JSON.stringify(booking),
-  //   },
-  // })
+function logWebhookEvent(event: string, bookingId: string, booking: BokunBooking): void {
+  console.log(
+    '[Bokun Webhook]',
+    JSON.stringify({
+      timestamp: new Date().toISOString(),
+      event,
+      bookingId,
+      confirmationCode: booking.confirmationCode,
+      status: booking.status,
+      customerEmail: booking.customerDetails.email,
+      totalPrice: booking.totalPrice,
+      currency: booking.currency,
+    }),
+  )
 }
 
 /**
- * Handle BOOKING_CREATED event
+ * Invalidate availability for any event that changes slot capacity.
+ * Pure side-effect — kept separate from persistence so cache invalidation
+ * still happens even if persistence fails for a transient reason
+ * (Bokun will retry, but cache should be evicted immediately).
  */
-async function handleBookingCreated(booking: BokunBooking): Promise<void> {
-  console.log(`[Bokun] Booking created: ${booking.confirmationCode}`)
-  // Invalidate cached availability so the next read reflects the booked slot
+function revalidateAvailability(): void {
   revalidateTag('bokun-availability', HARD_EXPIRE)
-
-  // TODO: Send confirmation email via Resend
-  // await sendBookingConfirmationEmail({
-  //   to: booking.customerDetails.email,
-  //   confirmationCode: booking.confirmationCode,
-  //   customerName: booking.customerDetails.firstName,
-  //   totalPrice: booking.totalPrice,
-  //   currency: booking.currency,
-  // })
-}
-
-/**
- * Handle BOOKING_CONFIRMED event
- */
-async function handleBookingConfirmed(booking: BokunBooking): Promise<void> {
-  console.log(`[Bokun] Booking confirmed: ${booking.confirmationCode}`)
-  revalidateTag('bokun-availability', HARD_EXPIRE)
-
-  // TODO: Update booking status in database
-  // TODO: Send confirmation email if not already sent
-}
-
-/**
- * Handle BOOKING_CANCELLED event
- */
-async function handleBookingCancelled(booking: BokunBooking): Promise<void> {
-  console.log(`[Bokun] Booking cancelled: ${booking.confirmationCode}`)
-  // Cancellation frees a slot; invalidate cache so it reappears as available
-  revalidateTag('bokun-availability', HARD_EXPIRE)
-
-  // TODO: Update booking status in database
-  // TODO: Send cancellation email to customer
-  // await sendBookingCancellationEmail({
-  //   to: booking.customerDetails.email,
-  //   confirmationCode: booking.confirmationCode,
-  //   customerName: booking.customerDetails.firstName,
-  // })
-}
-
-/**
- * Handle PAYMENT_RECEIVED event
- */
-async function handlePaymentReceived(booking: BokunBooking): Promise<void> {
-  console.log(`[Bokun] Payment received for: ${booking.confirmationCode}`)
-
-  // TODO: Update payment status in database
-  // TODO: Trigger any post-payment workflows
 }
 
 /**
@@ -205,33 +141,25 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  // Log the event
-  await logWebhookEvent(payload.event, payload.bookingId, payload.booking)
+  logWebhookEvent(payload.event, payload.bookingId, payload.booking)
 
   try {
-    // Process event based on type
-    switch (payload.event) {
-      case 'BOOKING_CREATED':
-        await handleBookingCreated(payload.booking)
-        break
+    // Persistence handles upsert + customer email side-effects. The mapper
+    // and email modules live in lib/bokun and lib/email so this route
+    // stays focused on transport (signature, parsing, status codes).
+    await persistBokunBooking(payload)
 
-      case 'BOOKING_CONFIRMED':
-        await handleBookingConfirmed(payload.booking)
-        break
-
-      case 'BOOKING_CANCELLED':
-        await handleBookingCancelled(payload.booking)
-        break
-
-      case 'PAYMENT_RECEIVED':
-        await handlePaymentReceived(payload.booking)
-        break
-
-      default:
-        console.log(`[Bokun Webhook] Unhandled event type: ${payload.event}`)
+    // Any state-changing event affects availability — evict the cached
+    // calendar so the next reader fetches fresh data from Bokun.
+    if (
+      payload.event === 'BOOKING_CREATED' ||
+      payload.event === 'BOOKING_CONFIRMED' ||
+      payload.event === 'BOOKING_CANCELLED' ||
+      payload.event === 'BOOKING_MODIFIED'
+    ) {
+      revalidateAvailability()
     }
 
-    // Return success response
     return NextResponse.json({
       received: true,
       event: payload.event,

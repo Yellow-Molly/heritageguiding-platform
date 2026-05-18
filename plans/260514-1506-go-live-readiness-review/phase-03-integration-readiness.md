@@ -30,16 +30,19 @@ Most integration concerns live in `260430-1520-bokun-go-live`. This phase tracks
 - **Fix 5 — lazy client factory:** ✅ `getBokunClient()` with cached singleton — no module-level `new BokunApiClient()`; test helper `__resetBokunClientForTests` confirms intentional pattern (`bokun-api-client-with-hmac-authentication.ts:307-314`).
 - **Owner:** `260430-1520-bokun-go-live/phase-02-security-fixes.md` — verify which `260430-1520` fixes 1+2 were also enumerated and confirm those.
 
-#### I2. Webhook → Bookings persistence stubbed
-- **Current:** `apps/web/app/api/bokun/webhook/route.ts` logs events but `payload.create()` calls are commented out (lines ~71-86 per scout).
-- **Effect:** Booking events from Bokun are received and acknowledged but NOT saved. No CMS record, no admin visibility, no email confirmation.
-- **Action:**
-  1. Wire `payload.create({collection:'bookings', data: mapEvent(payload)})` for each event handler (CREATED, CONFIRMED, CANCELLED, PAYMENT_RECEIVED).
-  2. Idempotency: lookup by `bokunBookingId` before create; update if exists.
-  3. Enable booking confirmation email (currently stubbed at lines ~95-102 per scout).
-  4. Call `revalidateTag('tours')` if booking affects availability.
-- **Files:** `apps/web/app/api/bokun/webhook/route.ts`, `apps/web/lib/email/` (confirmation template)
-- **Effort:** 2-3h
+#### I2. Webhook → Bookings persistence — ✅ DONE (2026-05-18)
+- **Done:**
+  1. ✅ Pure mapper `lib/bokun/map-bokun-webhook-to-booking-row.ts` — `BokunWebhookPayload` → Bookings row, handles status enum case-mapping, multi-age-band participant summing, empty `productBookings` fallback. 8/8 unit tests.
+  2. ✅ Idempotent upsert `lib/bokun/persist-bokun-booking.ts` — looks up by `bokunBookingId`, attaches matching Tour by `bokunExperienceId` (best-effort), writes via `payload.create`/`update`. Errors propagate so Bokun retries.
+  3. ✅ Customer emails wired:
+     - `lib/email/send-booking-confirmation-to-customer.ts` — sent once on first BOOKING_CREATED or BOOKING_CONFIRMED, gated by `confirmationEmailSent` flag.
+     - `lib/email/send-booking-cancellation-to-customer.ts` — sent on transition into `cancelled`. Email failures don't fail the webhook (record is saved, ops can resend).
+  4. ✅ `revalidateTag('bokun-availability', { expire: 0 })` fires for any state-changing event (CREATED / CONFIRMED / CANCELLED / MODIFIED).
+  5. ✅ Webhook route trimmed to transport concerns (signature, parsing, status codes); persistence + emails live in `lib/bokun` + `lib/email` to keep the route under 200 lines.
+- **Files added:** `lib/bokun/map-bokun-webhook-to-booking-row.ts`, `lib/bokun/persist-bokun-booking.ts`, `lib/email/send-booking-confirmation-to-customer.ts`, `lib/email/send-booking-cancellation-to-customer.ts`, mapper test.
+- **Files changed:** `app/api/bokun/webhook/route.ts`.
+- **Verified:** Mapper 8/8, full adjacent suite 196/196. Dev server: webhook GET returns ok, unsigned POST returns 401 (signature gate still works).
+- **End-to-end test deferred:** Bokun canary booking lives in `260430-1520` phase-04 — requires commercial onboarding (I3).
 
 #### I3. Bokun commercial onboarding (route to `260430-1520`)
 - **Owner:** `260430-1520-bokun-go-live/phase-01-commercial-onboarding.md`

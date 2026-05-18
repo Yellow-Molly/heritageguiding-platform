@@ -1,0 +1,57 @@
+import { createEmailTransporter } from './create-email-transporter'
+
+export interface BookingConfirmationData {
+  to: string
+  customerName: string
+  confirmationCode: string
+  tourTitle?: string
+  bookingDate?: string
+  startTime?: string
+  participants?: number
+  totalPrice: string
+  currency: string
+}
+
+/**
+ * Confirmation email sent to the customer after Bokun webhook
+ * BOOKING_CREATED / BOOKING_CONFIRMED. Sent at most once per booking
+ * (gated by `confirmationEmailSent` on the Booking row).
+ */
+export async function sendBookingConfirmationToCustomer(data: BookingConfirmationData) {
+  const transporter = createEmailTransporter()
+  const tourLine = data.tourTitle ? `<p><strong>Tour:</strong> ${escapeHtml(data.tourTitle)}</p>` : ''
+  const dateLine =
+    data.bookingDate || data.startTime
+      ? `<p><strong>Date:</strong> ${escapeHtml(
+          [data.bookingDate, data.startTime].filter(Boolean).join(' ') || '',
+        )}</p>`
+      : ''
+  const peopleLine = data.participants
+    ? `<p><strong>Participants:</strong> ${data.participants}</p>`
+    : ''
+
+  await transporter.sendMail({
+    from: `Private Tours <${process.env.GMAIL_USER}>`,
+    to: data.to,
+    subject: `Booking confirmed — ${data.confirmationCode}`,
+    html: `
+      <h2>Thank you, ${escapeHtml(data.customerName || 'guest')}!</h2>
+      <p>Your booking has been confirmed.</p>
+      <p><strong>Confirmation code:</strong> ${escapeHtml(data.confirmationCode)}</p>
+      ${tourLine}
+      ${dateLine}
+      ${peopleLine}
+      <p><strong>Total:</strong> ${escapeHtml(data.totalPrice)} ${escapeHtml(data.currency)}</p>
+      <p>We'll be in touch shortly before your tour with meeting-point details. Reply to this email if you need anything.</p>
+      <p>Best regards,<br/>Private Tours Team</p>
+    `,
+  })
+}
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
