@@ -102,3 +102,4 @@ docs/booking-management-comparison.md
 docx/
 apps/web/plans/reports/
 .env*.local
+perf/
