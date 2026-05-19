@@ -10,7 +10,8 @@ import { TourHighlightsSection } from '@/components/tour/tour-highlights-section
 import { TourContent } from '@/components/tour/tour-content'
 import { InclusionsSection } from '@/components/tour/inclusions-section'
 import { LogisticsSection } from '@/components/tour/logistics-section'
-import { GuidesSection } from '@/components/tour/guides-section'
+// MVP-HIDE: re-enable after MVP launch
+// import { GuidesSection } from '@/components/tour/guides-section'
 import { RelatedTours } from '@/components/tour/related-tours'
 import { TourSchema } from '@/components/tour/tour-schema'
 import { Header } from '@/components/layout/header'
@@ -79,7 +80,8 @@ export default async function TourPage({ params }: TourPageProps) {
               <TourContent tour={tour} />
               <InclusionsSection tour={tour} />
               <LogisticsSection tour={tour} />
-              {tour.guides.length > 0 && <GuidesSection guides={tour.guides} />}
+              {/* MVP-HIDE: Guides section temporarily hidden for launch — re-enable after MVP */}
+              {/* {tour.guides.length > 0 && <GuidesSection guides={tour.guides} />} */}
             </div>
 
             {/* Booking Sidebar — sticky on desktop, stacks below content on mobile */}

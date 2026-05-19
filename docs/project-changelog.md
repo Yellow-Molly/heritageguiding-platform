@@ -4,6 +4,20 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-19] — Tour detail Guides section hidden for MVP launch ⏸️
+
+**Type:** Feature toggle / MVP scope trim
+**Scope:** Temporarily hide the "Your Guide(s)" section on tour detail pages until post-launch.
+
+- `apps/web/app/(site)/[locale]/(frontend)/tours/[slug]/page.tsx`: `<GuidesSection>` render and its import commented out with `MVP-HIDE` markers.
+- `GuidesSection` / `GuideCard` components and `tour.guides` data pipeline (`getTourBySlug`, mapper, migrations) untouched — nothing to roll back on the data layer.
+- Guide profiles at `/guides/[slug]` and the `/guides` listing page remain live; only the in-tour link block is hidden.
+- **Re-enable:** grep `MVP-HIDE` in `tours/[slug]/page.tsx` and uncomment the two lines (import + render). No data or schema work required.
+
+Files: `apps/web/app/(site)/[locale]/(frontend)/tours/[slug]/page.tsx`.
+
+---
+
 ## [2026-05-17] — Bokun booking widget lazy-loaded (TBT 1,330ms → 50ms) 🚀
 
 **Type:** Performance / Third-party deferral
