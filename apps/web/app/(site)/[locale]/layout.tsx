@@ -96,10 +96,15 @@ export default async function LocaleLayout({
           otherwise the wrapper renders inline (taking layout space, pushing content) and
           causes CLS 0.467 on TourDetails. External globals.css loads concurrently with JS so
           this rule must be inline. !important wins specificity over any Bokun inline styles.
+
+          Do NOT add `contain: layout` here — it establishes a containing block for
+          position:fixed descendants, which sizes Bokun's checkout modal to the 0x0
+          phantom and freezes the page (the modal's body scroll-lock still fires).
+          Position:fixed + 0x0 alone is enough to prevent the CLS regression.
         */}
         <style
           dangerouslySetInnerHTML={{
-            __html: `#bokun-widgets-root{position:fixed!important;top:0!important;left:0!important;width:0!important;height:0!important;overflow:visible!important;contain:layout!important;pointer-events:none;z-index:60}#bokun-widgets-root *{pointer-events:auto}.bokun-widgets-cart-wrapper{position:fixed!important;bottom:1rem!important;right:1rem!important;left:auto!important;top:auto!important}`,
+            __html: `#bokun-widgets-root{position:fixed!important;top:0!important;left:0!important;width:0!important;height:0!important;overflow:visible!important;pointer-events:none;z-index:60}#bokun-widgets-root *{pointer-events:auto}.bokun-widgets-cart-wrapper{position:fixed!important;bottom:1rem!important;right:1rem!important;left:auto!important;top:auto!important}`,
           }}
         />
         {/*
