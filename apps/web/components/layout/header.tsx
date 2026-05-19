@@ -60,6 +60,16 @@ export function Header({ variant = 'transparent' }: HeaderProps) {
       return
     }
 
+    // Tour-detail pages embed the Bokun widget, whose loader retains internal
+    // state across soft `BokunWidgets.init()` re-invocations and ignores the
+    // new `?lang=` on data-src. Hard-navigate so the iframe mounts against a
+    // fresh page in the target language. Other routes keep soft navigation.
+    if (/^\/tours\/[^/]+/.test(pathname)) {
+      window.location.assign(`/${newLocale}${pathname}`)
+      setIsLangMenuOpen(false)
+      return
+    }
+
     startTransition(() => {
       router.replace(pathname, { locale: newLocale })
       setIsLangMenuOpen(false)

@@ -24,6 +24,15 @@ export function FooterLanguageSelector({
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const next = e.target.value as Locale
     if (!locales.includes(next)) return
+
+    // Mirrors header switcher: tour-detail pages embed the Bokun widget whose
+    // loader can't soft-refresh language. Hard-navigate so the iframe loads
+    // against a fresh page in the target locale.
+    if (/^\/tours\/[^/]+/.test(pathname)) {
+      window.location.assign(`/${next}${pathname}`)
+      return
+    }
+
     startTransition(() => {
       router.replace(pathname, { locale: next })
     })

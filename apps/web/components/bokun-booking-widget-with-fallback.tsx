@@ -69,9 +69,6 @@ export function BokunBookingWidget({
   // Track async iframe verification so locale switches / unmounts can cancel it.
   const verifyTimerRef = useRef<number | null>(null)
   const observerRef = useRef<MutationObserver | null>(null)
-  // Track the previous locale so we can detect a soft (router.replace) locale
-  // change and force a fresh Bokun loader on that transition.
-  const previousLocaleRef = useRef<string | undefined>(undefined)
 
   // Get booking channel UUID from environment
   const bookingChannelUUID = process.env.NEXT_PUBLIC_BOKUN_UUID
@@ -217,26 +214,12 @@ export function BokunBookingWidget({
   // iframe with a fresh data-src. Cleanup cancels any pending iframe-presence
   // verification so a remount doesn't surface the previous cycle's timeout.
   //
-  // On a soft locale switch (next-intl router.replace, not a hard navigation)
-  // Bokun's loader retains internal state from the previous mount: re-invoking
-  // `BokunWidgets.init()` re-renders the iframe but reuses the cached language
-  // and silently ignores the new `?lang=` query on data-src. The widget area
-  // visibly reloads yet stays in the previous language until a hard refresh.
-  // Drop the loader script + global + cart-pin DOM so `loadWidget()` falls
-  // into the cold-start path — identical to a full page reload, but scoped to
-  // the booking widget so the rest of the SPA navigation stays soft.
+  // Note: Bokun's loader retains internal state across `BokunWidgets.init()`
+  // calls — soft locale switches re-render the iframe but reuse the cached
+  // language and silently ignore the new `?lang=` on data-src. Locale switches
+  // therefore hard-navigate from the language switchers when on tour-detail
+  // pages, so this widget always mounts against a fresh page.
   useEffect(() => {
-    const isLocaleChange =
-      previousLocaleRef.current !== undefined && previousLocaleRef.current !== locale
-    if (isLocaleChange && typeof window !== 'undefined') {
-      document
-        .querySelectorAll('script[src*="BokunWidgetsLoader.js"]')
-        .forEach((s) => s.remove())
-      window.BokunWidgets = undefined
-      document.getElementById('bokun-widgets-root')?.remove()
-    }
-    previousLocaleRef.current = locale
-
     loadWidget()
     return cancelPendingVerification
     // eslint-disable-next-line react-hooks/exhaustive-deps
