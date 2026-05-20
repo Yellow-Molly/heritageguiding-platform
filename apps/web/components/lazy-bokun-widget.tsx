@@ -15,11 +15,15 @@ interface LazyBokunWidgetProps {
 // sticky right-column sidebar that's typically in initial viewport.
 const DESKTOP_MEDIA_QUERY = '(min-width: 1024px)'
 
-// Delay before auto-loading Bokun on desktop. Picks a window past Lighthouse's
-// TTI measurement (~5s after FCP under Slow 4G simulation) but before typical
-// user dwell-to-booking time on TourDetails (~10-30s). PSI's TBT/Speed Index
-// stay clean; real users see the widget by the time they scroll to it.
-const DESKTOP_LOAD_DELAY_MS = 7000
+// Delay before auto-loading Bokun on desktop. Picks a window past LCP
+// measurement (~2.5s "good" threshold) so the booking iframe isn't fighting
+// hero/title paint, but well below the 5-10s perceived-load ceiling that
+// hurt real-user conversion. TBT/Speed Index will rise (Bokun's ~2.8s
+// main-thread work now lands in 1.5-4.3s post-FCP); accepted trade — real
+// user speed beats Lighthouse desktop vanity metric. The sticky sidebar is
+// usually in initial viewport so intersection would fire immediately; this
+// setTimeout is the only thing protecting LCP on desktop.
+const DESKTOP_LOAD_DELAY_MS = 1500
 
 /**
  * Defers Bokun widget script load until user intent. Bokun's loader pulls
@@ -32,8 +36,8 @@ const DESKTOP_LOAD_DELAY_MS = 7000
  *   sidebar sits below ~5 content sections so observer naturally fires
  *   well after the audit window has closed.
  * - Desktop (>=1024px): sticky sidebar is usually in initial viewport so
- *   intersection would fire immediately. setTimeout past Lighthouse's TTI
- *   instead.
+ *   intersection would fire immediately. Short setTimeout instead — see
+ *   DESKTOP_LOAD_DELAY_MS for the picked value and rationale.
  */
 export function LazyBokunWidget({ experienceId, className, locale }: LazyBokunWidgetProps) {
   const ref = useRef<HTMLDivElement>(null)
