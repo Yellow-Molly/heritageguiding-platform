@@ -660,3 +660,4 @@ git push origin hotfix/booking-bug
 - [Infrastructure Setup](./infrastructure-setup.md) - Hosting, database, services
 - [System Architecture](./system-architecture.md) - Technical design
 - [Code Standards](./code-standards.md) - Development guidelines
+- [Bokun Cart CSS Customization](./bokun-cart-css-customization.md) - **Load-bearing CSS** injected via Bokun admin Theme → Advanced options. WCAG fix for the cart delete button. Lives in Bokun admin, NOT in this repo.
