@@ -441,7 +441,11 @@ a {
 
 /* Bokun widget global cart — Bokun's bundle applies inline styles, so we use !important to win
    specificity. Target both the root container and the cart wrapper directly. Without this,
-   the cart wrapper takes inline layout space at top:739 (mid-page) causing CLS 0.467 on TourDetails. */
+   the cart wrapper takes inline layout space at top:739 (mid-page) causing CLS 0.467 on TourDetails.
+   z-index must sit above the site header (--z-fixed: 300) so Bokun's full-screen checkout
+   overlay — which renders as a descendant of #bokun-widgets-root — is not covered by the
+   fixed header (tablet landscape repro: close button hidden behind nav). The floating cart
+   button is pinned bottom-right and never visually overlaps the top header. */
 #bokun-widgets-root,
 .bokun-widgets-cart-wrapper {
   position: fixed !important;
@@ -449,7 +453,7 @@ a {
   right: 1rem !important;
   left: auto !important;
   top: auto !important;
-  z-index: 60 !important;
+  z-index: 500 !important;
 }
 /* Cart shouldn't block clicks on the page beneath when it sits idle */
 #bokun-widgets-root {

@@ -104,7 +104,7 @@ export default async function LocaleLayout({
         */}
         <style
           dangerouslySetInnerHTML={{
-            __html: `#bokun-widgets-root{position:fixed!important;top:0!important;left:0!important;width:0!important;height:0!important;overflow:visible!important;pointer-events:none;z-index:60}#bokun-widgets-root *{pointer-events:auto}.bokun-widgets-cart-wrapper{position:fixed!important;bottom:1rem!important;right:1rem!important;left:auto!important;top:auto!important}`,
+            __html: `#bokun-widgets-root{position:fixed!important;top:0!important;left:0!important;width:0!important;height:0!important;overflow:visible!important;pointer-events:none;z-index:500}#bokun-widgets-root *{pointer-events:auto}.bokun-widgets-cart-wrapper{position:fixed!important;bottom:1rem!important;right:1rem!important;left:auto!important;top:auto!important}`,
           }}
         />
         {/*
