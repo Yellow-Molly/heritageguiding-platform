@@ -6,7 +6,7 @@
  */
 
 import type { FeaturedTour } from './get-featured-tours'
-import type { TourDetail } from './get-tour-by-slug'
+import type { TourDetail, OptionalAddOn } from './get-tour-by-slug'
 
 // ─── Lexical types ────────────────────────────────────────────────────────────
 
@@ -64,6 +64,20 @@ interface PayloadCategory {
   id: number | string
   name?: string
   slug?: string
+}
+
+/** Optional add-on row as stored by Payload (post-locale-resolution). */
+interface RawOptionalAddOn {
+  id?: string | number
+  name?: string | null
+  description?: string | null
+  pricingType?: 'perBooking' | 'perPerson' | null
+  adultPriceHint?: number | string | null
+  childPriceHint?: number | string | null
+  currency?: string | null
+  isRequired?: boolean | null
+  bokunExtraId?: string | null
+  displayOrder?: number | string | null
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -277,6 +291,31 @@ export function mapPayloadTourToTourDetail(doc: Record<string, unknown>): TourDe
     ? rawWhatToBring.filter((r) => r.item).map((r) => ({ item: r.item! }))
     : undefined
 
+  // ── Optional Add-ons (Bokun Extras mirror) ──
+  // Filter: drop rows missing `bokunExtraId` (half-configured, not yet wired to Bokun).
+  // Sort:   by `displayOrder` asc, then by Payload-side array order (CMS authoring order).
+  const rawAddOns = doc.optionalAddOns as Array<RawOptionalAddOn> | null | undefined
+  const optionalAddOnsResult: OptionalAddOn[] | undefined = (() => {
+    if (!rawAddOns?.length) return undefined
+
+    const withOrder = rawAddOns
+      .map((row, idx) => ({ row, idx, order: Number(row.displayOrder ?? 0) }))
+      .filter(({ row }) => typeof row.bokunExtraId === 'string' && row.bokunExtraId.trim().length > 0)
+      .sort((a, b) => (a.order !== b.order ? a.order - b.order : a.idx - b.idx))
+      .map(({ row, idx }): OptionalAddOn => ({
+        id: String(row.id ?? `addon-${idx}`),
+        name: row.name ?? '',
+        description: row.description ?? undefined,
+        pricingType: row.pricingType === 'perPerson' ? 'perPerson' : 'perBooking',
+        adultPriceHint: Number(row.adultPriceHint ?? 0),
+        childPriceHint: row.childPriceHint != null ? Number(row.childPriceHint) : undefined,
+        currency: row.currency ?? 'SEK',
+        isRequired: Boolean(row.isRequired),
+      }))
+
+    return withOrder.length > 0 ? withOrder : undefined
+  })()
+
   // ── Guides (hasMany) ──
   const rawGuides = doc.guides as Array<PayloadGuide | number> | null | undefined
   const guides: TourDetail['guides'] = (rawGuides ?? [])
@@ -323,6 +362,7 @@ export function mapPayloadTourToTourDetail(doc: Record<string, unknown>): TourDe
     included,
     notIncluded,
     whatToBring,
+    optionalAddOns: optionalAddOnsResult,
     guides,
     categories,
     audienceTags,

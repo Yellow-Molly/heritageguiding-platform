@@ -10,6 +10,7 @@ import * as migration_20260503_131600_enable_rls_public_tables from './20260503_
 import * as migration_20260503_153500_postgis_security_hardening from './20260503_153500_postgis_security_hardening';
 import * as migration_20260510_215812_convert_tour_guide_to_hasmany from './20260510_215812_convert_tour_guide_to_hasmany';
 import * as migration_20260514_174200_add_bokun_sync_fields from './20260514_174200_add_bokun_sync_fields';
+import * as migration_20260524_211041_add_optional_add_ons from './20260524_211041_add_optional_add_ons';
 
 export const migrations = [
   {
@@ -65,11 +66,16 @@ export const migrations = [
   {
     up: migration_20260510_215812_convert_tour_guide_to_hasmany.up,
     down: migration_20260510_215812_convert_tour_guide_to_hasmany.down,
-    name: '20260510_215812_convert_tour_guide_to_hasmany'
+    name: '20260510_215812_convert_tour_guide_to_hasmany',
   },
   {
     up: migration_20260514_174200_add_bokun_sync_fields.up,
     down: migration_20260514_174200_add_bokun_sync_fields.down,
     name: '20260514_174200_add_bokun_sync_fields',
+  },
+  {
+    up: migration_20260524_211041_add_optional_add_ons.up,
+    down: migration_20260524_211041_add_optional_add_ons.down,
+    name: '20260524_211041_add_optional_add_ons',
   },
 ];

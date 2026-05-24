@@ -14,6 +14,7 @@ import {
   tourPricingFields,
   tourDurationFields,
   tourInclusionFields,
+  tourOptionalAddOnsField,
   tourDifficultyFields,
 } from '../fields'
 import { audienceTagsField } from '../fields/tour-audience-fields'
@@ -108,6 +109,9 @@ export const Tours: CollectionConfig = {
 
     // ===== INCLUSIONS & EXCLUSIONS =====
     ...tourInclusionFields,
+
+    // ===== OPTIONAL ADD-ONS (Bokun Extras mirror) =====
+    tourOptionalAddOnsField,
 
     // ===== AUDIENCE & DIFFICULTY =====
     audienceTagsField,

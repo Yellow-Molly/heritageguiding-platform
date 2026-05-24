@@ -1,0 +1,182 @@
+{
+  "_meta": {
+    "source": "Bokun widgets checkout API response (https://widgets.bokun.io/widgets/<channel-uuid>/checkout) — captured 2026-05-24 from staging booking PRI-92631591",
+    "note": "This is the frontend draft-booking response, NOT the BOOKING_CREATED/CONFIRMED webhook payload our server receives. Field names for extras should be identical in webhook (same Bokun data model), but the outer envelope may use `productBookings`/`customerDetails` keys instead of `activityBookings`/`customer` (per existing BokunBooking type comments).",
+    "piiRedacted": true,
+    "captureContext": {
+      "experienceId": 1215959,
+      "extraId": 276080,
+      "extraConfig": "Title: 'QA Test Museum Ticket', pricingType: PER_PERSON (but effectively per-booking because tour has only one pricing category 'Per group' with occupancy=9), unitPrice: 150 SEK, maxUnits: Maximum by participant, Required: ON"
+    }
+  },
+  "booking": {
+    "bookingId": 92631591,
+    "language": "en",
+    "confirmationCode": "PRI-92631591",
+    "status": "RESERVED",
+    "currency": "SEK",
+    "totalPrice": 4050.0,
+    "totalPaid": 0.0,
+    "totalDue": 4050.0,
+    "customer": {
+      "id": 215878870,
+      "uuid": "REDACTED-CUSTOMER-UUID",
+      "email": "qa+addontest@privatetours.test",
+      "firstName": "QA",
+      "lastName": "Tester",
+      "phoneNumber": null,
+      "acceptsMarketing": false
+    },
+    "activityBookings": [
+      {
+        "bookingId": 131925602,
+        "parentBookingId": 92631591,
+        "confirmationCode": "PRI-92631591",
+        "productConfirmationCode": "PRI-T131925602",
+        "startDateTime": 1779872400000,
+        "endDateTime": 1779883200000,
+        "status": "RESERVED",
+        "title": "Guided City Walk Including Vasa Museum – Gamla Stan, Strandvägen and Vasa Museum",
+        "totalPrice": 4050.0,
+        "totalPriceAsText": "SEK 4,050.00",
+        "productId": 1215959,
+        "rateId": 2408929,
+        "rateTitle": "Standard",
+        "date": 1779840000000,
+        "dateString": "Wed, May 27 2026 - 9:00 AM",
+        "startTime": "09:00",
+        "startTimeId": 5166395,
+        "totalParticipants": 1,
+
+        "lineItems": [
+          {
+            "id": 258515165,
+            "title": "Passengers",
+            "currency": "SEK",
+            "quantity": 1,
+            "unitPrice": 3900.0,
+            "total": 3900.0,
+            "totalAsText": "SEK 3,900.00",
+            "itemBookingId": "1215959_131925602",
+            "costItemId": 552733787,
+            "costItemTitle": "Participant",
+            "costGroupTitle": "Guided City Walk Including Vasa Museum",
+            "people": 5
+          },
+          {
+            "id": 258515166,
+            "title": "Per group: QA Test Museum Ticket",
+            "currency": "SEK",
+            "quantity": 1,
+            "unitPrice": 150.0,
+            "total": 150.0,
+            "totalAsText": "SEK 150.00",
+            "extraId": 276080,
+            "pricingCategoryId": 1186978,
+            "itemBookingId": "1215959_14695302",
+            "costItemId": 4611686018428651821,
+            "costItemTitle": "QA Test Museum Ticket : Per group",
+            "costGroupTitle": "Guided City Walk Including Vasa Museum",
+            "people": 0
+          }
+        ],
+
+        "extras": [
+          {
+            "bookingId": 14695302,
+            "title": "QA Test Museum Ticket",
+            "unitCount": 1,
+            "extra": {
+              "id": 276080,
+              "externalId": "",
+              "title": "QA Test Museum Ticket",
+              "information": "",
+              "included": false,
+              "free": false,
+              "pricingType": "PER_PERSON",
+              "pricingTypeLabel": "per person",
+              "increasesCapacity": false,
+              "maxPerBooking": 0,
+              "limitByPax": true,
+              "rateIds": [2408929],
+              "type": "OTHERS"
+            },
+            "bookableExtra": {
+              "id": 276080,
+              "title": "QA Test Museum Ticket",
+              "pricingType": "PER_PERSON",
+              "type": "OTHERS"
+            }
+          }
+        ],
+
+        "pricingCategoryBookings": [
+          {
+            "id": 338058391,
+            "pricingCategoryId": 1186978,
+            "occupancy": 9,
+            "groupSize": 5,
+            "quantity": 1,
+            "bookedTitle": "Per group",
+            "extras": [
+              {
+                "bookingId": 14695302,
+                "title": "QA Test Museum Ticket",
+                "unitCount": 1,
+                "extra": {
+                  "id": 276080,
+                  "title": "QA Test Museum Ticket",
+                  "pricingType": "PER_PERSON"
+                }
+              }
+            ]
+          }
+        ],
+
+        "bookedPricingCategories": [
+          {
+            "id": 1186978,
+            "title": "Per group",
+            "occupancy": 1,
+            "groupSize": 1
+          }
+        ],
+
+        "cancellationPolicy": {
+          "id": 261112,
+          "title": "Non refundable",
+          "policyType": "NON_REFUNDABLE"
+        }
+      }
+    ],
+
+    "invoice": {
+      "id": 533757247,
+      "currency": "SEK",
+      "productInvoices": [
+        {
+          "id": 248427586,
+          "productBookingId": 131925602,
+          "lineItems": [
+            {
+              "id": 258515165,
+              "title": "Passengers",
+              "quantity": 1,
+              "unitPrice": 3900.0,
+              "total": 3900.0
+            },
+            {
+              "id": 258515166,
+              "title": "Per group: QA Test Museum Ticket",
+              "quantity": 1,
+              "unitPrice": 150.0,
+              "total": 150.0,
+              "extraId": 276080,
+              "pricingCategoryId": 1186978
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -9,6 +9,7 @@ import { TourMobilePriceBar } from '@/components/tour/tour-mobile-price-bar'
 import { TourHighlightsSection } from '@/components/tour/tour-highlights-section'
 import { TourContent } from '@/components/tour/tour-content'
 import { InclusionsSection } from '@/components/tour/inclusions-section'
+import { OptionalAddOnsSection } from '@/components/tour/optional-add-ons-section'
 import { LogisticsSection } from '@/components/tour/logistics-section'
 // MVP-HIDE: re-enable after MVP launch
 // import { GuidesSection } from '@/components/tour/guides-section'
@@ -85,6 +86,7 @@ export default async function TourPage({ params }: TourPageProps) {
               <TourHighlightsSection highlights={tour.highlights} />
               <TourContent tour={tour} />
               <InclusionsSection tour={tour} />
+              <OptionalAddOnsSection tour={tour} />
               <LogisticsSection tour={tour} />
               {/* MVP-HIDE: Guides section temporarily hidden for launch — re-enable after MVP */}
               {/* {tour.guides.length > 0 && <GuidesSection guides={tour.guides} />} */}

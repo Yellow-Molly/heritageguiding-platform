@@ -1,4 +1,5 @@
 import { createEmailTransporter } from './create-email-transporter'
+import type { AddOnEmailLine } from './send-booking-confirmation-to-customer'
 
 export interface BookingCancellationData {
   to: string
@@ -6,6 +7,8 @@ export interface BookingCancellationData {
   confirmationCode: string
   tourTitle?: string
   bookingDate?: string
+  /** Paid add-ons that were on the cancelled booking. Refund flow is Bokun's; this is courtesy context. */
+  addOns?: AddOnEmailLine[]
 }
 
 /**
@@ -20,6 +23,12 @@ export async function sendBookingCancellationToCustomer(data: BookingCancellatio
   const dateLine = data.bookingDate
     ? `<p><strong>Originally scheduled:</strong> ${escapeHtml(data.bookingDate)}</p>`
     : ''
+  // Single comma-separated summary line — cancellation emails stay terse.
+  const addOnsLine = data.addOns?.length
+    ? `<p><strong>Add-ons included:</strong> ${data.addOns
+        .map((a) => `${escapeHtml(a.name)} × ${a.qty}`)
+        .join(', ')}</p>`
+    : ''
 
   await transporter.sendMail({
     from: `Private Tours <${process.env.GMAIL_USER}>`,
@@ -31,6 +40,7 @@ export async function sendBookingCancellationToCustomer(data: BookingCancellatio
       <p><strong>Confirmation code:</strong> ${escapeHtml(data.confirmationCode)}</p>
       ${tourLine}
       ${dateLine}
+      ${addOnsLine}
       <p>If a refund applies, it's processed through Bokun and will arrive via your original payment method within the standard window for your bank.</p>
       <p>We hope to host you on another tour soon — reply to this email if you'd like help picking a new date.</p>
       <p>Best regards,<br/>Private Tours Team</p>

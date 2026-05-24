@@ -633,6 +633,14 @@
       "notIncluded": "Ingår ej",
       "whatToBring": "Vad du behöver ta med"
     },
+    "optionalAddOns": {
+      "title": "Tillägg",
+      "subtitle": "Betalas i kassan. Vissa tillägg är obligatoriska för den här turen, andra är valfria. Slutpriset visas i bokningswidgeten.",
+      "pillRequired": "Obligatoriskt — läggs till i kassan",
+      "pillOptional": "Valfritt — lägg till i kassan",
+      "priceHintPerPerson": "från {price} per person",
+      "priceHintPerBooking": "{price} per bokning"
+    },
     "guides": {
       "title": "{count, plural, one {Din guide} other {Dina guider}}",
       "speaks": "Talar"

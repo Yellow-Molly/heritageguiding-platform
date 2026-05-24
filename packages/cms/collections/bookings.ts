@@ -135,6 +135,17 @@ export const Bookings: CollectionConfig = {
       },
     },
 
+    // ===== PAID ADD-ONS (Bokun Extras purchased at checkout) =====
+    {
+      name: 'addOns',
+      type: 'json',
+      admin: {
+        description:
+          'Paid add-ons captured from Bokun webhook (museum tickets, meals, etc). Shape: [{ bokunExtraId, name, qty, unitPrice, totalPrice, currency, perPerson }]. Read-only — only the webhook writes this.',
+        readOnly: true,
+      },
+    },
+
     // ===== PRICING =====
     {
       name: 'totalPrice',

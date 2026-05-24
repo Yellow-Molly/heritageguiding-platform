@@ -59,6 +59,15 @@ function verifyWebhookSignature(rawBody: string, signature: string): boolean {
  * in the `bookings.rawPayload` JSON column.
  */
 function logWebhookEvent(event: string, bookingId: string, booking: BokunBooking): void {
+  // Count add-on lines (lineItems with `extraId` set) across all productBookings.
+  // Acts as a canary: if Bokun ever renames the field, count drops to 0 even
+  // when extras were actually purchased — early signal of shape drift.
+  let addOnCount = 0
+  for (const product of booking.productBookings ?? []) {
+    for (const item of product.lineItems ?? []) {
+      if (item.extraId != null) addOnCount += 1
+    }
+  }
   console.log(
     '[Bokun Webhook]',
     JSON.stringify({
@@ -70,6 +79,7 @@ function logWebhookEvent(event: string, bookingId: string, booking: BokunBooking
       customerEmail: booking.customerDetails.email,
       totalPrice: booking.totalPrice,
       currency: booking.currency,
+      addOnCount,
     }),
   )
 }

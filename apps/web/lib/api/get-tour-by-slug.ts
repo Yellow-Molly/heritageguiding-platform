@@ -10,6 +10,29 @@ import config from '@payload-config'
 import type { FeaturedTour } from './get-featured-tours'
 import { mapPayloadTourToTourDetail } from './tour-payload-mapper'
 
+/**
+ * One paid add-on shown on a tour page. Mirrors a Bokun Extra (operator
+ * configures both sides — see plans/260519-2046-bokun-extras-add-ons-checkout/).
+ */
+export interface OptionalAddOn {
+  /** Stable id for React keys (Payload row id, stringified). */
+  id: string
+  /** Localized title (already resolved for the requested locale). */
+  name: string
+  /** Optional localized description. */
+  description?: string
+  /** Drives price-hint copy: per booking vs per person. */
+  pricingType: 'perBooking' | 'perPerson'
+  /** Indicative adult-tier price (must match Bokun-side price). */
+  adultPriceHint: number
+  /** Optional child-tier price. */
+  childPriceHint?: number
+  /** ISO 4217 currency code (SEK | EUR | USD). */
+  currency: string
+  /** When true, render amber "Required" pill; otherwise neutral "Optional" pill. */
+  isRequired: boolean
+}
+
 /** Extended tour details for detail page */
 export interface TourDetail extends FeaturedTour {
   /** HTML content for emotional description */
@@ -44,6 +67,12 @@ export interface TourDetail extends FeaturedTour {
   notIncluded?: Array<{ item: string }>
   /** What to bring */
   whatToBring?: Array<{ item: string }>
+  /**
+   * Optional paid add-ons (mirror of Bokun Extras configured per-product).
+   * Loader filters out rows missing `bokunExtraId` so the public never sees
+   * half-configured items. Sorted by `displayOrder` asc, then array order.
+   */
+  optionalAddOns?: OptionalAddOn[]
   /** Guides leading this tour (>=1, ordered as set in CMS) */
   guides: Array<{
     id: string
@@ -105,9 +134,10 @@ async function fetchTourBySlug(
 // to invalidate Vercel Data Cache entries from previous deploys. Bumping
 // avoids serving e.g. the legacy `{ guide }` object after the hasMany
 // migration converted it to `{ guides: [...] }`.
+// v3 — adds `optionalAddOns` field for Bokun Extras at-checkout mirror.
 export const getTourBySlug = unstable_cache(
   fetchTourBySlug,
-  ['tour-by-slug', 'v2-hasmany-guides'],
+  ['tour-by-slug', 'v3-optional-add-ons'],
   { tags: ['tours'] }
 )
 

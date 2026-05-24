@@ -1,0 +1,80 @@
+{
+  "_meta": {
+    "source": "Synthesized from Phase 01 sandbox capture (booking PRI-92631591, extra 276080).",
+    "shape": "Conforms to BokunWebhookPayload — booking has `productBookings[]` (webhook envelope) with `lineItems[]` carrying the extras pricing.",
+    "piiRedacted": true
+  },
+  "event": "BOOKING_CONFIRMED",
+  "bookingId": "92631591",
+  "timestamp": 1779656280000,
+  "booking": {
+    "id": "92631591",
+    "confirmationCode": "PRI-92631591",
+    "status": "CONFIRMED",
+    "customerDetails": {
+      "firstName": "QA",
+      "lastName": "Tester",
+      "email": "qa+addontest@privatetours.test",
+      "phone": "+46000000000"
+    },
+    "productBookings": [
+      {
+        "startTimeId": "5166395",
+        "experienceId": "1215959",
+        "participants": [
+          { "ageBand": "ADULT", "count": 3 },
+          { "ageBand": "CHILD", "count": 2 }
+        ],
+        "date": "2026-05-27",
+        "startTime": "09:00",
+        "lineItems": [
+          {
+            "id": 258515165,
+            "title": "Passengers",
+            "currency": "SEK",
+            "quantity": 1,
+            "unitPrice": 3900.0,
+            "total": 3900.0,
+            "totalAsText": "SEK 3,900.00",
+            "itemBookingId": "1215959_131925602",
+            "people": 5
+          },
+          {
+            "id": 258515166,
+            "title": "Per group: QA Test Museum Ticket",
+            "currency": "SEK",
+            "quantity": 1,
+            "unitPrice": 150.0,
+            "total": 150.0,
+            "totalAsText": "SEK 150.00",
+            "extraId": 276080,
+            "pricingCategoryId": 1186978,
+            "itemBookingId": "1215959_14695302",
+            "people": 0
+          }
+        ],
+        "extras": [
+          {
+            "bookingId": 14695302,
+            "title": "QA Test Museum Ticket",
+            "unitCount": 1,
+            "extra": {
+              "id": 276080,
+              "title": "QA Test Museum Ticket",
+              "pricingType": "PER_PERSON",
+              "type": "OTHERS"
+            },
+            "bookableExtra": {
+              "id": 276080,
+              "title": "QA Test Museum Ticket",
+              "pricingType": "PER_PERSON"
+            }
+          }
+        ]
+      }
+    ],
+    "totalPrice": "4050.00",
+    "currency": "SEK",
+    "createdAt": 1779656280000
+  }
+}

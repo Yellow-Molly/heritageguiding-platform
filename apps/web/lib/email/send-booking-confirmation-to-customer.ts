@@ -1,5 +1,18 @@
 import { createEmailTransporter } from './create-email-transporter'
 
+/**
+ * Minimal shape for a purchased add-on rendered inside a booking email.
+ * Subset of `MappedAddOnLine` — only the fields needed for display.
+ * Re-exported for use by the cancellation sender (shared shape avoids
+ * the caller having to massage data twice).
+ */
+export interface AddOnEmailLine {
+  name: string
+  qty: number
+  totalPrice: string
+  currency: string
+}
+
 export interface BookingConfirmationData {
   to: string
   customerName: string
@@ -10,6 +23,8 @@ export interface BookingConfirmationData {
   participants?: number
   totalPrice: string
   currency: string
+  /** Paid add-ons purchased at checkout. Omit/empty → no add-on block rendered. */
+  addOns?: AddOnEmailLine[]
 }
 
 /**
@@ -29,6 +44,19 @@ export async function sendBookingConfirmationToCustomer(data: BookingConfirmatio
   const peopleLine = data.participants
     ? `<p><strong>Participants:</strong> ${data.participants}</p>`
     : ''
+  // Inline-style `<ul>` for Gmail/Outlook compatibility — list-style reset
+  // and tight margins to keep the block visually compact.
+  const addOnsBlock = data.addOns?.length
+    ? `<p style="margin-bottom: 4px;"><strong>Add-ons:</strong></p>
+       <ul style="margin: 0 0 12px 0; padding-left: 20px;">
+         ${data.addOns
+           .map(
+             (a) =>
+               `<li>${escapeHtml(a.name)} × ${a.qty} — ${escapeHtml(a.totalPrice)} ${escapeHtml(a.currency)}</li>`,
+           )
+           .join('')}
+       </ul>`
+    : ''
 
   await transporter.sendMail({
     from: `Private Tours <${process.env.GMAIL_USER}>`,
@@ -41,6 +69,7 @@ export async function sendBookingConfirmationToCustomer(data: BookingConfirmatio
       ${tourLine}
       ${dateLine}
       ${peopleLine}
+      ${addOnsBlock}
       <p><strong>Total:</strong> ${escapeHtml(data.totalPrice)} ${escapeHtml(data.currency)}</p>
       <p>We'll be in touch shortly before your tour with meeting-point details. Reply to this email if you need anything.</p>
       <p>Best regards,<br/>Private Tours Team</p>

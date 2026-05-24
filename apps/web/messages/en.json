@@ -633,6 +633,14 @@
       "notIncluded": "Not Included",
       "whatToBring": "What to Bring"
     },
+    "optionalAddOns": {
+      "title": "Add-ons",
+      "subtitle": "Paid at checkout. Some add-ons are required for this tour, others are optional. Final price shown in the booking widget.",
+      "pillRequired": "Required — added at checkout",
+      "pillOptional": "Optional — add at checkout",
+      "priceHintPerPerson": "from {price} per person",
+      "priceHintPerBooking": "{price} per booking"
+    },
     "guides": {
       "title": "{count, plural, one {Your Guide} other {Your Guides}}",
       "speaks": "Speaks"

@@ -633,6 +633,14 @@
       "notIncluded": "Nicht enthalten",
       "whatToBring": "Was Sie mitbringen sollten"
     },
+    "optionalAddOns": {
+      "title": "Zusatzleistungen",
+      "subtitle": "Bezahlung beim Checkout. Einige Zusatzleistungen sind für diese Tour erforderlich, andere optional. Der Endpreis wird im Buchungs-Widget angezeigt.",
+      "pillRequired": "Erforderlich — wird beim Bezahlvorgang hinzugefügt",
+      "pillOptional": "Optional — beim Bezahlvorgang hinzufügen",
+      "priceHintPerPerson": "ab {price} pro Person",
+      "priceHintPerBooking": "{price} pro Buchung"
+    },
     "guides": {
       "title": "{count, plural, one {Ihr Reiseführer} other {Ihre Reiseführer}}",
       "speaks": "Spricht"

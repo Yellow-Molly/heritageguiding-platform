@@ -70,6 +70,113 @@ export interface BokunBooking {
   createdAt: number
   /** Last update timestamp (UTC milliseconds) */
   updatedAt?: number
+  /**
+   * Paid Extras envelope (no pricing) as emitted on the booking object.
+   * Authoritative pricing/quantity lives on `BokunProductBooking.lineItems[]`
+   * where `extraId` is set. See `BokunBookingLineItem`.
+   *
+   * Path varies by Bokun event surface:
+   *   - Webhook payload (server-side): `booking.productBookings[N].extras[]`
+   *   - Checkout API response (widget): `booking.activityBookings[N].extras[]`
+   *
+   * See: plans/260519-2046-bokun-extras-add-ons-checkout/research/bokun-extras-shape-findings.md
+   */
+  extras?: BokunExtraEnvelope[]
+}
+
+/**
+ * Bokun "Extra" envelope returned on a booking — purely metadata; price/qty
+ * for an Extra purchase live on `BokunBookingLineItem` (cross-reference by
+ * `lineItem.extraId === envelope.extra.id`).
+ *
+ * Observed in Phase 01 capture (sample: `research/bokun-checkout-api-response-sample.json`).
+ */
+export interface BokunExtraEnvelope {
+  /** Internal Bokun booking ID for this extra purchase (not the parent booking). */
+  bookingId: number
+  /** Display title (single string, NOT localized in payload). */
+  title: string
+  /** Quantity purchased (Bokun's pre-payment count). */
+  unitCount: number
+  /** Nested metadata about the configured Extra (catalog-side). */
+  extra: BokunExtraDefinition
+  /** Duplicate of `extra` Bokun emits on the same envelope. */
+  bookableExtra?: BokunExtraDefinition
+  /** Customer answers to any extra-level questions. v1 unused. */
+  bookingAnswers?: unknown[]
+  /** Customer answers (alt array). v1 unused. */
+  answers?: unknown[]
+}
+
+/**
+ * Catalog-side definition of a Bokun Extra, embedded inside a booking's
+ * `BokunExtraEnvelope.extra`. Bokun replicates this in multiple places.
+ */
+export interface BokunExtraDefinition {
+  /** Bokun-side numeric Extra ID. Operator pastes this into CMS `bokunExtraId` (as string). */
+  id: number
+  /** Vendor-controlled external reference string; usually empty. */
+  externalId?: string
+  /** Display title. Single string, NOT localized. */
+  title: string
+  /** Long-form description. Bokun emits HTML-safe plain text. */
+  information?: string
+  /** Whether this extra is auto-included with every booking (Required). */
+  included?: boolean
+  /** Whether the extra is offered for free. */
+  free?: boolean
+  /** Pricing model. PER_PERSON extras still price once per pricing-category line. */
+  pricingType?: 'PER_PERSON' | 'PER_BOOKING'
+  /** Localized label of pricingType (e.g. "per person"). Single string, NOT localized. */
+  pricingTypeLabel?: string
+  /** Whether buying this extra adds capacity to the booking. */
+  increasesCapacity?: boolean
+  /** 0 = no max, otherwise hard cap per booking. */
+  maxPerBooking?: number
+  /** When true, max units = number of participants. */
+  limitByPax?: boolean
+  /** Rate IDs this extra is offered against. */
+  rateIds?: number[]
+  /** GetYourGuide channel-mapping hint. v1 ignores. */
+  type?: 'FOOD' | 'DRINKS' | 'SAFETY' | 'TRANSPORT' | 'DONATION' | 'OTHERS'
+  /** Custom questions attached to the extra. v1 ignores. */
+  questions?: unknown[]
+  /** Bokun-internal flags. v1 ignores. */
+  flags?: unknown[]
+}
+
+/**
+ * One line item on a product booking. Bokun emits both passenger lines and
+ * extra-purchase lines through this same shape. Extra lines have `extraId` set.
+ *
+ * Monetary values arrive as **numbers (floats)** here — coerce to strings
+ * in the mapper to match Bokun's stated stringly-typed monetary convention.
+ *
+ * Observed in Phase 01 capture (sample: `research/bokun-checkout-api-response-sample.json`).
+ */
+export interface BokunBookingLineItem {
+  /** Internal line ID. */
+  id: number
+  /** Display title. Extra lines are prefixed with pricing category, e.g. `"Per group: Museum Ticket"`. */
+  title: string
+  /** ISO 4217 currency code. */
+  currency: string
+  /** Units purchased. */
+  quantity: number
+  /** Per-unit price (float). Coerce to string for persistence. */
+  unitPrice: number
+  /** Total line price (float). Coerce to string for persistence. */
+  total: number
+  /** Pre-formatted total, e.g. "SEK 150.00". */
+  totalAsText?: string
+  /** Present ONLY on lines that represent an Extra purchase (cross-ref to `BokunExtraDefinition.id`). */
+  extraId?: number
+  /** Pricing category this line was sold under (e.g. "Per group", "Adult", "Child"). */
+  pricingCategoryId?: number
+  /** Internal item-booking reference for the line. */
+  itemBookingId?: string
+  /** Number of people this line represents (0 for per-booking extras). */
+  people?: number
 }
 
 /**
@@ -106,6 +213,17 @@ export interface BokunProductBooking {
   date: string
   /** Start time */
   startTime: string
+  /**
+   * Per-line breakdown of what was purchased on this product booking.
+   * Extras are line items where `extraId` is set (rest are passenger lines).
+   * Authoritative source for extras pricing/quantity — see `BokunBookingLineItem`.
+   */
+  lineItems?: BokunBookingLineItem[]
+  /**
+   * Extras envelope (metadata only — no pricing). Cross-reference by
+   * `lineItem.extraId === envelope.extra.id`. See `BokunExtraEnvelope`.
+   */
+  extras?: BokunExtraEnvelope[]
 }
 
 /**

@@ -9,9 +9,18 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { BokunWebhookPayload } from './bokun-types'
-import { mapBokunWebhookToBookingRow } from './map-bokun-webhook-to-booking-row'
-import { sendBookingConfirmationToCustomer } from '@/lib/email/send-booking-confirmation-to-customer'
+import { mapBokunWebhookToBookingRow, type MappedAddOnLine } from './map-bokun-webhook-to-booking-row'
+import {
+  sendBookingConfirmationToCustomer,
+  type AddOnEmailLine,
+} from '@/lib/email/send-booking-confirmation-to-customer'
 import { sendBookingCancellationToCustomer } from '@/lib/email/send-booking-cancellation-to-customer'
+
+/** Strip MappedAddOnLine down to the subset emails need (name, qty, totalPrice, currency). */
+function toEmailAddOns(addOns: MappedAddOnLine[] | undefined): AddOnEmailLine[] | undefined {
+  if (!addOns?.length) return undefined
+  return addOns.map(({ name, qty, totalPrice, currency }) => ({ name, qty, totalPrice, currency }))
+}
 
 /**
  * Persist the webhook event and trigger emails as appropriate.
@@ -93,6 +102,7 @@ export async function persistBokunBooking(payload: BokunWebhookPayload): Promise
         participants: row.participants,
         totalPrice: row.totalPrice,
         currency: row.currency,
+        addOns: toEmailAddOns(row.addOns),
       })
       await cms.update({
         collection: 'bookings',
@@ -122,6 +132,7 @@ export async function persistBokunBooking(payload: BokunWebhookPayload): Promise
         confirmationCode: row.confirmationCode,
         tourTitle,
         bookingDate: row.bookingDate,
+        addOns: toEmailAddOns(row.addOns),
       })
     } catch (err) {
       console.error('[Bokun Webhook] Cancellation email failed:', err)
