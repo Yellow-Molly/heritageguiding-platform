@@ -1,61 +1,63 @@
-# Phase 05: SEO Meta/Schema + Visual Regression + Performance Web Vitals
+# Phase 05: SEO Meta/Schema + Visual Regression + Performance Sanity
 
 ## Context Links
 - **Parent Plan**: [plan.md](./plan.md)
 - **Depends On**: [Phase 01](./phase-01-foundation-setup-config-pom-base-smoke-tests.md), [Phase 02](./phase-02-customer-journey-browse-search-filter-booking.md)
 - **Research**: [i18n, Bokun, SEO, Performance](./research/researcher-02-i18n-bokun-seo-testing.md)
-- **Codebase**: apps/web/components/seo/ (faq-schema, travel-agency-schema, tour-schema, guide-detail-schema, guide-list-schema, about-schema)
+- **Codebase**: `apps/web/components/seo/` (faq-schema, travel-agency-schema, contact-page-schema, tour-list-schema, guide-detail-schema, guide-list-schema, about-schema)
 
 ## Overview
-- **Date**: 2026-02-12
+- **Date**: 2026-02-12 (rewritten 2026-05-19)
 - **Priority**: MEDIUM
 - **Effort**: 2.5h
 - **Implementation Status**: Pending
 - **Review Status**: Not started
 
-Test SEO meta tags (title, description, OpenGraph, Twitter Card) and JSON-LD structured data (TravelAgency, TourProduct/TouristAttraction, FAQPage) across key pages. Visual regression via `toHaveScreenshot()` at 3 viewports (375px mobile, 768px tablet, 1920px desktop). Performance via Core Web Vitals assertions (LCP < 2.5s, CLS < 0.1, FCP < 1.8s). WhatsApp floating button visibility and localStorage dismiss.
+Test SEO meta tags (title, description, OpenGraph, Twitter Card) and JSON-LD structured data (TravelAgency, Tour/TouristAttraction/Product, FAQPage, ContactPage, ItemList, Person) across key pages — including new routes (`/contact`, `/imprint`, `/cancellation`). Visual regression via `toHaveScreenshot()` at 3 viewports (375 / 768 / 1920px) with animations disabled and volatile regions masked (Bokun iframe, AI chat, WhatsApp). WhatsApp floating button visibility coupled with AI chat open state. Performance is **out of scope** here — covered by `lighthouse-ci.yml` workflow on every PR Preview.
 
 ## Key Insights
-- SEO components: `faq-schema.tsx`, `travel-agency-schema.tsx`, `tour-schema.tsx`, `guide-detail-schema.tsx`, `guide-list-schema.tsx`, `about-schema.tsx`
+- SEO components verified 2026-05-19: `faq-schema.tsx`, `travel-agency-schema.tsx`, `contact-page-schema.tsx`, `tour-list-schema.tsx`, `guide-detail-schema.tsx`, `guide-list-schema.tsx`, `about-schema.tsx`
 - JSON-LD rendered as `<script type="application/ld+json">` in page head
-- Homepage uses TravelAgency schema, tour detail uses TouristAttraction, FAQ uses FAQPage, guide detail uses Person, about uses AboutPage
-- New `llms.txt` and `llms-full.txt` endpoints added (since Feb 12)
-- OpenGraph tags: og:title, og:description, og:image, og:url
-- Visual regression uses `toHaveScreenshot()` with `maxDiffPixels: 100`, `threshold: 0.2`
-- Animations must be disabled for consistent screenshots
-- Core Web Vitals measured via PerformanceObserver API
-- WhatsApp button uses localStorage key `hg-whatsapp-dismissed` (from component source)
-- WhatsApp link format: `https://wa.me/{phoneNumber}?text={encodedMessage}`
+- Schema mapping (verified): home → `TravelAgency`; tour list → `ItemList`/`TouristAttraction[]`; tour detail → individual tour schema; FAQ → `FAQPage`; guide detail → `Person`; guide list → `ItemList`; contact → `ContactPage`; about → `AboutPage`
+- `llms.txt` + `llms-full.txt` exist at root and at `/{locale}/`
+- Visual regression: animations disabled; **must mask** Bokun iframe (`iframe[src*="bokun"]`), AI chat (`#bubblav-iframe`, `[data-chat-bubble]`), WhatsApp button (`a[href*="wa.me"]`), header sticky region
+- WhatsApp button hidden while AI chat is open (`whatsapp-floating-button.tsx`: returns `null` when `isAiChatOpen`)
+- WhatsApp dismiss key `hg-whatsapp-dismissed` confirmed 2026-05-19 unchanged
+- AI chat (Bubblav) gated behind `NEXT_PUBLIC_ENABLE_AI_CHAT`; mounted on idle/first-interaction
+- Performance Web Vitals removed from this phase — Lighthouse CI workflow enforces perf ≥0.9 / a11y ≥0.95 on every PR Preview
+- Playwright keeps a single page-load timing sanity check on homepage only (catch catastrophic regressions only)
 
 ## Requirements
 
 ### Functional
-- **SEO Meta**: Verify title, meta description (50-160 chars), og:title, og:image, og:url, twitter:card on homepage, tour catalog, tour detail
-- **JSON-LD**: Parse and validate TravelAgency schema on homepage, TouristAttraction on tour detail, FAQPage on /faq
-- **Visual Regression**: Capture full-page screenshots at 3 viewports for homepage, tours, tour detail, about-us
-- **Performance**: Assert LCP < 2.5s, CLS < 0.1, FCP < 1.8s on homepage and tour detail
-- **WhatsApp**: Button visible on page load, wa.me link with correct format, dismiss stores `hg-whatsapp-dismissed` in localStorage, reload hides button after dismiss
+- **Meta**: Title, meta description, og:title, og:description, og:image, og:url, twitter:card on homepage, tour catalog, tour detail, FAQ, guides listing, contact, about-us
+- **JSON-LD validation**: TravelAgency on home; tour schema on detail; FAQPage on /faq; Person on guide detail; ItemList on /guides; ContactPage on /contact; AboutPage on /about-us
+- **llms.txt + llms-full.txt** return 200 with non-empty body
+- **Visual regression**: capture at 3 viewports for homepage, tour catalog, tour detail (one stable tour), guides listing, guide detail (one stable guide), about-us, faq, contact, imprint, cancellation, group-booking
+- **WhatsApp button**: visible on homepage when AI chat closed; dismiss persists in localStorage; reload keeps it hidden; button stays hidden while AI chat open (if NEXT_PUBLIC_ENABLE_AI_CHAT enabled on staging)
+- **Page-load sanity**: homepage `load` event under 5s on Chromium (loose threshold; Lighthouse owns real budget)
+- **Admin smoke**: `/admin` login page renders email + password inputs (no login required)
 
 ### Non-Functional
-- Visual baselines stored per browser in `e2e/tests/visual/` (auto-generated by Playwright)
-- Screenshots disable animations for deterministic comparison
-- Performance thresholds are soft warnings, not hard failures (staging may be slower)
-- Each spec under 200 lines
+- Visual baselines per browser auto-generated by Playwright on first run
+- Mask helpers shared across specs
+- Tests run only on Chromium for visual regression (cross-browser pixel diffs too noisy)
+- Performance budget assertions REMOVED — see `lighthouse-ci.yml`
 
 ## Architecture
 
 ```
-e2e/
-├── tests/
-│   ├── seo/
-│   │   ├── meta-tags.spec.ts             # Title, description, OG, Twitter
-│   │   └── schema-markup.spec.ts         # JSON-LD structured data validation
-│   ├── visual/
-│   │   └── visual-regression.spec.ts     # Screenshots at 3 viewports
-│   ├── performance/
-│   │   └── core-web-vitals.spec.ts       # LCP, CLS, FCP assertions
-│   └── whatsapp/
-│       └── floating-button.spec.ts       # Visibility, link, dismiss
+e2e/tests/
+├── seo/
+│   ├── meta-tags.spec.ts        # Title, description, OG, Twitter
+│   ├── schema-markup.spec.ts    # JSON-LD validation per page
+│   └── llms-txt.spec.ts         # llms.txt + llms-full.txt 200
+├── visual/
+│   └── visual-regression.spec.ts # 3 viewports × 11 pages (Chromium only)
+├── whatsapp/
+│   └── floating-button.spec.ts   # Visibility, dismiss, AI-chat coupling
+└── admin/
+    └── admin-login-smoke.spec.ts # /admin renders login form
 ```
 
 ## Related Code Files
@@ -63,208 +65,203 @@ e2e/
 ### To Create
 | File | Purpose |
 |------|---------|
-| `e2e/tests/seo/meta-tags.spec.ts` | Meta title, description, OG, Twitter Card |
-| `e2e/tests/seo/schema-markup.spec.ts` | JSON-LD TravelAgency, TouristAttraction, FAQPage |
-| `e2e/tests/visual/visual-regression.spec.ts` | Full-page screenshots at 3 viewports |
-| `e2e/tests/performance/core-web-vitals.spec.ts` | LCP, CLS, FCP measurement |
-| `e2e/tests/whatsapp/floating-button.spec.ts` | WhatsApp button + localStorage dismiss |
+| `e2e/tests/seo/meta-tags.spec.ts` | Meta tags across key pages |
+| `e2e/tests/seo/schema-markup.spec.ts` | JSON-LD validation |
+| `e2e/tests/seo/llms-txt.spec.ts` | llms.txt + llms-full.txt 200 |
+| `e2e/tests/visual/visual-regression.spec.ts` | Visual snapshots × 3 viewports |
+| `e2e/tests/whatsapp/floating-button.spec.ts` | WhatsApp visibility + dismiss + AI-chat coupling |
+| `e2e/tests/admin/admin-login-smoke.spec.ts` | Admin login form smoke |
 
 ### Existing Reference (apps/web)
 | File | Relevance |
 |------|-----------|
-| `components/seo/faq-schema.tsx` | FAQPage JSON-LD structure |
-| `components/seo/travel-agency-schema.tsx` | TravelAgency JSON-LD structure |
-| `components/seo/tour-schema.tsx` | TouristAttraction JSON-LD structure |
-| `components/seo/guide-detail-schema.tsx` | Person JSON-LD for guide detail (new since Feb 12) |
-| `components/seo/guide-list-schema.tsx` | ItemList JSON-LD for guides listing (new since Feb 12) |
-| `components/seo/about-schema.tsx` | AboutPage JSON-LD (new since Feb 12) |
-| `lib/seo.ts` | SEO utilities, hreflang generation |
-| `components/shared/whatsapp-floating-button.tsx` | WhatsApp button, DISMISS_KEY = 'hg-whatsapp-dismissed' |
+| `components/seo/travel-agency-schema.tsx` | Home schema |
+| `components/seo/tour-list-schema.tsx` | Tour listing schema (added since Feb 12) |
+| `components/seo/contact-page-schema.tsx` | Contact page schema (NEW since Mar 14) |
+| `components/seo/faq-schema.tsx` | FAQPage schema |
+| `components/seo/guide-detail-schema.tsx` | Guide detail Person schema |
+| `components/seo/guide-list-schema.tsx` | Guide list ItemList schema |
+| `components/seo/about-schema.tsx` | AboutPage schema |
+| `lib/seo.ts` | SEO utilities (hreflang generation) |
+| `components/shared/whatsapp-floating-button.tsx` | Dismiss key `hg-whatsapp-dismissed`, gated by `isAiChatOpen` |
+| `components/ai-chat/ai-chat-provider-context.tsx` | Provides `isAiChatOpen` state |
+| `.github/workflows/lighthouse-ci.yml` | Owns real perf budgets |
 
 ## Implementation Steps
 
-### 1. Create e2e/tests/seo/meta-tags.spec.ts
+### 1. Create `e2e/tests/seo/meta-tags.spec.ts`
+
 ```typescript
 import { test, expect } from '@playwright/test'
 import { getFirstTourSlug } from '../../fixtures/staging-data'
 
 const LOCALE = 'en'
 
+const META_PAGES = [
+  { path: '/', name: 'Homepage' },
+  { path: '/tours', name: 'Tour catalog' },
+  { path: '/guides', name: 'Guides listing' },
+  { path: '/about-us', name: 'About' },
+  { path: '/contact', name: 'Contact' },
+  { path: '/faq', name: 'FAQ' },
+]
+
 test.describe('SEO - Meta Tags', () => {
-  test('homepage has title and meta description', async ({ page }) => {
+  for (const { path, name } of META_PAGES) {
+    test(`${name} has title + meta description`, async ({ page }) => {
+      await page.goto(`/${LOCALE}${path}`)
+      const title = await page.title()
+      expect(title.length).toBeGreaterThan(0)
+      const description = await page
+        .locator('meta[name="description"]')
+        .getAttribute('content')
+      expect(description?.length ?? 0).toBeGreaterThan(20)
+    })
+  }
+
+  test('homepage has OpenGraph + Twitter card', async ({ page }) => {
     await page.goto(`/${LOCALE}/`)
-    const title = await page.title()
-    expect(title.length).toBeGreaterThan(0)
-
-    const description = await page.locator('meta[name="description"]').getAttribute('content')
-    expect(description).toBeTruthy()
-    expect(description!.length).toBeGreaterThan(50)
-    expect(description!.length).toBeLessThan(160)
-  })
-
-  test('homepage has OpenGraph tags', async ({ page }) => {
-    await page.goto(`/${LOCALE}/`)
-
     const ogTitle = await page.locator('meta[property="og:title"]').getAttribute('content')
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute('content')
-    const ogUrl = await page.locator('meta[property="og:url"]').getAttribute('content')
-
+    const twitter = await page.locator('meta[name="twitter:card"]').getAttribute('content')
     expect(ogTitle).toBeTruthy()
     expect(ogImage).toMatch(/^https?:\/\//)
-    expect(ogUrl).toBeTruthy()
+    expect(twitter).toBe('summary_large_image')
   })
 
-  test('tour catalog has meta description', async ({ page }) => {
-    await page.goto(`/${LOCALE}/tours`)
-    const description = await page.locator('meta[name="description"]').getAttribute('content')
-    expect(description).toBeTruthy()
-  })
-
-  test('tour detail page has specific meta tags', async ({ page, browser }) => {
-    const tempPage = await browser.newPage()
-    const slug = await getFirstTourSlug(tempPage)
-    await tempPage.close()
-
+  test('tour detail has tour-specific OG title', async ({ page, browser }) => {
+    const tmp = await browser.newPage()
+    const slug = await getFirstTourSlug(tmp)
+    await tmp.close()
     await page.goto(`/${LOCALE}/tours/${slug}`)
-
-    const title = await page.title()
-    expect(title.length).toBeGreaterThan(0)
-
-    const description = await page.locator('meta[name="description"]').getAttribute('content')
-    expect(description).toBeTruthy()
-
     const ogTitle = await page.locator('meta[property="og:title"]').getAttribute('content')
-    expect(ogTitle).toBeTruthy()
+    expect(ogTitle?.length ?? 0).toBeGreaterThan(0)
+  })
+})
+```
 
-    // Twitter card
-    const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute('content')
-    if (twitterCard) {
-      expect(twitterCard).toBe('summary_large_image')
-    }
+### 2. Create `e2e/tests/seo/schema-markup.spec.ts`
+
+```typescript
+import { test, expect, type Page } from '@playwright/test'
+import { getFirstTourSlug } from '../../fixtures/staging-data'
+
+const LOCALE = 'en'
+
+async function getJsonLd(page: Page): Promise<Array<Record<string, unknown>>> {
+  return page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
+    scripts
+      .map((s) => {
+        try { return JSON.parse(s.textContent || '{}') }
+        catch { return null }
+      })
+      .filter(Boolean) as Array<Record<string, unknown>>,
+  )
+}
+
+function findByType(schemas: Array<Record<string, unknown>>, ...types: string[]) {
+  return schemas.find((s) => types.includes(String(s['@type'])))
+}
+
+test.describe('SEO - JSON-LD Schema Markup', () => {
+  test('homepage has TravelAgency', async ({ page }) => {
+    await page.goto(`/${LOCALE}/`)
+    const schemas = await getJsonLd(page)
+    const agency = findByType(schemas, 'TravelAgency', 'Organization')
+    expect(agency).toBeTruthy()
+    expect(String(agency!['@context'])).toContain('schema.org')
+    expect(agency!.name).toBeTruthy()
   })
 
-  test('FAQ page has meta description', async ({ page }) => {
+  test('tour detail has tour schema', async ({ page, browser }) => {
+    const tmp = await browser.newPage()
+    const slug = await getFirstTourSlug(tmp)
+    await tmp.close()
+    await page.goto(`/${LOCALE}/tours/${slug}`)
+    const schemas = await getJsonLd(page)
+    const tour = findByType(schemas, 'TouristAttraction', 'Product', 'TouristTrip', 'TourProduct')
+    expect(tour).toBeTruthy()
+    expect(tour!.name).toBeTruthy()
+    expect(tour!.description).toBeTruthy()
+  })
+
+  test('FAQ has FAQPage with Question items', async ({ page }) => {
     await page.goto(`/${LOCALE}/faq`)
-    const title = await page.title()
-    expect(title.length).toBeGreaterThan(0)
+    const schemas = await getJsonLd(page)
+    const faq = findByType(schemas, 'FAQPage')
+    expect(faq).toBeTruthy()
+    const entities = faq!.mainEntity as Array<Record<string, unknown>>
+    expect(Array.isArray(entities)).toBe(true)
+    expect(entities.length).toBeGreaterThan(0)
+    expect(entities[0]['@type']).toBe('Question')
+    expect(entities[0].acceptedAnswer).toBeTruthy()
   })
 
-  test('guides listing has meta tags', async ({ page }) => {
+  test('guide detail has Person', async ({ page }) => {
     await page.goto(`/${LOCALE}/guides`)
-    const title = await page.title()
-    expect(title.length).toBeGreaterThan(0)
-    const description = await page.locator('meta[name="description"]').getAttribute('content')
-    expect(description).toBeTruthy()
+    const firstGuide = page.locator('a[href*="/guides/"]').first()
+    const visible = await firstGuide.isVisible().catch(() => false)
+    test.skip(!visible, 'no guides in CMS')
+    await firstGuide.click()
+    await page.waitForLoadState('domcontentloaded')
+    const schemas = await getJsonLd(page)
+    const person = findByType(schemas, 'Person')
+    expect(person).toBeTruthy()
+    expect(person!.name).toBeTruthy()
   })
 
-  test('llms.txt endpoint returns content', async ({ page }) => {
+  test('guides listing has ItemList', async ({ page }) => {
+    await page.goto(`/${LOCALE}/guides`)
+    const schemas = await getJsonLd(page)
+    const list = findByType(schemas, 'ItemList', 'CollectionPage')
+    expect(list).toBeTruthy()
+  })
+
+  test('contact page has ContactPage', async ({ page }) => {
+    await page.goto(`/${LOCALE}/contact`)
+    const schemas = await getJsonLd(page)
+    const contact = findByType(schemas, 'ContactPage')
+    expect(contact).toBeTruthy()
+  })
+
+  test('about page has AboutPage', async ({ page }) => {
+    await page.goto(`/${LOCALE}/about-us`)
+    const schemas = await getJsonLd(page)
+    const about = findByType(schemas, 'AboutPage')
+    expect(about).toBeTruthy()
+  })
+})
+```
+
+### 3. Create `e2e/tests/seo/llms-txt.spec.ts`
+
+```typescript
+import { test, expect } from '@playwright/test'
+
+test.describe('SEO - llms.txt endpoints', () => {
+  test('/llms.txt returns 200', async ({ page }) => {
     const response = await page.goto('/llms.txt')
     expect(response?.status()).toBe(200)
     const text = await page.locator('body').textContent()
-    expect(text?.length).toBeGreaterThan(0)
+    expect((text ?? '').length).toBeGreaterThan(20)
   })
 
-  test('llms-full.txt endpoint returns content', async ({ page }) => {
+  test('/llms-full.txt returns 200', async ({ page }) => {
     const response = await page.goto('/llms-full.txt')
     expect(response?.status()).toBe(200)
   })
 })
 ```
 
-### 2. Create e2e/tests/seo/schema-markup.spec.ts
-```typescript
-import { test, expect } from '@playwright/test'
-import { getFirstTourSlug } from '../../fixtures/staging-data'
+### 4. Create `e2e/tests/visual/visual-regression.spec.ts`
 
-const LOCALE = 'en'
-
-/** Extract all JSON-LD scripts from page */
-async function getJsonLdSchemas(page: import('@playwright/test').Page) {
-  return page.locator('script[type="application/ld+json"]').evaluateAll(
-    scripts => scripts.map(s => {
-      try { return JSON.parse(s.textContent || '{}') }
-      catch { return null }
-    }).filter(Boolean)
-  )
-}
-
-test.describe('SEO - JSON-LD Schema Markup', () => {
-  test('homepage has TravelAgency schema', async ({ page }) => {
-    await page.goto(`/${LOCALE}/`)
-    const schemas = await getJsonLdSchemas(page)
-
-    const agency = schemas.find(
-      (s: Record<string, unknown>) => s['@type'] === 'TravelAgency' || s['@type'] === 'Organization'
-    )
-    expect(agency).toBeTruthy()
-    expect(agency['@context']).toContain('schema.org')
-    expect(agency.name).toBeTruthy()
-  })
-
-  test('tour detail has TouristAttraction or Product schema', async ({ page, browser }) => {
-    const tempPage = await browser.newPage()
-    const slug = await getFirstTourSlug(tempPage)
-    await tempPage.close()
-
-    await page.goto(`/${LOCALE}/tours/${slug}`)
-    const schemas = await getJsonLdSchemas(page)
-
-    const tourSchema = schemas.find(
-      (s: Record<string, unknown>) =>
-        s['@type'] === 'TouristAttraction' ||
-        s['@type'] === 'Product' ||
-        s['@type'] === 'TourProduct'
-    )
-    expect(tourSchema).toBeTruthy()
-    expect(tourSchema['@context']).toContain('schema.org')
-    expect(tourSchema.name).toBeTruthy()
-    expect(tourSchema.description).toBeTruthy()
-  })
-
-  test('FAQ page has FAQPage schema', async ({ page }) => {
-    await page.goto(`/${LOCALE}/faq`)
-    const schemas = await getJsonLdSchemas(page)
-
-    const faqSchema = schemas.find(
-      (s: Record<string, unknown>) => s['@type'] === 'FAQPage'
-    )
-    expect(faqSchema).toBeTruthy()
-    expect(faqSchema.mainEntity).toBeTruthy()
-    expect(Array.isArray(faqSchema.mainEntity)).toBe(true)
-    expect(faqSchema.mainEntity.length).toBeGreaterThan(0)
-
-    // Each FAQ item should have question and answer
-    const firstItem = faqSchema.mainEntity[0]
-    expect(firstItem['@type']).toBe('Question')
-    expect(firstItem.name).toBeTruthy()
-    expect(firstItem.acceptedAnswer).toBeTruthy()
-  })
-
-  test('guide detail page has Person schema', async ({ page }) => {
-    // Navigate to first guide from listing
-    await page.goto(`/${LOCALE}/guides`)
-    const firstGuide = page.locator('a[href*="/guides/"]').first()
-    if (await firstGuide.isVisible()) {
-      await firstGuide.click()
-      await page.waitForLoadState('networkidle')
-
-      const schemas = await getJsonLdSchemas(page)
-      const guideSchema = schemas.find(
-        (s: Record<string, unknown>) => s['@type'] === 'Person'
-      )
-      expect(guideSchema).toBeTruthy()
-      expect(guideSchema['@context']).toContain('schema.org')
-      expect(guideSchema.name).toBeTruthy()
-    }
-  })
-})
-```
-
-### 3. Create e2e/tests/visual/visual-regression.spec.ts
 ```typescript
 import { test, expect } from '@playwright/test'
 
 const LOCALE = 'en'
+
+// Chromium-only — cross-browser pixel diff noise is unmanageable
+test.skip(({ browserName }) => browserName !== 'chromium', 'visual regression: Chromium only')
 
 const VIEWPORTS = [
   { name: 'mobile', width: 375, height: 812 },
@@ -277,129 +274,44 @@ const PAGES = [
   { name: 'tour-catalog', path: '/tours' },
   { name: 'guides-listing', path: '/guides' },
   { name: 'about-us', path: '/about-us' },
+  { name: 'contact', path: '/contact' },
   { name: 'faq', path: '/faq' },
+  { name: 'imprint', path: '/imprint' },
+  { name: 'cancellation', path: '/cancellation' },
+  { name: 'group-booking', path: '/group-booking' },
+  { name: 'find-tour', path: '/find-tour' },
+]
+
+const VOLATILE_MASKS = (page: import('@playwright/test').Page) => [
+  page.locator('iframe[src*="bokun"]'),
+  page.locator('#bubblav-iframe'),
+  page.locator('[data-chat-bubble]'),
+  page.locator('a[href*="wa.me"]'),
 ]
 
 test.describe('Visual Regression', () => {
   for (const viewport of VIEWPORTS) {
     for (const { name, path } of PAGES) {
-      test(`${name} at ${viewport.name} (${viewport.width}px)`, async ({ page }) => {
+      test(`${name} @ ${viewport.name}`, async ({ page }) => {
         await page.setViewportSize({ width: viewport.width, height: viewport.height })
         await page.goto(`/${LOCALE}${path}`)
         await page.waitForLoadState('networkidle')
 
-        await expect(page).toHaveScreenshot(
-          `${name}-${viewport.name}.png`,
-          {
-            fullPage: true,
-            animations: 'disabled',
-            maxDiffPixels: 100,
-            threshold: 0.2,
-          }
-        )
+        await expect(page).toHaveScreenshot(`${name}-${viewport.name}.png`, {
+          fullPage: true,
+          animations: 'disabled',
+          mask: VOLATILE_MASKS(page),
+          maxDiffPixels: 200,
+          threshold: 0.25,
+        })
       })
     }
   }
 })
 ```
 
-**Note**: First run generates baseline snapshots. Update baselines with:
-```bash
-npx playwright test tests/visual --update-snapshots
-```
+### 5. Create `e2e/tests/whatsapp/floating-button.spec.ts`
 
-### 4. Create e2e/tests/performance/core-web-vitals.spec.ts
-```typescript
-import { test, expect } from '@playwright/test'
-
-const LOCALE = 'en'
-
-interface WebVitals {
-  fcp: number | null
-  lcp: number | null
-  cls: number | null
-}
-
-/** Measure Core Web Vitals using PerformanceObserver */
-async function measureWebVitals(page: import('@playwright/test').Page): Promise<WebVitals> {
-  return page.evaluate(() => {
-    return new Promise<{ fcp: number | null; lcp: number | null; cls: number | null }>((resolve) => {
-      let lcp: number | null = null
-      let cls = 0
-
-      // FCP from paint entries
-      const fcp = performance.getEntriesByType('paint')
-        .find(e => e.name === 'first-contentful-paint')?.startTime ?? null
-
-      // LCP observer
-      const lcpObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries()
-        const lastEntry = entries[entries.length - 1] as PerformanceEntry & { renderTime?: number; loadTime?: number }
-        lcp = lastEntry.renderTime || lastEntry.loadTime || lastEntry.startTime
-      })
-      lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true })
-
-      // CLS observer
-      const clsObserver = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          cls += (entry as PerformanceEntry & { value?: number }).value || 0
-        }
-      })
-      clsObserver.observe({ type: 'layout-shift', buffered: true })
-
-      // Resolve after page settles
-      setTimeout(() => {
-        lcpObserver.disconnect()
-        clsObserver.disconnect()
-        resolve({ fcp, lcp, cls })
-      }, 5000)
-    })
-  })
-}
-
-test.describe('Performance - Core Web Vitals', () => {
-  // Use only Chromium for performance tests (consistent metrics)
-  test.skip(({ browserName }) => browserName !== 'chromium', 'Performance tests run on Chromium only')
-
-  test('homepage meets LCP, CLS, FCP thresholds', async ({ page }) => {
-    await page.goto(`/${LOCALE}/`)
-    const vitals = await measureWebVitals(page)
-
-    // FCP < 1.8s
-    if (vitals.fcp !== null) {
-      expect(vitals.fcp).toBeLessThan(1800)
-    }
-
-    // LCP < 2.5s
-    if (vitals.lcp !== null) {
-      expect(vitals.lcp).toBeLessThan(2500)
-    }
-
-    // CLS < 0.1
-    expect(vitals.cls).toBeLessThan(0.1)
-  })
-
-  test('tour catalog meets performance thresholds', async ({ page }) => {
-    await page.goto(`/${LOCALE}/tours`)
-    const vitals = await measureWebVitals(page)
-
-    if (vitals.fcp !== null) expect(vitals.fcp).toBeLessThan(1800)
-    if (vitals.lcp !== null) expect(vitals.lcp).toBeLessThan(2500)
-    expect(vitals.cls).toBeLessThan(0.1)
-  })
-
-  test('page load time under 3 seconds', async ({ page }) => {
-    const start = Date.now()
-    await page.goto(`/${LOCALE}/`)
-    await page.waitForLoadState('load')
-    const loadTime = Date.now() - start
-
-    expect(loadTime).toBeLessThan(3000)
-  })
-})
-```
-
-### 5. Create e2e/tests/whatsapp/floating-button.spec.ts
 ```typescript
 import { test, expect } from '@playwright/test'
 
@@ -408,160 +320,92 @@ const DISMISS_KEY = 'hg-whatsapp-dismissed'
 
 test.describe('WhatsApp Floating Button', () => {
   test.beforeEach(async ({ page }) => {
-    // Clear dismiss state before each test
     await page.goto(`/${LOCALE}/`)
     await page.evaluate((key) => localStorage.removeItem(key), DISMISS_KEY)
     await page.reload()
     await page.waitForLoadState('networkidle')
   })
 
-  test('WhatsApp button is visible on page load', async ({ page }) => {
-    const waButton = page.locator('a[href*="wa.me"]')
-    // Button may not appear if no phone number configured in CMS
-    if (await waButton.isVisible()) {
-      await expect(waButton).toBeVisible()
-      const href = await waButton.getAttribute('href')
-      expect(href).toMatch(/wa\.me\/\d+/)
-    }
+  test('button visible when AI chat not open', async ({ page }) => {
+    const wa = page.locator('a[href*="wa.me"]')
+    const visible = await wa.isVisible().catch(() => false)
+    // Skip if staging has no phone configured
+    test.skip(!visible, 'no WhatsApp phone configured on staging')
+    const href = await wa.getAttribute('href')
+    expect(href).toMatch(/wa\.me\/\d+/)
   })
 
-  test('WhatsApp link includes locale-specific message', async ({ page }) => {
-    const waButton = page.locator('a[href*="wa.me"]')
-    if (await waButton.isVisible()) {
-      const href = await waButton.getAttribute('href')
-      expect(href).toContain('text=')
-    }
-  })
-
-  test('dismiss button hides WhatsApp widget', async ({ page }) => {
-    const waButton = page.locator('a[href*="wa.me"]')
-    if (await waButton.isVisible()) {
-      // Find and click dismiss button (X icon near the prompt)
-      const dismissBtn = page.locator(`button[aria-label]`).filter({
-        has: page.locator('svg')
-      }).last()
-
-      if (await dismissBtn.isVisible()) {
-        await dismissBtn.click()
-        await expect(waButton).not.toBeVisible()
-      }
-    }
-  })
-
-  test('dismiss persists in localStorage', async ({ page }) => {
-    const waButton = page.locator('a[href*="wa.me"]')
-    if (await waButton.isVisible()) {
-      const dismissBtn = page.locator(`button[aria-label]`).filter({
-        has: page.locator('svg')
-      }).last()
-
-      if (await dismissBtn.isVisible()) {
-        await dismissBtn.click()
-
-        const dismissed = await page.evaluate(
-          (key) => localStorage.getItem(key),
-          DISMISS_KEY
-        )
-        expect(dismissed).toBe('true')
-      }
-    }
-  })
-
-  test('widget stays hidden after reload when dismissed', async ({ page }) => {
-    const waButton = page.locator('a[href*="wa.me"]')
-    if (await waButton.isVisible()) {
-      const dismissBtn = page.locator(`button[aria-label]`).filter({
-        has: page.locator('svg')
-      }).last()
-
-      if (await dismissBtn.isVisible()) {
-        await dismissBtn.click()
-        await page.reload()
-        await page.waitForLoadState('networkidle')
-        await expect(waButton).not.toBeVisible()
-      }
+  test('dismiss persists in localStorage and survives reload', async ({ page }) => {
+    const wa = page.locator('a[href*="wa.me"]')
+    const visible = await wa.isVisible().catch(() => false)
+    test.skip(!visible, 'no WhatsApp phone configured')
+    // Dismiss button — adjacent to wa link, has aria-label "dismiss" or similar
+    const dismiss = page.getByRole('button', { name: /dismiss|close|hide/i }).last()
+    if (await dismiss.isVisible().catch(() => false)) {
+      await dismiss.click()
+      const stored = await page.evaluate((key) => localStorage.getItem(key), DISMISS_KEY)
+      expect(stored).toBe('true')
+      await page.reload()
+      await page.waitForLoadState('networkidle')
+      await expect(wa).not.toBeVisible()
     }
   })
 })
 ```
 
-### 6. Create e2e/tests/admin/admin-smoke-test-login-page.spec.ts
+### 6. Create `e2e/tests/admin/admin-login-smoke.spec.ts`
+
 ```typescript
 import { test, expect } from '@playwright/test'
 
-test.describe('Admin - Smoke Test', () => {
-  test('/admin loads login page', async ({ page }) => {
+test.describe('Admin - Login Smoke', () => {
+  test('/admin renders login form', async ({ page }) => {
     const response = await page.goto('/admin')
     expect(response?.status()).toBeLessThan(400)
-
-    // Payload CMS login form should be present
-    const emailInput = page.getByLabel(/email/i)
-    const passwordInput = page.getByLabel(/password/i)
-
-    await expect(emailInput).toBeVisible()
-    await expect(passwordInput).toBeVisible()
-  })
-
-  test('admin login with valid credentials', async ({ page }) => {
-    const email = process.env.ADMIN_EMAIL
-    const password = process.env.ADMIN_PASSWORD
-
-    // Skip if credentials not provided
-    test.skip(!email || !password, 'ADMIN_EMAIL and ADMIN_PASSWORD env vars required')
-
-    await page.goto('/admin')
-    await page.getByLabel(/email/i).fill(email!)
-    await page.getByLabel(/password/i).fill(password!)
-    await page.getByRole('button', { name: /log in|sign in/i }).click()
-
-    // Should redirect to admin dashboard
-    await page.waitForURL(/\/admin(?!\/login)/, { timeout: 10000 })
-    await expect(page).not.toHaveURL(/login/)
+    await expect(page.getByLabel(/email/i)).toBeVisible()
+    await expect(page.getByLabel(/password/i)).toBeVisible()
   })
 })
 ```
 
 ## Todo List
 - [ ] Create `e2e/tests/seo/meta-tags.spec.ts`
-- [ ] Create `e2e/tests/seo/schema-markup.spec.ts`
-- [ ] Create `e2e/tests/visual/visual-regression.spec.ts`
-- [ ] Create `e2e/tests/performance/core-web-vitals.spec.ts`
-- [ ] Create `e2e/tests/whatsapp/floating-button.spec.ts`
-- [ ] Create `e2e/tests/admin/admin-smoke-test-login-page.spec.ts`
-- [ ] Generate initial visual baselines: `npx playwright test tests/visual --update-snapshots`
-- [ ] Verify JSON-LD schema types match actual component output
-- [ ] Verify WhatsApp dismiss key matches `DISMISS_KEY` in component source
-- [ ] Run performance tests on Chromium and validate thresholds
-- [ ] Run all tests against staging with 3 browsers
+- [ ] Create `e2e/tests/seo/schema-markup.spec.ts` (covers TravelAgency, tour, FAQPage, Person, ItemList, ContactPage, AboutPage)
+- [ ] Create `e2e/tests/seo/llms-txt.spec.ts`
+- [ ] Create `e2e/tests/visual/visual-regression.spec.ts` (Chromium only, 3 viewports × 10 pages)
+- [ ] Create `e2e/tests/whatsapp/floating-button.spec.ts` (dismiss + AI-chat coupling)
+- [ ] Create `e2e/tests/admin/admin-login-smoke.spec.ts`
+- [ ] Generate visual baselines: `npm run test -- tests/visual --update-snapshots --project=chromium`
+- [ ] Verify schema mapping against actual rendered JSON-LD on staging
+- [ ] Decide whether visual baselines are committed or treated as session-only (recommended: commit)
+- [ ] Confirm WhatsApp phone configured on staging CMS — else mark spec as `test.skip` permanently
 
 ## Success Criteria
-- Meta title + description present on homepage, catalog, tour detail, FAQ
-- OpenGraph og:title, og:image, og:url on homepage and tour detail
-- TravelAgency JSON-LD on homepage with name + @context
-- TouristAttraction/Product JSON-LD on tour detail with name + description
-- FAQPage JSON-LD on /faq with mainEntity array of Question items
-- Visual screenshots captured at 375px, 768px, 1920px for 5 pages (homepage, tours, guides, about, faq)
-- LCP < 2.5s, CLS < 0.1, FCP < 1.8s on homepage (Chromium)
-- WhatsApp button visible, dismissable, localStorage persists dismiss
-- Admin login page loads with email/password form
-- Admin login succeeds with valid credentials (when env vars provided)
+- Meta title + description present on 6 META_PAGES
+- OG title + image + Twitter card present on homepage
+- TravelAgency / tour / FAQPage / Person / ItemList / ContactPage / AboutPage JSON-LD validated
+- llms.txt + llms-full.txt return 200 with non-empty body
+- Visual baselines stable for 30 page-viewport combinations (10 pages × 3 viewports) on Chromium
+- WhatsApp button visible / dismissable / persists dismiss
+- Admin login form renders email + password
+- No Core Web Vitals assertions (delegated to Lighthouse CI)
 
 ## Risk Assessment
 | Risk | Likelihood | Mitigation |
 |------|-----------|------------|
-| Visual diffs from dynamic content (dates, testimonials) | High | Use `maxDiffPixels: 100`, disable animations |
-| Performance thresholds too strict for staging | Medium | Use soft assertions or larger thresholds for staging |
-| WhatsApp phone number not configured in staging CMS | Medium | Conditional tests with `if (await waButton.isVisible())` |
-| JSON-LD schema types differ from expected | Low | Check multiple @type possibilities (TouristAttraction or Product) |
-| Admin credentials not available in CI | Low | `test.skip()` when env vars missing |
+| Visual baselines noisy from dynamic CMS content (featured tours rotate) | High | Mask volatile regions; widen `maxDiffPixels` to 200, threshold 0.25 |
+| Tour detail visual depends on Bokun widget mount state | High | Mask `iframe[src*="bokun"]`; do NOT include tour-detail in visual list (defer) |
+| AI chat mounted on idle but not first interaction → unmasked button visible | Medium | Mask `[data-chat-bubble]` + `#bubblav-iframe` |
+| JSON-LD `@type` differs from expected (e.g., `Tour` vs `TouristTrip`) | Medium | Accept multiple types in `findByType` |
+| WhatsApp not configured on staging → spec skip | Low | `test.skip` if `wa.me` link absent |
 
 ## Security Considerations
-- ADMIN_EMAIL, ADMIN_PASSWORD passed via env vars, never hardcoded
-- Admin login test skipped when credentials not provided
-- No screenshots stored of admin authenticated pages (login page only)
-- Performance measurements are read-only client-side operations
+- ADMIN_EMAIL / ADMIN_PASSWORD only used in Phase 06 login (not this phase)
+- Visual snapshots may contain placeholder PII — review baselines before commit
+- llms.txt content is public — no sensitivity concern
+- JSON-LD inspection is read-only
 
 ## Next Steps
-- Phase 06 integrates all tests into GitHub Actions CI workflow
-- Visual baselines must be committed to repo after first generation
-- Performance thresholds may need tuning after initial staging runs
+- Phase 06 wires all of the above into GitHub Actions
+- Lighthouse CI workflow remains the source of truth for perf budgets
+- Tour-detail visual snapshot intentionally deferred; address in follow-up plan if needed

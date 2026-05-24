@@ -4,62 +4,64 @@
 - **Parent Plan**: [plan.md](./plan.md)
 - **Depends On**: All previous phases (01-05)
 - **Research**: [Playwright Best Practices](./research/researcher-01-playwright-best-practices.md)
-- **Existing CI**: .github/workflows/ci.yml (lint, type-check, build)
+- **Existing CI**:
+  - `.github/workflows/ci.yml` (lint, type-check, build)
+  - `.github/workflows/lighthouse-ci.yml` (PR Preview perf audit — already shipped 2026-04)
 
 ## Overview
-- **Date**: 2026-02-12
+- **Date**: 2026-02-12 (rewritten 2026-05-19)
 - **Priority**: MEDIUM
-- **Effort**: 2.5h
+- **Effort**: 2h
 - **Implementation Status**: Pending
 - **Review Status**: Not started
 
-Create a separate GitHub Actions workflow for Playwright E2E tests. Trigger: `workflow_dispatch` only (on-demand manual). Strategy: 3-browser matrix (chromium, firefox, webkit) x 4 shards = 12 parallel jobs. Merge blob reports into single HTML report artifact. No modification to existing ci.yml.
+Add a dedicated GitHub Actions workflow for Playwright E2E tests. Trigger: `workflow_dispatch` only (on-demand manual). Strategy: 3-browser matrix (chromium / firefox / webkit) × 4 shards = 12 parallel jobs, with `blob` reporter and a downstream merge job that publishes a single HTML report. **Leave `ci.yml` and `lighthouse-ci.yml` untouched.** Lighthouse CI continues to own performance budgets on every PR Preview; Playwright runs on demand against staging only.
 
 ## Key Insights
-- Existing CI runs in `apps/web/` working directory with `npm ci`; E2E is root `e2e/` directory
-- Playwright `--shard=X/Y` splits tests across workers for parallel CI
-- `blob` reporter outputs partial results; `merge-reports` combines them post-run
-- `workflow_dispatch` supports input parameters (environment selector)
-- Browser install: `npx playwright install --with-deps {browser}` (installs OS deps on Ubuntu)
-- Node 20 used in existing CI; keep consistent
-- E2E workflow is fully independent from main CI -- no changes to ci.yml needed
+- Existing `ci.yml` runs in `apps/web/` with `npm ci`; E2E lives in root `e2e/` directory
+- `lighthouse-ci.yml` already enforces perf ≥0.9, a11y ≥0.95 on every PR Preview → Playwright must NOT duplicate
+- Playwright `--shard=X/Y` splits tests across workers; `blob` reporter outputs partials, `merge-reports` combines
+- `workflow_dispatch` supports input parameters (environment, browser selection)
+- Browser install: `npx playwright install --with-deps {browser}` on Ubuntu
+- Node 20 used in existing CI workflows → keep consistent (note: app runtime is Node 24, but CI runner can stay on 20 for Playwright test execution — verified compatibility with @playwright/test 1.48+)
 - STAGING_URL, ADMIN_EMAIL, ADMIN_PASSWORD stored as GitHub Actions secrets
+- IS_STAGING / coming-soon redirect: staging URL bypasses production redirect; tests hit staging directly
 
 ## Requirements
 
 ### Functional
 - New workflow file: `.github/workflows/playwright-e2e-tests-on-demand.yml`
-- Trigger: `workflow_dispatch` with environment input (staging default)
-- Matrix: 3 browsers x 4 shards = 12 parallel jobs
-- Each job: checkout -> setup Node 20 -> install e2e deps -> install browser -> run sharded tests
-- Upload blob reports as artifacts per shard
-- Merge job: download all blobs -> merge -> upload final HTML report
+- Trigger: `workflow_dispatch` with two inputs: `environment` (staging/production), `browsers` (all/chromium/firefox/webkit)
+- Matrix: 3 browsers × 4 shards = 12 parallel jobs when `browsers=all`
+- Each job: checkout → setup Node 20 → install e2e deps → install browser → run sharded tests → upload blob report
+- Merge job: download all blobs → merge → upload final HTML report
 - Timeout: 30 min per shard job, 15 min for merge job
-- Pass STAGING_URL and admin credentials via GitHub secrets
+- Pass STAGING_URL + admin credentials via GitHub secrets
 
 ### Non-Functional
-- No changes to existing `.github/workflows/ci.yml`
+- No changes to existing `ci.yml` or `lighthouse-ci.yml`
 - Workflow file under 200 lines
 - Artifact retention: 30 days for merged report, 7 days for blob parts
-- fail-fast: false (continue other browsers/shards even if one fails)
+- `fail-fast: false` (continue other browsers/shards if one fails)
 
 ## Architecture
 
 ```
 .github/workflows/
-├── ci.yml                                        # Existing: lint, type-check, build
-└── playwright-e2e-tests-on-demand.yml           # New: E2E on-demand
+├── ci.yml                                       # untouched: lint / type-check / build
+├── lighthouse-ci.yml                            # untouched: PR Preview perf audit
+└── playwright-e2e-tests-on-demand.yml           # NEW: E2E on-demand
 
 Jobs:
-  test (matrix: browser x shard)
+  test (matrix: browser × shard)
     ├── actions/checkout@v4
     ├── actions/setup-node@v4 (node 20)
     ├── npm ci (in e2e/)
-    ├── npx playwright install --with-deps $browser
-    ├── npx playwright test --project=$browser --shard=$idx/$total
+    ├── npx playwright install --with-deps {browser}
+    ├── npx playwright test --project={browser} --shard={idx}/{total}
     └── actions/upload-artifact@v4 (blob-report-*)
 
-  merge-reports (needs: test)
+  merge-reports (needs: test, if: always)
     ├── actions/checkout@v4
     ├── actions/setup-node@v4
     ├── npm ci (in e2e/)
@@ -78,13 +80,14 @@ Jobs:
 ### Existing (No Modification)
 | File | Relevance |
 |------|-----------|
-| `.github/workflows/ci.yml` | Existing CI -- leave untouched |
-| `e2e/package.json` | E2E dependencies (from Phase 01) |
-| `e2e/playwright.config.ts` | Playwright config with blob reporter for CI |
+| `.github/workflows/ci.yml` | Existing CI — leave untouched |
+| `.github/workflows/lighthouse-ci.yml` | Perf coverage — leave untouched |
+| `e2e/package.json` | E2E dependencies (Playwright 1.48+, axe-core 4.9+) |
+| `e2e/playwright.config.ts` | Already configures `blob`+`github` reporters under `process.env.CI` |
 
 ## Implementation Steps
 
-### 1. Create .github/workflows/playwright-e2e-tests-on-demand.yml
+### 1. Create `.github/workflows/playwright-e2e-tests-on-demand.yml`
 
 ```yaml
 name: Playwright E2E Tests
@@ -202,43 +205,39 @@ jobs:
 
 ### 2. Configure GitHub Repository Secrets
 
-Add these secrets in GitHub repo Settings > Secrets and Variables > Actions:
+In `Settings → Secrets and variables → Actions`:
 
 | Secret | Description | Example |
 |--------|-------------|---------|
-| `STAGING_URL` | Staging site base URL | `https://staging.privatetours.com` |
-| `PRODUCTION_URL` | Production site base URL | `https://privatetours.com` |
-| `ADMIN_EMAIL` | Payload CMS admin email | `admin@privatetours.com` |
-| `ADMIN_PASSWORD` | Payload CMS admin password | `(secure password)` |
+| `STAGING_URL` | Staging site base URL | `https://staging.privatetours.se` |
+| `PRODUCTION_URL` | Production site base URL | `https://www.privatetours.se` |
+| `ADMIN_EMAIL` | Payload CMS admin email | `admin@privatetours.se` |
+| `ADMIN_PASSWORD` | Payload CMS admin password | (vault) |
 
-### 3. Verify playwright.config.ts reporter for CI
+### 3. Verify `e2e/playwright.config.ts` (no edit required)
 
-The config from Phase 01 already handles this:
+Already configured (verified 2026-05-19):
 ```typescript
 reporter: process.env.CI
   ? [['blob'], ['github']]
   : [['html'], ['json', { outputFile: 'test-results/results.json' }]],
 ```
 
-- `blob` reporter creates partial report files for merging
-- `github` reporter adds inline annotations to PR checks
+### 4. Update root `.gitignore` (if not already covered)
 
-### 4. Update e2e/.gitignore (if not in root .gitignore)
-
+Confirm these are ignored:
 ```
-test-results/
-playwright-report/
-blob-report/
-node_modules/
+e2e/test-results/
+e2e/playwright-report/
+e2e/blob-report/
+e2e/node_modules/
+e2e/all-blob-reports/
 ```
 
-### 5. Test workflow locally with act (optional)
+### 5. Verify locally with `gh` CLI
 
 ```bash
-# Dry-run to validate workflow syntax
 gh workflow view playwright-e2e-tests-on-demand.yml
-
-# Trigger manually from CLI
 gh workflow run playwright-e2e-tests-on-demand.yml \
   --field environment=staging \
   --field browsers=chromium
@@ -246,52 +245,50 @@ gh workflow run playwright-e2e-tests-on-demand.yml \
 
 ### 6. Manual trigger from GitHub UI
 
-1. Go to repo Actions tab
-2. Select "Playwright E2E Tests" workflow
-3. Click "Run workflow" dropdown
-4. Select environment (staging/production) and browsers (all/chromium/firefox/webkit)
-5. Click "Run workflow"
-6. After completion, download "playwright-report-merged" artifact for HTML report
+1. Actions tab → "Playwright E2E Tests" → Run workflow
+2. Select environment + browsers
+3. After completion, download `playwright-report-merged` artifact
 
 ## Todo List
 - [ ] Create `.github/workflows/playwright-e2e-tests-on-demand.yml`
-- [ ] Configure GitHub secrets: STAGING_URL, PRODUCTION_URL, ADMIN_EMAIL, ADMIN_PASSWORD
+- [ ] Add GitHub secrets: `STAGING_URL`, `PRODUCTION_URL`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`
 - [ ] Verify `e2e/package-lock.json` is committed (needed for `npm ci`)
-- [ ] Test workflow with single browser first: `gh workflow run ... --field browsers=chromium`
-- [ ] Verify blob reports upload correctly from each shard
-- [ ] Verify merged HTML report is downloadable and readable
-- [ ] Test `fromJSON` matrix expression works for single-browser selection
-- [ ] Document workflow usage in project README or docs
+- [ ] Confirm root `.gitignore` covers `e2e/test-results/`, `e2e/playwright-report/`, `e2e/blob-report/`, `e2e/all-blob-reports/`
+- [ ] Run first dispatch with `browsers=chromium` to validate flow before fanning out
+- [ ] Verify blob reports upload per shard and merge job succeeds
+- [ ] Document workflow usage in `docs/deployment-guide.md` or `docs/codebase-summary.md`
+- [ ] Decide whether to commit visual baselines now or after first green dispatch (recommended: commit after green)
 
 ## Success Criteria
-- Workflow appears in GitHub Actions tab as "Playwright E2E Tests"
-- Manual dispatch with environment + browser selection works
-- 12 parallel jobs run (3 browsers x 4 shards) when "all" selected
-- Single-browser selection runs 4 shard jobs only
-- Each shard uploads blob-report artifact
-- Merge job combines all blobs into single HTML report
-- Merged report downloadable with 30-day retention
+- Workflow appears in Actions tab as "Playwright E2E Tests"
+- Dispatch with `browsers=all` produces 12 parallel jobs (3 × 4)
+- Dispatch with `browsers=chromium` produces 4 jobs only
+- Each shard uploads a blob-report artifact (7-day retention)
+- Merge job combines blobs into `playwright-report-merged` (30-day retention)
 - Workflow does NOT trigger on push/PR (on-demand only)
-- Existing ci.yml is completely untouched
+- `ci.yml` and `lighthouse-ci.yml` remain untouched and continue to pass
 
 ## Risk Assessment
 | Risk | Likelihood | Mitigation |
 |------|-----------|------------|
-| `fromJSON` matrix expression fails for single browser | Medium | Test with `gh workflow run` before relying on it |
-| Blob report merge fails with mismatched versions | Low | All shards use same Playwright version from `npm ci` |
-| WebKit install takes too long on ubuntu | Low | 30 min timeout per job; `--with-deps` handles OS deps |
-| GitHub Actions minutes consumed quickly (12 jobs) | Medium | On-demand only; can reduce shards to 2 if needed |
-| Secrets not configured leads to test failures | High | Admin tests use `test.skip()` when env vars missing |
+| `fromJSON` matrix expression fails for single-browser input | Medium | Test with `gh workflow run` before relying |
+| Blob merge fails on mismatched Playwright versions | Low | All shards install identical versions via `npm ci` |
+| WebKit install slow on Ubuntu | Low | 30 min per-job timeout, `--with-deps` handles OS deps |
+| 12 parallel jobs burns GitHub Actions minutes | Medium | On-demand only; reduce to 2 shards if needed |
+| `STAGING_URL` missing → tests target `http://localhost:3000` and fail | High | Add explicit `if: secrets.STAGING_URL == ''` guard or assert in spec setup |
+| Production dispatch hits real Bokun + sends real emails | High | `environment=production` requires manual selection; honeypot + sentinel in payloads |
 
 ## Security Considerations
-- STAGING_URL, ADMIN_EMAIL, ADMIN_PASSWORD stored as GitHub encrypted secrets
-- Secrets not logged in workflow output (GitHub masks them automatically)
-- Production URL only used when explicitly selected via `workflow_dispatch` input
-- Artifacts may contain failure screenshots -- 30-day retention auto-deletes
+- All secrets stored encrypted in GitHub Actions secret store
+- Secrets auto-masked in workflow logs
+- Production URL only used when explicitly selected via dispatch input
+- Failure artifacts (screenshots, traces) may contain PII — 30-day retention auto-deletes
 - No secrets committed to repository files
+- `npm ci` uses lockfile only — no surprise dependency injection
 
 ## Next Steps
-- After first successful workflow run, tune shard count (2 or 4) based on actual test duration
-- Consider adding Slack/Teams notification on workflow completion
+- After first green dispatch, tune shard count based on observed duration
+- Consider Slack/Teams notification on workflow completion
 - Consider adding workflow badge to README
-- Future: add `schedule` trigger for nightly runs if desired
+- Future: optional nightly `schedule` trigger if business value justifies CI minutes
+- Coordinate with Lighthouse CI ownership boundary — Playwright owns functional + visual + SEO + a11y; Lighthouse owns Core Web Vitals

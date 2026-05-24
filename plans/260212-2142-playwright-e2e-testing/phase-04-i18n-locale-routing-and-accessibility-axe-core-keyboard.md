@@ -4,55 +4,58 @@
 - **Parent Plan**: [plan.md](./plan.md)
 - **Depends On**: [Phase 01](./phase-01-foundation-setup-config-pom-base-smoke-tests.md), [Phase 02](./phase-02-customer-journey-browse-search-filter-booking.md)
 - **Research**: [i18n, Bokun, SEO, localStorage](./research/researcher-02-i18n-bokun-seo-testing.md)
-- **Codebase**: apps/web/messages/ (sv.json, en.json, de.json), apps/web/i18n/, apps/web/components/language-switcher/
+- **Codebase**: `apps/web/messages/` (sv.json, en.json, de.json), `apps/web/i18n/`, `apps/web/components/layout/footer-language-selector.tsx`, `apps/web/proxy.ts`
 
 ## Overview
-- **Date**: 2026-02-12
+- **Date**: 2026-02-12 (rewritten 2026-05-19)
 - **Priority**: HIGH
-- **Effort**: 2.5h
-- **Implementation Status**: Pending
-- **Review Status**: Not started
+- **Effort**: 2h (axe-core audit already shipped — see `e2e/tests/accessibility/wcag-audit.spec.ts`)
+- **Implementation Status**: **Partial** — WCAG 2.1 AA audit complete; i18n routing + keyboard-nav specs pending
+- **Review Status**: axe-core audit reviewed in code; remaining items not started
 
-Test i18n locale routing for all 3 locales (sv/en/de), language switcher navigation, cookie persistence (NEXT_LOCALE), content localization on key pages. Accessibility testing via @axe-core/playwright for WCAG 2.1 AA on all major pages, plus keyboard navigation for interactive components (wizard, filters, modals).
+Test i18n locale routing for all 3 locales (sv/en/de), language switcher navigation, cookie persistence, content localization. **Accessibility coverage already exists** (`wcag-audit.spec.ts` covers 10 public routes + tour/guide detail + 404 + wizard steps) — extend to cover new routes (`/contact` already in spec, `/imprint`, `/cancellation`, coming-soon if applicable) and add keyboard navigation specs for wizard / modal / filter chips.
 
 ## Key Insights
-- next-intl uses `[locale]` dynamic segment with sv/en/de
-- Default locale: sv (Swedish) -- but tests default to `en` for simpler assertions
-- Language switcher component in `components/language-switcher/`
-- NEXT_LOCALE cookie set by next-intl middleware on locale switch
-- Hreflang alternate links rendered in `<head>` for all pages
-- Bokun iframe should be excluded from axe scans (third-party, cross-origin)
-- Wizard option cards use `aria-pressed`, progress bar uses `role="progressbar"`
-- Filter chips use ARIA labels and keyboard navigation
+- next-intl uses `[locale]` dynamic segment with `sv` / `en` / `de`
+- Default locale on staging: `en` for simpler assertions
+- Locale middleware lives in `apps/web/proxy.ts` (renamed from `middleware.ts` in Next.js 16)
+- Language switcher in `components/layout/footer-language-selector.tsx`
+- next-intl uses cookie `NEXT_LOCALE` set automatically by proxy
+- Hreflang alternates rendered in `<head>` for all pages via `lib/seo.ts`
+- Bokun iframe + `#bubblav-iframe` already excluded from axe scans in `test-fixtures.ts`
+- **Existing `wcag-audit.spec.ts` covers:** `/`, `/tours`, `/guides`, `/find-tour`, `/about-us`, `/contact`, `/faq`, `/terms`, `/privacy`, `/group-booking`, tour detail, guide detail, 404, wizard steps
+- **Missing from axe audit (added since 2026-03-14):** `/imprint`, `/cancellation`
+- Custom 404 page exists at `app/(site)/[locale]/not-found.tsx` + `[...rest]/page.tsx`
+- Filter chips on tour listing: client-side state via `useFilterState` provider; keyboard nav untested
 
 ## Requirements
 
 ### Functional
-- Locale routing: visiting `/sv/tours`, `/en/tours`, `/de/tours` loads correct locale
-- Language switcher: clicking switcher navigates to same page in new locale
-- Cookie persistence: after switching locale, NEXT_LOCALE cookie is set
-- Content localization: tour catalog heading differs across sv/en/de (homepage no longer has h1)
-- Hreflang: all pages have `<link rel="alternate" hreflang="...">` for sv/en/de + x-default
-- Axe audits: homepage, tours, tour detail, find-tour, group-booking, guides, guide detail, about-us, faq -- all pass WCAG 2.1 AA
-- Keyboard navigation: Tab through wizard options, Enter/Space to select, Escape closes modals
+- Locale routing: `/sv/...`, `/en/...`, `/de/...` all load 200 for homepage + tours
+- Language switcher: clicking switches locale and URL prefix
+- Cookie persistence: `NEXT_LOCALE` set after switch and stable across navigation
+- Content localization: tour catalog h1 differs across at least 2 of 3 locales (homepage h1 removed)
+- Hreflang: every public page has `<link rel="alternate" hreflang="sv|en|de|x-default">`
+- **Extend axe audit** to `/imprint` and `/cancellation`
+- Keyboard navigation: Tab → first option card → Enter selects; Space toggles; Escape closes group inquiry modal
+- Filter chip keyboard nav: focus chip → Enter → URL updates with filter
 
 ### Non-Functional
-- Axe scans exclude `iframe[src*="bokun"]` (third-party widget)
-- Each spec file under 200 lines
-- Parameterized locale tests use data-driven pattern (array of locales)
-- Accessibility failures should provide actionable violation details
+- Each new spec under 200 lines
+- Parameterized locale tests use array `['sv', 'en', 'de']`
+- axe-core scans already exclude third-party widgets in `test-fixtures.ts`
+- Reuse existing `makeAxeBuilder` fixture — do not duplicate
 
 ## Architecture
 
 ```
-e2e/
-├── tests/
-│   ├── i18n/
-│   │   ├── locale-routing.spec.ts          # Route navigation per locale
-│   │   └── content-localization.spec.ts    # Translated content + hreflang
-│   ├── accessibility/
-│   │   ├── axe-audit.spec.ts              # axe-core WCAG 2.1 AA scans
-│   │   └── keyboard-navigation.spec.ts    # Tab, Enter, Space, Escape
+e2e/tests/
+├── accessibility/
+│   ├── wcag-audit.spec.ts            # EXISTS — extend with /imprint, /cancellation
+│   └── keyboard-navigation.spec.ts   # NEW — wizard, modal, filter chips
+└── i18n/
+    ├── locale-routing.spec.ts        # NEW — routes + switcher + cookie
+    └── content-localization.spec.ts  # NEW — translated content + hreflang
 ```
 
 ## Related Code Files
@@ -60,361 +63,204 @@ e2e/
 ### To Create
 | File | Purpose |
 |------|---------|
-| `e2e/tests/i18n/locale-routing.spec.ts` | Locale routing and language switcher |
-| `e2e/tests/i18n/content-localization.spec.ts` | Translated content + hreflang validation |
-| `e2e/tests/accessibility/axe-audit.spec.ts` | axe-core WCAG 2.1 AA page audits |
-| `e2e/tests/accessibility/keyboard-navigation.spec.ts` | Keyboard nav for interactive components |
+| `e2e/tests/i18n/locale-routing.spec.ts` | Locale routing + language switcher + cookie |
+| `e2e/tests/i18n/content-localization.spec.ts` | Translated content + hreflang |
+| `e2e/tests/accessibility/keyboard-navigation.spec.ts` | Keyboard for wizard / modal / filter chips |
+
+### To Update
+| File | Change |
+|------|--------|
+| `e2e/tests/accessibility/wcag-audit.spec.ts` | Add `/imprint`, `/cancellation` to `PUBLIC_ROUTES` |
 
 ### Existing Reference (apps/web)
 | File | Relevance |
 |------|-----------|
-| `messages/sv.json` | Swedish translations (heading text) |
-| `messages/en.json` | English translations (heading text) |
-| `messages/de.json` | German translations (heading text) |
-| `i18n.ts` | Locale configuration |
-| `i18n/routing.ts` | Route definitions per locale |
-| `components/language-switcher/` | Language switcher UI |
-| `app/proxy.ts` | next-intl locale detection + NEXT_LOCALE cookie (renamed from middleware.ts in Next.js 16) |
-| `components/wizard/wizard-option-card.tsx` | aria-pressed attribute |
+| `messages/sv.json` `messages/en.json` `messages/de.json` | Translation source of truth |
+| `i18n.ts` `i18n/routing.ts` | Locale config |
+| `proxy.ts` | next-intl middleware (renamed in Next 16) |
+| `components/layout/footer-language-selector.tsx` | Language switcher UI |
+| `components/wizard/wizard-option-card.tsx` | `aria-pressed` attribute |
 | `components/booking/group-inquiry-modal.tsx` | Dialog close on Escape |
+| `app/(site)/[locale]/(frontend)/tours/tour-catalog-client.tsx` | Sidebar filter chips |
 
 ## Implementation Steps
 
-### 1. Create e2e/tests/i18n/locale-routing.spec.ts
+### 1. Update `e2e/tests/accessibility/wcag-audit.spec.ts`
+
+Append to `PUBLIC_ROUTES`:
+
+```typescript
+{ path: '/imprint', name: 'Imprint (TMG §5)' },
+{ path: '/cancellation', name: 'Cancellation policy' },
+```
+
+No other changes required — existing fixture handles iframe exclusions.
+
+### 2. Create `e2e/tests/i18n/locale-routing.spec.ts`
+
 ```typescript
 import { test, expect } from '@playwright/test'
-import { NavigationPage } from '../../page-objects/navigation'
 
 const LOCALES = ['sv', 'en', 'de'] as const
 
 test.describe('i18n - Locale Routing', () => {
   for (const locale of LOCALES) {
-    test(`/${locale}/ homepage loads correctly`, async ({ page }) => {
+    test(`/${locale}/ loads 200`, async ({ page }) => {
       const response = await page.goto(`/${locale}/`)
       expect(response?.status()).toBe(200)
-      await expect(page).toHaveURL(new RegExp(`/${locale}`))
     })
-
-    test(`/${locale}/tours catalog loads correctly`, async ({ page }) => {
+    test(`/${locale}/tours loads 200`, async ({ page }) => {
       const response = await page.goto(`/${locale}/tours`)
       expect(response?.status()).toBe(200)
     })
   }
 
-  test('language switcher navigates to same page in new locale', async ({ page }) => {
-    const nav = new NavigationPage(page, 'en')
-    await nav.goto('/tours')
-
-    // Switch to Swedish
-    await nav.switchLocale('sv')
-    await expect(page).toHaveURL(/\/sv\/tours/)
-
-    // Switch to German
-    await nav.switchLocale('de')
-    await expect(page).toHaveURL(/\/de\/tours/)
+  test('language switcher changes URL prefix', async ({ page }) => {
+    await page.goto('/en/tours')
+    // Footer language selector renders <button>/<a> per locale
+    const sv = page.getByRole('link', { name: /svenska|swedish/i })
+      .or(page.getByRole('button', { name: /svenska|swedish/i }))
+    if (await sv.first().isVisible().catch(() => false)) {
+      await sv.first().click()
+      await expect(page).toHaveURL(/\/sv(\/|$)/)
+    }
   })
 
-  test('sets NEXT_LOCALE cookie after locale switch', async ({ page, context }) => {
+  test('NEXT_LOCALE cookie is set after visiting locale', async ({ page, context }) => {
     await page.goto('/en/')
     const cookies = await context.cookies()
-    const localeCookie = cookies.find(c => c.name === 'NEXT_LOCALE')
-    expect(localeCookie?.value).toBe('en')
-  })
-
-  test('cookie persists locale preference across navigation', async ({ page, context }) => {
-    // Visit English page
-    await page.goto('/en/about-us')
-    // Navigate to another page -- should stay in English
-    await page.goto('/en/faq')
-    const cookies = await context.cookies()
-    const localeCookie = cookies.find(c => c.name === 'NEXT_LOCALE')
+    const localeCookie = cookies.find((c) => c.name === 'NEXT_LOCALE')
     expect(localeCookie?.value).toBe('en')
   })
 })
 ```
 
-### 2. Create e2e/tests/i18n/content-localization.spec.ts
+### 3. Create `e2e/tests/i18n/content-localization.spec.ts`
+
 ```typescript
 import { test, expect } from '@playwright/test'
 
 test.describe('i18n - Content Localization', () => {
-  test('tour catalog heading differs across locales', async ({ page }) => {
-    // Homepage no longer has h1 (hero title removed). Use tour catalog heading instead.
+  test('tour catalog h1 differs across locales', async ({ page }) => {
     const headings: Record<string, string> = {}
-
     for (const locale of ['sv', 'en', 'de']) {
       await page.goto(`/${locale}/tours`)
-      await page.waitForLoadState('networkidle')
+      await page.waitForLoadState('domcontentloaded')
       const h1 = page.getByRole('heading', { level: 1 })
-      headings[locale] = (await h1.textContent()) || ''
+      headings[locale] = (await h1.textContent())?.trim() ?? ''
     }
-
-    // At least 2 of 3 should differ (sv is default, en and de are translations)
-    const unique = new Set(Object.values(headings))
-    expect(unique.size).toBeGreaterThanOrEqual(2)
+    expect(new Set(Object.values(headings)).size).toBeGreaterThanOrEqual(2)
   })
 
-  test('tour catalog page title is localized', async ({ page }) => {
-    const titles: Record<string, string> = {}
-
-    for (const locale of ['sv', 'en', 'de']) {
-      await page.goto(`/${locale}/tours`)
-      titles[locale] = await page.title()
-    }
-
-    const unique = new Set(Object.values(titles))
-    expect(unique.size).toBeGreaterThanOrEqual(2)
-  })
-
-  test('hreflang alternate links present on homepage', async ({ page }) => {
+  test('hreflang alternates present on homepage', async ({ page }) => {
     await page.goto('/en/')
-
-    const hreflangs = await page.locator('link[rel="alternate"][hreflang]').evaluateAll(
-      links => links.map(l => ({
-        hreflang: l.getAttribute('hreflang'),
-        href: l.getAttribute('href'),
-      }))
-    )
-
-    const langs = hreflangs.map(h => h.hreflang)
-    expect(langs).toContain('sv')
-    expect(langs).toContain('en')
-    expect(langs).toContain('de')
-    expect(langs).toContain('x-default')
+    const hreflangs = await page
+      .locator('link[rel="alternate"][hreflang]')
+      .evaluateAll((links) => links.map((l) => l.getAttribute('hreflang')))
+    expect(hreflangs).toEqual(expect.arrayContaining(['sv', 'en', 'de', 'x-default']))
   })
 
-  test('hreflang links present on tour detail page', async ({ page }) => {
-    // Navigate to catalog and find a tour link
+  test('hreflang alternates present on tour detail', async ({ page }) => {
     await page.goto('/en/tours')
-    const firstTourLink = page.locator('a[href*="/tours/"]').first()
-    if (await firstTourLink.isVisible()) {
-      await firstTourLink.click()
-      await page.waitForLoadState('networkidle')
-
-      const hreflangs = await page.locator('link[rel="alternate"][hreflang]').evaluateAll(
-        links => links.map(l => l.getAttribute('hreflang'))
-      )
-      expect(hreflangs).toContain('sv')
-      expect(hreflangs).toContain('en')
-      expect(hreflangs).toContain('de')
-    }
+    const firstTour = page.locator('a[href*="/tours/"]').first()
+    const visible = await firstTour.isVisible().catch(() => false)
+    test.skip(!visible, 'no tour in CMS')
+    await firstTour.click()
+    await page.waitForLoadState('domcontentloaded')
+    const hreflangs = await page
+      .locator('link[rel="alternate"][hreflang]')
+      .evaluateAll((links) => links.map((l) => l.getAttribute('hreflang')))
+    expect(hreflangs).toEqual(expect.arrayContaining(['sv', 'en', 'de']))
   })
 })
 ```
 
-### 3. Create e2e/tests/accessibility/axe-audit.spec.ts
-```typescript
-import { test, expect } from '../../fixtures/test-fixtures'
+### 4. Create `e2e/tests/accessibility/keyboard-navigation.spec.ts`
 
-const PAGES_TO_AUDIT = [
-  { name: 'Homepage', path: '/' },
-  { name: 'Tour Catalog', path: '/tours' },
-  { name: 'Concierge Wizard', path: '/find-tour' },
-  { name: 'Group Booking', path: '/group-booking' },
-  { name: 'Guides Listing', path: '/guides' },
-  { name: 'About Us', path: '/about-us' },
-  { name: 'FAQ', path: '/faq' },
-  { name: 'Terms', path: '/terms' },
-  { name: 'Privacy', path: '/privacy' },
-]
+```typescript
+import { test, expect } from '@playwright/test'
 
 const LOCALE = 'en'
 
-test.describe('Accessibility - WCAG 2.1 AA Audit', () => {
-  for (const { name, path } of PAGES_TO_AUDIT) {
-    test(`${name} page passes axe-core audit`, async ({ page, makeAxeBuilder }) => {
-      await page.goto(`/${LOCALE}${path}`)
-      await page.waitForLoadState('networkidle')
-
-      const results = await makeAxeBuilder().analyze()
-
-      // Log violations for debugging (actionable details)
-      if (results.violations.length > 0) {
-        const summary = results.violations.map(v => ({
-          id: v.id,
-          impact: v.impact,
-          description: v.description,
-          nodes: v.nodes.length,
-        }))
-        console.log(`Axe violations on ${name}:`, JSON.stringify(summary, null, 2))
-      }
-
-      expect(results.violations).toEqual([])
-    })
-  }
-
-  test('tour detail page passes axe-core audit', async ({ page, makeAxeBuilder }) => {
-    // Navigate to first tour from catalog
-    await page.goto(`/${LOCALE}/tours`)
-    const firstTour = page.locator('a[href*="/tours/"]').first()
-    if (await firstTour.isVisible()) {
-      await firstTour.click()
-      await page.waitForLoadState('networkidle')
-
-      const results = await makeAxeBuilder().analyze()
-      expect(results.violations).toEqual([])
-    }
-  })
-
-  test('guide detail page passes axe-core audit', async ({ page, makeAxeBuilder }) => {
-    // Navigate to first guide from listing
-    await page.goto(`/${LOCALE}/guides`)
-    const firstGuide = page.locator('a[href*="/guides/"]').first()
-    if (await firstGuide.isVisible()) {
-      await firstGuide.click()
-      await page.waitForLoadState('networkidle')
-
-      const results = await makeAxeBuilder().analyze()
-      expect(results.violations).toEqual([])
-    }
-  })
-})
-```
-
-### 4. Create e2e/tests/accessibility/keyboard-navigation.spec.ts
-```typescript
-import { test, expect } from '@playwright/test'
-import { ConciergeWizardPage } from '../../page-objects/concierge-wizard'
-
-test.describe('Accessibility - Keyboard Navigation', () => {
-  test('wizard option cards navigable with Tab and selectable with Enter', async ({ page }) => {
-    const wizard = new ConciergeWizardPage(page)
-    await wizard.gotoWizard()
-
-    // Tab to first option card
-    await page.keyboard.press('Tab')
-    // Continue tabbing until an option card is focused
-    for (let i = 0; i < 10; i++) {
-      const focused = await page.evaluate(() => {
-        const el = document.activeElement
-        return el?.getAttribute('aria-pressed') !== null
-      })
-      if (focused) break
-      await page.keyboard.press('Tab')
-    }
-
-    // Press Enter to select
-    await page.keyboard.press('Enter')
-    const selected = await page.evaluate(() => {
-      return document.activeElement?.getAttribute('aria-pressed')
-    })
-    expect(selected).toBe('true')
-  })
-
-  test('wizard option cards selectable with Space', async ({ page }) => {
-    const wizard = new ConciergeWizardPage(page)
-    await wizard.gotoWizard()
-
-    // Click first card to focus area, then tab to it
-    const firstCard = wizard.optionCards.first()
+test.describe('Keyboard Navigation', () => {
+  test('wizard option cards activate with Enter/Space', async ({ page }) => {
+    await page.goto(`/${LOCALE}/find-tour`)
+    const firstCard = page.locator('[aria-pressed]').first()
     await firstCard.focus()
     await page.keyboard.press('Space')
     await expect(firstCard).toHaveAttribute('aria-pressed', 'true')
+    await page.keyboard.press('Space')
+    await expect(firstCard).toHaveAttribute('aria-pressed', 'false')
   })
 
   test('group inquiry modal closes with Escape', async ({ page }) => {
-    // Navigate to tour detail
-    await page.goto('/en/tours')
+    await page.goto(`/${LOCALE}/tours`)
     const firstTour = page.locator('a[href*="/tours/"]').first()
-    if (await firstTour.isVisible()) {
-      await firstTour.click()
-      await page.waitForLoadState('networkidle')
+    const visible = await firstTour.isVisible().catch(() => false)
+    test.skip(!visible, 'no tour in CMS')
+    await firstTour.click()
+    await page.waitForLoadState('domcontentloaded')
 
-      // Open group inquiry modal if button exists
-      const groupBtn = page.getByRole('button', { name: /group/i })
-      if (await groupBtn.isVisible()) {
-        await groupBtn.click()
-        const dialog = page.getByRole('dialog')
-        await expect(dialog).toBeVisible()
-
-        await page.keyboard.press('Escape')
-        await expect(dialog).not.toBeVisible()
-      }
-    }
+    const groupBtn = page.getByRole('button', { name: /group/i }).first()
+    await groupBtn.click()
+    const dialog = page.getByRole('dialog')
+    await expect(dialog).toBeVisible()
+    await page.keyboard.press('Escape')
+    await expect(dialog).not.toBeVisible()
   })
 
-  test('category filter chips are keyboard accessible', async ({ page }) => {
-    await page.goto('/en/tours')
-    await page.waitForLoadState('networkidle')
-
-    // Tab through the page to reach filter chips
-    const chips = page.locator('[data-testid="category-chips"] button, [role="group"] button')
-    const firstChip = chips.first()
-
-    if (await firstChip.isVisible()) {
-      await firstChip.focus()
+  test('tour catalog filter chips are keyboard-activatable', async ({ page }) => {
+    await page.goto(`/${LOCALE}/tours`)
+    await page.waitForLoadState('domcontentloaded')
+    // Sidebar filter buttons (city / category / duration / etc.)
+    const chip = page
+      .locator('aside, [role="complementary"]')
+      .getByRole('button')
+      .first()
+    if (await chip.isVisible().catch(() => false)) {
+      const before = page.url()
+      await chip.focus()
       await page.keyboard.press('Enter')
-
-      // URL should update with category filter
-      await page.waitForTimeout(300)
-      const url = page.url()
-      // Chip should be activatable via keyboard
-      expect(url).toBeDefined()
-    }
-  })
-
-  test('skip-to-content link is present and functional', async ({ page }) => {
-    await page.goto('/en/')
-
-    // Press Tab -- first focusable should be skip link (if present)
-    await page.keyboard.press('Tab')
-    const focused = await page.evaluate(() => {
-      const el = document.activeElement
-      return {
-        tag: el?.tagName,
-        href: el?.getAttribute('href'),
-        text: el?.textContent,
-      }
-    })
-
-    // If skip-to-content exists, verify it works
-    if (focused.href === '#main' || focused.text?.toLowerCase().includes('skip')) {
-      await page.keyboard.press('Enter')
-      const mainFocused = await page.evaluate(() => {
-        return document.activeElement?.id === 'main' ||
-          document.activeElement?.tagName === 'MAIN'
-      })
-      expect(mainFocused).toBeTruthy()
+      await page.waitForLoadState('domcontentloaded')
+      expect(page.url()).not.toBe(before) // URL updated with filter
     }
   })
 })
 ```
 
 ## Todo List
+- [ ] Append `/imprint` and `/cancellation` to `PUBLIC_ROUTES` in `wcag-audit.spec.ts`
 - [ ] Create `e2e/tests/i18n/locale-routing.spec.ts`
 - [ ] Create `e2e/tests/i18n/content-localization.spec.ts`
-- [ ] Create `e2e/tests/accessibility/axe-audit.spec.ts`
 - [ ] Create `e2e/tests/accessibility/keyboard-navigation.spec.ts`
-- [ ] Verify language switcher selector matches actual component markup
-- [ ] Verify NEXT_LOCALE cookie name matches next-intl convention
-- [ ] Cross-reference axe violations and fix source components if needed
-- [ ] Run all tests against staging with 3 browsers
+- [ ] Verify footer language selector exposes role/text matching the regex
+- [ ] Confirm `NEXT_LOCALE` cookie name (next-intl v4 default)
+- [ ] Run all specs across 3 browsers
 
 ## Success Criteria
-- All 3 locales (sv/en/de) load correctly for homepage and tours
-- Language switcher navigates to correct locale
-- NEXT_LOCALE cookie persists locale choice
-- Tour catalog heading differs across at least 2 of 3 locales
-- Hreflang tags present for sv/en/de/x-default on all pages
-- All 9 static pages + tour detail + guide detail pass axe-core WCAG 2.1 AA
-- Wizard options selectable via Tab + Enter/Space
-- Modal dismissable via Escape key
-- All tests pass on Chromium, Firefox, WebKit
+- `/imprint` and `/cancellation` both pass critical/serious WCAG audit
+- All 3 locales return 200 for `/` and `/tours`
+- Language switcher updates URL prefix
+- `NEXT_LOCALE` cookie set after locale visit
+- Tour catalog h1 differs across at least 2 of 3 locales
+- Hreflang alternates present for sv/en/de/x-default on homepage + tour detail
+- Wizard option cards activate via Space; group modal closes via Escape
+- Tour catalog filter chip URL update via Enter
+- Specs pass on Chromium / Firefox / WebKit
 
 ## Risk Assessment
 | Risk | Likelihood | Mitigation |
 |------|-----------|------------|
-| Axe violations from third-party widgets (Bokun) | High | Exclude `iframe[src*="bokun"]` in fixture |
-| Language switcher markup changes | Medium | NavigationPage POM uses flexible regex selectors |
-| NEXT_LOCALE cookie not set (middleware config) | Low | Verify cookie name from next-intl docs |
-| Axe false positives on dynamic content | Medium | Log violation details for manual review |
-| Skip-to-content link not implemented | Medium | Conditional test (skip if not present) |
+| `/imprint` or `/cancellation` audit surfaces critical violation | Medium | Filter to `critical`/`serious` already in existing fixture — fix source if blocking |
+| Language switcher markup differs across breakpoints | Medium | Flexible role-or-text matcher, scoped to footer in next iteration |
+| `NEXT_LOCALE` cookie not set yet on first visit (race) | Low | Wait for navigation completion before reading cookies |
+| Filter chip keyboard activation has no visual signal | Low | URL-change assertion is observable |
 
 ## Security Considerations
-- No credentials needed for i18n or accessibility tests
-- axe-core runs client-side only (no server access)
-- Cookie assertions read only, no modification
+- No credentials required for i18n / keyboard tests
+- axe-core fixture excludes third-party iframes — no cross-origin reads
+- Cookie inspection is read-only via Playwright context API
 
 ## Next Steps
-- Phase 05 builds on hreflang tests for SEO schema validation
-- Axe violations discovered here should be filed as bugs for source component fixes
+- Phase 05 builds on hreflang assertions for schema markup tests
+- Any axe violations in `/imprint` or `/cancellation` filed as upstream component bugs
