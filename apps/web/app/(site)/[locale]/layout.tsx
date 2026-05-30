@@ -88,9 +88,14 @@ export default async function LocaleLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Bokun is lazy-loaded by LazyBokunWidget when booking sidebar enters
-            viewport. Warming DNS/TLS here saves ~100-200ms when intersect fires. */}
+            viewport. Warming DNS/TLS here saves ~100-200ms when intersect fires.
+            Includes both prod (bokun.io) and sandbox (bokuntest.com) hosts —
+            unused entries are cheap (browser just resolves DNS), and we avoid
+            an env-aware render so the same HTML works in every environment. */}
         <link rel="dns-prefetch" href="https://widgets.bokun.io" />
         <link rel="dns-prefetch" href="https://static.bokun.io" />
+        <link rel="dns-prefetch" href="https://widgets.bokuntest.com" />
+        <link rel="dns-prefetch" href="https://static.bokuntest.com" />
         {/*
           Inline Bokun cart pin — must be parsed before Bokun's JS inserts #bokun-widgets-root,
           otherwise the wrapper renders inline (taking layout space, pushing content) and

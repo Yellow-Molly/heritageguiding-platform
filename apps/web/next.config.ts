@@ -141,12 +141,16 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.bubblav.com https://widgets.bokun.io https://static.bokun.io",
-              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://widgets.bokun.io https://static.bokun.io",
-              "img-src 'self' data: blob: https://*.blob.vercel-storage.com https://images.unsplash.com https://*.privatetours.se https://www.gravatar.com https://*.bokun.io",
-              "font-src 'self' data: https://fonts.gstatic.com https://widgets.bokun.io",
-              "frame-src 'self' https://www.bubblav.com https://www.youtube.com https://www.youtube-nocookie.com https://*.bokun.io",
-              "connect-src 'self' https://www.bubblav.com https://*.bubblav.com https://*.ably.net https://*.ably-realtime.com wss://*.ably.net wss://*.ably-realtime.com https://*.bokun.io",
+              // bokuntest.com hosts mirror bokun.io but for the sandbox env
+              // (dev/preview deployments load `widgets.bokuntest.com`). Listing
+              // both unconditionally keeps the CSP env-independent — the widget
+              // loader code picks one based on NODE_ENV.
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.bubblav.com https://widgets.bokun.io https://static.bokun.io https://widgets.bokuntest.com https://static.bokuntest.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://widgets.bokun.io https://static.bokun.io https://widgets.bokuntest.com https://static.bokuntest.com",
+              "img-src 'self' data: blob: https://*.blob.vercel-storage.com https://images.unsplash.com https://*.privatetours.se https://www.gravatar.com https://*.bokun.io https://*.bokuntest.com",
+              "font-src 'self' data: https://fonts.gstatic.com https://widgets.bokun.io https://widgets.bokuntest.com",
+              "frame-src 'self' https://www.bubblav.com https://www.youtube.com https://www.youtube-nocookie.com https://*.bokun.io https://*.bokuntest.com",
+              "connect-src 'self' https://www.bubblav.com https://*.bubblav.com https://*.ably.net https://*.ably-realtime.com wss://*.ably.net wss://*.ably-realtime.com https://*.bokun.io https://*.bokuntest.com",
             ].join('; '),
           },
           {

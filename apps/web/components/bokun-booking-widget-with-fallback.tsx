@@ -39,9 +39,15 @@ declare global {
   }
 }
 
-// Bokun widget script URL
-const BOKUN_WIDGET_SCRIPT_URL =
-  'https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js'
+// Bokun widget script URL — host swaps between prod (`widgets.bokun.io`) and
+// sandbox (`widgets.bokuntest.com`) based on NODE_ENV, mirroring the API
+// client. Loading the prod loader against a sandbox channel UUID silently
+// 404s the iframe and the booking panel never renders.
+const BOKUN_WIDGET_HOST =
+  process.env.NODE_ENV === 'production'
+    ? 'widgets.bokun.io'
+    : 'widgets.bokuntest.com'
+const BOKUN_WIDGET_SCRIPT_URL = `https://${BOKUN_WIDGET_HOST}/assets/javascripts/apps/build/BokunWidgetsLoader.js`
 
 // UUID v4 format validation (prevents accidental API key exposure)
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i

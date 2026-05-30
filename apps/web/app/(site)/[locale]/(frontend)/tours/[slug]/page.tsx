@@ -63,9 +63,20 @@ export default async function TourPage({ params }: TourPageProps) {
       {/* Warm TLS handshake to Bokun origins. Tour-detail is the only route
           that embeds the booking widget, so per-route preconnect avoids
           wasting handshakes on bouncers from other routes. Global
-          dns-prefetch in [locale]/layout.tsx stays as a safety net. */}
-      <link rel="preconnect" href="https://widgets.bokun.io" crossOrigin="anonymous" />
-      <link rel="preconnect" href="https://static.bokun.io" crossOrigin="anonymous" />
+          dns-prefetch in [locale]/layout.tsx stays as a safety net.
+          Env-conditional: preconnect is more expensive than dns-prefetch
+          (actual TLS handshake), so warm only the host the widget will hit. */}
+      {process.env.NODE_ENV === 'production' ? (
+        <>
+          <link rel="preconnect" href="https://widgets.bokun.io" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://static.bokun.io" crossOrigin="anonymous" />
+        </>
+      ) : (
+        <>
+          <link rel="preconnect" href="https://widgets.bokuntest.com" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://static.bokuntest.com" crossOrigin="anonymous" />
+        </>
+      )}
       <TourSchema tour={tour} reviews={reviews} />
       <Header variant="solid" />
       <main className="min-h-screen pt-20">
