@@ -1,6 +1,11 @@
-# Bokun Cart CSS Customization
+# Bókun Widget CSS Customizations
 
-> **Important — load-bearing.** This CSS lives in the Bokun admin dashboard (not in this repo). If a future developer "cleans up" the Bokun theme without checking here, the WCAG fix for the cart delete button will silently disappear.
+> **Important — load-bearing.** The CSS documented here lives in the Bókun admin dashboard (not in this repo) and is injected into the Bókun widget/checkout iframe. If a future developer "cleans up" the Bókun theme without checking here, these fixes silently disappear.
+
+This file is the single in-repo record of every CSS rule pasted into the Bókun theme editor. It currently covers:
+
+1. **Cart delete button** — WCAG target-size / contrast / focus fix.
+2. **Booking widget — "Per group" quantity stepper** — hidden so private tours sell as a single group; party size is chosen via the separate "Group size" dropdown, and parties above the max use the "Request Group Quote" button.
 
 ## Why this exists
 
@@ -74,6 +79,20 @@ button[data-testid="remove-from-cart"]:focus-visible {
   outline: 2px solid #2563eb !important;
   outline-offset: 2px;
 }
+
+/* =============================================================
+   Booking widget — hide the "Per group" quantity stepper.
+   Private tours sell as ONE group at a flat price; the customer
+   sets party size via the separate "Group size" dropdown, and
+   parties above the max use "Request Group Quote". Hiding this
+   control freezes the per-group quantity at its default of 1.
+   Selector contract: .PricingCategorySelector (readable class).
+   Title-scoped alternative: [data-testid="Per group-selector"].
+   !important required — Bokun ships Tailwind utilities on the node.
+   ============================================================= */
+.PricingCategorySelector {
+  display: none !important;
+}
 ```
 
 ## Selector contract
@@ -83,6 +102,15 @@ button[data-testid="remove-from-cart"]:focus-visible {
 | `button[data-testid="remove-from-cart"]` | `data-testid` is a stable contract. Test IDs rarely churn even when Bokun renames CSS classes between deploys. Far more durable than the scrambled `sc-dxroEu iuwoOl` SVG classes. |
 | `button[data-testid="remove-from-cart"] svg` | Scales the SVG above its inline `width="10" height="10"` HTML attributes — CSS dimensions beat presentation attributes. |
 | `button[data-testid="remove-from-cart"] svg path` | Recolors via `fill:` (CSS) over inline `fill="#C4C4C4"` (attribute). |
+
+### Per-group stepper selector
+
+| Selector | Why this one |
+|---|---|
+| `.PricingCategorySelector` | Readable class (not scrambled like `sc-kGCsyv kbnaUT`). Hides the whole per-group quantity block; the "Group size" dropdown is a sibling node and is unaffected. **Channel-wide** — hides the stepper for every pricing category on every product in this channel. Fine for a per-group-only catalogue. |
+| `[data-testid="Per group-selector"]` | Title-scoped alternative — matches only categories titled exactly "Per group". Switch to this if the channel ever serves per-person products (Adult/Child) whose steppers must stay visible. |
+
+> **Pairs with a Bókun product setting** (not CSS): on each per-group experience, the **Standard** rate's **Max. passengers per booking = max group size** (e.g. 9) blocks any 2-group booking server-side, so a customer who bypasses the hidden stepper still cannot complete an over-count. This value is **not** written by the CMS→Bókun sync — `apps/web/lib/bokun/serialize-bokun-wire-payload.ts` omits the pricing/rates component (`BokunExperienceWirePayload` carries only title/description/included/excluded/requirements/extras), so the manually-set cap is safe from re-syncs.
 
 ## Maintenance protocol
 
@@ -104,7 +132,8 @@ If the cart delete button looks broken again (tiny, gray, no hover effect), Boku
 
 ## Last verified
 
-- **Date:** 2026-05-21
+- **Cart delete button — Date:** 2026-05-21
+- **Per-group stepper — Date:** 2026-05-31 (verified hidden in Bókun Preview; "Group size" dropdown retained)
 - **Bokun channel:** value of `NEXT_PUBLIC_BOKUN_UUID` (see deployment-guide.md)
 - **Verified breakpoints:** desktop (≥1024px) right-rail cart, mobile (<768px) "Order summary" accordion
 - **Applied via:** Bokun admin → Theme → Show advanced options
