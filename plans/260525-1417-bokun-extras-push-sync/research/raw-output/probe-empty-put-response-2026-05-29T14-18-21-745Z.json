@@ -1,0 +1,27 @@
+{
+  "lastModified": 1780064303000,
+  "extras": [],
+  "rates": {
+    "defaultRate": {
+      "id": 57035
+    },
+    "rates": [
+      {
+        "id": 57035,
+        "title": "Standard rate",
+        "created": 1780061617000,
+        "lastModified": 1780061617000,
+        "minPerBooking": 1,
+        "pickupSelectionType": "UNAVAILABLE",
+        "dropoffSelectionType": "UNAVAILABLE",
+        "cancellationPolicyId": 7523,
+        "pricedPerPerson": true,
+        "tieredPricingEnabled": false,
+        "allStartTimes": true,
+        "allPricingCategories": true
+      }
+    ]
+  },
+  "bookingQuestions": [],
+  "id": 24003
+}

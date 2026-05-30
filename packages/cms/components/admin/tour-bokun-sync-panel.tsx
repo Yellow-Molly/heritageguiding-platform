@@ -11,7 +11,7 @@
  * @see plans/260514-1437-bokun-integration/phase-06-admin-ui-manual-sync.md
  */
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDocumentInfo, useFormFields } from '@payloadcms/ui'
 import { BokunSyncStatusPill } from './bokun-sync-status-pill'
 
@@ -29,6 +29,24 @@ function formatRelative(iso: string | null | undefined): string {
   if (diffHr < 24) return `${diffHr} h ago`
   const diffDay = Math.round(diffHr / 24)
   return `${diffDay} d ago`
+}
+
+/**
+ * Render a time-relative string only after mount, so SSR and the initial CSR
+ * render the SAME stable placeholder (the absolute ISO timestamp). Avoids the
+ * hydration mismatch caused by `Date.now()` returning slightly different
+ * values on server vs client.
+ */
+function useRelativeTime(iso: string | null | undefined): string {
+  const [text, setText] = useState<string>(() => iso ?? 'Never synced')
+  useEffect(() => {
+    setText(formatRelative(iso))
+    // Update once a minute while mounted so "3 min ago" stays accurate without
+    // a full panel re-render from upstream.
+    const interval = window.setInterval(() => setText(formatRelative(iso)), 60_000)
+    return () => window.clearInterval(interval)
+  }, [iso])
+  return text
 }
 
 export function TourBokunSyncPanel() {
@@ -57,11 +75,23 @@ export function TourBokunSyncPanel() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ tourId: id }),
       })
-      const json = (await res.json().catch(() => ({}))) as { error?: string }
+      const json = (await res.json().catch(() => ({}))) as {
+        error?: string
+        extrasGateReason?: 'pushed' | 'gate-disabled' | 'baseline-not-adopted'
+      }
       if (!res.ok) {
         setFeedback(json.error ?? `Sync failed (${res.status})`)
       } else {
-        setFeedback('Sync queued. Refresh in ~30s to see updated status.')
+        // Explain extras-gate silent no-op cases so the operator isn't
+        // surprised when the Bokun dashboard stays empty after a "successful" sync.
+        const base = 'Sync succeeded.'
+        const gateNote =
+          json.extrasGateReason === 'gate-disabled'
+            ? ' Add-ons NOT pushed — `BOKUN_EXTRAS_PUSH_ENABLED` is false in env.'
+            : json.extrasGateReason === 'baseline-not-adopted'
+              ? ' Add-ons NOT pushed — click "Adopt baseline" first.'
+              : ''
+        setFeedback(`${base}${gateNote} Refresh to see updated status.`)
       }
     } catch {
       setFeedback('Network error — try again')
@@ -92,7 +122,7 @@ export function TourBokunSyncPanel() {
       </div>
 
       <div style={{ fontSize: '12px', color: '#374151', marginBottom: '8px' }}>
-        Last synced: {formatRelative(lastSyncedAt)}
+        Last synced: <LastSyncedAt iso={lastSyncedAt} />
       </div>
 
       {lastError ? (
@@ -142,4 +172,17 @@ export function TourBokunSyncPanel() {
       ) : null}
     </div>
   )
+}
+
+/**
+ * Wrap the relative-time render in its own component so React's hydration
+ * boundary is exactly the text span — `suppressHydrationWarning` on a string
+ * child is the recommended path for intentional SSR/CSR text differences.
+ * The first render (SSR + initial CSR) outputs the raw ISO; after mount the
+ * effect-driven hook swaps to "N min ago". This is invisible to the user but
+ * makes hydration deterministic.
+ */
+function LastSyncedAt({ iso }: { iso: string | null | undefined }) {
+  const text = useRelativeTime(iso)
+  return <span suppressHydrationWarning>{text}</span>
 }

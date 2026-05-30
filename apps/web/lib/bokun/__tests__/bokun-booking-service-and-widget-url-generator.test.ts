@@ -180,18 +180,18 @@ describe('cancelBokunBooking', () => {
 describe('getBokunWidgetUrl', () => {
   it('generates correct widget URL with channel UUID and experience ID', () => {
     const url = getBokunWidgetUrl('my-channel-uuid', 'exp-999')
-    expect(url).toBe('https://widgets.bokun.io/online-sales/my-channel-uuid/experience-calendar/exp-999')
+    expect(url).toBe('https://widgets.bokuntest.com/online-sales/my-channel-uuid/experience-calendar/exp-999')
   })
 
-  it('URL contains widgets.bokun.io domain', () => {
+  it('URL contains widgets.bokuntest.com domain', () => {
     const url = getBokunWidgetUrl('uuid-abc', 'exp-123')
-    expect(url).toContain('widgets.bokun.io')
+    expect(url).toContain('widgets.bokuntest.com')
   })
 
   it('appends ?lang= when locale is provided', () => {
     const url = getBokunWidgetUrl('uuid-abc', 'exp-123', 'sv')
     expect(url).toBe(
-      'https://widgets.bokun.io/online-sales/uuid-abc/experience-calendar/exp-123?lang=sv'
+      'https://widgets.bokuntest.com/online-sales/uuid-abc/experience-calendar/exp-123?lang=sv'
     )
   })
 
@@ -218,7 +218,7 @@ describe('getBokunWidgetScriptUrl', () => {
   it('generates script URL with bookingChannelUUID query param', () => {
     const url = getBokunWidgetScriptUrl('my-channel-uuid')
     expect(url).toBe(
-      'https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=my-channel-uuid'
+      'https://widgets.bokuntest.com/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=my-channel-uuid'
     )
   })
 })
@@ -229,7 +229,7 @@ describe('getBokunWidgetScriptUrl', () => {
 describe('getBokunCheckoutUrl', () => {
   it('returns base URL when no options provided', () => {
     const url = getBokunCheckoutUrl('channel-uuid', 'exp-123')
-    expect(url).toBe('https://widgets.bokun.io/online-sales/channel-uuid/experience/exp-123')
+    expect(url).toBe('https://widgets.bokuntest.com/online-sales/channel-uuid/experience/exp-123')
   })
 
   it('appends date param when provided', () => {
@@ -267,7 +267,7 @@ describe('getBokunCheckoutUrl', () => {
 
   it('returns base URL without query string when options object is empty', () => {
     const url = getBokunCheckoutUrl('channel-uuid', 'exp-123', {})
-    expect(url).toBe('https://widgets.bokun.io/online-sales/channel-uuid/experience/exp-123')
+    expect(url).toBe('https://widgets.bokuntest.com/online-sales/channel-uuid/experience/exp-123')
     expect(url).not.toContain('?')
   })
 })
@@ -283,16 +283,42 @@ describe('getBokunEmbedCode', () => {
 
   it('includes widget URL in data-src attribute', () => {
     const html = getBokunEmbedCode('channel-uuid', 'exp-123')
-    expect(html).toContain('data-src="https://widgets.bokun.io/online-sales/channel-uuid/experience-calendar/exp-123"')
+    expect(html).toContain('data-src="https://widgets.bokuntest.com/online-sales/channel-uuid/experience-calendar/exp-123"')
   })
 
   it('includes script tag with widget loader src', () => {
     const html = getBokunEmbedCode('channel-uuid', 'exp-123')
-    expect(html).toContain('src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=channel-uuid"')
+    expect(html).toContain('src="https://widgets.bokuntest.com/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=channel-uuid"')
   })
 
   it('includes async attribute on script tag', () => {
     const html = getBokunEmbedCode('channel-uuid', 'exp-123')
     expect(html).toContain('async')
+  })
+})
+
+// ============================================================================
+// Env-conditional host (production vs sandbox)
+// ============================================================================
+describe('widget host env switch', () => {
+  // Vitest sets NODE_ENV='test' by default → bokuntest path. The rest of this
+  // file already asserts the bokuntest URLs. This block pins both branches
+  // so a future code change can't silently flip prod to the sandbox host.
+  it('uses widgets.bokuntest.com when NODE_ENV !== "production" (default test env)', () => {
+    expect(getBokunWidgetUrl('uuid', 'exp')).toContain('widgets.bokuntest.com')
+    expect(getBokunWidgetScriptUrl('uuid')).toContain('widgets.bokuntest.com')
+  })
+
+  it('uses widgets.bokun.io when NODE_ENV === "production"', () => {
+    vi.stubEnv('NODE_ENV', 'production')
+    try {
+      expect(getBokunWidgetUrl('uuid', 'exp')).toContain('widgets.bokun.io')
+      expect(getBokunWidgetUrl('uuid', 'exp')).not.toContain('bokuntest')
+      expect(getBokunWidgetScriptUrl('uuid')).toContain('widgets.bokun.io')
+      expect(getBokunCheckoutUrl('uuid', 'exp')).toContain('widgets.bokun.io')
+      expect(getBokunEmbedCode('uuid', 'exp')).toContain('widgets.bokun.io')
+    } finally {
+      vi.unstubAllEnvs()
+    }
   })
 })

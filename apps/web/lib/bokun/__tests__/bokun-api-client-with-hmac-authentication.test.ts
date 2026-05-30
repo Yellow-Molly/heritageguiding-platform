@@ -182,6 +182,37 @@ describe('BokunApiClient', () => {
       const data = await client.fetch<{ result: number }>('/test')
       expect(data).toEqual({ result: 42 })
     })
+
+    it('returns {} on 204 No Content without invoking json()', async () => {
+      // PUT /experience/{id}/components routinely answers 204; calling
+      // response.json() on the empty body throws "Unexpected end of JSON input".
+      const resp = {
+        ok: true,
+        status: 204,
+        statusText: 'No Content',
+        headers: new Headers(),
+        json: vi.fn().mockRejectedValue(new Error('should not be called')),
+        text: vi.fn().mockResolvedValue(''),
+      }
+      mockFetch.mockResolvedValueOnce(resp)
+      const data = await client.fetch('/test')
+      expect(data).toEqual({})
+      expect(resp.json).not.toHaveBeenCalled()
+    })
+
+    it('returns {} on 2xx with empty body', async () => {
+      const resp = {
+        ok: true,
+        status: 200,
+        statusText: 'OK',
+        headers: new Headers(),
+        json: vi.fn().mockRejectedValue(new Error('should not be called')),
+        text: vi.fn().mockResolvedValue(''),
+      }
+      mockFetch.mockResolvedValueOnce(resp)
+      const data = await client.fetch('/test')
+      expect(data).toEqual({})
+    })
   })
 
   // --------------------------------------------------------------------------

@@ -10,6 +10,7 @@
 
 import { lexicalToBokunHtml } from './lexical-to-bokun-html'
 import { sanitizeHtml } from '../utils/sanitize-html'
+import { mapAddOnsToBokunExtras, type AddOnSource } from './map-addons-to-bokun-extras'
 import type {
   BokunExperienceActivityLevel,
   BokunExperienceCreatePayload,
@@ -66,6 +67,12 @@ export interface TourSource {
   accessibility?: { wheelchairAccessible?: boolean | null } | null
   minGroupSize?: number | null
   maxGroupSize?: number | null
+  /**
+   * Optional paid add-ons (museum tickets, meals). Mapped to Bokun extras via
+   * `mapAddOnsToBokunExtras`. v1 syncs text fields only — price + Required flag
+   * remain dashboard-managed (REST v2.0 doesn't expose those writes — Phase 01).
+   */
+  optionalAddOns?: AddOnSource[] | null
 }
 
 // ─── Locale + localized-field helpers ─────────────────────────────────────────
@@ -337,6 +344,12 @@ export function tourToBokunExperiencePayload(
 
   const wheelchair = tour.accessibility?.wheelchairAccessible
   if (typeof wheelchair === 'boolean') payload.wheelchairAccessible = wheelchair
+
+  // Extras (phase-2 v1: text fields only — title, description, externalId).
+  // The wire serializer (`serializeBokunExtras`) flattens localized title/description
+  // to a single primary-locale string per Bokun's ExtraDto wire shape.
+  const extras = mapAddOnsToBokunExtras(tour.optionalAddOns)
+  if (extras.length > 0) payload.extras = extras
 
   return payload
 }

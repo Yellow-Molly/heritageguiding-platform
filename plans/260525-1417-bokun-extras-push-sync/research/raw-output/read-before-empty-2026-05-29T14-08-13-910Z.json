@@ -1,0 +1,81 @@
+{
+  "components": {
+    "EXTRAS": {
+      "extras": [
+        {
+          "id": 5378,
+          "externalId": "cms-spike-1780063498164",
+          "title": "Spike Probe 2026-05-29T14-04-58-164Z",
+          "description": "externalId round-trip probe — safe to delete",
+          "maxPerBooking": 5,
+          "limitByPax": false
+        }
+      ],
+      "id": 24003
+    },
+    "PRICING": {
+      "pricing": {
+        "experiencePriceRules": [
+          {
+            "id": 36392067,
+            "rate": {
+              "id": 57035
+            },
+            "created": 1780061923000,
+            "priceCatalogId": 17696,
+            "currency": "SEK",
+            "amount": "5500.000000",
+            "pricingCategoryId": 30079
+          }
+        ],
+        "extraPriceRules": [],
+        "pickupPriceRules": [],
+        "dropoffPriceRules": [],
+        "priceCatalogCurrencies": [
+          {
+            "priceCatalogId": 17696,
+            "currencies": [
+              "SEK"
+            ],
+            "defaultCurrency": "SEK"
+          }
+        ]
+      },
+      "id": 24003
+    },
+    "RATES": {
+      "rates": {
+        "defaultRate": {
+          "id": 57035
+        },
+        "rates": [
+          {
+            "id": 57035,
+            "title": "Standard rate",
+            "created": 1780061617000,
+            "lastModified": 1780061617000,
+            "minPerBooking": 1,
+            "pickupSelectionType": "UNAVAILABLE",
+            "dropoffSelectionType": "UNAVAILABLE",
+            "cancellationPolicyId": 7523,
+            "pricedPerPerson": true,
+            "tieredPricingEnabled": false,
+            "allStartTimes": true,
+            "allPricingCategories": true
+          }
+        ]
+      },
+      "id": 24003
+    }
+  },
+  "errors": [
+    {
+      "componentType": "BASIC",
+      "error": "Unsupported componentType value: BASIC"
+    },
+    {
+      "componentType": "TRANSLATIONS",
+      "error": "Unsupported componentType value: TRANSLATIONS"
+    }
+  ]
+}

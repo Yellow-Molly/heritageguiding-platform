@@ -213,6 +213,22 @@ export const Tours: CollectionConfig = {
       },
     },
     {
+      // Phase-2 extras-push gate. Until set, optionalAddOns is excluded from
+      // Bokun sync (prevents the first push from silently deleting extras
+      // configured directly in the Bokun dashboard). Operator flips this via
+      // the "Adopt baseline" sidebar action (Phase 05).
+      // See plans/260525-1417-bokun-extras-push-sync/.
+      name: 'bokunExtrasBaselineAt',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+        date: { pickerAppearance: 'dayAndTime' },
+        readOnly: true,
+        description:
+          'Set when operator adopts the Bokun-side extras baseline for this tour. Until set, add-ons stay out of the sync payload — text-only sync continues as before.',
+      },
+    },
+    {
       name: 'bokunSyncPanel',
       type: 'ui',
       admin: {
@@ -220,6 +236,19 @@ export const Tours: CollectionConfig = {
         components: {
           Field:
             '@cms/components/admin/tour-bokun-sync-panel#TourBokunSyncPanel',
+        },
+      },
+    },
+    {
+      // Phase-2 extras-push opt-in: per-tour "Adopt baseline" sidebar action
+      // (renders adopt button if not yet baselined, status + re-baseline link if it is).
+      name: 'bokunExtrasBaselinePanel',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field:
+            '@cms/components/admin/tour-bokun-extras-baseline-panel#TourBokunExtrasBaselinePanel',
         },
       },
     },

@@ -98,9 +98,9 @@ Total: ~10–14h (1–2 working days). **All phases shipped 2026-05-25.**
 
 ## Out-of-scope items remaining for v2
 
-- CMS→Bokun push sync of extras (extends `260514-1437-bokun-integration`)
-- Live validation that `bokunExtraId` exists in Bokun
-- Audit script for CMS hint vs Bokun price drift
+- ~~CMS→Bokun push sync of extras (extends `260514-1437-bokun-integration`)~~ → **SHIPPED in [plans/260525-1417-bokun-extras-push-sync/](../260525-1417-bokun-extras-push-sync/) (text-only v1).** Pricing and Required toggle remain dashboard-managed — Bokun REST v2.0 does not expose those writes (verified by Phase 01 spike + OpenAPI audit).
+- Live validation that `bokunExtraId` exists in Bokun → partially addressed by the Phase 05 Adopt-baseline diff UI in the push-sync plan
+- Audit script for CMS hint vs Bokun price drift → still deferred (v2.1 candidate)
 - Date/time-slot-conditional add-on availability
 - Localized customer emails (today English-only)
 

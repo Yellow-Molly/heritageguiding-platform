@@ -1,0 +1,15 @@
+{
+  "sent": {
+    "externalId": "cms-spike-1780063498164",
+    "title": "Spike Probe 2026-05-29T14-04-58-164Z"
+  },
+  "received": {
+    "id": 5378,
+    "externalId": "cms-spike-1780063498164",
+    "title": "Spike Probe 2026-05-29T14-04-58-164Z",
+    "description": "externalId round-trip probe — safe to delete",
+    "maxPerBooking": 5,
+    "limitByPax": false
+  },
+  "verdict": "externalId preserved"
+}

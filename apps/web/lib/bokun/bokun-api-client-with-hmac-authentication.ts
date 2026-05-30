@@ -11,8 +11,18 @@ import type {
   BokunExperienceCreateResponse,
   BokunExperienceUpdatePayload,
   BokunExperienceUpdateResponse,
+  BokunExtraComponentDto,
 } from './bokun-types'
 import { serializeBokunExperiencePayload } from './serialize-bokun-wire-payload'
+
+/**
+ * Shape Bokun returns from GET /restapi/v2.0/experience/{id}/components?componentType=EXTRAS.
+ * Verified Phase 01 spike — see `plans/260525-1417-bokun-extras-push-sync/research/`.
+ */
+export interface BokunExperienceExtrasGetResponse {
+  extras: BokunExtraComponentDto[]
+  id?: number
+}
 
 // Bokun API base URLs
 const BOKUN_TEST_URL = 'https://api.bokuntest.com'
@@ -135,7 +145,11 @@ export class BokunApiClient {
       'X-Bokun-AccessKey': this.accessKey,
       'X-Bokun-Date': date,
       'X-Bokun-Signature': signature,
-      'Content-Type': 'application/json',
+      // Charset must be explicit. Phase 01 spike observed Bokun's Jackson parser
+      // decoding our UTF-8 body as Latin-1 (em-dash "—" stored as "â€”") when the
+      // header lacks `; charset=UTF-8`. RFC 8259 says JSON defaults to UTF-8, but
+      // Bokun ignores that. Adding charset removes the ambiguity.
+      'Content-Type': 'application/json; charset=UTF-8',
       Accept: 'application/json',
       ...options.headers,
     }
@@ -201,8 +215,19 @@ export class BokunApiClient {
         throw new BokunError(message, response.status, errorCode)
       }
 
-      // Parse and return successful response
-      return response.json()
+      // Bokun's component-PUT endpoint commonly returns 204 No Content, and
+      // other 2xx variants may ship empty bodies too. Calling response.json()
+      // on an empty body throws "Unexpected end of JSON input" which the outer
+      // catch then misclassifies as a transient NETWORK_ERROR. Read as text
+      // and parse defensively so empty bodies resolve to {} for the caller.
+      if (response.status === 204) {
+        return {} as T
+      }
+      const successBody = await response.text()
+      if (!successBody) {
+        return {} as T
+      }
+      return JSON.parse(successBody) as T
     } catch (error) {
       // Re-throw BokunError instances
       if (error instanceof BokunError) {
@@ -272,6 +297,29 @@ export class BokunApiClient {
       method: 'POST',
       body: JSON.stringify(wireBody),
     })
+  }
+
+  /**
+   * Read the EXTRAS component for an Experience.
+   * Endpoint: GET /restapi/v2.0/experience/{id}/components?componentType=EXTRAS
+   *
+   * Phase 01 spike: the read endpoint REQUIRES `componentType=<X>` — the codebase
+   * had no prior art for reading from this endpoint (only writes via PUT). Used
+   * by Phase 05's adopt-baseline diff UI to compare Bokun-side extras against
+   * the CMS mirror before flipping the per-tour push gate.
+   *
+   * @param experienceId - Bokun-assigned Experience id (URL-encoded internally)
+   * @returns `{ extras: [...], id: <experienceId> }` per Bokun's response shape
+   * @throws BokunError on non-2xx
+   */
+  async getExperienceExtras(
+    experienceId: string
+  ): Promise<BokunExperienceExtrasGetResponse> {
+    const safeId = encodeURIComponent(experienceId)
+    return this.fetch<BokunExperienceExtrasGetResponse>(
+      `/restapi/v2.0/experience/${safeId}/components?componentType=EXTRAS`,
+      { method: 'GET' }
+    )
   }
 
   /**

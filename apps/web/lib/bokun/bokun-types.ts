@@ -437,6 +437,62 @@ export interface BokunExperienceMeetingPoint {
 export type BokunExperienceActivityLevel = 'EASY' | 'MODERATE' | 'CHALLENGING'
 
 /**
+ * Internal input to the wire serializer for one Bokun extra (paid add-on).
+ * One per CMS `optionalAddOns` row. Localized title/description; the serializer
+ * flattens to a single string per Bokun's ExtraDto shape (no localized arrays
+ * on extras — confirmed Phase 01 spike).
+ */
+export interface BokunExtraInput {
+  /** CMS row id — pushed as Bokun `externalId` for round-trip correlation. */
+  externalId: string
+  /**
+   * Bokun-assigned numeric id (when updating an existing extra).
+   * Undefined → CREATE path; Bokun assigns a new id and returns it in the PUT response.
+   */
+  existingBokunExtraId?: string | number
+  title: BokunExperienceLocalizedString[]
+  description?: BokunExperienceLocalizedString[]
+  /**
+   * Max units per booking. REQUIRED on Bokun's ExtraDto — omission → HTTP 400
+   * "extras[N]::maxPerBooking absent" (Phase 01 verified). CMS does not model
+   * this; serializer falls back to a sane default if omitted.
+   */
+  maxPerBooking?: number
+}
+
+/**
+ * Wire shape for one Bokun extra. Matches Bokun's ExtraDto exactly per Phase 01.
+ * Allowed fields (9 total, from Bokun's Jackson error listing):
+ *   maxPerBooking, photo, limitByPax, externalId, title, type, id,
+ *   description, commissionGroupId
+ *
+ * v1 sends: id (UPDATE only), externalId, title, description, type, maxPerBooking,
+ * limitByPax.
+ * v1 omits: photo, commissionGroupId (not modeled in CMS).
+ *
+ * NOT on ExtraDto (do not add — Bokun will 400):
+ *   - `required` / `included` flags (dashboard-only — Phase 01 confirmed)
+ *   - `price` / `currency` / `pricedPerPerson` (pricing writes not exposed via
+ *     REST v2.0 at all — Phase 01 4-variant probe + OpenAPI audit)
+ */
+export interface BokunExtraComponentDto {
+  /** Bokun-assigned id when updating; omit for CREATE. */
+  id?: number
+  /** CMS row id as stable correlator — round-trips on PUT response. */
+  externalId: string
+  title: string
+  description?: string
+  /**
+   * GetYourGuide channel hint; ignored for direct Bokun bookings. v1 hardcodes "OTHERS".
+   */
+  type: 'OTHERS' | 'FOOD' | 'DRINKS' | 'SAFETY' | 'TRANSPORT' | 'DONATION'
+  /** REQUIRED by Bokun; omitting yields 400 "maxPerBooking absent". */
+  maxPerBooking: number
+  /** Whether qty cap ties to participant count. v1 always false. */
+  limitByPax: boolean
+}
+
+/**
  * Payload for POST /restapi/v2.0/experience (CREATE Experience).
  * All fields validated against Bokun spec in Phase 01 findings.
  */
@@ -458,6 +514,12 @@ export interface BokunExperienceCreatePayload {
   bringList?: BokunExperienceLocalizedString[]
   activityLevel?: BokunExperienceActivityLevel
   wheelchairAccessible?: boolean
+  /**
+   * Optional add-ons to push to the EXTRAS component on PUT /components.
+   * Per Phase 01: serialized via `serializeBokunExtras` into a top-level `extras`
+   * array on the wire payload. v1 only — pricing remains dashboard-managed.
+   */
+  extras?: BokunExtraInput[]
 }
 
 /**
@@ -482,11 +544,22 @@ export interface BokunExperienceCreateResponse {
 
 /**
  * Response from PUT /restapi/v2.0/experience/{id}/components.
- * Bokun's component-PUT endpoint commonly returns 204 No Content; treat all fields as optional.
+ *
+ * Phase 01 finding: when the PUT body contains `{ extras: [...] }`, Bokun returns
+ * the FULL updated state (not 204) — including the extras array with Bokun-assigned
+ * `id` values. Use `extras[].externalId` to correlate back to CMS rows; no separate
+ * GET round-trip needed for ID backfill.
+ *
+ * When the PUT body contains only text fields (existing path: title, description,
+ * etc.), Bokun returns 204 No Content. All fields are therefore optional.
  */
 export interface BokunExperienceUpdateResponse {
   id?: string
   experienceId?: string
   status?: string
   updatedAt?: number
+  /** Updated extras list with assigned ids (when PUT body included `extras`). */
+  extras?: BokunExtraComponentDto[]
+  /** Epoch ms; Bokun emits when returning full state. */
+  lastModified?: number
 }

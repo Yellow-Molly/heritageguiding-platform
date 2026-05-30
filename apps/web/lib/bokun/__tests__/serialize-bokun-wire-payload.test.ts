@@ -8,8 +8,9 @@ import {
   localizedListToHtml,
   pickPrimaryLocaleValue,
   serializeBokunExperiencePayload,
+  serializeBokunExtras,
 } from '../serialize-bokun-wire-payload'
-import type { BokunExperienceCreatePayload } from '../bokun-types'
+import type { BokunExperienceCreatePayload, BokunExtraInput } from '../bokun-types'
 
 afterEach(() => {
   vi.unstubAllEnvs()
@@ -169,9 +170,152 @@ describe('serializeBokunExperiencePayload', () => {
   it('regression: 2026-05-15 — never produces arrays at the wire layer', () => {
     // Bokun returned HTTP 400 (Jackson MismatchedInputException) when title was
     // serialized as a JSON array. This test fails if anyone re-introduces arrays.
+    // Exception: `extras` IS an array (Bokun's ExtraDto wire shape — Phase 01).
     const out = serializeBokunExperiencePayload(buildPayload())
-    for (const value of Object.values(out)) {
+    for (const [key, value] of Object.entries(out)) {
+      if (key === 'extras') continue
       expect(Array.isArray(value)).toBe(false)
     }
+  })
+
+  it('does not include extras key when payload.extras is empty / missing', () => {
+    const out = serializeBokunExperiencePayload(buildPayload())
+    expect(out).not.toHaveProperty('extras')
+  })
+
+  it('emits extras:[] on the wire when payload.extras is an explicit empty array (delete signal)', () => {
+    // Mirror of the sync-job behavior: baselined + push enabled + CMS has zero
+    // add-on rows → mapper omits extras; sync-job sets `payload.extras = []`
+    // to ask Bokun to wipe its side (full-replacement semantics).
+    const out = serializeBokunExperiencePayload(buildPayload({ extras: [] }))
+    expect(out.extras).toEqual([])
+  })
+
+  it('serializes extras into top-level extras array when provided', () => {
+    const out = serializeBokunExperiencePayload(
+      buildPayload({
+        extras: [
+          {
+            externalId: 'cms-row-1',
+            title: [{ locale: 'en', value: 'Museum Ticket' }],
+            maxPerBooking: 5,
+          },
+        ],
+      })
+    )
+    expect(out.extras).toHaveLength(1)
+    expect(out.extras?.[0]).toMatchObject({
+      externalId: 'cms-row-1',
+      title: 'Museum Ticket',
+      type: 'OTHERS',
+      maxPerBooking: 5,
+      limitByPax: false,
+    })
+  })
+})
+
+describe('serializeBokunExtras', () => {
+  const baseExtra = (overrides: Partial<BokunExtraInput> = {}): BokunExtraInput => ({
+    externalId: 'cms-row-default',
+    title: [{ locale: 'en', value: 'Default Extra' }],
+    maxPerBooking: 5,
+    ...overrides,
+  })
+
+  it('returns undefined for missing input (caller omits the key — preserve Bokun)', () => {
+    expect(serializeBokunExtras(undefined)).toBeUndefined()
+  })
+
+  it('returns [] for empty-array input (caller emits extras:[] — delete all in Bokun)', () => {
+    // Phase 01: PUT { extras: [] } deletes every Bokun-side extra
+    // (probe-empty verified destructive). The empty-list path is reachable
+    // only when the per-tour `bokunExtrasBaselineAt` gate is active, so a
+    // non-baselined tour can never trigger an accidental wipe.
+    expect(serializeBokunExtras([])).toEqual([])
+  })
+
+  it('emits a single extra without id for the CREATE path', () => {
+    const out = serializeBokunExtras([baseExtra({ externalId: 'cms-1' })])
+    expect(out).toEqual([
+      {
+        externalId: 'cms-1',
+        title: 'Default Extra',
+        type: 'OTHERS',
+        maxPerBooking: 5,
+        limitByPax: false,
+      },
+    ])
+    expect(out?.[0]).not.toHaveProperty('id')
+  })
+
+  it('emits id (numeric) when existingBokunExtraId is set — UPDATE path', () => {
+    const out = serializeBokunExtras([baseExtra({ existingBokunExtraId: '276080' })])
+    expect(out?.[0].id).toBe(276080)
+  })
+
+  it('coerces empty / whitespace existingBokunExtraId to undefined (CREATE)', () => {
+    expect(serializeBokunExtras([baseExtra({ existingBokunExtraId: '' })])?.[0]).not.toHaveProperty(
+      'id'
+    )
+    expect(
+      serializeBokunExtras([baseExtra({ existingBokunExtraId: '   ' })])?.[0]
+    ).not.toHaveProperty('id')
+  })
+
+  it('drops rows whose title is empty across all locales (no half-configured pushes)', () => {
+    const out = serializeBokunExtras([
+      baseExtra({ externalId: 'keep', title: [{ locale: 'en', value: 'Real' }] }),
+      baseExtra({ externalId: 'skip', title: [] }),
+      baseExtra({ externalId: 'skip-blank', title: [{ locale: 'en', value: '   ' }] }),
+    ])
+    expect(out).toHaveLength(1)
+    expect(out?.[0].externalId).toBe('keep')
+  })
+
+  it('falls back to a default maxPerBooking when CMS does not supply one', () => {
+    const out = serializeBokunExtras([baseExtra({ maxPerBooking: undefined })])
+    expect(out?.[0].maxPerBooking).toBe(99) // DEFAULT_MAX_PER_BOOKING
+  })
+
+  it('honors BOKUN_SYNC_LOCALE for title/description picking', () => {
+    vi.stubEnv('BOKUN_SYNC_LOCALE', 'sv')
+    const out = serializeBokunExtras([
+      baseExtra({
+        title: [
+          { locale: 'en', value: 'English Title' },
+          { locale: 'sv', value: 'Svensk Titel' },
+        ],
+        description: [
+          { locale: 'en', value: 'English desc' },
+          { locale: 'sv', value: 'Svensk beskrivning' },
+        ],
+      }),
+    ])
+    expect(out?.[0].title).toBe('Svensk Titel')
+    expect(out?.[0].description).toBe('Svensk beskrivning')
+  })
+
+  it('omits description when empty in every locale', () => {
+    const out = serializeBokunExtras([baseExtra({ description: undefined })])
+    expect(out?.[0]).not.toHaveProperty('description')
+  })
+
+  it('preserves input order across multiple extras', () => {
+    const out = serializeBokunExtras([
+      baseExtra({ externalId: 'a', title: [{ locale: 'en', value: 'A' }] }),
+      baseExtra({ externalId: 'b', title: [{ locale: 'en', value: 'B' }] }),
+      baseExtra({ externalId: 'c', title: [{ locale: 'en', value: 'C' }] }),
+    ])
+    expect(out?.map((e) => e.externalId)).toEqual(['a', 'b', 'c'])
+  })
+
+  it('Phase 01 regression: NEVER includes `required`, `included`, `price`, or `currency` — Bokun ExtraDto rejects these', () => {
+    const out = serializeBokunExtras([baseExtra()])
+    const dto = out?.[0] ?? {}
+    expect(dto).not.toHaveProperty('required')
+    expect(dto).not.toHaveProperty('included')
+    expect(dto).not.toHaveProperty('price')
+    expect(dto).not.toHaveProperty('currency')
+    expect(dto).not.toHaveProperty('amount')
   })
 })

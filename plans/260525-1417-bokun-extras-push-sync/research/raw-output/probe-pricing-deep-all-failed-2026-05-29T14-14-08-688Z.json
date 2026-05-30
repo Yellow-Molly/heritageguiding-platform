@@ -1,0 +1,25 @@
+{
+  "extra_id": 5379,
+  "results": [
+    {
+      "variant": "V1: PUT /components?componentType=PRICING with {pricing:{extraPriceRules:[rule]}}",
+      "status": "error",
+      "error": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>NotFound</Code><Message>The resource you requested does not exist</Message><RequestId>XHFXXQYV7F4Z7S1V</RequestId><HostId>ocAvlBJBX0zLQVVboybd4X/srM4nG0aykNRo5hZohg37kw6/rgUr4reeVCXqkQtmhselDRwyJxM2mphAP7YpLeiEVwuMUinG</HostId></Error>"
+    },
+    {
+      "variant": "V2: PUT /components with FULL pricing echo (preserves experiencePriceRules + adds extraPriceRule)",
+      "status": "error",
+      "error": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>NotFound</Code><Message>The resource you requested does not exist</Message><RequestId>XHFXXQYV7F4Z7S1V</RequestId><HostId>ocAvlBJBX0zLQVVboybd4X/srM4nG0aykNRo5hZohg37kw6/rgUr4reeVCXqkQtmhselDRwyJxM2mphAP7YpLeiEVwuMUinG</HostId></Error>"
+    },
+    {
+      "variant": "V3: PUT /experience/{id}/pricing with {extraPriceRules:[rule]}",
+      "status": "error",
+      "error": "{\"status\":404,\"message\":\"\"}"
+    },
+    {
+      "variant": "V4: PUT /experience/{id}/components/pricing with {extraPriceRules:[rule]}",
+      "status": "error",
+      "error": "{\"status\":404,\"message\":\"\"}"
+    }
+  ]
+}

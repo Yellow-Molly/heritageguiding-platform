@@ -90,9 +90,24 @@ export async function cancelBokunBooking(bookingId: string): Promise<BokunBookin
 // ============================================================================
 
 /**
- * Bokun widget base URL
+ * Bokun widget host — production uses `widgets.bokun.io`, every other env
+ * (dev / preview / test) uses `widgets.bokuntest.com`. Mirrors the API
+ * client's `NODE_ENV === 'production'` switch so the widget and HMAC calls
+ * always hit the same Bokun environment.
+ *
+ * Each Bokun environment has its OWN booking channel UUID + experience IDs.
+ * Loading the prod widget against a test channel UUID silently 404s the
+ * embedded iframe and the "Book Now" panel never renders — exactly the
+ * symptom reported on localhost when this was hardcoded to `widgets.bokun.io`.
  */
-const BOKUN_WIDGET_BASE_URL = 'https://widgets.bokun.io/online-sales'
+export function getBokunWidgetHost(): string {
+  return process.env.NODE_ENV === 'production'
+    ? 'widgets.bokun.io'
+    : 'widgets.bokuntest.com'
+}
+
+const BOKUN_WIDGET_BASE_URL = () =>
+  `https://${getBokunWidgetHost()}/online-sales`
 
 /**
  * Generate Bokun widget checkout URL for embedded calendar experience.
@@ -111,7 +126,7 @@ export function getBokunWidgetUrl(
   experienceId: string,
   locale?: string
 ): string {
-  const baseUrl = `${BOKUN_WIDGET_BASE_URL}/${bookingChannelUUID}/experience-calendar/${experienceId}`
+  const baseUrl = `${BOKUN_WIDGET_BASE_URL()}/${bookingChannelUUID}/experience-calendar/${experienceId}`
   return locale ? `${baseUrl}?lang=${encodeURIComponent(locale)}` : baseUrl
 }
 
@@ -122,7 +137,7 @@ export function getBokunWidgetUrl(
  * @returns Widget script URL
  */
 export function getBokunWidgetScriptUrl(bookingChannelUUID: string): string {
-  return `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${bookingChannelUUID}`
+  return `https://${getBokunWidgetHost()}/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${bookingChannelUUID}`
 }
 
 /**
@@ -144,7 +159,7 @@ export function getBokunCheckoutUrl(
     locale?: string
   }
 ): string {
-  const baseUrl = `${BOKUN_WIDGET_BASE_URL}/${bookingChannelUUID}/experience/${experienceId}`
+  const baseUrl = `${BOKUN_WIDGET_BASE_URL()}/${bookingChannelUUID}/experience/${experienceId}`
 
   if (!options) {
     return baseUrl

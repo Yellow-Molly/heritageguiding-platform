@@ -1,0 +1,25 @@
+{
+  "components": {},
+  "errors": [
+    {
+      "componentType": "BASIC",
+      "error": "No such Activity#24003"
+    },
+    {
+      "componentType": "EXTRAS",
+      "error": "No such Activity#24003"
+    },
+    {
+      "componentType": "PRICING",
+      "error": "No such Activity#24003"
+    },
+    {
+      "componentType": "RATES",
+      "error": "No such Activity#24003"
+    },
+    {
+      "componentType": "TRANSLATIONS",
+      "error": "No such Activity#24003"
+    }
+  ]
+}

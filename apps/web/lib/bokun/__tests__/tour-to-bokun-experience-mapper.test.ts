@@ -319,4 +319,35 @@ describe('tourToBokunExperiencePayload (top-level)', () => {
     expect(payload.rates[0].pricePerBooking).toBe(true)
     expect(payload.rates[0].pricingCategories[0].flatPrice).toBe('2500.00')
   })
+
+  it('wires optionalAddOns into payload.extras (Phase 03)', () => {
+    const tour = buildTourFixture({
+      optionalAddOns: [
+        {
+          id: 'cms-row-1',
+          name: { en: 'Vasa Museum Ticket', sv: 'Vasamuseet biljett' },
+          description: { en: 'Entry + audio guide' },
+          bokunExtraId: '276080',
+          displayOrder: 1,
+        },
+        {
+          id: 'cms-row-2',
+          name: { en: 'Boxed lunch' },
+          displayOrder: 0, // sort first
+        },
+      ],
+    })
+    const payload = tourToBokunExperiencePayload(tour)
+    expect(payload.extras).toBeDefined()
+    expect(payload.extras).toHaveLength(2)
+    expect(payload.extras?.[0].externalId).toBe('cms-row-2') // displayOrder 0 first
+    expect(payload.extras?.[1].externalId).toBe('cms-row-1')
+    expect(payload.extras?.[1].existingBokunExtraId).toBe('276080')
+  })
+
+  it('omits payload.extras when no add-ons (preserves Bokun-side state on text-only syncs)', () => {
+    const tour = buildTourFixture() // no optionalAddOns
+    const payload = tourToBokunExperiencePayload(tour)
+    expect(payload.extras).toBeUndefined()
+  })
 })

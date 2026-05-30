@@ -23,6 +23,16 @@ import {
   tourToBokunExperiencePayload,
   type TourSource,
 } from '../../../apps/web/lib/bokun/tour-to-bokun-experience-mapper'
+import type {
+  BokunExperienceUpdateResponse,
+  BokunExperienceCreateResponse,
+} from '../../../apps/web/lib/bokun/bokun-types'
+import {
+  backfillBokunExtraIdsViaSql,
+  writeBokunErrorStatusViaSql,
+  writeBokunStatusViaSql,
+  type BokunSyncStatus,
+} from './bokun-sync-sql-writes'
 
 const MAX_ERROR_LENGTH = 500
 
@@ -100,14 +110,27 @@ function isExperienceGone(err: unknown): boolean {
   return err instanceof BokunError && err.status === 410
 }
 
+
 interface SyncTourInput {
   tourId: number | string
 }
+
+/**
+ * Extras gate state — surfaced in the API response so the admin UI can
+ * explain to the operator why extras weren't pushed despite the sync
+ * "succeeding". Otherwise the panel just says "synced" and the operator
+ * wonders why the Bokun dashboard is empty.
+ */
+export type ExtrasGateReason =
+  | 'pushed' // gate open + at least one row → extras sent (or deletion sent)
+  | 'gate-disabled' // BOKUN_EXTRAS_PUSH_ENABLED is not "true"
+  | 'baseline-not-adopted' // tour.bokunExtrasBaselineAt is null
 
 interface SyncTourOutput {
   experienceId?: string
   action?: 'create' | 'update' | 'skipped'
   error?: string
+  extrasGateReason?: ExtrasGateReason
 }
 
 /**
@@ -136,6 +159,7 @@ export async function runBokunSyncForTour(
         id: number | string
         bokunExperienceId?: string | null
         bokunSyncStatus?: 'pending' | 'synced' | 'failed' | 'disabled' | null
+        bokunExtrasBaselineAt?: string | Date | null
       })
     | null
 
@@ -148,16 +172,48 @@ export async function runBokunSyncForTour(
     return { action: 'skipped' }
   }
 
+  // ── Extras push gate ────────────────────────────────────────────────────────
+  // v1 extras sync is OFF unless BOTH:
+  //   1. BOKUN_EXTRAS_PUSH_ENABLED=true (global kill switch — dark-deploy friendly),
+  //   2. Per-tour `bokunExtrasBaselineAt` is set (operator has reviewed the diff
+  //      and explicitly enabled push via the Phase 05 "Adopt baseline" button).
+  // Until both conditions are met, optionalAddOns is excluded from the payload,
+  // so existing tour text-sync behavior is unchanged.
+  const extrasGloballyEnabled = process.env.BOKUN_EXTRAS_PUSH_ENABLED === 'true'
+  const extrasBaselined = tour.bokunExtrasBaselineAt != null
+  const extrasPushEnabled = extrasGloballyEnabled && extrasBaselined
+  // Reason surfaced to the admin UI when the operator clicks Sync and the
+  // Bokun dashboard ends up unchanged — explains the silent no-op gate state.
+  const extrasGateReason: ExtrasGateReason = !extrasGloballyEnabled
+    ? 'gate-disabled'
+    : !extrasBaselined
+      ? 'baseline-not-adopted'
+      : 'pushed'
+
   try {
-    const bokunPayload = tourToBokunExperiencePayload(tour)
+    const tourForMapping: TourSource = extrasPushEnabled
+      ? tour
+      : { ...tour, optionalAddOns: null }
+    const bokunPayload = tourToBokunExperiencePayload(tourForMapping)
+
+    // When push is enabled but CMS has zero (valid) add-on rows, force an
+    // explicit empty `extras: []` on the wire so Bokun deletes its side
+    // (full-replacement semantics — Phase 01 verified). Without this, the
+    // mapper omits the key entirely and Bokun-side extras silently survive,
+    // contradicting the "delete the last CMS row → Bokun cleans up" SOP.
+    if (extrasPushEnabled && bokunPayload.extras === undefined) {
+      bokunPayload.extras = []
+    }
+
     const client = getBokunClient()
 
     const trimmedId = tour.bokunExperienceId?.trim() || undefined
     let experienceId = trimmedId
     let action: 'create' | 'update'
+    let bokunResponse: BokunExperienceUpdateResponse | BokunExperienceCreateResponse | undefined
 
     if (experienceId) {
-      await client.updateExperience(experienceId, bokunPayload)
+      bokunResponse = await client.updateExperience(experienceId, bokunPayload)
       action = 'update'
     } else if (process.env.BOKUN_ALLOW_CREATE === 'true') {
       // CREATE is gated off by default. Reasons:
@@ -168,6 +224,7 @@ export async function runBokunSyncForTour(
       //     mapped yet.
       // Set BOKUN_ALLOW_CREATE=true once both conditions are resolved.
       const created = await client.createExperience(bokunPayload)
+      bokunResponse = created
       experienceId = created.id ?? created.experienceId
       action = 'create'
       if (!experienceId) {
@@ -185,37 +242,62 @@ export async function runBokunSyncForTour(
       )
     }
 
-    // Cast `data` because the generated Tour type doesn't yet include the new
-    // bokunSyncStatus / bokunLastSyncedAt / bokunLastError fields until Payload
-    // regenerates payload-types.ts on next dev-server boot (additive schema change).
-    await payload.update({
-      collection: 'tours',
-      id: tour.id,
-      data: {
-        bokunExperienceId: experienceId,
-        bokunSyncStatus: 'synced',
-        bokunLastSyncedAt: new Date().toISOString(),
-        bokunLastError: null,
-      } as Record<string, unknown>,
-      context: { skipBokunSync: true },
+    // Write sync status via direct SQL — see writeBokunStatusViaSql for the
+    // reason `payload.update` cannot be used here. Skips Payload validation
+    // on existing optionalAddOns rows that may have locale-asymmetric data.
+    await writeBokunStatusViaSql(payload as never, tour.id, {
+      bokunExperienceId: experienceId ?? null,
+      bokunSyncStatus: 'synced',
+      bokunLastSyncedAt: new Date().toISOString(),
+      bokunLastError: null,
     })
 
-    return { experienceId, action }
+    // ID backfill: when extras were pushed, Bokun's PUT response includes the
+    // updated extras list with assigned numeric ids (Phase 01 verified).
+    // Issued AFTER the status update so even if backfill fails the sync is
+    // recorded as successful (Bokun side already has the new state).
+    if (extrasPushEnabled && bokunResponse && 'extras' in bokunResponse && bokunResponse.extras) {
+      try {
+        const count = await backfillBokunExtraIdsViaSql(
+          payload as never,
+          tour.id,
+          bokunResponse.extras
+        )
+        if (count > 0) {
+          payload.logger?.info?.(
+            { tourId: tour.id, backfilled: count },
+            '[bokun-sync] backfilled bokun_extra_id on optionalAddOns rows'
+          )
+        }
+      } catch (backfillErr) {
+        // Backfill failure is non-fatal — sync already succeeded, operator
+        // can copy IDs from Bokun manually if this consistently fails.
+        payload.logger?.error?.(
+          { err: backfillErr, tourId: tour.id },
+          '[bokun-sync] backfill SQL failed (non-fatal — sync already complete)'
+        )
+      }
+    }
+
+    return { experienceId, action, extrasGateReason }
   } catch (err) {
     const message = sanitizeBokunError(err)
     const permanent = isPermanentClientError(err)
     const gone = isExperienceGone(err)
 
-    await payload.update({
-      collection: 'tours',
-      id: tour.id,
-      data: {
-        bokunSyncStatus: permanent ? 'failed' : tour.bokunSyncStatus ?? 'pending',
-        bokunLastError: message,
-        // 410 Gone → wipe the stale id so the NEXT sync re-creates the Experience.
-        ...(gone ? { bokunExperienceId: null } : {}),
-      } as Record<string, unknown>,
-      context: { skipBokunSync: true },
+    // Direct SQL — same reason as success path. We don't want a recoverable
+    // sync error masked by a separate "couldn't even write the error status"
+    // failure caused by Payload's full-document validation.
+    const newStatus: BokunSyncStatus = permanent
+      ? 'failed'
+      : tour.bokunSyncStatus ?? 'pending'
+    await writeBokunErrorStatusViaSql(payload as never, tour.id, {
+      // 410 Gone → wipe the stale id so the NEXT sync re-creates the Experience.
+      // Otherwise keep whatever the tour already had — we never want to clobber
+      // a working id on a transient failure.
+      bokunExperienceId: gone ? null : tour.bokunExperienceId ?? null,
+      bokunSyncStatus: newStatus,
+      bokunLastError: message,
     })
 
     if (permanent) {

@@ -22,6 +22,8 @@ import type {
   BokunExperienceLocale,
   BokunExperienceLocalizedString,
   BokunExperienceUpdatePayload,
+  BokunExtraComponentDto,
+  BokunExtraInput,
 } from './bokun-types'
 
 /**
@@ -88,6 +90,11 @@ export function localizedListToHtml(
 /**
  * Bokun `ExperienceComponentsDto` wire shape — strictly the fields we currently
  * sync. All optional: Bokun treats absent fields as "leave unchanged" on PUT.
+ *
+ * `extras` — full-replacement semantics per Phase 01: omitted = no change;
+ * present = the array becomes Bokun's complete extras list. Sending `extras: []`
+ * deletes all extras (verified destructive probe). Pricing for extras is NOT in
+ * this payload — Bokun's REST v2.0 does not expose pricing writes.
  */
 export interface BokunExperienceWirePayload {
   title?: string
@@ -96,6 +103,63 @@ export interface BokunExperienceWirePayload {
   included?: string
   excluded?: string
   requirements?: string
+  extras?: BokunExtraComponentDto[]
+}
+
+/**
+ * Bokun rejects ExtraDto without maxPerBooking ("extras[N]::maxPerBooking absent",
+ * HTTP 400 — Phase 01 verified). CMS doesn't model this today; use a permissive
+ * default so syncs don't fail. Operators who need a tighter cap configure it in
+ * the Bokun dashboard (manual; not yet round-tripped).
+ */
+const DEFAULT_MAX_PER_BOOKING = 99
+
+/**
+ * Serialize internal extras into Bokun's ExtraDto wire shape.
+ *
+ * Three-state return contract — the caller distinguishes between "absent"
+ * (preserve Bokun state) and "explicit empty" (delete all Bokun-side extras):
+ *  - `undefined` input → `undefined` output (caller omits the `extras` key)
+ *  - `[]`        input → `[]`        output (caller emits `extras: []` to wipe)
+ *  - `[rows]`    input → mapped DTOs (may still be `[]` if every row was
+ *    filtered for empty title — caller treats that as the wipe signal too)
+ *
+ * Per-row rules:
+ *  - Skip rows with no usable title in any locale (would 400 on Bokun side).
+ *  - Pick the primary-locale title/description via the existing picker.
+ *  - Emit `id` (numeric) when the CMS row has an existing `bokunExtraId`; omit on CREATE.
+ *  - Always emit `externalId` so the PUT response correlates back to CMS rows.
+ *  - Hardcode `type: 'OTHERS'` + `limitByPax: false` — v1 doesn't model these.
+ */
+export function serializeBokunExtras(
+  extras: BokunExtraInput[] | undefined
+): BokunExtraComponentDto[] | undefined {
+  if (extras === undefined) return undefined
+  // Empty input → preserve "delete all" intent. The caller (sync-job) sets
+  // `payload.extras = []` only when the per-tour gate is active, so this
+  // path is gated upstream and cannot fire on a non-baselined tour.
+  if (extras.length === 0) return []
+  const out: BokunExtraComponentDto[] = []
+  for (const extra of extras) {
+    const title = pickPrimaryLocaleValue(extra.title)
+    if (!title || !title.trim()) continue
+    const dto: BokunExtraComponentDto = {
+      externalId: extra.externalId,
+      title,
+      type: 'OTHERS',
+      maxPerBooking: extra.maxPerBooking ?? DEFAULT_MAX_PER_BOOKING,
+      limitByPax: false,
+    }
+    const existing = String(extra.existingBokunExtraId ?? '').trim()
+    if (existing) {
+      const numericId = Number(existing)
+      if (Number.isFinite(numericId)) dto.id = numericId
+    }
+    const description = pickPrimaryLocaleValue(extra.description)
+    if (description) dto.description = description
+    out.push(dto)
+  }
+  return out
 }
 
 /**
@@ -127,6 +191,11 @@ export function serializeBokunExperiencePayload(
 
   const requirements = localizedListToHtml(payload.bringList)
   if (requirements) out.requirements = requirements
+
+  const extras = serializeBokunExtras(payload.extras)
+  // Distinguish "absent" (preserve Bokun state) from "explicit empty" (delete all)
+  // — empty array is falsy via .length but truthy here, so explicit `!== undefined`.
+  if (extras !== undefined) out.extras = extras
 
   return out
 }
