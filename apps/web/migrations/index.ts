@@ -11,6 +11,7 @@ import * as migration_20260503_153500_postgis_security_hardening from './2026050
 import * as migration_20260510_215812_convert_tour_guide_to_hasmany from './20260510_215812_convert_tour_guide_to_hasmany';
 import * as migration_20260514_174200_add_bokun_sync_fields from './20260514_174200_add_bokun_sync_fields';
 import * as migration_20260524_211041_add_optional_add_ons from './20260524_211041_add_optional_add_ons';
+import * as migration_20260531_013900_add_bokun_extras_baseline_at from './20260531_013900_add_bokun_extras_baseline_at';
 
 export const migrations = [
   {
@@ -77,5 +78,10 @@ export const migrations = [
     up: migration_20260524_211041_add_optional_add_ons.up,
     down: migration_20260524_211041_add_optional_add_ons.down,
     name: '20260524_211041_add_optional_add_ons',
+  },
+  {
+    up: migration_20260531_013900_add_bokun_extras_baseline_at.up,
+    down: migration_20260531_013900_add_bokun_extras_baseline_at.down,
+    name: '20260531_013900_add_bokun_extras_baseline_at',
   },
 ];
