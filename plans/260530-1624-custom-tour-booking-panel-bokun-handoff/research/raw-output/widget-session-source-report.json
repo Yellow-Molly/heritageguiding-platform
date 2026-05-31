@@ -1,0 +1,73 @@
+{
+  "test1_urlParam": {
+    "url": "https://widgets.bokuntest.com/online-sales/11917131-ac6a-45e1-8e99-bd0cf1e318c8/experience/24010?lang=en&sessionId=spike-resume-aaaa-1111",
+    "sessionIds": [
+      "f369fa8d-546c-49f2-9250-931db49b88d3"
+    ],
+    "localStorage": {
+      "NRBA_SESSION": "{\"value\":\"df187207d0931c72\",\"inactiveAt\":1780234258881,\"expiresAt\":1780246857355,\"updatedAt\":1780232458881,\"sessionRepla",
+      "AMP_unsent_023ab810ee": "[]",
+      "__mpq_f5d897cc774901c40320adb98c367f39_ev": "[]",
+      "__mpq_f5d897cc774901c40320adb98c367f39_pp": "[]",
+      "GoogleAnalytics.clientId": "1226135834.1780232458",
+      "onlineSales_displayCurrency_11917131-ac6a-45e1-8e99-bd0cf1e318c8": "SEK",
+      "mp_f5d897cc774901c40320adb98c367f39_mixpanel": "{\"distinct_id\":\"5317\",\"$device_id\":\"bb471355-7208-4b4d-8958-5947a765ebb4\",\"$initial_referrer\":\"$direct\",\"$initial_referr"
+    },
+    "cookies": [
+      "bokunSessionId_11917131-ac6a-45e1-8e99-bd0cf1e318c8=f369fa8d-546c-49f2-9250-931db49b88d3",
+      "bokun_widgets_bc14797=f369fa8d-546c-49f2-9250-931db49b88d3",
+      "bokun_widgets_sign14797=$2a$10$.uAPGfzZakiVoWmmJLLJxuVPpQt85oEFP",
+      "AMP_023ab810ee=JTdCJTIyZGV2aWNlSWQlMjIlM0ElMjI0ZDRlMzMy"
+    ],
+    "injected": "spike-resume-aaaa-1111",
+    "honored": false
+  },
+  "test2_storage": {
+    "url": "https://widgets.bokuntest.com/online-sales/11917131-ac6a-45e1-8e99-bd0cf1e318c8/experience/24010?lang=en",
+    "sessionIds": [
+      "ae42227e-1b87-47e8-af45-f2c209ad7a5d"
+    ],
+    "localStorage": {
+      "NRBA_SESSION": "{\"value\":\"b76ab20a8df44972\",\"inactiveAt\":1780234265266,\"expiresAt\":1780246864120,\"updatedAt\":1780232465266,\"sessionRepla",
+      "AMP_unsent_023ab810ee": "[]",
+      "__mpq_f5d897cc774901c40320adb98c367f39_ev": "[]",
+      "__mpq_f5d897cc774901c40320adb98c367f39_pp": "[]",
+      "GoogleAnalytics.clientId": "869817692.1780232465",
+      "onlineSales_displayCurrency_11917131-ac6a-45e1-8e99-bd0cf1e318c8": "SEK",
+      "mp_f5d897cc774901c40320adb98c367f39_mixpanel": "{\"distinct_id\":\"5317\",\"$device_id\":\"e37fdd75-74da-4702-b936-995123af32a2\",\"$initial_referrer\":\"$direct\",\"$initial_referr"
+    },
+    "cookies": [
+      "bokunSessionId_11917131-ac6a-45e1-8e99-bd0cf1e318c8=ae42227e-1b87-47e8-af45-f2c209ad7a5d",
+      "bokun_widgets_bc14797=ae42227e-1b87-47e8-af45-f2c209ad7a5d",
+      "bokun_widgets_sign14797=$2a$10$.uAPGfzZakiVoWmmJLLJxuVPpQt85oEFP",
+      "AMP_023ab810ee=JTdCJTIyZGV2aWNlSWQlMjIlM0ElMjIzNDA0MzYx"
+    ]
+  },
+  "test3_localStoragePreset": {
+    "url": "https://widgets.bokuntest.com/online-sales/11917131-ac6a-45e1-8e99-bd0cf1e318c8/experience/24010?lang=en",
+    "sessionIds": [
+      "e2a9acd0-f59d-4c7e-bc45-2af2dde54ca0"
+    ],
+    "localStorage": {
+      "bokun_session_id": "spike-resume-bbbb-2222",
+      "NRBA_SESSION": "{\"value\":\"aa8aab42f3f71ca2\",\"inactiveAt\":1780234271715,\"expiresAt\":1780246870496,\"updatedAt\":1780232471715,\"sessionRepla",
+      "bokun.sessionId": "spike-resume-bbbb-2222",
+      "__mpq_f5d897cc774901c40320adb98c367f39_pp": "[]",
+      "mp_f5d897cc774901c40320adb98c367f39_mixpanel": "{\"distinct_id\":\"5317\",\"$device_id\":\"dd7a4383-7e0e-40c4-8037-d7abce4c6626\",\"$initial_referrer\":\"$direct\",\"$initial_referr",
+      "AMP_unsent_023ab810ee": "[]",
+      "sessionId": "spike-resume-bbbb-2222",
+      "__mpq_f5d897cc774901c40320adb98c367f39_ev": "[]",
+      "octo.sessionId": "spike-resume-bbbb-2222",
+      "GoogleAnalytics.clientId": "1472119778.1780232471",
+      "onlineSales_displayCurrency_11917131-ac6a-45e1-8e99-bd0cf1e318c8": "SEK"
+    },
+    "cookies": [
+      "bokunSessionId_11917131-ac6a-45e1-8e99-bd0cf1e318c8=e2a9acd0-f59d-4c7e-bc45-2af2dde54ca0",
+      "bokun_widgets_bc14797=e2a9acd0-f59d-4c7e-bc45-2af2dde54ca0",
+      "bokun_widgets_sign14797=$2a$10$.uAPGfzZakiVoWmmJLLJxuVPpQt85oEFP",
+      "AMP_023ab810ee=JTdCJTIyZGV2aWNlSWQlMjIlM0ElMjI5NGMwZGYy"
+    ],
+    "preset": "spike-resume-bbbb-2222",
+    "honored": false
+  }
+}

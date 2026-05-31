@@ -342,15 +342,19 @@ query {
 - `fetchTourSchema()` - Generate JSON-LD schema
 
 **Bokun Integration (Phase 08.1 - Complete):**
-- `GET /api/bokun/availability` - Real-time availability with 60s caching (lib/bokun/bokun-availability-service-with-caching.ts)
+- `GET /api/bokun/availability` - ⚠️ **DEAD/BROKEN (verified 2026-05-31).** `getBokunAvailability` calls `/restapi/v2.0/activity/{id}/availabilities`, which **404s on BOTH sandbox (`api.bokuntest.com`) AND prod (`api.bokun.io`)** — these products are Bokun "experiences", served only by the old `/activity.json/{id}/availabilities`. **No UI consumes this route**; real booking availability comes from the embedded widget's own `/widgets/{uuid}/activity/...` API. Zero user impact, but the service would never return data. Fix = repoint to `/activity.json/{id}/availabilities` (different response shape) or delete. (lib/bokun/bokun-availability-service-with-caching.ts)
 - `POST /api/bokun/webhook` - Webhook handler with HMAC-SHA256 signature verification (app/api/bokun/webhook/route.ts)
 
 **Features:**
 - HMAC-SHA256 authentication for API requests
-- Availability cache with 60-second TTL
 - Webhook signature verification using HMAC
 - Rate limit handling with exponential backoff (400 req/min)
 - Webhook event types: BOOKING_CREATED, BOOKING_CONFIRMED, PAYMENT_RECEIVED, etc.
+
+**Custom Booking Panel → Bokun-hosted payment — INVESTIGATED, INFEASIBLE (2026-05-31, deferred post-MVP):**
+- Goal: replace the embedded Bokun widget with our own selection panel (date/time/participants/add-ons) handing off to Bokun-hosted payment (Bokun stays merchant-of-record). Plan: `plans/260530-1624-custom-tour-booking-panel-bokun-handoff/`; evidence: `…/research/handoff-spike-findings.md`.
+- Spike (direct against Bokun sandbox + prod hosts) disproved **every** handoff path: (1) widget deep-link pre-fill — `date`/`startTimeId`/`participants` ignored; (2) HMAC reserve → hosted-payment URL — none returned, `RESERVE_FOR_EXTERNAL_PAYMENT` = caller collects payment (PCI on us, rejected); (3) pre-build widget `shoppingCart` + resume — session is a **server-signed cookie** (`bokun_widgets_sign…`), injected `?sessionId=`/localStorage ignored, not transferable cross-origin.
+- **Conclusion:** Bokun-hosted card payment lives ONLY inside the embedded widget (server-controlled session). A custom panel needs either a different PSP (PCI on us) or a Bokun feature that doesn't currently exist. Only **restyling the live widget** preserves Bokun-as-payer. Revisit post-MVP (Bokun support inquiry). See memory `bokun-no-custom-checkout-handoff`.
 
 **Bokun Outbound Sync (Phase 08.2 - Complete):**
 - Automatic push: Tour create/update in Payload → enqueue `syncTourToBokun` Payload Job via `afterChange` hook

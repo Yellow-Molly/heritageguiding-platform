@@ -1,0 +1,69 @@
+{
+  "experienceId": "24006",
+  "channelUUID": "11917131-ac6a-45e1-8e99-bd0cf1e318c8",
+  "slotCount": 0,
+  "firstBookable": null,
+  "perAgeBandRateShape": null,
+  "components": {
+    "RATES": {
+      "rates": {
+        "defaultRate": {
+          "id": 57039,
+          "externalId": "STANDARD"
+        },
+        "rates": [
+          {
+            "id": 57039,
+            "externalId": "STANDARD",
+            "title": "Standard",
+            "created": 1780067334000,
+            "lastModified": 1780067367000,
+            "minPerBooking": 1,
+            "maxPerBooking": 5,
+            "pickupSelectionType": "UNAVAILABLE",
+            "dropoffSelectionType": "UNAVAILABLE",
+            "cancellationPolicyId": 7523,
+            "pricedPerPerson": false,
+            "allStartTimes": true,
+            "allPricingCategories": true
+          }
+        ]
+      },
+      "id": 24006
+    },
+    "PRICING": {
+      "pricing": {
+        "experiencePriceRules": [
+          {
+            "id": 36394199,
+            "rate": {
+              "id": 57039,
+              "externalId": "STANDARD"
+            },
+            "created": 1780068097000,
+            "priceCatalogId": 17696,
+            "currency": "SEK",
+            "amount": "19000.000000"
+          }
+        ],
+        "extraPriceRules": [],
+        "pickupPriceRules": [],
+        "dropoffPriceRules": [],
+        "priceCatalogCurrencies": [
+          {
+            "priceCatalogId": 17696,
+            "currencies": [
+              "SEK"
+            ],
+            "defaultCurrency": "SEK"
+          }
+        ]
+      },
+      "id": 24006
+    },
+    "BASIC": {
+      "error": "Unsupported componentType value: BASIC",
+      "status": 400
+    }
+  }
+}

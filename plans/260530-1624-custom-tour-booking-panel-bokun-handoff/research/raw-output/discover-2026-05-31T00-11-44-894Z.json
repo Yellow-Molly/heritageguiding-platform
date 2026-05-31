@@ -1,0 +1,21 @@
+{
+  "experienceId": "24003",
+  "channelUUID": "11917131-ac6a-45e1-8e99-bd0cf1e318c8",
+  "slotCount": 0,
+  "firstBookable": null,
+  "perAgeBandRateShape": null,
+  "components": {
+    "RATES": {
+      "error": "No such Activity#24003",
+      "status": 400
+    },
+    "PRICING": {
+      "error": "No such Activity#24003",
+      "status": 400
+    },
+    "BASIC": {
+      "error": "No such Activity#24003",
+      "status": 400
+    }
+  }
+}

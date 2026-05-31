@@ -1,0 +1,44 @@
+{
+  "base": "https://widgets.bokuntest.com/online-sales/11917131-ac6a-45e1-8e99-bd0cf1e318c8/experience/24010?lang=en",
+  "withParams": "https://widgets.bokuntest.com/online-sales/11917131-ac6a-45e1-8e99-bd0cf1e318c8/experience/24010?date=2026-06-01&startTimeId=48301&participants=2&lang=en",
+  "results": [
+    {
+      "label": "baseline-no-params",
+      "url": "https://widgets.bokuntest.com/online-sales/11917131-ac6a-45e1-8e99-bd0cf1e318c8/experience/24010?lang=en",
+      "httpStatus": 200,
+      "title": "SEK View Photos Guided City Walk Including City Hall – Gamla Stan, Riddarholmen and City Hall 3 hours Moderate Private A",
+      "apiCalls": [
+        "GET https://widgets.bokuntest.com/online-sales/11917131-ac6a-45e1-8e99-bd0cf1e318c8/experience/24010?lang=en",
+        "POST https://bam.nr-data.net/1/d93e1d23c8?a=112389077&v=1.315.0&to=bgNQNkYCXkQEUEIPXFdJYg5VGnNYC0dECV9VA0AjVxdZWAscVQldTRRdDlgGQkRLXFgKWlcDQQNYBkMZKl1aD11cNVMOURB2RQpdQgNdXUhBF1YzUVAA&r",
+        "POST https://bam.nr-data.net/events/1/d93e1d23c8?a=112389077&v=1.315.0&to=bgNQNkYCXkQEUEIPXFdJYg5VGnNYC0dECV9VA0AjVxdZWAscVQldTRRdDlgGQkRLXFgKWlcDQQNYBkMZKl1aD11cNVMOURB2RQpdQgNdXUhBF1Y",
+        "GET https://widgets.bokuntest.com/widgets/11917131-ac6a-45e1-8e99-bd0cf1e318c8/activity/24010?availabilityRequired=1&currency=SEK&sessionId=79096a0d-25ea-4174-aafc-dfcff2eb2662&lang=en",
+        "POST https://widgets.bokuntest.com/widgets/11917131-ac6a-45e1-8e99-bd0cf1e318c8/shoppingCart?currency=SEK&sessionId=79096a0d-25ea-4174-aafc-dfcff2eb2662&lang=en_US"
+      ],
+      "consoleErrs": [],
+      "visibleTextSample": "SEK View Photos Guided City Walk Including City Hall – Gamla Stan, Riddarholmen and City Hall 3 hours Moderate Private A private guided city walk from Gamla Stan to Kungsholmen following Stockholm's historical development through medieval street networks, royal environments... Description Meeting points The city walk begins at the Obelisk on Slottsbacken, where an authorized Stockholm guide – who is also an authorized City Hall guide – introduces how Stockholm emerged between the islands and how Gamla Stan developed into the city's political and economic center. The walk continues through Gamla Stan's medieval street network. Narrow alleys, historic buildings and squares reveal the city's early structure and development. During the stroll, you'll pass the Royal Palace, where the city's royal and administrative functions are placed in clear historical context. The tour continues to Riddarholmen, where the urban environment changes and views open across Lake Mälaren and Stockholm's silho",
+      "mentionsDate": false,
+      "mentionsParticipants2": false,
+      "hasPayWord": true,
+      "screenshot": "plans\\260530-1624-custom-tour-booking-panel-bokun-handoff\\research\\raw-output\\widget-baseline-no-params.png"
+    },
+    {
+      "label": "with-params",
+      "url": "https://widgets.bokuntest.com/online-sales/11917131-ac6a-45e1-8e99-bd0cf1e318c8/experience/24010?date=2026-06-01&startTimeId=48301&participants=2&lang=en",
+      "httpStatus": 200,
+      "title": "SEK View Photos Guided City Walk Including City Hall – Gamla Stan, Riddarholmen and City Hall 3 hours Moderate Private A",
+      "apiCalls": [
+        "GET https://widgets.bokuntest.com/online-sales/11917131-ac6a-45e1-8e99-bd0cf1e318c8/experience/24010?date=2026-06-01&startTimeId=48301&participants=2&lang=en",
+        "POST https://bam.nr-data.net/1/d93e1d23c8?a=112389077&v=1.315.0&to=bgNQNkYCXkQEUEIPXFdJYg5VGnNYC0dECV9VA0AjVxdZWAscVQldTRRdDlgGQkRLXFgKWlcDQQNYBkMZKl1aD11cNVMOURB2RQpdQgNdXUhBF1YzUVAA&r",
+        "POST https://bam.nr-data.net/events/1/d93e1d23c8?a=112389077&v=1.315.0&to=bgNQNkYCXkQEUEIPXFdJYg5VGnNYC0dECV9VA0AjVxdZWAscVQldTRRdDlgGQkRLXFgKWlcDQQNYBkMZKl1aD11cNVMOURB2RQpdQgNdXUhBF1Y",
+        "GET https://widgets.bokuntest.com/widgets/11917131-ac6a-45e1-8e99-bd0cf1e318c8/activity/24010?availabilityRequired=1&currency=SEK&sessionId=c6aba997-bd94-44d5-bae5-e0f7aba5a15c&lang=en",
+        "POST https://widgets.bokuntest.com/widgets/11917131-ac6a-45e1-8e99-bd0cf1e318c8/shoppingCart?currency=SEK&sessionId=c6aba997-bd94-44d5-bae5-e0f7aba5a15c&lang=en_US"
+      ],
+      "consoleErrs": [],
+      "visibleTextSample": "SEK View Photos Guided City Walk Including City Hall – Gamla Stan, Riddarholmen and City Hall 3 hours Moderate Private A private guided city walk from Gamla Stan to Kungsholmen following Stockholm's historical development through medieval street networks, royal environments... Description Meeting points The city walk begins at the Obelisk on Slottsbacken, where an authorized Stockholm guide – who is also an authorized City Hall guide – introduces how Stockholm emerged between the islands and how Gamla Stan developed into the city's political and economic center. The walk continues through Gamla Stan's medieval street network. Narrow alleys, historic buildings and squares reveal the city's early structure and development. During the stroll, you'll pass the Royal Palace, where the city's royal and administrative functions are placed in clear historical context. The tour continues to Riddarholmen, where the urban environment changes and views open across Lake Mälaren and Stockholm's silho",
+      "mentionsDate": false,
+      "mentionsParticipants2": false,
+      "hasPayWord": true,
+      "screenshot": "plans\\260530-1624-custom-tour-booking-panel-bokun-handoff\\research\\raw-output\\widget-with-params.png"
+    }
+  ]
+}

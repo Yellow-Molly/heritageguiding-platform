@@ -1,0 +1,26 @@
+{
+  "url": "https://widgets.bokuntest.com/online-sales/11917131-ac6a-45e1-8e99-bd0cf1e318c8/experience/24010?lang=en",
+  "finalUrl": "https://widgets.bokuntest.com/online-sales/11917131-ac6a-45e1-8e99-bd0cf1e318c8/experience/24010?lang=en",
+  "dayClicked": "1",
+  "plus": false,
+  "addExtra": false,
+  "cta": "Book now",
+  "steps": [
+    {
+      "name": "1-loaded",
+      "screenshot": "plans\\260530-1624-custom-tour-booking-panel-bokun-handoff\\research\\raw-output\\cart-capture-1-loaded.png"
+    },
+    {
+      "name": "2-date-clicked",
+      "screenshot": "plans\\260530-1624-custom-tour-booking-panel-bokun-handoff\\research\\raw-output\\cart-capture-2-date-clicked.png"
+    },
+    {
+      "name": "3-participants-extra",
+      "screenshot": "plans\\260530-1624-custom-tour-booking-panel-bokun-handoff\\research\\raw-output\\cart-capture-3-participants-extra.png"
+    },
+    {
+      "name": "4-after-cta",
+      "screenshot": "plans\\260530-1624-custom-tour-booking-panel-bokun-handoff\\research\\raw-output\\cart-capture-4-after-cta.png"
+    }
+  ]
+}

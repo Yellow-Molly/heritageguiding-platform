@@ -1,0 +1,114 @@
+{
+  "experienceId": "24010",
+  "channelUUID": "11917131-ac6a-45e1-8e99-bd0cf1e318c8",
+  "slotCount": 0,
+  "firstBookable": null,
+  "perAgeBandRateShape": null,
+  "components": {
+    "RATES": {
+      "rates": {
+        "defaultRate": {
+          "id": 57043,
+          "externalId": "STANDARD"
+        },
+        "rates": [
+          {
+            "id": 57043,
+            "externalId": "STANDARD",
+            "title": "Standard",
+            "created": 1780067334000,
+            "lastModified": 1780095406000,
+            "minPerBooking": 1,
+            "maxPerBooking": 9,
+            "pickupSelectionType": "UNAVAILABLE",
+            "dropoffSelectionType": "UNAVAILABLE",
+            "cancellationPolicyId": 7523,
+            "pricedPerPerson": false,
+            "extraConfigs": [
+              {
+                "id": 11238,
+                "extra": {
+                  "id": 5380,
+                  "externalId": "6a19bbe0b8ef8583a7b93a08"
+                },
+                "selectionType": "PRESELECTED",
+                "pricingType": "PRICED_SEPARATELY",
+                "pricedPerPerson": true
+              }
+            ],
+            "allStartTimes": true,
+            "allPricingCategories": true
+          }
+        ]
+      },
+      "id": 24010
+    },
+    "PRICING": {
+      "pricing": {
+        "experiencePriceRules": [
+          {
+            "id": 36395889,
+            "rate": {
+              "id": 57043,
+              "externalId": "STANDARD"
+            },
+            "created": 1780071146000,
+            "priceCatalogId": 17696,
+            "currency": "SEK",
+            "amount": "3900.000000"
+          }
+        ],
+        "extraPriceRules": [
+          {
+            "id": 2907,
+            "rate": {
+              "id": 57043,
+              "externalId": "STANDARD"
+            },
+            "created": 1780095464000,
+            "priceCatalogId": 17696,
+            "currency": "SEK",
+            "amount": "900.000000",
+            "pricingCategoryId": 30079,
+            "extra": {
+              "id": 5380,
+              "externalId": "6a19bbe0b8ef8583a7b93a08"
+            }
+          },
+          {
+            "id": 2908,
+            "rate": {
+              "id": 57043,
+              "externalId": "STANDARD"
+            },
+            "created": 1780095464000,
+            "priceCatalogId": 17696,
+            "currency": "SEK",
+            "amount": "100.000000",
+            "pricingCategoryId": 30074,
+            "extra": {
+              "id": 5380,
+              "externalId": "6a19bbe0b8ef8583a7b93a08"
+            }
+          }
+        ],
+        "pickupPriceRules": [],
+        "dropoffPriceRules": [],
+        "priceCatalogCurrencies": [
+          {
+            "priceCatalogId": 17696,
+            "currencies": [
+              "SEK"
+            ],
+            "defaultCurrency": "SEK"
+          }
+        ]
+      },
+      "id": 24010
+    },
+    "BASIC": {
+      "error": "Unsupported componentType value: BASIC",
+      "status": 400
+    }
+  }
+}

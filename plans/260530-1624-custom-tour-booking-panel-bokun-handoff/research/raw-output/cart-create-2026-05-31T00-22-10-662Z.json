@@ -1,0 +1,109 @@
+{
+  "label": "GET /cart.json/create",
+  "ok": true,
+  "body": {
+    "sessionId": "create",
+    "sellerId": "5317",
+    "customerUUID": null,
+    "lastAccessDate": 1780186618000,
+    "totalPrice": 0,
+    "totalPriceInInvoiceCurrency": 0,
+    "accommodationBookings": [],
+    "activityBookings": [],
+    "routeBookings": [],
+    "giftCardBookings": [],
+    "promoCode": null,
+    "giftCard": null,
+    "customerInvoice": {
+      "id": 825187,
+      "issueDate": 1780186618000,
+      "currency": "SEK",
+      "includedAppliedTaxes": [],
+      "excludedAppliedTaxes": [],
+      "issuer": {
+        "id": 5317,
+        "title": "Private Tours",
+        "externalId": "",
+        "flags": []
+      },
+      "issuerCompany": {
+        "registrationNumber": "",
+        "vatRegistrationNumber": ""
+      },
+      "customLineItems": [],
+      "productInvoices": [],
+      "payments": [],
+      "appliedFees": [],
+      "totalDueWithoutExcludedTaxAsMoney": {
+        "amount": 0,
+        "currency": "SEK"
+      },
+      "recipientName": "",
+      "totalBookingFeeAsMoney": {
+        "amount": 0,
+        "currency": "SEK"
+      },
+      "totalFeesAsText": "SEK 0.00",
+      "issuerName": "Private Tours",
+      "totalDueAsMoney": {
+        "amount": 0,
+        "currency": "SEK"
+      },
+      "lodgingTaxes": [],
+      "totalBookingFeePercent": 0,
+      "totalFeesAsMoney": {
+        "amount": 0,
+        "currency": "SEK"
+      },
+      "invoiceNumber": "C-825187",
+      "strikeThroughTotalAsMoney": {
+        "amount": 0,
+        "currency": "SEK"
+      },
+      "totalDiscountAsMoney": {
+        "amount": 0,
+        "currency": "SEK"
+      },
+      "excludedTaxes": false,
+      "includedTaxes": false,
+      "totalAsText": "SEK 0.00",
+      "totalWithExcludedTaxAsMoney": {
+        "amount": 0,
+        "currency": "SEK"
+      },
+      "totalDiscountedAsText": "SEK 0.00",
+      "totalDiscountAsText": "SEK 0.00",
+      "totalDueAsText": "SEK 0.00",
+      "totalExcludedTaxAsText": "SEK 0.00",
+      "totalIncludedTaxAsText": "SEK 0.00",
+      "totalTaxAsText": "SEK 0.00",
+      "strikeThroughTotalAsText": "SEK 0.00",
+      "totalDiscountedAsMoney": {
+        "amount": 0,
+        "currency": "SEK"
+      },
+      "totalAsMoney": {
+        "amount": 0,
+        "currency": "SEK"
+      },
+      "free": true,
+      "totalExcludedTaxAsMoney": {
+        "amount": 0,
+        "currency": "SEK"
+      },
+      "totalTaxAsMoney": {
+        "amount": 0,
+        "currency": "SEK"
+      },
+      "totalIncludedTaxAsMoney": {
+        "amount": 0,
+        "currency": "SEK"
+      }
+    },
+    "customerInvoiceInInvoiceCurrency": null,
+    "singleAllowedCurrency": "SEK",
+    "reservationTimeoutDefined": false,
+    "reservationTimeout": 0,
+    "size": 0
+  }
+}

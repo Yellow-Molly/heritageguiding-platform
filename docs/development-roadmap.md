@@ -12,6 +12,14 @@ Living document tracking project phases, milestones, and progress toward MVP lau
 
 ---
 
+## Parked / Post-MVP: Custom Booking Panel (Bokun handoff) ⏸️ INFEASIBLE-AS-PLANNED
+
+**Date:** 2026-05-31
+**Status:** Spike-gated → blocked. Plan: 260530-1624-custom-tour-booking-panel-bokun-handoff/
+**Outcome:** Custom selection panel → Bokun-hosted payment proven **infeasible** — deep-link pre-fill, HMAC reserve→redirect, and widget-session-resume all disproved **directly against Bokun sandbox + prod hosts**. Bokun-hosted payment lives only inside the embedded widget (server-signed session). Phases 2–5 cancelled; only widget restyle (Phase 6) viable, deferred post-MVP. Revisit via Bokun support inquiry. Evidence: `…/research/handoff-spike-findings.md`. Side-finding: `getBokunAvailability` REST endpoint 404s on both hosts (dead code, no user impact).
+
+---
+
 ## Completed Phase: Phase 08.2 — Bokun Outbound Sync v1 🚀 COMPLETE
 
 **Date Started:** 2026-05-14

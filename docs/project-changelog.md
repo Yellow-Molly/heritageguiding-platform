@@ -4,6 +4,18 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-05-31] — Bokun custom booking panel: spike-gated, infeasible, deferred post-MVP 🔬⏸️
+
+**Type:** Research / architecture decision (no production code shipped)
+**Scope:** Phase 1 spike of `plans/260530-1624-custom-tour-booking-panel-bokun-handoff/` — can a custom selection panel hand off to Bokun-hosted payment?
+
+- Verified **directly against Bokun hosts** (sandbox `api.bokuntest.com` + prod `api.bokun.io`): all three handoff paths disproved — deep-link pre-fill ignored; HMAC reserve returns no hosted-payment URL (`RESERVE_FOR_EXTERNAL_PAYMENT` = caller collects = PCI on us, rejected); widget `shoppingCart` session is server-signed-cookie-bound (can't pre-build + resume cross-origin).
+- **Decision:** custom panel not achievable against current Bokun capabilities; only restyling the embedded widget preserves Bokun-as-payer. Phases 2–5 cancelled; Phase 6 (widget restyle) deferred post-MVP. Revisit via Bokun support inquiry.
+- **Side-finding (verified both hosts):** `getBokunAvailability` (`/restapi/v2.0/activity/{id}/availabilities`) 404s everywhere — latent dead code (no UI consumer; widget serves real availability). Fix = repoint to `/activity.json/{id}/availabilities` or delete.
+- **Artifacts:** spike scripts `scripts/spike-bokun-checkout-handoff.ts`, `scripts/bokun-availability-host-probe.ts`, `e2e/spike-bokun-widget-*.mjs`; findings `plans/260530-1624-…/research/handoff-spike-findings.md`.
+
+---
+
 ## [2026-05-19] — Tour detail Guides section hidden for MVP launch ⏸️
 
 **Type:** Feature toggle / MVP scope trim

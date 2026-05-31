@@ -1,0 +1,1282 @@
+{
+  "results": [
+    {
+      "label": "POST /activity.json/search {}",
+      "ok": true,
+      "body": {
+        "tookInMillis": 10,
+        "totalHits": 3,
+        "tagFilters": [],
+        "tagFacets": [],
+        "termFacets": {
+          "difficulty": {
+            "name": "difficulty",
+            "title": "Physical difficulty level",
+            "entries": [
+              {
+                "title": "Moderate",
+                "term": "MODERATE",
+                "count": 2,
+                "flags": []
+              },
+              {
+                "title": "Easy",
+                "term": "EASY",
+                "count": 1,
+                "flags": []
+              }
+            ],
+            "flags": [],
+            "multipleSelection": false,
+            "sortedEntries": [
+              {
+                "title": "Easy",
+                "term": "EASY",
+                "count": 1,
+                "flags": []
+              },
+              {
+                "title": "Moderate",
+                "term": "MODERATE",
+                "count": 2,
+                "flags": []
+              }
+            ]
+          },
+          "country": {
+            "name": "country",
+            "title": "country",
+            "entries": [
+              {
+                "title": "Sweden",
+                "term": "SE",
+                "count": 3,
+                "flags": []
+              }
+            ],
+            "flags": [],
+            "multipleSelection": false,
+            "sortedEntries": [
+              {
+                "title": "Sweden",
+                "term": "SE",
+                "count": 3,
+                "flags": []
+              }
+            ]
+          },
+          "city": {
+            "name": "city",
+            "title": "city",
+            "entries": [
+              {
+                "title": "Stockholm",
+                "term": "Stockholm",
+                "count": 3,
+                "flags": []
+              }
+            ],
+            "flags": [],
+            "multipleSelection": false,
+            "sortedEntries": [
+              {
+                "title": "Stockholm",
+                "term": "Stockholm",
+                "count": 3,
+                "flags": []
+              }
+            ]
+          },
+          "supplier": {
+            "name": "supplier",
+            "title": "Operator",
+            "entries": [
+              {
+                "title": "Private Tours",
+                "term": "5317",
+                "count": 3,
+                "flags": []
+              }
+            ],
+            "flags": [],
+            "multipleSelection": false,
+            "sortedEntries": [
+              {
+                "title": "Private Tours",
+                "term": "5317",
+                "count": 3,
+                "flags": []
+              }
+            ]
+          },
+          "activityAttributes": {
+            "name": "activityAttributes",
+            "title": "activityAttributes",
+            "entries": [],
+            "flags": [],
+            "multipleSelection": true,
+            "sortedEntries": []
+          },
+          "guidanceLanguages": {
+            "name": "guidanceLanguages",
+            "title": "guidanceLanguages",
+            "entries": [],
+            "flags": [],
+            "multipleSelection": true,
+            "sortedEntries": []
+          },
+          "activityType": {
+            "name": "activityType",
+            "title": "activityType",
+            "entries": [
+              {
+                "title": "DAY_TOUR_OR_ACTIVITY",
+                "term": "DAY_TOUR_OR_ACTIVITY",
+                "count": 3,
+                "flags": []
+              }
+            ],
+            "flags": [],
+            "multipleSelection": false,
+            "sortedEntries": [
+              {
+                "title": "DAY_TOUR_OR_ACTIVITY",
+                "term": "DAY_TOUR_OR_ACTIVITY",
+                "count": 3,
+                "flags": []
+              }
+            ]
+          },
+          "activityCategories": {
+            "name": "activityCategories",
+            "title": "activityCategories",
+            "entries": [
+              {
+                "title": "WALKING_TOUR",
+                "term": "WALKING_TOUR",
+                "count": 2,
+                "flags": []
+              },
+              {
+                "title": "SAILING_OR_BOAT_TOUR",
+                "term": "SAILING_OR_BOAT_TOUR",
+                "count": 1,
+                "flags": []
+              }
+            ],
+            "flags": [],
+            "multipleSelection": true,
+            "sortedEntries": [
+              {
+                "title": "SAILING_OR_BOAT_TOUR",
+                "term": "SAILING_OR_BOAT_TOUR",
+                "count": 1,
+                "flags": []
+              },
+              {
+                "title": "WALKING_TOUR",
+                "term": "WALKING_TOUR",
+                "count": 2,
+                "flags": []
+              }
+            ]
+          }
+        },
+        "tagFacetHierarchy": [],
+        "items": [
+          {
+            "id": "24006",
+            "externalId": "slow-travel-stockholm-archipelago-classic-boat",
+            "productGroupId": 0,
+            "title": "Full Day Stockholm Boat Tour – Slow Travel through Djurgårdsbrunnskanalen and Inner Archipelago",
+            "summary": "Aboard a classic cabin boat you'll be welcomed at Strandvägskajen and the journey begins eastward toward Saltsjön. The boat is equipped with toilet, refrigerator and a small galley – everything needed to spend a full day comfortably on the water.\n\nThe first part of the journey goes through Djurgårdsbrunnskanalen, a narrow and sheltered passage where Stockholm gradually transitions from city to archipelago landscape. Your guide shares stories about how the archipelago has been shaped by both nature and people, about life on the islands and the long tradition of boating in the area.\n\nGradually the landscape opens up. The islands become more numerous but less densely built, and the journey continues through narrow straits, past Fjäderholmarna – the closest islands in Stockholm's archipelago – and further into the inner parts where red summer cottages, old jetties and small natural harbors succeed each other.\n\nDuring the day, a stop is made at an island or natural harbor. Here there's an opportunity to go ashore, swim or simply enjoy the tranquility. On board, a classic Swedish coffee break is served with coffee or tea. Lunch is planned at a restaurant on one of the islands visited – the meal is paid separately by guests.\n\nDuring the afternoon, the journey back toward Stockholm begins. It's on the return journey – when the city slowly emerges from the horizon and the archipelago light softens – that the distance you've traveled during the day, measured in atmosphere rather than nautical miles, becomes clear.",
+            "excerpt": "A private full day boat tour from Stockholm through Djurgårdsbrunnskanalen and onwards to Fjäderholmarna and the inner archipelago – with stops for...",
+            "price": 19000,
+            "locationCode": {
+              "country": "SE",
+              "location": "STO",
+              "name": "Stockholm"
+            },
+            "googlePlace": {
+              "country": "Sweden",
+              "countryCode": "SE",
+              "city": "Stockholm",
+              "cityCode": "STO",
+              "geoLocationCenter": {
+                "lat": 0,
+                "lng": 0
+              },
+              "addressTypes": []
+            },
+            "vendor": {
+              "id": 5317,
+              "title": "Private Tours"
+            },
+            "box": false,
+            "inventoryLocal": true,
+            "usedInAffiliateHub": false,
+            "showInMarketplaceSearch": false,
+            "boxedProductId": 0,
+            "boxedSupplierId": 0,
+            "difficultyLevel": "EASY",
+            "activityCategories": [
+              "SAILING_OR_BOAT_TOUR"
+            ],
+            "keywords": [
+              "strandvagen",
+              "stockholms-skargard",
+              "djurgardsbrunnskanalen",
+              "fjaderholmarna"
+            ],
+            "flags": [],
+            "reviewRating": 0,
+            "reviewCount": 0,
+            "durationText": "8 hours",
+            "baseLanguage": "en_US",
+            "languages": [
+              "EN_US"
+            ],
+            "paymentCurrencies": [],
+            "customFields": [],
+            "places": [],
+            "keyPhoto": {
+              "id": 84682,
+              "originalUrl": "https://bokundemo.s3.amazonaws.com/550171dc-1d6a-480f-ae8b-8672acd64618.jpg",
+              "description": null,
+              "alternateText": null,
+              "height": null,
+              "width": null,
+              "fileName": "/550171dc-1d6a-480f-ae8b-8672acd64618.jpg",
+              "flags": [],
+              "derived": [
+                {
+                  "name": "thumbnail",
+                  "url": "https://bokuntest.gumlet.io/550171dc-1d6a-480f-ae8b-8672acd64618.jpg?w=80&h=80&mode=crop",
+                  "cleanUrl": "https://bokuntest.gumlet.io/550171dc-1d6a-480f-ae8b-8672acd64618.jpg?w=80&h=80&mode=crop"
+                },
+                {
+                  "name": "preview",
+                  "url": "https://bokuntest.gumlet.io/550171dc-1d6a-480f-ae8b-8672acd64618.jpg?w=300&h=300",
+                  "cleanUrl": "https://bokuntest.gumlet.io/550171dc-1d6a-480f-ae8b-8672acd64618.jpg?w=300&h=300"
+                },
+                {
+                  "name": "large",
+                  "url": "https://bokuntest.gumlet.io/550171dc-1d6a-480f-ae8b-8672acd64618.jpg?w=660&h=660",
+                  "cleanUrl": "https://bokuntest.gumlet.io/550171dc-1d6a-480f-ae8b-8672acd64618.jpg?w=660&h=660"
+                }
+              ]
+            },
+            "photos": [
+              {
+                "id": 84682,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/550171dc-1d6a-480f-ae8b-8672acd64618.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/550171dc-1d6a-480f-ae8b-8672acd64618.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/550171dc-1d6a-480f-ae8b-8672acd64618.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/550171dc-1d6a-480f-ae8b-8672acd64618.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/550171dc-1d6a-480f-ae8b-8672acd64618.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/550171dc-1d6a-480f-ae8b-8672acd64618.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/550171dc-1d6a-480f-ae8b-8672acd64618.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/550171dc-1d6a-480f-ae8b-8672acd64618.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84683,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/70802e12-5f15-48a1-9b6f-ce4ee73b3958.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/70802e12-5f15-48a1-9b6f-ce4ee73b3958.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/70802e12-5f15-48a1-9b6f-ce4ee73b3958.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/70802e12-5f15-48a1-9b6f-ce4ee73b3958.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/70802e12-5f15-48a1-9b6f-ce4ee73b3958.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/70802e12-5f15-48a1-9b6f-ce4ee73b3958.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/70802e12-5f15-48a1-9b6f-ce4ee73b3958.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/70802e12-5f15-48a1-9b6f-ce4ee73b3958.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84684,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/38c2b953-4d88-429e-a8b0-509f521c7115.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/38c2b953-4d88-429e-a8b0-509f521c7115.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/38c2b953-4d88-429e-a8b0-509f521c7115.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/38c2b953-4d88-429e-a8b0-509f521c7115.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/38c2b953-4d88-429e-a8b0-509f521c7115.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/38c2b953-4d88-429e-a8b0-509f521c7115.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/38c2b953-4d88-429e-a8b0-509f521c7115.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/38c2b953-4d88-429e-a8b0-509f521c7115.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84685,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/7fb609d2-b864-4c6d-9d93-39b32d66af21.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/7fb609d2-b864-4c6d-9d93-39b32d66af21.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/7fb609d2-b864-4c6d-9d93-39b32d66af21.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/7fb609d2-b864-4c6d-9d93-39b32d66af21.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/7fb609d2-b864-4c6d-9d93-39b32d66af21.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/7fb609d2-b864-4c6d-9d93-39b32d66af21.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/7fb609d2-b864-4c6d-9d93-39b32d66af21.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/7fb609d2-b864-4c6d-9d93-39b32d66af21.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84686,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/52d81c22-feeb-41fe-9750-4564876f7465.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/52d81c22-feeb-41fe-9750-4564876f7465.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/52d81c22-feeb-41fe-9750-4564876f7465.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/52d81c22-feeb-41fe-9750-4564876f7465.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/52d81c22-feeb-41fe-9750-4564876f7465.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/52d81c22-feeb-41fe-9750-4564876f7465.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/52d81c22-feeb-41fe-9750-4564876f7465.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/52d81c22-feeb-41fe-9750-4564876f7465.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84687,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/fa126821-d89f-4b87-bb71-3f10aba6d168.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/fa126821-d89f-4b87-bb71-3f10aba6d168.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/fa126821-d89f-4b87-bb71-3f10aba6d168.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/fa126821-d89f-4b87-bb71-3f10aba6d168.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/fa126821-d89f-4b87-bb71-3f10aba6d168.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/fa126821-d89f-4b87-bb71-3f10aba6d168.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/fa126821-d89f-4b87-bb71-3f10aba6d168.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/fa126821-d89f-4b87-bb71-3f10aba6d168.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84688,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/a4ee52fe-3484-4deb-bcbf-35015ce96b0d.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/a4ee52fe-3484-4deb-bcbf-35015ce96b0d.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/a4ee52fe-3484-4deb-bcbf-35015ce96b0d.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/a4ee52fe-3484-4deb-bcbf-35015ce96b0d.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/a4ee52fe-3484-4deb-bcbf-35015ce96b0d.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/a4ee52fe-3484-4deb-bcbf-35015ce96b0d.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/a4ee52fe-3484-4deb-bcbf-35015ce96b0d.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/a4ee52fe-3484-4deb-bcbf-35015ce96b0d.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84689,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/95a58ff8-f8ea-4d1c-832b-4880f8ddfe6b.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/95a58ff8-f8ea-4d1c-832b-4880f8ddfe6b.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/95a58ff8-f8ea-4d1c-832b-4880f8ddfe6b.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/95a58ff8-f8ea-4d1c-832b-4880f8ddfe6b.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/95a58ff8-f8ea-4d1c-832b-4880f8ddfe6b.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/95a58ff8-f8ea-4d1c-832b-4880f8ddfe6b.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/95a58ff8-f8ea-4d1c-832b-4880f8ddfe6b.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/95a58ff8-f8ea-4d1c-832b-4880f8ddfe6b.jpg?w=660&h=660"
+                  }
+                ]
+              }
+            ],
+            "videos": [],
+            "fields": {
+              "durationHours": 8,
+              "durationWeeks": 0,
+              "durationText": "8 hours",
+              "comboComponentsInventory": null,
+              "cutoffReferenceMinute": 0,
+              "bookingCutoffDays": 1,
+              "dayOptions": [],
+              "meetingType": "MEET_ON_LOCATION",
+              "durationDays": 0,
+              "durationMinutes": 0,
+              "dayBasedAvailability": false,
+              "bookingCutoffMinutes": 0,
+              "cutoffType": "RELATIVE_TO_START_TIME",
+              "cutoffReferenceHour": 0,
+              "selectFromDayOptions": false,
+              "comboComponents": [],
+              "bookingCutoffHours": 0,
+              "comboActivity": false,
+              "bookingCutoffWeeks": 0
+            }
+          },
+          {
+            "id": "24005",
+            "externalId": "stockholm-everyday-life-private-tour",
+            "productGroupId": 0,
+            "title": "Stockholm through local perspectives – everyday life, neighborhoods and culture 1",
+            "summary": "<p>The tour begins with pickup at your hotel or at an agreed meeting point in central Stockholm. The route is planned from the starting point to create a natural and cohesive movement through the city, without unnecessary transfers.</p>\n<p>The experience is conducted at a relaxed pace adapted to the group. Focus is on understanding how Stockholm functions in everyday life – socially, historically and culturally – rather than covering many places quickly.</p>\n<p>After a brief introduction to the city&#39;s geography and historical development, you move through the city center, where the guide explains how Stockholm grew from a trading town at the outlet of Lake Mälaren to today&#39;s modern capital.</p>\n<p>Depending on the starting point, the tour continues eastward to Djurgården, where nature, recreation and cultural institutions meet in a cohesive landscape close to the city center. Here the guide explains Stockholmers&#39; relationship with nature and how outdoor life is integrated into everyday life, even in a capital city.</p>\n<p>Next, you continue to Östermalm, where broad boulevards, institutions and residential quarters illustrate how one of the city&#39;s more established areas developed. Here Swedish social structure, education and working life are discussed in concrete environments.</p>\n<p>By public transport or boat, you continue to Södermalm, an area that in recent decades has transformed from a working-class district to one of the city&#39;s most creative and cultural areas. During the walk, the guide discusses urban transformation, the housing market and modern urban life in Stockholm.</p>\n<p>During the tour, subway, bus or boat are used as needed – providing a natural insight into how Stockholmers move through the city in everyday life. The conversation moves between history and present day, illuminating city planning, welfare systems and cultural traditions like fika and the balance between work and leisure.</p>\n<p>It&#39;s the kind of understanding that rarely emerges in front of an attraction – but almost always on a park bench in Vitabergsparken, in a subway car toward Slussen, or at a fika table on Södermalm.</p>",
+            "excerpt": "A private guided half-day tour of Stockholm exploring the city's neighborhoods, public transport and everyday life in a cohesive perspective – from...",
+            "price": 5500,
+            "locationCode": {
+              "country": "SE",
+              "location": "STO",
+              "name": "Stockholm"
+            },
+            "googlePlace": {
+              "country": "Sweden",
+              "countryCode": "SE",
+              "city": "Stockholm",
+              "cityCode": "STO",
+              "geoLocationCenter": {
+                "lat": 0,
+                "lng": 0
+              },
+              "addressTypes": []
+            },
+            "vendor": {
+              "id": 5317,
+              "title": "Private Tours"
+            },
+            "box": false,
+            "inventoryLocal": true,
+            "usedInAffiliateHub": false,
+            "showInMarketplaceSearch": false,
+            "boxedProductId": 0,
+            "boxedSupplierId": 0,
+            "difficultyLevel": "MODERATE",
+            "activityCategories": [
+              "WALKING_TOUR"
+            ],
+            "keywords": [
+              "norrmalm",
+              "sodermalm",
+              "ostermalm",
+              "djurgarden",
+              "stockholm-city"
+            ],
+            "flags": [],
+            "reviewRating": 0,
+            "reviewCount": 0,
+            "durationText": "4 hours",
+            "baseLanguage": "en_US",
+            "languages": [
+              "EN_US"
+            ],
+            "paymentCurrencies": [],
+            "customFields": [],
+            "places": [],
+            "keyPhoto": {
+              "id": 84671,
+              "originalUrl": "https://bokundemo.s3.amazonaws.com/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg",
+              "description": null,
+              "alternateText": null,
+              "height": null,
+              "width": null,
+              "fileName": "/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg",
+              "flags": [],
+              "derived": [
+                {
+                  "name": "thumbnail",
+                  "url": "https://bokuntest.gumlet.io/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg?w=80&h=80&mode=crop",
+                  "cleanUrl": "https://bokuntest.gumlet.io/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg?w=80&h=80&mode=crop"
+                },
+                {
+                  "name": "preview",
+                  "url": "https://bokuntest.gumlet.io/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg?w=300&h=300",
+                  "cleanUrl": "https://bokuntest.gumlet.io/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg?w=300&h=300"
+                },
+                {
+                  "name": "large",
+                  "url": "https://bokuntest.gumlet.io/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg?w=660&h=660",
+                  "cleanUrl": "https://bokuntest.gumlet.io/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg?w=660&h=660"
+                }
+              ]
+            },
+            "photos": [
+              {
+                "id": 84671,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/0679ed14-f18d-48d8-aa91-f4b76cd6b0d9.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84672,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/8c71b71e-680e-4ee7-96cf-c4b180361480.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/8c71b71e-680e-4ee7-96cf-c4b180361480.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/8c71b71e-680e-4ee7-96cf-c4b180361480.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/8c71b71e-680e-4ee7-96cf-c4b180361480.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/8c71b71e-680e-4ee7-96cf-c4b180361480.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/8c71b71e-680e-4ee7-96cf-c4b180361480.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/8c71b71e-680e-4ee7-96cf-c4b180361480.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/8c71b71e-680e-4ee7-96cf-c4b180361480.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84673,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/5ce7776d-7413-4d39-929c-1b3fca0fa053.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/5ce7776d-7413-4d39-929c-1b3fca0fa053.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/5ce7776d-7413-4d39-929c-1b3fca0fa053.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/5ce7776d-7413-4d39-929c-1b3fca0fa053.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/5ce7776d-7413-4d39-929c-1b3fca0fa053.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/5ce7776d-7413-4d39-929c-1b3fca0fa053.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/5ce7776d-7413-4d39-929c-1b3fca0fa053.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/5ce7776d-7413-4d39-929c-1b3fca0fa053.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84674,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/f4672895-5a64-4476-8baf-6cbb099a1487.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/f4672895-5a64-4476-8baf-6cbb099a1487.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/f4672895-5a64-4476-8baf-6cbb099a1487.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/f4672895-5a64-4476-8baf-6cbb099a1487.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/f4672895-5a64-4476-8baf-6cbb099a1487.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/f4672895-5a64-4476-8baf-6cbb099a1487.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/f4672895-5a64-4476-8baf-6cbb099a1487.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/f4672895-5a64-4476-8baf-6cbb099a1487.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84675,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/3e9a0c73-f6d6-4ab8-a093-f25417d5dfff.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/3e9a0c73-f6d6-4ab8-a093-f25417d5dfff.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/3e9a0c73-f6d6-4ab8-a093-f25417d5dfff.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/3e9a0c73-f6d6-4ab8-a093-f25417d5dfff.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/3e9a0c73-f6d6-4ab8-a093-f25417d5dfff.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/3e9a0c73-f6d6-4ab8-a093-f25417d5dfff.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/3e9a0c73-f6d6-4ab8-a093-f25417d5dfff.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/3e9a0c73-f6d6-4ab8-a093-f25417d5dfff.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84676,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/bc901b5c-bf59-495e-9d5a-f3a79c9aa7bb.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/bc901b5c-bf59-495e-9d5a-f3a79c9aa7bb.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/bc901b5c-bf59-495e-9d5a-f3a79c9aa7bb.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/bc901b5c-bf59-495e-9d5a-f3a79c9aa7bb.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/bc901b5c-bf59-495e-9d5a-f3a79c9aa7bb.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/bc901b5c-bf59-495e-9d5a-f3a79c9aa7bb.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/bc901b5c-bf59-495e-9d5a-f3a79c9aa7bb.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/bc901b5c-bf59-495e-9d5a-f3a79c9aa7bb.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84677,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/02657d64-db80-4c8a-ab25-0db5cc06d88d.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/02657d64-db80-4c8a-ab25-0db5cc06d88d.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/02657d64-db80-4c8a-ab25-0db5cc06d88d.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/02657d64-db80-4c8a-ab25-0db5cc06d88d.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/02657d64-db80-4c8a-ab25-0db5cc06d88d.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/02657d64-db80-4c8a-ab25-0db5cc06d88d.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/02657d64-db80-4c8a-ab25-0db5cc06d88d.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/02657d64-db80-4c8a-ab25-0db5cc06d88d.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84678,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/42eec1d8-a830-4803-9662-348f4ed8e8f4.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/42eec1d8-a830-4803-9662-348f4ed8e8f4.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/42eec1d8-a830-4803-9662-348f4ed8e8f4.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/42eec1d8-a830-4803-9662-348f4ed8e8f4.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/42eec1d8-a830-4803-9662-348f4ed8e8f4.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/42eec1d8-a830-4803-9662-348f4ed8e8f4.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/42eec1d8-a830-4803-9662-348f4ed8e8f4.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/42eec1d8-a830-4803-9662-348f4ed8e8f4.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84679,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/9d6ee603-ca7e-42aa-af34-00e5cae7b3f1.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/9d6ee603-ca7e-42aa-af34-00e5cae7b3f1.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/9d6ee603-ca7e-42aa-af34-00e5cae7b3f1.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/9d6ee603-ca7e-42aa-af34-00e5cae7b3f1.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/9d6ee603-ca7e-42aa-af34-00e5cae7b3f1.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/9d6ee603-ca7e-42aa-af34-00e5cae7b3f1.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/9d6ee603-ca7e-42aa-af34-00e5cae7b3f1.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/9d6ee603-ca7e-42aa-af34-00e5cae7b3f1.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84680,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/6d42db10-c4af-4aa3-85d5-7ad051317d5e.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/6d42db10-c4af-4aa3-85d5-7ad051317d5e.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/6d42db10-c4af-4aa3-85d5-7ad051317d5e.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/6d42db10-c4af-4aa3-85d5-7ad051317d5e.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/6d42db10-c4af-4aa3-85d5-7ad051317d5e.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/6d42db10-c4af-4aa3-85d5-7ad051317d5e.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/6d42db10-c4af-4aa3-85d5-7ad051317d5e.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/6d42db10-c4af-4aa3-85d5-7ad051317d5e.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84681,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/fbab945d-f86f-4e5e-99e2-224d4872593e.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/fbab945d-f86f-4e5e-99e2-224d4872593e.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/fbab945d-f86f-4e5e-99e2-224d4872593e.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/fbab945d-f86f-4e5e-99e2-224d4872593e.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/fbab945d-f86f-4e5e-99e2-224d4872593e.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/fbab945d-f86f-4e5e-99e2-224d4872593e.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/fbab945d-f86f-4e5e-99e2-224d4872593e.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/fbab945d-f86f-4e5e-99e2-224d4872593e.jpg?w=660&h=660"
+                  }
+                ]
+              }
+            ],
+            "videos": [],
+            "fields": {
+              "durationHours": 4,
+              "durationWeeks": 0,
+              "durationText": "4 hours",
+              "comboComponentsInventory": null,
+              "cutoffReferenceMinute": 0,
+              "bookingCutoffDays": 1,
+              "dayOptions": [],
+              "meetingType": "MEET_ON_LOCATION",
+              "durationDays": 0,
+              "durationMinutes": 0,
+              "dayBasedAvailability": false,
+              "bookingCutoffMinutes": 0,
+              "cutoffType": "RELATIVE_TO_START_TIME",
+              "cutoffReferenceHour": 0,
+              "selectFromDayOptions": false,
+              "comboComponents": [],
+              "bookingCutoffHours": 0,
+              "comboActivity": false,
+              "bookingCutoffWeeks": 0
+            }
+          },
+          {
+            "id": "24010",
+            "externalId": "gamla-stan-and-stockholm-city-hall-private-walking-tour",
+            "productGroupId": 0,
+            "title": "Guided City Walk Including City Hall – Gamla Stan, Riddarholmen and City Hall",
+            "summary": "<p>The city walk begins at the Obelisk on Slottsbacken, where an authorized Stockholm guide – who is also an authorized City Hall guide – introduces how Stockholm emerged between the islands and how Gamla Stan developed into the city&#39;s political and economic center.</p>\n<p>The walk continues through Gamla Stan&#39;s medieval street network. Narrow alleys, historic buildings and squares reveal the city&#39;s early structure and development. During the stroll, you&#39;ll pass the Royal Palace, where the city&#39;s royal and administrative functions are placed in clear historical context.</p>\n<p>The tour continues to Riddarholmen, where the urban environment changes and views open across Lake Mälaren and Stockholm&#39;s silhouette. Here, the area&#39;s historical significance is explained with focus on Riddarholmen Church – burial church for Swedish monarchs – and the location&#39;s role in Sweden&#39;s history.</p>\n<p>From there, the tour proceeds to Kungsholmen and Stockholm City Hall by the shore of Lake Mälaren. The authorized City Hall guide leads an in-depth tour focusing on the building&#39;s architecture, symbolism and role in 20th-century urban development. The connection to the Nobel Banquet and the city&#39;s international context gives the building a perspective that extends beyond the local.</p>\n<p>After the tour, there&#39;s time in the City Hall courtyard outside the building. From here, views open across Lake Mälaren and the waterscape that has always defined Stockholm – and which now, after a walk through the city&#39;s history, emerges with greater depth.</p>",
+            "excerpt": "A private guided city walk from Gamla Stan to Kungsholmen following Stockholm's historical development through medieval street networks, royal environments...",
+            "price": 4800,
+            "locationCode": {
+              "country": "SE",
+              "location": "STO",
+              "name": "Stockholm"
+            },
+            "googlePlace": {
+              "country": "Sweden",
+              "countryCode": "SE",
+              "city": "Stockholm",
+              "cityCode": "STO",
+              "geoLocationCenter": {
+                "lat": 0,
+                "lng": 0
+              },
+              "addressTypes": []
+            },
+            "vendor": {
+              "id": 5317,
+              "title": "Private Tours"
+            },
+            "box": false,
+            "inventoryLocal": true,
+            "usedInAffiliateHub": false,
+            "showInMarketplaceSearch": false,
+            "boxedProductId": 0,
+            "boxedSupplierId": 0,
+            "difficultyLevel": "MODERATE",
+            "activityCategories": [
+              "WALKING_TOUR"
+            ],
+            "keywords": [
+              "gamla-stan",
+              "stadshuset",
+              "riddarholmen",
+              "kungsholmen"
+            ],
+            "flags": [],
+            "reviewRating": 0,
+            "reviewCount": 0,
+            "durationText": "3 hours",
+            "baseLanguage": "en_US",
+            "languages": [
+              "EN_US"
+            ],
+            "paymentCurrencies": [],
+            "customFields": [],
+            "places": [],
+            "keyPhoto": {
+              "id": 84696,
+              "originalUrl": "https://bokundemo.s3.amazonaws.com/3766a14c-7c39-40e8-85de-ab1f483af422.jpg",
+              "description": null,
+              "alternateText": null,
+              "height": null,
+              "width": null,
+              "fileName": "/3766a14c-7c39-40e8-85de-ab1f483af422.jpg",
+              "flags": [],
+              "derived": [
+                {
+                  "name": "thumbnail",
+                  "url": "https://bokuntest.gumlet.io/3766a14c-7c39-40e8-85de-ab1f483af422.jpg?w=80&h=80&mode=crop",
+                  "cleanUrl": "https://bokuntest.gumlet.io/3766a14c-7c39-40e8-85de-ab1f483af422.jpg?w=80&h=80&mode=crop"
+                },
+                {
+                  "name": "preview",
+                  "url": "https://bokuntest.gumlet.io/3766a14c-7c39-40e8-85de-ab1f483af422.jpg?w=300&h=300",
+                  "cleanUrl": "https://bokuntest.gumlet.io/3766a14c-7c39-40e8-85de-ab1f483af422.jpg?w=300&h=300"
+                },
+                {
+                  "name": "large",
+                  "url": "https://bokuntest.gumlet.io/3766a14c-7c39-40e8-85de-ab1f483af422.jpg?w=660&h=660",
+                  "cleanUrl": "https://bokuntest.gumlet.io/3766a14c-7c39-40e8-85de-ab1f483af422.jpg?w=660&h=660"
+                }
+              ]
+            },
+            "photos": [
+              {
+                "id": 84696,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/3766a14c-7c39-40e8-85de-ab1f483af422.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/3766a14c-7c39-40e8-85de-ab1f483af422.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/3766a14c-7c39-40e8-85de-ab1f483af422.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/3766a14c-7c39-40e8-85de-ab1f483af422.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/3766a14c-7c39-40e8-85de-ab1f483af422.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/3766a14c-7c39-40e8-85de-ab1f483af422.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/3766a14c-7c39-40e8-85de-ab1f483af422.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/3766a14c-7c39-40e8-85de-ab1f483af422.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84697,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/84390385-48fc-42a3-89d4-e984ab9a7592.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/84390385-48fc-42a3-89d4-e984ab9a7592.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/84390385-48fc-42a3-89d4-e984ab9a7592.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/84390385-48fc-42a3-89d4-e984ab9a7592.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/84390385-48fc-42a3-89d4-e984ab9a7592.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/84390385-48fc-42a3-89d4-e984ab9a7592.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/84390385-48fc-42a3-89d4-e984ab9a7592.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/84390385-48fc-42a3-89d4-e984ab9a7592.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84698,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/8d290a9a-2d58-41d0-9e14-7205751e6173.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/8d290a9a-2d58-41d0-9e14-7205751e6173.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/8d290a9a-2d58-41d0-9e14-7205751e6173.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/8d290a9a-2d58-41d0-9e14-7205751e6173.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/8d290a9a-2d58-41d0-9e14-7205751e6173.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/8d290a9a-2d58-41d0-9e14-7205751e6173.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/8d290a9a-2d58-41d0-9e14-7205751e6173.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/8d290a9a-2d58-41d0-9e14-7205751e6173.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84699,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/b20ff5db-1657-46f7-a7ba-3f5a7d4ffcac.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/b20ff5db-1657-46f7-a7ba-3f5a7d4ffcac.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/b20ff5db-1657-46f7-a7ba-3f5a7d4ffcac.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/b20ff5db-1657-46f7-a7ba-3f5a7d4ffcac.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/b20ff5db-1657-46f7-a7ba-3f5a7d4ffcac.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/b20ff5db-1657-46f7-a7ba-3f5a7d4ffcac.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/b20ff5db-1657-46f7-a7ba-3f5a7d4ffcac.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/b20ff5db-1657-46f7-a7ba-3f5a7d4ffcac.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84700,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/1c8b1cf4-4e74-4bac-afcc-8aa216960a75.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/1c8b1cf4-4e74-4bac-afcc-8aa216960a75.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/1c8b1cf4-4e74-4bac-afcc-8aa216960a75.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/1c8b1cf4-4e74-4bac-afcc-8aa216960a75.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/1c8b1cf4-4e74-4bac-afcc-8aa216960a75.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/1c8b1cf4-4e74-4bac-afcc-8aa216960a75.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/1c8b1cf4-4e74-4bac-afcc-8aa216960a75.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/1c8b1cf4-4e74-4bac-afcc-8aa216960a75.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84701,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/4dc13fe4-7a54-4872-907d-dda422c8ce24.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/4dc13fe4-7a54-4872-907d-dda422c8ce24.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/4dc13fe4-7a54-4872-907d-dda422c8ce24.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/4dc13fe4-7a54-4872-907d-dda422c8ce24.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/4dc13fe4-7a54-4872-907d-dda422c8ce24.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/4dc13fe4-7a54-4872-907d-dda422c8ce24.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/4dc13fe4-7a54-4872-907d-dda422c8ce24.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/4dc13fe4-7a54-4872-907d-dda422c8ce24.jpg?w=660&h=660"
+                  }
+                ]
+              },
+              {
+                "id": 84702,
+                "originalUrl": "https://bokundemo.s3.amazonaws.com/a08997f3-20b3-48ff-8a65-8018f689a815.jpg",
+                "description": null,
+                "alternateText": null,
+                "height": null,
+                "width": null,
+                "fileName": "/a08997f3-20b3-48ff-8a65-8018f689a815.jpg",
+                "flags": [],
+                "derived": [
+                  {
+                    "name": "thumbnail",
+                    "url": "https://bokuntest.gumlet.io/a08997f3-20b3-48ff-8a65-8018f689a815.jpg?w=80&h=80&mode=crop",
+                    "cleanUrl": "https://bokuntest.gumlet.io/a08997f3-20b3-48ff-8a65-8018f689a815.jpg?w=80&h=80&mode=crop"
+                  },
+                  {
+                    "name": "preview",
+                    "url": "https://bokuntest.gumlet.io/a08997f3-20b3-48ff-8a65-8018f689a815.jpg?w=300&h=300",
+                    "cleanUrl": "https://bokuntest.gumlet.io/a08997f3-20b3-48ff-8a65-8018f689a815.jpg?w=300&h=300"
+                  },
+                  {
+                    "name": "large",
+                    "url": "https://bokuntest.gumlet.io/a08997f3-20b3-48ff-8a65-8018f689a815.jpg?w=660&h=660",
+                    "cleanUrl": "https://bokuntest.gumlet.io/a08997f3-20b3-48ff-8a65-8018f689a815.jpg?w=660&h=660"
+                  }
+                ]
+              }
+            ],
+            "videos": [],
+            "fields": {
+              "durationHours": 3,
+              "durationWeeks": 0,
+              "durationText": "3 hours",
+              "comboComponentsInventory": null,
+              "cutoffReferenceMinute": 0,
+              "bookingCutoffDays": 1,
+              "dayOptions": [],
+              "meetingType": "MEET_ON_LOCATION",
+              "durationDays": 0,
+              "durationMinutes": 0,
+              "dayBasedAvailability": false,
+              "bookingCutoffMinutes": 0,
+              "cutoffType": "RELATIVE_TO_START_TIME",
+              "cutoffReferenceHour": 0,
+              "selectFromDayOptions": false,
+              "comboComponents": [],
+              "bookingCutoffHours": 0,
+              "comboActivity": false,
+              "bookingCutoffWeeks": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "label": "POST /restapi/v2.0/activity.json/search {}",
+      "ok": false,
+      "status": 404,
+      "errorCode": "UNKNOWN",
+      "body": "{\"status\":404,\"message\":\"\"}"
+    },
+    {
+      "label": "POST /restapi/v2.0/search/product-list {}",
+      "ok": false,
+      "status": 404,
+      "errorCode": "UNKNOWN",
+      "body": "{\"status\":404,\"message\":\"\"}"
+    },
+    {
+      "label": "GET /restapi/v2.0/booking-channel",
+      "ok": false,
+      "status": 404,
+      "errorCode": "UNKNOWN",
+      "body": "{\"status\":404,\"message\":\"\"}"
+    },
+    {
+      "label": "GET /restapi/v2.0/booking-channel/11917131-ac6a-45e1-8e99-bd0cf1e318c8",
+      "ok": false,
+      "status": 404,
+      "errorCode": "UNKNOWN",
+      "body": "{\"status\":404,\"message\":\"\"}"
+    },
+    {
+      "label": "POST /booking.json/activity-search {}",
+      "ok": false,
+      "status": 404,
+      "errorCode": "UNKNOWN",
+      "body": "{\"status\":404,\"message\":\"\"}"
+    }
+  ],
+  "candidateActivityIds": [
+    24006,
+    5317,
+    84682,
+    84683,
+    84684,
+    84685,
+    84686,
+    84687,
+    84688,
+    84689,
+    24005,
+    84671,
+    84672,
+    84673,
+    84674,
+    84675,
+    84676,
+    84677,
+    84678,
+    84679,
+    84680,
+    84681,
+    24010,
+    84696,
+    84697,
+    84698,
+    84699,
+    84700,
+    84701,
+    84702
+  ]
+}

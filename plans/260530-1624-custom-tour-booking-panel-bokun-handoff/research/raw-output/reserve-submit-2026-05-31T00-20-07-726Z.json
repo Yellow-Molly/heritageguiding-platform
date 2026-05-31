@@ -1,0 +1,40 @@
+{
+  "sent": {
+    "bookingRequest": {
+      "activityBookings": [
+        {
+          "activityId": 24010,
+          "rateId": 57043,
+          "startTimeId": 48301,
+          "date": 1780272000000,
+          "pricingCategoryBookings": [
+            {
+              "pricingCategoryId": 30079,
+              "quantity": 1,
+              "occupancy": 2
+            }
+          ],
+          "extras": [
+            {
+              "extra": {
+                "id": 5380
+              },
+              "unitCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    "checkoutOption": "RESERVE_FOR_EXTERNAL_PAYMENT",
+    "paymentMethod": "RESERVE_FOR_EXTERNAL_PAYMENT",
+    "source": "DIRECT_REQUEST",
+    "clientReference": "qa-spike-2026-05-31T00-20-07-271Z"
+  },
+  "result": {
+    "label": "POST /checkout.json/submit (RESERVE_FOR_EXTERNAL_PAYMENT)",
+    "ok": false,
+    "status": 400,
+    "errorCode": "UNKNOWN",
+    "body": "Invalid JSON in body"
+  }
+}
