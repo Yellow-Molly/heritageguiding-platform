@@ -6,6 +6,8 @@
 
 You're an operator and you need to add a paid extra to a tour — museum admission, meals, equipment rental, etc.
 
+> **For per-group / private tours with a per-adult museum fee** (booking model, group-size cap, calendar-empty traps, per-unit ticket extra), see [bokun-per-group-pricing-and-museum-fee-runbook.md](./bokun-per-group-pricing-and-museum-fee-runbook.md). It also documents how this dashboard config interacts with the push sync below (`maxPerBooking`→99 reset, delete-by-omission).
+
 ## Prerequisites
 
 - Bokun dashboard access (you still need it for price + Required + photos)
