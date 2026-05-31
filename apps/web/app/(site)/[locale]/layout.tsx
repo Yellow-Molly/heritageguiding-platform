@@ -97,10 +97,17 @@ export default async function LocaleLayout({
         <link rel="dns-prefetch" href="https://widgets.bokuntest.com" />
         <link rel="dns-prefetch" href="https://static.bokuntest.com" />
         {/*
-          Inline Bokun cart pin — must be parsed before Bokun's JS inserts #bokun-widgets-root,
-          otherwise the wrapper renders inline (taking layout space, pushing content) and
-          causes CLS 0.467 on TourDetails. External globals.css loads concurrently with JS so
-          this rule must be inline. !important wins specificity over any Bokun inline styles.
+          Inline Bokun phantom-root pin — must be parsed before Bokun's JS inserts
+          #bokun-widgets-root, otherwise the cart wrapper renders inline (taking layout
+          space, pushing content) and causes CLS 0.467 on TourDetails. Holding the root as
+          a fixed 0x0 box keeps every Bokun descendant out of document flow → no CLS,
+          wherever the cart bubble sits. External globals.css loads concurrently with JS so
+          this rule must be inline. !important wins over any Bokun inline styles.
+
+          Cart corner placement is intentionally NOT pinned here — it is owned by the Bokun
+          dashboard (Settings → Widgets → Shopping Cart → Left/Right side). Do not re-add a
+          `.bokun-widgets-cart-wrapper` position rule: it fights the dashboard setting and
+          the class name churns between Bokun deploys.
 
           Do NOT add `contain: layout` here — it establishes a containing block for
           position:fixed descendants, which sizes Bokun's checkout modal to the 0x0
@@ -109,7 +116,7 @@ export default async function LocaleLayout({
         */}
         <style
           dangerouslySetInnerHTML={{
-            __html: `#bokun-widgets-root{position:fixed!important;top:0!important;left:0!important;width:0!important;height:0!important;overflow:visible!important;pointer-events:none;z-index:500}#bokun-widgets-root *{pointer-events:auto}.bokun-widgets-cart-wrapper{position:fixed!important;bottom:1rem!important;right:1rem!important;left:auto!important;top:auto!important}`,
+            __html: `#bokun-widgets-root{position:fixed!important;top:0!important;left:0!important;width:0!important;height:0!important;overflow:visible!important;pointer-events:none;z-index:500}#bokun-widgets-root *{pointer-events:auto}`,
           }}
         />
         {/*

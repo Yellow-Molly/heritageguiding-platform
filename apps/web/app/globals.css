@@ -439,24 +439,26 @@ a {
   }
 }
 
-/* Bokun widget global cart — Bokun's bundle applies inline styles, so we use !important to win
-   specificity. Target both the root container and the cart wrapper directly. Without this,
-   the cart wrapper takes inline layout space at top:739 (mid-page) causing CLS 0.467 on TourDetails.
-   z-index must sit above the site header (--z-fixed: 300) so Bokun's full-screen checkout
-   overlay — which renders as a descendant of #bokun-widgets-root — is not covered by the
-   fixed header (tablet landscape repro: close button hidden behind nav). The floating cart
-   button is pinned bottom-right and never visually overlaps the top header. */
-#bokun-widgets-root,
-.bokun-widgets-cart-wrapper {
-  position: fixed !important;
-  bottom: 1rem !important;
-  right: 1rem !important;
-  left: auto !important;
-  top: auto !important;
-  z-index: 500 !important;
-}
-/* Cart shouldn't block clicks on the page beneath when it sits idle */
+/* Bokun widget phantom root — held as a fixed 0x0 box so every Bokun descendant (the
+   floating cart bubble and the full-screen checkout overlay) stays out of document flow.
+   Without this the cart wrapper takes inline layout space mid-page, causing CLS 0.467 on
+   TourDetails. Bokun's bundle applies inline styles, so !important wins specificity.
+   z-index must sit above the site header (--z-fixed: 300) so Bokun's checkout overlay —
+   a descendant of #bokun-widgets-root — is not covered by the fixed header (tablet
+   landscape repro: close button hidden behind nav).
+   Cart corner placement (bottom-left vs bottom-right) is owned by the Bokun dashboard
+   (Settings → Widgets → Shopping Cart), NOT pinned here — do not re-add a
+   `.bokun-widgets-cart-wrapper` position rule: it fights the dashboard and the class churns.
+   Mirrors the inline <head> copy in app/(site)/[locale]/layout.tsx — keep both in sync. */
 #bokun-widgets-root {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: visible !important;
+  z-index: 500 !important;
+  /* Idle cart shouldn't block clicks on the page beneath */
   pointer-events: none;
 }
 #bokun-widgets-root > * {
