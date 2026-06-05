@@ -48,7 +48,7 @@ The coming-soon redirect matches only `source: '/:locale(en|sv)'` (`next.config.
 | S9 | Phantom canonical var — `env.ts:47` validates `NEXT_PUBLIC_URL` (read by **0** files); code reads `NEXT_PUBLIC_SITE_URL` (22 files incl `packages/cms/payload.config.ts:52`) | `lib/env.ts:47` | 🔴 1-line fix + Vercel value | Fix (Phase 03) |
 | S10 | Phantom email vars — `env.ts:52-53` validates `RESEND_API_KEY`/`EMAIL_FROM` (unused); email uses `GMAIL_USER`/`GMAIL_APP_PASSWORD` | `lib/email/*` vs `lib/env.ts:52-53` | 🔴 Code+`.env.example` | Fix (Phase 03) |
 | S11 | AI chat widget | `NEXT_PUBLIC_ENABLE_AI_CHAT` | 🟠 Flag | **Keep off** (Phase 03); CSP still allowlists it (Phase 03 decision) |
-| S12 | www→apex — **no redirect exists**; S1 www rules keep you on www host. Kept block covers only `heritageguiding` hosts | `next.config.ts:84-102` | 🔴 Add redirect | Act (Phase 01) |
+| S12 | Canonical host — **Vercel makes www primary** (apex→www, runs before next.config). Do NOT add www→apex in code (loops). `NEXT_PUBLIC_SITE_URL` fallback is apex → mismatch with serving host | Vercel Domains + `next.config.ts` | 🟠 SEO decision | Resolve (Phase 02) |
 | S13 | `REVALIDATION_SECRET` falls back to `PAYLOAD_SECRET` (master key) on public endpoint | `api/revalidate/route.ts:31` | 🔴 Secret hygiene | Fix (Phase 03) |
 | S14 | Client Sentry gated on `NEXT_PUBLIC_VERCEL_ENV` (Vercel does NOT auto-inject) | `instrumentation-client.ts:13` | 🟠 Config | Set (Phase 06) |
 | K1 | `heritageguiding.com` + `staging.*` → new-domain redirects | `next.config.ts:84-102` | ⚪ KEEP | Do NOT remove (Phase 01) |
@@ -58,7 +58,7 @@ The coming-soon redirect matches only `source: '/:locale(en|sv)'` (`next.config.
 
 | # | Phase | Owner | Priority | Status |
 |---|-------|-------|----------|--------|
-| 1 | [Live-Domain Flip](./phase-01-live-domain-flip.md) — all-locale `COMING_SOON` gate, www→apex, indexing audit | Dev | P0 | in-progress (code ✅, ops pending) |
+| 1 | [Live-Domain Flip](./phase-01-live-domain-flip.md) — all-locale `COMING_SOON` gate (both hosts), indexing audit | Dev | P0 | in-progress (code ✅, ops pending) |
 | 2 | [SEO Activation](./phase-02-seo-activation.md) — verify auto-flip + sitemap fixes + Search Console | Dev | P0 | pending |
 | 3 | [Env-Var Audit](./phase-03-env-var-audit.md) — correct CFG3 (S9/S10/S13), sequence-safe | Dev | P0 | pending |
 | 4 | [Bokun Go-Live](./phase-04-bokun-go-live.md) — gate input → `260430-1520` | Dev + Business | P0 | pending |
@@ -120,7 +120,7 @@ Gate inputs (defer to master plan, can lag the flip):  04 Bokun · 05 Legal · 0
 ## Open Questions
 
 1. **Launch gate canonicalization:** master Phase 05 still describes an `IS_STAGING`/DNS launch; this plan uses the `COMING_SOON` flag. Confirm Phase 08 here is the single runbook and master Phase 05 defers to it.
-2. **Current Vercel domain config for `www.privatetours.se`** — primary/redirect/unconfigured? Determines whether S12 needs a code redirect or just dashboard verify. Not repo-inspectable.
+2. **Canonical host — RESOLVED 2026-06-05: www is primary.** Vercel redirects apex→www; the code www→apex looped and was removed (`54dfdf8`). Open SEO choice: keep www canonical (set `NEXT_PUBLIC_SITE_URL=https://www.privatetours.se`) OR flip Vercel to apex-primary then set apex. Phase 02/03.
 3. **Search Console state** — are `/de/*` or `/coming-soon` URLs already indexed? Drives the Phase 01/02 301 cleanup.
 4. **Browse-only vs hold** — launch with tours visible but "Book Now" pending Bokun, or hold tour pages until S8 ready?
 5. **Target launch date** — drives Phase 08 timing and P1 (monitoring) waiver.

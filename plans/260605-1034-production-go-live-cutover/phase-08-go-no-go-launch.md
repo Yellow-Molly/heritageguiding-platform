@@ -68,7 +68,7 @@ Site is dark because of the `COMING_SOON` gate, not DNS/`IS_STAGING`. To go live
 ## Success Criteria
 
 - [ ] Signed go/no-go with named owners + recorded waivers.
-- [ ] `COMING_SOON` off; all 3 locales serve live; `/coming-soon`→301; www→apex.
+- [ ] `COMING_SOON=false`; all 3 locales serve live; `/coming-soon`→301; apex→www canonical (no loop).
 - [ ] Post-flip smoke passes; client Sentry confirmed receiving events.
 - [ ] 24-48h watch within threshold.
 - [ ] Master Phase 05 reconciled; plan archived; journal written.

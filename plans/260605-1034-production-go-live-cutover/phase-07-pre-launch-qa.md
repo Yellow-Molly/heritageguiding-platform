@@ -43,7 +43,7 @@ Existing Playwright e2e suite (`e2e/tests/customer-journey/*`) + Vitest unit sui
    - Mobile viewport: sticky price bar, nav, images (blur placeholders), no layout breaks.
    - **All 3 locales incl `/de`** (live during the dark period): German pages render + are served per the launch decision.
    - **Security probes:** unauthenticated `curl /api/bookings|users|contact-inquiries|group-inquiries` → 401/403; `curl -X POST /api/group-inquiries` (direct REST) → 403, not 201.
-   - **www→apex:** `curl -I https://www.privatetours.se/sv` → 301 to apex.
+   - **Canonical host (Vercel www-primary):** `curl -sI https://privatetours.se/sv` → 308 to `www.privatetours.se` (NOT a loop); www serves/holds. Confirm no apex↔www ping-pong.
    - **`/coming-soon`:** after go-live → 301 to locale home (not 404).
    - **Client Sentry:** trigger a browser error → confirm it reaches Sentry (proves `NEXT_PUBLIC_VERCEL_ENV` set).
    - **Sitemap robustness:** `sitemap.xml` URL count above threshold (tours + guides + legal incl `/cancellation`), not a silent static-only degrade.
@@ -57,7 +57,7 @@ Existing Playwright e2e suite (`e2e/tests/customer-journey/*`) + Vitest unit sui
 - [ ] All routes 200 in 3 locales; SEO signals correct on prod.
 - [ ] Contact + group-inquiry emails delivered (S10 verified live).
 - [ ] Booking CTA transacts OR degrades gracefully (no broken Book Now).
-- [ ] All 3 locales incl `/de` verified; PII REST endpoints 401/403; `group-inquiries` direct POST 403; www→apex 301; client Sentry receiving events.
+- [ ] All 3 locales incl `/de` verified; PII REST endpoints 401/403; `group-inquiries` direct POST 403; apex→www canonical (no loop); client Sentry receiving events.
 - [ ] Lighthouse ≥ 90 all categories.
 
 ## Risk Assessment

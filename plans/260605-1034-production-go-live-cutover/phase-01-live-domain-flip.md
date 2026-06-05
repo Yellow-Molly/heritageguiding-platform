@@ -11,7 +11,7 @@ dependencies: []
 
 ## Overview
 
-Replace the brittle coming-soon redirect with a single **all-locale, env-gated holding switch** (`COMING_SOON`), add the missing `www→apex` redirect, and audit/repair indexing leaked during the dark period. Red-team found the current redirect only matches `(en|sv)` — so `/de` has been live and crawlable on `privatetours.se` the whole time. Per decision, `/de` should have been dark; this phase closes the gap and makes go-live (and rollback) a single flag.
+Replace the brittle coming-soon redirect with a single **all-locale, env-gated holding switch** (`COMING_SOON`) covering both production hosts (Vercel is www-primary), and audit/repair indexing leaked during the dark period. Red-team found the current redirect only matches `(en|sv)` — so `/de` has been live and crawlable on `privatetours.se` the whole time. Per decision, `/de` should have been dark; this phase closes the gap and makes go-live (and rollback) a single flag.
 
 ## Requirements
 
@@ -32,7 +32,7 @@ Replace the brittle coming-soon redirect with a single **all-locale, env-gated h
 
 Go-live = set `COMING_SOON=false` + redeploy. Rollback = unset `COMING_SOON` (or set `true`) + redeploy the current build (covers all locales, preserves Phase 03 env fixes — see Phase 08).
 
-**Implementation note (shipped 2026-06-05):** code complete + code-reviewed (PASS); type-check clean. Used fail-safe `!== 'false'` (stronger than the originally-planned `=== 'true'`). Deferred to Phase 02 (H1): `robots.ts`/`sitemap.ts`/`llms*.txt` still gate on `isProductionDeployment()` not `COMING_SOON`, so they serve the live catalog on the dark apex. Ops steps (set flag / www verify / Search Console audit) remain.
+**Implementation note (shipped 2026-06-05):** code complete + code-reviewed (PASS); type-check clean. Used fail-safe `!== 'false'` (stronger than the originally-planned `=== 'true'`). Deferred to Phase 02 (H1): `robots.ts`/`sitemap.ts`/`llms*.txt` still gate on `isProductionDeployment()` not `COMING_SOON`, so they serve the live catalog on the dark apex. Ops step (Search Console audit) remains. **Post-deploy verify caught a redirect loop** — Vercel is www-primary (apex→www), so the added www→apex rule looped; hotfix `54dfdf8` removed it and now gates BOTH hosts.
 
 ## Related Code Files
 
@@ -42,11 +42,11 @@ Go-live = set `COMING_SOON=false` + redeploy. Rollback = unset `COMING_SOON` (or
 
 ## Implementation Steps
 
-1. In `next.config.ts`, replace the 4 coming-soon rules with a `...(process.env.COMING_SOON !== 'false' ? [ ...rules ] : [])` block matching `/:locale(sv|en|de)` and `/:locale(sv|en|de)/:path((?!coming-soon).*)`, host-scoped to apex `privatetours.se` (`type: 'host' as const` to satisfy the `Redirect[]` type). Preserve the loop-guard. Comment explains intent, NOT plan/finding codes. (www is handled by the separate www→apex rule, step 2.) ✅ done
+1. In `next.config.ts`, replace the 4 coming-soon rules with a `...(process.env.COMING_SOON !== 'false' ? [ ...rules ] : [])` block matching `/:locale(sv|en|de)` and `/:locale(sv|en|de)/:path((?!coming-soon).*)`, host-scoped to apex `privatetours.se` (`type: 'host' as const` to satisfy the `Redirect[]` type). Preserve the loop-guard. Gate BOTH prod hosts (`privatetours.se` + `www.privatetours.se`) since Vercel serves on www. Comment explains intent, NOT plan/finding codes. ✅ done
 2. Add `www.privatetours.se`→`https://privatetours.se/:path*` `permanent: true` to the kept domain-migration group.
 3. Add `robots: { index: false }` to `coming-soon/page.tsx` metadata (close the indexable-holding-page gap).
 4. Deploying this change takes the apex dark **by default** (fail-safe — `COMING_SOON` unset → dark), which immediately closes the `/de` live exposure. German visitors currently seeing live content will see the holding page until go-live. Confirm `sv`/`en`/`de` all show holding on prod after deploy. (No env var needed to stay dark; go-live later = `COMING_SOON=false`.)
-5. **www→apex:** confirm Vercel Domains marks apex primary with `www` redirecting; the code rule in step 2 is the belt-and-suspenders fallback. Verify post-deploy.
+5. **Canonical host:** Vercel is **www-primary** (apex→www, verified 2026-06-05). Do NOT add a code www→apex (it loops against Vercel's apex→www — caught post-deploy, hotfixed `54dfdf8`). Decide canonical (www vs apex) in Phase 02.
 6. **Indexing audit:** in Google Search Console, check coverage for `privatetours.se/de/*` and `*/coming-soon`. Record what leaked. Plan 301s for any indexed dark-period URLs (execute in Phase 02).
 7. `npm run build` to confirm config compiles.
 
@@ -57,7 +57,7 @@ Go-live = set `COMING_SOON=false` + redeploy. Rollback = unset `COMING_SOON` (or
 - [ ] `coming-soon/page.tsx` returns `noindex`.
 - [ ] heritageguiding/staging redirects unchanged; build passes.
 - [ ] Search Console audit of `/de` + `/coming-soon` exposure recorded; 301 list handed to Phase 02.
-- [x] Code shipped + reviewed (fail-safe `!== 'false'`, www→apex, noindex); type-check clean.
+- [x] Code shipped + reviewed (fail-safe `!== 'false'`, both-host holding, noindex); type-check clean. Post-deploy loop (www→apex vs Vercel apex→www) caught + hotfixed (`54dfdf8`).
 - [ ] Go-live dry-run: setting `COMING_SOON=false` serves full site in all 3 locales (verify on preview).
 
 ## Risk Assessment
