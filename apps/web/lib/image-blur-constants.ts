@@ -1,12 +1,16 @@
 /**
- * Pre-generated blur data URLs for hardcoded Unsplash images.
- * Generated using sharp (8x6 colored JPEG for each image's dominant color).
- * Each value is a tiny 8x6 JPEG encoded as base64 data URI.
+ * Pre-generated blur data URLs for hardcoded hero/section images.
+ * Sources: Unsplash (section heroes) and Vercel Blob (homepage hero).
+ * Generated using sharp (8x6 JPEG of each image's dominant colors), base64 data URI.
  */
 export const BLUR_DATA = {
-  /** Gamla Stan sunset — hero-section, about-hero */
+  /** Gamla Stan sunset — about-hero */
   HERO_GAMLA_STAN:
     'data:image/jpeg;base64,/9j/2wBDACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//j/2wBDASstLTw1PHZBQXb4pYyl+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj/wAARCAAGAAgDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAH/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAwT/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCAJzv/2Q==',
+
+  /** Boats in front of Stockholm — homepage hero (Vercel Blob) */
+  HERO_STOCKHOLM_BOATS:
+    'data:image/jpeg;base64,/9j/2wBDACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//j/2wBDASstLTw1PHZBQXb4pYyl+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj/wAARCAAGAAgDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAT/xAAZEAADAAMAAAAAAAAAAAAAAAAAAQMCEYH/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AotJvHTlFroACT//Z',
 
   /** Stockholm archipelago — video, about-story, seasonal-summer, blog */
   ARCHIPELAGO:
