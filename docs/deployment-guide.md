@@ -211,6 +211,13 @@ vercel env add PAYLOAD_SECRET production
 
 ## 3. Cache Revalidation (Phase 16)
 
+> **Correction (2026-06-05):** the code samples below are illustrative and do NOT
+> match the implementation. The real flow: (1) the CMS `afterChange` hook calls
+> `revalidateTag()` **in-process** (no HTTP round-trip); (2) the on-demand endpoint
+> is `POST /api/revalidate?secret=<REVALIDATION_SECRET>&tag=<tag>` — a **query
+> param**, not an `X-Revalidate-Token` header. The env var is `REVALIDATION_SECRET`
+> (falls back to `PAYLOAD_SECRET`), not `REVALIDATE_TOKEN`.
+
 ### Overview
 
 Cache revalidation strategy using Payload CMS hooks + on-demand API endpoint.

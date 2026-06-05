@@ -37,20 +37,30 @@ const envSchema = z.object({
     : z.string().uuid().optional(),
 
   // Bokun webhook — optional even in prod. Webhooks only fire after Bokun
-  // commercial onboarding (`260430-1520` phase-01) registers our endpoint
-  // and may require the Bokun PLUS plan tier. The webhook handler already
-  // 401s when this is unset, so missing config fails closed at request
-  // time rather than blocking unrelated pages from booting.
+  // commercial onboarding registers our endpoint (may require the Bokun PLUS
+  // plan tier). The webhook handler already 401s when this is unset, so missing
+  // config fails closed at request time rather than blocking unrelated pages.
   BOKUN_WEBHOOK_SECRET: z.string().optional(),
 
-  // Public site origin — required in prod for canonical URLs, sitemaps, og:url.
-  NEXT_PUBLIC_URL: isProd ? z.string().url() : z.string().url().optional(),
+  // Canonical public origin read by sitemap, robots, schema.org, page metadata
+  // (lib/seo.ts, components/seo/*, and packages/cms livePreview). Optional for
+  // now — code falls back to the hardcoded prod origin; promote to prod-required
+  // once the Vercel value is confirmed set (so a deploy where it is still unset
+  // cannot boot-crash). NEXT_PUBLIC_URL was the previously-validated name, but no
+  // runtime code reads it.
+  NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
 
   // Optional services — must be valid IF set.
   BLOB_READ_WRITE_TOKEN: z.string().optional(),
+  // Revalidation endpoint secret. Optional for now; promote to prod-required
+  // once set on Vercel (the route falls back to PAYLOAD_SECRET — dropping that
+  // fallback is a separate hardening step gated on this value existing).
   REVALIDATION_SECRET: z.string().optional(),
-  RESEND_API_KEY: z.string().optional(),
-  EMAIL_FROM: z.string().email().optional(),
+  // Transactional email (Gmail SMTP via nodemailer — lib/email/*). Validated if
+  // present; promote to prod-required once set so missing creds fail fast rather
+  // than emails silently failing. Replaces the never-read RESEND_API_KEY/EMAIL_FROM.
+  GMAIL_USER: z.string().email().optional(),
+  GMAIL_APP_PASSWORD: z.string().min(1).optional(),
   OPENAI_API_KEY: z.string().optional(),
 
   // Sentry — both server and client DSNs supported. NEXT_PUBLIC_SENTRY_DSN
