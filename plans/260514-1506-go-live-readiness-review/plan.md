@@ -13,6 +13,7 @@ blockedBy:
   - 260430-1520-bokun-go-live                  # Bokun security + commercial onboarding
 blocks: []
 related:
+  - 260605-1034-production-go-live-cutover     # Executable cutover runbook + technical switch list (this = audit, that = action)
   - 260514-1437-bokun-integration              # Outbound sync (DEFERRED post-launch)
   - 260419-1332-per-tour-cancellation-policy   # Per-tour policy variant
   - 260508-2335-privacy-policy-page-implementation
@@ -30,6 +31,8 @@ context:
 ## Purpose
 
 Single gate for production launch. Audits state across 4 dimensions, cross-links execution to existing plans, identifies uncovered gaps. **No new code planned here** — phases either reference existing plan owners or add minimal scope to close gaps.
+
+> **Executable cutover:** the technical switch list + actionable go-live runbook (coming-soon removal, SEO/env verification, smoke test, launch gate) lives in [`260605-1034-production-go-live-cutover`](../260605-1034-production-go-live-cutover/plan.md). This review stays the audit; that plan executes the flip. It surfaced a **live exposure** this audit missed — the coming-soon redirect matches only `(en|sv)`, so `/de` has been serving live on prod the whole time — and it **corrects CFG3**: `lib/env.ts` validates `NEXT_PUBLIC_URL`/`RESEND_API_KEY` (wrong names) while code reads `NEXT_PUBLIC_SITE_URL`/`GMAIL_*`. CFG3 is superseded by that plan's Phase 03.
 
 ## Readiness Matrix (re-verified 2026-05-17; quick-wins implemented same day — see [audit report](../reports/audit-260517-1311-go-live-readiness.md))
 
