@@ -10,7 +10,7 @@ import { WebVitalsReporter } from '@/components/analytics/web-vitals-reporter'
 import { inter, playfairDisplay } from '@/lib/fonts'
 import { getWhatsAppNumber } from '@/lib/get-whatsapp-number-from-cms'
 import { generateHreflangAlternates, generateOgLocaleAlternates } from '@/lib/seo'
-import { isProductionDeployment } from '@/lib/environment'
+import { isPubliclyIndexable } from '@/lib/environment'
 import type { Metadata } from 'next'
 
 export function generateStaticParams() {
@@ -132,8 +132,8 @@ export default async function LocaleLayout({
             __html: `(function(){function r(v){return typeof v==='string'&&/maps\\.googleapis\\.com\\/maps\\/api\\/js/.test(v)&&!/[?&]loading=async/.test(v)?v+(v.indexOf('?')>-1?'&':'?')+'loading=async':v}var p=HTMLScriptElement.prototype,d=Object.getOwnPropertyDescriptor(p,'src');if(d&&d.set){Object.defineProperty(p,'src',{configurable:true,get:function(){return d.get.call(this)},set:function(v){var n=r(v);if(n!==v){this.async=true}d.set.call(this,n)}})}var sa=p.setAttribute;p.setAttribute=function(n,v){if(n==='src'){var nv=r(v);if(nv!==v){this.async=true}return sa.call(this,n,nv)}return sa.call(this,n,v)};if(typeof MutationObserver!=='undefined'){new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.tagName==='SCRIPT'){var s=n.getAttribute('src');var ns=r(s);if(ns&&ns!==s){var rep=document.createElement('script');rep.async=true;rep.src=ns;n.parentNode&&n.parentNode.replaceChild(rep,n)}}})})}).observe(document,{childList:true,subtree:true})}})();`,
           }}
         />
-        {/* Block indexing on non-production deployments */}
-        {!isProductionDeployment() && (
+        {/* Block indexing unless this is the live, publicly-indexable production site */}
+        {!isPubliclyIndexable() && (
           <meta name="robots" content="noindex, nofollow" />
         )}
       </head>

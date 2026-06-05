@@ -107,9 +107,11 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
-      // Block search engine indexing on non-production deployments
-      // Note: inline env check because next.config.ts can't use @/ path aliases
-      ...(process.env.VERCEL_ENV !== 'production' || process.env.IS_STAGING === 'true'
+      // Block search-engine indexing unless this is the live production site.
+      // Build-reliable flags only: next.config is evaluated at BUILD, where
+      // VERCEL_ENV is NOT 'production' — gate on COMING_SOON + IS_STAGING instead.
+      // (Inline because next.config.ts can't use @/ path aliases.)
+      ...(process.env.COMING_SOON !== 'false' || process.env.IS_STAGING === 'true'
         ? [
             {
               source: '/:path*',

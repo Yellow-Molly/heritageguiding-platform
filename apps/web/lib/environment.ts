@@ -19,3 +19,15 @@ export function isProductionDeployment(): boolean {
 export function isComingSoon(): boolean {
   return process.env.COMING_SOON !== 'false'
 }
+
+/**
+ * Whether crawlers should index this deployment. BUILD-RELIABLE: depends only on
+ * COMING_SOON (set to 'false' on live prod) and IS_STAGING — NOT on VERCEL_ENV,
+ * which is NOT 'production' during the Vercel build, so isProductionDeployment()
+ * is wrong for build-time-static surfaces (robots.txt, sitemap.xml, noindex meta,
+ * next.config headers). Reserve isProductionDeployment() for runtime-evaluated
+ * code (env validation at boot, Sentry init).
+ */
+export function isPubliclyIndexable(): boolean {
+  return !isComingSoon() && process.env.IS_STAGING !== 'true'
+}
