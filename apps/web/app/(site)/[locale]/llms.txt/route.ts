@@ -1,5 +1,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { isProductionDeployment, isComingSoon } from '@/lib/environment'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 const VALID_LOCALES = ['sv', 'en', 'de'] as const
@@ -44,6 +45,13 @@ export async function GET(
   const { locale: rawLocale } = await params
   const locale = VALID_LOCALES.includes(rawLocale as ValidLocale) ? (rawLocale as ValidLocale) : 'en'
   const i18n = SITE_TITLES[locale]
+
+  // Pre-launch: don't expose the catalog on the public dark production site.
+  if (isProductionDeployment() && isComingSoon()) {
+    return new Response(`# ${i18n.title}\n\n> Launching soon.\n`, {
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    })
+  }
 
   let toursSection = ''
   let guidesSection = ''

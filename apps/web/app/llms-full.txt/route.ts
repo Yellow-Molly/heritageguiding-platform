@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import enMessages from '@/messages/en.json'
 import { extractPlainText } from '@/lib/payload-rich-text-to-plain'
+import { isProductionDeployment, isComingSoon } from '@/lib/environment'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
@@ -31,6 +32,13 @@ function formatFaqSection(): string {
  * Includes full tour details, guide bios, FAQ, pricing info.
  */
 export async function GET(): Promise<Response> {
+  // Pre-launch: don't expose the catalog on the public dark production site.
+  if (isProductionDeployment() && isComingSoon()) {
+    return new Response('# Private Tours Sweden — Full Content\n\n> Launching soon.\n', {
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    })
+  }
+
   let toursSection = ''
   let guidesSection = ''
   let categoriesSection = ''

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { isProductionDeployment } from '@/lib/environment'
+import { isProductionDeployment, isComingSoon } from '@/lib/environment'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 const LOCALES = ['sv', 'en', 'de'] as const
@@ -31,8 +31,8 @@ function buildAlternates(path: string): Record<string, string> {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Don't expose URLs on non-production deployments
-  if (!isProductionDeployment()) {
+  // Don't expose URLs on non-production deployments or while the launch gate holds
+  if (!isProductionDeployment() || isComingSoon()) {
     return []
   }
 

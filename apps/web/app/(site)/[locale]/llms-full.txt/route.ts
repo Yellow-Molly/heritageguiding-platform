@@ -4,6 +4,7 @@ import enMessages from '@/messages/en.json'
 import svMessages from '@/messages/sv.json'
 import deMessages from '@/messages/de.json'
 import { extractPlainText } from '@/lib/payload-rich-text-to-plain'
+import { isProductionDeployment, isComingSoon } from '@/lib/environment'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 const VALID_LOCALES = ['sv', 'en', 'de'] as const
@@ -68,6 +69,13 @@ export async function GET(
   const { locale: rawLocale } = await params
   const locale = VALID_LOCALES.includes(rawLocale as ValidLocale) ? (rawLocale as ValidLocale) : 'en'
   const copy = SITE_COPY[locale]
+
+  // Pre-launch: don't expose the catalog on the public dark production site.
+  if (isProductionDeployment() && isComingSoon()) {
+    return new Response(`# ${copy.title}\n\n> Launching soon.\n`, {
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    })
+  }
 
   let toursSection = ''
   let guidesSection = ''

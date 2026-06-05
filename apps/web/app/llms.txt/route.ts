@@ -1,5 +1,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { isProductionDeployment, isComingSoon } from '@/lib/environment'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
 
@@ -11,6 +12,13 @@ export const revalidate = 3600
  * Follows llmstxt.org standard: H1 title, blockquote, H2 sections with links.
  */
 export async function GET(): Promise<Response> {
+  // Pre-launch: don't expose the catalog on the public dark production site.
+  if (isProductionDeployment() && isComingSoon()) {
+    return new Response('# Private Tours Sweden\n\n> Launching soon.\n', {
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    })
+  }
+
   let toursSection = ''
   let guidesSection = ''
   let categoriesSection = ''
