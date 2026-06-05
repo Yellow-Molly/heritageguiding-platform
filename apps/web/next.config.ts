@@ -121,6 +121,15 @@ const nextConfig: NextConfig = {
             },
           ]
         : []),
+      // Staging host is NEVER indexable, regardless of deployment/env topology.
+      // Matched on the request host at the edge (not build-time), so it holds even
+      // when staging.privatetours.se is aliased onto the production deployment —
+      // which build-static, per-deployment env-var checks cannot distinguish.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'staging.privatetours.se' }],
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
       {
         // Cache static image assets for 1 year (immutable)
         source: '/:all*(svg|jpg|png|webp|avif)',
