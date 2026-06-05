@@ -5,6 +5,8 @@ export const metadata: Metadata = {
   title: 'Coming Soon | Private Tours Stockholm',
   description:
     'Private Tours Stockholm is launching soon. Premium private tours through Sweden with expert local guides.',
+  // Holding page must never be indexed, even though production otherwise allows crawling.
+  robots: { index: false, follow: false },
 }
 
 export default function ComingSoonPage() {

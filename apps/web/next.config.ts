@@ -55,31 +55,37 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'date-fns'],
   },
   async redirects() {
+    // Pre-launch holding gate (production apex only). Fail-safe dark: the site
+    // stays on the holding page unless COMING_SOON is explicitly 'false', so a
+    // deploy that forgets the flag can never accidentally expose the site.
+    // Go-live is a single env change (COMING_SOON=false) + redeploy — no code
+    // edit — and rollback is the same flag flipped back. Covers all locales
+    // (sv|en|de); the negative lookahead stops /coming-soon self-redirecting.
+    // Host-scoped to the bare apex, so localhost/preview/staging are unaffected.
+    const holding = process.env.COMING_SOON !== 'false'
     return [
-      // Coming soon redirect — production only (remove after April 2 launch)
+      ...(holding
+        ? [
+            {
+              source: '/:locale(sv|en|de)',
+              has: [{ type: 'host' as const, value: 'privatetours.se' }],
+              destination: '/:locale/coming-soon',
+              permanent: false,
+            },
+            {
+              source: '/:locale(sv|en|de)/:path((?!coming-soon).*)',
+              has: [{ type: 'host' as const, value: 'privatetours.se' }],
+              destination: '/:locale/coming-soon',
+              permanent: false,
+            },
+          ]
+        : []),
+      // Canonical host: www -> apex (always on; consolidates duplicate-content signal)
       {
-        source: '/:locale(en|sv)',
-        has: [{ type: 'host', value: 'privatetours.se' }],
-        destination: '/:locale/coming-soon',
-        permanent: false,
-      },
-      {
-        source: '/:locale(en|sv)',
+        source: '/:path*',
         has: [{ type: 'host', value: 'www.privatetours.se' }],
-        destination: '/:locale/coming-soon',
-        permanent: false,
-      },
-      {
-        source: '/:locale(en|sv)/:path((?!coming-soon).*)',
-        has: [{ type: 'host', value: 'privatetours.se' }],
-        destination: '/:locale/coming-soon',
-        permanent: false,
-      },
-      {
-        source: '/:locale(en|sv)/:path((?!coming-soon).*)',
-        has: [{ type: 'host', value: 'www.privatetours.se' }],
-        destination: '/:locale/coming-soon',
-        permanent: false,
+        destination: 'https://privatetours.se/:path*',
+        permanent: true,
       },
       // Old domain -> new domain (keep for 1+ year for SEO)
       {

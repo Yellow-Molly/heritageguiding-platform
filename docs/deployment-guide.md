@@ -444,6 +444,21 @@ curl -I https://privatetours.se/robots.txt
 
 ---
 
+## 4.5 Launch Gate (COMING_SOON)
+
+The production apex (`privatetours.se`) is held on a "coming soon" page by a
+**fail-safe** env gate in `next.config.ts`. The holding redirect is active unless
+`COMING_SOON` is explicitly `false`, and is host-scoped to the bare apex
+(local dev, preview, and `staging.privatetours.se` are never gated).
+
+- **Go live:** set `COMING_SOON=false` on the Production Vercel project + redeploy.
+- **Roll back to dark:** set `COMING_SOON=true` (or remove it) + redeploy the
+  *current* build. Do NOT promote an older deployment to roll back (it would
+  revert env-var fixes and re-expose stale behavior).
+- Covers all locales (`sv`, `en`, `de`). Leaving it unset keeps the site dark.
+
+---
+
 ## 5. Domain & DNS Configuration
 
 ### Domain Setup
