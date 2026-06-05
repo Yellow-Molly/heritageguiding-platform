@@ -65,14 +65,19 @@ export function HeroSection() {
 
       {/* Hero Content — centered, minimal */}
       <div className="container relative z-20 mx-auto px-4 text-center lg:px-8">
-        {/* Single CTA — outline white */}
+        {/* Single CTA — solid accent pill, matching the primary "Book Now" button
+            (bg-[var(--color-accent)] + white text). The white-on-accent contrast
+            (~4.7:1) is self-contained, so the button stays WCAG AA readable over ANY
+            hero image, independent of the background scrim (which is transparent at
+            this vertical center). White focus ring keeps keyboard focus visible on the
+            accent fill, where an accent-colored ring would blend into the button. */}
         <div
           className="animate-fade-in-up"
           style={{ animationDelay: '400ms' }}
         >
           <Link
             href="/tours"
-            className="inline-block rounded-full border-2 border-white px-8 py-3 text-lg font-medium text-white transition-all hover:bg-white hover:text-[#252525]"
+            className="inline-block rounded-full bg-[var(--color-accent)] px-8 py-3 text-lg font-medium text-white shadow-lg transition-all hover:bg-[var(--color-accent-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-accent)]"
           >
             {t('home.hero.cta')}
           </Link>
