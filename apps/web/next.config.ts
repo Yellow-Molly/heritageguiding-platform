@@ -55,38 +55,35 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'date-fns'],
   },
   async redirects() {
-    // Pre-launch holding gate (production apex only). Fail-safe dark: the site
-    // stays on the holding page unless COMING_SOON is explicitly 'false', so a
-    // deploy that forgets the flag can never accidentally expose the site.
-    // Go-live is a single env change (COMING_SOON=false) + redeploy — no code
-    // edit — and rollback is the same flag flipped back. Covers all locales
-    // (sv|en|de); the negative lookahead stops /coming-soon self-redirecting.
-    // Host-scoped to the bare apex, so localhost/preview/staging are unaffected.
+    // Pre-launch holding gate. Fail-safe dark: the site stays on the holding
+    // page unless COMING_SOON is explicitly 'false', so a deploy that forgets
+    // the flag can never accidentally expose the site. Go-live = COMING_SOON=false
+    // + redeploy; rollback = same flag flipped back. Covers all locales (sv|en|de);
+    // the negative lookahead stops /coming-soon self-redirecting.
+    // Scoped to BOTH production hosts because Vercel's domain config redirects
+    // apex -> www (www is primary), so real traffic lands on www; we gate apex too
+    // in case it is hit directly. localhost/preview/staging are other hosts and
+    // stay unaffected. Do NOT add a www<->apex redirect here: Vercel already owns
+    // apex -> www, and a counter-rule produces an infinite redirect loop.
     const holding = process.env.COMING_SOON !== 'false'
+    const holdingHosts = ['privatetours.se', 'www.privatetours.se']
     return [
       ...(holding
-        ? [
+        ? holdingHosts.flatMap((host) => [
             {
               source: '/:locale(sv|en|de)',
-              has: [{ type: 'host' as const, value: 'privatetours.se' }],
+              has: [{ type: 'host' as const, value: host }],
               destination: '/:locale/coming-soon',
               permanent: false,
             },
             {
               source: '/:locale(sv|en|de)/:path((?!coming-soon).*)',
-              has: [{ type: 'host' as const, value: 'privatetours.se' }],
+              has: [{ type: 'host' as const, value: host }],
               destination: '/:locale/coming-soon',
               permanent: false,
             },
-          ]
+          ])
         : []),
-      // Canonical host: www -> apex (always on; consolidates duplicate-content signal)
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.privatetours.se' }],
-        destination: 'https://privatetours.se/:path*',
-        permanent: true,
-      },
       // Old domain -> new domain (keep for 1+ year for SEO)
       {
         source: '/:path*',
