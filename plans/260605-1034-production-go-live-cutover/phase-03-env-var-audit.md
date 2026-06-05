@@ -1,7 +1,7 @@
 ---
 phase: 3
 title: "Env-Var Audit & Reconciliation"
-status: pending
+status: in-progress
 priority: P0
 effort: "1.5h"
 dependencies: []
@@ -12,6 +12,15 @@ dependencies: []
 ## Overview
 
 Correct `lib/env.ts` so it validates the variables the running code actually reads. This **supersedes master plan CFG3** (`260514-1506` phase-04, commit `c1d1d9f`), which authored the schema but validated the **wrong** var names — so this is a correction of a signed-off item, not a gap the audit missed. Sequencing matters: `env.ts` throws at boot, so a careless "tighten" can self-inflict a production outage.
+
+## Implementation Status
+
+**Safe slice shipped `9124108` (2026-06-05):** `env.ts` now validates `NEXT_PUBLIC_SITE_URL`, `GMAIL_USER`, `GMAIL_APP_PASSWORD` (all **validated-if-present** — NOT prod-required, to avoid a boot crash before Vercel values exist); dropped phantom `NEXT_PUBLIC_URL`/`RESEND_API_KEY`/`EMAIL_FROM`; stripped the stale plan-ref comment. `.env.example` + deployment-guide revalidation section corrected. Type-clean; boot-safe (strictly more permissive). Supersedes readiness-review CFG3.
+
+**Deferred — ops-gated on you (then I finish):**
+1. Set on Vercel prod: `NEXT_PUBLIC_SITE_URL` (value = the chosen canonical host, see Phase 02), `GMAIL_USER`, `GMAIL_APP_PASSWORD`, `REVALIDATION_SECRET` (distinct from `PAYLOAD_SECRET`).
+2. Then I promote those to **prod-required** in `env.ts` (fail-fast) + drop the `|| PAYLOAD_SECRET` fallback in `api/revalidate/route.ts` (S13). Both safe only AFTER step 1.
+3. README env block (minor) still references `NEXT_PUBLIC_URL`.
 
 ## Requirements
 
