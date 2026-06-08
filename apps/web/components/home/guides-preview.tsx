@@ -10,19 +10,18 @@ interface GuidesPreviewProps {
 /**
  * GuidesPreview — navy background section with circular guide headshots.
  */
-/** Map CMS language codes to display labels */
-const langLabels: Record<string, { full: string; short: string }> = {
-  sv: { full: 'Swedish', short: 'SE' },
-  en: { full: 'English', short: 'EN' },
-  de: { full: 'German', short: 'DE' },
-  fr: { full: 'French', short: 'FR' },
-  es: { full: 'Spanish', short: 'ES' },
-  it: { full: 'Italian', short: 'IT' },
+/** Map CMS language codes (ISO 639-1) to full display names */
+const langLabels: Record<string, string> = {
+  sv: 'Swedish',
+  en: 'English',
+  de: 'German',
+  fr: 'French',
+  es: 'Spanish',
+  it: 'Italian',
 }
 
-function formatLanguages(langs: string[], mode: 'full' | 'short'): string {
-  const separator = mode === 'short' ? ' · ' : ', '
-  return langs.map((code) => langLabels[code]?.[mode] || code).join(separator)
+function formatLanguages(langs: string[]): string {
+  return langs.map((code) => langLabels[code] ?? code).join(', ')
 }
 
 export function GuidesPreview({ guides }: GuidesPreviewProps) {
@@ -82,8 +81,7 @@ export function GuidesPreview({ guides }: GuidesPreviewProps) {
               )}
               {guide.languages && guide.languages.length > 0 && (
                 <p className="text-[13px] text-white/70">
-                  <span className="md:hidden">{formatLanguages(guide.languages, 'short')}</span>
-                  <span className="hidden md:inline">{formatLanguages(guide.languages, 'full')}</span>
+                  {formatLanguages(guide.languages)}
                 </p>
               )}
             </Link>
