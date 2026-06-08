@@ -7,8 +7,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { SerializedEditorState } from 'lexical'
-import type { FeaturedTour } from './get-featured-tours'
-import { mapPayloadTourToFeaturedTour } from './tour-payload-mapper'
 
 export interface GuideDetail {
   id: string
@@ -30,8 +28,6 @@ export interface GuideDetail {
   uniqueAspectsQuote?: string | null
   uniqueAspectsBody?: string | null
   specialtyDescriptions?: Array<{ description: string }>
-  /** Tours led by this guide, mapped to same shape as tour listing cards */
-  tours: FeaturedTour[]
 }
 
 /**
@@ -63,25 +59,6 @@ export async function getGuideBySlug(
   const areas = (doc.operatingAreas ?? []) as Array<{ id: string; name: string; slug: string }>
   const creds = (doc.credentials ?? []) as Array<{ credential: string }>
 
-  // Fetch tours led by this guide (hasMany: this guide may be primary or secondary).
-  // Payload v3 hasMany filter: `in` operator matches if the relationship array
-  // contains any of the given IDs.
-  const toursResult = await payload.find({
-    collection: 'tours',
-    where: {
-      guides: { in: [doc.id] },
-      status: { equals: 'published' },
-    },
-    depth: 2,
-    locale: locale as 'sv' | 'en' | 'de',
-    limit: 20,
-    sort: '-createdAt',
-  })
-
-  const tours = toursResult.docs.map((tour) =>
-    mapPayloadTourToFeaturedTour(tour as unknown as Record<string, unknown>)
-  )
-
   return {
     id: String(doc.id),
     name: String(doc.name),
@@ -106,7 +83,6 @@ export async function getGuideBySlug(
     uniqueAspectsQuote: (doc.uniqueAspectsQuote as string) ?? null,
     uniqueAspectsBody: (doc.uniqueAspectsBody as string) ?? null,
     specialtyDescriptions: (doc.specialtyDescriptions ?? []) as Array<{ description: string }>,
-    tours,
   }
 }
 

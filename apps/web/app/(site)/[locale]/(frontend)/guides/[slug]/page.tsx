@@ -6,12 +6,10 @@ import { Footer } from '@/components/layout/footer'
 import {
   GuideDetailSidebar,
   GuideDetailBio,
-  GuideToursSection,
   GuideExpertiseSection,
   GuideQuoteSection,
   GuideApproachSection,
   GuideGuestFeedbackSection,
-  GuideStickyCta,
 } from '@/components/guide'
 import { Breadcrumb } from '@/components/shared/breadcrumb'
 import { generatePageMetadata } from '@/lib/seo'
@@ -55,8 +53,7 @@ export default async function GuideDetailPage({ params }: GuideDetailPageProps) 
         credentials={guide.credentials}
       />
       <Header variant="solid" />
-      {/* pb-20 on mobile to clear the sticky CTA bar; removed on lg+ */}
-      <main className="min-h-screen bg-[var(--color-background)] pb-20 pt-[var(--header-height)] lg:pb-0">
+      <main className="min-h-screen bg-[var(--color-background)] pt-[var(--header-height)]">
         {/* Mobile breadcrumb */}
         <div className="bg-[var(--color-background-alt)] px-5 py-3 lg:hidden">
           <Breadcrumb items={breadcrumbs} />
@@ -84,17 +81,10 @@ export default async function GuideDetailPage({ params }: GuideDetailPageProps) 
               />
               <GuideApproachSection guideStyle={guide.guideStyle} />
               <GuideGuestFeedbackSection whatGuestsAppreciate={guide.whatGuestsAppreciate} />
-              {guide.tours.length > 0 && (
-                <>
-                  <hr className="border-[var(--color-border)]" />
-                  <GuideToursSection tours={guide.tours} guideName={guide.name} />
-                </>
-              )}
             </div>
           </div>
         </div>
       </main>
-      {guide.tours.length > 0 && <GuideStickyCta guideName={guide.name} />}
       <Footer />
     </>
   )

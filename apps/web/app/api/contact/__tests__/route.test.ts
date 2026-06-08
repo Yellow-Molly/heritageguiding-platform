@@ -25,8 +25,15 @@ vi.mock('@/lib/rate-limit-by-ip', () => ({
   checkRateLimit: vi.fn().mockReturnValue({ success: true }),
 }))
 
+// Mock Sentry to avoid real capture in tests
+vi.mock('@sentry/nextjs', () => ({ captureException: vi.fn() }))
+
 const { POST } = await import('../route')
 const { checkRateLimit } = await import('@/lib/rate-limit-by-ip')
+const { sendContactNotificationToAdmin } = await import(
+  '@/lib/email/send-contact-notification-to-admin'
+)
+const Sentry = await import('@sentry/nextjs')
 
 describe('POST /api/contact', () => {
   const validBody = {
@@ -104,5 +111,20 @@ describe('POST /api/contact', () => {
     expect(response.status).toBe(400)
     const data = await response.json()
     expect(data.message).toContain('Invalid JSON')
+  })
+
+  it('returns 200 and reports to Sentry when admin email send fails', async () => {
+    // The inquiry is persisted before the send, so a delivery failure must not
+    // fail the request — it is captured for observability instead.
+    vi.mocked(sendContactNotificationToAdmin).mockRejectedValueOnce(
+      new Error('ADMIN_EMAIL env var is not set')
+    )
+
+    const response = await POST(createRequest(validBody))
+
+    expect(response.status).toBe(200)
+    const data = await response.json()
+    expect(data.success).toBe(true)
+    expect(vi.mocked(Sentry.captureException)).toHaveBeenCalledTimes(1)
   })
 })

@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { sendInquiryNotificationToAdmin } from '@/lib/email/send-inquiry-notification-to-admin'
 import { sendInquiryConfirmationToCustomer } from '@/lib/email/send-inquiry-confirmation-to-customer'
 import { checkRateLimit } from '@/lib/rate-limit-by-ip'
+import * as Sentry from '@sentry/nextjs'
 
 const groupInquirySchema = z.object({
   firstName: z.string().min(2),
@@ -65,7 +66,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    console.error('Group inquiry error:', error)
+    // Email delivery failure (e.g. unset ADMIN_EMAIL or SMTP error) propagates
+    // here — capture it so the failure is visible instead of a bare console log.
+    Sentry.captureException(error, { tags: { route: 'group-inquiry' } })
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

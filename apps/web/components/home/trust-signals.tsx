@@ -71,39 +71,35 @@ function StatCard({ stat, isVisible }: { stat: StatItem; isVisible: boolean }) {
   )
 }
 
-interface TrustSignalsProps {
-  guideCount?: number
-}
-
-export function TrustSignals({ guideCount = 7 }: TrustSignalsProps) {
+export function TrustSignals() {
   const t = useTranslations('home.trust')
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
   const stats: StatItem[] = [
     {
-      value: guideCount,
-      suffix: '+',
-      label: t('expertGuides'),
-      description: t('expertGuidesDesc'),
+      value: 100,
+      suffix: '%',
+      label: t('authorizedGuides'),
+      description: t('authorizedGuidesDesc'),
     },
     {
       value: 100,
       suffix: '%',
-      label: t('trustedAgency'),
-      description: t('trustedAgencyDesc'),
+      label: t('privateTours'),
+      description: t('privateToursDesc'),
     },
     {
-      value: 15,
-      suffix: '+',
-      label: t('yearsExperience'),
-      description: t('yearsExperienceDesc'),
+      value: 0,
+      suffix: '',
+      label: t('zeroCompromises'),
+      description: t('zeroCompromisesDesc'),
     },
     {
-      value: 98,
+      value: 100,
       suffix: '%',
-      label: t('happyTravelers'),
-      description: t('happyTravelersDesc'),
+      label: t('tailoredToYou'),
+      description: t('tailoredToYouDesc'),
     },
   ]
 

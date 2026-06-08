@@ -42,14 +42,14 @@
     },
     "trust": {
       "sectionTitle": "Warum Mit Uns Reisen",
-      "expertGuides": "Fachkundige Guides",
-      "expertGuidesDesc": "Zertifizierte Guides mit tiefem Kulturerbe-Wissen",
-      "trustedAgency": "Vertrauenswürdige Agentur",
-      "trustedAgencyDesc": "Lizenziert, versichert und vollständig geprüft",
-      "yearsExperience": "Jahre Erfahrung",
-      "yearsExperienceDesc": "Verbindung von Reisenden mit schwedischer Geschichte",
-      "happyTravelers": "Zufriedene Reisende",
-      "happyTravelersDesc": "Basierend auf verifizierten Gästebewertungen"
+      "authorizedGuides": "Autorisierte Guides",
+      "authorizedGuidesDesc": "Lizenziert, geprüft und Experten auf ihrem Gebiet.",
+      "privateTours": "Private Touren",
+      "privateToursDesc": "Nur Sie und Ihre Gruppe — niemals eine geteilte Gruppe.",
+      "zeroCompromises": "Kompromisse",
+      "zeroCompromisesDesc": "Jeder Guide und jede Route wird von uns handverlesen und geprüft.",
+      "tailoredToYou": "Maßgeschneidert für Sie",
+      "tailoredToYouDesc": "Das Erlebnis richtet sich nach Ihren Interessen und Ihrem Tempo."
     },
     "guides": {
       "tag": "UNSER TEAM",
@@ -756,8 +756,6 @@
     "operatingAreas": "Einsatzgebiete",
     "credentials": "Qualifikationen und Zertifizierungen",
     "about": "Über {name}",
-    "toursBy": "Touren mit {name}",
-    "noTours": "Derzeit keine Touren verfügbar",
     "onLeave": "Abwesend",
     "emptyState": "Keine Reiseführer gefunden, die Ihren Kriterien entsprechen",
     "breadcrumb": {
@@ -805,8 +803,7 @@
     },
     "guestFeedback": {
       "title": "Was Gäste sagen"
-    },
-    "bookTour": "Tour buchen mit {name}"
+    }
   },
   "privacy": {
     "meta": {
@@ -1089,7 +1086,6 @@
       "phoneLabel": "Telefon",
       "phoneValue": "+46 72 441 19 01",
       "addressLabel": "Besuchen Sie uns",
-      "addressValue": "Drottninggatan 5, 111 51 Stockholm",
       "hoursLabel": "Geschäftszeiten",
       "hoursValue": "Mo-Fr, 08:00-18:00 MEZ",
       "followUs": "Folgen Sie uns"

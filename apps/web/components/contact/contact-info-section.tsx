@@ -21,7 +21,7 @@ export function ContactInfoSection() {
   const infoItems = [
     { icon: Mail, label: t('info.emailLabel'), value: t('info.emailValue'), href: `mailto:${t('info.emailValue')}` },
     { icon: Phone, label: t('info.phoneLabel'), value: t('info.phoneValue'), href: `tel:${t('info.phoneValue').replace(/\s/g, '')}` },
-    { icon: MapPin, label: t('info.addressLabel'), value: t('info.addressValue') },
+    { icon: MapPin, label: t('info.addressLabel'), value: CONTACT_ADDRESS_LINE },
     { icon: Clock, label: t('info.hoursLabel'), value: t('info.hoursValue') },
   ]
 

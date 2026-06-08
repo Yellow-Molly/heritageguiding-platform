@@ -5,6 +5,7 @@ import config from '@cms/payload.config'
 import { sendContactNotificationToAdmin } from '@/lib/email/send-contact-notification-to-admin'
 import { sendContactConfirmationToCustomer } from '@/lib/email/send-contact-confirmation-to-customer'
 import { checkRateLimit } from '@/lib/rate-limit-by-ip'
+import * as Sentry from '@sentry/nextjs'
 
 const contactSchema = z.object({
   fullName: z.string().min(2).max(100),
@@ -61,28 +62,35 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    // Send emails fire-and-forget — don't block user response
-    Promise.all([
-      sendContactNotificationToAdmin({
-        fullName: data.fullName,
-        email: data.email,
-        phone: data.phone || undefined,
-        subject: data.subject,
-        message: data.message,
-      }),
-      sendContactConfirmationToCustomer({
-        to: data.email,
-        name: data.fullName,
-      }),
-    ])
-      .then(() =>
-        payload.update({
-          collection: 'contact-inquiries',
-          id: inquiry.id,
-          data: { notificationSent: true },
-        })
-      )
-      .catch((err) => console.error('Contact email send failed:', err))
+    // Send notification + confirmation emails. Awaited so the work completes
+    // within the request — on serverless the instance can suspend right after the
+    // response is returned, dropping un-awaited promises (the original bug). The
+    // inquiry is already persisted above, so a delivery failure is reported to
+    // Sentry but does not fail the request or prompt the user to resend.
+    try {
+      await Promise.all([
+        sendContactNotificationToAdmin({
+          fullName: data.fullName,
+          email: data.email,
+          phone: data.phone || undefined,
+          subject: data.subject,
+          message: data.message,
+        }),
+        sendContactConfirmationToCustomer({
+          to: data.email,
+          name: data.fullName,
+        }),
+      ])
+      await payload.update({
+        collection: 'contact-inquiries',
+        id: inquiry.id,
+        data: { notificationSent: true },
+      })
+    } catch (err) {
+      Sentry.captureException(err, {
+        tags: { route: 'contact', inquiryId: String(inquiry.id) },
+      })
+    }
 
     return NextResponse.json({ success: true, message: 'Message sent successfully' })
   } catch (error) {

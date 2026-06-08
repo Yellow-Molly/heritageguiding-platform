@@ -42,14 +42,14 @@
     },
     "trust": {
       "sectionTitle": "Varför Resa Med Oss",
-      "expertGuides": "Expertguider",
-      "expertGuidesDesc": "Certifierade guider med djup kulturarvskunskap",
-      "trustedAgency": "Pålitlig Resebyrå",
-      "trustedAgencyDesc": "Licensierade, försäkrade och fullt granskade",
-      "yearsExperience": "Års Erfarenhet",
-      "yearsExperienceDesc": "Kopplar resenärer till svensk historia",
-      "happyTravelers": "Nöjda Resenärer",
-      "happyTravelersDesc": "Baserat på verifierade gästrecensioner"
+      "authorizedGuides": "Auktoriserade guider",
+      "authorizedGuidesDesc": "Licensierade, granskade och experter inom sitt område.",
+      "privateTours": "Privata turer",
+      "privateToursDesc": "Endast du och ditt sällskap — aldrig en delad grupp.",
+      "zeroCompromises": "Kompromisser",
+      "zeroCompromisesDesc": "Varje guide och rutt är handplockad och godkänd av oss.",
+      "tailoredToYou": "Skräddarsytt för dig",
+      "tailoredToYouDesc": "Upplevelsen formas efter dina intressen och din takt."
     },
     "guides": {
       "tag": "VÅRT TEAM",
@@ -756,8 +756,6 @@
     "operatingAreas": "Verksamhetsområden",
     "credentials": "Meriter och certifieringar",
     "about": "Om {name}",
-    "toursBy": "Turer med {name}",
-    "noTours": "Inga turer tillgängliga för närvarande",
     "onLeave": "Ledig",
     "emptyState": "Inga guider hittades som matchar dina kriterier",
     "breadcrumb": {
@@ -805,8 +803,7 @@
     },
     "guestFeedback": {
       "title": "Vad gästerna säger"
-    },
-    "bookTour": "Boka en tur med {name}"
+    }
   },
   "privacy": {
     "meta": {
@@ -1089,7 +1086,6 @@
       "phoneLabel": "Telefon",
       "phoneValue": "+46 72 441 19 01",
       "addressLabel": "Besök oss",
-      "addressValue": "Drottninggatan 5, 111 51 Stockholm",
       "hoursLabel": "Öppettider",
       "hoursValue": "Mån-Fre, 08:00-18:00 CET",
       "followUs": "Följ oss"

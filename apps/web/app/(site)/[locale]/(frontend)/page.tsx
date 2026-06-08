@@ -74,7 +74,7 @@ export default async function HomePage({
       <Header />
       <main>
         <HeroSection />
-        <TrustSignals guideCount={guidesResponse.total} />
+        <TrustSignals />
         <FeaturedTours tours={featuredTours} />
         <GuidesPreview guides={guidesResponse.guides} />
         {/* MVP: VideoHighlight temporarily hidden — re-enable post-MVP */}

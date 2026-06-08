@@ -42,14 +42,14 @@
     },
     "trust": {
       "sectionTitle": "Why Travel With Us",
-      "expertGuides": "Expert Local Guides",
-      "expertGuidesDesc": "Certified guides with deep heritage knowledge",
-      "trustedAgency": "Trusted Tour Agency",
-      "trustedAgencyDesc": "Licensed, insured, and fully vetted",
-      "yearsExperience": "Years of Experience",
-      "yearsExperienceDesc": "Connecting travelers with Swedish history",
-      "happyTravelers": "Travelers Are Happy",
-      "happyTravelersDesc": "Based on verified guest reviews"
+      "authorizedGuides": "Authorized guides",
+      "authorizedGuidesDesc": "Licensed, vetted and experts in their field.",
+      "privateTours": "Private tours",
+      "privateToursDesc": "Only you and your group — never a shared group.",
+      "zeroCompromises": "Compromises",
+      "zeroCompromisesDesc": "Every guide and route is handpicked and approved by us.",
+      "tailoredToYou": "Tailored to you",
+      "tailoredToYouDesc": "The experience is shaped around your interests and pace."
     },
     "guides": {
       "tag": "OUR TEAM",
@@ -756,8 +756,6 @@
     "operatingAreas": "Operating Areas",
     "credentials": "Credentials & Certifications",
     "about": "About {name}",
-    "toursBy": "Tours by {name}",
-    "noTours": "No tours currently available",
     "onLeave": "On Leave",
     "emptyState": "No guides found matching your criteria",
     "breadcrumb": {
@@ -805,8 +803,7 @@
     },
     "guestFeedback": {
       "title": "What Guests Say"
-    },
-    "bookTour": "Book a Tour with {name}"
+    }
   },
   "privacy": {
     "meta": {
@@ -1089,7 +1086,6 @@
       "phoneLabel": "Phone",
       "phoneValue": "+46 72 441 19 01",
       "addressLabel": "Visit Us",
-      "addressValue": "Drottninggatan 5, 111 51 Stockholm",
       "hoursLabel": "Business Hours",
       "hoursValue": "Mon-Fri, 08:00-18:00 CET",
       "followUs": "Follow Us"

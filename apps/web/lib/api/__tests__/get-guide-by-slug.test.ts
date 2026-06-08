@@ -20,22 +20,6 @@ const mockGuideDoc = {
   credentials: [{ credential: 'PhD History' }],
 }
 
-// Shape expected by `mapPayloadTourToFeaturedTour` (lib/api/tour-payload-mapper.ts).
-// `description` ← shortDescription, `duration` ← duration.hours×60, `price` ← pricing.basePrice,
-// `image` ← resolvePrimaryImage(images, title), `maxCapacity` ← maxGroupSize.
-// `rating` and `reviewCount` are hardcoded 0 in the current mapper.
-const mockTourDoc = {
-  id: 'tour1',
-  title: 'Viking History Tour',
-  slug: 'viking-history-tour',
-  shortDescription: 'A short tour description',
-  images: [{ image: { url: '/tour.jpg', alt: 'Viking tour' }, isPrimary: true }],
-  duration: { hours: 3 },
-  pricing: { basePrice: 500 },
-  maxGroupSize: 12,
-  featured: false,
-}
-
 const mockPayload = {
   find: vi.fn(),
 }
@@ -50,14 +34,10 @@ describe('getGuideBySlug', () => {
   beforeEach(() => {
     vi.clearAllMocks()
 
-    // Default mock: first call returns guide, second call returns tours
-    mockPayload.find
-      .mockResolvedValueOnce({
-        docs: [mockGuideDoc],
-      })
-      .mockResolvedValueOnce({
-        docs: [mockTourDoc],
-      })
+    // Default mock: single query returns the guide (no secondary tours query)
+    mockPayload.find.mockResolvedValueOnce({
+      docs: [mockGuideDoc],
+    })
   })
 
   it('returns GuideDetail without email/phone when guide found', async () => {
@@ -93,45 +73,20 @@ describe('getGuideBySlug', () => {
     expect(result).toBeNull()
   })
 
-  it('returns tours array from second Payload query', async () => {
+  it('does not expose a tours field on the guide profile', async () => {
     const { getGuideBySlug } = await import('../get-guide-by-slug')
 
     const result = await getGuideBySlug('erik-lindqvist', 'en')
 
-    expect(result?.tours).toBeDefined()
-    expect(Array.isArray(result?.tours)).toBe(true)
-    expect(result?.tours).toHaveLength(1)
+    expect(result).not.toHaveProperty('tours')
   })
 
-  it('maps tours correctly with id, title, slug, image, duration, price, rating, reviewCount', async () => {
-    const { getGuideBySlug } = await import('../get-guide-by-slug')
-
-    const result = await getGuideBySlug('erik-lindqvist', 'en')
-
-    expect(result?.tours[0]).toEqual({
-      id: 'tour1',
-      title: 'Viking History Tour',
-      description: 'A short tour description',
-      slug: 'viking-history-tour',
-      image: { url: '/tour.jpg', alt: 'Viking tour' },
-      duration: 180,
-      maxCapacity: 12,
-      rating: 0,
-      reviewCount: 0,
-      price: 500,
-      featured: false,
-      accessibility: undefined,
-    })
-  })
-
-  it('calls Payload.find twice - once for guide, once for tours', async () => {
+  it('queries the guides collection once (no secondary tours query)', async () => {
     const { getGuideBySlug } = await import('../get-guide-by-slug')
 
     await getGuideBySlug('erik-lindqvist', 'en')
 
-    expect(mockPayload.find).toHaveBeenCalledTimes(2)
-
-    // First call: guides collection
+    expect(mockPayload.find).toHaveBeenCalledTimes(1)
     expect(mockPayload.find).toHaveBeenNthCalledWith(1, expect.objectContaining({
       collection: 'guides',
       where: {
@@ -139,34 +94,11 @@ describe('getGuideBySlug', () => {
         status: { in: ['active', 'on-leave'] },
       },
     }))
-
-    // Second call: tours collection
-    expect(mockPayload.find).toHaveBeenNthCalledWith(2, expect.objectContaining({
-      collection: 'tours',
-      where: {
-        guides: { in: ['1'] },
-        status: { equals: 'published' },
-      },
-    }))
-  })
-
-  it('handles guide with no tours', async () => {
-    mockPayload.find.mockReset()
-      .mockResolvedValueOnce({ docs: [mockGuideDoc] })
-      .mockResolvedValueOnce({ docs: [] })
-
-    const { getGuideBySlug } = await import('../get-guide-by-slug')
-
-    const result = await getGuideBySlug('erik-lindqvist', 'en')
-
-    expect(result?.tours).toEqual([])
   })
 
   it('handles guide with no photo', async () => {
     const docWithoutPhoto = { ...mockGuideDoc, photo: undefined }
-    mockPayload.find.mockReset()
-      .mockResolvedValueOnce({ docs: [docWithoutPhoto] })
-      .mockResolvedValueOnce({ docs: [] })
+    mockPayload.find.mockReset().mockResolvedValueOnce({ docs: [docWithoutPhoto] })
 
     const { getGuideBySlug } = await import('../get-guide-by-slug')
 
@@ -177,9 +109,7 @@ describe('getGuideBySlug', () => {
 
   it('returns on-leave guides', async () => {
     const onLeaveDoc = { ...mockGuideDoc, status: 'on-leave' }
-    mockPayload.find.mockReset()
-      .mockResolvedValueOnce({ docs: [onLeaveDoc] })
-      .mockResolvedValueOnce({ docs: [] })
+    mockPayload.find.mockReset().mockResolvedValueOnce({ docs: [onLeaveDoc] })
 
     const { getGuideBySlug } = await import('../get-guide-by-slug')
 

@@ -14,6 +14,9 @@ vi.mock('@/lib/rate-limit-by-ip', () => ({
   checkRateLimit: vi.fn().mockReturnValue({ success: true }),
 }))
 
+// Mock Sentry to avoid real capture in tests
+vi.mock('@sentry/nextjs', () => ({ captureException: vi.fn() }))
+
 const { POST } = await import('../route')
 const { sendInquiryNotificationToAdmin } = await import(
   '@/lib/email/send-inquiry-notification-to-admin'
