@@ -161,6 +161,8 @@ BLOB_READ_WRITE_TOKEN=vercel_blob_token
 GMAIL_USER=bookings@privatetours.se
 GMAIL_APP_PASSWORD=your-google-app-password
 EMAIL_FROM=bookings@privatetours.se
+# Recipient for contact-form + group-inquiry notifications (REQUIRED for email delivery)
+ADMIN_EMAIL=info@privatetours.se
 
 # Analytics (optional)
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX

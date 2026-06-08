@@ -4,6 +4,20 @@ Complete record of significant changes, features, and releases.
 
 ---
 
+## [2026-06-08] — Stakeholder bug fixes: Why-Travel copy, guide tours, contact address, email delivery 🐛
+
+**Type:** Bug fixes / content (4 stakeholder-reported items)
+**Scope:** Plan `260608-2214-privatetours-stakeholder-bug-fixes`.
+
+- **#1 "Why Travel With Us" cards** — replaced the 4 homepage trust cards with *100% Authorized guides / 100% Private tours / 0 Compromises / 100% Tailored to you* + descriptions. `components/home/trust-signals.tsx` (stat values + renamed `home.trust.*` keys, dropped unused `guideCount` prop); `messages/{en,sv,de}.json` (SV/DE drafted — pending native-speaker review).
+- **#2 Guide linked tours removed** — deleted `guide-tours-section.tsx` + `guide-sticky-cta.tsx`, the reverse-lookup tours query + `tours` field in `get-guide-by-slug.ts`, the mobile sticky CTA + its `pb-20` padding, and 3 i18n keys per locale. `getGuideBySlug` now runs a single query; Tours collection untouched.
+- **#3 Wrong contact address** — `contact-info-section.tsx` renders the `CONTACT_ADDRESS_LINE` constant (Karlavägen 18, 114 31 Stockholm) instead of the stale i18n `addressValue` (Drottninggatan 5); removed the orphaned key. Resolves the dual-source drift that displayed two addresses on the contact page.
+- **#4 Contact + group-inquiry email delivery** — contact route now **awaits** the email send (was an un-awaited promise dropped by Vercel serverless) inside try/catch with `Sentry.captureException`; new `lib/email/get-admin-email.ts` throws if `ADMIN_EMAIL` is unset (was a silent `undefined` recipient); group-inquiry route gains Sentry capture. Added `ADMIN_EMAIL=info@privatetours.se` to `.env.example` + deployment guide. **Ops required:** set `ADMIN_EMAIL` and verify Gmail creds in Vercel — code alone does not deliver mail.
+
+Verification: type-check + lint clean on changed files (2 tsc / 1 eslint issues are pre-existing, unrelated); affected test suites green incl. new `get-admin-email` + contact email-failure coverage; full suite baseline unchanged (51 pre-existing env/DB failures, 0 new); i18n key parity exact across 3 locales.
+
+---
+
 ## [2026-05-19] — Tour detail Guides section hidden for MVP launch ⏸️
 
 **Type:** Feature toggle / MVP scope trim
