@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
+import { languageDisplayNames } from '@/lib/language-display-names'
 import type { TourDetail } from '@/lib/api/get-tour-by-slug'
 
 interface GuideCardProps {
@@ -18,7 +19,7 @@ export function GuideCard({ guide }: GuideCardProps) {
     metaParts.push(...guide.credentials.map((c) => c.credential))
   }
   if (guide.languages && guide.languages.length > 0) {
-    metaParts.push(guide.languages.join(', '))
+    metaParts.push(guide.languages.map((l) => languageDisplayNames[l] ?? l).join(', '))
   }
 
   return (

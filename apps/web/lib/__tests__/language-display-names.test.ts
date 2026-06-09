@@ -3,7 +3,23 @@
  */
 
 import { describe, it, expect } from 'vitest'
+import { Guides } from '@cms/collections/guides'
 import { languageDisplayNames } from '../language-display-names'
+
+/**
+ * Read the real select-option values for a field from the Guides CMS collection,
+ * so coverage is checked against the actual enum rather than a hardcoded copy.
+ * This is what makes the coverage test below a genuine drift guard: adding a
+ * language option in the CMS without a matching display name fails the test
+ * instead of silently rendering a raw code (e.g. "el") in the UI.
+ */
+function cmsLanguageCodes(fieldName: string): string[] {
+  const field = Guides.fields.find((f) => 'name' in f && f.name === fieldName)
+  if (!field || field.type !== 'select') {
+    throw new Error(`Guides collection has no select field named "${fieldName}"`)
+  }
+  return field.options.map((opt) => (typeof opt === 'string' ? opt : opt.value))
+}
 
 describe('languageDisplayNames', () => {
   it('maps sv to Swedish', () => {
@@ -98,5 +114,16 @@ describe('languageDisplayNames', () => {
 
   it('has 19 language mappings', () => {
     expect(Object.keys(languageDisplayNames)).toHaveLength(19)
+  })
+
+  it('covers every language code defined in the Guides CMS collection', () => {
+    const codes = [
+      ...cmsLanguageCodes('languages'),
+      ...cmsLanguageCodes('additionalLanguages'),
+    ]
+
+    const missing = codes.filter((code) => !languageDisplayNames[code])
+
+    expect(missing).toEqual([])
   })
 })

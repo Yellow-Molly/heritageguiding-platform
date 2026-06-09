@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
+import { languageDisplayNames } from '@/lib/language-display-names'
 import type { GuideListItem } from '@/lib/api/get-guides'
 
 interface GuidesPreviewProps {
@@ -10,18 +11,8 @@ interface GuidesPreviewProps {
 /**
  * GuidesPreview — navy background section with circular guide headshots.
  */
-/** Map CMS language codes (ISO 639-1) to full display names */
-const langLabels: Record<string, string> = {
-  sv: 'Swedish',
-  en: 'English',
-  de: 'German',
-  fr: 'French',
-  es: 'Spanish',
-  it: 'Italian',
-}
-
 function formatLanguages(langs: string[]): string {
-  return langs.map((code) => langLabels[code] ?? code).join(', ')
+  return langs.map((code) => languageDisplayNames[code] ?? code).join(', ')
 }
 
 export function GuidesPreview({ guides }: GuidesPreviewProps) {
