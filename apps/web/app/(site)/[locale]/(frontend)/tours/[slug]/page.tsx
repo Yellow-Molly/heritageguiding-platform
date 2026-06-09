@@ -6,6 +6,7 @@ import { getTourReviews } from '@/lib/api/get-tour-reviews'
 import { TourHero } from '@/components/tour/tour-hero'
 import { TourTitleSection } from '@/components/tour/tour-title-section'
 import { TourMobilePriceBar } from '@/components/tour/tour-mobile-price-bar'
+import { TourBookingAnchorScroll } from '@/components/tour/tour-booking-anchor-scroll'
 import { TourHighlightsSection } from '@/components/tour/tour-highlights-section'
 import { TourContent } from '@/components/tour/tour-content'
 import { InclusionsSection } from '@/components/tour/inclusions-section'
@@ -80,6 +81,10 @@ export default async function TourPage({ params }: TourPageProps) {
       <TourSchema tour={tour} reviews={reviews} />
       <Header variant="solid" />
       <main className="min-h-screen pt-20">
+        {/* Deep-link / "Book Now" scroll manager — pins #booking deterministically
+            so Safari doesn't bounce to top while the Bokun widget reflows. */}
+        <TourBookingAnchorScroll />
+
         {/* Image Grid */}
         <TourHero tour={tour} />
 
