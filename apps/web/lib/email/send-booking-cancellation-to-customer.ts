@@ -1,4 +1,5 @@
 import { createEmailTransporter } from './create-email-transporter'
+import { getEmailFrom } from './get-email-from'
 import type { AddOnEmailLine } from './send-booking-confirmation-to-customer'
 
 export interface BookingCancellationData {
@@ -31,7 +32,7 @@ export async function sendBookingCancellationToCustomer(data: BookingCancellatio
     : ''
 
   await transporter.sendMail({
-    from: `Private Tours <${process.env.GMAIL_USER}>`,
+    from: getEmailFrom(),
     to: data.to,
     subject: `Booking cancelled — ${data.confirmationCode}`,
     html: `

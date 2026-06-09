@@ -1,5 +1,6 @@
 import { createEmailTransporter } from './create-email-transporter'
 import { getAdminEmail } from './get-admin-email'
+import { getEmailFrom } from './get-email-from'
 
 export interface ContactNotificationData {
   fullName: string
@@ -27,7 +28,7 @@ export async function sendContactNotificationToAdmin(data: ContactNotificationDa
   const subjectLabel = subjectLabels[data.subject] ?? data.subject
 
   await transporter.sendMail({
-    from: `Private Tours <${process.env.GMAIL_USER}>`,
+    from: getEmailFrom(),
     to: getAdminEmail(),
     subject: `New Contact: ${subjectLabel} — ${data.fullName}`,
     html: `

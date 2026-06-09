@@ -1,4 +1,5 @@
 import { createEmailTransporter } from './create-email-transporter'
+import { getEmailFrom } from './get-email-from'
 
 export interface InquiryConfirmationData {
   to: string
@@ -13,7 +14,7 @@ export async function sendInquiryConfirmationToCustomer(data: InquiryConfirmatio
   const transporter = createEmailTransporter()
 
   await transporter.sendMail({
-    from: `Private Tours <${process.env.GMAIL_USER}>`,
+    from: getEmailFrom(),
     to: data.to,
     subject: 'We received your group booking inquiry',
     html: `

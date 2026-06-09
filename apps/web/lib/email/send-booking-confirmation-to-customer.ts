@@ -1,4 +1,5 @@
 import { createEmailTransporter } from './create-email-transporter'
+import { getEmailFrom } from './get-email-from'
 
 /**
  * Minimal shape for a purchased add-on rendered inside a booking email.
@@ -59,7 +60,7 @@ export async function sendBookingConfirmationToCustomer(data: BookingConfirmatio
     : ''
 
   await transporter.sendMail({
-    from: `Private Tours <${process.env.GMAIL_USER}>`,
+    from: getEmailFrom(),
     to: data.to,
     subject: `Booking confirmed — ${data.confirmationCode}`,
     html: `

@@ -158,8 +158,11 @@ OPENAI_API_KEY=sk-your-openai-key
 BLOB_READ_WRITE_TOKEN=vercel_blob_token
 
 # Email (Gmail SMTP via Nodemailer)
-GMAIL_USER=bookings@privatetours.se
+# GMAIL_USER = primary licensed Workspace login (SMTP auth; an alias cannot authenticate)
+GMAIL_USER=primary-account@privatetours.se
 GMAIL_APP_PASSWORD=your-google-app-password
+# EMAIL_FROM = visible sender (optional; defaults to GMAIL_USER). Use a Workspace
+# alias to send "from" bookings@ while authenticating as the primary account.
 EMAIL_FROM=bookings@privatetours.se
 # Recipient for contact-form + group-inquiry notifications (REQUIRED for email delivery)
 ADMIN_EMAIL=info@privatetours.se

@@ -1,5 +1,6 @@
 import { createEmailTransporter } from './create-email-transporter'
 import { getAdminEmail } from './get-admin-email'
+import { getEmailFrom } from './get-email-from'
 
 export interface InquiryNotificationData {
   name: string
@@ -19,7 +20,7 @@ export async function sendInquiryNotificationToAdmin(data: InquiryNotificationDa
   const transporter = createEmailTransporter()
 
   await transporter.sendMail({
-    from: `Private Tours <${process.env.GMAIL_USER}>`,
+    from: getEmailFrom(),
     to: getAdminEmail(),
     subject: `New Group Inquiry: ${data.groupSize} people - ${data.name}`,
     html: `
