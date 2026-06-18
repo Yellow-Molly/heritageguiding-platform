@@ -15,11 +15,12 @@ export function sanitizeSearchQuery(query: string): string {
 /**
  * Zod schema for tour filter validation
  */
-/** Reusable slug-list refiner shared by categories/cities. */
+/** Reusable slug-list refiner shared by categories/cities. Max 20 slugs, max 64 chars each. */
 const slugListValid = (val: string | undefined) => {
   if (!val) return true
   const slugs = val.split(',').filter(Boolean)
-  return slugs.every((s) => /^[a-z0-9-]+$/.test(s))
+  if (slugs.length > 20) return false
+  return slugs.every((s) => s.length <= 64 && /^[a-z0-9-]+$/.test(s))
 }
 
 export const tourFiltersSchema = z.object({
