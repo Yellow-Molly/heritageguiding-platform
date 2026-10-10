@@ -1,4 +1,5 @@
 import React from 'react'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 /**
  * Schema.org ItemList of Person for /guides listing page.
@@ -18,7 +19,7 @@ interface GuideListSchemaProps {
 }
 
 export function GuideListSchema({ guides }: GuideListSchemaProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   const schema = {
     '@context': 'https://schema.org',

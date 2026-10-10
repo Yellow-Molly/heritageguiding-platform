@@ -43,10 +43,12 @@ const envSchema = z.object({
   BOKUN_WEBHOOK_SECRET: z.string().optional(),
 
   // Canonical public origin read by sitemap, robots, schema.org, page metadata
-  // (lib/seo.ts, components/seo/*, and packages/cms livePreview). Optional for
-  // now — code falls back to the hardcoded prod origin; promote to prod-required
-  // once the Vercel value is confirmed set (so a deploy where it is still unset
-  // cannot boot-crash). NEXT_PUBLIC_URL was the previously-validated name, but no
+  // (lib/canonical-site-url.ts, which every one of those call sites goes
+  // through). Optional for now — that helper falls back to the www production
+  // origin; promote to prod-required once the Vercel value is confirmed set (so
+  // a deploy where it is still unset cannot boot-crash). Must include the `www.`
+  // prefix: the apex 308-redirects to www, so an apex value makes every canonical
+  // URL a redirect. NEXT_PUBLIC_URL was the previously-validated name, but no
   // runtime code reads it.
   NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
 

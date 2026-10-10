@@ -84,17 +84,20 @@ const nextConfig: NextConfig = {
             },
           ])
         : []),
-      // Old domain -> new domain (keep for 1+ year for SEO)
+      // Old domain -> new domain (keep for 1+ year for SEO).
+      // Target www directly: the apex 308-redirects to www at the Vercel domain
+      // layer, so pointing these at the apex would make every legacy link take
+      // two hops and bleed link equity on the way.
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'heritageguiding.com' }],
-        destination: 'https://privatetours.se/:path*',
+        destination: 'https://www.privatetours.se/:path*',
         permanent: true,
       },
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.heritageguiding.com' }],
-        destination: 'https://privatetours.se/:path*',
+        destination: 'https://www.privatetours.se/:path*',
         permanent: true,
       },
       {

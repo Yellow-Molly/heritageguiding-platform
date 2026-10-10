@@ -5,8 +5,9 @@ import svMessages from '@/messages/sv.json'
 import deMessages from '@/messages/de.json'
 import { extractPlainText } from '@/lib/payload-rich-text-to-plain'
 import { isComingSoon } from '@/lib/environment'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+const BASE_URL = getCanonicalSiteUrl()
 const VALID_LOCALES = ['sv', 'en', 'de'] as const
 type ValidLocale = (typeof VALID_LOCALES)[number]
 

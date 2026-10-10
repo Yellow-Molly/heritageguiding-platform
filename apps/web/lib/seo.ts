@@ -1,5 +1,6 @@
 import { locales, localeMetadata, type Locale } from '@/i18n'
 import type { Metadata } from 'next'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 /**
  * Generate hreflang alternate links for SEO
@@ -18,7 +19,7 @@ export function generateHreflangAlternates(
   pathname: string,
   currentLocale: Locale,
 ): Metadata['alternates'] {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   // Ensure pathname starts with /
   const normalizedPath = pathname.startsWith('/') ? pathname : `/${pathname}`
@@ -110,7 +111,7 @@ export function generatePageMetadata(options: {
   noIndex?: boolean
 }): Metadata {
   const { title, description, locale, pathname, keywords, ogImage, noIndex } = options
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   return {
     title,

@@ -2,8 +2,9 @@ import type { MetadataRoute } from 'next'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { isPubliclyIndexable } from '@/lib/environment'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+const BASE_URL = getCanonicalSiteUrl()
 const LOCALES = ['sv', 'en', 'de'] as const
 
 /** Static public routes (without locale prefix) */
@@ -15,9 +16,11 @@ const STATIC_ROUTES = [
   { path: '/guides', priority: 0.9, changeFrequency: 'weekly' as const },
   { path: '/tours', priority: 0.9, changeFrequency: 'weekly' as const },
   { path: '/group-booking', priority: 0.7, changeFrequency: 'monthly' as const },
+  { path: '/contact', priority: 0.7, changeFrequency: 'monthly' as const },
   { path: '/privacy', priority: 0.3, changeFrequency: 'yearly' as const },
   { path: '/terms', priority: 0.3, changeFrequency: 'yearly' as const },
   { path: '/imprint', priority: 0.3, changeFrequency: 'yearly' as const },
+  { path: '/cancellation', priority: 0.3, changeFrequency: 'yearly' as const },
 ]
 
 /** Build hreflang alternates map for a given path */

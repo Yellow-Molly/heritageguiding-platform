@@ -9,6 +9,7 @@ import type { Locale } from '@/i18n'
 import { WebPageSchema } from '@/components/seo'
 import { LEGAL_DATES } from '@/lib/legal-dates'
 import {
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
   CONTACT_ADDRESS,
   CONTACT_EMAIL,
   CONTACT_PHONE,
@@ -49,7 +50,7 @@ export default async function ImprintPage({
 }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'imprint' })
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   const addressLines = [
     LEGAL_ENTITY.legalName,

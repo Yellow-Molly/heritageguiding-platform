@@ -25,6 +25,7 @@ import {
   type TocEntry,
 } from '@/components/terms'
 import { InlineCrossLinkCard } from '@/components/shared/inline-cross-link-card'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 const SECTION_KEYS = [
   'parties',
@@ -95,7 +96,7 @@ export default async function TermsPage({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'terms' })
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   const tocItems: TocEntry[] = SECTION_KEYS.map((key, idx) => ({
     id: key,
