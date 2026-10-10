@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { isPubliclyIndexable } from '@/lib/environment'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 /**
  * Generates robots.txt directives.
@@ -7,7 +8,7 @@ import { isPubliclyIndexable } from '@/lib/environment'
  * Live production: allows all except admin/API.
  */
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   if (!isPubliclyIndexable()) {
     return {

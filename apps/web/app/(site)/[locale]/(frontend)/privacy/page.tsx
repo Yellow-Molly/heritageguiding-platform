@@ -23,6 +23,7 @@ import {
   type ProseSection,
   type TocItem,
 } from '@/components/privacy'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 const TOC_KEYS = [
   'controller',
@@ -64,7 +65,7 @@ export default async function PrivacyPage({
 }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'privacy' })
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   const tocItems: TocItem[] = TOC_KEYS.map((k, i) => ({
     id: k,

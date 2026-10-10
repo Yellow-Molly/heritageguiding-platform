@@ -4,13 +4,14 @@ import {
   CONTACT_EMAIL,
   CONTACT_PHONE_TEL,
 } from '@/lib/contact-constants'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 /**
  * Schema.org WebPage + ContactPage structured data for /contact.
  * @see https://schema.org/ContactPage
  */
 export function ContactPageSchema() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   const schema = {
     '@context': 'https://schema.org',

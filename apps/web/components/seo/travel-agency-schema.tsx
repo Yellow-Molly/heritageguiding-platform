@@ -5,8 +5,9 @@ import {
   CONTACT_PHONE_TEL,
   SOCIAL_URLS,
 } from '@/lib/contact-constants'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+const SITE_URL = getCanonicalSiteUrl()
 
 /**
  * Schema.org TravelAgency structured data for SEO.

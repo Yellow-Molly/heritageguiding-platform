@@ -1,8 +1,9 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { isComingSoon } from '@/lib/environment'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+const BASE_URL = getCanonicalSiteUrl()
 
 /** Cache for 1 hour */
 export const revalidate = 3600

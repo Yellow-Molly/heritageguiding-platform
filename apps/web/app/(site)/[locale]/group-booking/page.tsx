@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
 import { WebPageSchema } from '@/components/seo'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 interface PageProps {
   params: Promise<{ locale: string }>
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function GroupBookingPage({ params }: PageProps) {
   const { locale } = await params
   const t = await getTranslations('groupBooking')
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   return (
     <>

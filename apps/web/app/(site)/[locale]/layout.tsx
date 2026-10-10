@@ -12,6 +12,7 @@ import { getWhatsAppNumber } from '@/lib/get-whatsapp-number-from-cms'
 import { generateHreflangAlternates, generateOgLocaleAlternates } from '@/lib/seo'
 import { isPubliclyIndexable } from '@/lib/environment'
 import type { Metadata } from 'next'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -24,7 +25,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   return {
     metadataBase: new URL(baseUrl),

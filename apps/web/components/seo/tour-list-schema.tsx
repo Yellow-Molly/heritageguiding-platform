@@ -1,4 +1,5 @@
 import React from 'react'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 /**
  * Schema.org ItemList of TouristAttraction for /tours listing page.
@@ -17,7 +18,7 @@ interface TourListSchemaProps {
 }
 
 export function TourListSchema({ tours }: TourListSchemaProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   const schema = {
     '@context': 'https://schema.org',

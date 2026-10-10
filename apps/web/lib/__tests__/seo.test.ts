@@ -43,10 +43,18 @@ describe('generateHreflangAlternates', () => {
     expect(result?.canonical).toBe('https://example.com/sv/')
   })
 
-  it('uses default URL when env not set', () => {
+  it('falls back to the www serving host when env not set', () => {
+    // Must be www, not the apex: the apex 308-redirects to www, so an apex
+    // canonical would advertise a redirecting URL on every page.
     vi.unstubAllEnvs()
     const result = generateHreflangAlternates('/tours', 'sv')
-    expect(result?.canonical).toBe('https://privatetours.se/sv/tours')
+    expect(result?.canonical).toBe('https://www.privatetours.se/sv/tours')
+  })
+
+  it('strips a trailing slash from a configured origin', () => {
+    vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://www.privatetours.se/')
+    const result = generateHreflangAlternates('/tours', 'sv')
+    expect(result?.canonical).toBe('https://www.privatetours.se/sv/tours')
   })
 })
 

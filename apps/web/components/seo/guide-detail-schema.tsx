@@ -1,4 +1,5 @@
 import React from 'react'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 /**
  * Schema.org Person structured data for guide detail pages.
@@ -23,7 +24,7 @@ export function GuideDetailSchema({
   specializations,
   credentials,
 }: GuideSchemaProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   const schema = {
     '@context': 'https://schema.org',

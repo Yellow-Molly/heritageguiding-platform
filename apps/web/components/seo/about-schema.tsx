@@ -1,4 +1,5 @@
 import React from 'react'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 /**
  * Schema.org AboutPage + Organization structured data for /about-us.
@@ -20,12 +21,12 @@ export function AboutSchema({ founders, description }: AboutSchemaProps) {
     '@type': 'AboutPage',
     name: 'About Private Tours',
     description: description || defaultDescription,
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'}/about-us`,
+    url: `${getCanonicalSiteUrl()}/about-us`,
     mainEntity: {
       '@type': 'Organization',
       name: 'Private Tours',
       description: description || defaultDescription,
-      url: process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se',
+      url: getCanonicalSiteUrl(),
       foundingDate: '2024',
       areaServed: {
         '@type': 'Country',

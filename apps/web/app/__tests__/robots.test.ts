@@ -14,8 +14,14 @@ describe('robots.ts', () => {
 
   describe('production', () => {
     beforeEach(() => {
+      // Indexability is gated on COMING_SOON + IS_STAGING, NOT on VERCEL_ENV
+      // (which is not 'production' during the Vercel build). Without the
+      // explicit COMING_SOON='false' these cases silently took the dark branch
+      // and asserted nothing about live behaviour.
       process.env.VERCEL_ENV = 'production'
-      process.env.NEXT_PUBLIC_SITE_URL = 'https://privatetours.se'
+      process.env.COMING_SOON = 'false'
+      delete process.env.IS_STAGING
+      process.env.NEXT_PUBLIC_SITE_URL = 'https://www.privatetours.se'
     })
 
     it('allows crawling on /', async () => {
@@ -37,7 +43,7 @@ describe('robots.ts', () => {
     it('includes sitemap URL', async () => {
       const { default: robots } = await import('../robots')
       const result = robots()
-      expect(result.sitemap).toBe('https://privatetours.se/sitemap.xml')
+      expect(result.sitemap).toBe('https://www.privatetours.se/sitemap.xml')
     })
   })
 
@@ -68,9 +74,12 @@ describe('robots.ts', () => {
     })
   })
 
-  describe('staging (VERCEL_ENV=production but IS_STAGING=true)', () => {
+  describe('staging (gate open but IS_STAGING=true)', () => {
     beforeEach(() => {
+      // COMING_SOON='false' so this proves IS_STAGING alone blocks indexing,
+      // rather than passing because the holding gate happened to be closed.
       process.env.VERCEL_ENV = 'production'
+      process.env.COMING_SOON = 'false'
       process.env.IS_STAGING = 'true'
     })
 

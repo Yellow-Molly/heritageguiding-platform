@@ -14,6 +14,7 @@ import {
   CancellationTrustBanner,
   CancellationCta,
 } from '@/components/cancellation'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 export async function generateMetadata({
   params,
@@ -39,7 +40,7 @@ export default async function CancellationPage({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'cancellation' })
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   return (
     <>

@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/footer'
 import { generatePageMetadata } from '@/lib/seo'
 import type { Locale } from '@/i18n'
 import { WebPageSchema } from '@/components/seo'
+import { getCanonicalSiteUrl } from '@/lib/canonical-site-url'
 
 // Lazy-load heavy wizard component to reduce initial bundle size
 const ConciergeWizardContainer = dynamic(
@@ -33,7 +34,7 @@ export default async function FindTourPage({ params }: FindTourPageProps) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'findTour' })
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://privatetours.se'
+  const baseUrl = getCanonicalSiteUrl()
 
   return (
     <>
